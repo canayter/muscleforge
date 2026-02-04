@@ -1525,66 +1525,59 @@ select.field-input option {
       <div class="header-inner">
         <div class="logo">
           <div class="logo-mark">
-            <!-- MuscleForge Mark - Classic flexed arm -->
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g fill="var(--primary)" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Fist -->
-                <path d="M62 8 Q70 6 74 10 Q78 14 76 20 L72 22 Q74 18 72 14 Q70 10 64 12 Z" stroke-width="2"/>
-                <path d="M58 12 L62 8" stroke-width="2" fill="none"/>
-                <path d="M66 14 L68 10" stroke-width="1.5" fill="none"/>
-                <path d="M70 16 L74 14" stroke-width="1.5" fill="none"/>
+            <!-- MuscleForge Mark - Flexed Bicep -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <!-- Main arm shape with thick outline -->
+              <g fill="var(--void-elevated)" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
 
-                <!-- Forearm -->
-                <path d="M54 18 Q58 14 62 12 L72 22 Q68 28 62 32 Q56 36 50 38 L46 34 Q50 30 52 26 Q54 22 54 18 Z" stroke-width="2"/>
+                <!-- Fist at top -->
+                <path d="M58 4 C52 2 46 4 44 8 C42 12 44 18 50 22 C48 20 45 16 44 12 C43 8 46 4 52 3 C58 2 62 5 63 10 C64 14 62 18 58 20 L56 18 C60 16 62 12 60 8 C58 5 54 4 50 6"/>
+
+                <!-- Finger creases -->
+                <path d="M48 7 Q52 9 56 7" fill="none" stroke-width="2"/>
+                <path d="M49 11 Q53 13 57 11" fill="none" stroke-width="2"/>
+                <path d="M50 15 Q54 17 58 15" fill="none" stroke-width="2"/>
+
+                <!-- Wrist/forearm connection -->
+                <path d="M50 22 C46 26 42 32 40 40 C38 48 38 54 42 58"/>
+
+                <!-- Forearm outer edge -->
+                <path d="M56 18 C60 24 62 32 60 42 C58 50 54 56 48 60"/>
 
                 <!-- Forearm muscle lines -->
-                <path d="M56 20 Q58 24 56 28" stroke-width="1.2" fill="none" opacity="0.7"/>
-                <path d="M60 22 Q62 26 60 30" stroke-width="1" fill="none" opacity="0.6"/>
-                <path d="M64 24 Q66 28 64 32" stroke-width="1" fill="none" opacity="0.5"/>
+                <path d="M52 24 C50 32 48 40 48 48" fill="none" stroke-width="2"/>
+                <path d="M56 28 C54 36 52 44 52 52" fill="none" stroke-width="2"/>
 
-                <!-- BICEP - The main event -->
-                <path d="M28 42
-                         Q22 38 18 32
-                         Q14 26 16 18
-                         Q18 12 26 10
-                         Q34 8 42 14
-                         Q48 18 50 24
-                         Q52 30 50 38
-                         L46 34
-                         Q44 28 40 24
-                         Q36 20 30 22
-                         Q24 24 24 32
-                         Q24 38 28 42 Z" stroke-width="2.5"/>
+                <!-- BICEP - the massive peak -->
+                <path d="M42 58 C34 56 24 50 18 40 C12 30 14 18 24 10 C34 2 48 6 58 16"/>
 
-                <!-- Bicep peak highlight -->
-                <ellipse cx="32" cy="18" rx="10" ry="6" fill="var(--primary)" opacity="0.9"/>
+                <!-- Bicep peak curve -->
+                <ellipse cx="28" cy="28" rx="14" ry="12" fill="var(--void-elevated)"/>
 
-                <!-- Bicep muscle striations -->
-                <path d="M22 28 Q28 22 34 18" stroke-width="1.5" fill="none" opacity="0.6"/>
-                <path d="M24 34 Q30 28 36 24" stroke-width="1.2" fill="none" opacity="0.5"/>
-                <path d="M20 24 Q24 20 30 16" stroke-width="1" fill="none" opacity="0.5"/>
-                <path d="M36 20 Q40 22 44 26" stroke-width="1" fill="none" opacity="0.4"/>
+                <!-- Bicep separation line -->
+                <path d="M20 44 C28 38 36 30 42 24" fill="none" stroke-width="2.5"/>
 
-                <!-- Tricep area -->
-                <path d="M28 42 Q34 46 42 48 Q50 50 56 48 Q50 44 46 38" stroke-width="2" fill="none"/>
+                <!-- Bicep muscle detail lines -->
+                <path d="M22 50 C30 44 38 36 44 30" fill="none" stroke-width="2"/>
+                <path d="M26 54 C34 48 42 40 48 34" fill="none" stroke-width="2"/>
 
-                <!-- Tricep lines -->
-                <path d="M32 44 Q38 44 44 42" stroke-width="1" fill="none" opacity="0.4"/>
-                <path d="M36 48 Q42 48 48 46" stroke-width="1" fill="none" opacity="0.3"/>
+                <!-- Tricep lower part -->
+                <path d="M48 60 C56 62 66 62 76 58 C86 54 92 48 94 42"/>
 
-                <!-- Shoulder cap -->
-                <path d="M16 32 Q10 38 8 48 Q6 58 10 68 Q14 78 22 84 Q28 88 36 90" stroke-width="2.5" fill="none"/>
-                <path d="M56 48 Q62 54 66 62 Q70 70 70 80 Q68 88 60 92 Q52 94 42 92 L36 90" stroke-width="2.5" fill="none"/>
+                <!-- Tricep upper connection -->
+                <path d="M58 16 C66 22 74 30 80 40 C86 50 88 58 86 66"/>
 
-                <!-- Deltoid striations -->
-                <path d="M12 42 Q14 50 18 58" stroke-width="1.2" fill="none" opacity="0.5"/>
-                <path d="M14 48 Q18 56 24 64" stroke-width="1" fill="none" opacity="0.4"/>
-                <path d="M60 56 Q64 64 66 72" stroke-width="1" fill="none" opacity="0.4"/>
+                <!-- Tricep muscle line -->
+                <path d="M54 58 C64 58 74 54 82 48" fill="none" stroke-width="2"/>
+                <path d="M58 64 C68 64 78 60 86 54" fill="none" stroke-width="2"/>
 
-                <!-- Veins -->
-                <path d="M26 26 Q22 32 20 40" stroke-width="1.8" fill="none" opacity="0.7"/>
-                <path d="M34 22 Q30 28 28 36" stroke-width="1.5" fill="none" opacity="0.6"/>
-                <path d="M42 28 Q40 34 38 42" stroke-width="1.2" fill="none" opacity="0.5"/>
+                <!-- Shoulder connection -->
+                <path d="M18 40 C10 50 6 62 8 76 C10 88 18 96 32 98"/>
+                <path d="M94 42 C98 54 98 68 94 80 C90 92 80 98 66 98"/>
+
+                <!-- Shoulder detail lines -->
+                <path d="M12 54 C14 66 20 78 30 88" fill="none" stroke-width="2"/>
+                <path d="M16 60 C18 72 24 84 34 92" fill="none" stroke-width="2"/>
               </g>
             </svg>
           </div>
