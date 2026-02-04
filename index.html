@@ -26,57 +26,62 @@
 
   <style>
 /* ═══════════════════════════════════════════════════════════════════════════
-   MUSCLEFORGE - BRUTALIST MODERN
-   Raw. Functional. Uncompromising.
+   MUSCLEFORGE - NEON BRUTALIST
+   Dark-first. Electric accents. Uncompromising.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* The Void - Pure blacks, no warmth */
-  --void: #000000;
-  --void-elevated: #0a0a0a;
-  --void-surface: #111111;
-  --void-float: #181818;
-  --void-hover: #1f1f1f;
+  /* The Void - Deep blacks with subtle blue undertone */
+  --void: #0a0a0f;
+  --void-elevated: #12121a;
+  --void-surface: #1a1a24;
+  --void-float: #22222e;
+  --void-hover: #2a2a38;
 
-  /* The Signal - Stark white accent, one color to rule */
+  /* Primary - Electric cyan */
+  --primary: #00f0ff;
+  --primary-dim: rgba(0,240,255,0.12);
+  --primary-glow: rgba(0,240,255,0.25);
+
+  /* Accent - Hot coral/orange */
+  --accent: #ff6b35;
+  --accent-dim: rgba(255,107,53,0.12);
+  --accent-glow: rgba(255,107,53,0.3);
+
+  /* Signal - Clean white for emphasis */
   --signal: #ffffff;
   --signal-dim: rgba(255,255,255,0.08);
   --signal-glow: rgba(255,255,255,0.15);
-  --signal-intense: #ffffff;
 
-  /* Accent - A single, surgical strike of color */
-  --accent: #ff3d00;
-  --accent-dim: rgba(255,61,0,0.12);
-  --accent-glow: rgba(255,61,0,0.25);
-
-  /* Typography - High contrast */
+  /* Typography - Layered contrast */
   --ink: #ffffff;
-  --ink-secondary: #888888;
-  --ink-tertiary: #555555;
-  --ink-faint: #333333;
+  --ink-secondary: #a0a0b0;
+  --ink-tertiary: #6a6a7a;
+  --ink-faint: #45454f;
 
-  /* Borders - Visible, intentional */
-  --line: rgba(255,255,255,0.08);
-  --line-hover: rgba(255,255,255,0.16);
-  --line-active: rgba(255,255,255,0.24);
+  /* Borders - Subtle but visible */
+  --line: rgba(255,255,255,0.1);
+  --line-hover: rgba(255,255,255,0.18);
+  --line-active: rgba(0,240,255,0.4);
 
-  /* Macros - Desaturated, clinical */
-  --protein: #ff5252;
-  --carbs: #00bfa5;
-  --fat: #ffd740;
+  /* Macros - Vibrant, distinct */
+  --protein: #ff6b6b;
+  --carbs: #4ecdc4;
+  --fat: #ffe66d;
+  --calories: #ff6b35;
 
   /* System */
   --success: #00e676;
   --warning: #ffab00;
-  --danger: #ff1744;
+  --danger: #ff4757;
 
-  /* Motion - Snappy, intentional */
+  /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
 
-  /* Spacing scale - Generous, breathing room */
+  /* Spacing scale */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -86,37 +91,45 @@
   --space-3xl: 96px;
   --space-4xl: 128px;
 
-  /* Radius - Minimal, geometric */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  /* Radius - Slight softness */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
-/* Light mode - Stark, clinical white */
+/* Light mode - Clean, warm white */
 [data-theme="light"] {
-  --void: #ffffff;
-  --void-elevated: #fafafa;
-  --void-surface: #f5f5f5;
-  --void-float: #eeeeee;
-  --void-hover: #e0e0e0;
+  --void: #fafafa;
+  --void-elevated: #ffffff;
+  --void-surface: #f0f0f2;
+  --void-float: #e8e8ec;
+  --void-hover: #dddde2;
 
-  --signal: #000000;
+  --primary: #0099aa;
+  --primary-dim: rgba(0,153,170,0.1);
+  --primary-glow: rgba(0,153,170,0.2);
+
+  --accent: #e85a2c;
+  --accent-dim: rgba(232,90,44,0.1);
+  --accent-glow: rgba(232,90,44,0.2);
+
+  --signal: #1a1a24;
   --signal-dim: rgba(0,0,0,0.06);
   --signal-glow: rgba(0,0,0,0.12);
-  --signal-intense: #000000;
 
-  --accent: #ff3d00;
-  --accent-dim: rgba(255,61,0,0.08);
-  --accent-glow: rgba(255,61,0,0.18);
-
-  --ink: #000000;
-  --ink-secondary: #666666;
-  --ink-tertiary: #999999;
-  --ink-faint: #cccccc;
+  --ink: #1a1a24;
+  --ink-secondary: #555560;
+  --ink-tertiary: #8888990;
+  --ink-faint: #c0c0c8;
 
   --line: rgba(0,0,0,0.08);
   --line-hover: rgba(0,0,0,0.14);
-  --line-active: rgba(0,0,0,0.22);
+  --line-active: rgba(0,153,170,0.4);
+
+  --protein: #e85555;
+  --carbs: #00a896;
+  --fat: #e6b800;
+  --calories: #e85a2c;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -499,61 +512,76 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FORMS - Raw, functional
+   FORMS - Clean, accessible
    ═══════════════════════════════════════════════════════════════════════════ */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .field-label {
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-tertiary);
+  color: var(--ink-secondary);
 }
 
 .field-input {
   width: 100%;
-  padding: 12px 0;
+  padding: 14px 16px;
   font-size: 0.9375rem;
   font-family: inherit;
   color: var(--ink);
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--line-hover);
+  background: var(--void-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   outline: none;
-  transition: border-color var(--duration-fast) var(--ease-sharp);
+  transition: all var(--duration-fast) var(--ease-sharp);
 }
 
 .field-input:hover {
-  border-color: var(--ink-tertiary);
+  border-color: var(--line-hover);
+  background: var(--void-float);
 }
 
 .field-input:focus {
-  border-color: var(--ink);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-dim);
+  background: var(--void-surface);
 }
 
 .field-input::placeholder {
   color: var(--ink-faint);
 }
 
-/* Select styling */
+/* Select/Dropdown styling */
 select.field-input {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-color: var(--void-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236a6a7a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0 center;
-  padding-right: 20px;
+  background-position: right 14px center;
+  padding-right: 40px;
   cursor: pointer;
+}
+
+select.field-input option {
+  background: var(--void-elevated);
+  color: var(--ink);
+  padding: 12px;
+}
+
+/* For light mode dropdown arrow */
+[data-theme="light"] select.field-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555560' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
 }
 
 /* Input with suffix */
@@ -563,22 +591,25 @@ select.field-input {
 }
 
 .field-combo .field-input {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
   border-right: none;
 }
 
 .field-suffix {
   display: flex;
   align-items: center;
-  padding: 0 0 0 var(--space-sm);
-  font-size: 0.75rem;
+  padding: 0 16px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--ink-tertiary);
-  background: transparent;
-  border-bottom: 1px solid var(--line-hover);
+  background: var(--void-float);
+  border: 1px solid var(--line);
+  border-left: none;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
 .field-hint {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   color: var(--ink-faint);
   margin-top: var(--space-xs);
 }
@@ -2235,44 +2266,61 @@ function exportPDF() {
 
   const { macros, inputs, water } = plan;
   const el = document.createElement('div');
-  el.className = 'pdf-export';
+
   el.innerHTML = `
-    <div class="pdf-header">
-      <div class="pdf-logo">MuscleForge</div>
-      <div class="pdf-date">${new Date().toLocaleDateString()}</div>
-    </div>
-    <div class="pdf-section">
-      <div class="pdf-section-title">Daily Targets</div>
-      <div class="pdf-stats">
-        <div class="pdf-stat"><div class="pdf-stat-value">${macros.cals}</div><div class="pdf-stat-label">Calories</div></div>
-        <div class="pdf-stat"><div class="pdf-stat-value">${macros.protein.g}g</div><div class="pdf-stat-label">Protein</div></div>
-        <div class="pdf-stat"><div class="pdf-stat-value">${macros.carbs.g}g</div><div class="pdf-stat-label">Carbs</div></div>
-        <div class="pdf-stat"><div class="pdf-stat-value">${macros.fat.g}g</div><div class="pdf-stat-label">Fat</div></div>
-        <div class="pdf-stat"><div class="pdf-stat-value">${water}oz</div><div class="pdf-stat-label">Water</div></div>
+    <div style="background:#fff;color:#111;padding:40px;font-family:Inter,sans-serif;">
+      <div style="text-align:center;padding-bottom:24px;margin-bottom:24px;border-bottom:3px solid #ff6b35;">
+        <div style="font-family:Space Grotesk,sans-serif;font-size:28px;font-weight:700;">MUSCLEFORGE</div>
+        <div style="font-size:12px;color:#666;margin-top:4px;">Nutrition Plan · ${new Date().toLocaleDateString()}</div>
       </div>
-    </div>
-    <div class="pdf-section">
-      <div class="pdf-section-title">Meal Plan</div>
-      ${meals.map(m => `
-        <div class="pdf-meal">
-          <div class="pdf-meal-title">${m.name} · ${m.time}</div>
-          ${m.foods.map(f => `
-            <div class="pdf-meal-item">
-              <span>${f.food.name} (${f.qty}×)</span>
-              <span>${Math.round(f.food.macros.protein * f.qty)}P / ${Math.round(f.food.macros.carbs * f.qty)}C / ${Math.round(f.food.macros.fat * f.qty)}F</span>
-            </div>
-          `).join('')}
+      <div style="margin-bottom:28px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;">Daily Targets</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
+            <div style="font-size:24px;font-weight:700;color:#ff6b35;">${macros.cals}</div>
+            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Calories</div>
+          </div>
+          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
+            <div style="font-size:24px;font-weight:700;color:#ff6b6b;">${macros.protein.g}g</div>
+            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Protein</div>
+          </div>
+          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
+            <div style="font-size:24px;font-weight:700;color:#4ecdc4;">${macros.carbs.g}g</div>
+            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Carbs</div>
+          </div>
+          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
+            <div style="font-size:24px;font-weight:700;color:#e6b800;">${macros.fat.g}g</div>
+            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Fat</div>
+          </div>
+          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
+            <div style="font-size:24px;font-weight:700;color:#0099aa;">${water}oz</div>
+            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Water</div>
+          </div>
         </div>
-      `).join('')}
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;">Meal Plan</div>
+        ${meals.map(m => `
+          <div style="margin-bottom:16px;padding:16px;background:#f9f9f9;border-radius:8px;border-left:4px solid #ff6b35;">
+            <div style="font-weight:600;font-size:14px;margin-bottom:10px;"><span>${m.name}</span> <span style="color:#ff6b35;float:right;">${m.time}</span></div>
+            ${m.foods.map(f => `
+              <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid #eee;">
+                <span>${f.food.name} (${f.qty}×)</span>
+                <span style="color:#666;">${Math.round(f.food.macros.protein * f.qty)}P / ${Math.round(f.food.macros.carbs * f.qty)}C / ${Math.round(f.food.macros.fat * f.qty)}F</span>
+              </div>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+      <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;font-size:10px;color:#999;">MuscleForge by Can Ayter · ayter.com</div>
     </div>
-    <p style="margin-top:20px;font-size:10px;color:#888;">MuscleForge by Can Ayter · ayter.com</p>
   `;
 
   html2pdf().set({
     margin: [10, 10],
     filename: 'muscleforge-plan.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
+    html2canvas: { scale: 2, useCORS: true },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   }).from(el).save();
 }
