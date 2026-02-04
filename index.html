@@ -31,38 +31,38 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* The Void - Deep blacks with subtle blue undertone */
-  --void: #0a0a0f;
-  --void-elevated: #12121a;
-  --void-surface: #1a1a24;
-  --void-float: #22222e;
-  --void-hover: #2a2a38;
+  /* The Void - Pure deep black */
+  --void: #0a0a0a;
+  --void-elevated: #111111;
+  --void-surface: #181818;
+  --void-float: #1f1f1f;
+  --void-hover: #282828;
 
-  /* Primary - Electric cyan */
-  --primary: #00f0ff;
-  --primary-dim: rgba(0,240,255,0.12);
-  --primary-glow: rgba(0,240,255,0.25);
+  /* Primary - Electric gold/yellow */
+  --primary: #ffd000;
+  --primary-dim: rgba(255,208,0,0.15);
+  --primary-glow: rgba(255,208,0,0.35);
 
-  /* Accent - Hot coral/orange */
+  /* Accent - Hot orange for energy */
   --accent: #ff6b35;
-  --accent-dim: rgba(255,107,53,0.12);
-  --accent-glow: rgba(255,107,53,0.3);
+  --accent-dim: rgba(255,107,53,0.15);
+  --accent-glow: rgba(255,107,53,0.35);
 
   /* Signal - Clean white for emphasis */
   --signal: #ffffff;
-  --signal-dim: rgba(255,255,255,0.08);
-  --signal-glow: rgba(255,255,255,0.15);
+  --signal-dim: rgba(255,255,255,0.1);
+  --signal-glow: rgba(255,255,255,0.2);
 
-  /* Typography - Layered contrast */
+  /* Typography - High contrast */
   --ink: #ffffff;
-  --ink-secondary: #a0a0b0;
-  --ink-tertiary: #6a6a7a;
-  --ink-faint: #45454f;
+  --ink-secondary: #b0b0b0;
+  --ink-tertiary: #707070;
+  --ink-faint: #404040;
 
-  /* Borders - Subtle but visible */
-  --line: rgba(255,255,255,0.1);
-  --line-hover: rgba(255,255,255,0.18);
-  --line-active: rgba(0,240,255,0.4);
+  /* Borders - Visible */
+  --line: rgba(255,255,255,0.12);
+  --line-hover: rgba(255,255,255,0.2);
+  --line-active: rgba(255,208,0,0.5);
 
   /* Macros - Vibrant, distinct */
   --protein: #ff6b6b;
@@ -264,9 +264,15 @@ h1, h2, h3, h4, h5, h6, .display {
 }
 
 .logo-mark {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   position: relative;
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+  transition: filter var(--duration-normal) var(--ease-sharp);
+}
+
+.logo:hover .logo-mark {
+  filter: drop-shadow(0 0 16px var(--accent-glow));
 }
 
 .logo-mark svg {
@@ -277,25 +283,40 @@ h1, h2, h3, h4, h5, h6, .display {
 .logo-type {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
 }
 
 .logo-name {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--ink);
-  line-height: 1.1;
+  line-height: 1;
 }
 
 .logo-tag {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-secondary);
+}
+
+.logo-credit {
   font-size: 0.5625rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-tertiary);
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+.logo-credit a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.logo-credit a:hover {
+  color: var(--primary);
 }
 
 /* Nav */
@@ -1350,23 +1371,125 @@ select.field-input option {
    FOOTER
    ═══════════════════════════════════════════════════════════════════════════ */
 .site-footer {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-3xl) 0 var(--space-xl);
+  border-top: 2px solid var(--primary);
+  background: var(--void);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+}
+
+.footer-brand { }
+
+.footer-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-tagline {
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.footer-credit {
+  font-size: 0.8125rem;
+  color: var(--ink-tertiary);
+  margin-bottom: var(--space-xs);
+}
+
+.footer-credit strong {
+  color: var(--primary);
+}
+
+.footer-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-sm);
+  transition: all var(--duration-fast);
+}
+
+.footer-link:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.footer-contact { }
+
+.footer-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-form .field-input {
+  padding: 12px 14px;
+  font-size: 0.875rem;
+}
+
+.contact-form textarea.field-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+  margin-top: var(--space-xs);
+}
+
+.contact-note {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin-top: var(--space-sm);
+}
+
+.footer-bottom {
+  padding-top: var(--space-lg);
   border-top: 1px solid var(--line);
   text-align: center;
 }
 
-.footer-text {
-  font-size: 0.8125rem;
-  color: var(--ink-tertiary);
+.footer-bottom p {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
 }
 
-.footer-text a {
-  color: var(--signal);
+.footer-bottom a {
+  color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s;
 }
 
-.footer-text a:hover { color: var(--ink); }
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
 
 /* Watermark */
 .watermark {
@@ -1396,41 +1519,65 @@ select.field-input option {
       <div class="header-inner">
         <div class="logo">
           <div class="logo-mark">
-            <!-- MuscleForge Mark - Stylized geometric goat head representing strength -->
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Outer ring -->
-              <circle cx="22" cy="22" r="21" stroke="var(--signal)" stroke-width="1.5" fill="none" opacity="0.3"/>
+            <!-- MuscleForge Mark - Massive flexed bicep -->
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flexed arm silhouette - powerful bicep peak -->
+              <g fill="var(--accent)" stroke="var(--accent)" stroke-width="0.5">
+                <!-- Main bicep mass - huge peak -->
+                <path d="M8 38
+                         Q6 36 6 32
+                         Q6 26 10 22
+                         Q14 18 18 16
+                         Q22 14 26 12
+                         Q30 10 32 8
+                         L34 10
+                         Q32 14 30 18
+                         Q28 22 28 26
+                         Q28 30 30 32
+                         Q32 34 36 34
+                         Q40 34 44 32
+                         Q48 30 50 28
+                         L52 30
+                         Q50 34 46 38
+                         Q42 42 38 44
+                         Q34 46 28 46
+                         Q22 46 16 44
+                         Q10 42 8 38 Z"
+                      fill="var(--accent)"/>
 
-              <!-- Inner geometric goat - abstract, powerful -->
-              <g fill="var(--signal)">
-                <!-- Left horn - angular, strong -->
-                <path d="M11 8 L14 6 L16 12 L13 16 L11 12 Z" opacity="0.9"/>
-                <!-- Right horn - mirror -->
-                <path d="M33 8 L30 6 L28 12 L31 16 L33 12 Z" opacity="0.9"/>
+                <!-- Bicep peak highlight -->
+                <ellipse cx="24" cy="20" rx="8" ry="6" fill="var(--accent)" opacity="0.9"/>
 
-                <!-- Head - geometric shield shape -->
-                <path d="M22 14 L30 18 L30 26 L22 34 L14 26 L14 18 Z" fill="var(--void)" stroke="var(--signal)" stroke-width="1.5"/>
+                <!-- Veins - thick and prominent -->
+                <path d="M14 30 Q18 26 22 22 Q26 18 28 14" stroke="var(--void)" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <path d="M16 34 Q20 30 24 26" stroke="var(--void)" stroke-width="1.2" fill="none" opacity="0.5"/>
+                <path d="M20 36 Q24 32 28 28 Q32 26 36 26" stroke="var(--void)" stroke-width="1" fill="none" opacity="0.4"/>
+                <path d="M26 20 Q28 18 30 14" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.5"/>
+                <path d="M18 24 Q16 26 14 28" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.4"/>
 
-                <!-- Face details - minimal, fierce -->
-                <!-- Eyes - angled, determined -->
-                <path d="M17 21 L20 20 L20 22 L17 23 Z"/>
-                <path d="M27 21 L24 20 L24 22 L27 23 Z"/>
+                <!-- Forearm mass -->
+                <path d="M36 34 Q42 36 48 34 Q52 32 54 28 L56 30 Q54 36 50 40 Q46 44 40 46 Q36 46 34 44"
+                      fill="var(--accent)" opacity="0.85"/>
 
-                <!-- Nose bridge - strong vertical -->
-                <path d="M21 24 L23 24 L22 28 Z"/>
+                <!-- Forearm veins -->
+                <path d="M38 38 Q44 36 50 32" stroke="var(--void)" stroke-width="1" fill="none" opacity="0.4"/>
+                <path d="M40 42 Q46 40 52 36" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.3"/>
 
-                <!-- Chin/beard point -->
-                <path d="M22 30 L20 28 L22 32 L24 28 Z" opacity="0.7"/>
+                <!-- Fist indication -->
+                <ellipse cx="54" cy="29" rx="3" ry="4" fill="var(--accent)" opacity="0.8"/>
               </g>
 
-              <!-- Muscle indication - subtle curves on sides -->
-              <path d="M8 22 Q6 18 8 14" stroke="var(--signal)" stroke-width="1" fill="none" opacity="0.4"/>
-              <path d="M36 22 Q38 18 36 14" stroke="var(--signal)" stroke-width="1" fill="none" opacity="0.4"/>
+              <!-- Highlight/shine on bicep peak -->
+              <ellipse cx="22" cy="18" rx="4" ry="2.5" fill="var(--signal)" opacity="0.15"/>
+
+              <!-- Power glow effect -->
+              <circle cx="24" cy="22" r="12" fill="var(--accent)" opacity="0.1"/>
             </svg>
           </div>
           <div class="logo-type">
-            <span class="logo-name">MuscleForge</span>
-            <span class="logo-tag">Precision Nutrition</span>
+            <span class="logo-name">MUSCLEFORGE</span>
+            <span class="logo-tag">Evidence-Based Nutrition Tools</span>
+            <span class="logo-credit">by Can Ayter · <a href="https://ayter.com" target="_blank">ayter.com</a></span>
           </div>
         </div>
 
@@ -1789,7 +1936,27 @@ select.field-input option {
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-text">© 2024 MuscleForge by <a href="https://ayter.com" target="_blank">Can Ayter</a></p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">MUSCLEFORGE</div>
+          <p class="footer-tagline">Evidence-based nutrition tools for serious athletes.</p>
+          <p class="footer-credit">Created with dedication by <strong>Can Ayter</strong></p>
+          <a href="https://ayter.com" target="_blank" class="footer-link">ayter.com</a>
+        </div>
+        <div class="footer-contact">
+          <h4 class="footer-heading">Get in Touch</h4>
+          <form id="contactForm" class="contact-form" onsubmit="sendContactForm(event)">
+            <input type="text" name="name" placeholder="Your name" class="field-input" required>
+            <input type="email" name="email" placeholder="Your email" class="field-input" required>
+            <textarea name="message" placeholder="Your message" class="field-input" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+          <p class="contact-note">Questions, feedback, or collaboration inquiries welcome.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 MuscleForge · Built by <a href="https://ayter.com" target="_blank">Can Ayter</a> · All calculations are estimates. Consult a professional.</p>
+      </div>
     </div>
   </footer>
 
@@ -2268,51 +2435,76 @@ function exportPDF() {
   const el = document.createElement('div');
 
   el.innerHTML = `
-    <div style="background:#fff;color:#111;padding:40px;font-family:Inter,sans-serif;">
-      <div style="text-align:center;padding-bottom:24px;margin-bottom:24px;border-bottom:3px solid #ff6b35;">
-        <div style="font-family:Space Grotesk,sans-serif;font-size:28px;font-weight:700;">MUSCLEFORGE</div>
-        <div style="font-size:12px;color:#666;margin-top:4px;">Nutrition Plan · ${new Date().toLocaleDateString()}</div>
+    <div style="background:#fff;color:#111;padding:40px;font-family:Inter,sans-serif;position:relative;">
+      <!-- Header with branding -->
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;margin-bottom:24px;border-bottom:3px solid #ffd000;">
+        <div>
+          <div style="font-family:Space Grotesk,sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;">MUSCLEFORGE</div>
+          <div style="font-size:11px;color:#666;margin-top:2px;">Evidence-Based Nutrition Tools</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:#888;">Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+          <div style="font-size:10px;color:#ffd000;font-weight:600;margin-top:4px;">ayter.com</div>
+        </div>
       </div>
+
+      <!-- Daily Targets -->
       <div style="margin-bottom:28px;">
-        <div style="font-size:14px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;">Daily Targets</div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;letter-spacing:0.05em;color:#333;">Daily Targets</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
-            <div style="font-size:24px;font-weight:700;color:#ff6b35;">${macros.cals}</div>
-            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Calories</div>
+          <div style="text-align:center;padding:16px 20px;background:linear-gradient(135deg,#fff8e1,#fff);border:2px solid #ffd000;border-radius:8px;flex:1;min-width:70px;">
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#ff6b35;">${macros.cals}</div>
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Calories</div>
           </div>
-          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
-            <div style="font-size:24px;font-weight:700;color:#ff6b6b;">${macros.protein.g}g</div>
-            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Protein</div>
+          <div style="text-align:center;padding:16px 20px;background:#f5f5f5;border-radius:8px;flex:1;min-width:70px;">
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#e53935;">${macros.protein.g}g</div>
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Protein</div>
           </div>
-          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
-            <div style="font-size:24px;font-weight:700;color:#4ecdc4;">${macros.carbs.g}g</div>
-            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Carbs</div>
+          <div style="text-align:center;padding:16px 20px;background:#f5f5f5;border-radius:8px;flex:1;min-width:70px;">
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#00897b;">${macros.carbs.g}g</div>
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Carbs</div>
           </div>
-          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
-            <div style="font-size:24px;font-weight:700;color:#e6b800;">${macros.fat.g}g</div>
-            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Fat</div>
+          <div style="text-align:center;padding:16px 20px;background:#f5f5f5;border-radius:8px;flex:1;min-width:70px;">
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#f9a825;">${macros.fat.g}g</div>
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Fat</div>
           </div>
-          <div style="text-align:center;padding:16px 24px;background:#f5f5f5;border-radius:8px;flex:1;">
-            <div style="font-size:24px;font-weight:700;color:#0099aa;">${water}oz</div>
-            <div style="font-size:10px;text-transform:uppercase;color:#888;margin-top:4px;">Water</div>
+          <div style="text-align:center;padding:16px 20px;background:#f5f5f5;border-radius:8px;flex:1;min-width:70px;">
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#0288d1;">${water}oz</div>
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Water</div>
           </div>
         </div>
       </div>
+
+      <!-- Meal Plan -->
       <div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;">Meal Plan</div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;letter-spacing:0.05em;color:#333;">Meal Plan</div>
         ${meals.map(m => `
-          <div style="margin-bottom:16px;padding:16px;background:#f9f9f9;border-radius:8px;border-left:4px solid #ff6b35;">
-            <div style="font-weight:600;font-size:14px;margin-bottom:10px;"><span>${m.name}</span> <span style="color:#ff6b35;float:right;">${m.time}</span></div>
+          <div style="margin-bottom:16px;padding:16px;background:#fafafa;border-radius:8px;border-left:4px solid #ffd000;">
+            <div style="font-weight:600;font-size:14px;margin-bottom:10px;display:flex;justify-content:space-between;">
+              <span>${m.name}</span>
+              <span style="color:#ff6b35;font-weight:500;">${m.time}</span>
+            </div>
             ${m.foods.map(f => `
               <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid #eee;">
-                <span>${f.food.name} (${f.qty}×)</span>
-                <span style="color:#666;">${Math.round(f.food.macros.protein * f.qty)}P / ${Math.round(f.food.macros.carbs * f.qty)}C / ${Math.round(f.food.macros.fat * f.qty)}F</span>
+                <span style="color:#333;">${f.food.name} <span style="color:#999;">(${f.qty}×)</span></span>
+                <span style="color:#666;font-family:monospace;font-size:11px;">${Math.round(f.food.macros.protein * f.qty)}P / ${Math.round(f.food.macros.carbs * f.qty)}C / ${Math.round(f.food.macros.fat * f.qty)}F</span>
               </div>
             `).join('')}
           </div>
         `).join('')}
       </div>
-      <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;font-size:10px;color:#999;">MuscleForge by Can Ayter · ayter.com</div>
+
+      <!-- Footer with branding -->
+      <div style="margin-top:32px;padding-top:20px;border-top:2px solid #ffd000;display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:10px;color:#666;">
+          <strong style="color:#333;">MuscleForge</strong> by Can Ayter<br>
+          <span style="color:#999;">All calculations are estimates. Consult a nutrition professional.</span>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:11px;font-weight:600;color:#ffd000;">ayter.com</div>
+          <div style="font-size:9px;color:#999;">© ${new Date().getFullYear()} All rights reserved</div>
+        </div>
+      </div>
     </div>
   `;
 
@@ -2348,6 +2540,39 @@ function resetForm() {
   document.getElementById('results').classList.add('hidden');
   plan = null;
   meals = [];
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONTACT FORM
+// ═══════════════════════════════════════════════════════════════════════════
+function sendContactForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.name.value;
+  const email = form.email.value;
+  const message = form.message.value;
+
+  // Obfuscated email construction
+  const user = 'canayter';
+  const domain = 'gmail.com';
+  const recipient = user + '@' + domain;
+
+  const subject = encodeURIComponent('MuscleForge Contact from ' + name);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n\n' +
+    'Message:\n' + message
+  );
+
+  window.location.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+
+  // Show success feedback
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Opening Email...';
+  setTimeout(() => {
+    btn.textContent = 'Send Message';
+    form.reset();
+  }, 2000);
 }
   </script>
 </body>
