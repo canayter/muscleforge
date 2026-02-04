@@ -436,6 +436,208 @@ tr:hover td { background: var(--panel-hover); }
   body { background: white; color: black; }
   .card { border: 1px solid #ddd; break-inside: avoid; }
 }
+
+/* Food Swap Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-title { font-size: 1.25rem; font-weight: 700; }
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Current food display in modal */
+.current-food-display {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.current-food-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.current-food-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+.current-food-macros {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Alternative foods list */
+.alternatives-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.alternatives-title {
+  font-weight: 600;
+  color: var(--text);
+}
+.alternatives-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.alternatives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.alternative-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.alternative-item:hover {
+  border-color: var(--accent);
+  background: var(--panel-hover);
+}
+.alternative-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+.alternative-info { flex: 1; }
+.alternative-name { font-weight: 500; margin-bottom: 2px; }
+.alternative-serving { font-size: 0.85rem; color: var(--text-muted); }
+.alternative-macros {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.alternative-match {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.match-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.match-badge.excellent { background: var(--success-dim); color: var(--success); }
+.match-badge.good { background: var(--info-dim); color: var(--info); }
+.match-badge.fair { background: var(--warning-dim); color: var(--warning); }
+
+/* Swap button in meal items */
+.meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+.meal-item:last-child { border-bottom: none; }
+.meal-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.meal-item-name { color: var(--text); }
+.meal-item-macros { color: var(--text-muted); font-size: 0.85rem; }
+.swap-btn {
+  background: var(--panel-hover);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.swap-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* No alternatives message */
+.no-alternatives {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-muted);
+}
+.no-alternatives-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
   </style>
 </head>
 <body>
@@ -841,6 +1043,32 @@ tr:hover td { background: var(--panel-hover); }
       <p class="footer-copyright">&copy; <span id="year"></span> MuscleForge. Created by Can Ayter. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Food Swap Modal -->
+  <div id="swapModal" class="modal-overlay hidden" onclick="closeSwapModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Swap Food Item</h3>
+        <button class="modal-close" onclick="closeSwapModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="current-food-display">
+          <div class="current-food-label">Current Selection</div>
+          <div id="currentFoodName" class="current-food-name"></div>
+          <div id="currentFoodMacros" class="current-food-macros"></div>
+        </div>
+        <div class="alternatives-header">
+          <span class="alternatives-title">Similar Alternatives</span>
+          <span id="alternativesCount" class="alternatives-count"></span>
+        </div>
+        <div id="alternativesList" class="alternatives-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeSwapModal()">Cancel</button>
+        <button id="confirmSwapBtn" class="btn btn-primary" onclick="confirmSwap()" disabled>Swap Food</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -1353,8 +1581,14 @@ function selectFoodsForMeal(foods, targets) {
   return selected;
 }
 
+// Store current meals globally for swap functionality
+let currentMeals = [];
+
 function renderMealPlan(meals) {
-  const html = meals.map((meal, i) => {
+  // Store meals for later modification
+  currentMeals = meals;
+
+  const html = meals.map((meal, mealIndex) => {
     const totals = meal.foods.reduce((acc, item) => ({
       p: acc.p + (item.food.macros.protein * item.portions),
       c: acc.c + (item.food.macros.carbs * item.portions),
@@ -1363,16 +1597,21 @@ function renderMealPlan(meals) {
     }), { p: 0, c: 0, f: 0, cal: 0 });
 
     return `
-      <div class="meal-card">
+      <div class="meal-card" data-meal-index="${mealIndex}">
         <div class="meal-header">
-          <span class="meal-name">Meal ${i + 1}: ${meal.name}</span>
+          <span class="meal-name">Meal ${mealIndex + 1}: ${meal.name}</span>
           <span class="meal-time">${meal.time}</span>
         </div>
         <ul class="meal-items">
-          ${meal.foods.map(item => `
+          ${meal.foods.map((item, foodIndex) => `
             <li class="meal-item">
-              <span class="meal-item-name">${item.food.name}</span>
-              <span class="meal-item-macros">${item.food.serving.description} · P${Math.round(item.food.macros.protein * item.portions)}g C${Math.round(item.food.macros.carbs * item.portions)}g F${Math.round(item.food.macros.fat * item.portions)}g</span>
+              <div class="meal-item-content">
+                <span class="meal-item-name">${item.food.name}</span>
+                <span class="meal-item-macros">${item.food.serving.description} · P${Math.round(item.food.macros.protein * item.portions)}g C${Math.round(item.food.macros.carbs * item.portions)}g F${Math.round(item.food.macros.fat * item.portions)}g</span>
+              </div>
+              <button class="swap-btn" onclick="openSwapModal(${mealIndex}, ${foodIndex})" title="Swap for similar food">
+                🔄 Swap
+              </button>
             </li>
           `).join('')}
         </ul>
@@ -1387,6 +1626,211 @@ function renderMealPlan(meals) {
   }).join('');
 
   document.getElementById('mealPlanContent').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FOOD SWAP FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════════════════
+let swapContext = { mealIndex: null, foodIndex: null, selectedAlternative: null };
+
+function openSwapModal(mealIndex, foodIndex) {
+  const meal = currentMeals[mealIndex];
+  const foodItem = meal.foods[foodIndex];
+  const currentFood = foodItem.food;
+
+  // Store context for the swap
+  swapContext = { mealIndex, foodIndex, selectedAlternative: null };
+
+  // Display current food
+  document.getElementById('currentFoodName').textContent = currentFood.name;
+  document.getElementById('currentFoodMacros').innerHTML = `
+    <span>P: ${currentFood.macros.protein}g</span>
+    <span>C: ${currentFood.macros.carbs}g</span>
+    <span>F: ${currentFood.macros.fat}g</span>
+    <span>${currentFood.calories} cal</span>
+  `;
+
+  // Find similar foods
+  const alternatives = findSimilarFoods(currentFood, currentPlan.inputs.dietType);
+
+  // Render alternatives
+  renderAlternatives(alternatives, currentFood);
+
+  // Reset confirm button
+  document.getElementById('confirmSwapBtn').disabled = true;
+
+  // Show modal
+  document.getElementById('swapModal').classList.remove('hidden');
+}
+
+function closeSwapModal(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById('swapModal').classList.add('hidden');
+  swapContext = { mealIndex: null, foodIndex: null, selectedAlternative: null };
+}
+
+function findSimilarFoods(currentFood, dietType) {
+  const allFoods = getAllFoods();
+  const tolerance = 0.35; // 35% tolerance for macro matching
+
+  // Get current food macros
+  const targetP = currentFood.macros.protein;
+  const targetC = currentFood.macros.carbs;
+  const targetF = currentFood.macros.fat;
+  const targetCal = currentFood.calories;
+
+  // Filter and score alternatives
+  const alternatives = allFoods
+    .filter(food => {
+      // Exclude the current food
+      if (food.id === currentFood.id) return false;
+
+      // Must be same category
+      if (food.category !== currentFood.category) return false;
+
+      // Must match diet type
+      if (dietType !== 'regular' && !food.dietTypes.includes(dietType)) return false;
+
+      return true;
+    })
+    .map(food => {
+      // Calculate similarity score (0-100)
+      const pDiff = targetP > 0 ? Math.abs(food.macros.protein - targetP) / targetP : (food.macros.protein === 0 ? 0 : 1);
+      const cDiff = targetC > 0 ? Math.abs(food.macros.carbs - targetC) / targetC : (food.macros.carbs === 0 ? 0 : 1);
+      const fDiff = targetF > 0 ? Math.abs(food.macros.fat - targetF) / targetF : (food.macros.fat === 0 ? 0 : 1);
+      const calDiff = targetCal > 0 ? Math.abs(food.calories - targetCal) / targetCal : 0;
+
+      // Weighted score (protein most important for bodybuilding)
+      const score = 100 - ((pDiff * 40 + cDiff * 25 + fDiff * 20 + calDiff * 15) * 100);
+
+      return {
+        food,
+        score: Math.max(0, Math.round(score)),
+        pDiff: Math.round(food.macros.protein - targetP),
+        cDiff: Math.round(food.macros.carbs - targetC),
+        fDiff: Math.round(food.macros.fat - targetF)
+      };
+    })
+    .filter(item => item.score >= 50) // Only show reasonably similar foods
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10); // Top 10 alternatives
+
+  return alternatives;
+}
+
+function renderAlternatives(alternatives, currentFood) {
+  const countEl = document.getElementById('alternativesCount');
+  const listEl = document.getElementById('alternativesList');
+
+  if (alternatives.length === 0) {
+    countEl.textContent = '';
+    listEl.innerHTML = `
+      <div class="no-alternatives">
+        <div class="no-alternatives-icon">🔍</div>
+        <p>No similar alternatives found for this food.</p>
+        <p class="text-sm">Try adjusting your diet type or check the food database.</p>
+      </div>
+    `;
+    return;
+  }
+
+  countEl.textContent = `${alternatives.length} found`;
+
+  listEl.innerHTML = alternatives.map((alt, index) => {
+    const matchClass = alt.score >= 85 ? 'excellent' : alt.score >= 70 ? 'good' : 'fair';
+    const matchLabel = alt.score >= 85 ? 'Excellent Match' : alt.score >= 70 ? 'Good Match' : 'Fair Match';
+
+    // Format macro differences
+    const formatDiff = (diff, label) => {
+      if (diff === 0) return `${label}: same`;
+      const sign = diff > 0 ? '+' : '';
+      return `${label}: ${sign}${diff}g`;
+    };
+
+    return `
+      <div class="alternative-item" data-index="${index}" onclick="selectAlternative(${index}, '${alt.food.id}')">
+        <div class="alternative-info">
+          <div class="alternative-name">${alt.food.name}</div>
+          <div class="alternative-serving">${alt.food.serving.description}</div>
+          <div class="alternative-macros">
+            <span>P: ${alt.food.macros.protein}g (${formatDiff(alt.pDiff, '')})</span>
+            <span>C: ${alt.food.macros.carbs}g</span>
+            <span>F: ${alt.food.macros.fat}g</span>
+            <span>${alt.food.calories} cal</span>
+          </div>
+        </div>
+        <div class="alternative-match">
+          <span class="match-badge ${matchClass}">${matchLabel}</span>
+          <span class="text-sm text-muted">${alt.score}% similar</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectAlternative(index, foodId) {
+  // Remove previous selection
+  document.querySelectorAll('.alternative-item').forEach(el => el.classList.remove('selected'));
+
+  // Add selection to clicked item
+  const selectedEl = document.querySelector(`.alternative-item[data-index="${index}"]`);
+  if (selectedEl) {
+    selectedEl.classList.add('selected');
+  }
+
+  // Store selection
+  swapContext.selectedAlternative = getFoodById(foodId);
+
+  // Enable confirm button
+  document.getElementById('confirmSwapBtn').disabled = false;
+}
+
+function confirmSwap() {
+  if (!swapContext.selectedAlternative) return;
+
+  const { mealIndex, foodIndex, selectedAlternative } = swapContext;
+
+  // Update the meal with the new food
+  currentMeals[mealIndex].foods[foodIndex] = {
+    food: selectedAlternative,
+    portions: currentMeals[mealIndex].foods[foodIndex].portions
+  };
+
+  // Re-render the meal plan
+  renderMealPlan(currentMeals);
+
+  // Close modal
+  closeSwapModal();
+
+  // Show success feedback (optional)
+  showSwapSuccess(selectedAlternative.name);
+}
+
+function showSwapSuccess(foodName) {
+  // Create a temporary toast notification
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--success);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    z-index: 1001;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  `;
+  toast.textContent = `✓ Swapped to ${foodName}`;
+  document.body.appendChild(toast);
+
+  // Remove after 3 seconds
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
