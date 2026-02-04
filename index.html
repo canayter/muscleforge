@@ -7,637 +7,788 @@
   <meta name="author" content="Can Ayter"/>
   <meta name="robots" content="noindex, nofollow"/>
   <title>MuscleForge | Professional Bodybuilding Nutrition Planner</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Copy Protection -->
   <script>
-    // Disable right-click
     document.addEventListener('contextmenu', e => e.preventDefault());
-    // Disable text selection via keyboard
     document.addEventListener('keydown', e => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'a' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
+      if ((e.ctrlKey || e.metaKey) && ['c','a','u','s','p'].includes(e.key.toLowerCase())) {
         e.preventDefault();
-        return false;
       }
     });
-    // Disable drag
     document.addEventListener('dragstart', e => e.preventDefault());
   </script>
 
   <style>
 /* ═══════════════════════════════════════════════════════════════════════════
-   MUSCLEFORGE - ELEGANT MINIMALIST THEME
+   MUSCLEFORGE - BRUTALIST MODERN
+   Raw. Functional. Uncompromising.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* CSS Variables - Dark Mode (Default) */
 :root {
-  --bg-primary: #0d0d0f;
-  --bg-secondary: #141418;
-  --bg-tertiary: #1a1a1f;
-  --bg-elevated: #222228;
-  --bg-hover: #2a2a32;
+  /* The Void - Pure blacks, no warmth */
+  --void: #000000;
+  --void-elevated: #0a0a0a;
+  --void-surface: #111111;
+  --void-float: #181818;
+  --void-hover: #1f1f1f;
 
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-default: rgba(255,255,255,0.1);
-  --border-strong: rgba(255,255,255,0.15);
+  /* The Signal - Stark white accent, one color to rule */
+  --signal: #ffffff;
+  --signal-dim: rgba(255,255,255,0.08);
+  --signal-glow: rgba(255,255,255,0.15);
+  --signal-intense: #ffffff;
 
-  --text-primary: #f5f5f7;
-  --text-secondary: #a1a1a6;
-  --text-tertiary: #6e6e73;
-  --text-inverse: #0d0d0f;
+  /* Accent - A single, surgical strike of color */
+  --accent: #ff3d00;
+  --accent-dim: rgba(255,61,0,0.12);
+  --accent-glow: rgba(255,61,0,0.25);
 
-  --accent-primary: #d4a574;
-  --accent-secondary: #c4956a;
-  --accent-tertiary: #b48560;
-  --accent-glow: rgba(212, 165, 116, 0.15);
-  --accent-glow-strong: rgba(212, 165, 116, 0.25);
+  /* Typography - High contrast */
+  --ink: #ffffff;
+  --ink-secondary: #888888;
+  --ink-tertiary: #555555;
+  --ink-faint: #333333;
 
-  --success: #34c759;
-  --success-dim: rgba(52, 199, 89, 0.12);
-  --warning: #ff9f0a;
-  --warning-dim: rgba(255, 159, 10, 0.12);
-  --danger: #ff453a;
-  --danger-dim: rgba(255, 69, 58, 0.12);
-  --info: #64d2ff;
-  --info-dim: rgba(100, 210, 255, 0.12);
+  /* Borders - Visible, intentional */
+  --line: rgba(255,255,255,0.08);
+  --line-hover: rgba(255,255,255,0.16);
+  --line-active: rgba(255,255,255,0.24);
 
-  --protein-color: #ff6b6b;
-  --carbs-color: #4ecdc4;
-  --fat-color: #ffe66d;
-  --fiber-color: #95d5b2;
+  /* Macros - Desaturated, clinical */
+  --protein: #ff5252;
+  --carbs: #00bfa5;
+  --fat: #ffd740;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* System */
+  --success: #00e676;
+  --warning: #ffab00;
+  --danger: #ff1744;
 
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
-  --shadow-glow: 0 0 40px var(--accent-glow);
+  /* Motion - Snappy, intentional */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
 
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
-  --transition-slow: 0.4s ease;
+  /* Spacing scale - Generous, breathing room */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+
+  /* Radius - Minimal, geometric */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
 }
 
-/* Light Mode */
+/* Light mode - Stark, clinical white */
 [data-theme="light"] {
-  --bg-primary: #fafafa;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #eeeeee;
-  --bg-elevated: #ffffff;
-  --bg-hover: #e8e8e8;
+  --void: #ffffff;
+  --void-elevated: #fafafa;
+  --void-surface: #f5f5f5;
+  --void-float: #eeeeee;
+  --void-hover: #e0e0e0;
 
-  --border-subtle: rgba(0,0,0,0.04);
-  --border-default: rgba(0,0,0,0.08);
-  --border-strong: rgba(0,0,0,0.12);
+  --signal: #000000;
+  --signal-dim: rgba(0,0,0,0.06);
+  --signal-glow: rgba(0,0,0,0.12);
+  --signal-intense: #000000;
 
-  --text-primary: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --text-tertiary: #a1a1a6;
-  --text-inverse: #f5f5f7;
+  --accent: #ff3d00;
+  --accent-dim: rgba(255,61,0,0.08);
+  --accent-glow: rgba(255,61,0,0.18);
 
-  --accent-primary: #8b6914;
-  --accent-secondary: #7a5c12;
-  --accent-tertiary: #694f10;
-  --accent-glow: rgba(139, 105, 20, 0.1);
-  --accent-glow-strong: rgba(139, 105, 20, 0.18);
+  --ink: #000000;
+  --ink-secondary: #666666;
+  --ink-tertiary: #999999;
+  --ink-faint: #cccccc;
 
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --line: rgba(0,0,0,0.08);
+  --line-hover: rgba(0,0,0,0.14);
+  --line-active: rgba(0,0,0,0.22);
 }
 
-/* Reset & Base */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESET & FOUNDATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--void);
+  color: var(--ink);
   line-height: 1.6;
+  font-size: 0.9375rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  transition: background var(--transition-normal), color var(--transition-normal);
+  transition: background var(--duration-normal) var(--ease-sharp),
+              color var(--duration-normal) var(--ease-sharp);
+
   /* Copy protection */
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-/* Allow selection in form inputs */
-input, textarea, select { user-select: text; -webkit-user-select: text; }
-
-/* Layout */
-.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-@media (max-width: 768px) { .container { padding: 0 20px; } }
+input, textarea, select {
+  user-select: text;
+  -webkit-user-select: text;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HEADER
+   TYPOGRAPHY - Brutal, functional hierarchy
+   ═══════════════════════════════════════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6, .display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.display-xl {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.display-lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.display-md {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+.mono {
+  font-family: 'Space Grotesk', monospace;
+  font-feature-settings: 'tnum';
+  letter-spacing: -0.02em;
+}
+
+/* Accent text */
+.text-accent { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-md); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER - Stark, structural
    ═══════════════════════════════════════════════════════════════════════════ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--void);
+  border-bottom: 1px solid var(--line);
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
-.header-main {
+.site-header.scrolled {
+  background: var(--void);
+  border-bottom-color: var(--line-hover);
+}
+
+.header-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  justify-content: space-between;
+  height: 64px;
 }
 
+/* Logo - The Mark */
 .logo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
-.logo-icon {
-  width: 56px;
-  height: 56px;
+.logo-mark {
+  width: 40px;
+  height: 40px;
   position: relative;
 }
 
-.logo-icon svg {
+.logo-mark svg {
   width: 100%;
   height: 100%;
 }
 
-.logo-text h1 {
-  font-size: 1.5rem;
+.logo-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.logo-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.125rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
-  color: var(--text-primary);
-}
-
-.logo-text h1 span {
-  color: var(--accent-primary);
-}
-
-.logo-tagline {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  font-weight: 400;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
 }
 
-.header-actions {
+.logo-tag {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+/* Nav */
+.nav-primary {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 0;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.theme-toggle:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-strong);
-}
-
-.theme-toggle-icon {
-  font-size: 1.1rem;
-}
-
-.theme-toggle-text {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-/* Navigation */
-.nav-wrapper {
-  padding: 16px 0;
-}
-
-.nav-tabs {
-  display: flex;
-  gap: 4px;
-  background: var(--bg-tertiary);
-  padding: 4px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-subtle);
-}
-
-.nav-tab {
-  flex: 1;
-  padding: 12px 24px;
+.nav-link {
+  position: relative;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  background: none;
   border: none;
-  background: transparent;
-  color: var(--text-tertiary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-sharp);
+  font-family: inherit;
 }
 
-.nav-tab:hover {
-  color: var(--text-secondary);
-  background: var(--bg-hover);
+.nav-link:hover {
+  color: var(--ink);
 }
 
-.nav-tab.active {
-  background: var(--accent-primary);
-  color: var(--text-inverse);
-  box-shadow: var(--shadow-sm);
+.nav-link.active {
+  color: var(--ink);
 }
 
-@media (max-width: 768px) {
-  .nav-tabs { flex-wrap: wrap; }
-  .nav-tab { flex: 1 1 45%; text-align: center; padding: 10px 12px; font-size: 0.8rem; }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: var(--space-lg);
+  right: var(--space-lg);
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Theme Toggle - Minimal */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-sharp);
+}
+
+.theme-switch:hover {
+  border-color: var(--ink-tertiary);
+}
+
+.theme-switch-track {
+  position: relative;
+  width: 32px;
+  height: 16px;
+  background: var(--void-hover);
+  transition: background var(--duration-fast) var(--ease-sharp);
+}
+
+.theme-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: var(--ink);
+  transition: transform var(--duration-fast) var(--ease-sharp);
+}
+
+[data-theme="light"] .theme-switch-track::after {
+  transform: translateX(16px);
+}
+
+.theme-switch-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+@media (max-width: 900px) {
+  .nav-primary { display: none; }
+}
+
+/* Mobile nav */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--void);
+  border-top: 1px solid var(--line);
+  padding: 0;
+  z-index: 1000;
+}
+
+.nav-mobile .nav-link {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-md) var(--space-xs);
+  font-size: 0.5625rem;
+}
+
+.nav-mobile .nav-link.active::after {
+  bottom: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .nav-mobile { display: flex; }
+  main { padding-bottom: 64px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN CONTENT
    ═══════════════════════════════════════════════════════════════════════════ */
 main {
-  padding: 40px 0 80px;
-  min-height: calc(100vh - 200px);
+  padding-top: 64px;
+  min-height: 100vh;
 }
 
-.tab-content {
-  display: none;
-  animation: fadeSlideIn 0.4s ease;
+.section {
+  padding: var(--space-3xl) 0;
 }
 
-.tab-content.active { display: block; }
-
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Section Titles */
 .section-header {
-  margin-bottom: 32px;
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--line);
 }
 
 .section-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  letter-spacing: -0.5px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
 }
 
 .section-subtitle {
-  font-size: 1rem;
-  color: var(--text-tertiary);
-  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
+  max-width: 480px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Tab content */
+.view {
+  display: none;
+  animation: viewIn 0.4s var(--ease-sharp);
+}
+
+.view.active { display: block; }
+
+@keyframes viewIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CARDS
+   CARDS - Flat, structural
    ═══════════════════════════════════════════════════════════════════════════ */
 .card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  margin-bottom: 24px;
-  transition: all var(--transition-normal);
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-sharp);
 }
 
 .card:hover {
-  border-color: var(--border-default);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--line-hover);
+}
+
+.card-body {
+  padding: var(--space-xl);
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-xl);
+  border-bottom: 1px solid var(--line);
 }
 
 .card-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.card-title .icon {
-  font-size: 1.3rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
 }
 
 .card-subtitle {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
-  margin-top: 4px;
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FORMS
+   FORMS - Raw, functional
    ═══════════════════════════════════════════════════════════════════════════ */
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  letter-spacing: 0.3px;
-}
-
-.form-input,
-.form-select {
-  width: 100%;
-  padding: 14px 16px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition: all var(--transition-fast);
-}
-
-.form-input:focus,
-.form-select:focus {
-  outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-  background: var(--bg-elevated);
-}
-
-.form-input::placeholder {
-  color: var(--text-tertiary);
-}
-
-.form-select {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236e6e73' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  padding-right: 44px;
-}
-
-.form-hint {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  margin-top: 6px;
-}
-
-/* Input Group */
-.input-group {
+.field {
   display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.input-group .form-input {
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
+.field-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-hover);
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-sharp);
+}
+
+.field-input:hover {
+  border-color: var(--ink-tertiary);
+}
+
+.field-input:focus {
+  border-color: var(--ink);
+}
+
+.field-input::placeholder {
+  color: var(--ink-faint);
+}
+
+/* Select styling */
+select.field-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+/* Input with suffix */
+.field-combo {
+  display: flex;
+  align-items: stretch;
+}
+
+.field-combo .field-input {
   border-right: none;
 }
 
-.input-suffix {
+.field-suffix {
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  background: var(--bg-hover);
-  border: 1px solid var(--border-default);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  color: var(--text-tertiary);
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 0 0 0 var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-tertiary);
+  background: transparent;
+  border-bottom: 1px solid var(--line-hover);
+}
+
+.field-hint {
+  font-size: 0.6875rem;
+  color: var(--ink-faint);
+  margin-top: var(--space-xs);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   BUTTONS
+   BUTTONS - Stark, geometric
    ═══════════════════════════════════════════════════════════════════════════ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 28px;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-family: inherit;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
+  transition: all var(--duration-fast) var(--ease-sharp);
+  position: relative;
 }
 
 .btn-primary {
-  background: var(--accent-primary);
-  color: var(--text-inverse);
-  border-color: var(--accent-primary);
+  background: var(--ink);
+  color: var(--void);
 }
 
 .btn-primary:hover {
-  background: var(--accent-secondary);
-  border-color: var(--accent-secondary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:active {
+  opacity: 0.9;
 }
 
 .btn-secondary {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border-color: var(--border-default);
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-hover);
 }
 
 .btn-secondary:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-strong);
+  border-color: var(--ink);
 }
 
-.btn-outline {
+.btn-ghost {
   background: transparent;
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
+  color: var(--ink-secondary);
+  padding: 14px 16px;
 }
 
-.btn-outline:hover {
-  background: var(--accent-glow);
+.btn-ghost:hover {
+  color: var(--ink);
 }
 
 .btn-sm {
-  padding: 10px 18px;
-  font-size: 0.85rem;
+  padding: 10px 20px;
+  font-size: 0.625rem;
 }
 
 .btn-lg {
-  padding: 18px 36px;
-  font-size: 1.05rem;
+  padding: 18px 48px;
+  font-size: 0.75rem;
 }
 
 .btn-group {
   display: flex;
-  gap: 12px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
-  margin-top: 28px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   STATS & METRICS
+   STATS - The Numbers
    ═══════════════════════════════════════════════════════════════════════════ */
-.stats-grid {
+.stats-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
 }
 
-.stat-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  text-align: center;
-  transition: all var(--transition-fast);
+.stat {
+  background: var(--void-elevated);
+  padding: var(--space-lg) var(--space-md);
+  text-align: left;
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
-.stat-card:hover {
-  border-color: var(--border-default);
-  transform: translateY(-2px);
+.stat:hover {
+  background: var(--void-surface);
 }
 
 .stat-value {
-  font-size: 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--accent-primary);
-  margin-bottom: 4px;
-  letter-spacing: -1px;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  font-weight: 500;
+  color: var(--ink-tertiary);
 }
 
-.stat-card.protein .stat-value { color: var(--protein-color); }
-.stat-card.carbs .stat-value { color: var(--carbs-color); }
-.stat-card.fat .stat-value { color: var(--fat-color); }
-.stat-card.success .stat-value { color: var(--success); }
+.stat.protein .stat-value { color: var(--protein); }
+.stat.carbs .stat-value { color: var(--carbs); }
+.stat.fat .stat-value { color: var(--fat); }
+.stat.success .stat-value { color: var(--success); }
 
-/* Macro Bars */
+/* Macro bars */
 .macro-bars {
-  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
 }
 
-.macro-bar-item {
-  margin-bottom: 20px;
+.macro-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.macro-bar-header {
+.macro-bar-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  align-items: baseline;
 }
 
-.macro-bar-label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+.macro-bar-name {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
 }
 
 .macro-bar-value {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .macro-bar-track {
-  height: 10px;
-  background: var(--bg-tertiary);
-  border-radius: 5px;
+  height: 3px;
+  background: var(--void-hover);
   overflow: hidden;
 }
 
 .macro-bar-fill {
   height: 100%;
-  border-radius: 5px;
-  transition: width 0.6s ease;
+  transition: width 0.6s var(--ease-sharp);
 }
 
-.macro-bar-fill.protein { background: linear-gradient(90deg, #ff6b6b, #ee5a5a); }
-.macro-bar-fill.carbs { background: linear-gradient(90deg, #4ecdc4, #45b7aa); }
-.macro-bar-fill.fat { background: linear-gradient(90deg, #ffe66d, #ffd93d); }
-.macro-bar-fill.fiber { background: linear-gradient(90deg, #95d5b2, #74c69d); }
+.macro-bar-fill.protein { background: var(--protein); }
+.macro-bar-fill.carbs { background: var(--carbs); }
+.macro-bar-fill.fat { background: var(--fat); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   MEAL CARDS
+   MEALS
    ═══════════════════════════════════════════════════════════════════════════ */
-.meals-grid {
-  display: grid;
-  gap: 20px;
+.meals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
-.meal-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  transition: all var(--transition-fast);
+.meal {
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-sharp);
 }
 
-.meal-card:hover {
-  border-color: var(--border-default);
+.meal:hover {
+  border-color: var(--line-hover);
 }
 
 .meal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--line);
 }
 
-.meal-name {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--text-primary);
+.meal-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .meal-time {
-  font-size: 0.85rem;
-  color: var(--accent-primary);
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Space Grotesk', monospace;
+  color: var(--accent);
 }
 
 .meal-items {
@@ -646,975 +797,972 @@ main {
 
 .meal-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-subtle);
-  gap: 12px;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--line);
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
-.meal-item:last-child {
-  border-bottom: none;
-}
+.meal-item:last-child { border-bottom: none; }
+.meal-item:hover { background: var(--void-surface); }
 
 .meal-item-info {
   flex: 1;
+  min-width: 0;
 }
 
 .meal-item-name {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  margin-bottom: 2px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.meal-item-serving {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+.meal-item-portion {
+  font-size: 0.6875rem;
+  color: var(--ink-faint);
+  margin-top: 2px;
 }
 
 .meal-item-macros {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  text-align: right;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-tertiary);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
-.meal-item-actions {
+.meal-item-swap {
   opacity: 0;
-  transition: opacity var(--transition-fast);
-}
-
-.meal-card:hover .meal-item-actions {
-  opacity: 1;
-}
-
-.btn-swap {
   padding: 6px 12px;
-  font-size: 0.75rem;
-  background: var(--bg-hover);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  background: var(--void-hover);
+  border: 1px solid var(--line);
+  border-radius: 6px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s;
 }
 
-.btn-swap:hover {
-  background: var(--accent-glow);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
+.meal-item:hover .meal-item-swap { opacity: 1; }
+.meal-item-swap:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+  background: var(--signal-dim);
 }
 
-.meal-totals {
+.meal-footer {
   display: flex;
-  gap: 20px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-subtle);
-  flex-wrap: wrap;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--void-float);
+  font-size: 0.75rem;
 }
 
 .meal-total {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--ink-secondary);
 }
 
-.meal-total .dot {
-  width: 8px;
-  height: 8px;
+.meal-total-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
 }
 
-.meal-total .dot.p { background: var(--protein-color); }
-.meal-total .dot.c { background: var(--carbs-color); }
-.meal-total .dot.f { background: var(--fat-color); }
-.meal-total .dot.cal { background: var(--accent-primary); }
+.meal-total-dot.cal { background: var(--signal); }
+.meal-total-dot.p { background: var(--protein); }
+.meal-total-dot.c { background: var(--carbs); }
+.meal-total-dot.f { background: var(--fat); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FOOD DATABASE
+   FOODS DATABASE
    ═══════════════════════════════════════════════════════════════════════════ */
-.search-bar {
+.search-row {
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
   flex-wrap: wrap;
 }
 
-.search-input-wrapper {
+.search-field {
   flex: 1;
-  min-width: 250px;
+  min-width: 200px;
   position: relative;
 }
 
-.search-input-wrapper::before {
-  content: '🔍';
+.search-field::before {
+  content: '';
   position: absolute;
-  left: 16px;
+  left: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1rem;
-  opacity: 0.5;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' stroke='%23555555' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-size: contain;
 }
 
-.search-input {
-  width: 100%;
-  padding: 14px 16px 14px 48px;
+.search-field .field-input {
+  padding-left: 24px;
 }
 
-.filter-select {
-  min-width: 160px;
-}
-
-.food-grid {
+.foods-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
 }
 
 .food-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  transition: all var(--transition-fast);
+  background: var(--void-elevated);
+  padding: var(--space-lg);
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
 .food-card:hover {
-  border-color: var(--border-default);
-  transform: translateY(-2px);
+  background: var(--void-surface);
 }
 
 .food-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
   font-weight: 600;
-  font-size: 1rem;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .food-serving {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  margin-bottom: 12px;
+  font-size: 0.6875rem;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-md);
 }
 
 .food-macros {
   display: flex;
-  gap: 12px;
+  gap: var(--space-md);
   flex-wrap: wrap;
 }
 
 .food-macro {
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-hover);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-.food-macro.protein { color: var(--protein-color); }
-.food-macro.carbs { color: var(--carbs-color); }
-.food-macro.fat { color: var(--fat-color); }
-.food-macro.cal { color: var(--accent-primary); }
+.food-macro.cal { color: var(--ink); }
+.food-macro.p { color: var(--protein); }
+.food-macro.c { color: var(--carbs); }
+.food-macro.f { color: var(--fat); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    SCIENCE TAB
    ═══════════════════════════════════════════════════════════════════════════ */
-.reference-grid {
+.refs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
 }
 
-.reference-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  transition: all var(--transition-fast);
+.ref-card {
+  background: var(--void-elevated);
+  padding: var(--space-xl);
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
-.reference-card:hover {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 1px var(--accent-glow);
+.ref-card:hover {
+  background: var(--void-surface);
 }
 
-.reference-category {
-  font-size: 0.7rem;
+.ref-category {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--accent-primary);
-  font-weight: 600;
-  margin-bottom: 8px;
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
 }
 
-.reference-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-.reference-authors {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
-  margin-bottom: 4px;
-}
-
-.reference-journal {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-style: italic;
-}
-
-.reference-relevance {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-subtle);
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.relevance-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  background: var(--accent-glow);
-  color: var(--accent-primary);
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+.ref-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
   font-weight: 500;
-  margin-right: 6px;
-  margin-bottom: 4px;
+  line-height: 1.4;
+  margin-bottom: var(--space-sm);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ref-authors {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin-bottom: 2px;
+}
+
+.ref-journal {
+  font-size: 0.75rem;
+  color: var(--ink-tertiary);
+  font-style: normal;
+}
+
+.ref-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--line);
+}
+
+.ref-tag {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  background: transparent;
+  color: var(--ink-tertiary);
+  border: 1px solid var(--line);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ALERTS
    ═══════════════════════════════════════════════════════════════════════════ */
 .alert {
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  border-left: 2px solid;
+  background: var(--void-surface);
 }
 
-.alert-icon { font-size: 1.2rem; }
-.alert-content { flex: 1; }
-.alert-title { font-weight: 600; margin-bottom: 4px; }
-.alert-text { font-size: 0.9rem; opacity: 0.9; }
+.alert-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
 
-.alert-success { background: var(--success-dim); border: 1px solid var(--success); color: var(--success); }
-.alert-warning { background: var(--warning-dim); border: 1px solid var(--warning); color: var(--warning); }
-.alert-danger { background: var(--danger-dim); border: 1px solid var(--danger); color: var(--danger); }
-.alert-info { background: var(--info-dim); border: 1px solid var(--info); color: var(--info); }
+.alert-content { flex: 1; }
+.alert-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.alert-text { font-size: 0.8125rem; color: var(--ink-secondary); }
+
+.alert-success {
+  border-color: var(--success);
+}
+.alert-success .alert-title,
+.alert-success .alert-icon { color: var(--success); }
+
+.alert-info {
+  border-color: var(--ink-secondary);
+}
+.alert-info .alert-title,
+.alert-info .alert-icon { color: var(--ink-secondary); }
+
+.alert-warning {
+  border-color: var(--warning);
+}
+.alert-warning .alert-title,
+.alert-warning .alert-icon { color: var(--warning); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    MODAL
    ═══════════════════════════════════════════════════════════════════════════ */
-.modal-overlay {
+.modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
+  inset: 0;
+  background: rgba(0,0,0,0.9);
   display: none;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 2000;
-  padding: 20px;
+  padding: var(--space-xl);
 }
 
-.modal-overlay.active { display: flex; }
+.modal-backdrop.active { display: flex; }
 
 .modal {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  max-width: 500px;
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
   width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  animation: modalIn 0.3s ease;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow: hidden;
+  animation: modalIn 0.25s var(--ease-sharp);
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--line);
 }
 
 .modal-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
-  border: none;
-  color: var(--text-tertiary);
-  font-size: 1.5rem;
+  border: 1px solid transparent;
+  color: var(--ink-tertiary);
+  font-size: 1rem;
   cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-  transition: color var(--transition-fast);
+  transition: all var(--duration-fast) var(--ease-sharp);
 }
 
-.modal-close:hover { color: var(--text-primary); }
+.modal-close:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
 
-.modal-body { padding: 24px; }
+.modal-body {
+  padding: var(--space-lg);
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
 .modal-footer {
-  padding: 16px 24px;
-  border-top: 1px solid var(--border-subtle);
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-top: 1px solid var(--line);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   TOGGLE SWITCH
+   TOGGLE
    ═══════════════════════════════════════════════════════════════════════════ */
 .toggle-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 16px 0;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
 }
 
 .toggle {
   position: relative;
-  width: 48px;
-  height: 26px;
-  background: var(--bg-hover);
-  border-radius: 13px;
+  width: 44px;
+  height: 24px;
+  background: var(--void-hover);
+  border: 1px solid var(--line);
+  border-radius: 12px;
   cursor: pointer;
-  transition: background var(--transition-fast);
-  border: 1px solid var(--border-default);
-}
-
-.toggle.active {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
+  transition: all 0.3s var(--ease-out-quart);
 }
 
 .toggle::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background: var(--text-primary);
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--ink-secondary);
   border-radius: 50%;
-  transition: transform var(--transition-fast);
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.toggle.active {
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 .toggle.active::after {
-  transform: translateX(22px);
-  background: var(--text-inverse);
+  transform: translateX(20px);
+  background: white;
 }
 
-.toggle-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   UTILITIES
-   ═══════════════════════════════════════════════════════════════════════════ */
-.hidden { display: none !important; }
-.text-center { text-align: center; }
-.text-muted { color: var(--text-tertiary); }
-.mt-16 { margin-top: 16px; }
-.mt-24 { margin-top: 24px; }
-.mt-32 { margin-top: 32px; }
-.mb-16 { margin-bottom: 16px; }
-.mb-24 { margin-bottom: 24px; }
-
-/* Grid utilities */
-.grid { display: grid; gap: 20px; }
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-@media (max-width: 768px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+.toggle-text {
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PDF EXPORT STYLES
+   PDF STYLES
    ═══════════════════════════════════════════════════════════════════════════ */
-.pdf-content {
-  background: #ffffff !important;
-  color: #1a1a1a !important;
+.pdf-export {
+  background: #fff !important;
+  color: #111 !important;
   padding: 40px;
   font-family: 'Inter', sans-serif;
 }
 
-.pdf-content * {
-  color: #1a1a1a !important;
-  background: transparent !important;
+.pdf-export * {
+  color: #111 !important;
 }
 
-.pdf-content .pdf-header {
+.pdf-export .pdf-header {
   text-align: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #d4a574;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #ff6b35;
 }
 
-.pdf-content .pdf-title {
+.pdf-export .pdf-logo {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
-.pdf-content .pdf-subtitle {
-  font-size: 14px;
+.pdf-export .pdf-date {
+  font-size: 12px;
   color: #666 !important;
 }
 
-.pdf-content .pdf-section {
+.pdf-export .pdf-section {
   margin-bottom: 24px;
 }
 
-.pdf-content .pdf-section-title {
-  font-size: 16px;
+.pdf-export .pdf-section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #ddd;
 }
 
-.pdf-content .pdf-stats {
+.pdf-export .pdf-stats {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.pdf-content .pdf-stat {
+.pdf-export .pdf-stat {
   text-align: center;
   padding: 12px 20px;
   background: #f5f5f5 !important;
   border-radius: 8px;
 }
 
-.pdf-content .pdf-stat-value {
-  font-size: 20px;
+.pdf-export .pdf-stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
   font-weight: 700;
-  color: #8b6914 !important;
+  color: #ff6b35 !important;
 }
 
-.pdf-content .pdf-stat-label {
-  font-size: 11px;
+.pdf-export .pdf-stat-label {
+  font-size: 10px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: #888 !important;
 }
 
-.pdf-content .pdf-meal {
-  margin-bottom: 16px;
-  padding: 16px;
+.pdf-export .pdf-meal {
+  margin-bottom: 12px;
+  padding: 12px;
   background: #f9f9f9 !important;
-  border-radius: 8px;
-  border-left: 3px solid #d4a574;
+  border-radius: 6px;
+  border-left: 3px solid #ff6b35;
 }
 
-.pdf-content .pdf-meal-title {
+.pdf-export .pdf-meal-title {
   font-weight: 600;
+  font-size: 13px;
   margin-bottom: 8px;
 }
 
-.pdf-content .pdf-meal-item {
+.pdf-export .pdf-meal-item {
   display: flex;
   justify-content: space-between;
-  padding: 4px 0;
-  font-size: 13px;
+  font-size: 11px;
+  padding: 2px 0;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hidden { display: none !important; }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.text-muted { color: var(--ink-secondary); }
+.text-center { text-align: center; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════════════════════ */
 .site-footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
-  padding: 32px 0;
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--line);
   text-align: center;
 }
 
 .footer-text {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  color: var(--ink-tertiary);
 }
 
 .footer-text a {
-  color: var(--accent-primary);
+  color: var(--signal);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color 0.2s;
 }
 
-.footer-text a:hover {
-  color: var(--text-primary);
-}
+.footer-text a:hover { color: var(--ink); }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   WATERMARK (Copy Protection)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* Watermark */
 .watermark {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-  opacity: 0.5;
+  bottom: 16px;
+  right: 16px;
+  font-size: 0.625rem;
+  color: var(--ink-faint);
   pointer-events: none;
-  z-index: 9999;
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .watermark { display: none; }
 }
   </style>
 </head>
 
 <body data-theme="dark">
-  <!-- Watermark -->
-  <div class="watermark">© MuscleForge by Can Ayter</div>
+  <div class="watermark">© MuscleForge</div>
 
   <!-- ═══════════════════════════════════════════════════════════════════════════
        HEADER
        ═══════════════════════════════════════════════════════════════════════════ -->
-  <header class="site-header">
+  <header class="site-header" id="header">
     <div class="container">
-      <div class="header-main">
+      <div class="header-inner">
         <div class="logo">
-          <div class="logo-icon">
-            <!-- MuscleGoat Logo SVG - Ripped Mountain Goat -->
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Background circle -->
-              <circle cx="32" cy="32" r="30" fill="url(#goatGradient)" stroke="currentColor" stroke-width="2" style="color: var(--accent-primary)"/>
+          <div class="logo-mark">
+            <!-- MuscleForge Mark - Stylized geometric goat head representing strength -->
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer ring -->
+              <circle cx="22" cy="22" r="21" stroke="var(--signal)" stroke-width="1.5" fill="none" opacity="0.3"/>
 
-              <!-- Goat body - muscular silhouette -->
-              <path d="M20 48 L22 38 Q24 32 28 30 L30 26 Q32 22 36 24 L40 28 Q44 30 46 34 L48 42 L46 48 Z"
-                    fill="var(--bg-primary)" stroke="var(--accent-primary)" stroke-width="1.5"/>
+              <!-- Inner geometric goat - abstract, powerful -->
+              <g fill="var(--signal)">
+                <!-- Left horn - angular, strong -->
+                <path d="M11 8 L14 6 L16 12 L13 16 L11 12 Z" opacity="0.9"/>
+                <!-- Right horn - mirror -->
+                <path d="M33 8 L30 6 L28 12 L31 16 L33 12 Z" opacity="0.9"/>
 
-              <!-- Muscular arm flexing -->
-              <path d="M42 30 Q48 26 52 28 Q54 30 52 34 Q50 38 46 36 L44 34"
-                    fill="var(--bg-primary)" stroke="var(--accent-primary)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Head - geometric shield shape -->
+                <path d="M22 14 L30 18 L30 26 L22 34 L14 26 L14 18 Z" fill="var(--void)" stroke="var(--signal)" stroke-width="1.5"/>
 
-              <!-- Bicep bulge -->
-              <ellipse cx="50" cy="30" rx="5" ry="4" fill="var(--bg-primary)" stroke="var(--accent-primary)" stroke-width="1.5"/>
+                <!-- Face details - minimal, fierce -->
+                <!-- Eyes - angled, determined -->
+                <path d="M17 21 L20 20 L20 22 L17 23 Z"/>
+                <path d="M27 21 L24 20 L24 22 L27 23 Z"/>
 
-              <!-- Head -->
-              <ellipse cx="30" cy="20" rx="8" ry="7" fill="var(--bg-primary)" stroke="var(--accent-primary)" stroke-width="1.5"/>
+                <!-- Nose bridge - strong vertical -->
+                <path d="M21 24 L23 24 L22 28 Z"/>
 
-              <!-- Confident face - stern eyes -->
-              <circle cx="27" cy="18" r="1.5" fill="var(--accent-primary)"/>
-              <circle cx="33" cy="18" r="1.5" fill="var(--accent-primary)"/>
-              <path d="M25 17 L28 16" stroke="var(--accent-primary)" stroke-width="1" stroke-linecap="round"/>
-              <path d="M32 16 L35 17" stroke="var(--accent-primary)" stroke-width="1" stroke-linecap="round"/>
+                <!-- Chin/beard point -->
+                <path d="M22 30 L20 28 L22 32 L24 28 Z" opacity="0.7"/>
+              </g>
 
-              <!-- Snout -->
-              <ellipse cx="30" cy="23" rx="4" ry="2.5" fill="var(--bg-primary)" stroke="var(--accent-primary)" stroke-width="1"/>
-              <circle cx="28" cy="22.5" r="0.5" fill="var(--accent-primary)"/>
-              <circle cx="32" cy="22.5" r="0.5" fill="var(--accent-primary)"/>
-
-              <!-- Horns - curved and powerful -->
-              <path d="M22 16 Q16 10 14 6 Q13 4 15 5 Q20 8 24 14"
-                    fill="none" stroke="var(--accent-primary)" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M38 16 Q44 10 46 6 Q47 4 45 5 Q40 8 36 14"
-                    fill="none" stroke="var(--accent-primary)" stroke-width="2.5" stroke-linecap="round"/>
-
-              <!-- Beard -->
-              <path d="M28 26 Q30 30 32 26" stroke="var(--accent-primary)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-
-              <!-- Chest muscles definition -->
-              <path d="M28 32 Q32 34 36 32" stroke="var(--accent-primary)" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6"/>
-              <path d="M26 36 Q32 38 38 36" stroke="var(--accent-primary)" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6"/>
-
-              <defs>
-                <linearGradient id="goatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:var(--bg-tertiary)"/>
-                  <stop offset="100%" style="stop-color:var(--bg-secondary)"/>
-                </linearGradient>
-              </defs>
+              <!-- Muscle indication - subtle curves on sides -->
+              <path d="M8 22 Q6 18 8 14" stroke="var(--signal)" stroke-width="1" fill="none" opacity="0.4"/>
+              <path d="M36 22 Q38 18 36 14" stroke="var(--signal)" stroke-width="1" fill="none" opacity="0.4"/>
             </svg>
           </div>
-          <div class="logo-text">
-            <h1>Muscle<span>Forge</span></h1>
-            <div class="logo-tagline">Precision Nutrition Science</div>
+          <div class="logo-type">
+            <span class="logo-name">MuscleForge</span>
+            <span class="logo-tag">Precision Nutrition</span>
           </div>
         </div>
 
-        <div class="header-actions">
-          <button class="theme-toggle" onclick="toggleTheme()">
-            <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-            <span class="theme-toggle-text" id="themeText">Dark</span>
-          </button>
-        </div>
-      </div>
+        <nav class="nav-primary">
+          <button class="nav-link active" data-view="calculator">Calculator</button>
+          <button class="nav-link" data-view="meals">Meals</button>
+          <button class="nav-link" data-view="foods">Foods</button>
+          <button class="nav-link" data-view="prep">Prep</button>
+          <button class="nav-link" data-view="science">Science</button>
+        </nav>
 
-      <nav class="nav-wrapper">
-        <div class="nav-tabs">
-          <button class="nav-tab active" data-tab="calculator">Calculator</button>
-          <button class="nav-tab" data-tab="mealplan">Meal Plan</button>
-          <button class="nav-tab" data-tab="foods">Food Database</button>
-          <button class="nav-tab" data-tab="competition">Competition Prep</button>
-          <button class="nav-tab" data-tab="science">Science</button>
-        </div>
-      </nav>
+        <button class="theme-switch" onclick="toggleTheme()">
+          <div class="theme-switch-track"></div>
+          <span class="theme-switch-label" id="themeLabel">Dark</span>
+        </button>
+      </div>
     </div>
   </header>
 
+  <!-- Mobile nav -->
+  <nav class="nav-mobile">
+    <button class="nav-link active" data-view="calculator">Calc</button>
+    <button class="nav-link" data-view="meals">Meals</button>
+    <button class="nav-link" data-view="foods">Foods</button>
+    <button class="nav-link" data-view="prep">Prep</button>
+    <button class="nav-link" data-view="science">Sci</button>
+  </nav>
+
   <!-- ═══════════════════════════════════════════════════════════════════════════
-       MAIN CONTENT
+       MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
-  <main class="container">
-
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         CALCULATOR TAB
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="calculator" class="tab-content active">
-      <div class="section-header">
-        <h2 class="section-title">Nutrition Calculator</h2>
-        <p class="section-subtitle">Calculate your personalized macros based on your goals and body composition</p>
-      </div>
-
-      <form id="calculatorForm">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3 class="card-title"><span class="icon">📊</span> Body Metrics</h3>
-              <p class="card-subtitle">Enter your current measurements</p>
-            </div>
+  <main>
+    <!-- CALCULATOR VIEW -->
+    <div id="calculator" class="view active">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Calculate Your Macros</h1>
+            <p class="section-subtitle">Science-backed nutrition targets optimized for your body and goals</p>
           </div>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label">Age</label>
-              <input type="number" id="age" class="form-input" placeholder="25" min="16" max="99" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Biological Sex</label>
-              <select id="sex" class="form-select form-input" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Weight</label>
-              <div class="input-group">
-                <input type="number" id="weight" class="form-input" placeholder="180" step="0.1" required>
-                <span class="input-suffix">lbs</span>
+          <form id="calcForm">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Body Metrics</h2>
+                  <p class="card-subtitle">Your current measurements</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Age</label>
+                    <input type="number" id="age" class="field-input" placeholder="25" min="16" max="99" required>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Sex</label>
+                    <select id="sex" class="field-input" required>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="weight" class="field-input" placeholder="180" step="0.1" required>
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Height</label>
+                    <div class="field-combo">
+                      <input type="number" id="heightFt" class="field-input" placeholder="5" min="4" max="7" required style="border-radius: 10px 0 0 10px;">
+                      <span class="field-suffix" style="border-radius: 0;">ft</span>
+                      <input type="number" id="heightIn" class="field-input" placeholder="10" min="0" max="11" required style="border-radius: 0;">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Body Fat % <span class="text-muted">(optional)</span></label>
+                    <div class="field-combo">
+                      <input type="number" id="bodyFat" class="field-input" placeholder="15" step="0.1" min="3" max="50">
+                      <span class="field-suffix">%</span>
+                    </div>
+                    <span class="field-hint">For more accurate calculations</span>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Activity Level</label>
+                    <select id="activity" class="field-input" required>
+                      <option value="sedentary">Sedentary</option>
+                      <option value="light">Light (1-2x/week)</option>
+                      <option value="moderate" selected>Moderate (3-4x/week)</option>
+                      <option value="active">Active (5-6x/week)</option>
+                      <option value="veryActive">Very Active (daily)</option>
+                      <option value="athlete">Athlete (2x/day)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Height</label>
-              <div class="input-group">
-                <input type="number" id="heightFeet" class="form-input" placeholder="5" min="4" max="7" required style="border-radius: var(--radius-md) 0 0 var(--radius-md);">
-                <span class="input-suffix" style="border-radius: 0; border-left: none;">ft</span>
-                <input type="number" id="heightInches" class="form-input" placeholder="10" min="0" max="11" required style="border-radius: 0; border-left: none;">
-                <span class="input-suffix">in</span>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Goals & Preferences</h2>
+                  <p class="card-subtitle">Customize your approach</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Goal</label>
+                    <select id="goal" class="field-input" required>
+                      <option value="aggressiveCut">Aggressive Cut (-750)</option>
+                      <option value="cut">Cut (-500)</option>
+                      <option value="maintain" selected>Maintain</option>
+                      <option value="leanBulk">Lean Bulk (+300)</option>
+                      <option value="bulk">Bulk (+500)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Macro Split</label>
+                    <select id="macroProfile" class="field-input" required>
+                      <option value="bodybuilding" selected>Bodybuilding 40/40/20</option>
+                      <option value="highProtein">High Protein 45/35/20</option>
+                      <option value="highCarb">High Carb 30/55/15</option>
+                      <option value="lowCarb">Low Carb 40/20/40</option>
+                      <option value="keto">Keto 25/5/70</option>
+                      <option value="balanced">Balanced 30/40/30</option>
+                      <option value="competition">Competition 50/30/20</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Diet Type</label>
+                    <select id="dietType" class="field-input">
+                      <option value="regular" selected>Regular</option>
+                      <option value="vegetarian">Vegetarian</option>
+                      <option value="vegan">Vegan</option>
+                      <option value="paleo">Paleo</option>
+                      <option value="mediterranean">Mediterranean</option>
+                      <option value="glutenfree">Gluten-Free</option>
+                      <option value="keto">Keto</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Meals Per Day</label>
+                    <select id="mealsPerDay" class="field-input">
+                      <option value="3">3 Meals</option>
+                      <option value="4">4 Meals</option>
+                      <option value="5" selected>5 Meals</option>
+                      <option value="6">6 Meals</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Training Time</label>
+                    <select id="trainingTime" class="field-input">
+                      <option value="morning">Morning</option>
+                      <option value="midday">Midday</option>
+                      <option value="afternoon" selected>Afternoon</option>
+                      <option value="evening">Evening</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="toggle-row">
+                  <div class="toggle" id="detailedToggle" onclick="toggleDetailed()"></div>
+                  <span class="toggle-text">Show micronutrients</span>
+                </div>
+
+                <div class="btn-group mt-lg">
+                  <button type="submit" class="btn btn-primary btn-lg">Calculate</button>
+                  <button type="button" class="btn btn-ghost" onclick="resetForm()">Reset</button>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Body Fat % <span class="text-muted">(optional)</span></label>
-              <div class="input-group">
-                <input type="number" id="bodyFat" class="form-input" placeholder="15" step="0.1" min="3" max="50">
-                <span class="input-suffix">%</span>
+          </form>
+
+          <!-- Results -->
+          <div id="results" class="hidden mt-xl">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Your Daily Targets</h2>
+                  <p class="card-subtitle">Optimized for your goals</p>
+                </div>
+                <div class="btn-group" style="margin: 0;">
+                  <button class="btn btn-secondary btn-sm" onclick="exportPDF()">PDF</button>
+                  <button class="btn btn-ghost btn-sm" onclick="exportJSON()">JSON</button>
+                </div>
               </div>
-              <p class="form-hint">Enables more accurate calculations using Katch-McArdle</p>
+              <div class="card-body">
+                <div class="stats-row" id="statsRow"></div>
+                <div class="macro-bars" id="macroBars"></div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Activity Level</label>
-              <select id="activity" class="form-select form-input" required>
-                <option value="sedentary">Sedentary (desk job)</option>
-                <option value="light">Light (1-2 workouts/week)</option>
-                <option value="moderate" selected>Moderate (3-4 workouts/week)</option>
-                <option value="active">Active (5-6 workouts/week)</option>
-                <option value="veryActive">Very Active (intense daily)</option>
-                <option value="athlete">Athlete (2x daily training)</option>
-              </select>
+
+            <div class="card mt-lg">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Hydration & Timing</h2>
+                </div>
+              </div>
+              <div class="card-body" id="hydrationInfo"></div>
             </div>
           </div>
+
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3 class="card-title"><span class="icon">🎯</span> Goals & Preferences</h3>
-              <p class="card-subtitle">Customize your nutrition approach</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label">Goal</label>
-              <select id="goal" class="form-select form-input" required>
-                <option value="aggressiveCut">Aggressive Cut (-750 cal)</option>
-                <option value="cut">Cut (-500 cal)</option>
-                <option value="maintain" selected>Maintain</option>
-                <option value="leanBulk">Lean Bulk (+300 cal)</option>
-                <option value="bulk">Bulk (+500 cal)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Macro Profile</label>
-              <select id="macroProfile" class="form-select form-input" required>
-                <option value="bodybuilding" selected>Bodybuilding (40/40/20)</option>
-                <option value="highProtein">High Protein (45/35/20)</option>
-                <option value="highCarb">High Carb (30/55/15)</option>
-                <option value="lowCarb">Low Carb (40/20/40)</option>
-                <option value="keto">Ketogenic (25/5/70)</option>
-                <option value="balanced">Balanced (30/40/30)</option>
-                <option value="competition">Competition Prep (50/30/20)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Diet Type</label>
-              <select id="dietType" class="form-select form-input">
-                <option value="regular" selected>Regular</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
-                <option value="paleo">Paleo</option>
-                <option value="mediterranean">Mediterranean</option>
-                <option value="glutenfree">Gluten-Free</option>
-                <option value="keto">Keto</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Meals Per Day</label>
-              <select id="mealsPerDay" class="form-select form-input">
-                <option value="3">3 Meals</option>
-                <option value="4">4 Meals</option>
-                <option value="5" selected>5 Meals</option>
-                <option value="6">6 Meals</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Training Time</label>
-              <select id="trainingTime" class="form-select form-input">
-                <option value="morning">Morning (5-8 AM)</option>
-                <option value="midday">Midday (10 AM-1 PM)</option>
-                <option value="afternoon" selected>Afternoon (2-5 PM)</option>
-                <option value="evening">Evening (6-9 PM)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="toggle-row">
-            <div class="toggle" id="detailedToggle" onclick="toggleDetailed()"></div>
-            <span class="toggle-label">Show detailed micronutrients</span>
-          </div>
-
-          <div class="btn-group">
-            <button type="submit" class="btn btn-primary btn-lg">Calculate & Generate Plan</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
-          </div>
-        </div>
-      </form>
-
-      <!-- Results Section -->
-      <div id="results" class="hidden">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3 class="card-title"><span class="icon">⚡</span> Your Daily Targets</h3>
-              <p class="card-subtitle">Optimized for your goals</p>
-            </div>
-            <div class="btn-group" style="margin-top: 0;">
-              <button class="btn btn-secondary btn-sm" onclick="exportPDF()">📄 PDF</button>
-              <button class="btn btn-secondary btn-sm" onclick="exportJSON()">💾 JSON</button>
-            </div>
-          </div>
-
-          <div class="stats-grid" id="mainStats"></div>
-          <div class="macro-bars" id="macroBars"></div>
-
-          <div id="micronutrients" class="hidden mt-24"></div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3 class="card-title"><span class="icon">💧</span> Hydration & Protein Timing</h3>
-            </div>
-          </div>
-          <div id="hydrationProtein"></div>
-        </div>
-      </div>
+      </section>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         MEAL PLAN TAB
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="mealplan" class="tab-content">
-      <div class="section-header">
-        <h2 class="section-title">Your Meal Plan</h2>
-        <p class="section-subtitle">Customized meals based on your macros and preferences</p>
-      </div>
-
-      <div id="mealPlanContent">
-        <div class="alert alert-info">
-          <span class="alert-icon">💡</span>
-          <div class="alert-content">
-            <div class="alert-title">Generate Your Plan First</div>
-            <div class="alert-text">Use the Calculator tab to generate your personalized nutrition targets, then return here to see your meal plan.</div>
+    <!-- MEALS VIEW -->
+    <div id="meals" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Your Meal Plan</h1>
+            <p class="section-subtitle">Customized meals hitting your macro targets</p>
+          </div>
+          <div id="mealsContent">
+            <div class="alert alert-info">
+              <span class="alert-icon">→</span>
+              <div class="alert-content">
+                <div class="alert-title">Generate Your Plan</div>
+                <div class="alert-text">Use the Calculator to generate personalized targets first.</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         FOOD DATABASE TAB
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="foods" class="tab-content">
-      <div class="section-header">
-        <h2 class="section-title">Food Database</h2>
-        <p class="section-subtitle">200+ foods with complete nutritional profiles</p>
-      </div>
+    <!-- FOODS VIEW -->
+    <div id="foods" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Food Database</h1>
+            <p class="section-subtitle">200+ foods with complete nutritional profiles</p>
+          </div>
 
-      <div class="search-bar">
-        <div class="search-input-wrapper">
-          <input type="text" id="foodSearch" class="form-input search-input" placeholder="Search foods...">
+          <div class="search-row">
+            <div class="search-field">
+              <input type="text" id="foodSearch" class="field-input" placeholder="Search foods...">
+            </div>
+            <select id="catFilter" class="field-input" style="width: auto; min-width: 160px;">
+              <option value="">All Categories</option>
+              <option value="proteins">Proteins</option>
+              <option value="carbs">Carbs</option>
+              <option value="fats">Fats</option>
+              <option value="vegetables">Vegetables</option>
+              <option value="dairy">Dairy</option>
+            </select>
+          </div>
+
+          <div id="foodsGrid" class="foods-grid"></div>
         </div>
-        <select id="categoryFilter" class="form-select form-input filter-select">
-          <option value="">All Categories</option>
-          <option value="proteins">Proteins</option>
-          <option value="carbs">Carbohydrates</option>
-          <option value="fats">Fats</option>
-          <option value="vegetables">Vegetables</option>
-          <option value="dairy">Dairy</option>
-        </select>
-        <select id="dietFilter" class="form-select form-input filter-select">
-          <option value="">All Diets</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="paleo">Paleo</option>
-          <option value="keto">Keto</option>
-          <option value="glutenfree">Gluten-Free</option>
-        </select>
-      </div>
-
-      <div id="foodGrid" class="food-grid"></div>
+      </section>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         COMPETITION PREP TAB
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="competition" class="tab-content">
-      <div class="section-header">
-        <h2 class="section-title">IFBB Competition Prep</h2>
-        <p class="section-subtitle">Science-based approach to contest preparation</p>
-      </div>
+    <!-- PREP VIEW -->
+    <div id="prep" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Competition Prep</h1>
+            <p class="section-subtitle">Plan your contest timeline with science</p>
+          </div>
 
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <h3 class="card-title"><span class="icon">🏆</span> Prep Calculator</h3>
-            <p class="card-subtitle">Plan your competition timeline</p>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Prep Calculator</h2>
+                <p class="card-subtitle">Based on JISSN evidence-based guidelines</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">Current Weight</label>
+                  <div class="field-combo">
+                    <input type="number" id="prepCurrent" class="field-input" placeholder="200">
+                    <span class="field-suffix">lbs</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Target Stage Weight</label>
+                  <div class="field-combo">
+                    <input type="number" id="prepTarget" class="field-input" placeholder="175">
+                    <span class="field-suffix">lbs</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Current Body Fat</label>
+                  <div class="field-combo">
+                    <input type="number" id="prepBF" class="field-input" placeholder="15">
+                    <span class="field-suffix">%</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Weeks Out</label>
+                  <div class="field-combo">
+                    <input type="number" id="prepWeeks" class="field-input" placeholder="16">
+                    <span class="field-suffix">wks</span>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-group mt-lg">
+                <button type="button" class="btn btn-primary" onclick="calcPrep()">Calculate Prep</button>
+              </div>
+              <div id="prepResults" class="hidden mt-xl"></div>
+            </div>
           </div>
         </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">Current Weight</label>
-            <div class="input-group">
-              <input type="number" id="compCurrentWeight" class="form-input" placeholder="200">
-              <span class="input-suffix">lbs</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Target Stage Weight</label>
-            <div class="input-group">
-              <input type="number" id="compTargetWeight" class="form-input" placeholder="175">
-              <span class="input-suffix">lbs</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Current Body Fat %</label>
-            <div class="input-group">
-              <input type="number" id="compCurrentBF" class="form-input" placeholder="15">
-              <span class="input-suffix">%</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Weeks Until Show</label>
-            <div class="input-group">
-              <input type="number" id="compWeeks" class="form-input" placeholder="16">
-              <span class="input-suffix">weeks</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary" onclick="calculateCompPrep()">Calculate Prep Plan</button>
-        </div>
-
-        <div id="compResults" class="hidden mt-24"></div>
-      </div>
+      </section>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════════
-         SCIENCE TAB
-         ═══════════════════════════════════════════════════════════════════════ -->
-    <div id="science" class="tab-content">
-      <div class="section-header">
-        <h2 class="section-title">Scientific Foundation</h2>
-        <p class="section-subtitle">Every recommendation backed by peer-reviewed research</p>
-      </div>
+    <!-- SCIENCE VIEW -->
+    <div id="science" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">The Science</h1>
+            <p class="section-subtitle">Every calculation backed by peer-reviewed research</p>
+          </div>
 
-      <div class="alert alert-success mb-24">
-        <span class="alert-icon">🔬</span>
-        <div class="alert-content">
-          <div class="alert-title">Evidence-Based Nutrition</div>
-          <div class="alert-text">MuscleForge calculations are based on the latest sports nutrition research from ISSN, ACSM, and peer-reviewed journals.</div>
+          <div class="alert alert-success mb-lg">
+            <span class="alert-icon">◆</span>
+            <div class="alert-content">
+              <div class="alert-title">Evidence-Based</div>
+              <div class="alert-text">MuscleForge uses formulas and guidelines from ISSN, ACSM, and leading sports nutrition journals.</div>
+            </div>
+          </div>
+
+          <div id="refsGrid" class="refs-grid"></div>
         </div>
-      </div>
-
-      <div id="scienceContent" class="reference-grid"></div>
+      </section>
     </div>
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════════
-       SWAP MODAL
-       ═══════════════════════════════════════════════════════════════════════════ -->
-  <div id="swapModal" class="modal-overlay">
+  <!-- SWAP MODAL -->
+  <div id="swapModal" class="modal-backdrop">
     <div class="modal">
       <div class="modal-header">
-        <h3 class="modal-title">Swap Food Item</h3>
-        <button class="modal-close" onclick="closeSwapModal()">&times;</button>
+        <h3 class="modal-title">Swap Food</h3>
+        <button class="modal-close" onclick="closeSwap()">&times;</button>
       </div>
-      <div class="modal-body" id="swapOptions"></div>
+      <div class="modal-body" id="swapBody"></div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="closeSwapModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="confirmSwap()">Confirm Swap</button>
+        <button class="btn btn-ghost" onclick="closeSwap()">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmSwap()">Confirm</button>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════════════════════════════ -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-text">
-        © 2024 MuscleForge by <a href="https://www.ayter.com" target="_blank" rel="noopener">Can Ayter</a> · Built with science. Designed for results.
-      </p>
+      <p class="footer-text">© 2024 MuscleForge by <a href="https://ayter.com" target="_blank">Can Ayter</a></p>
     </div>
   </footer>
 
-  <!-- Hidden PDF Template -->
-  <div id="pdfTemplate" class="hidden"></div>
-
-  <!-- External Scripts -->
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="data/foods.js"></script>
   <script src="data/references.js"></script>
@@ -1622,584 +1770,322 @@ main {
 
   <script>
 // ═══════════════════════════════════════════════════════════════════════════
-// GLOBAL STATE
+// STATE
 // ═══════════════════════════════════════════════════════════════════════════
-let currentPlan = null;
-let currentMeals = [];
-let showDetailed = false;
-let selectedSwapMeal = null;
-let selectedSwapFood = null;
-let selectedAlternative = null;
+let plan = null;
+let meals = [];
+let detailed = false;
+let swapMeal = null;
+let swapFood = null;
+let swapAlt = null;
 
 // ═══════════════════════════════════════════════════════════════════════════
-// THEME TOGGLE
+// THEME
 // ═══════════════════════════════════════════════════════════════════════════
 function toggleTheme() {
-  const body = document.body;
-  const icon = document.getElementById('themeIcon');
-  const text = document.getElementById('themeText');
-
-  if (body.dataset.theme === 'dark') {
-    body.dataset.theme = 'light';
-    icon.textContent = '☀️';
-    text.textContent = 'Light';
-    localStorage.setItem('theme', 'light');
-  } else {
-    body.dataset.theme = 'dark';
-    icon.textContent = '🌙';
-    text.textContent = 'Dark';
-    localStorage.setItem('theme', 'dark');
-  }
+  const isDark = document.body.dataset.theme === 'dark';
+  document.body.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('themeLabel').textContent = isDark ? 'Light' : 'Dark';
+  localStorage.setItem('mf-theme', document.body.dataset.theme);
 }
 
-// Load saved theme
+// Init theme
 (function() {
-  const saved = localStorage.getItem('theme');
+  const saved = localStorage.getItem('mf-theme');
   if (saved === 'light') {
     document.body.dataset.theme = 'light';
-    document.getElementById('themeIcon').textContent = '☀️';
-    document.getElementById('themeText').textContent = 'Light';
+    document.getElementById('themeLabel').textContent = 'Light';
   }
 })();
 
-// ═══════════════════════════════════════════════════════════════════════════
-// TAB NAVIGATION
-// ═══════════════════════════════════════════════════════════════════════════
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+// Header scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+});
 
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab).classList.add('active');
+// ═══════════════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════
+document.querySelectorAll('.nav-link').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const view = btn.dataset.view;
 
-    // Load content for specific tabs
-    if (tab.dataset.tab === 'foods') loadFoodDatabase();
-    if (tab.dataset.tab === 'science') loadScienceContent();
+    document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll(`[data-view="${view}"]`).forEach(b => b.classList.add('active'));
+
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(view).classList.add('active');
+
+    if (view === 'foods') loadFoods();
+    if (view === 'science') loadScience();
+
+    window.scrollTo(0, 0);
   });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CALCULATOR FORM
+// CALCULATOR
 // ═══════════════════════════════════════════════════════════════════════════
-document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+document.getElementById('calcForm').addEventListener('submit', e => {
   e.preventDefault();
-  calculatePlan();
+  calculate();
 });
 
-function calculatePlan() {
-  // Get form values
-  const age = parseInt(document.getElementById('age').value);
+function calculate() {
+  const age = +document.getElementById('age').value;
   const sex = document.getElementById('sex').value;
-  const weightLbs = parseFloat(document.getElementById('weight').value);
-  const heightFeet = parseInt(document.getElementById('heightFeet').value);
-  const heightInches = parseInt(document.getElementById('heightInches').value);
-  const bodyFat = parseFloat(document.getElementById('bodyFat').value) || null;
+  const weightLbs = +document.getElementById('weight').value;
+  const heightFt = +document.getElementById('heightFt').value;
+  const heightIn = +document.getElementById('heightIn').value;
+  const bodyFat = +document.getElementById('bodyFat').value || null;
   const activity = document.getElementById('activity').value;
   const goal = document.getElementById('goal').value;
   const macroProfile = document.getElementById('macroProfile').value;
   const dietType = document.getElementById('dietType').value;
-  const mealsPerDay = parseInt(document.getElementById('mealsPerDay').value);
+  const mealsPerDay = +document.getElementById('mealsPerDay').value;
   const trainingTime = document.getElementById('trainingTime').value;
 
-  // Convert units
   const weightKg = weightLbs * 0.453592;
-  const heightCm = (heightFeet * 12 + heightInches) * 2.54;
+  const heightCm = (heightFt * 12 + heightIn) * 2.54;
 
-  // Calculate BMR
+  // BMR
   let bmr;
   if (bodyFat && typeof MuscleForgeCalculators !== 'undefined') {
     bmr = MuscleForgeCalculators.calculateBMR_KatchMcArdle(weightKg, bodyFat);
   } else if (typeof MuscleForgeCalculators !== 'undefined') {
     bmr = MuscleForgeCalculators.calculateBMR_MifflinStJeor(weightKg, heightCm, age, sex);
   } else {
-    // Fallback calculation
-    if (sex === 'male') {
-      bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
-    } else {
-      bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
-    }
+    bmr = sex === 'male'
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
   }
 
-  // Activity multipliers
-  const activityMultipliers = {
-    sedentary: 1.2,
-    light: 1.375,
-    moderate: 1.55,
-    active: 1.725,
-    veryActive: 1.9,
-    athlete: 2.1
+  const actMult = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, veryActive: 1.9, athlete: 2.1 };
+  const goalAdj = { aggressiveCut: -750, cut: -500, maintain: 0, leanBulk: 300, bulk: 500 };
+  const splits = {
+    bodybuilding: [0.4, 0.4, 0.2], highProtein: [0.45, 0.35, 0.2], highCarb: [0.3, 0.55, 0.15],
+    lowCarb: [0.4, 0.2, 0.4], keto: [0.25, 0.05, 0.7], balanced: [0.3, 0.4, 0.3], competition: [0.5, 0.3, 0.2]
   };
 
-  // Goal adjustments
-  const goalAdjustments = {
-    aggressiveCut: -750,
-    cut: -500,
-    maintain: 0,
-    leanBulk: 300,
-    bulk: 500
-  };
-
-  // Macro splits
-  const macroSplits = {
-    bodybuilding: { protein: 0.40, carbs: 0.40, fat: 0.20 },
-    highProtein: { protein: 0.45, carbs: 0.35, fat: 0.20 },
-    highCarb: { protein: 0.30, carbs: 0.55, fat: 0.15 },
-    lowCarb: { protein: 0.40, carbs: 0.20, fat: 0.40 },
-    keto: { protein: 0.25, carbs: 0.05, fat: 0.70 },
-    balanced: { protein: 0.30, carbs: 0.40, fat: 0.30 },
-    competition: { protein: 0.50, carbs: 0.30, fat: 0.20 }
-  };
-
-  const tdee = Math.round(bmr * activityMultipliers[activity]);
-  const targetCalories = tdee + goalAdjustments[goal];
-  const split = macroSplits[macroProfile];
+  const tdee = Math.round(bmr * actMult[activity]);
+  const cals = tdee + goalAdj[goal];
+  const [pPct, cPct, fPct] = splits[macroProfile];
 
   const macros = {
-    calories: targetCalories,
-    protein: {
-      grams: Math.round((targetCalories * split.protein) / 4),
-      percent: split.protein * 100
-    },
-    carbs: {
-      grams: Math.round((targetCalories * split.carbs) / 4),
-      percent: split.carbs * 100
-    },
-    fat: {
-      grams: Math.round((targetCalories * split.fat) / 9),
-      percent: split.fat * 100
-    }
+    cals,
+    protein: { g: Math.round((cals * pPct) / 4), pct: pPct * 100 },
+    carbs: { g: Math.round((cals * cPct) / 4), pct: cPct * 100 },
+    fat: { g: Math.round((cals * fPct) / 9), pct: fPct * 100 }
   };
 
-  // Calculate water intake
   const waterOz = Math.round(weightLbs * 0.5 + (activity === 'athlete' ? 32 : activity === 'veryActive' ? 24 : 16));
-  const waterL = (waterOz * 0.0296).toFixed(1);
 
-  // Store plan
-  currentPlan = {
-    bmr,
-    tdee,
-    macros,
-    water: { oz: waterOz, liters: waterL },
-    inputs: { age, sex, activity, goal, macroProfile, dietType, mealsPerDay, trainingTime, weightKg, heightCm, bodyFat, weightLbs }
-  };
+  plan = { bmr, tdee, macros, water: waterOz, inputs: { dietType, mealsPerDay, trainingTime, weightLbs } };
 
-  // Render results
   renderResults();
-  generateMealPlan();
+  genMeals();
 }
 
 function renderResults() {
   document.getElementById('results').classList.remove('hidden');
+  const { macros, tdee, bmr, water, inputs } = plan;
 
-  const { macros, tdee, bmr, water, inputs } = currentPlan;
-
-  // Main stats
-  document.getElementById('mainStats').innerHTML = `
-    <div class="stat-card">
-      <div class="stat-value">${macros.calories}</div>
-      <div class="stat-label">Daily Calories</div>
-    </div>
-    <div class="stat-card protein">
-      <div class="stat-value">${macros.protein.grams}g</div>
-      <div class="stat-label">Protein</div>
-    </div>
-    <div class="stat-card carbs">
-      <div class="stat-value">${macros.carbs.grams}g</div>
-      <div class="stat-label">Carbs</div>
-    </div>
-    <div class="stat-card fat">
-      <div class="stat-value">${macros.fat.grams}g</div>
-      <div class="stat-label">Fat</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">${bmr}</div>
-      <div class="stat-label">BMR</div>
-    </div>
-    <div class="stat-card success">
-      <div class="stat-value">${tdee}</div>
-      <div class="stat-label">TDEE</div>
-    </div>
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat"><div class="stat-value">${macros.cals}</div><div class="stat-label">Calories</div></div>
+    <div class="stat protein"><div class="stat-value">${macros.protein.g}g</div><div class="stat-label">Protein</div></div>
+    <div class="stat carbs"><div class="stat-value">${macros.carbs.g}g</div><div class="stat-label">Carbs</div></div>
+    <div class="stat fat"><div class="stat-value">${macros.fat.g}g</div><div class="stat-label">Fat</div></div>
+    <div class="stat"><div class="stat-value">${bmr}</div><div class="stat-label">BMR</div></div>
+    <div class="stat success"><div class="stat-value">${tdee}</div><div class="stat-label">TDEE</div></div>
   `;
 
-  // Macro bars
   document.getElementById('macroBars').innerHTML = `
-    <div class="macro-bar-item">
-      <div class="macro-bar-header">
-        <span class="macro-bar-label">Protein</span>
-        <span class="macro-bar-value">${macros.protein.grams}g (${macros.protein.percent}%)</span>
-      </div>
-      <div class="macro-bar-track">
-        <div class="macro-bar-fill protein" style="width: ${macros.protein.percent}%"></div>
-      </div>
+    <div class="macro-bar">
+      <div class="macro-bar-info"><span class="macro-bar-name">Protein</span><span class="macro-bar-value">${macros.protein.g}g (${macros.protein.pct}%)</span></div>
+      <div class="macro-bar-track"><div class="macro-bar-fill protein" style="width:${macros.protein.pct}%"></div></div>
     </div>
-    <div class="macro-bar-item">
-      <div class="macro-bar-header">
-        <span class="macro-bar-label">Carbohydrates</span>
-        <span class="macro-bar-value">${macros.carbs.grams}g (${macros.carbs.percent}%)</span>
-      </div>
-      <div class="macro-bar-track">
-        <div class="macro-bar-fill carbs" style="width: ${macros.carbs.percent}%"></div>
-      </div>
+    <div class="macro-bar">
+      <div class="macro-bar-info"><span class="macro-bar-name">Carbs</span><span class="macro-bar-value">${macros.carbs.g}g (${macros.carbs.pct}%)</span></div>
+      <div class="macro-bar-track"><div class="macro-bar-fill carbs" style="width:${macros.carbs.pct}%"></div></div>
     </div>
-    <div class="macro-bar-item">
-      <div class="macro-bar-header">
-        <span class="macro-bar-label">Fat</span>
-        <span class="macro-bar-value">${macros.fat.grams}g (${macros.fat.percent}%)</span>
-      </div>
-      <div class="macro-bar-track">
-        <div class="macro-bar-fill fat" style="width: ${macros.fat.percent}%"></div>
-      </div>
+    <div class="macro-bar">
+      <div class="macro-bar-info"><span class="macro-bar-name">Fat</span><span class="macro-bar-value">${macros.fat.g}g (${macros.fat.pct}%)</span></div>
+      <div class="macro-bar-track"><div class="macro-bar-fill fat" style="width:${macros.fat.pct}%"></div></div>
     </div>
   `;
 
-  // Hydration and protein timing
-  const proteinPerMeal = Math.round(macros.protein.grams / inputs.mealsPerDay);
-  document.getElementById('hydrationProtein').innerHTML = `
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">${water.oz} oz</div>
-        <div class="stat-label">Daily Water</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">${water.liters} L</div>
-        <div class="stat-label">Daily Water</div>
-      </div>
-      <div class="stat-card protein">
-        <div class="stat-value">${proteinPerMeal}g</div>
-        <div class="stat-label">Protein/Meal</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">${inputs.mealsPerDay}</div>
-        <div class="stat-label">Meals/Day</div>
-      </div>
+  const protPerMeal = Math.round(macros.protein.g / inputs.mealsPerDay);
+  document.getElementById('hydrationInfo').innerHTML = `
+    <div class="stats-row">
+      <div class="stat"><div class="stat-value">${water}</div><div class="stat-label">oz water/day</div></div>
+      <div class="stat"><div class="stat-value">${(water * 0.0296).toFixed(1)}</div><div class="stat-label">liters/day</div></div>
+      <div class="stat protein"><div class="stat-value">${protPerMeal}g</div><div class="stat-label">protein/meal</div></div>
     </div>
-    <p class="text-muted mt-16" style="font-size: 0.85rem;">
-      Based on ISSN guidelines, distribute protein evenly across meals (0.4-0.55g/kg per meal) to optimize muscle protein synthesis.
-    </p>
+    <p class="text-muted mt-md" style="font-size: 0.8125rem;">Distribute protein evenly (ISSN: 0.4-0.55g/kg per meal) for optimal muscle protein synthesis.</p>
   `;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// MEAL PLAN GENERATION - Fixed for 3-6 meals
+// MEAL GENERATION
 // ═══════════════════════════════════════════════════════════════════════════
-function generateMealPlan() {
-  if (!currentPlan) return;
-
-  const { macros, inputs } = currentPlan;
+function genMeals() {
+  if (!plan) return;
+  const { macros, inputs } = plan;
   const { mealsPerDay, dietType, trainingTime } = inputs;
 
-  // Get compatible foods
   const allFoods = getAllFoods();
-  const compatibleFoods = allFoods.filter(f =>
-    dietType === 'regular' || f.dietTypes.includes(dietType)
-  );
+  const compatible = allFoods.filter(f => dietType === 'regular' || f.dietTypes.includes(dietType));
 
-  // Generate meals with PROPER distribution for 3-6 meals
-  const meals = [];
-  const mealTimes = getMealTimes(mealsPerDay, trainingTime);
-
-  // Calculate per-meal targets - ensuring nutrients are properly distributed
-  const caloriesPerMeal = Math.round(macros.calories / mealsPerDay);
-  const proteinPerMeal = Math.round(macros.protein.grams / mealsPerDay);
-  const carbsPerMeal = Math.round(macros.carbs.grams / mealsPerDay);
-  const fatPerMeal = Math.round(macros.fat.grams / mealsPerDay);
-
-  for (let i = 0; i < mealsPerDay; i++) {
-    const mealInfo = mealTimes[i];
-    const isPreWorkout = mealInfo.name.toLowerCase().includes('pre-workout');
-    const isPostWorkout = mealInfo.name.toLowerCase().includes('post-workout');
-
-    // Select foods for this meal - scaled portions to hit targets
-    const mealFoods = selectFoodsForMeal(compatibleFoods, {
-      protein: proteinPerMeal,
-      carbs: carbsPerMeal,
-      fat: fatPerMeal,
-      calories: caloriesPerMeal,
-      isPreWorkout,
-      isPostWorkout
-    });
-
-    meals.push({
-      ...mealInfo,
-      foods: mealFoods,
-      targetMacros: { protein: proteinPerMeal, carbs: carbsPerMeal, fat: fatPerMeal, calories: caloriesPerMeal }
-    });
-  }
-
-  currentMeals = meals;
-  renderMealPlan(meals);
-}
-
-function getMealTimes(mealsPerDay, trainingTime) {
-  // Templates for 3, 4, 5, and 6 meals
-  const templates = {
-    morning: {
-      3: [
-        { time: '6:00 AM', name: 'Pre-Workout Breakfast' },
-        { time: '12:00 PM', name: 'Lunch' },
-        { time: '7:00 PM', name: 'Dinner' }
-      ],
-      4: [
-        { time: '6:00 AM', name: 'Pre-Workout Breakfast' },
-        { time: '10:00 AM', name: 'Post-Workout Snack' },
-        { time: '1:00 PM', name: 'Lunch' },
-        { time: '7:00 PM', name: 'Dinner' }
-      ],
-      5: [
-        { time: '5:30 AM', name: 'Pre-Workout Meal' },
-        { time: '8:00 AM', name: 'Post-Workout Breakfast' },
-        { time: '11:30 AM', name: 'Lunch' },
-        { time: '3:00 PM', name: 'Afternoon Snack' },
-        { time: '7:00 PM', name: 'Dinner' }
-      ],
-      6: [
-        { time: '5:30 AM', name: 'Pre-Workout Meal' },
-        { time: '8:00 AM', name: 'Post-Workout Breakfast' },
-        { time: '11:00 AM', name: 'Mid-Morning' },
-        { time: '2:00 PM', name: 'Lunch' },
-        { time: '5:00 PM', name: 'Afternoon Snack' },
-        { time: '8:00 PM', name: 'Dinner' }
-      ]
-    },
-    afternoon: {
-      3: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '12:00 PM', name: 'Pre-Workout Lunch' },
-        { time: '7:00 PM', name: 'Post-Workout Dinner' }
-      ],
-      4: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '12:00 PM', name: 'Pre-Workout Lunch' },
-        { time: '4:00 PM', name: 'Post-Workout' },
-        { time: '8:00 PM', name: 'Dinner' }
-      ],
-      5: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '10:30 AM', name: 'Mid-Morning' },
-        { time: '1:00 PM', name: 'Pre-Workout Lunch' },
-        { time: '5:00 PM', name: 'Post-Workout' },
-        { time: '8:00 PM', name: 'Dinner' }
-      ],
-      6: [
-        { time: '6:30 AM', name: 'Breakfast' },
-        { time: '9:30 AM', name: 'Mid-Morning' },
-        { time: '12:30 PM', name: 'Pre-Workout Lunch' },
-        { time: '3:30 PM', name: 'Post-Workout' },
-        { time: '6:00 PM', name: 'Afternoon Snack' },
-        { time: '9:00 PM', name: 'Dinner' }
-      ]
-    },
-    evening: {
-      3: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '1:00 PM', name: 'Lunch' },
-        { time: '8:00 PM', name: 'Post-Workout Dinner' }
-      ],
-      4: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '12:00 PM', name: 'Lunch' },
-        { time: '5:00 PM', name: 'Pre-Workout' },
-        { time: '9:00 PM', name: 'Post-Workout Dinner' }
-      ],
-      5: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '11:00 AM', name: 'Mid-Morning' },
-        { time: '2:00 PM', name: 'Lunch' },
-        { time: '5:30 PM', name: 'Pre-Workout' },
-        { time: '9:00 PM', name: 'Post-Workout Dinner' }
-      ],
-      6: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '10:00 AM', name: 'Mid-Morning' },
-        { time: '1:00 PM', name: 'Lunch' },
-        { time: '4:00 PM', name: 'Afternoon Snack' },
-        { time: '6:30 PM', name: 'Pre-Workout' },
-        { time: '9:30 PM', name: 'Post-Workout Dinner' }
-      ]
-    },
-    midday: {
-      3: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '11:00 AM', name: 'Pre-Workout Lunch' },
-        { time: '7:00 PM', name: 'Dinner' }
-      ],
-      4: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '10:30 AM', name: 'Pre-Workout' },
-        { time: '2:00 PM', name: 'Post-Workout Lunch' },
-        { time: '7:00 PM', name: 'Dinner' }
-      ],
-      5: [
-        { time: '7:00 AM', name: 'Breakfast' },
-        { time: '10:00 AM', name: 'Pre-Workout' },
-        { time: '1:00 PM', name: 'Post-Workout Lunch' },
-        { time: '4:30 PM', name: 'Afternoon Snack' },
-        { time: '7:30 PM', name: 'Dinner' }
-      ],
-      6: [
-        { time: '6:30 AM', name: 'Breakfast' },
-        { time: '9:00 AM', name: 'Pre-Workout' },
-        { time: '12:00 PM', name: 'Post-Workout Lunch' },
-        { time: '3:00 PM', name: 'Afternoon Snack 1' },
-        { time: '6:00 PM', name: 'Afternoon Snack 2' },
-        { time: '8:30 PM', name: 'Dinner' }
-      ]
-    }
+  const times = getMealTimes(mealsPerDay, trainingTime);
+  const perMeal = {
+    cals: Math.round(macros.cals / mealsPerDay),
+    p: Math.round(macros.protein.g / mealsPerDay),
+    c: Math.round(macros.carbs.g / mealsPerDay),
+    f: Math.round(macros.fat.g / mealsPerDay)
   };
 
-  return templates[trainingTime]?.[mealsPerDay] || templates.afternoon[mealsPerDay] || templates.afternoon[5];
+  meals = times.map(t => ({
+    ...t,
+    foods: pickFoods(compatible, perMeal, t.name.toLowerCase().includes('post')),
+    targets: perMeal
+  }));
+
+  renderMeals();
 }
 
-function selectFoodsForMeal(foods, targets) {
-  const selected = [];
-
-  // Calculate portion multipliers based on targets
-  const baseProtein = 25; // Average protein per serving
-  const proteinMultiplier = Math.max(0.5, Math.min(2, targets.protein / baseProtein));
-
-  // Select protein source with scaled portions
-  const proteins = foods.filter(f => f.category === 'proteins');
-  if (proteins.length) {
-    const protein = proteins[Math.floor(Math.random() * proteins.length)];
-    selected.push({ food: protein, portions: Math.round(proteinMultiplier * 10) / 10 });
-  }
-
-  // Select carb source
-  const carbs = foods.filter(f => f.category === 'carbs');
-  if (carbs.length) {
-    const carb = carbs[Math.floor(Math.random() * carbs.length)];
-    const carbMultiplier = Math.max(0.5, Math.min(2, targets.carbs / 35));
-    selected.push({ food: carb, portions: Math.round(carbMultiplier * 10) / 10 });
-  }
-
-  // Select vegetable
-  const veggies = foods.filter(f => f.category === 'vegetables');
-  if (veggies.length) {
-    const veggie = veggies[Math.floor(Math.random() * veggies.length)];
-    selected.push({ food: veggie, portions: 1 });
-  }
-
-  // Add fat source if not post-workout (lower fat post-workout)
-  if (!targets.isPostWorkout) {
-    const fats = foods.filter(f => f.category === 'fats');
-    if (fats.length) {
-      const fat = fats[Math.floor(Math.random() * fats.length)];
-      const fatMultiplier = Math.max(0.3, Math.min(1.5, targets.fat / 15));
-      selected.push({ food: fat, portions: Math.round(fatMultiplier * 10) / 10 });
+function getMealTimes(n, time) {
+  const t = {
+    morning: {
+      3: [{ time: '6:00', name: 'Pre-Workout Breakfast' }, { time: '12:00', name: 'Lunch' }, { time: '19:00', name: 'Dinner' }],
+      4: [{ time: '6:00', name: 'Pre-Workout' }, { time: '10:00', name: 'Post-Workout' }, { time: '14:00', name: 'Lunch' }, { time: '19:00', name: 'Dinner' }],
+      5: [{ time: '5:30', name: 'Pre-Workout' }, { time: '8:00', name: 'Post-Workout' }, { time: '11:30', name: 'Lunch' }, { time: '15:00', name: 'Snack' }, { time: '19:00', name: 'Dinner' }],
+      6: [{ time: '5:30', name: 'Pre-Workout' }, { time: '8:00', name: 'Post-Workout' }, { time: '11:00', name: 'Mid-Morning' }, { time: '14:00', name: 'Lunch' }, { time: '17:00', name: 'Snack' }, { time: '20:00', name: 'Dinner' }]
+    },
+    afternoon: {
+      3: [{ time: '7:00', name: 'Breakfast' }, { time: '12:00', name: 'Pre-Workout Lunch' }, { time: '19:00', name: 'Post-Workout Dinner' }],
+      4: [{ time: '7:00', name: 'Breakfast' }, { time: '12:00', name: 'Pre-Workout' }, { time: '16:00', name: 'Post-Workout' }, { time: '20:00', name: 'Dinner' }],
+      5: [{ time: '7:00', name: 'Breakfast' }, { time: '10:30', name: 'Snack' }, { time: '13:00', name: 'Pre-Workout' }, { time: '17:00', name: 'Post-Workout' }, { time: '20:00', name: 'Dinner' }],
+      6: [{ time: '6:30', name: 'Breakfast' }, { time: '9:30', name: 'Snack' }, { time: '12:30', name: 'Pre-Workout' }, { time: '15:30', name: 'Post-Workout' }, { time: '18:00', name: 'Snack' }, { time: '21:00', name: 'Dinner' }]
+    },
+    evening: {
+      3: [{ time: '7:00', name: 'Breakfast' }, { time: '13:00', name: 'Lunch' }, { time: '20:00', name: 'Post-Workout Dinner' }],
+      4: [{ time: '7:00', name: 'Breakfast' }, { time: '12:00', name: 'Lunch' }, { time: '17:00', name: 'Pre-Workout' }, { time: '21:00', name: 'Post-Workout' }],
+      5: [{ time: '7:00', name: 'Breakfast' }, { time: '11:00', name: 'Snack' }, { time: '14:00', name: 'Lunch' }, { time: '17:30', name: 'Pre-Workout' }, { time: '21:00', name: 'Post-Workout' }],
+      6: [{ time: '7:00', name: 'Breakfast' }, { time: '10:00', name: 'Snack' }, { time: '13:00', name: 'Lunch' }, { time: '16:00', name: 'Snack' }, { time: '18:30', name: 'Pre-Workout' }, { time: '21:30', name: 'Post-Workout' }]
+    },
+    midday: {
+      3: [{ time: '7:00', name: 'Breakfast' }, { time: '11:00', name: 'Pre-Workout' }, { time: '19:00', name: 'Dinner' }],
+      4: [{ time: '7:00', name: 'Breakfast' }, { time: '10:30', name: 'Pre-Workout' }, { time: '14:00', name: 'Post-Workout' }, { time: '19:00', name: 'Dinner' }],
+      5: [{ time: '7:00', name: 'Breakfast' }, { time: '10:00', name: 'Pre-Workout' }, { time: '13:00', name: 'Post-Workout' }, { time: '16:30', name: 'Snack' }, { time: '19:30', name: 'Dinner' }],
+      6: [{ time: '6:30', name: 'Breakfast' }, { time: '9:00', name: 'Pre-Workout' }, { time: '12:00', name: 'Post-Workout' }, { time: '15:00', name: 'Snack' }, { time: '18:00', name: 'Snack' }, { time: '20:30', name: 'Dinner' }]
     }
-  }
-
-  // Add dairy if available and diet allows
-  const dairy = foods.filter(f => f.category === 'dairy');
-  if (dairy.length && Math.random() > 0.5) {
-    const dairyItem = dairy[Math.floor(Math.random() * dairy.length)];
-    selected.push({ food: dairyItem, portions: 0.5 });
-  }
-
-  return selected;
+  };
+  return t[time]?.[n] || t.afternoon[n] || t.afternoon[5];
 }
 
-function renderMealPlan(meals) {
-  currentMeals = meals;
+function pickFoods(foods, targets, isPost) {
+  const picked = [];
+  const pMult = Math.max(0.5, Math.min(2, targets.p / 25));
+  const cMult = Math.max(0.5, Math.min(2, targets.c / 35));
+  const fMult = Math.max(0.3, Math.min(1.5, targets.f / 15));
 
-  const totalDayMacros = meals.reduce((acc, meal) => {
-    const mealTotals = meal.foods.reduce((m, item) => ({
-      p: m.p + (item.food.macros.protein * item.portions),
-      c: m.c + (item.food.macros.carbs * item.portions),
-      f: m.f + (item.food.macros.fat * item.portions),
-      cal: m.cal + (item.food.calories * item.portions)
-    }), { p: 0, c: 0, f: 0, cal: 0 });
+  const proteins = foods.filter(f => f.category === 'proteins');
+  const carbs = foods.filter(f => f.category === 'carbs');
+  const veggies = foods.filter(f => f.category === 'vegetables');
+  const fats = foods.filter(f => f.category === 'fats');
 
-    return {
-      p: acc.p + mealTotals.p,
-      c: acc.c + mealTotals.c,
-      f: acc.f + mealTotals.f,
-      cal: acc.cal + mealTotals.cal
-    };
-  }, { p: 0, c: 0, f: 0, cal: 0 });
+  if (proteins.length) picked.push({ food: proteins[Math.floor(Math.random() * proteins.length)], qty: Math.round(pMult * 10) / 10 });
+  if (carbs.length) picked.push({ food: carbs[Math.floor(Math.random() * carbs.length)], qty: Math.round(cMult * 10) / 10 });
+  if (veggies.length) picked.push({ food: veggies[Math.floor(Math.random() * veggies.length)], qty: 1 });
+  if (!isPost && fats.length) picked.push({ food: fats[Math.floor(Math.random() * fats.length)], qty: Math.round(fMult * 10) / 10 });
 
-  const html = `
-    <div class="alert alert-success mb-24">
-      <span class="alert-icon">✓</span>
+  return picked;
+}
+
+function renderMeals() {
+  const totals = meals.reduce((a, m) => {
+    m.foods.forEach(f => {
+      a.cal += f.food.calories * f.qty;
+      a.p += f.food.macros.protein * f.qty;
+      a.c += f.food.macros.carbs * f.qty;
+      a.f += f.food.macros.fat * f.qty;
+    });
+    return a;
+  }, { cal: 0, p: 0, c: 0, f: 0 });
+
+  document.getElementById('mealsContent').innerHTML = `
+    <div class="alert alert-success mb-lg">
+      <span class="alert-icon">◆</span>
       <div class="alert-content">
-        <div class="alert-title">Daily Totals</div>
-        <div class="alert-text">${Math.round(totalDayMacros.cal)} cal · ${Math.round(totalDayMacros.p)}g protein · ${Math.round(totalDayMacros.c)}g carbs · ${Math.round(totalDayMacros.f)}g fat</div>
+        <div class="alert-title">Daily Total</div>
+        <div class="alert-text">${Math.round(totals.cal)} cal · ${Math.round(totals.p)}g P · ${Math.round(totals.c)}g C · ${Math.round(totals.f)}g F</div>
       </div>
     </div>
-    <div class="meals-grid">
-      ${meals.map((meal, mealIndex) => {
-        const totals = meal.foods.reduce((acc, item) => ({
-          p: acc.p + (item.food.macros.protein * item.portions),
-          c: acc.c + (item.food.macros.carbs * item.portions),
-          f: acc.f + (item.food.macros.fat * item.portions),
-          cal: acc.cal + (item.food.calories * item.portions)
-        }), { p: 0, c: 0, f: 0, cal: 0 });
+    <div class="meals">
+      ${meals.map((m, mi) => {
+        const t = m.foods.reduce((a, f) => ({
+          cal: a.cal + f.food.calories * f.qty,
+          p: a.p + f.food.macros.protein * f.qty,
+          c: a.c + f.food.macros.carbs * f.qty,
+          f: a.f + f.food.macros.fat * f.qty
+        }), { cal: 0, p: 0, c: 0, f: 0 });
 
         return `
-          <div class="meal-card">
+          <div class="meal">
             <div class="meal-header">
-              <span class="meal-name">${meal.name}</span>
-              <span class="meal-time">${meal.time}</span>
+              <span class="meal-title">${m.name}</span>
+              <span class="meal-time">${m.time}</span>
             </div>
             <ul class="meal-items">
-              ${meal.foods.map((item, foodIndex) => `
+              ${m.foods.map((f, fi) => `
                 <li class="meal-item">
                   <div class="meal-item-info">
-                    <div class="meal-item-name">${item.food.name}</div>
-                    <div class="meal-item-serving">${item.portions}x ${item.food.serving.description}</div>
+                    <div class="meal-item-name">${f.food.name}</div>
+                    <div class="meal-item-portion">${f.qty}× ${f.food.serving.description}</div>
                   </div>
-                  <div class="meal-item-macros">
-                    ${Math.round(item.food.macros.protein * item.portions)}p / ${Math.round(item.food.macros.carbs * item.portions)}c / ${Math.round(item.food.macros.fat * item.portions)}f
-                  </div>
-                  <div class="meal-item-actions">
-                    <button class="btn-swap" onclick="openSwapModal(${mealIndex}, ${foodIndex})">Swap</button>
-                  </div>
+                  <div class="meal-item-macros">${Math.round(f.food.macros.protein * f.qty)}p / ${Math.round(f.food.macros.carbs * f.qty)}c / ${Math.round(f.food.macros.fat * f.qty)}f</div>
+                  <button class="meal-item-swap" onclick="openSwap(${mi}, ${fi})">Swap</button>
                 </li>
               `).join('')}
             </ul>
-            <div class="meal-totals">
-              <span class="meal-total"><span class="dot cal"></span>${Math.round(totals.cal)} cal</span>
-              <span class="meal-total"><span class="dot p"></span>${Math.round(totals.p)}g protein</span>
-              <span class="meal-total"><span class="dot c"></span>${Math.round(totals.c)}g carbs</span>
-              <span class="meal-total"><span class="dot f"></span>${Math.round(totals.f)}g fat</span>
+            <div class="meal-footer">
+              <span class="meal-total"><span class="meal-total-dot cal"></span>${Math.round(t.cal)} cal</span>
+              <span class="meal-total"><span class="meal-total-dot p"></span>${Math.round(t.p)}g P</span>
+              <span class="meal-total"><span class="meal-total-dot c"></span>${Math.round(t.c)}g C</span>
+              <span class="meal-total"><span class="meal-total-dot f"></span>${Math.round(t.f)}g F</span>
             </div>
           </div>
         `;
       }).join('')}
     </div>
   `;
-
-  document.getElementById('mealPlanContent').innerHTML = html;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// FOOD SWAP FUNCTIONALITY
+// SWAP
 // ═══════════════════════════════════════════════════════════════════════════
-function openSwapModal(mealIndex, foodIndex) {
-  selectedSwapMeal = mealIndex;
-  selectedSwapFood = foodIndex;
-  selectedAlternative = null;
+function openSwap(mi, fi) {
+  swapMeal = mi;
+  swapFood = fi;
+  swapAlt = null;
 
-  const currentFood = currentMeals[mealIndex].foods[foodIndex].food;
-  const dietType = currentPlan?.inputs?.dietType || 'regular';
-  const alternatives = findSimilarFoods(currentFood, dietType);
+  const curr = meals[mi].foods[fi].food;
+  const diet = plan?.inputs?.dietType || 'regular';
+  const alts = findAlts(curr, diet);
 
-  document.getElementById('swapOptions').innerHTML = `
-    <p class="text-muted mb-16">Replace <strong>${currentFood.name}</strong> with:</p>
-    <div class="meals-grid">
-      ${alternatives.map((alt, i) => `
-        <div class="food-card ${selectedAlternative === i ? 'selected' : ''}"
-             onclick="selectAlternative(${i})"
-             style="cursor: pointer; ${selectedAlternative === i ? 'border-color: var(--accent-primary);' : ''}">
-          <div class="food-name">${alt.food.name}</div>
-          <div class="food-serving">${alt.food.serving.description}</div>
+  document.getElementById('swapBody').innerHTML = `
+    <p class="text-muted mb-lg">Replace <strong>${curr.name}</strong>:</p>
+    <div class="foods-grid" style="grid-template-columns: 1fr;">
+      ${alts.map((a, i) => `
+        <div class="food-card" style="cursor:pointer;${swapAlt === i ? 'border-color:var(--signal);' : ''}" onclick="selectAlt(${i})">
+          <div class="food-name">${a.food.name}</div>
+          <div class="food-serving">${a.food.serving.description}</div>
           <div class="food-macros">
-            <span class="food-macro protein">${alt.food.macros.protein}g P</span>
-            <span class="food-macro carbs">${alt.food.macros.carbs}g C</span>
-            <span class="food-macro fat">${alt.food.macros.fat}g F</span>
+            <span class="food-macro p">${a.food.macros.protein}P</span>
+            <span class="food-macro c">${a.food.macros.carbs}C</span>
+            <span class="food-macro f">${a.food.macros.fat}F</span>
           </div>
-          <div class="text-muted mt-8" style="font-size: 0.75rem;">${alt.score}% match</div>
+          <div class="text-muted mt-sm" style="font-size:0.6875rem;">${a.score}% match</div>
         </div>
       `).join('')}
     </div>
@@ -2208,442 +2094,212 @@ function openSwapModal(mealIndex, foodIndex) {
   document.getElementById('swapModal').classList.add('active');
 }
 
-function findSimilarFoods(currentFood, dietType) {
-  const allFoods = getAllFoods();
-  const sameCategoryFoods = allFoods.filter(f =>
-    f.id !== currentFood.id &&
-    f.category === currentFood.category &&
-    (dietType === 'regular' || f.dietTypes.includes(dietType))
-  );
+function findAlts(curr, diet) {
+  const all = getAllFoods();
+  const same = all.filter(f => f.id !== curr.id && f.category === curr.category && (diet === 'regular' || f.dietTypes.includes(diet)));
 
-  const scored = sameCategoryFoods.map(food => {
-    const proteinDiff = Math.abs(food.macros.protein - currentFood.macros.protein);
-    const carbsDiff = Math.abs(food.macros.carbs - currentFood.macros.carbs);
-    const fatDiff = Math.abs(food.macros.fat - currentFood.macros.fat);
-    const calDiff = Math.abs(food.calories - currentFood.calories);
-
-    const score = Math.max(0, 100 - (proteinDiff * 2 + carbsDiff * 1 + fatDiff * 1.5 + calDiff * 0.05));
-    return { food, score: Math.round(score) };
-  });
-
-  return scored.sort((a, b) => b.score - a.score).slice(0, 6);
+  return same.map(f => {
+    const pD = Math.abs(f.macros.protein - curr.macros.protein);
+    const cD = Math.abs(f.macros.carbs - curr.macros.carbs);
+    const fD = Math.abs(f.macros.fat - curr.macros.fat);
+    const score = Math.max(0, 100 - (pD * 2 + cD * 1 + fD * 1.5));
+    return { food: f, score: Math.round(score) };
+  }).sort((a, b) => b.score - a.score).slice(0, 6);
 }
 
-function selectAlternative(index) {
-  selectedAlternative = index;
-  document.querySelectorAll('#swapOptions .food-card').forEach((card, i) => {
-    card.style.borderColor = i === index ? 'var(--accent-primary)' : '';
+function selectAlt(i) {
+  swapAlt = i;
+  document.querySelectorAll('#swapBody .food-card').forEach((c, idx) => {
+    c.style.borderColor = idx === i ? 'var(--signal)' : '';
   });
 }
 
 function confirmSwap() {
-  if (selectedAlternative === null || selectedSwapMeal === null || selectedSwapFood === null) return;
-
-  const currentFood = currentMeals[selectedSwapMeal].foods[selectedSwapFood].food;
-  const dietType = currentPlan?.inputs?.dietType || 'regular';
-  const alternatives = findSimilarFoods(currentFood, dietType);
-  const newFood = alternatives[selectedAlternative].food;
-
-  currentMeals[selectedSwapMeal].foods[selectedSwapFood].food = newFood;
-  renderMealPlan(currentMeals);
-  closeSwapModal();
+  if (swapAlt === null) return;
+  const curr = meals[swapMeal].foods[swapFood].food;
+  const alts = findAlts(curr, plan?.inputs?.dietType || 'regular');
+  meals[swapMeal].foods[swapFood].food = alts[swapAlt].food;
+  renderMeals();
+  closeSwap();
 }
 
-function closeSwapModal() {
+function closeSwap() {
   document.getElementById('swapModal').classList.remove('active');
-  selectedSwapMeal = null;
-  selectedSwapFood = null;
-  selectedAlternative = null;
+  swapMeal = swapFood = swapAlt = null;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// FOOD DATABASE
+// FOODS
 // ═══════════════════════════════════════════════════════════════════════════
-function loadFoodDatabase() {
-  const allFoods = getAllFoods();
-  renderFoodGrid(allFoods);
+function loadFoods() {
+  renderFoods(getAllFoods());
 }
 
-function renderFoodGrid(foods) {
-  const html = foods.slice(0, 50).map(food => `
+function renderFoods(list) {
+  document.getElementById('foodsGrid').innerHTML = list.slice(0, 60).map(f => `
     <div class="food-card">
-      <div class="food-name">${food.name}</div>
-      <div class="food-serving">${food.serving.description}</div>
+      <div class="food-name">${f.name}</div>
+      <div class="food-serving">${f.serving.description}</div>
       <div class="food-macros">
-        <span class="food-macro cal">${food.calories} cal</span>
-        <span class="food-macro protein">${food.macros.protein}g P</span>
-        <span class="food-macro carbs">${food.macros.carbs}g C</span>
-        <span class="food-macro fat">${food.macros.fat}g F</span>
+        <span class="food-macro cal">${f.calories} cal</span>
+        <span class="food-macro p">${f.macros.protein}P</span>
+        <span class="food-macro c">${f.macros.carbs}C</span>
+        <span class="food-macro f">${f.macros.fat}F</span>
       </div>
     </div>
   `).join('');
-
-  document.getElementById('foodGrid').innerHTML = html;
 }
 
-// Search functionality
 document.getElementById('foodSearch')?.addEventListener('input', filterFoods);
-document.getElementById('categoryFilter')?.addEventListener('change', filterFoods);
-document.getElementById('dietFilter')?.addEventListener('change', filterFoods);
+document.getElementById('catFilter')?.addEventListener('change', filterFoods);
 
 function filterFoods() {
-  const search = document.getElementById('foodSearch').value.toLowerCase();
-  const category = document.getElementById('categoryFilter').value;
-  const diet = document.getElementById('dietFilter').value;
-
-  let foods = getAllFoods();
-
-  if (search) {
-    foods = foods.filter(f => f.name.toLowerCase().includes(search) || f.tags.some(t => t.includes(search)));
-  }
-  if (category) {
-    foods = foods.filter(f => f.category === category);
-  }
-  if (diet) {
-    foods = foods.filter(f => f.dietTypes.includes(diet));
-  }
-
-  renderFoodGrid(foods);
+  const q = document.getElementById('foodSearch').value.toLowerCase();
+  const cat = document.getElementById('catFilter').value;
+  let list = getAllFoods();
+  if (q) list = list.filter(f => f.name.toLowerCase().includes(q) || f.tags?.some(t => t.includes(q)));
+  if (cat) list = list.filter(f => f.category === cat);
+  renderFoods(list);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SCIENCE TAB
+// SCIENCE
 // ═══════════════════════════════════════════════════════════════════════════
-function loadScienceContent() {
-  const references = [
-    {
-      category: 'Protein Requirements',
-      title: 'International Society of Sports Nutrition Position Stand: Protein and Exercise',
-      authors: 'Jäger R, Kerksick CM, Campbell BI, et al.',
-      journal: 'Journal of the International Society of Sports Nutrition, 2017',
-      relevance: ['Protein timing', 'Muscle protein synthesis', 'Daily protein needs'],
-      foods: ['All protein sources', 'Whey protein', 'Casein', 'Plant proteins']
-    },
-    {
-      category: 'BMR Calculations',
-      title: 'A New Predictive Equation for Resting Energy Expenditure in Healthy Individuals',
-      authors: 'Mifflin MD, St Jeor ST, Hill LA, et al.',
-      journal: 'American Journal of Clinical Nutrition, 1990',
-      relevance: ['BMR calculation', 'Calorie targets', 'Weight management'],
-      foods: ['All foods - calorie calculations']
-    },
-    {
-      category: 'Competition Prep',
-      title: 'Evidence-based Recommendations for Natural Bodybuilding Contest Preparation',
-      authors: 'Helms ER, Aragon AA, Fitschen PJ',
-      journal: 'Journal of the International Society of Sports Nutrition, 2014',
-      relevance: ['Contest prep', 'Fat loss', 'Muscle retention', 'Peak week'],
-      foods: ['High protein foods', 'Complex carbs', 'Low-fat options']
-    },
-    {
-      category: 'Creatine',
-      title: 'ISSN Position Stand: Creatine Supplementation and Exercise',
-      authors: 'Kreider RB, Kalman DS, Antonio J, et al.',
-      journal: 'Journal of the International Society of Sports Nutrition, 2017',
-      relevance: ['Strength gains', 'Power output', 'Muscle mass'],
-      foods: ['Red meat', 'Fish', 'Creatine supplements']
-    },
-    {
-      category: 'Carbohydrate Timing',
-      title: 'Nutrient Timing Revisited: Is There a Post-Exercise Anabolic Window?',
-      authors: 'Aragon AA, Schoenfeld BJ',
-      journal: 'Journal of the International Society of Sports Nutrition, 2013',
-      relevance: ['Post-workout nutrition', 'Glycogen replenishment', 'Recovery'],
-      foods: ['Rice', 'Potatoes', 'Oats', 'Fruits', 'Fast-digesting carbs']
-    },
-    {
-      category: 'Fat Intake',
-      title: 'Dietary Fat Guidelines for Athletes: A Critical Review',
-      authors: 'Lowery LM',
-      journal: 'Journal of the International Society of Sports Nutrition, 2004',
-      relevance: ['Hormone production', 'Fat-soluble vitamins', 'Essential fatty acids'],
-      foods: ['Olive oil', 'Avocado', 'Nuts', 'Fatty fish', 'Omega-3 sources']
-    },
-    {
-      category: 'Hydration',
-      title: 'Exercise and Fluid Replacement Position Stand',
-      authors: 'American College of Sports Medicine',
-      journal: 'Medicine & Science in Sports & Exercise, 2007',
-      relevance: ['Hydration needs', 'Performance', 'Recovery', 'Electrolytes'],
-      foods: ['Water', 'Electrolyte drinks', 'Water-rich foods']
-    },
-    {
-      category: 'Micronutrients',
-      title: 'Micronutrients and Athletic Performance',
-      authors: 'Lukaski HC',
-      journal: 'Nutrition, 2004',
-      relevance: ['Vitamin needs', 'Mineral requirements', 'Performance optimization'],
-      foods: ['Leafy greens', 'Organ meats', 'Shellfish', 'Fortified foods']
-    },
-    {
-      category: 'Fiber',
-      title: 'Position of the Academy of Nutrition and Dietetics: Health Implications of Dietary Fiber',
-      authors: 'Dahl WJ, Stewart ML',
-      journal: 'Journal of the Academy of Nutrition and Dietetics, 2015',
-      relevance: ['Digestive health', 'Satiety', 'Blood sugar control'],
-      foods: ['Vegetables', 'Legumes', 'Whole grains', 'Fruits']
-    },
-    {
-      category: 'Glycemic Index',
-      title: 'Glycemic Index and Exercise Metabolism',
-      authors: 'Burke LM, Collier GR, Hargreaves M',
-      journal: 'Sports Medicine, 1998',
-      relevance: ['Pre-workout nutrition', 'Energy timing', 'Blood glucose'],
-      foods: ['Low GI carbs', 'High GI post-workout', 'Complex carbohydrates']
-    },
-    {
-      category: 'Leucine',
-      title: 'Leucine-enriched Essential Amino Acid Supplementation',
-      authors: 'Katsanos CS, Kobayashi H, Sheffield-Moore M, et al.',
-      journal: 'American Journal of Physiology, 2006',
-      relevance: ['Muscle protein synthesis', 'Anabolic signaling', 'Recovery'],
-      foods: ['Chicken breast', 'Eggs', 'Dairy', 'Whey protein', 'Beef']
-    },
-    {
-      category: 'Omega-3',
-      title: 'Omega-3 Fatty Acids and Athletic Performance',
-      authors: 'Mickleborough TD',
-      journal: 'Sports Medicine, 2013',
-      relevance: ['Inflammation', 'Recovery', 'Joint health', 'Heart health'],
-      foods: ['Salmon', 'Sardines', 'Mackerel', 'Walnuts', 'Chia seeds', 'Flaxseeds']
-    }
+function loadScience() {
+  const refs = [
+    { cat: 'Protein', title: 'ISSN Position Stand: Protein and Exercise', authors: 'Jäger R et al.', journal: 'J Int Soc Sports Nutr, 2017', tags: ['Protein timing', 'MPS', 'Daily needs'] },
+    { cat: 'BMR', title: 'Predictive Equation for Resting Energy Expenditure', authors: 'Mifflin MD et al.', journal: 'Am J Clin Nutr, 1990', tags: ['BMR calculation', 'Calorie targets'] },
+    { cat: 'Contest Prep', title: 'Evidence-based Natural Bodybuilding Prep', authors: 'Helms ER et al.', journal: 'J Int Soc Sports Nutr, 2014', tags: ['Fat loss', 'Muscle retention', 'Peak week'] },
+    { cat: 'Creatine', title: 'ISSN Position Stand: Creatine Supplementation', authors: 'Kreider RB et al.', journal: 'J Int Soc Sports Nutr, 2017', tags: ['Strength', 'Power', 'Recovery'] },
+    { cat: 'Nutrient Timing', title: 'Is There a Post-Exercise Anabolic Window?', authors: 'Aragon AA, Schoenfeld BJ', journal: 'J Int Soc Sports Nutr, 2013', tags: ['Post-workout', 'Glycogen', 'Timing'] },
+    { cat: 'Dietary Fat', title: 'Fat Guidelines for Athletes', authors: 'Lowery LM', journal: 'J Int Soc Sports Nutr, 2004', tags: ['Hormones', 'EFAs', 'Performance'] },
+    { cat: 'Hydration', title: 'Exercise and Fluid Replacement', authors: 'ACSM', journal: 'Med Sci Sports Exerc, 2007', tags: ['Performance', 'Recovery', 'Electrolytes'] },
+    { cat: 'Micronutrients', title: 'Micronutrients and Athletic Performance', authors: 'Lukaski HC', journal: 'Nutrition, 2004', tags: ['Vitamins', 'Minerals', 'Optimization'] },
+    { cat: 'Fiber', title: 'Health Implications of Dietary Fiber', authors: 'Dahl WJ, Stewart ML', journal: 'J Acad Nutr Diet, 2015', tags: ['Digestion', 'Satiety', 'Glucose'] },
+    { cat: 'Glycemic Index', title: 'Glycemic Index and Exercise Metabolism', authors: 'Burke LM et al.', journal: 'Sports Med, 1998', tags: ['Pre-workout', 'Energy timing'] },
+    { cat: 'Leucine', title: 'Leucine-enriched EAA Supplementation', authors: 'Katsanos CS et al.', journal: 'Am J Physiol, 2006', tags: ['MPS', 'Anabolic signaling'] },
+    { cat: 'Omega-3', title: 'Omega-3 and Athletic Performance', authors: 'Mickleborough TD', journal: 'Sports Med, 2013', tags: ['Recovery', 'Inflammation', 'Joints'] }
   ];
 
-  const html = references.map(ref => `
-    <div class="reference-card">
-      <div class="reference-category">${ref.category}</div>
-      <div class="reference-title">${ref.title}</div>
-      <div class="reference-authors">${ref.authors}</div>
-      <div class="reference-journal">${ref.journal}</div>
-      <div class="reference-relevance">
-        <strong style="font-size: 0.8rem; color: var(--text-tertiary);">MuscleForge Application:</strong><br>
-        ${ref.relevance.map(r => `<span class="relevance-tag">${r}</span>`).join('')}
-      </div>
+  document.getElementById('refsGrid').innerHTML = refs.map(r => `
+    <div class="ref-card">
+      <div class="ref-category">${r.cat}</div>
+      <div class="ref-title">${r.title}</div>
+      <div class="ref-authors">${r.authors}</div>
+      <div class="ref-journal">${r.journal}</div>
+      <div class="ref-tags">${r.tags.map(t => `<span class="ref-tag">${t}</span>`).join('')}</div>
     </div>
   `).join('');
-
-  document.getElementById('scienceContent').innerHTML = html;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// COMPETITION PREP
+// COMP PREP
 // ═══════════════════════════════════════════════════════════════════════════
-function calculateCompPrep() {
-  const currentWeight = parseFloat(document.getElementById('compCurrentWeight').value);
-  const targetWeight = parseFloat(document.getElementById('compTargetWeight').value);
-  const currentBF = parseFloat(document.getElementById('compCurrentBF').value);
-  const weeks = parseInt(document.getElementById('compWeeks').value);
+function calcPrep() {
+  const curr = +document.getElementById('prepCurrent').value;
+  const target = +document.getElementById('prepTarget').value;
+  const bf = +document.getElementById('prepBF').value;
+  const weeks = +document.getElementById('prepWeeks').value;
 
-  if (!currentWeight || !targetWeight || !currentBF || !weeks) {
-    alert('Please fill in all fields');
-    return;
-  }
+  if (!curr || !target || !bf || !weeks) return alert('Fill all fields');
 
-  const weightToLose = currentWeight - targetWeight;
-  const weeklyLoss = weightToLose / weeks;
-  const percentPerWeek = (weeklyLoss / currentWeight) * 100;
-  const dailyDeficit = Math.round((weeklyLoss * 3500) / 7);
+  const toLose = curr - target;
+  const perWeek = toLose / weeks;
+  const pctWeek = (perWeek / curr) * 100;
+  const deficit = Math.round((perWeek * 3500) / 7);
 
-  let assessment = '';
-  let alertType = 'success';
+  let status = 'Conservative', type = 'success';
+  if (pctWeek > 1) { status = 'Aggressive'; type = 'warning'; }
+  else if (pctWeek > 0.75) { status = 'Moderate'; type = 'info'; }
 
-  if (percentPerWeek > 1) {
-    assessment = 'Aggressive - Risk of muscle loss. Consider extending timeline.';
-    alertType = 'warning';
-  } else if (percentPerWeek > 0.75) {
-    assessment = 'Moderate - Achievable with strict adherence.';
-    alertType = 'info';
-  } else {
-    assessment = 'Conservative - Optimal for muscle retention.';
-  }
-
-  document.getElementById('compResults').innerHTML = `
-    <div class="alert alert-${alertType} mb-16">
-      <span class="alert-icon">${alertType === 'success' ? '✓' : alertType === 'warning' ? '⚠️' : 'ℹ️'}</span>
-      <div class="alert-content">
-        <div class="alert-title">Assessment: ${assessment}</div>
-      </div>
+  document.getElementById('prepResults').innerHTML = `
+    <div class="alert alert-${type} mb-lg">
+      <span class="alert-icon">${type === 'success' ? '◆' : type === 'warning' ? '!' : '→'}</span>
+      <div class="alert-content"><div class="alert-title">${status}</div></div>
     </div>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">${weightToLose.toFixed(1)}</div>
-        <div class="stat-label">lbs to lose</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">${weeklyLoss.toFixed(2)}</div>
-        <div class="stat-label">lbs/week</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">${percentPerWeek.toFixed(2)}%</div>
-        <div class="stat-label">BW/week</div>
-      </div>
-      <div class="stat-card ${alertType === 'warning' ? 'warning' : ''}">
-        <div class="stat-value">${dailyDeficit}</div>
-        <div class="stat-label">cal deficit/day</div>
-      </div>
-    </div>
-
-    <div class="mt-24">
-      <h4 style="font-size: 1rem; margin-bottom: 12px;">Recommended Phases</h4>
-      <div class="meals-grid">
-        <div class="meal-card">
-          <div class="meal-name">Phase 1: Base Building</div>
-          <div class="meal-time">Weeks 1-${Math.round(weeks * 0.25)}</div>
-          <p class="text-muted mt-8" style="font-size: 0.85rem;">Establish baseline, moderate deficit, high volume training</p>
-        </div>
-        <div class="meal-card">
-          <div class="meal-name">Phase 2: Fat Loss</div>
-          <div class="meal-time">Weeks ${Math.round(weeks * 0.25) + 1}-${Math.round(weeks * 0.7)}</div>
-          <p class="text-muted mt-8" style="font-size: 0.85rem;">Progressive deficit increase, maintain protein, cardio ramp</p>
-        </div>
-        <div class="meal-card">
-          <div class="meal-name">Phase 3: Sharpening</div>
-          <div class="meal-time">Weeks ${Math.round(weeks * 0.7) + 1}-${weeks - 1}</div>
-          <p class="text-muted mt-8" style="font-size: 0.85rem;">Final fat loss push, posing practice, detail work</p>
-        </div>
-        <div class="meal-card">
-          <div class="meal-name">Phase 4: Peak Week</div>
-          <div class="meal-time">Week ${weeks}</div>
-          <p class="text-muted mt-8" style="font-size: 0.85rem;">Water/carb manipulation, glycogen loading, show prep</p>
-        </div>
-      </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-value">${toLose.toFixed(1)}</div><div class="stat-label">lbs to lose</div></div>
+      <div class="stat"><div class="stat-value">${perWeek.toFixed(2)}</div><div class="stat-label">lbs/week</div></div>
+      <div class="stat"><div class="stat-value">${pctWeek.toFixed(2)}%</div><div class="stat-label">BW/week</div></div>
+      <div class="stat ${type === 'warning' ? 'warning' : ''}"><div class="stat-value">${deficit}</div><div class="stat-label">cal deficit</div></div>
     </div>
   `;
-
-  document.getElementById('compResults').classList.remove('hidden');
+  document.getElementById('prepResults').classList.remove('hidden');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PDF EXPORT - Fixed
+// EXPORT
 // ═══════════════════════════════════════════════════════════════════════════
 function exportPDF() {
-  if (!currentPlan) {
-    alert('Generate a plan first');
-    return;
-  }
+  if (!plan) return alert('Generate a plan first');
 
-  const { macros, inputs, water } = currentPlan;
-
-  // Create PDF content
-  const pdfContent = document.createElement('div');
-  pdfContent.className = 'pdf-content';
-  pdfContent.innerHTML = `
+  const { macros, inputs, water } = plan;
+  const el = document.createElement('div');
+  el.className = 'pdf-export';
+  el.innerHTML = `
     <div class="pdf-header">
-      <div class="pdf-title">MuscleForge Nutrition Plan</div>
-      <div class="pdf-subtitle">Generated ${new Date().toLocaleDateString()}</div>
+      <div class="pdf-logo">MuscleForge</div>
+      <div class="pdf-date">${new Date().toLocaleDateString()}</div>
     </div>
-
     <div class="pdf-section">
       <div class="pdf-section-title">Daily Targets</div>
       <div class="pdf-stats">
-        <div class="pdf-stat">
-          <div class="pdf-stat-value">${macros.calories}</div>
-          <div class="pdf-stat-label">Calories</div>
-        </div>
-        <div class="pdf-stat">
-          <div class="pdf-stat-value">${macros.protein.grams}g</div>
-          <div class="pdf-stat-label">Protein</div>
-        </div>
-        <div class="pdf-stat">
-          <div class="pdf-stat-value">${macros.carbs.grams}g</div>
-          <div class="pdf-stat-label">Carbs</div>
-        </div>
-        <div class="pdf-stat">
-          <div class="pdf-stat-value">${macros.fat.grams}g</div>
-          <div class="pdf-stat-label">Fat</div>
-        </div>
-        <div class="pdf-stat">
-          <div class="pdf-stat-value">${water.oz} oz</div>
-          <div class="pdf-stat-label">Water</div>
-        </div>
+        <div class="pdf-stat"><div class="pdf-stat-value">${macros.cals}</div><div class="pdf-stat-label">Calories</div></div>
+        <div class="pdf-stat"><div class="pdf-stat-value">${macros.protein.g}g</div><div class="pdf-stat-label">Protein</div></div>
+        <div class="pdf-stat"><div class="pdf-stat-value">${macros.carbs.g}g</div><div class="pdf-stat-label">Carbs</div></div>
+        <div class="pdf-stat"><div class="pdf-stat-value">${macros.fat.g}g</div><div class="pdf-stat-label">Fat</div></div>
+        <div class="pdf-stat"><div class="pdf-stat-value">${water}oz</div><div class="pdf-stat-label">Water</div></div>
       </div>
     </div>
-
     <div class="pdf-section">
-      <div class="pdf-section-title">Meal Plan (${inputs.mealsPerDay} meals)</div>
-      ${currentMeals.map((meal, i) => `
+      <div class="pdf-section-title">Meal Plan</div>
+      ${meals.map(m => `
         <div class="pdf-meal">
-          <div class="pdf-meal-title">${meal.name} - ${meal.time}</div>
-          ${meal.foods.map(item => `
+          <div class="pdf-meal-title">${m.name} · ${m.time}</div>
+          ${m.foods.map(f => `
             <div class="pdf-meal-item">
-              <span>${item.food.name} (${item.portions}x)</span>
-              <span>${Math.round(item.food.macros.protein * item.portions)}P / ${Math.round(item.food.macros.carbs * item.portions)}C / ${Math.round(item.food.macros.fat * item.portions)}F</span>
+              <span>${f.food.name} (${f.qty}×)</span>
+              <span>${Math.round(f.food.macros.protein * f.qty)}P / ${Math.round(f.food.macros.carbs * f.qty)}C / ${Math.round(f.food.macros.fat * f.qty)}F</span>
             </div>
           `).join('')}
         </div>
       `).join('')}
     </div>
-
-    <div class="pdf-section" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 11px; color: #888;">
-      <p>Generated by MuscleForge - Professional Bodybuilding Nutrition Planner</p>
-      <p>© ${new Date().getFullYear()} Can Ayter · ayter.com</p>
-    </div>
+    <p style="margin-top:20px;font-size:10px;color:#888;">MuscleForge by Can Ayter · ayter.com</p>
   `;
 
-  // PDF options
-  const opt = {
-    margin: [10, 10, 10, 10],
-    filename: 'muscleforge-nutrition-plan.pdf',
+  html2pdf().set({
+    margin: [10, 10],
+    filename: 'muscleforge-plan.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      logging: false
-    },
-    jsPDF: {
-      unit: 'mm',
-      format: 'a4',
-      orientation: 'portrait'
-    }
-  };
-
-  // Generate PDF
-  html2pdf().set(opt).from(pdfContent).save();
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).from(el).save();
 }
 
 function exportJSON() {
-  if (!currentPlan) {
-    alert('Generate a plan first');
-    return;
-  }
-
-  const exportData = {
-    ...currentPlan,
-    meals: currentMeals,
-    generatedAt: new Date().toISOString(),
-    generator: 'MuscleForge by Can Ayter'
-  };
-
-  const dataStr = JSON.stringify(exportData, null, 2);
-  const blob = new Blob([dataStr], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
+  if (!plan) return alert('Generate a plan first');
+  const data = { ...plan, meals, generated: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'muscleforge-nutrition-plan.json';
+  a.href = URL.createObjectURL(blob);
+  a.download = 'muscleforge-plan.json';
   a.click();
-  URL.revokeObjectURL(url);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// UTILITY FUNCTIONS
+// UTILS
 // ═══════════════════════════════════════════════════════════════════════════
 function toggleDetailed() {
-  showDetailed = !showDetailed;
-  document.getElementById('detailedToggle').classList.toggle('active', showDetailed);
-  document.getElementById('micronutrients')?.classList.toggle('hidden', !showDetailed);
+  detailed = !detailed;
+  document.getElementById('detailedToggle').classList.toggle('active', detailed);
 }
 
 function resetForm() {
-  document.getElementById('calculatorForm').reset();
+  document.getElementById('calcForm').reset();
   document.getElementById('results').classList.add('hidden');
-  currentPlan = null;
-  currentMeals = [];
-}
-
-// Initialize food database on load
-if (typeof getAllFoods === 'function') {
-  // Foods are loaded
+  plan = null;
+  meals = [];
 }
   </script>
 </body>
