@@ -253,26 +253,26 @@ h1, h2, h3, h4, h5, h6, .display {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 88px;
 }
 
 /* Logo - The Mark */
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .logo-mark {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   position: relative;
-  filter: drop-shadow(0 0 8px var(--accent-glow));
+  filter: drop-shadow(0 0 12px var(--primary-glow));
   transition: filter var(--duration-normal) var(--ease-sharp);
 }
 
 .logo:hover .logo-mark {
-  filter: drop-shadow(0 0 16px var(--accent-glow));
+  filter: drop-shadow(0 0 20px var(--primary-glow));
 }
 
 .logo-mark svg {
@@ -283,12 +283,12 @@ h1, h2, h3, h4, h5, h6, .display {
 .logo-type {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .logo-name {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.375rem;
+  font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -297,26 +297,32 @@ h1, h2, h3, h4, h5, h6, .display {
 }
 
 .logo-tag {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--ink-secondary);
 }
 
 .logo-credit {
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   color: var(--ink-faint);
   margin-top: 2px;
 }
 
 .logo-credit a {
-  color: var(--accent);
+  color: var(--primary);
   text-decoration: none;
   transition: color var(--duration-fast);
 }
 
 .logo-credit a:hover {
-  color: var(--primary);
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .logo-mark { width: 56px; height: 56px; }
+  .logo-name { font-size: 1.25rem; }
+  .logo-tag { font-size: 0.625rem; }
 }
 
 /* Nav */
@@ -447,7 +453,7 @@ h1, h2, h3, h4, h5, h6, .display {
    MAIN CONTENT
    ═══════════════════════════════════════════════════════════════════════════ */
 main {
-  padding-top: 64px;
+  padding-top: 88px;
   min-height: 100vh;
 }
 
@@ -1519,59 +1525,67 @@ select.field-input option {
       <div class="header-inner">
         <div class="logo">
           <div class="logo-mark">
-            <!-- MuscleForge Mark - Massive flexed bicep -->
-            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Flexed arm silhouette - powerful bicep peak -->
-              <g fill="var(--accent)" stroke="var(--accent)" stroke-width="0.5">
-                <!-- Main bicep mass - huge peak -->
-                <path d="M8 38
-                         Q6 36 6 32
-                         Q6 26 10 22
-                         Q14 18 18 16
-                         Q22 14 26 12
-                         Q30 10 32 8
-                         L34 10
-                         Q32 14 30 18
-                         Q28 22 28 26
-                         Q28 30 30 32
-                         Q32 34 36 34
-                         Q40 34 44 32
-                         Q48 30 50 28
-                         L52 30
-                         Q50 34 46 38
-                         Q42 42 38 44
-                         Q34 46 28 46
-                         Q22 46 16 44
-                         Q10 42 8 38 Z"
-                      fill="var(--accent)"/>
+            <!-- MuscleForge Mark - Classic flexed arm -->
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g fill="var(--primary)" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Fist -->
+                <path d="M62 8 Q70 6 74 10 Q78 14 76 20 L72 22 Q74 18 72 14 Q70 10 64 12 Z" stroke-width="2"/>
+                <path d="M58 12 L62 8" stroke-width="2" fill="none"/>
+                <path d="M66 14 L68 10" stroke-width="1.5" fill="none"/>
+                <path d="M70 16 L74 14" stroke-width="1.5" fill="none"/>
+
+                <!-- Forearm -->
+                <path d="M54 18 Q58 14 62 12 L72 22 Q68 28 62 32 Q56 36 50 38 L46 34 Q50 30 52 26 Q54 22 54 18 Z" stroke-width="2"/>
+
+                <!-- Forearm muscle lines -->
+                <path d="M56 20 Q58 24 56 28" stroke-width="1.2" fill="none" opacity="0.7"/>
+                <path d="M60 22 Q62 26 60 30" stroke-width="1" fill="none" opacity="0.6"/>
+                <path d="M64 24 Q66 28 64 32" stroke-width="1" fill="none" opacity="0.5"/>
+
+                <!-- BICEP - The main event -->
+                <path d="M28 42
+                         Q22 38 18 32
+                         Q14 26 16 18
+                         Q18 12 26 10
+                         Q34 8 42 14
+                         Q48 18 50 24
+                         Q52 30 50 38
+                         L46 34
+                         Q44 28 40 24
+                         Q36 20 30 22
+                         Q24 24 24 32
+                         Q24 38 28 42 Z" stroke-width="2.5"/>
 
                 <!-- Bicep peak highlight -->
-                <ellipse cx="24" cy="20" rx="8" ry="6" fill="var(--accent)" opacity="0.9"/>
+                <ellipse cx="32" cy="18" rx="10" ry="6" fill="var(--primary)" opacity="0.9"/>
 
-                <!-- Veins - thick and prominent -->
-                <path d="M14 30 Q18 26 22 22 Q26 18 28 14" stroke="var(--void)" stroke-width="1.5" fill="none" opacity="0.6"/>
-                <path d="M16 34 Q20 30 24 26" stroke="var(--void)" stroke-width="1.2" fill="none" opacity="0.5"/>
-                <path d="M20 36 Q24 32 28 28 Q32 26 36 26" stroke="var(--void)" stroke-width="1" fill="none" opacity="0.4"/>
-                <path d="M26 20 Q28 18 30 14" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.5"/>
-                <path d="M18 24 Q16 26 14 28" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.4"/>
+                <!-- Bicep muscle striations -->
+                <path d="M22 28 Q28 22 34 18" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <path d="M24 34 Q30 28 36 24" stroke-width="1.2" fill="none" opacity="0.5"/>
+                <path d="M20 24 Q24 20 30 16" stroke-width="1" fill="none" opacity="0.5"/>
+                <path d="M36 20 Q40 22 44 26" stroke-width="1" fill="none" opacity="0.4"/>
 
-                <!-- Forearm mass -->
-                <path d="M36 34 Q42 36 48 34 Q52 32 54 28 L56 30 Q54 36 50 40 Q46 44 40 46 Q36 46 34 44"
-                      fill="var(--accent)" opacity="0.85"/>
+                <!-- Tricep area -->
+                <path d="M28 42 Q34 46 42 48 Q50 50 56 48 Q50 44 46 38" stroke-width="2" fill="none"/>
 
-                <!-- Forearm veins -->
-                <path d="M38 38 Q44 36 50 32" stroke="var(--void)" stroke-width="1" fill="none" opacity="0.4"/>
-                <path d="M40 42 Q46 40 52 36" stroke="var(--void)" stroke-width="0.8" fill="none" opacity="0.3"/>
+                <!-- Tricep lines -->
+                <path d="M32 44 Q38 44 44 42" stroke-width="1" fill="none" opacity="0.4"/>
+                <path d="M36 48 Q42 48 48 46" stroke-width="1" fill="none" opacity="0.3"/>
 
-                <!-- Fist indication -->
-                <ellipse cx="54" cy="29" rx="3" ry="4" fill="var(--accent)" opacity="0.8"/>
+                <!-- Shoulder cap -->
+                <path d="M16 32 Q10 38 8 48 Q6 58 10 68 Q14 78 22 84 Q28 88 36 90" stroke-width="2.5" fill="none"/>
+                <path d="M56 48 Q62 54 66 62 Q70 70 70 80 Q68 88 60 92 Q52 94 42 92 L36 90" stroke-width="2.5" fill="none"/>
+
+                <!-- Deltoid striations -->
+                <path d="M12 42 Q14 50 18 58" stroke-width="1.2" fill="none" opacity="0.5"/>
+                <path d="M14 48 Q18 56 24 64" stroke-width="1" fill="none" opacity="0.4"/>
+                <path d="M60 56 Q64 64 66 72" stroke-width="1" fill="none" opacity="0.4"/>
+
+                <!-- Veins -->
+                <path d="M26 26 Q22 32 20 40" stroke-width="1.8" fill="none" opacity="0.7"/>
+                <path d="M34 22 Q30 28 28 36" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <path d="M42 28 Q40 34 38 42" stroke-width="1.2" fill="none" opacity="0.5"/>
               </g>
-
-              <!-- Highlight/shine on bicep peak -->
-              <ellipse cx="22" cy="18" rx="4" ry="2.5" fill="var(--signal)" opacity="0.15"/>
-
-              <!-- Power glow effect -->
-              <circle cx="24" cy="22" r="12" fill="var(--accent)" opacity="0.1"/>
             </svg>
           </div>
           <div class="logo-type">
