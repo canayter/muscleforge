@@ -243,6 +243,7 @@ h1, h2, h3, h4, h5, h6, .display {
   background: var(--void);
   border-bottom: 1px solid var(--line);
   transition: background var(--duration-fast) var(--ease-sharp);
+  padding-top: 20px;
 }
 
 .site-header.scrolled {
@@ -456,7 +457,7 @@ h1, h2, h3, h4, h5, h6, .display {
    MAIN CONTENT
    ═══════════════════════════════════════════════════════════════════════════ */
 main {
-  padding-top: 110px;
+  padding-top: 130px;
   min-height: 100vh;
 }
 
@@ -469,6 +470,8 @@ main {
 
 .intro-content {
   max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .intro-title {
@@ -490,6 +493,8 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-lg);
+  text-align: left;
+  margin-bottom: var(--space-2xl);
 }
 
 .intro-feature {
@@ -526,6 +531,60 @@ main {
   font-size: 0.875rem;
   color: var(--ink-tertiary);
   line-height: 1.5;
+}
+
+.intro-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  background: var(--void-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.intro-contact-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.intro-contact-text {
+  font-size: 0.9375rem;
+  color: var(--ink-secondary);
+  max-width: 500px;
+}
+
+.intro-contact-links {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.intro-contact-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: 'Teko', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.intro-contact-link:hover {
+  color: var(--accent);
+}
+
+.intro-contact-link svg {
+  width: 16px;
+  height: 16px;
 }
 
 .section {
@@ -1698,6 +1757,21 @@ select.field-input option {
                 <h3>Science</h3>
                 <p>Access the peer-reviewed literature and methodologies underlying these calculations.</p>
               </div>
+            </div>
+          </div>
+
+          <div class="intro-contact">
+            <h3 class="intro-contact-title">Get in Touch</h3>
+            <p class="intro-contact-text">Questions, feedback, or collaboration inquiries? Find contact information in the header above or the footer below.</p>
+            <div class="intro-contact-links">
+              <a href="#" class="intro-contact-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                Header
+              </a>
+              <a href="#" class="intro-contact-link" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                Footer
+              </a>
             </div>
           </div>
         </div>
