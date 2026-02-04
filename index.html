@@ -9,7 +9,7 @@
   <title>MuscleForge | Professional Bodybuilding Nutrition Planner</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23d4a83a'/%3E%3Cstop offset='100%25' stop-color='%23c45c26'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%230d0b09'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='48' font-weight='700' fill='%23d4a83a' text-anchor='middle'%3EMF%3C/text%3E%3Crect x='15' y='78' width='70' height='6' fill='url(%23g)' rx='2'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,23 +265,6 @@ h1, h2, h3, h4, h5, h6, .display {
   gap: var(--space-lg);
 }
 
-.logo-mark {
-  width: 80px;
-  height: 50px;
-  filter: drop-shadow(0 0 12px var(--primary-glow));
-  transition: filter var(--duration-normal) var(--ease-sharp), transform var(--duration-normal);
-}
-
-.logo:hover .logo-mark {
-  filter: drop-shadow(0 0 25px var(--primary-glow)) drop-shadow(0 0 40px var(--primary-dim));
-  transform: scale(1.05);
-}
-
-.logo-mark svg {
-  width: 100%;
-  height: 100%;
-}
-
 .logo-type {
   display: flex;
   flex-direction: column;
@@ -324,7 +307,6 @@ h1, h2, h3, h4, h5, h6, .display {
 }
 
 @media (max-width: 768px) {
-  .logo-mark { width: 50px; height: 58px; }
   .logo-name { font-size: 1.5rem; }
   .logo-tag { font-size: 0.75rem; }
 }
@@ -531,60 +513,6 @@ main {
   font-size: 0.875rem;
   color: var(--ink-tertiary);
   line-height: 1.5;
-}
-
-.intro-contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-xl);
-  background: var(--void-surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-}
-
-.intro-contact-title {
-  font-family: 'Teko', sans-serif;
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.intro-contact-text {
-  font-size: 0.9375rem;
-  color: var(--ink-secondary);
-  max-width: 500px;
-}
-
-.intro-contact-links {
-  display: flex;
-  gap: var(--space-lg);
-  margin-top: var(--space-sm);
-}
-
-.intro-contact-link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-family: 'Teko', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: var(--primary);
-  text-decoration: none;
-  transition: color var(--duration-fast);
-}
-
-.intro-contact-link:hover {
-  color: var(--accent);
-}
-
-.intro-contact-link svg {
-  width: 16px;
-  height: 16px;
 }
 
 .section {
@@ -1665,20 +1593,6 @@ select.field-input option {
     <div class="container">
       <div class="header-inner">
         <div class="logo">
-          <div class="logo-mark">
-            <svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="var(--primary)"/>
-                  <stop offset="100%" stop-color="var(--accent)"/>
-                </linearGradient>
-              </defs>
-              <!-- Clean MF text with accent bar -->
-              <text x="40" y="35" font-family="'Bebas Neue', sans-serif" font-size="42" font-weight="400" fill="var(--primary)" text-anchor="middle" letter-spacing="3">MF</text>
-              <!-- Accent underline -->
-              <rect x="8" y="42" width="64" height="3" fill="url(#logoGrad)" rx="1"/>
-            </svg>
-          </div>
           <div class="logo-type">
             <span class="logo-name">MUSCLEFORGE</span>
             <span class="logo-tag">Evidence-Based Nutrition</span>
@@ -1758,20 +1672,12 @@ select.field-input option {
                 <p>Access the peer-reviewed literature and methodologies underlying these calculations.</p>
               </div>
             </div>
-          </div>
-
-          <div class="intro-contact">
-            <h3 class="intro-contact-title">Get in Touch</h3>
-            <p class="intro-contact-text">Questions, feedback, or collaboration inquiries? Find contact information in the header above or the footer below.</p>
-            <div class="intro-contact-links">
-              <a href="#" class="intro-contact-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                Header
-              </a>
-              <a href="#" class="intro-contact-link" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); return false;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                Footer
-              </a>
+            <div class="intro-feature">
+              <div class="intro-feature-icon">✉</div>
+              <div class="intro-feature-content">
+                <h3>Contact</h3>
+                <p>Contact Can Ayter for questions, feedback, or collaborations via the footer below.</p>
+              </div>
             </div>
           </div>
         </div>
