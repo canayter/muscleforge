@@ -2398,16 +2398,18 @@ function logCalculation() {
     water
   };
 
-  // Use form data approach for Google Apps Script compatibility
-  const formData = new FormData();
-  formData.append('data', JSON.stringify(logData));
+  // Use iframe + GET params for Google Apps Script (most reliable)
+  const params = new URLSearchParams();
+  params.append('data', JSON.stringify(logData));
 
-  fetch(CONFIG.sheetsWebhook, {
-    method: 'POST',
-    body: formData
-  })
-  .then(res => console.log('Logged to Google Sheets'))
-  .catch(err => console.error('Logging failed:', err));
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = CONFIG.sheetsWebhook + '?' + params.toString();
+  document.body.appendChild(iframe);
+
+  // Remove iframe after 5 seconds
+  setTimeout(() => iframe.remove(), 5000);
+  console.log('Logging to Google Sheets...');
 }
 
 function showNotification(message, type = 'info') {
