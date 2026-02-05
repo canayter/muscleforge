@@ -27,6 +27,29 @@
     document.addEventListener('dragstart', e => e.preventDefault());
   </script>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════════════════════════════
+    // CONFIGURATION - Replace with your own keys
+    // ═══════════════════════════════════════════════════════════════════════════
+    const CONFIG = {
+      // EmailJS - Get these from https://dashboard.emailjs.com
+      emailjs: {
+        publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',      // From EmailJS dashboard > Account > API Keys
+        serviceId: 'YOUR_EMAILJS_SERVICE_ID',       // From EmailJS dashboard > Email Services
+        templateId: 'YOUR_EMAILJS_TEMPLATE_ID'      // From EmailJS dashboard > Email Templates
+      },
+      // Google Sheets - Get this from your deployed Apps Script
+      sheetsWebhook: 'YOUR_GOOGLE_SHEETS_WEBHOOK_URL'  // Deploy Apps Script as web app
+    };
+
+    // Initialize EmailJS
+    if (CONFIG.emailjs.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      emailjs.init(CONFIG.emailjs.publicKey);
+    }
+  </script>
+
   <style>
 /* ═══════════════════════════════════════════════════════════════════════════
    MUSCLEFORGE - PRECISION NUTRITION
@@ -2275,10 +2298,111 @@ function calculate() {
 
   const waterOz = Math.round(weightLbs * 0.5 + (activity === 'athlete' ? 32 : activity === 'veryActive' ? 24 : 16));
 
-  plan = { bmr, tdee, macros, water: waterOz, inputs: { dietType, mealsPerDay, trainingTime, weightLbs } };
+  plan = { bmr, tdee, macros, water: waterOz, inputs: { dietType, mealsPerDay, trainingTime, weightLbs, age, sex, heightFt, heightIn, bodyFat, activity, goal, macroProfile } };
 
   renderResults();
   genMeals();
+
+  // Log to Google Sheets (always)
+  logCalculation();
+
+  // Send email if requested
+  if (emailResults && document.getElementById('userEmail').value) {
+    sendResultsEmail();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// EMAIL & LOGGING
+// ═══════════════════════════════════════════════════════════════════════════
+function sendResultsEmail() {
+  const email = document.getElementById('userEmail').value;
+  const name = document.getElementById('userName').value || 'User';
+
+  if (!email || CONFIG.emailjs.publicKey === 'YOUR_EMAILJS_PUBLIC_KEY') {
+    console.log('EmailJS not configured or no email provided');
+    return;
+  }
+
+  const { macros, tdee, bmr, water } = plan;
+
+  const templateParams = {
+    to_email: email,
+    to_name: name,
+    calories: macros.cals,
+    protein: macros.protein.g,
+    carbs: macros.carbs.g,
+    fat: macros.fat.g,
+    bmr: bmr,
+    tdee: tdee,
+    water_oz: water,
+    water_liters: (water * 0.0296).toFixed(1)
+  };
+
+  emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, templateParams)
+    .then(() => {
+      showNotification('Results sent to your email!', 'success');
+    })
+    .catch((err) => {
+      console.error('Email failed:', err);
+      showNotification('Failed to send email. Please try again.', 'error');
+    });
+}
+
+function logCalculation() {
+  if (CONFIG.sheetsWebhook === 'YOUR_GOOGLE_SHEETS_WEBHOOK_URL') {
+    console.log('Google Sheets webhook not configured - logging disabled');
+    return;
+  }
+
+  const { macros, tdee, bmr, water, inputs } = plan;
+  const userName = document.getElementById('userName')?.value || '';
+  const userEmail = document.getElementById('userEmail')?.value || '';
+
+  const logData = {
+    timestamp: new Date().toISOString(),
+    userName,
+    userEmail,
+    age: inputs.age,
+    sex: inputs.sex,
+    weight: inputs.weightLbs,
+    height: `${inputs.heightFt}'${inputs.heightIn}"`,
+    bodyFat: inputs.bodyFat || '',
+    activity: inputs.activity,
+    goal: inputs.goal,
+    macroProfile: inputs.macroProfile,
+    dietType: inputs.dietType,
+    mealsPerDay: inputs.mealsPerDay,
+    calories: macros.cals,
+    protein: macros.protein.g,
+    carbs: macros.carbs.g,
+    fat: macros.fat.g,
+    bmr,
+    tdee,
+    water
+  };
+
+  fetch(CONFIG.sheetsWebhook, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(logData)
+  }).catch(err => console.error('Logging failed:', err));
+}
+
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed; bottom: 20px; right: 20px; padding: 16px 24px;
+    background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--accent)' : 'var(--primary)'};
+    color: white; border-radius: 8px; font-family: 'Teko', sans-serif;
+    font-size: 1rem; letter-spacing: 0.05em; z-index: 9999;
+    animation: slideIn 0.3s ease;
+  `;
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 4000);
 }
 
 function renderResults() {
