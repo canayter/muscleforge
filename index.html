@@ -1051,24 +1051,24 @@ select.field-input option {
 }
 
 .meal-item-swap {
-  opacity: 0;
-  padding: 8px 14px;
+  padding: 6px 12px;
   font-family: 'Teko', sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--ink-secondary);
-  background: var(--void-hover);
-  border: 1px solid var(--line);
+  color: var(--void);
+  background: var(--primary);
+  border: 1px solid var(--primary);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.meal-item:hover .meal-item-swap { opacity: 1; }
 .meal-item-swap:hover {
-  color: var(--signal);
-  border-color: var(--signal);
-  background: var(--signal-dim);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .meal-footer {
@@ -2518,6 +2518,14 @@ function getMealTimes(n, time) {
   return t[time]?.[n] || t.afternoon[n] || t.afternoon[5];
 }
 
+// Common US foods - prioritized for easy availability
+const COMMON_FOODS = {
+  proteins: ['chickenBreast', 'eggs', 'groundBeef95', 'salmon', 'turkeyBreast', 'tuna', 'groundTurkey', 'wholeEggs', 'tilapia', 'shrimpCooked'],
+  carbs: ['whiteRice', 'brownRice', 'oatmeal', 'sweetPotato', 'potato', 'quinoa', 'wholeWheatBread', 'pasta'],
+  vegetables: ['broccoli', 'spinach', 'greenBeans', 'mixedGreens', 'bellPepper', 'asparagus', 'zucchini'],
+  fats: ['oliveOil', 'almonds', 'peanutButter', 'avocado', 'walnuts', 'coconutOil']
+};
+
 function pickFoods(foods, targets, isPost) {
   const picked = [];
   const pMult = Math.max(0.5, Math.min(2, targets.p / 25));
@@ -2529,10 +2537,17 @@ function pickFoods(foods, targets, isPost) {
   const veggies = foods.filter(f => f.category === 'vegetables');
   const fats = foods.filter(f => f.category === 'fats');
 
-  if (proteins.length) picked.push({ food: proteins[Math.floor(Math.random() * proteins.length)], qty: Math.round(pMult * 10) / 10 });
-  if (carbs.length) picked.push({ food: carbs[Math.floor(Math.random() * carbs.length)], qty: Math.round(cMult * 10) / 10 });
-  if (veggies.length) picked.push({ food: veggies[Math.floor(Math.random() * veggies.length)], qty: 1 });
-  if (!isPost && fats.length) picked.push({ food: fats[Math.floor(Math.random() * fats.length)], qty: Math.round(fMult * 10) / 10 });
+  // Prefer common foods first, fallback to random
+  const pickFrom = (arr, commonList) => {
+    const common = arr.filter(f => commonList.includes(f.id));
+    if (common.length > 0) return common[Math.floor(Math.random() * common.length)];
+    return arr[Math.floor(Math.random() * arr.length)];
+  };
+
+  if (proteins.length) picked.push({ food: pickFrom(proteins, COMMON_FOODS.proteins), qty: Math.round(pMult * 10) / 10 });
+  if (carbs.length) picked.push({ food: pickFrom(carbs, COMMON_FOODS.carbs), qty: Math.round(cMult * 10) / 10 });
+  if (veggies.length) picked.push({ food: pickFrom(veggies, COMMON_FOODS.vegetables), qty: 1 });
+  if (!isPost && fats.length) picked.push({ food: pickFrom(fats, COMMON_FOODS.fats), qty: Math.round(fMult * 10) / 10 });
 
   return picked;
 }
@@ -2579,7 +2594,7 @@ function renderMeals() {
                     <div class="meal-item-portion">${f.qty}× ${f.food.serving.description}</div>
                   </div>
                   <div class="meal-item-macros">${Math.round(f.food.macros.protein * f.qty)}p / ${Math.round(f.food.macros.carbs * f.qty)}c / ${Math.round(f.food.macros.fat * f.qty)}f</div>
-                  <button class="meal-item-swap" onclick="openSwap(${mi}, ${fi})">Swap</button>
+                  <button class="meal-item-swap" onclick="openSwap(${mi}, ${fi})">⇄ Swap</button>
                 </li>
               `).join('')}
             </ul>
