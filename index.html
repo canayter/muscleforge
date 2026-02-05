@@ -1984,7 +1984,7 @@ select.field-input option {
                   <p class="card-subtitle">Optimized for your goals</p>
                 </div>
                 <div class="btn-group" style="margin: 0;">
-                  <button class="btn btn-secondary btn-sm" onclick="exportPDF()">PDF</button>
+                  <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;" title="Coming soon">PDF ⚠</button>
                   <button class="btn btn-ghost btn-sm" onclick="exportJSON()">JSON</button>
                 </div>
               </div>
@@ -2001,6 +2001,18 @@ select.field-input option {
                 </div>
               </div>
               <div class="card-body" id="hydrationInfo"></div>
+            </div>
+
+            <!-- Meal Plan (generated below targets) -->
+            <div class="card mt-lg">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Your Meal Plan</h2>
+                  <p class="card-subtitle">Customized meals hitting your macro targets</p>
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="genMeals()">Regenerate</button>
+              </div>
+              <div class="card-body" id="calculatorMeals"></div>
             </div>
           </div>
 
@@ -2536,7 +2548,7 @@ function renderMeals() {
     return a;
   }, { cal: 0, p: 0, c: 0, f: 0 });
 
-  document.getElementById('mealsContent').innerHTML = `
+  const mealsHTML = `
     <div class="alert alert-success mb-lg">
       <span class="alert-icon">◆</span>
       <div class="alert-content">
@@ -2582,6 +2594,10 @@ function renderMeals() {
       }).join('')}
     </div>
   `;
+
+  // Render to both locations
+  document.getElementById('mealsContent').innerHTML = mealsHTML;
+  document.getElementById('calculatorMeals').innerHTML = mealsHTML;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
