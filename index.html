@@ -2278,6 +2278,9 @@ function calculate() {
       : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
   }
 
+  // Round BMR to whole number
+  bmr = Math.round(bmr);
+
   const actMult = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, veryActive: 1.9, athlete: 2.1 };
   const goalAdj = { aggressiveCut: -750, cut: -500, maintain: 0, leanBulk: 300, bulk: 500 };
   const splits = {
