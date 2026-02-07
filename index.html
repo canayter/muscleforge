@@ -889,6 +889,61 @@ main {
   color: var(--ink-tertiary);
 }
 
+/* Plan type selector */
+.plan-type-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 600px) {
+  .plan-type-selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+.plan-type-option {
+  cursor: pointer;
+}
+
+.plan-type-option input[type="checkbox"] {
+  display: none;
+}
+
+.plan-type-box {
+  background: var(--void-surface);
+  border: 2px solid var(--line);
+  padding: var(--space-xl);
+  text-align: center;
+  transition: all var(--duration-fast);
+}
+
+.plan-type-option input:checked + .plan-type-box {
+  border-color: var(--primary);
+  background: var(--primary-dim);
+}
+
+.plan-type-option:hover .plan-type-box {
+  border-color: var(--primary-soft);
+}
+
+.plan-type-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.plan-type-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.plan-type-desc {
+  font-size: 0.875rem;
+  color: var(--ink-tertiary);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    FORMS - Clean, accessible
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -1918,9 +1973,8 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary">
-          <button class="nav-link active" data-view="calculator">Calculator</button>
+          <button class="nav-link active" data-view="calculator">Planner</button>
           <button class="nav-link" data-view="meals">Meals</button>
-          <button class="nav-link" data-view="training">Training</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="prep">Prep</button>
           <button class="nav-link" data-view="science">Science</button>
@@ -1936,9 +1990,8 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile">
-    <button class="nav-link active" data-view="calculator">Calc</button>
+    <button class="nav-link active" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="meals">Meals</button>
-    <button class="nav-link" data-view="training">Train</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="prep">Prep</button>
     <button class="nav-link" data-view="science">Sci</button>
@@ -1957,24 +2010,17 @@ select.field-input option {
 
           <div class="intro-features">
             <div class="intro-feature">
-              <div class="intro-feature-icon">⚖</div>
+              <div class="intro-feature-icon">⚡</div>
               <div class="intro-feature-content">
-                <h3>Calculator</h3>
-                <p>Compute daily caloric needs and macro targets using the Mifflin-St Jeor equation with activity multipliers.</p>
+                <h3>Planner</h3>
+                <p>Generate nutrition plans and training programs in one place, with science-backed calculations and programming.</p>
               </div>
             </div>
             <div class="intro-feature">
               <div class="intro-feature-icon">🍽</div>
               <div class="intro-feature-content">
                 <h3>Meals</h3>
-                <p>Generate structured meal plans optimized for your calculated macros with flexible food substitutions.</p>
-              </div>
-            </div>
-            <div class="intro-feature">
-              <div class="intro-feature-icon">🏋️</div>
-              <div class="intro-feature-content">
-                <h3>Training</h3>
-                <p>Generate evidence-based training programs with 52+ exercises, automatic periodization, and exercise swaps.</p>
+                <p>Create structured meal plans optimized for your calculated macros with flexible food substitutions.</p>
               </div>
             </div>
             <div class="intro-feature">
@@ -1998,17 +2044,10 @@ select.field-input option {
                 <p>Access the peer-reviewed literature and methodologies underlying these calculations.</p>
               </div>
             </div>
-            <div class="intro-feature">
-              <div class="intro-feature-icon">✉</div>
-              <div class="intro-feature-content">
-                <h3>Contact</h3>
-                <p>Contact <a href="https://ayter.com" target="_blank" style="color: var(--primary); text-decoration: none;">Can</a> for questions, feedback, or collaborations.</p>
-              </div>
-            </div>
           </div>
 
           <div class="intro-cta">
-            <a href="#calculator" class="btn btn-primary">Start Calculating</a>
+            <a href="#calculator" class="btn btn-primary">Start Planning</a>
             <div class="scroll-indicator">
               <span>Scroll to begin</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2025,11 +2064,41 @@ select.field-input option {
       <section class="section">
         <div class="container">
           <div class="section-header">
-            <h1 class="section-title">Calculate Your Macros</h1>
-            <p class="section-subtitle">Science-backed nutrition targets optimized for your body and goals</p>
+            <h1 class="section-title">Plan Your Nutrition & Training</h1>
+            <p class="section-subtitle">Science-backed targets optimized for your body and goals</p>
           </div>
 
           <form id="calcForm">
+            <!-- Plan Type Selection -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">What Do You Want to Plan?</h2>
+                  <p class="card-subtitle">Select one or both options</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="plan-type-selector">
+                  <label class="plan-type-option">
+                    <input type="checkbox" id="planNutrition" checked>
+                    <div class="plan-type-box">
+                      <div class="plan-type-icon">🍽</div>
+                      <div class="plan-type-label">Nutrition Plan</div>
+                      <div class="plan-type-desc">Macros, calories, meal timing</div>
+                    </div>
+                  </label>
+                  <label class="plan-type-option">
+                    <input type="checkbox" id="planTraining">
+                    <div class="plan-type-box">
+                      <div class="plan-type-icon">🏋️</div>
+                      <div class="plan-type-label">Training Program</div>
+                      <div class="plan-type-desc">Workouts, exercises, volume</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
             <div class="card">
               <div class="card-header">
                 <div>
@@ -2176,9 +2245,61 @@ select.field-input option {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                <div class="btn-group mt-lg">
-                  <button type="submit" class="btn btn-primary btn-lg">Calculate</button>
+            <!-- Training Configuration (shown when training is selected) -->
+            <div id="trainingConfigCard" class="card hidden">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Training Configuration</h2>
+                  <p class="card-subtitle">Customize your training program</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Experience Level</label>
+                    <select id="experienceLevel" class="field-input">
+                      <option value="beginner">Beginner (0-1 year)</option>
+                      <option value="intermediate" selected>Intermediate (1-3 years)</option>
+                      <option value="advanced">Advanced (3+ years)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Days Available</label>
+                    <select id="trainingDays" class="field-input">
+                      <option value="3">3 days/week</option>
+                      <option value="4" selected>4 days/week</option>
+                      <option value="5">5 days/week</option>
+                      <option value="6">6 days/week</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Primary Goal</label>
+                    <select id="trainingGoal" class="field-input">
+                      <option value="hypertrophy" selected>Hypertrophy (Muscle Growth)</option>
+                      <option value="strength">Strength</option>
+                      <option value="endurance">Muscular Endurance</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Available Equipment</label>
+                    <select id="trainingEquipment" class="field-input">
+                      <option value="full" selected>Full Gym (All Equipment)</option>
+                      <option value="basic">Basic Gym (Barbell, Dumbbells, Cables)</option>
+                      <option value="home">Home Gym (Dumbbells, Bodyweight)</option>
+                      <option value="minimal">Minimal (Bodyweight Only)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-primary btn-lg">Generate Plan</button>
                   <button type="button" class="btn btn-ghost" onclick="resetForm()">Reset</button>
                 </div>
               </div>
@@ -2214,7 +2335,7 @@ select.field-input option {
             </div>
 
             <!-- Meal Plan (generated below targets) -->
-            <div class="card mt-lg">
+            <div class="card mt-lg" id="mealPlanCard">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Your Meal Plan</h2>
@@ -2226,96 +2347,8 @@ select.field-input option {
             </div>
           </div>
 
-        </div>
-      </section>
-    </div>
-
-    <!-- MEALS VIEW -->
-    <div id="meals" class="view">
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <h1 class="section-title">Your Meal Plan</h1>
-            <p class="section-subtitle">Customized meals hitting your macro targets</p>
-          </div>
-          <div id="mealsContent">
-            <div class="alert alert-info">
-              <span class="alert-icon">→</span>
-              <div class="alert-content">
-                <div class="alert-title">Generate Your Plan</div>
-                <div class="alert-text">Use the Calculator to generate personalized targets first.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- TRAINING VIEW -->
-    <div id="training" class="view">
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <h1 class="section-title">Training Program</h1>
-            <p class="section-subtitle">Evidence-based programming for optimal results</p>
-          </div>
-
-          <!-- Program Configuration Form -->
-          <form id="trainingForm">
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <h2 class="card-title">Configure Your Program</h2>
-                  <p class="card-subtitle">Select your preferences for a personalized training plan</p>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="form-grid">
-                  <div class="field">
-                    <label class="field-label">Experience Level</label>
-                    <select id="experienceLevel" class="field-input" required>
-                      <option value="beginner">Beginner (0-1 year)</option>
-                      <option value="intermediate" selected>Intermediate (1-3 years)</option>
-                      <option value="advanced">Advanced (3+ years)</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label class="field-label">Days Available</label>
-                    <select id="trainingDays" class="field-input" required>
-                      <option value="3">3 days/week</option>
-                      <option value="4" selected>4 days/week</option>
-                      <option value="5">5 days/week</option>
-                      <option value="6">6 days/week</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label class="field-label">Primary Goal</label>
-                    <select id="trainingGoal" class="field-input" required>
-                      <option value="hypertrophy" selected>Hypertrophy (Muscle Growth)</option>
-                      <option value="strength">Strength</option>
-                      <option value="endurance">Muscular Endurance</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label class="field-label">Available Equipment</label>
-                    <select id="trainingEquipment" class="field-input" required>
-                      <option value="full" selected>Full Gym (All Equipment)</option>
-                      <option value="basic">Basic Gym (Barbell, Dumbbells, Cables)</option>
-                      <option value="home">Home Gym (Dumbbells, Bodyweight)</option>
-                      <option value="minimal">Minimal (Bodyweight Only)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="btn-group" style="margin-top: var(--space-xl);">
-                  <button type="submit" class="btn btn-primary btn-lg">Generate Program</button>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <!-- Generated Program Display -->
-          <div id="trainingResults" class="hidden" style="margin-top: var(--space-xl);">
+          <!-- Training Results (shown when training is selected) -->
+          <div id="trainingResultsSection" class="hidden mt-xl">
             <!-- Program Header -->
             <div id="programHeader" class="card" style="margin-bottom: var(--space-xl);">
               <div class="card-header">
@@ -2360,8 +2393,8 @@ select.field-input option {
             <div class="card" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
-                  <h2 class="card-title">Nutrition Recommendations</h2>
-                  <p class="card-subtitle">Adjust your nutrition based on training</p>
+                  <h2 class="card-title">Training Day Nutrition</h2>
+                  <p class="card-subtitle">Adjust your intake based on training</p>
                 </div>
               </div>
               <div class="card-body">
@@ -2369,10 +2402,32 @@ select.field-input option {
                   <!-- Populated by JavaScript -->
                 </div>
                 <div class="rationale-box" style="margin-top: var(--space-lg);">
-                  <div class="rationale-label">Training Day Nutrition</div>
+                  <div class="rationale-label">Nutrient Timing</div>
                   <p>On training days, consider increasing carbohydrate intake by 20-30% for energy and recovery. Post-workout, prioritize protein (30-40g) and fast carbs within 2 hours to maximize muscle protein synthesis.</p>
                   <div class="rationale-citation">Reference: ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)</div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- MEALS VIEW -->
+    <div id="meals" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Your Meal Plan</h1>
+            <p class="section-subtitle">Customized meals hitting your macro targets</p>
+          </div>
+          <div id="mealsContent">
+            <div class="alert alert-info">
+              <span class="alert-icon">→</span>
+              <div class="alert-content">
+                <div class="alert-title">Generate Your Plan</div>
+                <div class="alert-text">Use the Calculator to generate personalized targets first.</div>
               </div>
             </div>
           </div>
@@ -2596,12 +2651,80 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
+// PLAN TYPE SELECTION
+// ═══════════════════════════════════════════════════════════════════════════
+const planNutritionCheckbox = document.getElementById('planNutrition');
+const planTrainingCheckbox = document.getElementById('planTraining');
+const trainingConfigCard = document.getElementById('trainingConfigCard');
+
+// Toggle training config visibility
+function updateTrainingConfigVisibility() {
+  if (planTrainingCheckbox.checked) {
+    trainingConfigCard.classList.remove('hidden');
+  } else {
+    trainingConfigCard.classList.add('hidden');
+  }
+}
+
+planTrainingCheckbox.addEventListener('change', updateTrainingConfigVisibility);
+planNutritionCheckbox.addEventListener('change', () => {
+  // Ensure at least one option is selected
+  if (!planNutritionCheckbox.checked && !planTrainingCheckbox.checked) {
+    planNutritionCheckbox.checked = true;
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
 // CALCULATOR
 // ═══════════════════════════════════════════════════════════════════════════
 document.getElementById('calcForm').addEventListener('submit', e => {
   e.preventDefault();
-  calculate();
+  generatePlan();
 });
+
+function generatePlan() {
+  let wantsNutrition = planNutritionCheckbox.checked;
+  let wantsTraining = planTrainingCheckbox.checked;
+
+  // Ensure at least one is selected
+  if (!wantsNutrition && !wantsTraining) {
+    planNutritionCheckbox.checked = true;
+    wantsNutrition = true;
+  }
+
+  if (wantsNutrition) {
+    calculate();
+  }
+
+  if (wantsTraining) {
+    generateTrainingProgram();
+  }
+
+  // Show/hide appropriate result sections
+  const nutritionResults = document.getElementById('results');
+  const mealPlanCard = document.getElementById('mealPlanCard');
+  const trainingResults = document.getElementById('trainingResultsSection');
+
+  if (wantsNutrition) {
+    nutritionResults.classList.remove('hidden');
+    if (mealPlanCard) mealPlanCard.style.display = '';
+  } else {
+    nutritionResults.classList.add('hidden');
+  }
+
+  if (wantsTraining) {
+    trainingResults.classList.remove('hidden');
+  } else {
+    trainingResults.classList.add('hidden');
+  }
+
+  // Scroll to results
+  if (wantsNutrition) {
+    nutritionResults.scrollIntoView({ behavior: 'smooth' });
+  } else if (wantsTraining) {
+    trainingResults.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
 function calculate() {
   const age = +document.getElementById('age').value;
@@ -3312,12 +3435,6 @@ const EQUIPMENT_AVAILABILITY = {
   minimal: ['bodyweight', 'bands']
 };
 
-// Training form handler
-document.getElementById('trainingForm')?.addEventListener('submit', function(e) {
-  e.preventDefault();
-  generateTrainingProgram();
-});
-
 function generateTrainingProgram() {
   const experienceLevel = document.getElementById('experienceLevel').value;
   const daysAvailable = parseInt(document.getElementById('trainingDays').value);
@@ -3337,12 +3454,6 @@ function generateTrainingProgram() {
 
   // Display the program
   displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal);
-
-  // Show results section
-  document.getElementById('trainingResults').classList.remove('hidden');
-
-  // Scroll to results
-  document.getElementById('trainingResults').scrollIntoView({ behavior: 'smooth' });
 }
 
 function generateWorkouts(template, goal, experienceLevel, availableEquipment) {
