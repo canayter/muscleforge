@@ -945,6 +945,134 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   EDUCATION / LEARN SECTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+.education-card {
+  background: var(--void-surface);
+  border: 1px solid var(--line);
+  padding: var(--space-xl);
+  transition: all var(--duration-fast);
+}
+
+.education-card:hover {
+  border-color: var(--primary-soft);
+  transform: translateY(-2px);
+}
+
+.education-card-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.education-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+  color: var(--ink-primary);
+}
+
+.education-card p {
+  font-size: 0.9rem;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.education-detail {
+  background: var(--primary-dim);
+  border-left: 2px solid var(--primary);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.education-tip {
+  background: var(--void-surface);
+  border: 1px dashed var(--line);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+}
+
+.education-tip strong {
+  color: var(--primary);
+}
+
+.education-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.education-table th,
+.education-table td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.education-table th {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  background: var(--void-surface);
+}
+
+.education-table td {
+  color: var(--ink-secondary);
+}
+
+.education-table .highlight-row {
+  background: var(--primary-dim);
+}
+
+.education-table .highlight-row td {
+  color: var(--ink-primary);
+}
+
+.orm-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.orm-item {
+  text-align: center;
+  padding: var(--space-sm);
+  background: var(--void-surface);
+  border: 1px solid var(--line);
+}
+
+.orm-item .reps {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  color: var(--ink-tertiary);
+  letter-spacing: 0.1em;
+}
+
+.orm-item .weight {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.orm-item .percent {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    FORMS - Clean, accessible
    ═══════════════════════════════════════════════════════════════════════════ */
 .form-grid {
@@ -1976,6 +2104,7 @@ select.field-input option {
           <button class="nav-link active" data-view="calculator">Planner</button>
           <button class="nav-link" data-view="meals">Meals</button>
           <button class="nav-link" data-view="foods">Foods</button>
+          <button class="nav-link" data-view="learn">Learn</button>
           <button class="nav-link" data-view="prep">Prep</button>
           <button class="nav-link" data-view="science">Science</button>
         </nav>
@@ -1993,6 +2122,7 @@ select.field-input option {
     <button class="nav-link active" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="meals">Meals</button>
     <button class="nav-link" data-view="foods">Foods</button>
+    <button class="nav-link" data-view="learn">Learn</button>
     <button class="nav-link" data-view="prep">Prep</button>
     <button class="nav-link" data-view="science">Sci</button>
   </nav>
@@ -2028,6 +2158,13 @@ select.field-input option {
               <div class="intro-feature-content">
                 <h3>Foods</h3>
                 <p>Browse a curated database of whole foods with complete macronutrient profiles per serving.</p>
+              </div>
+            </div>
+            <div class="intro-feature">
+              <div class="intro-feature-icon">🎓</div>
+              <div class="intro-feature-content">
+                <h3>Learn</h3>
+                <p>Understand the "why" behind training science: muscle fibers, recovery, 1RM calculations, and more.</p>
               </div>
             </div>
             <div class="intro-feature">
@@ -2459,6 +2596,292 @@ select.field-input option {
           </div>
 
           <div id="foodsGrid" class="foods-grid"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- LEARN VIEW -->
+    <div id="learn" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Learn the Science</h1>
+            <p class="section-subtitle">Understanding the "why" makes you a better athlete</p>
+          </div>
+
+          <!-- 1RM Calculator -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">1RM Calculator</h2>
+                <p class="card-subtitle">Calculate your one-rep max and working weights</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">Weight Lifted</label>
+                  <div class="field-combo">
+                    <input type="number" id="ormWeight" class="field-input" placeholder="100" step="2.5">
+                    <span class="field-suffix">lbs</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Reps Completed</label>
+                  <input type="number" id="ormReps" class="field-input" placeholder="5" min="1" max="15">
+                </div>
+              </div>
+              <div class="btn-group" style="margin-top: var(--space-lg);">
+                <button class="btn btn-primary" onclick="calculate1RM()">Calculate 1RM</button>
+              </div>
+              <div id="ormResults" class="hidden" style="margin-top: var(--space-xl);">
+                <div class="stats-row">
+                  <div class="stat-item">
+                    <div class="stat-value" id="orm1RM">--</div>
+                    <div class="stat-label">Estimated 1RM</div>
+                  </div>
+                </div>
+                <div class="rationale-box" style="margin-top: var(--space-lg);">
+                  <div class="rationale-label">Your Working Weights</div>
+                  <div id="ormWorkingWeights" class="orm-table"></div>
+                </div>
+                <div class="education-tip" style="margin-top: var(--space-lg);">
+                  <strong>Pro Tip:</strong> Round to the nearest available plate. Training with 93.6kg? Use 95kg. Your body won't know the 1.4kg difference, but your math will be simpler.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heart Rate Zones -->
+          <div class="card" style="margin-top: var(--space-xl);">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Heart Rate Zones</h2>
+                <p class="card-subtitle">Find your optimal cardio zones</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">Your Age</label>
+                  <input type="number" id="hrAge" class="field-input" placeholder="30" min="16" max="99">
+                </div>
+              </div>
+              <div class="btn-group" style="margin-top: var(--space-lg);">
+                <button class="btn btn-primary" onclick="calculateHRZones()">Calculate Zones</button>
+              </div>
+              <div id="hrResults" class="hidden" style="margin-top: var(--space-xl);">
+                <div class="stats-row">
+                  <div class="stat-item">
+                    <div class="stat-value" id="hrMax">--</div>
+                    <div class="stat-label">Max HR</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-value" id="hrFatBurn">--</div>
+                    <div class="stat-label">Fat Burn Zone</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-value" id="hrCardio">--</div>
+                    <div class="stat-label">Cardio Zone</div>
+                  </div>
+                </div>
+                <div class="education-tip" style="margin-top: var(--space-lg);">
+                  <strong>Why it matters:</strong> All cardio machines burn the same calories at equal heart rate and duration. The difference is joint stress, not calorie burn. Stay in the fat burn zone (60-70% max HR) for 30-45 min for optimal fat oxidation.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education Cards -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">Training Fundamentals</h2>
+
+          <div class="education-grid">
+            <!-- Warm-Up -->
+            <div class="education-card">
+              <div class="education-card-icon">🔥</div>
+              <h3>Why Warming Up Matters</h3>
+              <p>Every joint contains a cartilage capsule filled with synovial fluid. Warming up increases fluid production, improving mobility and reducing injury risk.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> The target of warming up is your JOINTS, not muscles. Cartilage injuries can take months to heal because cartilage is fed by synovial fluid, not blood.
+              </div>
+              <div class="education-tip">
+                <strong>Do this:</strong> Start with 5-10 min of rowing or full-body movements. Save stretching for AFTER training.
+              </div>
+            </div>
+
+            <!-- Recovery -->
+            <div class="education-card">
+              <div class="education-card-icon">😴</div>
+              <h3>The 72-Hour Rule</h3>
+              <p>Muscles need approximately 72 hours for full regeneration. Training without adequate rest leads to overtraining and stagnation.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Muscles don't grow during training—they grow during recovery. Training breaks down fibers; rest rebuilds them stronger.
+              </div>
+              <div class="education-tip">
+                <strong>Watch for:</strong> Persistent fatigue, decreased performance, mood changes, and increased illness = overtraining.
+              </div>
+            </div>
+
+            <!-- Neural Adaptation -->
+            <div class="education-card">
+              <div class="education-card-icon">🧠</div>
+              <h3>Strength vs. Size</h3>
+              <p>More muscle ≠ more strength. Your nervous system adapts faster than muscles. Better coordination = more strength.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Powerlifters can lift 3x bodyweight with smaller muscles than bodybuilders because of superior neural efficiency.
+              </div>
+              <div class="education-tip">
+                <strong>Why it matters:</strong> Beginners get stronger before getting bigger. This is normal—neural adaptation precedes hypertrophy.
+              </div>
+            </div>
+
+            <!-- Muscle Fibers -->
+            <div class="education-card">
+              <div class="education-card-icon">🔬</div>
+              <h3>White vs. Red Fibers</h3>
+              <p>Type I (red) fibers are endurance-oriented; Type II (white) are for explosive power. Bodybuilding converts fast-twitch to be more endurance-capable.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> 8-12 rep training increases blood vessel density in muscles, making them more aerobic and LARGER.
+              </div>
+              <div class="education-tip">
+                <strong>For size:</strong> Train primarily in the 8-12 rep range to promote blood vessel growth and fiber adaptation.
+              </div>
+            </div>
+
+            <!-- Fat Loss -->
+            <div class="education-card">
+              <div class="education-card-icon">📉</div>
+              <h3>The Math of Fat Loss</h3>
+              <p>1 kg of body fat = 7,700 kcal. Exercise alone is extremely difficult for fat loss—nutrition is the PRIMARY driver.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> To lose 1kg through exercise alone, you'd need to run ~100km. A single meal can exceed an hour of cardio.
+              </div>
+              <div class="education-tip">
+                <strong>Sustainable rate:</strong> 500 cal deficit = ~0.5kg/week fat loss. Gradual changes, not crash diets.
+              </div>
+            </div>
+
+            <!-- Vitamins -->
+            <div class="education-card">
+              <div class="education-card-icon">🔑</div>
+              <h3>Vitamins: The Missing Keys</h3>
+              <p>Vitamins have zero calories but act as "keys" that unlock nutrient utilization. Without them, protein can't be fully synthesized.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Eating 200g protein is useless if your cells can't process it. Vitamins are the catalysts for muscle-building.
+              </div>
+              <div class="education-tip">
+                <strong>For hardgainers:</strong> Vitamin supplementation optimizes metabolism and nutrient absorption.
+              </div>
+            </div>
+          </div>
+
+          <!-- Training Zones -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">Training Intensity Zones</h2>
+
+          <div class="card">
+            <div class="card-body">
+              <table class="education-table">
+                <thead>
+                  <tr>
+                    <th>Zone</th>
+                    <th>Intensity</th>
+                    <th>Reps</th>
+                    <th>Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Endurance</strong></td>
+                    <td>50-65%</td>
+                    <td>12-20</td>
+                    <td>Cardiovascular performance, sustained strength. Good for beginners and deload weeks.</td>
+                  </tr>
+                  <tr class="highlight-row">
+                    <td><strong>Hypertrophy</strong></td>
+                    <td>65-85%</td>
+                    <td>8-12</td>
+                    <td>Muscle size & strength. The "sweet spot"—enough load to stimulate growth, enough reps for metabolic stress.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Strength</strong></td>
+                    <td>85-100%</td>
+                    <td>1-5</td>
+                    <td>Maximum strength and power. Essential for athletes and powerlifters.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="education-tip" style="margin-top: var(--space-lg);">
+                <strong>For bodybuilding:</strong> Spend 70% of training in hypertrophy zone, with occasional strength and endurance work for complete development.
+              </div>
+            </div>
+          </div>
+
+          <!-- RPE Scale -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">RPE (Rating of Perceived Exertion)</h2>
+
+          <div class="card">
+            <div class="card-body">
+              <table class="education-table">
+                <thead>
+                  <tr>
+                    <th>RPE</th>
+                    <th>% 1RM</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>5</td><td>50%</td><td>Moderate</td><td>Rehabilitation, technique work</td></tr>
+                  <tr><td>6</td><td>60%</td><td>Moderate-hard</td><td>Warm-up sets, endurance</td></tr>
+                  <tr><td>7</td><td>70%</td><td>Hard</td><td>Hypertrophy training (3 reps in reserve)</td></tr>
+                  <tr class="highlight-row"><td>8</td><td>80%</td><td>Very hard</td><td>Standard working sets (2 reps in reserve)</td></tr>
+                  <tr><td>9</td><td>90%</td><td>Extremely hard</td><td>Heavy singles/doubles (1 rep in reserve)</td></tr>
+                  <tr><td>10</td><td>100%</td><td>Maximum</td><td>True 1RM attempts only</td></tr>
+                </tbody>
+              </table>
+              <div class="education-tip" style="margin-top: var(--space-lg);">
+                <strong>Auto-regulation:</strong> Most training should be RPE 7-8. Some days you're stronger than others. RPE helps you adjust intensity based on daily readiness.
+              </div>
+            </div>
+          </div>
+
+          <!-- 1RM Percentage Tables -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">1RM Percentage Tables</h2>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Working Weight Reference</h2>
+                <p class="card-subtitle">Percentage of 1RM by rep count (Brzycki formula)</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="education-table">
+                <thead>
+                  <tr>
+                    <th>Reps</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>8</th><th>10</th><th>12</th><th>15</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>% 1RM</strong></td>
+                    <td>100</td><td>95</td><td>90</td><td>88</td><td>86</td><td>83</td><td>78</td><td>75</td><td>70</td><td>65</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="rationale-box" style="margin-top: var(--space-lg);">
+                <div class="rationale-label">Example: Bench Press with 120kg 1RM</div>
+                <p>
+                  12 reps @ 70% = <strong>84kg</strong> &nbsp;|&nbsp;
+                  10 reps @ 75% = <strong>90kg</strong> &nbsp;|&nbsp;
+                  8 reps @ 78% = <strong>94kg</strong> &nbsp;|&nbsp;
+                  6 reps @ 83% = <strong>100kg</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>
@@ -3391,6 +3814,75 @@ function resetForm() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// 1RM CALCULATOR
+// ═══════════════════════════════════════════════════════════════════════════
+function calculate1RM() {
+  const weight = parseFloat(document.getElementById('ormWeight').value);
+  const reps = parseInt(document.getElementById('ormReps').value);
+
+  if (!weight || !reps || reps < 1) {
+    alert('Please enter valid weight and reps');
+    return;
+  }
+
+  // Brzycki formula: 1RM = weight × (36 / (37 - reps))
+  let oneRM;
+  if (reps === 1) {
+    oneRM = weight;
+  } else {
+    oneRM = Math.round(weight * (36 / (37 - reps)));
+  }
+
+  // Display 1RM
+  document.getElementById('orm1RM').textContent = oneRM + ' lbs';
+
+  // Generate working weights table
+  const percentages = {
+    12: 70, 10: 75, 8: 78, 6: 83, 5: 86, 4: 88, 3: 90, 2: 95, 1: 100
+  };
+
+  let tableHTML = '';
+  for (const [repCount, percent] of Object.entries(percentages)) {
+    const workingWeight = Math.round(oneRM * (percent / 100));
+    tableHTML += `
+      <div class="orm-item">
+        <div class="reps">${repCount} REP${repCount > 1 ? 'S' : ''}</div>
+        <div class="weight">${workingWeight}</div>
+        <div class="percent">${percent}%</div>
+      </div>
+    `;
+  }
+  document.getElementById('ormWorkingWeights').innerHTML = tableHTML;
+
+  // Show results
+  document.getElementById('ormResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// HEART RATE ZONE CALCULATOR
+// ═══════════════════════════════════════════════════════════════════════════
+function calculateHRZones() {
+  const age = parseInt(document.getElementById('hrAge').value);
+
+  if (!age || age < 16 || age > 99) {
+    alert('Please enter a valid age (16-99)');
+    return;
+  }
+
+  const maxHR = 220 - age;
+  const fatBurnLow = Math.round(maxHR * 0.6);
+  const fatBurnHigh = Math.round(maxHR * 0.7);
+  const cardioLow = Math.round(maxHR * 0.7);
+  const cardioHigh = Math.round(maxHR * 0.85);
+
+  document.getElementById('hrMax').textContent = maxHR + ' bpm';
+  document.getElementById('hrFatBurn').textContent = fatBurnLow + '-' + fatBurnHigh;
+  document.getElementById('hrCardio').textContent = cardioLow + '-' + cardioHigh;
+
+  document.getElementById('hrResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // CONTACT FORM
 // ═══════════════════════════════════════════════════════════════════════════
 function sendContactForm(e) {
@@ -3577,12 +4069,34 @@ function calculateVolumeSummary(workouts) {
   return volume;
 }
 
+// Educational tips based on goal and experience
+function getEducationalTip(goal, experienceLevel) {
+  const tips = {
+    hypertrophy: {
+      beginner: 'Focus on learning proper form with moderate weights (65-75% 1RM). Your nervous system adapts faster than your muscles—strength gains will come before size. This is called neural adaptation, and it\'s completely normal.',
+      intermediate: 'The 8-12 rep range is your "sweet spot" for muscle growth. This zone maximizes muscle fiber recruitment and metabolic stress. Remember: muscles need 72 hours to fully recover before training them again.',
+      advanced: 'Consider periodization: cycle through strength (4-6 reps), hypertrophy (8-12), and endurance (15-20) phases every 4-6 weeks. This prevents plateaus and promotes complete fiber development.'
+    },
+    strength: {
+      beginner: 'Master the big lifts first: squat, bench, deadlift, overhead press. Your early strength gains come from neural adaptation—your brain learning to recruit more muscle fibers efficiently.',
+      intermediate: 'Heavy compound movements (85%+ 1RM) trigger the greatest hormonal response, including growth hormone. Rest 3-5 minutes between heavy sets to allow full ATP regeneration.',
+      advanced: 'Train at 90%+ 1RM regularly but cycle intensity to prevent burnout. Your white (fast-twitch) muscle fibers are built for explosive power but fatigue quickly—longer rest is essential.'
+    },
+    endurance: {
+      beginner: 'Higher rep ranges (12-20) with shorter rest (30-60 sec) build muscular endurance and work capacity. This increases blood vessel density in your muscles, improving oxygen delivery.',
+      intermediate: 'Circuit training and supersets are effective for endurance. Keep heart rate elevated (60-70% max HR) throughout the workout for optimal cardiovascular adaptation.',
+      advanced: 'Combine strength and endurance work. Heavy compounds convert your fast-twitch fibers to have more endurance characteristics while maintaining strength.'
+    }
+  };
+  return tips[goal]?.[experienceLevel] || tips.hypertrophy.intermediate;
+}
+
 function displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal) {
   // Program header
   document.getElementById('programName').textContent = template.name;
   document.getElementById('programDescription').textContent = template.description;
 
-  // Stats
+  // Stats with educational context
   const statsHtml = `
     <div class="program-stat">
       <div class="stat-value">${template.daysPerWeek}</div>
@@ -3603,8 +4117,10 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
   `;
   document.getElementById('programStats').innerHTML = statsHtml;
 
-  // Rationale
-  document.getElementById('programRationaleText').textContent = template.research.rationale;
+  // Rationale with educational tips
+  const educationalTips = getEducationalTip(goal, experienceLevel);
+  document.getElementById('programRationaleText').innerHTML = template.research.rationale +
+    '<br><br><strong style="color: var(--primary);">💡 Training Tip:</strong> ' + educationalTips;
   document.getElementById('programCitation').textContent = template.research.proBodybuilderNote;
 
   // Weekly schedule
