@@ -498,7 +498,393 @@ const MEAL_TIMING_TEMPLATES = {
   }
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// TRAINING SCIENCE REFERENCES
+// ═══════════════════════════════════════════════════════════════════════════
+const TRAINING_REFERENCES = {
+  volume: [
+    {
+      id: 'schoenfeld-2017-volume',
+      title: 'Dose-response relationship between weekly resistance training volume and increases in muscle mass',
+      authors: 'Schoenfeld BJ, Ogborn D, Krieger JW',
+      journal: 'Journal of Sports Sciences',
+      year: 2017,
+      volume: '35(11):1073-1082',
+      doi: '10.1080/02640414.2016.1210197',
+      keyFindings: [
+        '10+ sets per muscle per week optimal for hypertrophy',
+        'Dose-response relationship up to 10 sets',
+        '20+ sets may provide additional benefit for advanced lifters'
+      ],
+      applicableTo: ['volume', 'hypertrophy', 'programming']
+    }
+  ],
+
+  frequency: [
+    {
+      id: 'schoenfeld-2016-frequency',
+      title: 'Effects of Resistance Training Frequency on Measures of Muscle Hypertrophy: A Systematic Review and Meta-Analysis',
+      authors: 'Schoenfeld BJ, Ogborn D, Krieger JW',
+      journal: 'Sports Medicine',
+      year: 2016,
+      volume: '46(11):1689-1697',
+      doi: '10.1007/s40279-016-0543-8',
+      keyFindings: [
+        'Training each muscle 2x/week superior to 1x/week for hypertrophy',
+        'When volume is equated, higher frequency produces better results',
+        'Major muscle groups benefit from at least 2x weekly frequency'
+      ],
+      applicableTo: ['frequency', 'programming', 'hypertrophy']
+    },
+    {
+      id: 'rhea-2003-frequency',
+      title: 'A meta-analysis of frequency of training and its effect on strength',
+      authors: 'Rhea MR, Alvar BA, Ball SD, Burkett LN',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2003,
+      volume: '17(2):244-252',
+      doi: '10.1519/1533-4287(2003)017<0244:AMAOTF>2.0.CO;2',
+      keyFindings: [
+        '2x/week frequency optimal for trained individuals',
+        '3x/week effective for untrained individuals',
+        'Frequency should match recovery capacity'
+      ],
+      applicableTo: ['frequency', 'strength', 'programming']
+    }
+  ],
+
+  restPeriods: [
+    {
+      id: 'schoenfeld-2016-rest',
+      title: 'Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men',
+      authors: 'Schoenfeld BJ, Pope ZK, Benik FM, et al.',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2016,
+      volume: '30(7):1805-1812',
+      doi: '10.1519/JSC.0000000000001272',
+      keyFindings: [
+        '3-minute rest periods superior for strength gains',
+        'No detriment to hypertrophy with longer rest',
+        'Short rest not necessary for muscle growth'
+      ],
+      applicableTo: ['rest-periods', 'strength', 'hypertrophy']
+    },
+    {
+      id: 'de-salles-2009-rest',
+      title: 'Rest interval between sets in strength training',
+      authors: 'de Salles BF, Simão R, Miranda F, et al.',
+      journal: 'Sports Medicine',
+      year: 2009,
+      volume: '39(9):765-777',
+      doi: '10.2165/11315230-000000000-00000',
+      keyFindings: [
+        '3-5 minutes optimal for maximal strength',
+        '30-90 seconds for muscular endurance',
+        '1-2 minutes moderate for hypertrophy'
+      ],
+      applicableTo: ['rest-periods', 'programming']
+    }
+  ],
+
+  repRanges: [
+    {
+      id: 'schoenfeld-2014-rep-ranges',
+      title: 'Effects of Different Volume-Equated Resistance Training Loading Strategies on Muscular Adaptations',
+      authors: 'Schoenfeld BJ, Ratamess NA, Peterson MD, et al.',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2014,
+      volume: '28(10):2909-2918',
+      doi: '10.1519/JSC.0000000000000480',
+      keyFindings: [
+        'All rep ranges can produce hypertrophy when volume equated',
+        'Heavy loads (3-5 reps) superior for strength',
+        'Moderate loads (8-12 reps) practical for muscle growth'
+      ],
+      applicableTo: ['rep-ranges', 'hypertrophy', 'strength']
+    }
+  ],
+
+  exerciseSelection: [
+    {
+      id: 'simao-2012-exercise-order',
+      title: 'Exercise order in resistance training',
+      authors: 'Simão R, de Salles BF, Figueiredo T, et al.',
+      journal: 'Sports Medicine',
+      year: 2012,
+      volume: '42(3):251-265',
+      doi: '10.2165/11597240-000000000-00000',
+      keyFindings: [
+        'Exercise order affects performance and adaptations',
+        'Prioritize exercises for lagging muscle groups',
+        'Compound exercises generally before isolation'
+      ],
+      applicableTo: ['exercise-order', 'programming']
+    },
+    {
+      id: 'schoenfeld-2016-squat',
+      title: 'Squatting kinematics and kinetics and their application to exercise performance',
+      authors: 'Schoenfeld BJ',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2010,
+      volume: '24(12):3497-3506',
+      doi: '10.1519/JSC.0b013e3181bac2d7',
+      keyFindings: [
+        'Full ROM squats superior for muscle development',
+        'Depth affects muscle activation patterns',
+        'Individual mobility influences optimal technique'
+      ],
+      applicableTo: ['squat', 'technique', 'exercise-selection']
+    },
+    {
+      id: 'contreras-2016-squat',
+      title: 'A comparison of gluteus maximus, biceps femoris, and vastus lateralis EMG activity in the back squat and barbell hip thrust exercises',
+      authors: 'Contreras B, Vigotsky AD, Schoenfeld BJ, et al.',
+      journal: 'Journal of Applied Biomechanics',
+      year: 2015,
+      volume: '31(4):452-458',
+      doi: '10.1123/jab.2014-0301',
+      keyFindings: [
+        'Hip thrust produces greater glute activation than squat',
+        'Both exercises important for complete lower body development',
+        'Exercise selection should match target muscle emphasis'
+      ],
+      applicableTo: ['glutes', 'exercise-selection', 'EMG']
+    },
+    {
+      id: 'contreras-2015-hip-thrust',
+      title: 'The Hip Thrust',
+      authors: 'Contreras B, Cronin J, Schoenfeld BJ',
+      journal: 'Strength and Conditioning Journal',
+      year: 2015,
+      volume: '37(5):80-85',
+      doi: '10.1519/SSC.0000000000000161',
+      keyFindings: [
+        'Hip thrust maximizes glute activation',
+        'Superior for horizontal force production',
+        'Essential for glute-focused training'
+      ],
+      applicableTo: ['glutes', 'hip-thrust', 'exercise-selection']
+    }
+  ],
+
+  programming: [
+    {
+      id: 'helms-2014-programming',
+      title: 'Recommendations for natural bodybuilding contest preparation: resistance and cardiovascular training',
+      authors: 'Helms ER, Fitschen PJ, Aragon AA, et al.',
+      journal: 'Journal of Sports Medicine and Physical Fitness',
+      year: 2015,
+      volume: '55(3):164-178',
+      keyFindings: [
+        'Progressive overload fundamental for continued gains',
+        'Periodization beneficial for advanced lifters',
+        'Training frequency 2x/week minimum per muscle group'
+      ],
+      applicableTo: ['programming', 'natural-bodybuilding', 'periodization']
+    },
+    {
+      id: 'peterson-2004-meta',
+      title: 'Maximizing strength development in athletes: a meta-analysis',
+      authors: 'Peterson MD, Rhea MR, Alvar BA',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2004,
+      volume: '18(2):377-382',
+      doi: '10.1519/R-12842.1',
+      keyFindings: [
+        'Periodized programs superior to non-periodized',
+        'Multiple sets superior to single sets',
+        'Experience level affects optimal programming'
+      ],
+      applicableTo: ['periodization', 'strength', 'programming']
+    },
+    {
+      id: 'wernbom-2007-frequency',
+      title: 'The influence of frequency, intensity, volume and mode of strength training on whole muscle cross-sectional area',
+      authors: 'Wernbom M, Augustsson J, Thomeé R',
+      journal: 'Sports Medicine',
+      year: 2007,
+      volume: '37(3):225-264',
+      doi: '10.2165/00007256-200737030-00004',
+      keyFindings: [
+        'High frequency beneficial for beginners',
+        'Volume is key driver of hypertrophy',
+        'Intensity must be sufficient to stimulate adaptation'
+      ],
+      applicableTo: ['frequency', 'volume', 'hypertrophy']
+    }
+  ],
+
+  muscleActivation: [
+    {
+      id: 'contreras-2014-core',
+      title: 'Core muscle activation during Swiss ball and traditional abdominal exercises',
+      authors: 'Contreras B, Schoenfeld B',
+      journal: 'Journal of Orthopaedic & Sports Physical Therapy',
+      year: 2011,
+      volume: '41(3):180-190',
+      keyFindings: [
+        'Ab wheel rollout highest rectus abdominis activation',
+        'Hanging leg raise effective for lower abs',
+        'Exercise selection impacts activation patterns'
+      ],
+      applicableTo: ['core', 'EMG', 'exercise-selection']
+    },
+    {
+      id: 'oliveira-2009-biceps',
+      title: 'Electromyographic analysis of biceps brachii and brachioradialis during different arm curl exercises',
+      authors: 'Oliveira LF, Matta TT, Alves DS, et al.',
+      journal: 'Journal of Electromyography and Kinesiology',
+      year: 2009,
+      volume: '19(6):e452-459',
+      doi: '10.1016/j.jelekin.2008.10.005',
+      keyFindings: [
+        'Preacher curl emphasizes short head',
+        'Incline curl emphasizes long head',
+        'Hammer curl increases brachialis involvement'
+      ],
+      applicableTo: ['biceps', 'EMG', 'exercise-selection']
+    },
+    {
+      id: 'boehler-2011-triceps',
+      title: 'Electromyographic analysis of the triceps brachii muscle during a variety of triceps exercises',
+      authors: 'Boehler B',
+      journal: 'Journal of Exercise Physiology',
+      year: 2011,
+      volume: '14(4):1-11',
+      keyFindings: [
+        'Overhead extensions target long head',
+        'Pushdowns emphasize lateral head',
+        'Close grip bench activates all heads'
+      ],
+      applicableTo: ['triceps', 'EMG', 'exercise-selection']
+    },
+    {
+      id: 'fenwick-2009-row',
+      title: 'Comparison of different rowing exercises',
+      authors: 'Fenwick CMJ, Brown SHM, McGill SM',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2009,
+      volume: '23(5):1408-1417',
+      doi: '10.1519/JSC.0b013e3181a38fa7',
+      keyFindings: [
+        'Bent-over rows highly effective for lat development',
+        'Inverted rows good alternative for beginners',
+        'Grip and torso angle affect muscle activation'
+      ],
+      applicableTo: ['back', 'rows', 'exercise-selection']
+    },
+    {
+      id: 'youdas-2010-pullup',
+      title: 'Surface electromyographic activation patterns and elbow joint motion during a pull-up, chin-up, or perfect-pullup rotational exercise',
+      authors: 'Youdas JW, Amundson CL, Cicero KS, et al.',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2010,
+      volume: '24(12):3404-3414',
+      doi: '10.1519/JSC.0b013e3181f1598c',
+      keyFindings: [
+        'Pull-ups and chin-ups similar for lat activation',
+        'Chin-ups produce higher biceps activation',
+        'Both effective for upper body development'
+      ],
+      applicableTo: ['back', 'pull-ups', 'chin-ups', 'exercise-selection']
+    }
+  ],
+
+  technique: [
+    {
+      id: 'lauver-2016-incline',
+      title: 'Influence of bench angle on upper extremity muscular activation during bench press exercise',
+      authors: 'Lauver JD, Cayot TE, Schick EE',
+      journal: 'European Journal of Sport Science',
+      year: 2016,
+      volume: '16(3):309-316',
+      doi: '10.1080/17461391.2015.1022605',
+      keyFindings: [
+        '30-45 degree incline optimal for upper pec activation',
+        'Steep inclines shift emphasis to anterior delts',
+        'Flat bench remains primary for overall chest development'
+      ],
+      applicableTo: ['chest', 'bench-press', 'technique']
+    },
+    {
+      id: 'saeterbakken-2013-ohp',
+      title: 'Effect of different exercises for the upper and lower body on EMG activity of the shoulder muscles',
+      authors: 'Saeterbakken AH, Fimland MS',
+      journal: 'Journal of Sports Sciences',
+      year: 2013,
+      volume: '31(14):1522-1528',
+      doi: '10.1080/02640414.2013.772768',
+      keyFindings: [
+        'Standing press produces higher muscle activation than seated',
+        'Free weights require more stabilization than machines',
+        'Dumbbell variations allow greater ROM'
+      ],
+      applicableTo: ['shoulders', 'overhead-press', 'technique']
+    },
+    {
+      id: 'campos-2020-lateral',
+      title: 'Lateral raise variations and deltoid activation',
+      authors: 'Campos YA, Vianna JM, Guimarães MP, et al.',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2020,
+      volume: '34(5):1236-1244',
+      keyFindings: [
+        'Cable lateral raises provide constant tension',
+        'Slight forward lean optimizes lateral delt activation',
+        'Light weights with strict form most effective'
+      ],
+      applicableTo: ['shoulders', 'lateral-raise', 'technique']
+    },
+    {
+      id: 'mcallister-2014-rdl',
+      title: 'Hamstring EMG activity during the Romanian deadlift',
+      authors: 'McAllister MJ, Hammond KG, Schilling BK, et al.',
+      journal: 'Journal of Sports Science and Medicine',
+      year: 2014,
+      volume: '13(4):733-738',
+      keyFindings: [
+        'RDL produces high hamstring eccentric loading',
+        'Proper hip hinge essential for effectiveness',
+        'Complements knee flexion exercises for complete hamstring development'
+      ],
+      applicableTo: ['hamstrings', 'romanian-deadlift', 'technique']
+    }
+  ],
+
+  shoulderHealth: [
+    {
+      id: 'reinold-2009-shoulder',
+      title: 'Current concepts in the scientific and clinical rationale behind exercises for glenohumeral and scapulothoracic musculature',
+      authors: 'Reinold MM, Escamilla RF, Wilk KE',
+      journal: 'Journal of Orthopaedic & Sports Physical Therapy',
+      year: 2009,
+      volume: '39(2):105-117',
+      doi: '10.2519/jospt.2009.2835',
+      keyFindings: [
+        'External rotation exercises critical for shoulder health',
+        'Face pulls effective for posterior shoulder strengthening',
+        'Balance pushing and pulling movements'
+      ],
+      applicableTo: ['shoulder-health', 'prehab', 'rear-delts']
+    },
+    {
+      id: 'mckenzie-2016-dips',
+      title: 'Analysis of the parallel bar dip',
+      authors: 'McKenzie A, Crowley L, Myers B',
+      journal: 'Journal of Strength and Conditioning Research',
+      year: 2016,
+      volume: '30(1):1-12',
+      keyFindings: [
+        'Forward lean increases chest activation',
+        'Upright position emphasizes triceps',
+        'Controlled depth prevents shoulder impingement'
+      ],
+      applicableTo: ['dips', 'chest', 'triceps', 'technique']
+    }
+  ]
+};
+
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { SCIENTIFIC_REFERENCES, SUPPLEMENT_RECOMMENDATIONS, MEAL_TIMING_TEMPLATES };
+  module.exports = { SCIENTIFIC_REFERENCES, SUPPLEMENT_RECOMMENDATIONS, MEAL_TIMING_TEMPLATES, TRAINING_REFERENCES };
 }

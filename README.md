@@ -1,8 +1,8 @@
 # MuscleForge
 
-**Professional Bodybuilding Nutrition Planner**
+**Professional Bodybuilding Nutrition & Training Planner**
 
-A comprehensive, scientifically-backed nutrition toolkit designed for bodybuilders, fitness enthusiasts, and anyone serious about optimizing their diet for physique goals - including IFBB competition preparation.
+A comprehensive, scientifically-backed nutrition and training toolkit designed for bodybuilders, fitness enthusiasts, and anyone serious about optimizing their diet and workouts for physique goals - including IFBB competition preparation.
 
 Created by [Can Ayter](https://www.ayter.com)
 
@@ -28,6 +28,30 @@ Created by [Can Ayter](https://www.ayter.com)
 - **Custom Macro Configuration**
 - **Multiple Diet Types**: Regular, Vegetarian, Vegan, Paleo, Mediterranean, Gluten-Free
 - **Meal Timing Optimization** based on training schedule
+
+### Training Program Generator
+- **Evidence-Based Programming** - All recommendations backed by peer-reviewed research
+- **4 Program Templates**:
+  - Push/Pull/Legs (6 days, 2x frequency)
+  - Upper/Lower (4 days, 2x frequency)
+  - Full Body (3 days, 3x frequency)
+  - Body Part Split (5 days, 1x frequency)
+- **52+ Exercise Database** with full metadata:
+  - Movement patterns (push, pull, squat, hinge, carry, rotation)
+  - Muscle groups (primary and secondary)
+  - Equipment requirements
+  - Difficulty levels
+  - Rep range and set recommendations
+  - Research citations for effectiveness
+- **Automatic Program Selection** based on:
+  - Experience level (beginner/intermediate/advanced)
+  - Available training days
+  - Primary goal (hypertrophy/strength/endurance)
+  - Available equipment
+- **Exercise Swap Feature** - Replace any exercise with similar alternatives
+- **Volume Tracking** - Weekly sets per muscle group with optimal/adequate/low indicators
+- **Scientific Rationale** - Research citations and pro bodybuilder notes for each program
+- **Nutrition Integration** - Training day vs rest day calorie recommendations
 
 ### Food Database
 - **80+ foods** with detailed nutritional data
@@ -58,6 +82,11 @@ All recommendations backed by peer-reviewed research:
 - ISSN Position Stands on Protein, Creatine, Caffeine, Beta-Alanine
 - Mifflin-St Jeor BMR equation (Am J Clin Nutr, 1990)
 - Evidence-based bodybuilding prep guidelines (JISSN, 2014)
+- **Training Science**:
+  - Schoenfeld et al. on training volume, frequency, and rest periods
+  - Contreras et al. on glute activation and hip thrust
+  - Helms et al. on natural bodybuilding programming
+  - EMG studies on exercise selection and muscle activation
 - And more...
 
 ### Export Options
@@ -98,7 +127,9 @@ muscleforge/
 ├── index.html          # Main application
 ├── README.md           # This file
 ├── data/
-│   ├── foods.js        # Comprehensive food database
+│   ├── foods.js        # Comprehensive food database (250+ foods)
+│   ├── exercises.js    # Exercise database (52+ exercises)
+│   ├── programs.js     # Training program templates & science
 │   └── references.js   # Scientific references & supplements
 └── js/
     └── calculators.js  # Calculation functions
@@ -135,6 +166,26 @@ muscleforge/
 6. **Export**
    - Download as PDF or JSON
    - Print directly
+
+### Generate Training Program
+
+1. **Navigate to Training Tab**
+
+2. **Configure Your Program**
+   - Experience level
+   - Days available per week
+   - Primary goal
+   - Available equipment
+
+3. **Generate Program**
+   - View weekly schedule with exercises
+   - See sets, reps, and rest periods
+   - Review scientific rationale
+
+4. **Customize**
+   - Swap exercises with alternatives
+   - Check volume summary per muscle
+   - View nutrition recommendations
 
 ## Scientific Basis
 

@@ -96,6 +96,16 @@
   --fat: #d4a83a;
   --calories: #c45c26;
 
+  /* Training-specific */
+  --training: #3d85c6;
+  --training-dim: rgba(61,133,198,0.15);
+  --training-glow: rgba(61,133,198,0.4);
+
+  /* Difficulty indicators */
+  --beginner: #5b9a5b;
+  --intermediate: #c9a227;
+  --advanced: #c45c26;
+
   /* System */
   --success: #5b9a5b;
   --warning: #d4a83a;
@@ -686,6 +696,197 @@ main {
 .card-subtitle {
   font-size: 1rem;
   color: var(--ink-secondary);
+}
+
+/* Training-specific card variant */
+.training-card {
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--training);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.training-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--training) 0%, transparent 60%);
+}
+
+.training-card:hover {
+  border-color: var(--training-glow);
+  box-shadow: 0 0 20px var(--training-dim);
+}
+
+.training-card .card-header {
+  background: var(--void-surface);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.training-day-name {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--training);
+}
+
+.training-day-focus {
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
+}
+
+/* Exercise row within training card */
+.exercise-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  transition: background var(--duration-fast);
+}
+
+.exercise-row:last-child {
+  border-bottom: none;
+}
+
+.exercise-row:hover {
+  background: var(--void-surface);
+}
+
+.exercise-name {
+  font-weight: 500;
+}
+
+.exercise-name small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ink-tertiary);
+  font-weight: 400;
+}
+
+.exercise-sets, .exercise-reps {
+  font-family: 'Teko', monospace;
+  font-size: 1.125rem;
+  color: var(--training);
+  text-align: center;
+  min-width: 60px;
+}
+
+.exercise-reps {
+  color: var(--ink-secondary);
+}
+
+.exercise-swap {
+  padding: 6px 14px;
+  background: var(--warning);
+  color: var(--void);
+  border: none;
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.exercise-swap:hover {
+  background: var(--primary);
+  transform: scale(1.02);
+}
+
+/* Difficulty badges */
+.badge-difficulty {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: 'Teko', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+
+.badge-difficulty.beginner {
+  background: var(--beginner);
+  color: white;
+}
+
+.badge-difficulty.intermediate {
+  background: var(--intermediate);
+  color: var(--void);
+}
+
+.badge-difficulty.advanced {
+  background: var(--advanced);
+  color: white;
+}
+
+/* Science rationale box */
+.rationale-box {
+  background: var(--void-surface);
+  border-left: 2px solid var(--primary);
+  padding: var(--space-md);
+  margin-top: var(--space-md);
+  font-size: 0.875rem;
+}
+
+.rationale-box .rationale-label {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
+
+.rationale-box p {
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.rationale-citation {
+  font-size: 0.75rem;
+  color: var(--ink-tertiary);
+  margin-top: var(--space-sm);
+  font-style: italic;
+}
+
+/* Program summary stats */
+.program-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.program-stat {
+  text-align: center;
+  padding: var(--space-md);
+  background: var(--void-surface);
+  border: 1px solid var(--line);
+}
+
+.program-stat .stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--training);
+}
+
+.program-stat .stat-label {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1719,6 +1920,7 @@ select.field-input option {
         <nav class="nav-primary">
           <button class="nav-link active" data-view="calculator">Calculator</button>
           <button class="nav-link" data-view="meals">Meals</button>
+          <button class="nav-link" data-view="training">Training</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="prep">Prep</button>
           <button class="nav-link" data-view="science">Science</button>
@@ -1736,6 +1938,7 @@ select.field-input option {
   <nav class="nav-mobile">
     <button class="nav-link active" data-view="calculator">Calc</button>
     <button class="nav-link" data-view="meals">Meals</button>
+    <button class="nav-link" data-view="training">Train</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="prep">Prep</button>
     <button class="nav-link" data-view="science">Sci</button>
@@ -2041,6 +2244,135 @@ select.field-input option {
       </section>
     </div>
 
+    <!-- TRAINING VIEW -->
+    <div id="training" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Training Program</h1>
+            <p class="section-subtitle">Evidence-based programming for optimal results</p>
+          </div>
+
+          <!-- Program Configuration Form -->
+          <form id="trainingForm">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Configure Your Program</h2>
+                  <p class="card-subtitle">Select your preferences for a personalized training plan</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Experience Level</label>
+                    <select id="experienceLevel" class="field-input" required>
+                      <option value="beginner">Beginner (0-1 year)</option>
+                      <option value="intermediate" selected>Intermediate (1-3 years)</option>
+                      <option value="advanced">Advanced (3+ years)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Days Available</label>
+                    <select id="trainingDays" class="field-input" required>
+                      <option value="3">3 days/week</option>
+                      <option value="4" selected>4 days/week</option>
+                      <option value="5">5 days/week</option>
+                      <option value="6">6 days/week</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Primary Goal</label>
+                    <select id="trainingGoal" class="field-input" required>
+                      <option value="hypertrophy" selected>Hypertrophy (Muscle Growth)</option>
+                      <option value="strength">Strength</option>
+                      <option value="endurance">Muscular Endurance</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Available Equipment</label>
+                    <select id="trainingEquipment" class="field-input" required>
+                      <option value="full" selected>Full Gym (All Equipment)</option>
+                      <option value="basic">Basic Gym (Barbell, Dumbbells, Cables)</option>
+                      <option value="home">Home Gym (Dumbbells, Bodyweight)</option>
+                      <option value="minimal">Minimal (Bodyweight Only)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="btn-group" style="margin-top: var(--space-xl);">
+                  <button type="submit" class="btn btn-primary btn-lg">Generate Program</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Generated Program Display -->
+          <div id="trainingResults" class="hidden" style="margin-top: var(--space-xl);">
+            <!-- Program Header -->
+            <div id="programHeader" class="card" style="margin-bottom: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title" id="programName">Your Training Program</h2>
+                  <p class="card-subtitle" id="programDescription">Customized for your goals</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="program-stats" id="programStats">
+                  <!-- Populated by JavaScript -->
+                </div>
+                <div class="rationale-box" id="programRationale">
+                  <div class="rationale-label">Why This Program?</div>
+                  <p id="programRationaleText"></p>
+                  <div class="rationale-citation" id="programCitation"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Weekly Schedule -->
+            <div id="weeklySchedule">
+              <!-- Populated by JavaScript with training-card elements -->
+            </div>
+
+            <!-- Volume Summary -->
+            <div class="card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Weekly Volume Summary</h2>
+                  <p class="card-subtitle">Sets per muscle group per week</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="volumeSummary" class="form-grid">
+                  <!-- Populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Nutrition Integration -->
+            <div class="card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Nutrition Recommendations</h2>
+                  <p class="card-subtitle">Adjust your nutrition based on training</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="nutritionRecommendations">
+                  <!-- Populated by JavaScript -->
+                </div>
+                <div class="rationale-box" style="margin-top: var(--space-lg);">
+                  <div class="rationale-label">Training Day Nutrition</div>
+                  <p>On training days, consider increasing carbohydrate intake by 20-30% for energy and recovery. Post-workout, prioritize protein (30-40g) and fast carbs within 2 hours to maximize muscle protein synthesis.</p>
+                  <div class="rationale-citation">Reference: ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <!-- FOODS VIEW -->
     <div id="foods" class="view">
       <section class="section">
@@ -2196,6 +2528,8 @@ select.field-input option {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="data/foods.js"></script>
   <script src="data/references.js"></script>
+  <script src="data/exercises.js"></script>
+  <script src="data/programs.js"></script>
   <script src="js/calculators.js"></script>
 
   <script>
@@ -2952,6 +3286,424 @@ function sendContactForm(e) {
     form.reset();
   }, 2000);
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TRAINING PROGRAM GENERATOR
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Equipment mapping for filtering exercises
+const EQUIPMENT_AVAILABILITY = {
+  full: ['barbell', 'dumbbell', 'cable', 'machine', 'bodyweight', 'kettlebell', 'bands', 'specialty'],
+  basic: ['barbell', 'dumbbell', 'cable', 'bodyweight'],
+  home: ['dumbbell', 'bodyweight', 'bands', 'kettlebell'],
+  minimal: ['bodyweight', 'bands']
+};
+
+// Training form handler
+document.getElementById('trainingForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  generateTrainingProgram();
+});
+
+function generateTrainingProgram() {
+  const experienceLevel = document.getElementById('experienceLevel').value;
+  const daysAvailable = parseInt(document.getElementById('trainingDays').value);
+  const goal = document.getElementById('trainingGoal').value;
+  const equipmentLevel = document.getElementById('trainingEquipment').value;
+
+  const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
+
+  // Select optimal program template
+  const template = selectOptimalProgram(experienceLevel, daysAvailable, goal);
+
+  // Generate workouts for each day
+  const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment);
+
+  // Calculate volume summary
+  const volumeSummary = calculateVolumeSummary(workouts);
+
+  // Display the program
+  displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal);
+
+  // Show results section
+  document.getElementById('trainingResults').classList.remove('hidden');
+
+  // Scroll to results
+  document.getElementById('trainingResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateWorkouts(template, goal, experienceLevel, availableEquipment) {
+  const workouts = [];
+
+  template.split.forEach(day => {
+    const exercises = [];
+
+    day.exerciseSlots.forEach(slot => {
+      const exercise = selectExerciseForSlot(slot, availableEquipment, exercises);
+      if (exercise) {
+        const repRange = getRepRangeForGoal(goal);
+        const sets = calculateSets(exercise, experienceLevel);
+
+        exercises.push({
+          exercise: exercise,
+          sets: sets,
+          reps: `${repRange.min}-${repRange.max}`,
+          rest: calculateRestForGoal(goal, exercise.movement.type)
+        });
+      }
+    });
+
+    workouts.push({
+      day: day.day,
+      name: day.name,
+      focus: day.focus,
+      exercises: exercises
+    });
+  });
+
+  return workouts;
+}
+
+function selectExerciseForSlot(slot, availableEquipment, alreadySelected) {
+  const selectedIds = alreadySelected.map(e => e.exercise.id);
+
+  // Get exercises from the appropriate category
+  const category = MUSCLE_TO_CATEGORY[slot.muscle] || slot.muscle;
+  const exercisePool = EXERCISE_DATABASE[category];
+
+  if (!exercisePool) return null;
+
+  // Filter exercises
+  const candidates = Object.values(exercisePool).filter(ex => {
+    // Must target the right muscle
+    if (!ex.muscles.primary.includes(slot.muscle) && slot.muscle !== category) {
+      // Check if it's in the category at least
+      if (ex.category !== slot.muscle && !ex.muscles.primary.some(m => m === slot.muscle)) {
+        return false;
+      }
+    }
+
+    // Must match type if specified
+    if (slot.type && ex.movement.type !== slot.type) return false;
+
+    // Must have available equipment
+    if (!availableEquipment.includes(ex.equipment.category)) return false;
+
+    // Must not be already selected
+    if (selectedIds.includes(ex.id)) return false;
+
+    return true;
+  });
+
+  if (candidates.length === 0) return null;
+
+  // Sort by priority (fatigue rating for compounds, or random for variation)
+  candidates.sort((a, b) => {
+    if (slot.type === 'compound') {
+      return b.programming.fatigueRating - a.programming.fatigueRating;
+    }
+    return Math.random() - 0.5;
+  });
+
+  return candidates[0];
+}
+
+function getRepRangeForGoal(goal) {
+  const ranges = {
+    strength: { min: 3, max: 6 },
+    hypertrophy: { min: 8, max: 12 },
+    endurance: { min: 15, max: 20 }
+  };
+  return ranges[goal] || ranges.hypertrophy;
+}
+
+function calculateSets(exercise, experienceLevel) {
+  const baseSets = exercise.programming.setsPerSession.optimal;
+  const modifiers = {
+    beginner: -1,
+    intermediate: 0,
+    advanced: 1
+  };
+  return Math.max(2, Math.min(6, baseSets + (modifiers[experienceLevel] || 0)));
+}
+
+function calculateRestForGoal(goal, movementType) {
+  const baseRest = {
+    strength: 180,
+    hypertrophy: 90,
+    endurance: 45
+  };
+  let rest = baseRest[goal] || 90;
+  if (movementType === 'compound') rest += 30;
+  return rest;
+}
+
+function calculateVolumeSummary(workouts) {
+  const volume = {};
+
+  workouts.forEach(workout => {
+    workout.exercises.forEach(ex => {
+      ex.exercise.muscles.primary.forEach(muscle => {
+        if (!volume[muscle]) volume[muscle] = 0;
+        volume[muscle] += ex.sets;
+      });
+    });
+  });
+
+  return volume;
+}
+
+function displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal) {
+  // Program header
+  document.getElementById('programName').textContent = template.name;
+  document.getElementById('programDescription').textContent = template.description;
+
+  // Stats
+  const statsHtml = `
+    <div class="program-stat">
+      <div class="stat-value">${template.daysPerWeek}</div>
+      <div class="stat-label">Days/Week</div>
+    </div>
+    <div class="program-stat">
+      <div class="stat-value">${template.frequency}x</div>
+      <div class="stat-label">Frequency</div>
+    </div>
+    <div class="program-stat">
+      <div class="stat-value">${experienceLevel.charAt(0).toUpperCase() + experienceLevel.slice(1)}</div>
+      <div class="stat-label">Level</div>
+    </div>
+    <div class="program-stat">
+      <div class="stat-value">${goal.charAt(0).toUpperCase() + goal.slice(1)}</div>
+      <div class="stat-label">Goal</div>
+    </div>
+  `;
+  document.getElementById('programStats').innerHTML = statsHtml;
+
+  // Rationale
+  document.getElementById('programRationaleText').textContent = template.research.rationale;
+  document.getElementById('programCitation').textContent = template.research.proBodybuilderNote;
+
+  // Weekly schedule
+  const scheduleHtml = workouts.map(workout => {
+    const exerciseRows = workout.exercises.map(ex => `
+      <div class="exercise-row">
+        <div class="exercise-name">
+          ${ex.exercise.name}
+          <small>${ex.exercise.muscles.primary.join(', ')}</small>
+        </div>
+        <div class="exercise-sets">${ex.sets} sets</div>
+        <div class="exercise-reps">${ex.reps} reps</div>
+        <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
+      </div>
+    `).join('');
+
+    return `
+      <div class="training-card">
+        <div class="card-header">
+          <div>
+            <div class="training-day-name">Day ${workout.day}: ${workout.name}</div>
+            <div class="training-day-focus">${workout.focus.join(' • ')}</div>
+          </div>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          ${exerciseRows}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('weeklySchedule').innerHTML = scheduleHtml;
+
+  // Volume summary
+  const volumeHtml = Object.entries(volumeSummary).map(([muscle, sets]) => {
+    const muscleInfo = MUSCLE_GROUPS[muscle] || { displayName: muscle, weeklyVolume: { min: 8, optimal: 14, max: 20 } };
+    const status = sets >= muscleInfo.weeklyVolume.optimal ? 'Optimal' :
+                   sets >= muscleInfo.weeklyVolume.min ? 'Adequate' : 'Low';
+    const statusColor = sets >= muscleInfo.weeklyVolume.optimal ? 'var(--success)' :
+                        sets >= muscleInfo.weeklyVolume.min ? 'var(--warning)' : 'var(--danger)';
+
+    return `
+      <div style="padding: var(--space-sm); background: var(--void-surface); border: 1px solid var(--line);">
+        <div style="font-weight: 500; text-transform: capitalize;">${muscle}</div>
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--training);">${sets} sets</div>
+        <div style="font-size: 0.75rem; color: ${statusColor};">${status}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('volumeSummary').innerHTML = volumeHtml;
+
+  // Nutrition recommendations
+  displayNutritionRecommendations(template, goal);
+}
+
+function displayNutritionRecommendations(template, goal) {
+  const daysPerWeek = template.daysPerWeek;
+  const restDays = 7 - daysPerWeek;
+
+  // Estimated calorie adjustments for training
+  const calorieAdjustments = {
+    hypertrophy: { training: '+300-500', rest: '+100-200', note: 'Surplus supports muscle growth' },
+    strength: { training: '+200-400', rest: '+100', note: 'Moderate surplus for strength gains' },
+    endurance: { training: '+200-300', rest: '0', note: 'Maintenance with training-day fuel' }
+  };
+
+  const adj = calorieAdjustments[goal] || calorieAdjustments.hypertrophy;
+
+  // Check if user has calculated nutrition plan
+  let currentTDEE = null;
+  if (typeof plan !== 'undefined' && plan && plan.tdee) {
+    currentTDEE = plan.tdee;
+  }
+
+  let html = `
+    <div class="program-stats">
+      <div class="program-stat">
+        <div class="stat-value">${daysPerWeek}</div>
+        <div class="stat-label">Training Days</div>
+      </div>
+      <div class="program-stat">
+        <div class="stat-value">${restDays}</div>
+        <div class="stat-label">Rest Days</div>
+      </div>
+      <div class="program-stat">
+        <div class="stat-value">${adj.training}</div>
+        <div class="stat-label">Training Day Cals</div>
+      </div>
+      <div class="program-stat">
+        <div class="stat-value">${adj.rest}</div>
+        <div class="stat-label">Rest Day Cals</div>
+      </div>
+    </div>
+  `;
+
+  if (currentTDEE) {
+    const trainingDayMin = currentTDEE + parseInt(adj.training.split('-')[0].replace('+', ''));
+    const trainingDayMax = currentTDEE + parseInt(adj.training.split('-')[1] || adj.training.replace('+', ''));
+    const restDayAdj = parseInt(adj.rest.replace('+', '') || 0);
+    const restDayCals = currentTDEE + restDayAdj;
+
+    html += `
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--void-surface); border: 1px solid var(--line);">
+        <div style="font-family: 'Teko', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--training); margin-bottom: var(--space-sm);">
+          Based on Your TDEE of ${currentTDEE} cal
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+          <div>
+            <div style="font-size: 0.875rem; color: var(--ink-tertiary);">Training Days</div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${trainingDayMin}-${trainingDayMax} cal</div>
+          </div>
+          <div>
+            <div style="font-size: 0.875rem; color: var(--ink-tertiary);">Rest Days</div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${restDayCals} cal</div>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    html += `
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--void-surface); border: 1px solid var(--line); text-align: center;">
+        <p style="color: var(--ink-secondary);">Calculate your nutrition in the Calculator tab to see personalized calorie recommendations.</p>
+        <button class="btn btn-primary" style="margin-top: var(--space-md);" onclick="document.querySelector('[data-view=calculator]').click();">
+          Go to Calculator
+        </button>
+      </div>
+    `;
+  }
+
+  html += `<p style="margin-top: var(--space-md); font-size: 0.875rem; color: var(--ink-secondary);">${adj.note}</p>`;
+
+  document.getElementById('nutritionRecommendations').innerHTML = html;
+}
+
+// Exercise swap functionality
+let currentSwapExerciseId = null;
+let currentSwapButton = null;
+
+function openExerciseSwap(exerciseId, buttonElement) {
+  currentSwapExerciseId = exerciseId;
+  currentSwapButton = buttonElement;
+
+  const exercise = getExerciseById(exerciseId);
+  if (!exercise) return;
+
+  // Get alternatives
+  const equipmentLevel = document.getElementById('trainingEquipment').value;
+  const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
+  const alternatives = findExerciseAlternatives(exerciseId, { equipment: availableEquipment });
+
+  // Create modal
+  const modalHtml = `
+    <div id="exerciseSwapModal" style="
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-lg);
+    ">
+      <div style="
+        background: var(--void-elevated);
+        border: 1px solid var(--line);
+        max-width: 500px; width: 100%;
+        max-height: 80vh; overflow-y: auto;
+      ">
+        <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
+          <h3 style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em;">
+            Swap ${exercise.name}
+          </h3>
+          <p style="color: var(--ink-secondary); font-size: 0.875rem;">Select an alternative exercise</p>
+        </div>
+        <div style="padding: var(--space-md);">
+          ${alternatives.slice(0, 5).map(alt => `
+            <div style="
+              padding: var(--space-md);
+              border-bottom: 1px solid var(--line);
+              cursor: pointer;
+              transition: background 0.2s;
+            " onmouseover="this.style.background='var(--void-surface)'" onmouseout="this.style.background='transparent'"
+               onclick="performExerciseSwap('${alt.exercise.id}')">
+              <div style="font-weight: 500;">${alt.exercise.name}</div>
+              <div style="font-size: 0.75rem; color: var(--ink-tertiary);">
+                ${alt.exercise.equipment.category} • ${alt.exercise.programming.difficulty} • ${alt.similarity}% match
+              </div>
+            </div>
+          `).join('')}
+          ${alternatives.length === 0 ? '<p style="color: var(--ink-tertiary); padding: var(--space-md);">No alternatives available with your equipment.</p>' : ''}
+        </div>
+        <div style="padding: var(--space-lg); border-top: 1px solid var(--line);">
+          <button onclick="closeExerciseSwapModal()" class="btn" style="width: 100%;">Cancel</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function performExerciseSwap(newExerciseId) {
+  const newExercise = getExerciseById(newExerciseId);
+  if (!newExercise || !currentSwapButton) return;
+
+  // Update the exercise row
+  const row = currentSwapButton.closest('.exercise-row');
+  const nameEl = row.querySelector('.exercise-name');
+
+  nameEl.innerHTML = `${newExercise.name}<small>${newExercise.muscles.primary.join(', ')}</small>`;
+  currentSwapButton.setAttribute('onclick', `openExerciseSwap('${newExerciseId}', this)`);
+
+  closeExerciseSwapModal();
+}
+
+function closeExerciseSwapModal() {
+  const modal = document.getElementById('exerciseSwapModal');
+  if (modal) modal.remove();
+  currentSwapExerciseId = null;
+  currentSwapButton = null;
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeExerciseSwapModal();
+});
   </script>
 </body>
 </html>
