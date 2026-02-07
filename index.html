@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="MuscleForge - Professional bodybuilding nutrition planner with scientifically-backed diet plans, macro calculators, and IFBB competition prep tools."/>
+  <meta name="description" content="MuscleForge - Professional bodybuilding nutrition and training planner with scientifically-backed diet plans, macro calculators, evidence-based training programs, and IFBB competition prep tools."/>
   <meta name="author" content="Can Ayter"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>MuscleForge | Professional Bodybuilding Nutrition Planner</title>
+  <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
@@ -1912,7 +1912,7 @@ select.field-input option {
         <div class="logo">
           <div class="logo-type">
             <span class="logo-name">MUSCLEFORGE</span>
-            <span class="logo-tag">Evidence-Based Nutrition</span>
+            <span class="logo-tag">Evidence-Based Nutrition & Training</span>
             <span class="logo-credit">by Can Ayter · <a href="https://ayter.com" target="_blank">ayter.com</a></span>
           </div>
         </div>
@@ -1952,8 +1952,8 @@ select.field-input option {
     <section class="intro">
       <div class="container">
         <div class="intro-content">
-          <h2 class="intro-title">Precision Nutrition for Serious Training</h2>
-          <p class="intro-text">MuscleForge provides evidence-based macro calculations, meal planning tools, and competition prep resources grounded in peer-reviewed research. Whether you're building muscle, cutting fat, or preparing for competition, these tools deliver the nutritional precision your goals demand.</p>
+          <h2 class="intro-title">Precision Nutrition & Training for Serious Athletes</h2>
+          <p class="intro-text">MuscleForge provides evidence-based macro calculations, meal planning tools, training program generation, and competition prep resources grounded in peer-reviewed research. Whether you're building muscle, cutting fat, or preparing for competition, these tools deliver the precision your goals demand.</p>
 
           <div class="intro-features">
             <div class="intro-feature">
@@ -1968,6 +1968,13 @@ select.field-input option {
               <div class="intro-feature-content">
                 <h3>Meals</h3>
                 <p>Generate structured meal plans optimized for your calculated macros with flexible food substitutions.</p>
+              </div>
+            </div>
+            <div class="intro-feature">
+              <div class="intro-feature-icon">🏋️</div>
+              <div class="intro-feature-content">
+                <h3>Training</h3>
+                <p>Generate evidence-based training programs with 52+ exercises, automatic periodization, and exercise swaps.</p>
               </div>
             </div>
             <div class="intro-feature">
@@ -2471,7 +2478,7 @@ select.field-input option {
             <span class="alert-icon">◆</span>
             <div class="alert-content">
               <div class="alert-title">Evidence-Based</div>
-              <div class="alert-text">MuscleForge uses formulas and guidelines from ISSN, ACSM, and leading sports nutrition journals.</div>
+              <div class="alert-text">MuscleForge uses formulas and guidelines from ISSN, ACSM, and leading sports nutrition and exercise science journals including Schoenfeld, Helms, and Contreras research.</div>
             </div>
           </div>
 
@@ -2503,7 +2510,7 @@ select.field-input option {
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">MUSCLEFORGE</div>
-          <p class="footer-tagline">Evidence-based nutrition tools for serious athletes.</p>
+          <p class="footer-tagline">Evidence-based nutrition and training tools for serious athletes.</p>
           <p class="footer-credit">Created with dedication by <strong>Can Ayter</strong></p>
           <a href="https://ayter.com" target="_blank" class="footer-link">ayter.com</a>
         </div>
@@ -2519,7 +2526,7 @@ select.field-input option {
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 MuscleForge · Built by <a href="https://ayter.com" target="_blank">Can Ayter</a> · All calculations are estimates. Consult a professional.</p>
+        <p>© 2024-2025 MuscleForge · Built by <a href="https://ayter.com" target="_blank">Can Ayter</a> · All calculations are estimates. Consult a professional.</p>
       </div>
     </div>
   </footer>
@@ -3061,16 +3068,22 @@ function filterFoods() {
 // ═══════════════════════════════════════════════════════════════════════════
 function loadScience() {
   const refs = [
+    // Nutrition References
     { cat: 'Protein', title: 'ISSN Position Stand: Protein and Exercise', authors: 'Jäger R et al.', journal: 'J Int Soc Sports Nutr, 2017', tags: ['Protein timing', 'MPS', 'Daily needs'] },
     { cat: 'BMR', title: 'Predictive Equation for Resting Energy Expenditure', authors: 'Mifflin MD et al.', journal: 'Am J Clin Nutr, 1990', tags: ['BMR calculation', 'Calorie targets'] },
     { cat: 'Contest Prep', title: 'Evidence-based Natural Bodybuilding Prep', authors: 'Helms ER et al.', journal: 'J Int Soc Sports Nutr, 2014', tags: ['Fat loss', 'Muscle retention', 'Peak week'] },
     { cat: 'Creatine', title: 'ISSN Position Stand: Creatine Supplementation', authors: 'Kreider RB et al.', journal: 'J Int Soc Sports Nutr, 2017', tags: ['Strength', 'Power', 'Recovery'] },
     { cat: 'Nutrient Timing', title: 'Is There a Post-Exercise Anabolic Window?', authors: 'Aragon AA, Schoenfeld BJ', journal: 'J Int Soc Sports Nutr, 2013', tags: ['Post-workout', 'Glycogen', 'Timing'] },
     { cat: 'Dietary Fat', title: 'Fat Guidelines for Athletes', authors: 'Lowery LM', journal: 'J Int Soc Sports Nutr, 2004', tags: ['Hormones', 'EFAs', 'Performance'] },
+    // Training References
+    { cat: 'Training Volume', title: 'Dose-Response: Weekly Volume and Muscle Hypertrophy', authors: 'Schoenfeld BJ et al.', journal: 'J Sports Sci, 2017', tags: ['Volume', 'Sets per muscle', 'Hypertrophy'] },
+    { cat: 'Training Frequency', title: 'Training Frequency for Muscle Hypertrophy', authors: 'Schoenfeld BJ et al.', journal: 'Sports Med, 2016', tags: ['2x/week', 'Frequency', 'Programming'] },
+    { cat: 'Rest Periods', title: 'Longer Rest Periods for Strength and Hypertrophy', authors: 'Schoenfeld BJ et al.', journal: 'J Strength Cond Res, 2016', tags: ['Rest', 'Recovery', 'Strength'] },
+    { cat: 'Glute Training', title: 'Hip Thrust vs Squat for Glute Activation', authors: 'Contreras B et al.', journal: 'J Applied Biomech, 2015', tags: ['Hip thrust', 'EMG', 'Glutes'] },
+    { cat: 'Exercise Order', title: 'Exercise Order in Resistance Training', authors: 'Simão R et al.', journal: 'Sports Med, 2012', tags: ['Compound first', 'Programming', 'Order'] },
+    // More Nutrition
     { cat: 'Hydration', title: 'Exercise and Fluid Replacement', authors: 'ACSM', journal: 'Med Sci Sports Exerc, 2007', tags: ['Performance', 'Recovery', 'Electrolytes'] },
     { cat: 'Micronutrients', title: 'Micronutrients and Athletic Performance', authors: 'Lukaski HC', journal: 'Nutrition, 2004', tags: ['Vitamins', 'Minerals', 'Optimization'] },
-    { cat: 'Fiber', title: 'Health Implications of Dietary Fiber', authors: 'Dahl WJ, Stewart ML', journal: 'J Acad Nutr Diet, 2015', tags: ['Digestion', 'Satiety', 'Glucose'] },
-    { cat: 'Glycemic Index', title: 'Glycemic Index and Exercise Metabolism', authors: 'Burke LM et al.', journal: 'Sports Med, 1998', tags: ['Pre-workout', 'Energy timing'] },
     { cat: 'Leucine', title: 'Leucine-enriched EAA Supplementation', authors: 'Katsanos CS et al.', journal: 'Am J Physiol, 2006', tags: ['MPS', 'Anabolic signaling'] },
     { cat: 'Omega-3', title: 'Omega-3 and Athletic Performance', authors: 'Mickleborough TD', journal: 'Sports Med, 2013', tags: ['Recovery', 'Inflammation', 'Joints'] }
   ];
