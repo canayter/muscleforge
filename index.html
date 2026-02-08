@@ -1792,6 +1792,248 @@ select.field-input option {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   TOOLS TAB
+   ═══════════════════════════════════════════════════════════════════════════ */
+.tools-nav {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.tools-nav-btn {
+  font-family: 'Teko', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--iron-surface);
+  color: var(--chalk-secondary);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.tools-nav-btn:hover {
+  background: var(--iron-hover);
+  color: var(--chalk);
+}
+
+.tools-nav-btn.active {
+  background: var(--blood-dim);
+  color: var(--blood);
+  border-color: var(--blood);
+}
+
+.tools-category {
+  display: none;
+}
+
+.tools-category.active {
+  display: block;
+}
+
+.tool-card {
+  border-left: 3px solid var(--training);
+}
+
+.tool-badge {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  background: var(--training-dim);
+  color: var(--training);
+  border-radius: var(--radius-sm);
+}
+
+.measurements-grid,
+.volume-grid,
+.overload-grid,
+.techniques-grid,
+.carb-cycle-grid,
+.peak-week-grid,
+.tools-overview-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.measurements-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.volume-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.measurement-item,
+.volume-item {
+  background: var(--iron-surface);
+  padding: var(--space-md);
+  border-left: 2px solid var(--training);
+}
+
+.measurement-item .label,
+.volume-item .label {
+  font-size: 0.75rem;
+  color: var(--chalk-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
+
+.measurement-item .value,
+.volume-item .value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--chalk);
+}
+
+.volume-item .range {
+  font-size: 0.875rem;
+  color: var(--chalk-secondary);
+  margin-top: var(--space-xs);
+}
+
+.technique-card {
+  background: var(--iron-surface);
+  padding: var(--space-md);
+  border-left: 2px solid var(--rust);
+}
+
+.technique-card h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--chalk);
+  margin-bottom: var(--space-sm);
+}
+
+.technique-card p {
+  font-size: 0.875rem;
+  color: var(--chalk-secondary);
+  line-height: 1.5;
+}
+
+.technique-card .when-to-use {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--line);
+  font-size: 0.8125rem;
+  color: var(--chalk-tertiary);
+}
+
+.deload-protocol,
+.reverse-protocol,
+.recomp-strategy,
+.combat-protocol,
+.period-recommendation {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--training);
+}
+
+.deload-protocol h4,
+.reverse-protocol h4,
+.recomp-strategy h4,
+.combat-protocol h4,
+.period-recommendation h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-md);
+}
+
+.protocol-week,
+.cycle-day {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.protocol-week:last-child,
+.cycle-day:last-child {
+  border-bottom: none;
+}
+
+.hmb-guide,
+.stress-guide,
+.injury-guide {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.guide-section {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 2px solid var(--training);
+}
+
+.guide-section h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.125rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-md);
+}
+
+.guide-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guide-section li {
+  padding: var(--space-xs) 0;
+  padding-left: var(--space-md);
+  position: relative;
+  color: var(--chalk-secondary);
+  font-size: 0.9375rem;
+}
+
+.guide-section li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--training);
+}
+
+.tools-overview-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tools-overview-section h3 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  color: var(--training);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--line);
+}
+
+.tools-overview-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tools-overview-section li {
+  padding: var(--space-sm) 0;
+  font-size: 0.9375rem;
+  color: var(--chalk-secondary);
+  border-bottom: 1px solid var(--line);
+}
+
+.tools-overview-section li:last-child {
+  border-bottom: none;
+}
+
+.tools-overview-section li strong {
+  color: var(--chalk);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ALERTS
    ═══════════════════════════════════════════════════════════════════════════ */
 .alert {
@@ -2266,6 +2508,7 @@ select.field-input option {
           <button class="nav-link active" data-view="calculator">Planner</button>
           <button class="nav-link" data-view="meals">Meals</button>
           <button class="nav-link" data-view="foods">Foods</button>
+          <button class="nav-link" data-view="tools">Tools</button>
           <button class="nav-link" data-view="learn">Learn</button>
           <button class="nav-link" data-view="prep">Prep</button>
           <button class="nav-link" data-view="science">Science</button>
@@ -2284,6 +2527,7 @@ select.field-input option {
     <button class="nav-link active" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="meals">Meals</button>
     <button class="nav-link" data-view="foods">Foods</button>
+    <button class="nav-link" data-view="tools">Tools</button>
     <button class="nav-link" data-view="learn">Learn</button>
     <button class="nav-link" data-view="prep">Prep</button>
     <button class="nav-link" data-view="science">Sci</button>
@@ -3259,6 +3503,1030 @@ select.field-input option {
       </section>
     </div>
 
+    <!-- TOOLS VIEW -->
+    <div id="tools" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Advanced Tools</h1>
+            <p class="section-subtitle">Evidence-based calculators for serious athletes</p>
+          </div>
+
+          <!-- Tool Categories -->
+          <div class="tools-nav">
+            <button class="tools-nav-btn active" data-tool-category="body">Body Composition</button>
+            <button class="tools-nav-btn" data-tool-category="training">Training</button>
+            <button class="tools-nav-btn" data-tool-category="nutrition">Nutrition</button>
+            <button class="tools-nav-btn" data-tool-category="recovery">Recovery</button>
+            <button class="tools-nav-btn" data-tool-category="advanced">Advanced</button>
+          </div>
+
+          <!-- Body Composition Tools -->
+          <div id="tools-body" class="tools-category active">
+            <!-- FFMI Calculator -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">FFMI Calculator</h2>
+                  <p class="card-subtitle">Fat-Free Mass Index - assess muscle mass relative to height</p>
+                </div>
+                <span class="tool-badge">Kouri et al. 1995</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="ffmiWeight" class="field-input" placeholder="180" step="0.1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Height</label>
+                    <div class="field-combo">
+                      <input type="number" id="ffmiHeight" class="field-input" placeholder="70" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Body Fat %</label>
+                    <div class="field-combo">
+                      <input type="number" id="ffmiBf" class="field-input" placeholder="15" step="0.1" min="3" max="50">
+                      <span class="field-suffix">%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateFFMI()">Calculate FFMI</button>
+                </div>
+                <div id="ffmiResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="ffmiValue">--</div>
+                      <div class="stat-label">FFMI</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="ffmiNormalized">--</div>
+                      <div class="stat-label">Normalized FFMI</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="ffmiLeanMass">--</div>
+                      <div class="stat-label">Lean Mass</div>
+                    </div>
+                  </div>
+                  <div id="ffmiInterpretation" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navy Body Fat Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Navy Body Fat Calculator</h2>
+                  <p class="card-subtitle">US Navy circumference method - no calipers needed</p>
+                </div>
+                <span class="tool-badge">US Navy 1984</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Sex</label>
+                    <select id="navySex" class="field-input">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Height</label>
+                    <div class="field-combo">
+                      <input type="number" id="navyHeight" class="field-input" placeholder="70" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Neck Circumference</label>
+                    <div class="field-combo">
+                      <input type="number" id="navyNeck" class="field-input" placeholder="15" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Waist (at navel)</label>
+                    <div class="field-combo">
+                      <input type="number" id="navyWaist" class="field-input" placeholder="32" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field" id="navyHipField" style="display: none;">
+                    <label class="field-label">Hip (widest point)</label>
+                    <div class="field-combo">
+                      <input type="number" id="navyHip" class="field-input" placeholder="38" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateNavyBF()">Calculate Body Fat</button>
+                </div>
+                <div id="navyResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="navyBfValue">--</div>
+                      <div class="stat-label">Body Fat %</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="navyCategory">--</div>
+                      <div class="stat-label">Category</div>
+                    </div>
+                  </div>
+                  <div id="navyInterpretation" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Genetic Potential Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Genetic Potential Calculator</h2>
+                  <p class="card-subtitle">Casey Butt formula - estimate your natural muscular potential</p>
+                </div>
+                <span class="tool-badge">Casey Butt PhD</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Height</label>
+                    <div class="field-combo">
+                      <input type="number" id="geneticHeight" class="field-input" placeholder="70" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Wrist Circumference</label>
+                    <div class="field-combo">
+                      <input type="number" id="geneticWrist" class="field-input" placeholder="7" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Ankle Circumference</label>
+                    <div class="field-combo">
+                      <input type="number" id="geneticAnkle" class="field-input" placeholder="8.5" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Body Fat %</label>
+                    <div class="field-combo">
+                      <input type="number" id="geneticBf" class="field-input" placeholder="10" step="1" min="4" max="20">
+                      <span class="field-suffix">%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateGeneticPotential()">Calculate Potential</button>
+                </div>
+                <div id="geneticResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="geneticMaxLean">--</div>
+                      <div class="stat-label">Max Lean Mass</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="geneticMaxWeight">--</div>
+                      <div class="stat-label">Max Stage Weight</div>
+                    </div>
+                  </div>
+                  <div id="geneticInterpretation" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ideal Measurements Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Ideal Measurements Calculator</h2>
+                  <p class="card-subtitle">Steve Reeves classic proportions - the golden era aesthetic</p>
+                </div>
+                <span class="tool-badge">Steve Reeves</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Wrist Circumference</label>
+                    <div class="field-combo">
+                      <input type="number" id="idealWrist" class="field-input" placeholder="7" step="0.1">
+                      <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateIdealMeasurements()">Calculate Ideal</button>
+                </div>
+                <div id="idealResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="idealMeasurementsGrid" class="measurements-grid"></div>
+                  <div class="education-tip" style="margin-top: var(--space-lg);">
+                    <strong>Note:</strong> These are idealized proportions from the Golden Era. They represent aesthetic goals, not requirements.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Training Tools -->
+          <div id="tools-training" class="tools-category">
+            <!-- Volume Landmarks Calculator -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Volume Landmarks Calculator</h2>
+                  <p class="card-subtitle">MEV/MAV/MRV per muscle - Renaissance Periodization method</p>
+                </div>
+                <span class="tool-badge">Dr. Mike Israetel</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Experience Level</label>
+                    <select id="volumeExperience" class="field-input">
+                      <option value="beginner">Beginner (0-2 years)</option>
+                      <option value="intermediate" selected>Intermediate (2-5 years)</option>
+                      <option value="advanced">Advanced (5+ years)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Sleep Quality</label>
+                    <select id="volumeSleep" class="field-input">
+                      <option value="poor">Poor (&lt;6h/inconsistent)</option>
+                      <option value="average" selected>Average (6-7h)</option>
+                      <option value="good">Good (7-8h)</option>
+                      <option value="excellent">Excellent (8+ hours)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Stress Level</label>
+                    <select id="volumeStress" class="field-input">
+                      <option value="high">High</option>
+                      <option value="moderate" selected>Moderate</option>
+                      <option value="low">Low</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Nutrition Phase</label>
+                    <select id="volumeNutrition" class="field-input">
+                      <option value="deficit">Cutting (deficit)</option>
+                      <option value="maintenance" selected>Maintenance</option>
+                      <option value="surplus">Bulking (surplus)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateVolumeLandmarks()">Calculate Landmarks</button>
+                </div>
+                <div id="volumeResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="volumeLandmarksGrid" class="volume-grid"></div>
+                  <div class="rationale-box" style="margin-top: var(--space-lg);">
+                    <div class="rationale-label">Legend</div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); margin-top: var(--space-sm);">
+                      <div><strong>MV:</strong> Maintenance Volume</div>
+                      <div><strong>MEV:</strong> Minimum Effective Volume</div>
+                      <div><strong>MAV:</strong> Maximum Adaptive Volume</div>
+                      <div><strong>MRV:</strong> Max Recoverable Volume</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Strength Score Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Strength Score Calculator</h2>
+                  <p class="card-subtitle">Wilks, DOTS, and IPF GL scores - compare across weight classes</p>
+                </div>
+                <span class="tool-badge">Powerlifting</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Sex</label>
+                    <select id="strengthSex" class="field-input">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Body Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="strengthWeight" class="field-input" placeholder="180" step="0.1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Squat</label>
+                    <div class="field-combo">
+                      <input type="number" id="strengthSquat" class="field-input" placeholder="315" step="5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Bench Press</label>
+                    <div class="field-combo">
+                      <input type="number" id="strengthBench" class="field-input" placeholder="225" step="5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Deadlift</label>
+                    <div class="field-combo">
+                      <input type="number" id="strengthDeadlift" class="field-input" placeholder="405" step="5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateStrengthScore()">Calculate Scores</button>
+                </div>
+                <div id="strengthResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="strengthTotal">--</div>
+                      <div class="stat-label">Total (lbs)</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="strengthWilks">--</div>
+                      <div class="stat-label">Wilks Score</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="strengthDots">--</div>
+                      <div class="stat-label">DOTS Score</div>
+                    </div>
+                  </div>
+                  <div id="strengthInterpretation" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progressive Overload Tracker -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Progressive Overload Calculator</h2>
+                  <p class="card-subtitle">Plan your progression - weight, reps, or volume based</p>
+                </div>
+                <span class="tool-badge">Progression</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Current Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="overloadWeight" class="field-input" placeholder="135" step="2.5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Current Reps</label>
+                    <input type="number" id="overloadReps" class="field-input" placeholder="8" min="1" max="30">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Current Sets</label>
+                    <input type="number" id="overloadSets" class="field-input" placeholder="3" min="1" max="10">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Experience Level</label>
+                    <select id="overloadExperience" class="field-input">
+                      <option value="beginner">Beginner</option>
+                      <option value="intermediate" selected>Intermediate</option>
+                      <option value="advanced">Advanced</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateOverload()">Plan Progression</button>
+                </div>
+                <div id="overloadResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="overloadRecommendations" class="overload-grid"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deload Generator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Deload Week Generator</h2>
+                  <p class="card-subtitle">Evidence-based deload protocols for recovery</p>
+                </div>
+                <span class="tool-badge">Recovery</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Current Training Volume</label>
+                    <select id="deloadVolume" class="field-input">
+                      <option value="low">Low (10-14 sets/muscle/week)</option>
+                      <option value="moderate" selected>Moderate (15-20 sets)</option>
+                      <option value="high">High (20+ sets)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Fatigue Level</label>
+                    <select id="deloadFatigue" class="field-input">
+                      <option value="mild">Mild (performance maintained)</option>
+                      <option value="moderate" selected>Moderate (slight performance drop)</option>
+                      <option value="severe">Severe (significant performance drop)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Deload Type</label>
+                    <select id="deloadType" class="field-input">
+                      <option value="volume">Volume Reduction (-40-60%)</option>
+                      <option value="intensity" selected>Intensity Reduction (-10-20%)</option>
+                      <option value="frequency">Frequency Reduction (-50%)</option>
+                      <option value="active">Active Recovery (light work)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="generateDeload()">Generate Deload</button>
+                </div>
+                <div id="deloadResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="deloadProtocol" class="deload-protocol"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Periodization Models -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Periodization Model Selector</h2>
+                  <p class="card-subtitle">Find the right periodization approach for your goals</p>
+                </div>
+                <span class="tool-badge">Programming</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Primary Goal</label>
+                    <select id="periodGoal" class="field-input">
+                      <option value="hypertrophy">Muscle Size (Hypertrophy)</option>
+                      <option value="strength">Strength</option>
+                      <option value="powerlifting">Powerlifting Competition</option>
+                      <option value="general">General Fitness</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Experience Level</label>
+                    <select id="periodExperience" class="field-input">
+                      <option value="beginner">Beginner</option>
+                      <option value="intermediate" selected>Intermediate</option>
+                      <option value="advanced">Advanced</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Training Days/Week</label>
+                    <select id="periodDays" class="field-input">
+                      <option value="3">3 days</option>
+                      <option value="4" selected>4 days</option>
+                      <option value="5">5 days</option>
+                      <option value="6">6 days</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="selectPeriodization()">Recommend Model</button>
+                </div>
+                <div id="periodResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="periodRecommendation" class="period-recommendation"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Training Techniques -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Advanced Training Techniques</h2>
+                  <p class="card-subtitle">Intensity techniques for breaking plateaus</p>
+                </div>
+                <span class="tool-badge">Intensity</span>
+              </div>
+              <div class="card-body">
+                <div id="advancedTechniquesList" class="techniques-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nutrition Tools -->
+          <div id="tools-nutrition" class="tools-category">
+            <!-- Carb Cycling Protocol -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Carb Cycling Protocol Builder</h2>
+                  <p class="card-subtitle">Optimize fat loss while preserving muscle</p>
+                </div>
+                <span class="tool-badge">Fat Loss</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Body Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="carbWeight" class="field-input" placeholder="180" step="1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Maintenance Calories</label>
+                    <div class="field-combo">
+                      <input type="number" id="carbMaintenance" class="field-input" placeholder="2500" step="50">
+                      <span class="field-suffix">cal</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Training Days/Week</label>
+                    <select id="carbTrainingDays" class="field-input">
+                      <option value="3">3 days</option>
+                      <option value="4" selected>4 days</option>
+                      <option value="5">5 days</option>
+                      <option value="6">6 days</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Goal Aggressiveness</label>
+                    <select id="carbAggressiveness" class="field-input">
+                      <option value="conservative">Conservative (-300 cal avg)</option>
+                      <option value="moderate" selected>Moderate (-500 cal avg)</option>
+                      <option value="aggressive">Aggressive (-750 cal avg)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="buildCarbCycle()">Build Protocol</button>
+                </div>
+                <div id="carbResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="carbProtocol" class="carb-cycle-grid"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reverse Dieting Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Reverse Dieting Calculator</h2>
+                  <p class="card-subtitle">Post-diet metabolic recovery protocol</p>
+                </div>
+                <span class="tool-badge">Post-Diet</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Current Calories</label>
+                    <div class="field-combo">
+                      <input type="number" id="reverseCurrentCals" class="field-input" placeholder="1800" step="50">
+                      <span class="field-suffix">cal</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Maintenance</label>
+                    <div class="field-combo">
+                      <input type="number" id="reverseTargetCals" class="field-input" placeholder="2500" step="50">
+                      <span class="field-suffix">cal</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Diet Duration</label>
+                    <select id="reverseDuration" class="field-input">
+                      <option value="short">Short (&lt;8 weeks)</option>
+                      <option value="moderate" selected>Moderate (8-16 weeks)</option>
+                      <option value="long">Long (16+ weeks)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Reverse Speed</label>
+                    <select id="reverseSpeed" class="field-input">
+                      <option value="slow">Slow (+50-75 cal/week)</option>
+                      <option value="moderate" selected>Moderate (+100-125 cal/week)</option>
+                      <option value="fast">Fast (+150-200 cal/week)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateReverseDiet()">Calculate Protocol</button>
+                </div>
+                <div id="reverseResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="reverseProtocol" class="reverse-protocol"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Body Recomposition Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Body Recomposition Calculator</h2>
+                  <p class="card-subtitle">Simultaneous fat loss and muscle gain strategy</p>
+                </div>
+                <span class="tool-badge">Recomp</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Body Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="recompWeight" class="field-input" placeholder="180" step="1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Body Fat %</label>
+                    <div class="field-combo">
+                      <input type="number" id="recompBf" class="field-input" placeholder="20" step="1" min="5" max="40">
+                      <span class="field-suffix">%</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Training Experience</label>
+                    <select id="recompExperience" class="field-input">
+                      <option value="beginner">Beginner (&lt;1 year)</option>
+                      <option value="intermediate" selected>Intermediate (1-3 years)</option>
+                      <option value="advanced">Advanced (3+ years)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">TDEE</label>
+                    <div class="field-combo">
+                      <input type="number" id="recompTdee" class="field-input" placeholder="2500" step="50">
+                      <span class="field-suffix">cal</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateRecomp()">Analyze Strategy</button>
+                </div>
+                <div id="recompResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="recompStrategy" class="recomp-strategy"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Peak Week Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Peak Week Calculator</h2>
+                  <p class="card-subtitle">Competition prep final week manipulation</p>
+                </div>
+                <span class="tool-badge">Competition</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Body Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="peakWeight" class="field-input" placeholder="180" step="1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Daily Carbs (current)</label>
+                    <div class="field-combo">
+                      <input type="number" id="peakCarbs" class="field-input" placeholder="200" step="10">
+                      <span class="field-suffix">g</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Show Day</label>
+                    <input type="date" id="peakShowDate" class="field-input">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Protocol Type</label>
+                    <select id="peakProtocol" class="field-input">
+                      <option value="conservative" selected>Conservative (safer)</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="aggressive">Aggressive (experienced only)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculatePeakWeek()">Generate Protocol</button>
+                </div>
+                <div id="peakResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="peakProtocolGrid" class="peak-week-grid"></div>
+                  <div class="alert alert-warning" style="margin-top: var(--space-lg);">
+                    <span class="alert-icon">⚠</span>
+                    <div class="alert-content">
+                      <div class="alert-title">Important</div>
+                      <div class="alert-text">Peak week protocols are highly individual. Test manipulations during prep before show week. Consult with an experienced coach.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combat Sports Weight Cut -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Combat Sports Weight Cut Calculator</h2>
+                  <p class="card-subtitle">ISSN 2025 Position Stand - safe weight cutting protocols</p>
+                </div>
+                <span class="tool-badge">ISSN 2025</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Current Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="combatCurrentWeight" class="field-input" placeholder="175" step="0.5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Weight Class</label>
+                    <div class="field-combo">
+                      <input type="number" id="combatTargetWeight" class="field-input" placeholder="155" step="1">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Days Until Weigh-In</label>
+                    <input type="number" id="combatDays" class="field-input" placeholder="14" min="1" max="90">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Hours to Rehydrate</label>
+                    <select id="combatRehydrate" class="field-input">
+                      <option value="2">2 hours (same day)</option>
+                      <option value="12">12 hours</option>
+                      <option value="24" selected>24 hours</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateCombatCut()">Analyze Cut</button>
+                </div>
+                <div id="combatResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="combatProtocol" class="combat-protocol"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HMB Guide -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">HMB Supplementation Guide</h2>
+                  <p class="card-subtitle">ISSN 2025 Position Stand - when HMB is most effective</p>
+                </div>
+                <span class="tool-badge">ISSN 2025</span>
+              </div>
+              <div class="card-body">
+                <div id="hmbGuideContent" class="hmb-guide"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recovery Tools -->
+          <div id="tools-recovery" class="tools-category">
+            <!-- Sleep Optimization -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Sleep Optimization Assessment</h2>
+                  <p class="card-subtitle">Evaluate and improve your sleep for better recovery</p>
+                </div>
+                <span class="tool-badge">Recovery</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Avg Sleep Duration</label>
+                    <select id="sleepDuration" class="field-input">
+                      <option value="less5">&lt;5 hours</option>
+                      <option value="5-6">5-6 hours</option>
+                      <option value="6-7">6-7 hours</option>
+                      <option value="7-8" selected>7-8 hours</option>
+                      <option value="8+">8+ hours</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Sleep Consistency</label>
+                    <select id="sleepConsistency" class="field-input">
+                      <option value="inconsistent">Inconsistent (+/- 2h)</option>
+                      <option value="moderate">Moderate (+/- 1h)</option>
+                      <option value="consistent" selected>Consistent (+/- 30min)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Time to Fall Asleep</label>
+                    <select id="sleepLatency" class="field-input">
+                      <option value="fast" selected>&lt;15 minutes</option>
+                      <option value="normal">15-30 minutes</option>
+                      <option value="slow">30-60 minutes</option>
+                      <option value="very-slow">60+ minutes</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Wake Ups Per Night</label>
+                    <select id="sleepWakeups" class="field-input">
+                      <option value="0" selected>0 times</option>
+                      <option value="1">1 time</option>
+                      <option value="2-3">2-3 times</option>
+                      <option value="4+">4+ times</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="assessSleep()">Assess Sleep</button>
+                </div>
+                <div id="sleepResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="sleepScore">--</div>
+                      <div class="stat-label">Sleep Score</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="sleepGrade">--</div>
+                      <div class="stat-label">Grade</div>
+                    </div>
+                  </div>
+                  <div id="sleepRecommendations" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recovery Readiness Assessment -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Recovery Readiness Assessment</h2>
+                  <p class="card-subtitle">Daily readiness scoring to optimize training</p>
+                </div>
+                <span class="tool-badge">HRV-Based</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">How do you feel?</label>
+                    <select id="recoveryFeeling" class="field-input">
+                      <option value="terrible">Terrible (1-2)</option>
+                      <option value="poor">Poor (3-4)</option>
+                      <option value="moderate">Moderate (5-6)</option>
+                      <option value="good" selected>Good (7-8)</option>
+                      <option value="excellent">Excellent (9-10)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Muscle Soreness</label>
+                    <select id="recoverySoreness" class="field-input">
+                      <option value="none" selected>None</option>
+                      <option value="mild">Mild</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="severe">Severe</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Energy Level</label>
+                    <select id="recoveryEnergy" class="field-input">
+                      <option value="low">Low</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="high" selected>High</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Motivation to Train</label>
+                    <select id="recoveryMotivation" class="field-input">
+                      <option value="none">None</option>
+                      <option value="low">Low</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="high" selected>High</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="assessRecovery()">Assess Readiness</button>
+                </div>
+                <div id="recoveryResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div class="stats-row">
+                    <div class="stat-item">
+                      <div class="stat-value" id="recoveryScore">--</div>
+                      <div class="stat-label">Readiness Score</div>
+                    </div>
+                    <div class="stat-item">
+                      <div class="stat-value" id="recoveryRecommendation">--</div>
+                      <div class="stat-label">Recommendation</div>
+                    </div>
+                  </div>
+                  <div id="recoveryProtocol" class="rationale-box" style="margin-top: var(--space-lg);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stress Management -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Stress & Cortisol Management</h2>
+                  <p class="card-subtitle">Strategies for managing training and life stress</p>
+                </div>
+                <span class="tool-badge">Hormones</span>
+              </div>
+              <div class="card-body">
+                <div id="stressGuideContent" class="stress-guide"></div>
+              </div>
+            </div>
+
+            <!-- Injury Prevention Guide -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Injury Prevention & Mobility Guide</h2>
+                  <p class="card-subtitle">Prehab protocols for longevity</p>
+                </div>
+                <span class="tool-badge">Longevity</span>
+              </div>
+              <div class="card-body">
+                <div id="injuryGuideContent" class="injury-guide"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advanced Tools (placeholder for future expansion) -->
+          <div id="tools-advanced" class="tools-category">
+            <div class="alert alert-success">
+              <span class="alert-icon">◆</span>
+              <div class="alert-content">
+                <div class="alert-title">All Tools Available</div>
+                <div class="alert-text">All 20 advanced calculators and guides are organized in the categories above. Browse Body Composition, Training, Nutrition, and Recovery tabs to access all tools.</div>
+              </div>
+            </div>
+
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Tools Overview</h2>
+                  <p class="card-subtitle">Quick reference for all available calculators</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="tools-overview-grid">
+                  <div class="tools-overview-section">
+                    <h3>Body Composition</h3>
+                    <ul>
+                      <li><strong>FFMI Calculator</strong> - Assess muscle mass relative to height</li>
+                      <li><strong>Navy Body Fat</strong> - Circumference-based body fat estimation</li>
+                      <li><strong>Genetic Potential</strong> - Casey Butt formula for natural limits</li>
+                      <li><strong>Ideal Measurements</strong> - Steve Reeves classic proportions</li>
+                    </ul>
+                  </div>
+                  <div class="tools-overview-section">
+                    <h3>Training</h3>
+                    <ul>
+                      <li><strong>Volume Landmarks</strong> - MEV/MAV/MRV per muscle group</li>
+                      <li><strong>Strength Scores</strong> - Wilks, DOTS, IPF GL calculation</li>
+                      <li><strong>Progressive Overload</strong> - Plan weight/rep progression</li>
+                      <li><strong>Deload Generator</strong> - Recovery week protocols</li>
+                      <li><strong>Periodization Selector</strong> - Find the right training model</li>
+                      <li><strong>Advanced Techniques</strong> - Intensity methods database</li>
+                    </ul>
+                  </div>
+                  <div class="tools-overview-section">
+                    <h3>Nutrition</h3>
+                    <ul>
+                      <li><strong>Carb Cycling</strong> - Fat loss protocol builder</li>
+                      <li><strong>Reverse Dieting</strong> - Post-diet metabolic recovery</li>
+                      <li><strong>Body Recomposition</strong> - Simultaneous fat loss/muscle gain</li>
+                      <li><strong>Peak Week</strong> - Competition prep final week</li>
+                      <li><strong>Combat Sports Cut</strong> - ISSN 2025 weight cutting guide</li>
+                      <li><strong>HMB Guide</strong> - ISSN 2025 supplementation protocol</li>
+                    </ul>
+                  </div>
+                  <div class="tools-overview-section">
+                    <h3>Recovery</h3>
+                    <ul>
+                      <li><strong>Sleep Optimization</strong> - Assess and improve sleep quality</li>
+                      <li><strong>Recovery Readiness</strong> - Daily training readiness scoring</li>
+                      <li><strong>Stress Management</strong> - Cortisol control strategies</li>
+                      <li><strong>Injury Prevention</strong> - Prehab and mobility protocols</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <!-- SWAP MODAL -->
@@ -3362,6 +4630,7 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 
     if (view === 'foods') loadFoods();
     if (view === 'science') loadScience();
+    if (view === 'tools') loadTools();
 
     window.scrollTo(0, 0);
   });
@@ -3981,6 +5250,545 @@ function loadScience() {
       <div class="ref-tags">${r.tags.map(t => `<span class="ref-tag">${t}</span>`).join('')}</div>
     </div>
   `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TOOLS
+// ═══════════════════════════════════════════════════════════════════════════
+let toolsLoaded = false;
+
+function loadTools() {
+  if (toolsLoaded) return;
+  toolsLoaded = true;
+
+  // Setup tool category navigation
+  document.querySelectorAll('.tools-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.toolCategory;
+      document.querySelectorAll('.tools-nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tools-category').forEach(c => c.classList.remove('active'));
+      document.getElementById(`tools-${cat}`).classList.add('active');
+    });
+  });
+
+  // Setup navy sex toggle for hip field
+  document.getElementById('navySex').addEventListener('change', (e) => {
+    document.getElementById('navyHipField').style.display = e.target.value === 'female' ? 'block' : 'none';
+  });
+
+  // Load static content
+  loadAdvancedTechniques();
+  loadHMBGuide();
+  loadStressGuide();
+  loadInjuryGuide();
+}
+
+// FFMI Calculator
+function calculateFFMI() {
+  const weightLbs = +document.getElementById('ffmiWeight').value;
+  const heightIn = +document.getElementById('ffmiHeight').value;
+  const bf = +document.getElementById('ffmiBf').value;
+
+  if (!weightLbs || !heightIn || !bf) return alert('Please fill all fields');
+
+  const weightKg = weightLbs * 0.453592;
+  const heightCm = heightIn * 2.54;
+  const result = FFMICalculator.calculate(weightKg, heightCm, bf);
+
+  document.getElementById('ffmiValue').textContent = result.ffmi;
+  document.getElementById('ffmiNormalized').textContent = result.normalizedFFMI;
+  document.getElementById('ffmiLeanMass').textContent = Math.round(result.leanMassKg * 2.205) + ' lbs';
+
+  const natural = result.naturalLimit;
+  document.getElementById('ffmiInterpretation').innerHTML = `
+    <div class="rationale-label">${result.interpretation.level}</div>
+    <p>${result.interpretation.description}</p>
+    <p style="margin-top: var(--space-sm);"><strong>Percentile:</strong> Top ${100 - result.percentile}% of lifters</p>
+    <p style="margin-top: var(--space-sm); color: ${natural.natural === true ? 'var(--success)' : natural.natural === false ? 'var(--danger)' : 'var(--warning)'};">
+      <strong>Natural Status:</strong> ${natural.natural === true ? 'Achievable naturally' : natural.natural === false ? 'Very unlikely without enhancement' : 'Possible with exceptional genetics'} (${natural.confidence})
+    </p>
+  `;
+  document.getElementById('ffmiResults').classList.remove('hidden');
+}
+
+// Navy Body Fat Calculator
+function calculateNavyBF() {
+  const sex = document.getElementById('navySex').value;
+  const heightIn = +document.getElementById('navyHeight').value;
+  const neckIn = +document.getElementById('navyNeck').value;
+  const waistIn = +document.getElementById('navyWaist').value;
+  const hipIn = sex === 'female' ? +document.getElementById('navyHip').value : 0;
+
+  if (!heightIn || !neckIn || !waistIn || (sex === 'female' && !hipIn)) {
+    return alert('Please fill all required fields');
+  }
+
+  const result = NavyBodyFatCalculator.calculate(sex, heightIn * 2.54, neckIn * 2.54, waistIn * 2.54, hipIn * 2.54);
+
+  document.getElementById('navyBfValue').textContent = result.bodyFatPercent + '%';
+  document.getElementById('navyCategory').textContent = result.category;
+  document.getElementById('navyInterpretation').innerHTML = `
+    <div class="rationale-label">Interpretation</div>
+    <p>${result.description}</p>
+    <p style="margin-top: var(--space-sm);"><strong>Lean Mass:</strong> ~${Math.round(result.leanMassPercent)}%</p>
+  `;
+  document.getElementById('navyResults').classList.remove('hidden');
+}
+
+// Genetic Potential Calculator
+function calculateGeneticPotential() {
+  const heightIn = +document.getElementById('geneticHeight').value;
+  const wristIn = +document.getElementById('geneticWrist').value;
+  const ankleIn = +document.getElementById('geneticAnkle').value;
+  const targetBf = +document.getElementById('geneticBf').value;
+
+  if (!heightIn || !wristIn || !ankleIn || !targetBf) return alert('Please fill all fields');
+
+  const result = GeneticPotentialCalculator.calculate(heightIn * 2.54, wristIn * 2.54, ankleIn * 2.54, targetBf);
+
+  document.getElementById('geneticMaxLean').textContent = Math.round(result.maxLeanMassLbs) + ' lbs';
+  document.getElementById('geneticMaxWeight').textContent = Math.round(result.maxWeightAtBf) + ' lbs';
+  document.getElementById('geneticInterpretation').innerHTML = `
+    <div class="rationale-label">Your Natural Potential</div>
+    <p>At ${targetBf}% body fat, your maximum natural weight is approximately <strong>${Math.round(result.maxWeightAtBf)} lbs</strong>.</p>
+    <p style="margin-top: var(--space-sm);">Maximum lean body mass: <strong>${Math.round(result.maxLeanMassLbs)} lbs</strong></p>
+    <p style="margin-top: var(--space-sm); font-size: 0.875rem; color: var(--chalk-tertiary);">Based on Casey Butt's formula using bone structure measurements. These are theoretical maximums achievable over years of optimal training and nutrition.</p>
+  `;
+  document.getElementById('geneticResults').classList.remove('hidden');
+}
+
+// Ideal Measurements Calculator
+function calculateIdealMeasurements() {
+  const wristIn = +document.getElementById('idealWrist').value;
+  if (!wristIn) return alert('Please enter wrist circumference');
+
+  const result = IdealMeasurementsCalculator.calculate(wristIn * 2.54);
+  const measurements = result.measurements;
+
+  let html = '';
+  for (const [part, value] of Object.entries(measurements)) {
+    const inchValue = Math.round(value / 2.54 * 10) / 10;
+    html += `
+      <div class="measurement-item">
+        <div class="label">${part.replace(/([A-Z])/g, ' $1').trim()}</div>
+        <div class="value">${inchValue}"</div>
+      </div>
+    `;
+  }
+  document.getElementById('idealMeasurementsGrid').innerHTML = html;
+  document.getElementById('idealResults').classList.remove('hidden');
+}
+
+// Volume Landmarks Calculator
+function calculateVolumeLandmarks() {
+  const experience = document.getElementById('volumeExperience').value;
+  const sleep = document.getElementById('volumeSleep').value;
+  const stress = document.getElementById('volumeStress').value;
+  const nutrition = document.getElementById('volumeNutrition').value;
+
+  const results = VolumeLandmarksCalculator.getAllMuscleGroups(experience, { sleep, stress, nutrition });
+
+  let html = '';
+  for (const [muscle, data] of Object.entries(results)) {
+    html += `
+      <div class="volume-item">
+        <div class="label">${muscle.charAt(0).toUpperCase() + muscle.slice(1)}</div>
+        <div class="value">${data.mavMin}-${data.mavMax}</div>
+        <div class="range">MV: ${data.mv} | MEV: ${data.mev} | MRV: ${data.mrv}</div>
+      </div>
+    `;
+  }
+  document.getElementById('volumeLandmarksGrid').innerHTML = html;
+  document.getElementById('volumeResults').classList.remove('hidden');
+}
+
+// Strength Score Calculator
+function calculateStrengthScore() {
+  const sex = document.getElementById('strengthSex').value;
+  const weightLbs = +document.getElementById('strengthWeight').value;
+  const squat = +document.getElementById('strengthSquat').value;
+  const bench = +document.getElementById('strengthBench').value;
+  const deadlift = +document.getElementById('strengthDeadlift').value;
+
+  if (!weightLbs || !squat || !bench || !deadlift) return alert('Please fill all fields');
+
+  const weightKg = weightLbs * 0.453592;
+  const totalKg = (squat + bench + deadlift) * 0.453592;
+  const result = StrengthScoreCalculator.calculate(sex, weightKg, totalKg);
+
+  document.getElementById('strengthTotal').textContent = squat + bench + deadlift;
+  document.getElementById('strengthWilks').textContent = result.wilks;
+  document.getElementById('strengthDots').textContent = result.dots;
+  document.getElementById('strengthInterpretation').innerHTML = `
+    <div class="rationale-label">${result.level}</div>
+    <p>${result.description}</p>
+    <p style="margin-top: var(--space-sm);"><strong>IPF GL:</strong> ${result.ipfgl}</p>
+  `;
+  document.getElementById('strengthResults').classList.remove('hidden');
+}
+
+// Progressive Overload Calculator
+function calculateOverload() {
+  const weight = +document.getElementById('overloadWeight').value;
+  const reps = +document.getElementById('overloadReps').value;
+  const sets = +document.getElementById('overloadSets').value;
+  const experience = document.getElementById('overloadExperience').value;
+
+  if (!weight || !reps || !sets) return alert('Please fill all fields');
+
+  const result = ProgressiveOverloadTracker.planProgression(weight, reps, sets, experience);
+
+  let html = '<div class="rationale-label">Progression Options</div>';
+  result.options.forEach(opt => {
+    html += `
+      <div style="padding: var(--space-md); background: var(--iron-surface); margin-top: var(--space-md); border-left: 2px solid var(--training);">
+        <h4 style="color: var(--chalk); margin-bottom: var(--space-sm);">${opt.method}</h4>
+        <p style="color: var(--chalk-secondary);">${opt.description}</p>
+        <p style="margin-top: var(--space-sm); font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--training);">${opt.target}</p>
+      </div>
+    `;
+  });
+  document.getElementById('overloadRecommendations').innerHTML = html;
+  document.getElementById('overloadResults').classList.remove('hidden');
+}
+
+// Deload Generator
+function generateDeload() {
+  const volume = document.getElementById('deloadVolume').value;
+  const fatigue = document.getElementById('deloadFatigue').value;
+  const type = document.getElementById('deloadType').value;
+
+  const result = DeloadGenerator.generate(volume, fatigue, type);
+
+  document.getElementById('deloadProtocol').innerHTML = `
+    <h4>${result.name}</h4>
+    <p style="color: var(--chalk-secondary); margin-bottom: var(--space-md);">${result.description}</p>
+    <div style="margin-top: var(--space-md);">
+      <strong>Duration:</strong> ${result.duration}<br>
+      <strong>Volume:</strong> ${result.volumeReduction}<br>
+      <strong>Intensity:</strong> ${result.intensityReduction}<br>
+    </div>
+    <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--line);">
+      <strong>Tips:</strong>
+      <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg); color: var(--chalk-secondary);">
+        ${result.tips.map(t => `<li>${t}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+  document.getElementById('deloadResults').classList.remove('hidden');
+}
+
+// Periodization Selector
+function selectPeriodization() {
+  const goal = document.getElementById('periodGoal').value;
+  const experience = document.getElementById('periodExperience').value;
+  const days = +document.getElementById('periodDays').value;
+
+  const result = PeriodizationModels.recommend(goal, experience, days);
+
+  document.getElementById('periodRecommendation').innerHTML = `
+    <h4>${result.model}</h4>
+    <p style="color: var(--chalk-secondary); margin-bottom: var(--space-md);">${result.description}</p>
+    <div style="margin-top: var(--space-md);">
+      <strong>Best For:</strong> ${result.bestFor}<br>
+      <strong>Structure:</strong> ${result.structure}<br>
+      <strong>Progression:</strong> ${result.progression}<br>
+    </div>
+    <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--line);">
+      <strong>Key Principles:</strong>
+      <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg); color: var(--chalk-secondary);">
+        ${result.principles.map(p => `<li>${p}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+  document.getElementById('periodResults').classList.remove('hidden');
+}
+
+// Carb Cycling Protocol
+function buildCarbCycle() {
+  const weightLbs = +document.getElementById('carbWeight').value;
+  const maintenance = +document.getElementById('carbMaintenance').value;
+  const trainingDays = +document.getElementById('carbTrainingDays').value;
+  const aggressiveness = document.getElementById('carbAggressiveness').value;
+
+  if (!weightLbs || !maintenance) return alert('Please fill all fields');
+
+  const result = CarbCyclingProtocol.build(weightLbs * 0.453592, maintenance, trainingDays, aggressiveness);
+
+  let html = '<div class="rationale-label">Weekly Protocol</div>';
+  html += '<div style="margin-top: var(--space-md);">';
+  result.days.forEach(day => {
+    html += `
+      <div class="cycle-day">
+        <span><strong>${day.type}</strong> (${day.count}x/week)</span>
+        <span>${day.calories} cal | P: ${day.protein}g C: ${day.carbs}g F: ${day.fat}g</span>
+      </div>
+    `;
+  });
+  html += `</div>
+    <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--iron-surface);">
+      <strong>Weekly Average:</strong> ${result.weeklyAverage} cal/day | <strong>Weekly Deficit:</strong> ${result.weeklyDeficit} cal
+    </div>
+  `;
+  document.getElementById('carbProtocol').innerHTML = html;
+  document.getElementById('carbResults').classList.remove('hidden');
+}
+
+// Reverse Diet Calculator
+function calculateReverseDiet() {
+  const current = +document.getElementById('reverseCurrentCals').value;
+  const target = +document.getElementById('reverseTargetCals').value;
+  const duration = document.getElementById('reverseDuration').value;
+  const speed = document.getElementById('reverseSpeed').value;
+
+  if (!current || !target) return alert('Please fill all fields');
+
+  const result = ReverseDietCalculator.calculate(current, target, duration, speed);
+
+  let html = `<h4>Reverse Diet Protocol</h4>
+    <p style="color: var(--chalk-secondary); margin-bottom: var(--space-md);">Duration: ${result.weeks} weeks</p>
+    <div style="margin-top: var(--space-md);">`;
+
+  result.weeklyTargets.slice(0, 8).forEach((week, i) => {
+    html += `
+      <div class="protocol-week">
+        <span>Week ${i + 1}</span>
+        <span>${week.calories} cal (+${week.increase})</span>
+      </div>
+    `;
+  });
+
+  if (result.weeklyTargets.length > 8) {
+    html += `<p style="margin-top: var(--space-sm); color: var(--chalk-tertiary);">... and ${result.weeklyTargets.length - 8} more weeks</p>`;
+  }
+
+  html += `</div>
+    <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--line);">
+      <strong>Tips:</strong> ${result.tips}
+    </div>
+  `;
+  document.getElementById('reverseProtocol').innerHTML = html;
+  document.getElementById('reverseResults').classList.remove('hidden');
+}
+
+// Body Recomposition Calculator
+function calculateRecomp() {
+  const weightLbs = +document.getElementById('recompWeight').value;
+  const bf = +document.getElementById('recompBf').value;
+  const experience = document.getElementById('recompExperience').value;
+  const tdee = +document.getElementById('recompTdee').value;
+
+  if (!weightLbs || !bf || !tdee) return alert('Please fill all fields');
+
+  const result = BodyRecompCalculator.analyze({
+    weightKg: weightLbs * 0.453592,
+    bodyFatPercent: bf,
+    experience,
+    tdee
+  });
+
+  document.getElementById('recompStrategy').innerHTML = `
+    <h4>Recomposition ${result.potential.viable ? 'Recommended' : 'Not Recommended'}</h4>
+    <p style="color: var(--chalk-secondary); margin-bottom: var(--space-md);">${result.potential.reason}</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-md);">
+      <div style="padding: var(--space-md); background: var(--iron-surface);">
+        <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase;">Training Days</div>
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.trainingDay} cal</div>
+      </div>
+      <div style="padding: var(--space-md); background: var(--iron-surface);">
+        <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase;">Rest Days</div>
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.restDay} cal</div>
+      </div>
+    </div>
+    <div style="margin-top: var(--space-lg);">
+      <strong>Protein Target:</strong> ${result.macros.protein}g/day<br>
+      <strong>Expected Timeline:</strong> ${result.timeline}
+    </div>
+  `;
+  document.getElementById('recompResults').classList.remove('hidden');
+}
+
+// Peak Week Calculator
+function calculatePeakWeek() {
+  const weightLbs = +document.getElementById('peakWeight').value;
+  const carbs = +document.getElementById('peakCarbs').value;
+  const showDate = document.getElementById('peakShowDate').value;
+  const protocol = document.getElementById('peakProtocol').value;
+
+  if (!weightLbs || !carbs || !showDate) return alert('Please fill all fields');
+
+  const result = PeakWeekCalculator.generate(weightLbs * 0.453592, carbs, showDate, protocol);
+
+  let html = '<div class="rationale-label">7-Day Peak Week Protocol</div>';
+  html += '<div style="margin-top: var(--space-md);">';
+  result.days.forEach(day => {
+    html += `
+      <div class="cycle-day">
+        <span><strong>${day.day}</strong></span>
+        <span>Carbs: ${day.carbs}g | Water: ${day.water}L | Sodium: ${day.sodium}</span>
+      </div>
+    `;
+  });
+  html += '</div>';
+  document.getElementById('peakProtocolGrid').innerHTML = html;
+  document.getElementById('peakResults').classList.remove('hidden');
+}
+
+// Combat Sports Weight Cut
+function calculateCombatCut() {
+  const current = +document.getElementById('combatCurrentWeight').value;
+  const target = +document.getElementById('combatTargetWeight').value;
+  const days = +document.getElementById('combatDays').value;
+  const rehydrate = +document.getElementById('combatRehydrate').value;
+
+  if (!current || !target || !days) return alert('Please fill all fields');
+
+  const result = CombatSportsWeightCut.analyze(current * 0.453592, target * 0.453592, days, rehydrate);
+
+  const statusColor = result.safe ? 'var(--success)' : 'var(--danger)';
+
+  document.getElementById('combatProtocol').innerHTML = `
+    <h4 style="color: ${statusColor};">${result.safe ? 'Safe Cut Protocol' : 'Warning: High Risk Cut'}</h4>
+    <p style="color: var(--chalk-secondary); margin-bottom: var(--space-md);">${result.assessment}</p>
+    <div style="margin-top: var(--space-md);">
+      <strong>Weight to Lose:</strong> ${result.weightToLose.toFixed(1)} lbs (${result.percentBodyWeight.toFixed(1)}%)<br>
+      <strong>Recommended Approach:</strong> ${result.approach}<br>
+      <strong>Water Cut Max:</strong> ${result.maxWaterCut.toFixed(1)} lbs
+    </div>
+    <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--line);">
+      <strong>ISSN Recommendation:</strong> ${result.issnGuideline}
+    </div>
+  `;
+  document.getElementById('combatResults').classList.remove('hidden');
+}
+
+// Sleep Assessment
+function assessSleep() {
+  const duration = document.getElementById('sleepDuration').value;
+  const consistency = document.getElementById('sleepConsistency').value;
+  const latency = document.getElementById('sleepLatency').value;
+  const wakeups = document.getElementById('sleepWakeups').value;
+
+  const result = SleepOptimization.assess({ duration, consistency, latency, wakeups });
+
+  document.getElementById('sleepScore').textContent = result.score + '/100';
+  document.getElementById('sleepGrade').textContent = result.grade;
+  document.getElementById('sleepRecommendations').innerHTML = `
+    <div class="rationale-label">Recommendations</div>
+    <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg);">
+      ${result.recommendations.map(r => `<li style="padding: var(--space-xs) 0; color: var(--chalk-secondary);">${r}</li>`).join('')}
+    </ul>
+  `;
+  document.getElementById('sleepResults').classList.remove('hidden');
+}
+
+// Recovery Readiness Assessment
+function assessRecovery() {
+  const feeling = document.getElementById('recoveryFeeling').value;
+  const soreness = document.getElementById('recoverySoreness').value;
+  const energy = document.getElementById('recoveryEnergy').value;
+  const motivation = document.getElementById('recoveryMotivation').value;
+
+  const result = RecoveryReadinessAssessment.assess({ feeling, soreness, energy, motivation });
+
+  document.getElementById('recoveryScore').textContent = result.score + '/100';
+  document.getElementById('recoveryRecommendation').textContent = result.recommendation;
+  document.getElementById('recoveryProtocol').innerHTML = `
+    <div class="rationale-label">Today's Protocol</div>
+    <p style="margin-top: var(--space-sm); color: var(--chalk-secondary);">${result.protocol}</p>
+    <p style="margin-top: var(--space-md);"><strong>Training Adjustment:</strong> ${result.adjustment}</p>
+  `;
+  document.getElementById('recoveryResults').classList.remove('hidden');
+}
+
+// Load Advanced Techniques
+function loadAdvancedTechniques() {
+  const techniques = AdvancedTrainingTechniques.getAll();
+  let html = '';
+  techniques.forEach(t => {
+    html += `
+      <div class="technique-card">
+        <h4>${t.name}</h4>
+        <p>${t.description}</p>
+        <div class="when-to-use"><strong>Best for:</strong> ${t.bestFor}</div>
+      </div>
+    `;
+  });
+  document.getElementById('advancedTechniquesList').innerHTML = html;
+}
+
+// Load HMB Guide
+function loadHMBGuide() {
+  const guide = HMBGuide.getInfo();
+  document.getElementById('hmbGuideContent').innerHTML = `
+    <div class="guide-section">
+      <h4>What is HMB?</h4>
+      <p style="color: var(--chalk-secondary);">${guide.description}</p>
+    </div>
+    <div class="guide-section">
+      <h4>When HMB is Most Effective</h4>
+      <ul>
+        ${guide.effectiveFor.map(e => `<li>${e}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="guide-section">
+      <h4>Dosing Protocol</h4>
+      <p style="color: var(--chalk-secondary);">${guide.dosing}</p>
+    </div>
+    <div class="guide-section">
+      <h4>ISSN 2025 Position</h4>
+      <p style="color: var(--chalk-secondary);">${guide.issnPosition}</p>
+    </div>
+  `;
+}
+
+// Load Stress Guide
+function loadStressGuide() {
+  const guide = StressManagement.getStrategies();
+  document.getElementById('stressGuideContent').innerHTML = `
+    <div class="guide-section">
+      <h4>Impact on Training</h4>
+      <p style="color: var(--chalk-secondary);">${guide.impact}</p>
+    </div>
+    <div class="guide-section">
+      <h4>Management Strategies</h4>
+      <ul>
+        ${guide.strategies.map(s => `<li><strong>${s.name}:</strong> ${s.description}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="guide-section">
+      <h4>Training Adjustments</h4>
+      <ul>
+        ${guide.trainingAdjustments.map(a => `<li>${a}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+}
+
+// Load Injury Prevention Guide
+function loadInjuryGuide() {
+  const guide = InjuryPreventionGuide.getProtocols();
+  document.getElementById('injuryGuideContent').innerHTML = `
+    <div class="guide-section">
+      <h4>Common Problem Areas</h4>
+      <ul>
+        ${guide.commonAreas.map(a => `<li><strong>${a.area}:</strong> ${a.prevention}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="guide-section">
+      <h4>Daily Mobility Routine</h4>
+      <ul>
+        ${guide.mobilityRoutine.map(m => `<li>${m}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="guide-section">
+      <h4>Warning Signs</h4>
+      <ul>
+        ${guide.warningSigns.map(w => `<li>${w}</li>`).join('')}
+      </ul>
+    </div>
+  `;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

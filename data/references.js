@@ -1619,7 +1619,2222 @@ const GOLDEN_ERA_METHODOLOGY = {
   }
 };
 
-// Export for use in other files
+// ═══════════════════════════════════════════════════════════════════════════
+// ADVANCED CALCULATORS & TOOLS
+// Evidence-based calculators for serious athletes
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────────────────────────────
+// 1. FFMI CALCULATOR (Fat-Free Mass Index)
+// Research: Kouri et al. (1995) - Fat-free mass index in users and nonusers of anabolic-androgenic steroids
+// ───────────────────────────────────────────────────────────────────────────
+const FFMICalculator = {
+  /**
+   * Calculate FFMI and normalized FFMI
+   * @param {number} weightKg - Body weight in kg
+   * @param {number} heightCm - Height in cm
+   * @param {number} bodyFatPercent - Body fat percentage
+   * @returns {Object} FFMI results with interpretation
+   */
+  calculate: function(weightKg, heightCm, bodyFatPercent) {
+    const heightM = heightCm / 100;
+    const leanMassKg = weightKg * (1 - bodyFatPercent / 100);
+
+    // Standard FFMI
+    const ffmi = leanMassKg / (heightM * heightM);
+
+    // Normalized FFMI (adjusted to 1.8m height)
+    const normalizedFFMI = ffmi + 6.1 * (1.8 - heightM);
+
+    return {
+      ffmi: Math.round(ffmi * 10) / 10,
+      normalizedFFMI: Math.round(normalizedFFMI * 10) / 10,
+      leanMassKg: Math.round(leanMassKg * 10) / 10,
+      interpretation: this.interpret(normalizedFFMI),
+      percentile: this.getPercentile(normalizedFFMI),
+      naturalLimit: this.isLikelyNatural(normalizedFFMI)
+    };
+  },
+
+  interpret: function(ffmi) {
+    if (ffmi < 18) return { level: 'Below Average', description: 'Room for significant muscle gain' };
+    if (ffmi < 20) return { level: 'Average', description: 'Typical for recreational lifters' };
+    if (ffmi < 22) return { level: 'Above Average', description: 'Noticeable muscularity' };
+    if (ffmi < 23) return { level: 'Excellent', description: 'Very muscular, years of training' };
+    if (ffmi < 25) return { level: 'Superior', description: 'Elite natural territory' };
+    if (ffmi < 26) return { level: 'Exceptional', description: 'Near genetic ceiling for naturals' };
+    return { level: 'Extreme', description: 'Likely enhanced or extremely rare genetics' };
+  },
+
+  getPercentile: function(ffmi) {
+    // Based on population data
+    if (ffmi < 17) return 10;
+    if (ffmi < 18) return 25;
+    if (ffmi < 19) return 40;
+    if (ffmi < 20) return 55;
+    if (ffmi < 21) return 70;
+    if (ffmi < 22) return 82;
+    if (ffmi < 23) return 90;
+    if (ffmi < 24) return 95;
+    if (ffmi < 25) return 98;
+    return 99;
+  },
+
+  isLikelyNatural: function(ffmi) {
+    // Based on Kouri et al. study - no natural athletes exceeded 25
+    if (ffmi <= 25) return { natural: true, confidence: 'High' };
+    if (ffmi <= 26) return { natural: 'Possible', confidence: 'Low - exceptional genetics required' };
+    return { natural: false, confidence: 'Very unlikely without enhancement' };
+  },
+
+  references: [
+    {
+      id: 'kouri-1995-ffmi',
+      title: 'Fat-free mass index in users and nonusers of anabolic-androgenic steroids',
+      authors: 'Kouri EM, Pope HG Jr, Katz DL, Oliva P',
+      journal: 'Clinical Journal of Sport Medicine',
+      year: 1995,
+      keyFinding: 'No steroid-free athlete exceeded FFMI of 25'
+    }
+  ]
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 2. VOLUME LANDMARKS CALCULATOR (MEV/MAV/MRV)
+// Based on Dr. Mike Israetel / Renaissance Periodization research
+// ───────────────────────────────────────────────────────────────────────────
+const VolumeLandmarksCalculator = {
+  // Base volume landmarks per muscle group (sets per week)
+  baseLandmarks: {
+    chest: { mv: 4, mev: 8, mav: { min: 12, max: 18 }, mrv: 22 },
+    back: { mv: 4, mev: 8, mav: { min: 12, max: 20 }, mrv: 25 },
+    shoulders: { mv: 4, mev: 6, mav: { min: 10, max: 16 }, mrv: 20 },
+    biceps: { mv: 2, mev: 6, mav: { min: 10, max: 14 }, mrv: 20 },
+    triceps: { mv: 2, mev: 4, mav: { min: 8, max: 12 }, mrv: 18 },
+    quads: { mv: 4, mev: 6, mav: { min: 10, max: 16 }, mrv: 20 },
+    hamstrings: { mv: 3, mev: 6, mav: { min: 10, max: 14 }, mrv: 18 },
+    glutes: { mv: 0, mev: 4, mav: { min: 8, max: 12 }, mrv: 16 },
+    calves: { mv: 4, mev: 6, mav: { min: 10, max: 14 }, mrv: 18 },
+    abs: { mv: 0, mev: 4, mav: { min: 8, max: 16 }, mrv: 20 },
+    traps: { mv: 0, mev: 4, mav: { min: 8, max: 12 }, mrv: 18 },
+    forearms: { mv: 0, mev: 4, mav: { min: 6, max: 10 }, mrv: 14 }
+  },
+
+  // Experience level multipliers
+  experienceMultipliers: {
+    beginner: { mev: 0.7, mav: 0.6, mrv: 0.7 },
+    intermediate: { mev: 1.0, mav: 1.0, mrv: 1.0 },
+    advanced: { mev: 1.2, mav: 1.3, mrv: 1.2 }
+  },
+
+  // Recovery factors
+  recoveryFactors: {
+    sleepQuality: { poor: 0.8, average: 1.0, good: 1.1, excellent: 1.2 },
+    stressLevel: { high: 0.8, moderate: 0.95, low: 1.1 },
+    age: function(age) {
+      if (age < 25) return 1.1;
+      if (age < 35) return 1.0;
+      if (age < 45) return 0.9;
+      return 0.8;
+    },
+    nutrition: { deficit: 0.85, maintenance: 1.0, surplus: 1.1 }
+  },
+
+  /**
+   * Calculate personalized volume landmarks
+   * @param {string} muscleGroup - Target muscle group
+   * @param {string} experience - beginner, intermediate, advanced
+   * @param {Object} recoveryParams - {sleep, stress, age, nutrition}
+   * @returns {Object} Personalized volume landmarks
+   */
+  calculate: function(muscleGroup, experience, recoveryParams = {}) {
+    const base = this.baseLandmarks[muscleGroup];
+    if (!base) return null;
+
+    const expMult = this.experienceMultipliers[experience] || this.experienceMultipliers.intermediate;
+
+    // Calculate recovery multiplier
+    let recoveryMult = 1.0;
+    if (recoveryParams.sleep) recoveryMult *= this.recoveryFactors.sleepQuality[recoveryParams.sleep] || 1.0;
+    if (recoveryParams.stress) recoveryMult *= this.recoveryFactors.stressLevel[recoveryParams.stress] || 1.0;
+    if (recoveryParams.age) recoveryMult *= this.recoveryFactors.age(recoveryParams.age);
+    if (recoveryParams.nutrition) recoveryMult *= this.recoveryFactors.nutrition[recoveryParams.nutrition] || 1.0;
+
+    return {
+      muscleGroup,
+      mv: base.mv,
+      mev: Math.round(base.mev * expMult.mev * recoveryMult),
+      mavMin: Math.round(base.mav.min * expMult.mav * recoveryMult),
+      mavMax: Math.round(base.mav.max * expMult.mav * recoveryMult),
+      mrv: Math.round(base.mrv * expMult.mrv * recoveryMult),
+      recommendation: this.getRecommendation(experience)
+    };
+  },
+
+  getRecommendation: function(experience) {
+    const recs = {
+      beginner: 'Start at MEV and add 1-2 sets per week. Focus on progressive overload before increasing volume.',
+      intermediate: 'Train within MAV range. Increase volume through mesocycle, deload when approaching MRV.',
+      advanced: 'Periodize volume: start near MEV, progress to MRV over 4-6 weeks, then deload.'
+    };
+    return recs[experience] || recs.intermediate;
+  },
+
+  getAllMuscleGroups: function(experience, recoveryParams) {
+    const results = {};
+    Object.keys(this.baseLandmarks).forEach(muscle => {
+      results[muscle] = this.calculate(muscle, experience, recoveryParams);
+    });
+    return results;
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 3. BODY RECOMPOSITION CALCULATOR
+// For simultaneous fat loss and muscle gain
+// ───────────────────────────────────────────────────────────────────────────
+const BodyRecompCalculator = {
+  /**
+   * Determine if body recomposition is optimal and calculate targets
+   * @param {Object} params - User parameters
+   * @returns {Object} Recomp strategy
+   */
+  analyze: function(params) {
+    const { weightKg, bodyFatPercent, experience, age } = params;
+
+    // Determine recomp potential
+    const potential = this.assessPotential(bodyFatPercent, experience, age);
+
+    // Calculate calorie targets
+    const calorieStrategy = this.calculateCalorieStrategy(params, potential);
+
+    // Calculate macro targets
+    const macros = this.calculateMacros(params, calorieStrategy);
+
+    return {
+      potential,
+      calorieStrategy,
+      macros,
+      timeline: this.estimateTimeline(potential),
+      recommendations: this.getRecommendations(potential)
+    };
+  },
+
+  assessPotential: function(bodyFatPercent, experience, age) {
+    let score = 0;
+
+    // Body fat factor (higher BF = better recomp potential)
+    if (bodyFatPercent > 25) score += 3;
+    else if (bodyFatPercent > 20) score += 2;
+    else if (bodyFatPercent > 15) score += 1;
+
+    // Experience factor (beginners have highest potential)
+    if (experience === 'beginner') score += 3;
+    else if (experience === 'intermediate') score += 1;
+
+    // Age factor
+    if (age < 25) score += 2;
+    else if (age < 35) score += 1;
+
+    if (score >= 6) return { level: 'Excellent', description: 'Ideal candidate for body recomposition' };
+    if (score >= 4) return { level: 'Good', description: 'Body recomposition will work well' };
+    if (score >= 2) return { level: 'Moderate', description: 'Possible but slower progress' };
+    return { level: 'Limited', description: 'Consider dedicated bulk/cut phases instead' };
+  },
+
+  calculateCalorieStrategy: function(params, potential) {
+    const { tdee } = params;
+
+    // Calorie cycling approach
+    return {
+      trainingDays: {
+        calories: Math.round(tdee * 1.05), // +5% surplus
+        description: 'Slight surplus to fuel training and muscle growth'
+      },
+      restDays: {
+        calories: Math.round(tdee * 0.85), // -15% deficit
+        description: 'Deficit to promote fat loss during recovery'
+      },
+      weeklyAverage: Math.round((tdee * 1.05 * 4 + tdee * 0.85 * 3) / 7),
+      weeklyDeficit: Math.round(tdee * 7 - ((tdee * 1.05 * 4 + tdee * 0.85 * 3)))
+    };
+  },
+
+  calculateMacros: function(params, calorieStrategy) {
+    const { weightKg } = params;
+
+    // High protein is critical for recomp (1g/lb or 2.2g/kg)
+    const proteinGrams = Math.round(weightKg * 2.2);
+
+    return {
+      trainingDays: {
+        protein: proteinGrams,
+        carbs: Math.round((calorieStrategy.trainingDays.calories - proteinGrams * 4) * 0.6 / 4),
+        fat: Math.round((calorieStrategy.trainingDays.calories - proteinGrams * 4) * 0.4 / 9)
+      },
+      restDays: {
+        protein: proteinGrams,
+        carbs: Math.round((calorieStrategy.restDays.calories - proteinGrams * 4) * 0.4 / 4),
+        fat: Math.round((calorieStrategy.restDays.calories - proteinGrams * 4) * 0.6 / 9)
+      }
+    };
+  },
+
+  estimateTimeline: function(potential) {
+    const timelines = {
+      'Excellent': '3-6 months for noticeable changes',
+      'Good': '4-8 months for noticeable changes',
+      'Moderate': '6-12 months for noticeable changes',
+      'Limited': 'Consider dedicated phases for faster results'
+    };
+    return timelines[potential.level];
+  },
+
+  getRecommendations: function(potential) {
+    return [
+      'Train 4-5 days per week with progressive overload',
+      'Prioritize protein at every meal (40-50g per meal)',
+      'Sleep 7-9 hours for optimal hormone levels',
+      'Track progress via measurements and photos, not just scale weight',
+      'Be patient - recomp is slower but maintains quality of life'
+    ];
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 4. WILKS / DOTS / IPF GL SCORE CALCULATOR
+// For comparing strength across different body weights
+// ───────────────────────────────────────────────────────────────────────────
+const StrengthScoreCalculator = {
+  /**
+   * Calculate Wilks Score (traditional)
+   */
+  calculateWilks: function(totalKg, bodyweightKg, sex) {
+    const coefficients = sex === 'male'
+      ? { a: -216.0475144, b: 16.2606339, c: -0.002388645, d: -0.00113732, e: 7.01863e-6, f: -1.291e-8 }
+      : { a: 594.31747775582, b: -27.23842536447, c: 0.82112226871, d: -0.00930733913, e: 0.00004731582, f: -0.00000009054 };
+
+    const { a, b, c, d, e, f } = coefficients;
+    const bw = bodyweightKg;
+    const coeff = 500 / (a + b*bw + c*bw**2 + d*bw**3 + e*bw**4 + f*bw**5);
+
+    return Math.round(totalKg * coeff * 100) / 100;
+  },
+
+  /**
+   * Calculate DOTS Score (newer, preferred)
+   */
+  calculateDOTS: function(totalKg, bodyweightKg, sex) {
+    const coefficients = sex === 'male'
+      ? { a: -307.75076, b: 24.0900756, c: -0.1918759221, d: 0.0007391293, e: -0.000001093 }
+      : { a: -57.96288, b: 13.6175032, c: -0.1126655495, d: 0.0005158568, e: -0.0000010706 };
+
+    const { a, b, c, d, e } = coefficients;
+    const bw = bodyweightKg;
+    const coeff = 500 / (a + b*bw + c*bw**2 + d*bw**3 + e*bw**4);
+
+    return Math.round(totalKg * coeff * 100) / 100;
+  },
+
+  /**
+   * Calculate IPF GL Points (IPF Goodlift)
+   */
+  calculateIPFGL: function(totalKg, bodyweightKg, sex, equipped = false) {
+    // Coefficients for classic (raw) and equipped
+    const coeff = sex === 'male'
+      ? equipped
+        ? { a: 1236.25115, b: 1449.21864, c: 0.01644 }
+        : { a: 310.67, b: 857.785, c: 0.05366 }
+      : equipped
+        ? { a: 758.63878, b: 949.31382, c: 0.02435 }
+        : { a: 125.1435, b: 228.03, c: 0.02398 };
+
+    const { a, b, c } = coeff;
+    const points = 100 / (a - b * Math.exp(-c * bodyweightKg)) * totalKg;
+
+    return Math.round(points * 100) / 100;
+  },
+
+  /**
+   * Get all scores at once
+   */
+  calculateAll: function(totalKg, bodyweightKg, sex) {
+    return {
+      wilks: this.calculateWilks(totalKg, bodyweightKg, sex),
+      dots: this.calculateDOTS(totalKg, bodyweightKg, sex),
+      ipfgl: this.calculateIPFGL(totalKg, bodyweightKg, sex),
+      interpretation: this.interpretScore(this.calculateDOTS(totalKg, bodyweightKg, sex))
+    };
+  },
+
+  interpretScore: function(dots) {
+    if (dots < 200) return { level: 'Beginner', description: 'Keep training consistently' };
+    if (dots < 300) return { level: 'Novice', description: 'Building a solid foundation' };
+    if (dots < 400) return { level: 'Intermediate', description: 'Competitive at local level' };
+    if (dots < 450) return { level: 'Advanced', description: 'Competitive at regional/national level' };
+    if (dots < 500) return { level: 'Elite', description: 'National championship caliber' };
+    return { level: 'World Class', description: 'International competition level' };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 5. REVERSE DIETING PROTOCOL GENERATOR
+// Post-diet metabolic recovery
+// ───────────────────────────────────────────────────────────────────────────
+const ReverseDietCalculator = {
+  /**
+   * Generate reverse diet protocol
+   * @param {Object} params - Current diet state
+   * @returns {Object} Weekly calorie progression
+   */
+  generateProtocol: function(params) {
+    const { currentCalories, estimatedTDEE, dietDuration, aggressiveness } = params;
+
+    // Calculate metabolic adaptation (estimated)
+    const adaptationPercent = Math.min(dietDuration * 1.5, 25); // ~1.5% per month, max 25%
+    const adaptedTDEE = estimatedTDEE * (1 - adaptationPercent / 100);
+
+    // Weekly calorie increase based on aggressiveness
+    const weeklyIncreases = {
+      conservative: 50,  // Slowest, safest
+      moderate: 75,      // Balanced approach
+      aggressive: 100    // Faster but more risk of fat gain
+    };
+
+    const weeklyIncrease = weeklyIncreases[aggressiveness] || weeklyIncreases.moderate;
+    const weeksToMaintenance = Math.ceil((estimatedTDEE - currentCalories) / weeklyIncrease);
+
+    // Generate weekly progression
+    const weeks = [];
+    let calories = currentCalories;
+    for (let i = 1; i <= weeksToMaintenance; i++) {
+      calories = Math.min(calories + weeklyIncrease, estimatedTDEE);
+      weeks.push({
+        week: i,
+        calories: Math.round(calories),
+        protein: this.calculateProtein(params.weightKg, calories),
+        carbs: this.calculateCarbs(calories, i, weeksToMaintenance),
+        fat: this.calculateFat(calories, i, weeksToMaintenance),
+        notes: this.getWeekNotes(i, weeksToMaintenance)
+      });
+    }
+
+    return {
+      currentState: {
+        calories: currentCalories,
+        estimatedAdaptation: `${adaptationPercent.toFixed(1)}%`,
+        adaptedTDEE: Math.round(adaptedTDEE)
+      },
+      targetMaintenance: estimatedTDEE,
+      protocol: weeks,
+      totalWeeks: weeksToMaintenance,
+      guidelines: this.getGuidelines(),
+      warningSignsOfTooFast: [
+        'Gaining more than 0.5kg per week',
+        'Visible increase in waist measurement',
+        'Significant bloating lasting more than 3 days',
+        'Feeling overly full at every meal'
+      ]
+    };
+  },
+
+  calculateProtein: function(weightKg, calories) {
+    // Keep protein high during reverse (2g/kg)
+    return Math.round(weightKg * 2);
+  },
+
+  calculateCarbs: function(calories, week, totalWeeks) {
+    // Gradually increase carbs (they drive metabolic recovery)
+    const proteinCals = calories * 0.3; // ~30% protein
+    const fatCals = calories * 0.25;    // ~25% fat
+    const carbCals = calories - proteinCals - fatCals;
+    return Math.round(carbCals / 4);
+  },
+
+  calculateFat: function(calories, week, totalWeeks) {
+    return Math.round(calories * 0.25 / 9);
+  },
+
+  getWeekNotes: function(week, total) {
+    if (week <= 2) return 'Monitor energy levels - should improve within 1-2 weeks';
+    if (week <= 4) return 'Watch for improved gym performance and recovery';
+    if (week <= total * 0.5) return 'Metabolic rate should be normalizing';
+    if (week <= total * 0.75) return 'Hormones (thyroid, leptin) recovering';
+    return 'Approaching maintenance - monitor weight closely';
+  },
+
+  getGuidelines: function() {
+    return [
+      'Weigh daily, track weekly averages (some fluctuation is normal)',
+      'Expect initial weight gain from glycogen/water - this is NOT fat',
+      'Increase carbs primarily around training',
+      'If gaining >0.5kg/week, slow the calorie increase',
+      'Monitor biofeedback: energy, sleep, libido, mood',
+      'Avoid excessive cardio - let food drive metabolism',
+      'Be patient - full metabolic recovery takes 4-12 weeks'
+    ];
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 6. CARB CYCLING PROTOCOL BUILDER
+// Strategic carbohydrate manipulation
+// ───────────────────────────────────────────────────────────────────────────
+const CarbCyclingProtocol = {
+  /**
+   * Generate carb cycling protocol
+   * @param {Object} params - User parameters and goals
+   * @returns {Object} Weekly carb cycling plan
+   */
+  generate: function(params) {
+    const { tdee, weightKg, trainingDays, goal, bodyFatPercent } = params;
+
+    // Determine protocol type based on goal
+    const protocolType = this.selectProtocol(goal, bodyFatPercent);
+
+    // Calculate macro targets for each day type
+    const dayTypes = this.calculateDayTypes(tdee, weightKg, protocolType);
+
+    // Generate weekly schedule
+    const weeklySchedule = this.generateWeeklySchedule(trainingDays, dayTypes, protocolType);
+
+    return {
+      protocolType,
+      dayTypes,
+      weeklySchedule,
+      weeklyTotals: this.calculateWeeklyTotals(weeklySchedule),
+      glycogenManagement: this.getGlycogenInfo(),
+      tips: this.getTips(goal)
+    };
+  },
+
+  selectProtocol: function(goal, bodyFatPercent) {
+    if (goal === 'fatLoss' && bodyFatPercent > 20) {
+      return { name: 'Aggressive Cut', highDays: 1, moderateDays: 2, lowDays: 4 };
+    }
+    if (goal === 'fatLoss') {
+      return { name: 'Standard Cut', highDays: 2, moderateDays: 2, lowDays: 3 };
+    }
+    if (goal === 'recomp') {
+      return { name: 'Recomposition', highDays: 3, moderateDays: 2, lowDays: 2 };
+    }
+    if (goal === 'muscle') {
+      return { name: 'Lean Gain', highDays: 4, moderateDays: 2, lowDays: 1 };
+    }
+    return { name: 'Balanced', highDays: 2, moderateDays: 3, lowDays: 2 };
+  },
+
+  calculateDayTypes: function(tdee, weightKg, protocol) {
+    const protein = Math.round(weightKg * 2.2); // Constant high protein
+    const proteinCals = protein * 4;
+
+    return {
+      high: {
+        name: 'High Carb Day',
+        calories: Math.round(tdee * 1.1),
+        protein,
+        carbs: Math.round((tdee * 1.1 - proteinCals) * 0.65 / 4),
+        fat: Math.round((tdee * 1.1 - proteinCals) * 0.35 / 9),
+        timing: 'Training days - especially leg day or high volume sessions',
+        purpose: 'Replenish glycogen, support training, boost metabolism'
+      },
+      moderate: {
+        name: 'Moderate Carb Day',
+        calories: Math.round(tdee),
+        protein,
+        carbs: Math.round((tdee - proteinCals) * 0.5 / 4),
+        fat: Math.round((tdee - proteinCals) * 0.5 / 9),
+        timing: 'Light training days or upper body days',
+        purpose: 'Maintain glycogen, support recovery'
+      },
+      low: {
+        name: 'Low Carb Day',
+        calories: Math.round(tdee * 0.85),
+        protein,
+        carbs: Math.round((tdee * 0.85 - proteinCals) * 0.25 / 4),
+        fat: Math.round((tdee * 0.85 - proteinCals) * 0.75 / 9),
+        timing: 'Rest days or cardio-only days',
+        purpose: 'Enhance fat oxidation, improve insulin sensitivity'
+      }
+    };
+  },
+
+  generateWeeklySchedule: function(trainingDays, dayTypes, protocol) {
+    // Default training schedule
+    const schedule = [
+      { day: 'Monday', type: 'high', training: 'Push' },
+      { day: 'Tuesday', type: 'moderate', training: 'Pull' },
+      { day: 'Wednesday', type: 'low', training: 'Rest' },
+      { day: 'Thursday', type: 'high', training: 'Legs' },
+      { day: 'Friday', type: 'moderate', training: 'Upper' },
+      { day: 'Saturday', type: 'low', training: 'Cardio' },
+      { day: 'Sunday', type: 'low', training: 'Rest' }
+    ];
+
+    return schedule.map(day => ({
+      ...day,
+      ...dayTypes[day.type]
+    }));
+  },
+
+  calculateWeeklyTotals: function(schedule) {
+    const totals = schedule.reduce((acc, day) => ({
+      calories: acc.calories + day.calories,
+      protein: acc.protein + day.protein,
+      carbs: acc.carbs + day.carbs,
+      fat: acc.fat + day.fat
+    }), { calories: 0, protein: 0, carbs: 0, fat: 0 });
+
+    return {
+      ...totals,
+      dailyAverage: {
+        calories: Math.round(totals.calories / 7),
+        protein: Math.round(totals.protein / 7),
+        carbs: Math.round(totals.carbs / 7),
+        fat: Math.round(totals.fat / 7)
+      }
+    };
+  },
+
+  getGlycogenInfo: function() {
+    return {
+      muscleGlycogen: '300-500g stored in muscles',
+      liverGlycogen: '80-100g stored in liver',
+      waterPerGram: '3-4g water stored per gram of glycogen',
+      depletionTime: '24-48 hours of low carb to significantly deplete',
+      supercompensation: '2-3 days of high carb after depletion can increase stores by 50-100%'
+    };
+  },
+
+  getTips: function(goal) {
+    const baseTips = [
+      'Time high carb days on your hardest training days',
+      'Place low carb days on rest days or light cardio days',
+      'Keep protein consistent every day',
+      'Prioritize carbs around training (pre/post workout)',
+      'On low days, increase vegetables for satiety'
+    ];
+
+    if (goal === 'fatLoss') {
+      baseTips.push('Consider adding a refeed day (very high carb) every 7-14 days');
+    }
+
+    return baseTips;
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 7. PEAK WEEK CALCULATOR
+// Competition preparation final week
+// ───────────────────────────────────────────────────────────────────────────
+const PeakWeekCalculator = {
+  /**
+   * Generate peak week protocol
+   * @param {Object} params - Competition parameters
+   * @returns {Object} Day-by-day peak week plan
+   */
+  generate: function(params) {
+    const { competitionDay, currentWeight, targetWeight, normalCarbs, normalWater } = params;
+
+    return {
+      overview: this.getOverview(),
+      waterProtocol: this.generateWaterProtocol(normalWater),
+      carbProtocol: this.generateCarbProtocol(normalCarbs),
+      sodiumProtocol: this.generateSodiumProtocol(),
+      dailySchedule: this.generateDailySchedule(params),
+      showDayMorning: this.getShowDayProtocol(),
+      warnings: this.getWarnings()
+    };
+  },
+
+  getOverview: function() {
+    return {
+      purpose: 'Maximize muscle fullness while minimizing subcutaneous water',
+      approach: 'Manipulate water, sodium, and carbs to peak on stage',
+      caution: 'Peak week cannot fix inadequate prep - it only fine-tunes'
+    };
+  },
+
+  generateWaterProtocol: function(normalWater) {
+    return [
+      { day: 'Sunday (7 out)', water: normalWater * 1.5, notes: 'Begin water loading' },
+      { day: 'Monday (6 out)', water: normalWater * 1.75, notes: 'Continue loading' },
+      { day: 'Tuesday (5 out)', water: normalWater * 2, notes: 'Peak water intake' },
+      { day: 'Wednesday (4 out)', water: normalWater * 2, notes: 'Maintain high intake' },
+      { day: 'Thursday (3 out)', water: normalWater * 1.5, notes: 'Begin tapering' },
+      { day: 'Friday (2 out)', water: normalWater * 0.75, notes: 'Reduce significantly' },
+      { day: 'Saturday (1 out)', water: normalWater * 0.5, notes: 'Minimal - sips only' },
+      { day: 'Show Day', water: 'Sips as needed', notes: 'Small amounts between judging' }
+    ];
+  },
+
+  generateCarbProtocol: function(normalCarbs) {
+    return [
+      { day: 'Sunday (7 out)', carbs: normalCarbs * 0.5, notes: 'Begin depletion' },
+      { day: 'Monday (6 out)', carbs: normalCarbs * 0.25, notes: 'Low carb + depletion workout' },
+      { day: 'Tuesday (5 out)', carbs: normalCarbs * 0.25, notes: 'Very low - deplete glycogen' },
+      { day: 'Wednesday (4 out)', carbs: normalCarbs * 0.25, notes: 'Final depletion day' },
+      { day: 'Thursday (3 out)', carbs: normalCarbs * 2, notes: 'Begin carb load' },
+      { day: 'Friday (2 out)', carbs: normalCarbs * 2.5, notes: 'Peak carb load' },
+      { day: 'Saturday (1 out)', carbs: normalCarbs * 1.5, notes: 'Moderate - top off' },
+      { day: 'Show Day', carbs: 'As needed', notes: 'Quick carbs backstage if flat' }
+    ];
+  },
+
+  generateSodiumProtocol: function() {
+    return [
+      { day: 'Sunday-Wednesday', sodium: 'High (4000-5000mg)', notes: 'Load sodium with water' },
+      { day: 'Thursday', sodium: 'Moderate (2500mg)', notes: 'Begin reduction' },
+      { day: 'Friday', sodium: 'Low (1000mg)', notes: 'Minimal added salt' },
+      { day: 'Saturday', sodium: 'Very Low (500mg)', notes: 'Avoid added salt' },
+      { day: 'Show Day', sodium: 'Minimal', notes: 'Small amount can help fullness' }
+    ];
+  },
+
+  generateDailySchedule: function(params) {
+    return {
+      sevenOut: {
+        training: 'Full body pump workout - high reps, moderate weight',
+        cardio: '20-30 min low intensity',
+        meals: '5-6 meals, begin water loading',
+        notes: 'Last heavy workout of the week'
+      },
+      sixOut: {
+        training: 'Depletion workout - high reps, supersets, minimal rest',
+        cardio: '30-45 min',
+        meals: 'Low carb, high protein',
+        notes: 'Goal is glycogen depletion'
+      },
+      fiveOut: {
+        training: 'Light depletion or rest',
+        cardio: '20-30 min',
+        meals: 'Very low carb',
+        notes: 'Preserve energy'
+      },
+      fourOut: {
+        training: 'Rest or very light posing',
+        cardio: 'None or 15 min',
+        meals: 'Low carb, final depletion',
+        notes: 'Prepare for carb load'
+      },
+      threeOut: {
+        training: 'Rest - posing practice only',
+        cardio: 'None',
+        meals: 'Begin carb loading - every 2-3 hours',
+        notes: 'Monitor fullness in mirror'
+      },
+      twoOut: {
+        training: 'Rest - posing practice',
+        cardio: 'None',
+        meals: 'Peak carb loading',
+        notes: 'Watch for spillover (soft look)'
+      },
+      oneOut: {
+        training: 'Rest - final posing practice',
+        cardio: 'None',
+        meals: 'Moderate carbs, reduce water',
+        notes: 'Final adjustments based on look'
+      }
+    };
+  },
+
+  getShowDayProtocol: function() {
+    return {
+      wakeUp: 'Assess condition in mirror',
+      breakfast: 'Small meal - rice cakes, honey, small protein',
+      prePrejudging: 'Quick carbs 30-60 min before (rice cakes, candy)',
+      pump: 'Light pump-up backstage with resistance bands',
+      betweenRounds: 'Sip water, small carbs if looking flat',
+      finals: 'Repeat pump-up protocol',
+      celebration: 'Enjoy - you earned it!'
+    };
+  },
+
+  getWarnings: function() {
+    return [
+      'Never try a new peak week protocol for the first time at a major show',
+      'Practice your peak week during prep to see how your body responds',
+      'If you spill over (look watery), reduce carbs and increase light activity',
+      'Extreme water restriction can be dangerous - never cut water completely',
+      'Trust your coach - dont make last-minute panic changes',
+      'Peak week is 5% of the equation - 12-16 weeks of prep is 95%'
+    ];
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 8. PERIODIZATION MODEL SELECTOR
+// Evidence-based training periodization
+// ───────────────────────────────────────────────────────────────────────────
+const PeriodizationModels = {
+  models: {
+    linear: {
+      name: 'Linear Periodization',
+      description: 'Progressive increase in intensity with decrease in volume over time',
+      bestFor: ['Beginners', 'Strength peaking', 'Simple programming'],
+      structure: {
+        phase1: { name: 'Hypertrophy', weeks: 4, reps: '10-12', intensity: '65-75%' },
+        phase2: { name: 'Strength', weeks: 4, reps: '6-8', intensity: '75-85%' },
+        phase3: { name: 'Power', weeks: 3, reps: '3-5', intensity: '85-95%' },
+        phase4: { name: 'Deload', weeks: 1, reps: '8-10', intensity: '60%' }
+      },
+      pros: ['Simple to implement', 'Good for beginners', 'Clear progression'],
+      cons: ['Can lead to plateau', 'Less variety', 'May lose adaptations from earlier phases']
+    },
+
+    dup: {
+      name: 'Daily Undulating Periodization',
+      description: 'Vary intensity and volume within each week',
+      bestFor: ['Intermediate/Advanced', 'Hypertrophy', 'Avoiding plateaus'],
+      structure: {
+        day1: { name: 'Hypertrophy', reps: '10-12', intensity: '65-75%', rest: '60-90s' },
+        day2: { name: 'Strength', reps: '4-6', intensity: '80-87%', rest: '3-5min' },
+        day3: { name: 'Power', reps: '2-4', intensity: '87-93%', rest: '3-5min' }
+      },
+      weeklyExample: [
+        'Monday: Hypertrophy (10-12 reps)',
+        'Wednesday: Strength (4-6 reps)',
+        'Friday: Power (2-4 reps)'
+      ],
+      pros: ['Prevents accommodation', 'Better for hypertrophy', 'More variety'],
+      cons: ['More complex', 'Harder to track progress', 'Requires more planning']
+    },
+
+    block: {
+      name: 'Block Periodization',
+      description: 'Concentrated training phases focusing on specific qualities',
+      bestFor: ['Advanced athletes', 'Peaking for competition', 'Specific goals'],
+      structure: {
+        accumulation: { name: 'Accumulation', weeks: 4, focus: 'Volume/Hypertrophy', intensity: '60-75%' },
+        transmutation: { name: 'Transmutation', weeks: 3, focus: 'Strength', intensity: '75-90%' },
+        realization: { name: 'Realization', weeks: 2, focus: 'Peaking/Power', intensity: '90-100%' }
+      },
+      pros: ['Concentrated adaptations', 'Good for peaking', 'Allows full recovery'],
+      cons: ['Complex', 'Can lose previous adaptations', 'Requires experience']
+    },
+
+    conjugate: {
+      name: 'Conjugate/Westside Method',
+      description: 'Concurrent training of multiple qualities using exercise rotation',
+      bestFor: ['Powerlifters', 'Advanced strength athletes', 'Breaking plateaus'],
+      structure: {
+        maxEffort: { description: 'Work up to 1-3RM, rotate exercises weekly' },
+        dynamicEffort: { description: '8-12 sets x 2-3 reps at 50-60% with bands/chains' },
+        repetition: { description: 'High rep accessory work for weak points' }
+      },
+      weeklyExample: [
+        'Monday: Max Effort Upper',
+        'Tuesday: Max Effort Lower',
+        'Thursday: Dynamic Effort Upper',
+        'Friday: Dynamic Effort Lower'
+      ],
+      pros: ['Prevents accommodation', 'Trains all qualities', 'Addresses weak points'],
+      cons: ['Very complex', 'Requires special equipment', 'Not ideal for beginners']
+    }
+  },
+
+  /**
+   * Recommend periodization model based on user profile
+   */
+  recommend: function(params) {
+    const { experience, goal, availableDays, equipment } = params;
+
+    if (experience === 'beginner') {
+      return {
+        recommended: 'linear',
+        reason: 'Simple progression allows beginners to build foundation and learn movements'
+      };
+    }
+
+    if (goal === 'hypertrophy') {
+      return {
+        recommended: 'dup',
+        reason: 'Research shows DUP produces slightly better hypertrophy outcomes'
+      };
+    }
+
+    if (goal === 'competition' || goal === 'peaking') {
+      return {
+        recommended: 'block',
+        reason: 'Block periodization is optimal for peaking at a specific date'
+      };
+    }
+
+    if (experience === 'advanced' && goal === 'strength') {
+      return {
+        recommended: 'conjugate',
+        reason: 'Conjugate method prevents accommodation in advanced lifters'
+      };
+    }
+
+    return {
+      recommended: 'dup',
+      reason: 'DUP offers good balance of simplicity and effectiveness for most goals'
+    };
+  },
+
+  getModel: function(modelName) {
+    return this.models[modelName];
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 9. DELOAD WEEK GENERATOR
+// Recovery and adaptation optimization
+// ───────────────────────────────────────────────────────────────────────────
+const DeloadGenerator = {
+  strategies: {
+    volumeDeload: {
+      name: 'Volume Reduction',
+      description: 'Maintain intensity, reduce sets by 40-50%',
+      application: 'Best for strength-focused training',
+      example: 'If normally doing 4 sets, do 2 sets at same weight'
+    },
+    intensityDeload: {
+      name: 'Intensity Reduction',
+      description: 'Maintain volume, reduce weight by 40-50%',
+      application: 'Best for hypertrophy-focused training',
+      example: 'If normally using 100kg, use 50-60kg for same sets/reps'
+    },
+    frequencyDeload: {
+      name: 'Frequency Reduction',
+      description: 'Train fewer days, maintain intensity and volume per session',
+      application: 'Best when feeling systemically fatigued',
+      example: 'If training 6 days, train 3-4 days'
+    },
+    activeRecovery: {
+      name: 'Active Recovery Week',
+      description: 'Light movement, mobility work, no resistance training',
+      application: 'When very overtrained or after competition',
+      example: 'Walking, swimming, yoga, stretching only'
+    }
+  },
+
+  /**
+   * Generate deload protocol
+   * @param {Object} params - Training state parameters
+   * @returns {Object} Deload protocol
+   */
+  generate: function(params) {
+    const { currentProgram, fatigueLevel, weeksTraining, goal } = params;
+
+    // Select deload strategy
+    const strategy = this.selectStrategy(fatigueLevel, goal);
+
+    // Generate week structure
+    const deloadWeek = this.generateWeek(currentProgram, strategy);
+
+    return {
+      strategy: this.strategies[strategy],
+      week: deloadWeek,
+      nutrition: this.getNutritionGuidelines(goal),
+      recovery: this.getRecoveryProtocol(),
+      returnToTraining: this.getReturnGuidelines()
+    };
+  },
+
+  selectStrategy: function(fatigueLevel, goal) {
+    if (fatigueLevel === 'severe') return 'activeRecovery';
+    if (goal === 'strength') return 'volumeDeload';
+    if (goal === 'hypertrophy') return 'intensityDeload';
+    return 'volumeDeload';
+  },
+
+  generateWeek: function(currentProgram, strategy) {
+    // Apply deload multipliers
+    const multipliers = {
+      volumeDeload: { sets: 0.5, weight: 1.0, reps: 1.0 },
+      intensityDeload: { sets: 1.0, weight: 0.6, reps: 1.0 },
+      frequencyDeload: { sets: 1.0, weight: 0.9, reps: 1.0, days: 0.5 },
+      activeRecovery: { sets: 0, weight: 0, reps: 0 }
+    };
+
+    return {
+      multipliers: multipliers[strategy],
+      guidelines: [
+        'Focus on movement quality over intensity',
+        'Leave the gym feeling refreshed, not fatigued',
+        'Use this time to work on mobility and flexibility',
+        'Get extra sleep (aim for 8-9 hours)'
+      ]
+    };
+  },
+
+  getNutritionGuidelines: function(goal) {
+    return {
+      calories: goal === 'cut' ? 'Slight deficit (-300)' : 'Maintenance or slight surplus',
+      protein: 'Maintain high protein (2g/kg) for recovery',
+      carbs: 'Moderate - support recovery without excess',
+      hydration: 'Increase water intake to support recovery processes'
+    };
+  },
+
+  getRecoveryProtocol: function() {
+    return [
+      'Sleep: 8-9 hours per night',
+      'Stress management: meditation, light walks',
+      'Mobility: 15-20 min daily stretching/foam rolling',
+      'Active recovery: light swimming, walking, cycling',
+      'Massage or self-myofascial release if available'
+    ];
+  },
+
+  getReturnGuidelines: function() {
+    return {
+      week1PostDeload: 'Resume at 90% of pre-deload volume',
+      week2PostDeload: 'Return to full volume, may exceed previous',
+      signs: [
+        'Should feel stronger and more recovered',
+        'If still fatigued, extend deload or investigate other factors',
+        'Use increased performance as motivation'
+      ]
+    };
+  },
+
+  determineDeloadTiming: function(params) {
+    const { weeksTraining, performanceDecline, fatigueSymptoms } = params;
+
+    // Auto-regulate based on signals
+    if (performanceDecline > 10 || fatigueSymptoms >= 3) {
+      return { needed: true, urgency: 'Immediate' };
+    }
+
+    if (weeksTraining >= 6 && weeksTraining < 8) {
+      return { needed: true, urgency: 'Soon (within 1-2 weeks)' };
+    }
+
+    if (weeksTraining >= 8) {
+      return { needed: true, urgency: 'Overdue - deload now' };
+    }
+
+    return { needed: false, recommendation: `Continue training. Consider deload in ${8 - weeksTraining} weeks.` };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 10. PROGRESSIVE OVERLOAD TRACKER
+// Track and recommend progression
+// ───────────────────────────────────────────────────────────────────────────
+const ProgressiveOverloadTracker = {
+  /**
+   * Calculate volume load
+   */
+  calculateVolumeLoad: function(sets, reps, weight) {
+    return sets * reps * weight;
+  },
+
+  /**
+   * Track weekly volume
+   */
+  calculateWeeklyVolume: function(workouts) {
+    return workouts.reduce((total, workout) => {
+      const workoutVolume = workout.exercises.reduce((exTotal, ex) => {
+        return exTotal + this.calculateVolumeLoad(ex.sets, ex.reps, ex.weight);
+      }, 0);
+      return total + workoutVolume;
+    }, 0);
+  },
+
+  /**
+   * Recommend progression based on performance
+   */
+  recommendProgression: function(exercise) {
+    const { targetReps, achievedReps, currentWeight, history } = exercise;
+
+    // If hit or exceeded target reps on all sets
+    if (achievedReps >= targetReps) {
+      // Recommend weight increase
+      const increase = this.calculateWeightIncrease(exercise);
+      return {
+        action: 'increase_weight',
+        amount: increase,
+        newWeight: currentWeight + increase,
+        reason: `Achieved ${achievedReps} reps (target: ${targetReps})`
+      };
+    }
+
+    // If within 1-2 reps of target
+    if (achievedReps >= targetReps - 2) {
+      return {
+        action: 'maintain',
+        reason: 'Building strength at current weight',
+        tip: 'Try to add 1 rep next session'
+      };
+    }
+
+    // If significantly under target
+    return {
+      action: 'evaluate',
+      reason: 'Missed target by 3+ reps',
+      suggestions: [
+        'Check recovery (sleep, nutrition, stress)',
+        'Consider if weight was too ambitious',
+        'Evaluate fatigue accumulation'
+      ]
+    };
+  },
+
+  calculateWeightIncrease: function(exercise) {
+    const { type, currentWeight } = exercise;
+
+    // Compound vs isolation
+    if (['squat', 'deadlift', 'benchPress', 'row', 'overheadPress'].includes(type)) {
+      return currentWeight < 60 ? 2.5 : 5; // kg
+    }
+
+    // Isolation exercises
+    return 2.5; // kg
+  },
+
+  /**
+   * Progression methods
+   */
+  progressionMethods: {
+    weightProgression: {
+      name: 'Weight Progression',
+      description: 'Add weight when you hit target reps',
+      example: 'Week 1: 100kg x 8, Week 2: 102.5kg x 8'
+    },
+    repProgression: {
+      name: 'Rep Progression',
+      description: 'Add reps within a range before adding weight',
+      example: 'Week 1: 100kg x 8, Week 2: 100kg x 9, Week 3: 100kg x 10, Week 4: 105kg x 8'
+    },
+    setProgression: {
+      name: 'Set Progression',
+      description: 'Add sets to increase volume',
+      example: 'Week 1: 3x10, Week 2: 4x10, Week 3: 5x10'
+    },
+    doubleProgression: {
+      name: 'Double Progression',
+      description: 'Progress reps within a range, then increase weight',
+      example: 'Target: 8-12 reps. Add reps until 12, then add weight and start at 8'
+    },
+    densityProgression: {
+      name: 'Density Progression',
+      description: 'Same work in less time (reduce rest periods)',
+      example: 'Week 1: 90s rest, Week 2: 75s rest, Week 3: 60s rest'
+    }
+  },
+
+  /**
+   * Check for plateau
+   */
+  detectPlateau: function(history) {
+    if (history.length < 4) return { plateau: false, reason: 'Not enough data' };
+
+    const recent4Weeks = history.slice(-4);
+    const volumeChange = recent4Weeks[3].volume - recent4Weeks[0].volume;
+    const percentChange = (volumeChange / recent4Weeks[0].volume) * 100;
+
+    if (percentChange < 2) {
+      return {
+        plateau: true,
+        duration: '4+ weeks',
+        suggestions: [
+          'Change rep ranges (if doing 8-12, try 4-6)',
+          'Vary exercise selection',
+          'Take a deload week',
+          'Assess recovery factors',
+          'Consider advanced techniques (drop sets, rest-pause)'
+        ]
+      };
+    }
+
+    return { plateau: false, progressRate: `${percentChange.toFixed(1)}% volume increase` };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 11. SLEEP OPTIMIZATION GUIDE
+// Evidence-based sleep recommendations for athletes
+// ───────────────────────────────────────────────────────────────────────────
+const SleepOptimization = {
+  recommendations: {
+    duration: {
+      minimum: 7,
+      optimal: '8-9',
+      athletes: '9-10 for heavy training periods',
+      research: 'Sleep extension studies show improved performance with 9+ hours'
+    },
+
+    timing: {
+      consistency: 'Same bedtime/waketime daily (±30 min)',
+      optimalBedtime: '10-11 PM for most people',
+      preSleepRoutine: '30-60 min wind-down without screens'
+    },
+
+    environment: {
+      temperature: '65-68°F (18-20°C)',
+      darkness: 'Complete darkness or sleep mask',
+      noise: 'Quiet or white noise',
+      bedding: 'Comfortable mattress and pillows'
+    }
+  },
+
+  /**
+   * Calculate sleep score and recommendations
+   */
+  assessSleep: function(params) {
+    const { hoursSlept, wakeUps, timeToSleep, sleepTime, wakeTime, trainingIntensity } = params;
+
+    let score = 0;
+    const issues = [];
+    const recommendations = [];
+
+    // Duration scoring
+    if (hoursSlept >= 8) score += 30;
+    else if (hoursSlept >= 7) score += 20;
+    else { score += 10; issues.push('Insufficient sleep duration'); }
+
+    // Wake-ups scoring
+    if (wakeUps === 0) score += 25;
+    else if (wakeUps <= 1) score += 20;
+    else { score += 10; issues.push('Frequent night wakings'); }
+
+    // Time to fall asleep
+    if (timeToSleep <= 15) score += 25;
+    else if (timeToSleep <= 30) score += 20;
+    else { score += 10; issues.push('Difficulty falling asleep'); }
+
+    // Consistency (simplified)
+    score += 20; // Assume consistent for now
+
+    // Generate recommendations
+    if (hoursSlept < 8 && trainingIntensity === 'high') {
+      recommendations.push('Increase sleep to 9+ hours during heavy training');
+    }
+
+    if (timeToSleep > 20) {
+      recommendations.push('Avoid screens 1 hour before bed');
+      recommendations.push('Try magnesium supplementation (200-400mg)');
+    }
+
+    if (wakeUps > 1) {
+      recommendations.push('Keep bedroom cooler (65-68°F)');
+      recommendations.push('Avoid fluids 2 hours before bed');
+    }
+
+    return {
+      score: Math.min(score, 100),
+      rating: this.getRating(score),
+      issues,
+      recommendations,
+      impactOnTraining: this.getTrainingImpact(score)
+    };
+  },
+
+  getRating: function(score) {
+    if (score >= 90) return 'Excellent';
+    if (score >= 75) return 'Good';
+    if (score >= 60) return 'Fair';
+    return 'Poor - prioritize sleep improvement';
+  },
+
+  getTrainingImpact: function(score) {
+    if (score >= 90) return 'Optimal recovery and performance';
+    if (score >= 75) return 'Adequate for most training';
+    if (score >= 60) return 'May limit recovery and strength gains';
+    return 'Significantly impacting muscle growth and strength';
+  },
+
+  hormonalEffects: {
+    growthHormone: {
+      peak: 'First 3-4 hours of sleep (deep sleep)',
+      deficitImpact: 'Up to 70% reduction with sleep deprivation',
+      optimization: 'Prioritize early sleep; avoid late nights'
+    },
+    testosterone: {
+      peak: 'REM sleep and early morning',
+      deficitImpact: '10-15% reduction per hour below 8 hours',
+      optimization: 'Consistent 7-9 hours maintains healthy levels'
+    },
+    cortisol: {
+      normal: 'Peaks in morning, lowest at night',
+      deficitImpact: 'Elevated throughout day with poor sleep',
+      optimization: 'Regular sleep schedule normalizes rhythm'
+    }
+  },
+
+  supplements: [
+    { name: 'Magnesium', dose: '200-400mg', timing: '30-60 min before bed', evidence: 'Strong' },
+    { name: 'Melatonin', dose: '0.5-3mg', timing: '30 min before bed', evidence: 'Moderate (short-term use)' },
+    { name: 'Glycine', dose: '3g', timing: 'Before bed', evidence: 'Moderate' },
+    { name: 'L-Theanine', dose: '200mg', timing: 'Before bed', evidence: 'Moderate' },
+    { name: 'Ashwagandha', dose: '300-600mg', timing: 'Evening', evidence: 'Moderate (also reduces cortisol)' }
+  ]
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 12. RECOVERY READINESS ASSESSMENT
+// Daily training readiness evaluation
+// ───────────────────────────────────────────────────────────────────────────
+const RecoveryReadinessAssessment = {
+  /**
+   * Assess daily training readiness
+   * @param {Object} params - Daily metrics
+   * @returns {Object} Readiness score and recommendations
+   */
+  assess: function(params) {
+    const {
+      sleepQuality, // 1-10
+      sleepHours,
+      musclesSoreness, // 1-10 (10 = very sore)
+      energyLevel, // 1-10
+      motivation, // 1-10
+      restingHeartRate, // compared to baseline
+      gripStrength, // optional: compared to baseline
+      mood, // 1-10
+      stress // 1-10 (10 = very stressed)
+    } = params;
+
+    const scores = {
+      sleep: this.scoreSleep(sleepQuality, sleepHours),
+      soreness: this.scoreSoreness(musclesSoreness),
+      energy: energyLevel * 10,
+      motivation: motivation * 10,
+      hrv: this.scoreHRV(restingHeartRate),
+      mood: mood * 10,
+      stress: (10 - stress) * 10
+    };
+
+    const totalScore = Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length;
+
+    return {
+      overallScore: Math.round(totalScore),
+      category: this.categorize(totalScore),
+      componentScores: scores,
+      recommendation: this.getRecommendation(totalScore, scores),
+      trainingModification: this.getTrainingMod(totalScore)
+    };
+  },
+
+  scoreSleep: function(quality, hours) {
+    let score = quality * 5; // 0-50
+    if (hours >= 8) score += 50;
+    else if (hours >= 7) score += 35;
+    else if (hours >= 6) score += 20;
+    else score += 10;
+    return Math.min(score, 100);
+  },
+
+  scoreSoreness: function(soreness) {
+    return (10 - soreness) * 10; // Invert: less sore = higher score
+  },
+
+  scoreHRV: function(restingHR) {
+    // Simplified: compare to assumed baseline
+    // In reality, this would compare to individual's baseline
+    if (!restingHR) return 70; // Default if not measured
+    if (restingHR <= 60) return 90;
+    if (restingHR <= 70) return 75;
+    if (restingHR <= 80) return 60;
+    return 40;
+  },
+
+  categorize: function(score) {
+    if (score >= 85) return { level: 'Excellent', color: 'green', emoji: '🟢' };
+    if (score >= 70) return { level: 'Good', color: 'lightgreen', emoji: '🟡' };
+    if (score >= 55) return { level: 'Moderate', color: 'yellow', emoji: '🟠' };
+    if (score >= 40) return { level: 'Low', color: 'orange', emoji: '🔴' };
+    return { level: 'Poor', color: 'red', emoji: '⛔' };
+  },
+
+  getRecommendation: function(score, components) {
+    const recommendations = [];
+
+    if (components.sleep < 60) {
+      recommendations.push('Priority: Improve sleep before next heavy session');
+    }
+    if (components.soreness < 50) {
+      recommendations.push('Consider active recovery or targeting different muscle groups');
+    }
+    if (components.stress > 70) {
+      recommendations.push('High stress detected - training may help or consider light session');
+    }
+    if (components.energy < 50) {
+      recommendations.push('Low energy - check nutrition and hydration');
+    }
+
+    if (score >= 80) {
+      recommendations.push('Great day for heavy/intense training');
+    } else if (score >= 60) {
+      recommendations.push('Moderate training appropriate - listen to your body');
+    } else {
+      recommendations.push('Consider light training, active recovery, or rest');
+    }
+
+    return recommendations;
+  },
+
+  getTrainingMod: function(score) {
+    if (score >= 85) return { intensity: '100%', volume: '100%', note: 'Push hard today' };
+    if (score >= 70) return { intensity: '90-100%', volume: '90-100%', note: 'Train normally' };
+    if (score >= 55) return { intensity: '80-90%', volume: '75-90%', note: 'Reduce slightly' };
+    if (score >= 40) return { intensity: '70-80%', volume: '50-75%', note: 'Light session' };
+    return { intensity: '0-60%', volume: '0-50%', note: 'Rest or very light movement' };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 13. STRESS & CORTISOL MANAGEMENT GUIDE
+// Managing stress for optimal muscle growth
+// ───────────────────────────────────────────────────────────────────────────
+const StressManagement = {
+  cortisolInfo: {
+    function: 'Catabolic hormone - breaks down tissue for energy',
+    normalPattern: 'High in morning, low at night',
+    chronicElevation: [
+      'Muscle protein breakdown',
+      'Increased fat storage (especially abdominal)',
+      'Impaired recovery',
+      'Reduced testosterone',
+      'Weakened immune system'
+    ],
+    acuteVsChronic: {
+      acute: 'Short-term elevation from training is BENEFICIAL - signals adaptation',
+      chronic: 'Long-term elevation from life stress is HARMFUL - impairs recovery'
+    }
+  },
+
+  /**
+   * Assess stress impact on training
+   */
+  assessStressImpact: function(params) {
+    const { workStress, sleepQuality, lifeDemands, trainingVolume, nutrition } = params;
+
+    let totalStressLoad = 0;
+    totalStressLoad += workStress * 2;
+    totalStressLoad += (10 - sleepQuality) * 2;
+    totalStressLoad += lifeDemands * 1.5;
+    totalStressLoad += trainingVolume * 1;
+    totalStressLoad += nutrition === 'deficit' ? 15 : 0;
+
+    return {
+      stressLoad: totalStressLoad,
+      category: this.categorizeStress(totalStressLoad),
+      recommendations: this.getRecommendations(totalStressLoad, params),
+      trainingAdjustment: this.getTrainingAdjustment(totalStressLoad)
+    };
+  },
+
+  categorizeStress: function(load) {
+    if (load <= 30) return { level: 'Low', impact: 'Minimal impact on training' };
+    if (load <= 50) return { level: 'Moderate', impact: 'May slightly reduce recovery' };
+    if (load <= 70) return { level: 'High', impact: 'Likely impacting recovery and gains' };
+    return { level: 'Very High', impact: 'Significantly compromising results' };
+  },
+
+  getRecommendations: function(load, params) {
+    const recs = [];
+
+    if (load > 50) {
+      recs.push('Consider reducing training volume by 20-30%');
+      recs.push('Prioritize sleep above all else');
+    }
+
+    if (params.sleepQuality < 7) {
+      recs.push('Improve sleep hygiene - this is your #1 lever');
+    }
+
+    if (params.nutrition === 'deficit') {
+      recs.push('Consider diet break or refeed days to reduce metabolic stress');
+    }
+
+    // General recommendations
+    recs.push(...[
+      'Daily 10-min meditation or deep breathing',
+      'Limit caffeine after 2pm',
+      'Schedule dedicated relaxation time',
+      'Consider adaptogenic supplements (ashwagandha, rhodiola)'
+    ]);
+
+    return recs;
+  },
+
+  getTrainingAdjustment: function(load) {
+    if (load <= 30) return 'Train as planned';
+    if (load <= 50) return 'Monitor recovery closely, be willing to auto-regulate';
+    if (load <= 70) return 'Reduce volume 20%, maintain intensity';
+    return 'Consider deload week or significant volume reduction';
+  },
+
+  managementStrategies: {
+    immediate: [
+      { name: 'Box breathing', duration: '5 min', description: '4 sec inhale, 4 sec hold, 4 sec exhale, 4 sec hold' },
+      { name: 'Cold exposure', duration: '2-5 min', description: 'Cold shower to activate parasympathetic system' },
+      { name: 'Walking', duration: '15-30 min', description: 'Light movement reduces cortisol' }
+    ],
+    daily: [
+      { name: 'Meditation', duration: '10-20 min', description: 'Reduces baseline cortisol levels' },
+      { name: 'Nature exposure', duration: '20+ min', description: 'Being in nature lowers stress hormones' },
+      { name: 'Social connection', description: 'Quality time with friends/family' },
+      { name: 'Journaling', duration: '10 min', description: 'Writing reduces rumination' }
+    ],
+    supplements: [
+      { name: 'Ashwagandha', dose: '300-600mg', evidence: 'Strong - reduces cortisol 15-30%' },
+      { name: 'Rhodiola Rosea', dose: '200-400mg', evidence: 'Moderate - adaptogenic effects' },
+      { name: 'Phosphatidylserine', dose: '300-800mg', evidence: 'Moderate - blunts cortisol response' },
+      { name: 'Magnesium', dose: '200-400mg', evidence: 'Strong - calming effect' }
+    ]
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 14. GENETIC POTENTIAL ESTIMATOR (Casey Butt Formula)
+// Maximum muscular bodyweight estimation
+// ───────────────────────────────────────────────────────────────────────────
+const GeneticPotentialCalculator = {
+  /**
+   * Calculate maximum muscular potential using Casey Butt formula
+   * @param {Object} measurements - Body measurements
+   * @returns {Object} Genetic potential estimates
+   */
+  calculate: function(measurements) {
+    const { heightCm, wristCm, ankleCm, targetBodyFat } = measurements;
+
+    const heightInches = heightCm / 2.54;
+    const wristInches = wristCm / 2.54;
+    const ankleInches = ankleCm / 2.54;
+
+    // Casey Butt formula for maximum lean body mass
+    const maxLBM = heightInches * (wristInches / 7.0) * (1 + ankleInches / 17);
+    const maxLBMKg = maxLBM * 0.453592;
+
+    // Calculate total weight at target body fat
+    const maxWeightKg = maxLBMKg / (1 - targetBodyFat / 100);
+
+    // Estimate maximum measurements
+    const maxMeasurements = this.estimateMaxMeasurements(heightCm, wristCm, ankleCm);
+
+    return {
+      maxLeanMassKg: Math.round(maxLBMKg * 10) / 10,
+      maxLeanMassLbs: Math.round(maxLBM * 10) / 10,
+      maxWeightAtBF: {
+        [`${targetBodyFat}%`]: Math.round(maxWeightKg * 10) / 10,
+        '10%': Math.round(maxLBMKg / 0.9 * 10) / 10,
+        '12%': Math.round(maxLBMKg / 0.88 * 10) / 10,
+        '15%': Math.round(maxLBMKg / 0.85 * 10) / 10
+      },
+      maxMeasurements,
+      frameSize: this.assessFrameSize(wristCm, heightCm),
+      timeToMaxPotential: this.estimateTimeToMax(),
+      notes: [
+        'These are estimates for drug-free athletes with optimal training and nutrition',
+        'Individual genetics can vary ±10% from these calculations',
+        'Most people reach 90% of potential within 5-7 years of serious training',
+        'Reaching 100% requires many years and exceptional dedication'
+      ]
+    };
+  },
+
+  estimateMaxMeasurements: function(heightCm, wristCm, ankleCm) {
+    // Based on Casey Butt's frame-size adjusted formulas
+    return {
+      chest: Math.round(wristCm * 6.5),
+      arms: Math.round(wristCm * 2.52),
+      forearms: Math.round(wristCm * 1.88),
+      neck: Math.round(wristCm * 2.32),
+      thighs: Math.round(ankleCm * 2.42),
+      calves: Math.round(ankleCm * 1.92)
+    };
+  },
+
+  assessFrameSize: function(wristCm, heightCm) {
+    const ratio = wristCm / (heightCm / 100);
+
+    if (ratio < 9.5) return { size: 'Small', potential: 'Lower total mass, can achieve excellent definition' };
+    if (ratio < 10.5) return { size: 'Medium', potential: 'Average frame, balanced potential' };
+    return { size: 'Large', potential: 'Higher mass potential, naturally thicker joints' };
+  },
+
+  estimateTimeToMax: function() {
+    return {
+      year1: '50-60% of maximum potential achievable',
+      year2: '70-75% achievable',
+      year3: '80-85% achievable',
+      year5: '90-92% achievable',
+      year10: '95-98% achievable',
+      note: 'Diminishing returns - first 2-3 years show fastest progress'
+    };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 15. IDEAL BODY MEASUREMENTS CALCULATOR
+// Classic physique proportions (Steve Reeves ratios)
+// ───────────────────────────────────────────────────────────────────────────
+const IdealMeasurementsCalculator = {
+  // Steve Reeves' classic proportions
+  reevesRatios: {
+    arm: 2.52,        // arm = wrist × 2.52
+    calf: 1.92,       // calf = ankle × 1.92
+    neck: 2.32,       // neck = wrist × 2.32
+    chest: 6.5,       // chest = wrist × 6.5
+    waist: 0.86,      // waist = chest × 0.86
+    thigh: 2.42,      // thigh = ankle × 2.42
+    hip: 0.85         // hip = chest × 0.85
+  },
+
+  // Grecian ideal (height-based)
+  grecianRatios: {
+    chest: 0.65,      // chest = height × 0.65
+    waist: 0.45,      // waist = height × 0.45
+    hips: 0.55,       // hips = height × 0.55
+    thigh: 0.35,      // thigh = height × 0.35
+    arm: 0.25,        // arm = height × 0.25
+    calf: 0.22,       // calf = height × 0.22
+    neck: 0.22        // neck = height × 0.22
+  },
+
+  /**
+   * Calculate ideal measurements
+   */
+  calculate: function(measurements) {
+    const { heightCm, wristCm, ankleCm, currentMeasurements } = measurements;
+
+    const reevesIdeal = this.calculateReeves(wristCm, ankleCm);
+    const grecianIdeal = this.calculateGrecian(heightCm);
+
+    // Compare current to ideal if provided
+    let comparison = null;
+    if (currentMeasurements) {
+      comparison = this.compareToIdeal(currentMeasurements, reevesIdeal);
+    }
+
+    return {
+      reevesIdeal,
+      grecianIdeal,
+      comparison,
+      symmetryRatios: this.getSymmetryRatios(reevesIdeal),
+      goldenRatio: this.explainGoldenRatio()
+    };
+  },
+
+  calculateReeves: function(wristCm, ankleCm) {
+    const chest = Math.round(wristCm * this.reevesRatios.chest * 10) / 10;
+
+    return {
+      arms: Math.round(wristCm * this.reevesRatios.arm * 10) / 10,
+      calves: Math.round(ankleCm * this.reevesRatios.calf * 10) / 10,
+      neck: Math.round(wristCm * this.reevesRatios.neck * 10) / 10,
+      chest,
+      waist: Math.round(chest * this.reevesRatios.waist * 10) / 10,
+      thighs: Math.round(ankleCm * this.reevesRatios.thigh * 10) / 10,
+      hips: Math.round(chest * this.reevesRatios.hip * 10) / 10
+    };
+  },
+
+  calculateGrecian: function(heightCm) {
+    return {
+      chest: Math.round(heightCm * this.grecianRatios.chest * 10) / 10,
+      waist: Math.round(heightCm * this.grecianRatios.waist * 10) / 10,
+      hips: Math.round(heightCm * this.grecianRatios.hips * 10) / 10,
+      thighs: Math.round(heightCm * this.grecianRatios.thigh * 10) / 10,
+      arms: Math.round(heightCm * this.grecianRatios.arm * 10) / 10,
+      calves: Math.round(heightCm * this.grecianRatios.calf * 10) / 10,
+      neck: Math.round(heightCm * this.grecianRatios.neck * 10) / 10
+    };
+  },
+
+  compareToIdeal: function(current, ideal) {
+    const comparison = {};
+
+    Object.keys(ideal).forEach(part => {
+      if (current[part]) {
+        const diff = current[part] - ideal[part];
+        const percentDiff = (diff / ideal[part]) * 100;
+        comparison[part] = {
+          current: current[part],
+          ideal: ideal[part],
+          difference: Math.round(diff * 10) / 10,
+          percentFromIdeal: Math.round(percentDiff * 10) / 10,
+          status: Math.abs(percentDiff) < 5 ? 'Ideal range' : (percentDiff < 0 ? 'Below ideal' : 'Above ideal')
+        };
+      }
+    });
+
+    return comparison;
+  },
+
+  getSymmetryRatios: function(ideal) {
+    return {
+      shoulderToWaist: Math.round((ideal.chest / ideal.waist) * 100) / 100,
+      idealShoulderToWaist: 1.618, // Golden ratio
+      armToNeck: 'Should be equal',
+      calfToArm: 'Should be equal',
+      chestToArm: Math.round((ideal.chest / ideal.arms) * 100) / 100
+    };
+  },
+
+  explainGoldenRatio: function() {
+    return {
+      ratio: 1.618,
+      application: 'Shoulder-to-waist ratio of 1.618 is considered aesthetically ideal',
+      history: 'Used in classical Greek sculpture and Renaissance art',
+      modernUse: 'Still referenced in mens physique judging criteria'
+    };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 16. NAVY BODY FAT CALCULATOR
+// US Navy circumference method
+// ───────────────────────────────────────────────────────────────────────────
+const NavyBodyFatCalculator = {
+  /**
+   * Calculate body fat using Navy method
+   * @param {Object} measurements - Body measurements in cm
+   * @param {string} sex - 'male' or 'female'
+   * @returns {Object} Body fat estimate and category
+   */
+  calculate: function(measurements, sex) {
+    const { heightCm, waistCm, neckCm, hipCm } = measurements;
+
+    let bodyFatPercent;
+
+    if (sex === 'male') {
+      // Men: 86.010 × log10(waist - neck) - 70.041 × log10(height) + 36.76
+      bodyFatPercent = 86.010 * Math.log10(waistCm - neckCm) - 70.041 * Math.log10(heightCm) + 36.76;
+    } else {
+      // Women: 163.205 × log10(waist + hip - neck) - 97.684 × log10(height) - 78.387
+      bodyFatPercent = 163.205 * Math.log10(waistCm + hipCm - neckCm) - 97.684 * Math.log10(heightCm) - 78.387;
+    }
+
+    bodyFatPercent = Math.max(0, Math.round(bodyFatPercent * 10) / 10);
+
+    return {
+      bodyFatPercent,
+      category: this.categorize(bodyFatPercent, sex),
+      leanMassPercent: 100 - bodyFatPercent,
+      accuracy: this.getAccuracyInfo(),
+      recommendations: this.getRecommendations(bodyFatPercent, sex)
+    };
+  },
+
+  categorize: function(bf, sex) {
+    const categories = sex === 'male' ? {
+      essential: { max: 5, name: 'Essential Fat' },
+      athlete: { max: 13, name: 'Athletes' },
+      fitness: { max: 17, name: 'Fitness' },
+      average: { max: 24, name: 'Average' },
+      obese: { max: 100, name: 'Obese' }
+    } : {
+      essential: { max: 13, name: 'Essential Fat' },
+      athlete: { max: 20, name: 'Athletes' },
+      fitness: { max: 24, name: 'Fitness' },
+      average: { max: 31, name: 'Average' },
+      obese: { max: 100, name: 'Obese' }
+    };
+
+    for (const [key, cat] of Object.entries(categories)) {
+      if (bf <= cat.max) {
+        return { category: cat.name, level: key };
+      }
+    }
+  },
+
+  getAccuracyInfo: function() {
+    return {
+      accuracy: '±3-4% compared to DEXA',
+      bestFor: 'Tracking changes over time',
+      limitations: [
+        'Less accurate for very lean or very overweight individuals',
+        'Doesnt distinguish between different fat deposits',
+        'Can be affected by water retention'
+      ],
+      tips: [
+        'Measure at same time of day',
+        'Measure after using bathroom',
+        'Use consistent tension on tape measure',
+        'Take average of 3 measurements'
+      ]
+    };
+  },
+
+  getRecommendations: function(bf, sex) {
+    const target = sex === 'male' ?
+      { competition: '6-8%', athletic: '10-14%', healthy: '14-17%' } :
+      { competition: '14-18%', athletic: '18-22%', healthy: '22-28%' };
+
+    return {
+      targets: target,
+      current: bf,
+      toAthleticRange: sex === 'male' ?
+        (bf > 14 ? `Lose ${Math.round(bf - 14)}% body fat` : 'Already in athletic range') :
+        (bf > 22 ? `Lose ${Math.round(bf - 22)}% body fat` : 'Already in athletic range')
+    };
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 17. ADVANCED TRAINING TECHNIQUES DATABASE
+// Intensity techniques for advanced trainees
+// ───────────────────────────────────────────────────────────────────────────
+const AdvancedTrainingTechniques = {
+  techniques: {
+    dropSets: {
+      name: 'Drop Sets',
+      description: 'Perform set to failure, immediately reduce weight by 20-30%, continue to failure',
+      bestFor: ['Hypertrophy', 'Metabolic stress', 'Time efficiency'],
+      protocol: 'Original weight → -20% → -20% (3 total drops)',
+      whenToUse: 'Last set of exercise, 1-2x per workout',
+      recovery: 'High fatigue - allow 72+ hours before training same muscle',
+      research: 'Shown to increase muscle fiber recruitment and metabolic stress'
+    },
+
+    restPause: {
+      name: 'Rest-Pause Sets',
+      description: 'Perform set to near failure, rest 10-20 seconds, continue for additional reps',
+      bestFor: ['Strength', 'Hypertrophy', 'Recruiting high-threshold motor units'],
+      protocol: 'Set to ~2 RIR → 15 sec rest → reps to failure → 15 sec rest → reps to failure',
+      whenToUse: 'Main compound movements, 1-2 sets per workout',
+      recovery: 'Moderate-high fatigue',
+      research: 'Effective for increasing total volume with heavy loads'
+    },
+
+    myoReps: {
+      name: 'Myo-Reps',
+      description: 'Activation set followed by cluster sets with short rest',
+      bestFor: ['Hypertrophy', 'Time efficiency', 'Accumulating effective reps'],
+      protocol: 'Activation set (12-20 reps to 2-3 RIR) → 5 deep breaths → 3-5 reps → repeat 3-5 times',
+      whenToUse: 'Isolation exercises, machine work',
+      recovery: 'Moderate fatigue',
+      research: 'Developed by Borge Fagerli - maximizes "effective reps" near failure'
+    },
+
+    supersets: {
+      name: 'Supersets',
+      description: 'Two exercises performed back-to-back with no rest',
+      types: {
+        antagonist: 'Opposing muscles (biceps/triceps) - maintains strength',
+        agonist: 'Same muscle - increases fatigue/pump',
+        compound: 'Pre-exhaust or post-exhaust strategies'
+      },
+      bestFor: ['Time efficiency', 'Metabolic stress', 'Pump'],
+      whenToUse: 'Throughout workout, especially when short on time',
+      recovery: 'Low-moderate fatigue for antagonist, higher for agonist'
+    },
+
+    bfr: {
+      name: 'Blood Flow Restriction (BFR)',
+      description: 'Partial restriction of blood flow during light weight training',
+      bestFor: ['Hypertrophy with light loads', 'Rehabilitation', 'Deload periods'],
+      protocol: {
+        pressure: '40-80% arterial occlusion (moderate tightness)',
+        weight: '20-40% 1RM',
+        reps: '30-15-15-15 with 30 sec rest',
+        duration: 'Keep cuffs on for entire 4 sets'
+      },
+      mechanism: 'Metabolite accumulation, cell swelling, hormone response',
+      research: 'Meta-analyses show similar hypertrophy to heavy training when used correctly',
+      caution: 'Not recommended for those with cardiovascular conditions'
+    },
+
+    tempoTraining: {
+      name: 'Tempo Training',
+      description: 'Controlling the speed of each phase of the lift',
+      notation: 'Eccentric-Pause-Concentric-Pause (e.g., 4-1-2-0)',
+      protocols: {
+        hypertrophy: '3-1-2-0 (3 sec eccentric, 1 sec pause, 2 sec concentric)',
+        strength: '2-0-X-0 (2 sec eccentric, explosive concentric)',
+        timeUnderTension: '4-2-4-0 (very slow for metabolic stress)'
+      },
+      bestFor: ['Mind-muscle connection', 'Technique improvement', 'Injury prevention'],
+      whenToUse: 'Accessory exercises, rehabilitation, technique work'
+    },
+
+    giantSets: {
+      name: 'Giant Sets',
+      description: '4+ exercises performed consecutively for same muscle group',
+      bestFor: ['Metabolic conditioning', 'Time efficiency', 'Pre-contest training'],
+      example: 'Chest: Incline Press → Flat Flyes → Dips → Cable Crossover',
+      protocol: 'Perform all exercises, rest 2-3 min, repeat 2-4 rounds',
+      whenToUse: 'Occasionally for shock effect, not as primary training method',
+      recovery: 'Very high fatigue - use sparingly'
+    },
+
+    mechanicalDropSets: {
+      name: 'Mechanical Drop Sets',
+      description: 'Change exercise angle/grip to extend set without reducing weight',
+      example: {
+        triceps: 'Overhead Extension → Pushdown → Close-Grip Push-up',
+        biceps: 'Incline Curl → Standing Curl → Spider Curl',
+        shoulders: 'Seated Press → Standing Press → Push Press'
+      },
+      bestFor: ['Hypertrophy', 'Strength-endurance', 'Mind-muscle connection'],
+      protocol: 'Perform to failure, switch to easier variation, continue'
+    },
+
+    eccentricOverload: {
+      name: 'Eccentric Overload',
+      description: 'Emphasize the lowering phase with heavier than normal loads',
+      protocols: {
+        negative: 'Partner assists concentric, solo slow eccentric',
+        weight_releasers: 'Extra weight drops off at bottom',
+        twoToOne: 'Lift with two limbs, lower with one'
+      },
+      bestFor: ['Strength', 'Breaking plateaus', 'Advanced trainees'],
+      caution: 'Very high muscle damage - requires extended recovery',
+      research: 'Eccentric training produces unique adaptations in muscle architecture'
+    }
+  },
+
+  getRecommendation: function(goal, experience) {
+    const recommendations = {
+      hypertrophy: {
+        beginner: ['Tempo training', 'Supersets (antagonist)'],
+        intermediate: ['Drop sets', 'Rest-pause', 'Myo-reps'],
+        advanced: ['BFR', 'Giant sets', 'Mechanical drop sets']
+      },
+      strength: {
+        beginner: ['Tempo training (technique focus)'],
+        intermediate: ['Rest-pause', 'Eccentric overload (light)'],
+        advanced: ['Eccentric overload', 'Cluster sets']
+      }
+    };
+
+    return recommendations[goal]?.[experience] || recommendations.hypertrophy.intermediate;
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 18. INJURY PREVENTION & MOBILITY GUIDE
+// Prehab exercises and mobility protocols
+// ───────────────────────────────────────────────────────────────────────────
+const InjuryPreventionGuide = {
+  commonIssues: {
+    shoulder: {
+      causes: ['Excessive pressing', 'Poor posture', 'Lack of rear delt work'],
+      prevention: [
+        { exercise: 'Face Pulls', sets: '3x15-20', frequency: 'Every training day' },
+        { exercise: 'External Rotations', sets: '2x15-20', frequency: '3x/week' },
+        { exercise: 'YTWLs', sets: '2x10 each', frequency: '2-3x/week' },
+        { exercise: 'Band Pull-Aparts', sets: '3x20', frequency: 'Daily' }
+      ],
+      ratio: 'Maintain 2:1 pull-to-push ratio',
+      stretches: ['Doorway stretch', 'Sleeper stretch', 'Cross-body stretch']
+    },
+
+    lowerBack: {
+      causes: ['Weak core', 'Poor hip mobility', 'Excessive spinal loading'],
+      prevention: [
+        { exercise: 'Dead Bug', sets: '3x10 each side', frequency: 'Daily' },
+        { exercise: 'Bird Dog', sets: '3x10 each side', frequency: 'Daily' },
+        { exercise: 'McGill Big 3', sets: '3x10 each', frequency: '3x/week' },
+        { exercise: 'Hip Hinge Pattern Work', sets: '2x10', frequency: 'Before deadlifts' }
+      ],
+      stretches: ['Hip flexor stretch', 'Pigeon pose', 'Cat-cow'],
+      programming: 'Limit heavy spinal loading to 2-3x/week'
+    },
+
+    knees: {
+      causes: ['Quad dominance', 'Poor ankle mobility', 'Tracking issues'],
+      prevention: [
+        { exercise: 'Terminal Knee Extensions', sets: '3x15-20', frequency: '3x/week' },
+        { exercise: 'Ankle Mobility Drills', sets: '2 min each', frequency: 'Before squats' },
+        { exercise: 'Single Leg Work', sets: 'Part of program', frequency: '2x/week' },
+        { exercise: 'Hip Strengthening', sets: '3x15', frequency: '2-3x/week' }
+      ],
+      stretches: ['Quad stretch', 'Calf stretch', 'Hip flexor stretch'],
+      technique: 'Ensure proper knee tracking over toes'
+    },
+
+    elbow: {
+      causes: ['Excessive curl volume', 'Grip issues', 'Tricep overuse'],
+      prevention: [
+        { exercise: 'Wrist curls/extensions', sets: '2x15-20', frequency: '2x/week' },
+        { exercise: 'Hammer curls', sets: '2x12-15', frequency: 'Include in arm training' },
+        { exercise: 'Elbow flexion/extension stretches', duration: '30 sec each', frequency: 'Post-workout' }
+      ],
+      recovery: ['Avoid excessive straight bar work', 'Use neutral grip options', 'Ice after training if needed']
+    }
+  },
+
+  mobilityProtocols: {
+    preworkout: {
+      duration: '5-10 minutes',
+      exercises: [
+        'Arm circles',
+        'Hip circles',
+        'Leg swings',
+        'Cat-cow',
+        'World\'s greatest stretch',
+        'Band pull-aparts'
+      ],
+      note: 'Dynamic movements only - save static stretching for post-workout'
+    },
+
+    postworkout: {
+      duration: '10-15 minutes',
+      exercises: [
+        'Static stretch worked muscles (30-60 sec each)',
+        'Foam rolling (30-60 sec per area)',
+        'Light walking (5 min cooldown)'
+      ]
+    },
+
+    dedicatedMobility: {
+      duration: '20-30 minutes',
+      frequency: '2-3x/week',
+      focus: [
+        'Hip mobility (pigeon, 90-90, hip flexor)',
+        'Thoracic mobility (foam roller, rotations)',
+        'Shoulder mobility (wall slides, band work)',
+        'Ankle mobility (wall stretches, squat holds)'
+      ]
+    }
+  },
+
+  warningSignsToStop: [
+    'Sharp pain during exercise',
+    'Pain that worsens with movement',
+    'Numbness or tingling',
+    'Significant swelling',
+    'Pain at rest that doesn\'t improve'
+  ],
+
+  getProtocol: function(bodyPart) {
+    return this.commonIssues[bodyPart] || null;
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 19. HMB SUPPLEMENTATION GUIDE
+// Based on 2025 ISSN Position Stand
+// ───────────────────────────────────────────────────────────────────────────
+const HMBGuide = {
+  overview: {
+    fullName: 'Beta-Hydroxy Beta-Methylbutyrate',
+    whatItIs: 'Metabolite of the amino acid leucine',
+    mechanism: 'Reduces muscle protein breakdown, may enhance protein synthesis',
+    formsAvailable: ['HMB-Ca (calcium salt)', 'HMB-FA (free acid)']
+  },
+
+  dosing: {
+    standard: '3g per day',
+    timing: {
+      hmbCa: '1g, 3x daily with meals',
+      hmbFa: '1-2g, 30-60 minutes pre-workout (faster absorption)'
+    },
+    loading: 'Not required but 2 weeks for full effect'
+  },
+
+  benefits: {
+    proven: [
+      'Reduces muscle protein breakdown',
+      'May preserve muscle during caloric restriction',
+      'May accelerate recovery from intense training',
+      'Beneficial for older adults and aging athletes'
+    ],
+    mayHelp: [
+      'Lean mass gains in untrained individuals',
+      'Performance in endurance activities',
+      'Recovery from muscle-damaging exercise'
+    ],
+    limitedEvidence: [
+      'Significant muscle gains in trained athletes',
+      'Performance enhancement in well-trained individuals'
+    ]
+  },
+
+  whoShouldConsider: [
+    'Older adults (40+) concerned about muscle loss',
+    'During aggressive caloric deficits (competition prep)',
+    'During periods of reduced training (injury, travel)',
+    'Beginners starting resistance training',
+    'Those doing high-volume damaging training'
+  ],
+
+  whoMayNotBenefit: [
+    'Well-trained athletes with adequate nutrition',
+    'Those already consuming sufficient leucine (2-3g per meal)',
+    'Young athletes with optimal recovery'
+  ],
+
+  safetyAndSideEffects: {
+    safety: 'Generally recognized as safe (GRAS)',
+    sideEffects: 'Rare - minor GI discomfort in some',
+    interactions: 'None known',
+    duration: 'Safe for long-term use'
+  },
+
+  research: {
+    source: 'ISSN Position Stand Update (January 2025)',
+    keyFinding: 'Most beneficial for populations prone to muscle loss or during high-stress training',
+    volumeOfResearch: '750+ articles reviewed since 2013 position stand'
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
+// 20. COMBAT SPORTS WEIGHT CUT CALCULATOR
+// Based on 2025 ISSN Position Stand
+// ───────────────────────────────────────────────────────────────────────────
+const CombatSportsWeightCut = {
+  /**
+   * Calculate safe weight cut strategy
+   * @param {Object} params - Athlete parameters
+   * @returns {Object} Weight cut protocol
+   */
+  calculate: function(params) {
+    const { currentWeight, targetWeight, daysUntilWeighIn, competitionType, experienceLevel } = params;
+
+    const weightToCut = currentWeight - targetWeight;
+    const percentToCut = (weightToCut / currentWeight) * 100;
+
+    // Assess safety
+    const safetyAssessment = this.assessSafety(percentToCut, daysUntilWeighIn, experienceLevel);
+
+    // Generate protocol
+    const protocol = this.generateProtocol(params, percentToCut);
+
+    return {
+      weightToCut: Math.round(weightToCut * 10) / 10,
+      percentToCut: Math.round(percentToCut * 10) / 10,
+      safetyAssessment,
+      protocol,
+      rehydration: this.getRehydrationProtocol(params),
+      offSeasonRecommendations: this.getOffSeasonGuidelines(targetWeight)
+    };
+  },
+
+  assessSafety: function(percentToCut, days, experience) {
+    if (percentToCut > 10) {
+      return {
+        safe: false,
+        risk: 'Extreme',
+        recommendation: 'Consider moving up a weight class',
+        healthRisks: ['Severe dehydration', 'Kidney damage', 'Heart strain', 'Death risk']
+      };
+    }
+
+    if (percentToCut > 8) {
+      return {
+        safe: false,
+        risk: 'High',
+        recommendation: 'Only for experienced athletes with medical supervision',
+        healthRisks: ['Significant performance decrease', 'Recovery challenges']
+      };
+    }
+
+    if (percentToCut > 5) {
+      return {
+        safe: experience !== 'beginner',
+        risk: 'Moderate',
+        recommendation: 'Manageable with proper protocol',
+        healthRisks: ['Some performance impact', 'Requires careful rehydration']
+      };
+    }
+
+    return {
+      safe: true,
+      risk: 'Low',
+      recommendation: 'Safe range for most athletes',
+      healthRisks: ['Minimal with proper execution']
+    };
+  },
+
+  generateProtocol: function(params, percentToCut) {
+    const { daysUntilWeighIn, currentWeight, targetWeight } = params;
+
+    // Split weight cut into phases
+    const phases = {
+      basePhase: {
+        name: 'Gradual Weight Loss',
+        duration: `${daysUntilWeighIn - 7} days`,
+        target: 'Lose fat weight through caloric deficit',
+        method: '500-750 cal deficit, high protein (2.5g/kg)',
+        expectedLoss: Math.round(percentToCut * 0.4 * currentWeight / 100)
+      },
+      loadingPhase: {
+        name: 'Water/Sodium Loading',
+        duration: 'Days 7-4 before weigh-in',
+        method: 'Increase water to 7-8L/day, high sodium',
+        purpose: 'Upregulate water excretion mechanisms'
+      },
+      waterCutPhase: {
+        name: 'Water Restriction',
+        duration: 'Days 3-1 before weigh-in',
+        schedule: [
+          { day: 3, water: '50% normal', sodium: 'Low' },
+          { day: 2, water: '25% normal', sodium: 'Very low' },
+          { day: 1, water: 'Sips only', sodium: 'None' }
+        ],
+        expectedLoss: '3-5% bodyweight'
+      },
+      saunaPhase: {
+        name: 'Active Sweating (if needed)',
+        duration: 'Night before or morning of weigh-in',
+        protocol: '15-20 min sauna, 10 min break, repeat',
+        maxSessions: 3,
+        warning: 'Monitor for dizziness, nausea - stop if experiencing'
+      }
+    };
+
+    return phases;
+  },
+
+  getRehydrationProtocol: function(params) {
+    const { targetWeight, timeBetweenWeighInAndFight } = params;
+
+    const rehydrationGoal = Math.round(targetWeight * 0.08); // ~8% bodyweight
+
+    return {
+      goal: `Rehydrate ${rehydrationGoal}kg before competition`,
+      immediatelyPostWeighIn: [
+        'Oral rehydration solution (electrolytes)',
+        'Small easily digestible meal',
+        'Avoid large amounts of plain water (dilutes electrolytes)'
+      ],
+      hourlyIntake: {
+        fluid: '1-1.5L per hour',
+        sodium: '500-700mg per liter',
+        carbs: '30-60g per hour'
+      },
+      foods: [
+        'Rice, pasta, bread',
+        'Lean protein',
+        'Fruit (bananas, dates)',
+        'Avoid high fat, high fiber'
+      ],
+      timeline: {
+        immediate: 'Electrolyte drink + small carb snack',
+        hour1: 'Light meal + continued fluids',
+        hour2_4: 'Moderate meals + sipping fluids',
+        preFight: 'Light snack 1-2 hours before'
+      }
+    };
+  },
+
+  getOffSeasonGuidelines: function(competitionWeight) {
+    const offSeasonWeight = competitionWeight * 1.12; // 12% above
+
+    return {
+      recommendedOffSeasonWeight: Math.round(offSeasonWeight * 10) / 10,
+      maxOffSeasonWeight: Math.round(competitionWeight * 1.15 * 10) / 10,
+      rationale: 'ISSN recommends maintaining 12-15% above competition weight',
+      benefits: [
+        'Less aggressive cuts required',
+        'Better training performance',
+        'Reduced health risks',
+        'Better long-term career health'
+      ]
+    };
+  },
+
+  research: {
+    source: 'ISSN Position Stand (March 2025)',
+    title: 'Nutrition and weight cut strategies for mixed martial arts and combat sports',
+    keyRecommendations: [
+      'Off-season weight should be 12-15% above competition weight',
+      'Gradual weight loss preferred over rapid water cuts',
+      'Rapid weight cuts (>5%) impair performance',
+      'Rehydration critical for performance and safety'
+    ]
+  }
+};
+
+// Export all modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     SCIENTIFIC_REFERENCES,
@@ -1630,6 +3845,27 @@ if (typeof module !== 'undefined' && module.exports) {
     GOLDEN_ERA_METHODOLOGY,
     OneRepMaxCalculator,
     CardioZoneCalculator,
-    EducationalTips
+    EducationalTips,
+    // New Advanced Calculators
+    FFMICalculator,
+    VolumeLandmarksCalculator,
+    BodyRecompCalculator,
+    StrengthScoreCalculator,
+    ReverseDietCalculator,
+    CarbCyclingProtocol,
+    PeakWeekCalculator,
+    PeriodizationModels,
+    DeloadGenerator,
+    ProgressiveOverloadTracker,
+    SleepOptimization,
+    RecoveryReadinessAssessment,
+    StressManagement,
+    GeneticPotentialCalculator,
+    IdealMeasurementsCalculator,
+    NavyBodyFatCalculator,
+    AdvancedTrainingTechniques,
+    InjuryPreventionGuide,
+    HMBGuide,
+    CombatSportsWeightCut
   };
 }
