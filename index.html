@@ -3486,11 +3486,55 @@ function calculate() {
   const cals = tdee + goalAdj[goal];
   const [pPct, cPct, fPct] = splits[macroProfile];
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EVIDENCE-BASED PROTEIN CALCULATION (ISSN Position Stand - Jäger et al. 2017)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Protein is calculated based on BODY WEIGHT (g/kg), not calorie percentage
+  // This prevents absurdly high protein at higher calorie levels
+  //
+  // ISSN Recommendations:
+  // - Cutting (aggressive): 2.3-3.1 g/kg lean mass OR ~2.3-2.8 g/kg total weight
+  // - Cutting (moderate): 2.0-2.5 g/kg
+  // - Maintenance: 1.6-2.0 g/kg
+  // - Bulking: 1.6-2.2 g/kg
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Determine protein multiplier based on goal (g per kg bodyweight)
+  const proteinMultipliers = {
+    aggressiveCut: 2.5,  // Higher protein preserves muscle during aggressive deficit
+    cut: 2.2,           // Elevated protein for muscle preservation
+    maintain: 1.8,      // Standard for active individuals
+    leanBulk: 2.0,      // Slightly higher for muscle building
+    bulk: 1.8           // Standard - excess protein not needed when in surplus
+  };
+
+  // Calculate protein based on body weight (ISSN method)
+  const proteinGramsPerKg = proteinMultipliers[goal];
+  let proteinGrams = Math.round(weightKg * proteinGramsPerKg);
+
+  // Cap protein at a reasonable maximum (no benefit beyond ~2.8g/kg for natural athletes)
+  const maxProteinGrams = Math.round(weightKg * 2.8);
+  proteinGrams = Math.min(proteinGrams, maxProteinGrams);
+
+  // Calculate protein calories
+  const proteinCals = proteinGrams * 4;
+  const actualProteinPct = proteinCals / cals;
+
+  // Distribute remaining calories between carbs and fat based on profile ratio
+  const remainingCals = cals - proteinCals;
+  const carbFatRatio = cPct / (cPct + fPct); // Ratio of carbs to (carbs + fat) from profile
+
+  const carbCals = Math.round(remainingCals * carbFatRatio);
+  const fatCals = remainingCals - carbCals;
+
+  const carbGrams = Math.round(carbCals / 4);
+  const fatGrams = Math.round(fatCals / 9);
+
   const macros = {
     cals,
-    protein: { g: Math.round((cals * pPct) / 4), pct: pPct * 100 },
-    carbs: { g: Math.round((cals * cPct) / 4), pct: cPct * 100 },
-    fat: { g: Math.round((cals * fPct) / 9), pct: fPct * 100 }
+    protein: { g: proteinGrams, pct: Math.round(actualProteinPct * 100) },
+    carbs: { g: carbGrams, pct: Math.round((carbCals / cals) * 100) },
+    fat: { g: fatGrams, pct: Math.round((fatCals / cals) * 100) }
   };
 
   const waterOz = Math.round(weightLbs * 0.5 + (activity === 'athlete' ? 32 : activity === 'veryActive' ? 24 : 16));
