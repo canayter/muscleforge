@@ -1303,6 +1303,322 @@ const EducationalTips = {
   }
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// GOLDEN ERA TRAINING METHODOLOGY
+// Classic bodybuilding wisdom from the sport's greatest era
+// ═══════════════════════════════════════════════════════════════════════════
+const GOLDEN_ERA_METHODOLOGY = {
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // MIND-MUSCLE INTEGRATION
+  // ───────────────────────────────────────────────────────────────────────────
+  mindMuscle: {
+    title: 'Mind-Muscle Integration',
+    icon: '🧠',
+    principle: 'The mind is the primary engine for hypertrophy.',
+    techniques: [
+      {
+        name: 'Muscle Transference',
+        description: 'During a set, "lock" your mind into the tissue, imagining you have transplanted your consciousness into the muscle itself.',
+        application: 'Before each set, close your eyes and visualize the target muscle. Feel every fiber contract.'
+      },
+      {
+        name: 'Mental Pumping',
+        description: 'Use visualization to actually "send blood" into a specific muscle through total concentration.',
+        application: 'Between sets, flex the target muscle and visualize blood flooding into it.'
+      },
+      {
+        name: 'The Three-Part Success Formula',
+        description: 'Apply strict discipline through a combination of self-confidence, a positive mental attitude, and honest hard work.',
+        application: 'Approach every session believing you will succeed. Train with intention, not just motion.'
+      },
+      {
+        name: 'Aggressive Goal Setting',
+        description: 'Use "down days" or weak sessions to set small, immediate stakes to force the body out of sluggishness.',
+        application: 'On bad days, set micro-challenges: one more rep, 5 more pounds. Turn weakness into competition.'
+      }
+    ],
+    keyInsight: 'A bodybuilder who merely goes through the motions will never achieve the physique of one who channels complete mental focus into every repetition.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // PRACTICAL TRAINING MECHANICS
+  // ───────────────────────────────────────────────────────────────────────────
+  trainingMechanics: {
+    title: 'Practical Training Mechanics',
+    icon: '⚙️',
+    principle: 'Effective training requires a balance between building a core foundation and "chiseling" for quality.',
+    techniques: [
+      {
+        name: 'The Foundation Rule',
+        description: 'Prioritize basic, heavy movements—bench presses, squats, rowing, chin-ups, and barbell curls—to build a "rugged foundation" of mass before focusing on definition.',
+        exercises: ['Bench Press', 'Squats', 'Barbell Rows', 'Chin-ups', 'Barbell Curls', 'Overhead Press', 'Deadlifts']
+      },
+      {
+        name: 'Shocking Through Extremes',
+        description: 'To break a plateau, dedicate an entire session to a single body part, performing extreme volume to force the muscle into growth via "survival mode".',
+        example: 'Once a week, take weights into isolation and perform one exercise for 3 hours straight (e.g., 55 sets of squats).'
+      },
+      {
+        name: 'Strategic Variation',
+        description: 'Modify standard movements to hit neglected fibers.',
+        example: 'Turn your wrists during a dumbbell curl to engage the muscle areas near the elbow more intensely.'
+      },
+      {
+        name: 'The Split Routine Execution',
+        description: 'Divide training into two daily sessions to ensure maximum energy and poundage for every body part.',
+        example: 'Arms/shoulders in the morning (9-11 AM), legs/chest in the evening (7-9 PM).'
+      }
+    ],
+    keyInsight: 'The body adapts to routine. Surprise it with what it does not expect, and it will grow to survive.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // DEFINITION & REFINEMENT
+  // ───────────────────────────────────────────────────────────────────────────
+  definition: {
+    title: 'Scientific Definition & Refinement',
+    icon: '🎯',
+    principle: 'Mass is "mere foundation material" without the "finish" required for a winning physique.',
+    techniques: [
+      {
+        name: 'The Mirror as a Tool',
+        description: 'Use the mirror not for vanity, but as a scientific instrument to check progress and identify "stubborn" muscles that refuse to grow.',
+        application: 'Weekly posing sessions to objectively assess symmetry and identify weak points.'
+      },
+      {
+        name: 'Targeted Separation',
+        description: 'Use specific exercises to create "grooves" between muscle groups.',
+        examples: [
+          'Front raises with dumbbells to separate pectorals from deltoids',
+          'Upward rowing to separate deltoid from trapezius',
+          'Dips to separate pectorals from abdominals'
+        ]
+      },
+      {
+        name: 'Vascularity Management',
+        description: 'To achieve high definition and visible veins, implement a low-carbohydrate diet and increase metabolic activity.',
+        application: 'Low-carb phases before competition or photo shoots.'
+      },
+      {
+        name: 'Weak Point Prioritization',
+        description: 'Identify lagging areas and train them first in your workout when energy is highest.',
+        example: 'If calves are weak, train them first with extreme resistance—not last when fatigued.'
+      }
+    ],
+    keyInsight: 'A physique is judged not just by size, but by the quality of separation, symmetry, and vascularity.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // POSING AS TRAINING
+  // ───────────────────────────────────────────────────────────────────────────
+  posing: {
+    title: 'Posing as Functional Training',
+    icon: '🏆',
+    principle: 'Posing is an essential component of muscular control and "showmanship".',
+    techniques: [
+      {
+        name: 'Isometric Flexing',
+        description: 'Spend time tensing and flexing after workouts; this acts as "super-isometrics" that promotes deep definition and muscle separation.',
+        duration: '15-30 minutes post-workout'
+      },
+      {
+        name: 'Stamina Posing',
+        description: 'Practice holding poses for at least one full minute; this eliminates shaking and trains muscles to remain flexed under pressure.',
+        application: 'Essential for competition posing rounds and photo shoots.'
+      },
+      {
+        name: 'Grace and Power',
+        description: 'Incorporate fluid transitions between poses—opening the hand for circular motions and closing it into a fist for sweeping power movements.',
+        application: 'Creates a complete "routine" rather than just static poses.'
+      }
+    ],
+    keyInsight: 'The ability to control and display your muscles is as important as building them. Posing practice burns fat, creates definition, and teaches complete muscle control.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // THE FAT-TO-VASCULARITY PIVOT
+  // ───────────────────────────────────────────────────────────────────────────
+  fatToVascularity: {
+    title: 'The Fat-to-Vascularity Pivot',
+    icon: '💪',
+    principle: 'Massive size is insufficient without the ability to see veins, which indicates low body fat percentage.',
+    keyPoints: [
+      'If a layer of fat exists between the skin and muscles, veins will not be visible',
+      'Low-carbohydrate implementation is essential for achieving visible abdominals and peak definition',
+      'Thermal activity (cardio, sun exposure) helps burn subcutaneous fat',
+      'Weight manipulation requires absolute control—the ability to drop or gain significant weight quickly'
+    ],
+    strategies: [
+      {
+        name: 'Carb Cycling',
+        description: 'Alternate between low-carb and moderate-carb days to maintain metabolic flexibility while burning fat.'
+      },
+      {
+        name: 'Strategic Cardio',
+        description: 'Use cardio not for muscle building, but specifically to reveal the muscle already built.'
+      },
+      {
+        name: 'Water Manipulation',
+        description: 'Understanding water retention and depletion for peak condition (competition prep only).'
+      }
+    ],
+    example: 'Dropping from 240 lbs to 209 lbs for a film role, then gaining 31 lbs of "size and symmetry" in just two months for Mr. Olympia.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // HIGH-PROTEIN MUSCLE MAINTENANCE
+  // ───────────────────────────────────────────────────────────────────────────
+  proteinStrategy: {
+    title: 'High-Protein Muscle Maintenance',
+    icon: '🥩',
+    principle: 'During "bulking" and "chiseling" phases, high protein intake ensures muscles survive grueling training sessions.',
+    strategies: [
+      {
+        name: 'Protein Regulation',
+        description: 'Use food and supplements to precisely regulate protein, vitamins, and minerals in the system.',
+        application: 'Track protein intake daily, aiming for 1g per pound of body weight minimum.'
+      },
+      {
+        name: 'Whole Food Volume',
+        description: 'Consume substantial whole food meals post-workout for recovery.',
+        example: 'A whole chicken after intense training sessions.'
+      },
+      {
+        name: 'Quality Over Quantity',
+        description: 'Recognize that several pounds of overcooked meat equals one medium-rare steak in terms of protein availability.',
+        application: 'Prioritize protein quality and digestibility.'
+      }
+    ],
+    keyInsight: 'Muscles need raw materials to grow. Without adequate protein, even the best training program will fail.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // MASS BUILDING FOUNDATION
+  // ───────────────────────────────────────────────────────────────────────────
+  massFoundation: {
+    title: 'The 250-Pound Mass Foundation',
+    icon: '🏋️',
+    principle: 'Building a rugged foundation requires basic, heavy movements before any refinement work.',
+    coreMovements: [
+      { exercise: 'Bench Press', purpose: 'Building thickness and mass of the chest' },
+      { exercise: 'Squats', purpose: 'The primary tool for building leg mass' },
+      { exercise: 'Rowing & Deadlifts', purpose: 'Developing muscles around the spine for raw power' },
+      { exercise: 'Chin-ups', purpose: 'Building width and thickness in the back' },
+      { exercise: 'Barbell Curls', purpose: 'Building massive bicep peaks' },
+      { exercise: 'Overhead Press', purpose: 'Building powerful, Herculean shoulders' }
+    ],
+    principles: [
+      {
+        name: 'Handle Maximum Weight',
+        description: 'The goal is sheer body weight, achieved by handling heavy weights and "blasting" the muscles.'
+      },
+      {
+        name: 'Basic Symmetrical Neglect',
+        description: 'During initial bulking, focus entirely on looking huge, awesome, and powerful—symmetry comes later.'
+      },
+      {
+        name: 'Six-Day Escalation',
+        description: 'While most train 2-3 times per week, escalate to six heavy workouts per week to force growth.'
+      },
+      {
+        name: 'Forced Reps and Torture',
+        description: 'Use training partners to push beyond the point of pain, forcing muscles to grow for survival.'
+      }
+    ],
+    nutrition: [
+      'Eat 4-5 times per day to fuel heavy training',
+      'Post-workout meals of whole protein sources',
+      'Use supplements to ensure proper vitamins and minerals'
+    ],
+    result: 'A body that expands "like an accordion" when flexed—arm going from 19 inches relaxed to 22 inches flexed.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // SPLIT ROUTINE MASTERY
+  // ───────────────────────────────────────────────────────────────────────────
+  splitRoutine: {
+    title: 'Split Routine Mastery',
+    icon: '📅',
+    principle: 'Separating muscle groups allows maximum energy for each body part, maintaining heavy poundage throughout sessions.',
+    evolution: {
+      problem: 'Continuous six-hour sessions prevent handling maximum weights toward the end of a workout.',
+      solution: 'Two-a-day training with adequate rest and nutrition between sessions.',
+      result: 'Within two months of starting this method, gain an additional five pounds of muscle.'
+    },
+    schedule: {
+      morning: { time: '9:00-11:00 AM', focus: 'Arms and shoulders' },
+      midday: { activity: 'Rest for a few hours, consume two substantial six-course meals' },
+      evening: { time: '7:00-9:00 PM', focus: 'Legs, chest, and abdominals' }
+    },
+    shockMethod: {
+      description: 'Once a week, perform extreme volume on a single exercise to break plateaus.',
+      examples: [
+        'Take weights into isolation and perform 55 sets of squats',
+        'Three hours straight of one movement',
+        'Turn "pain into pleasure" as growth signal'
+      ],
+      purpose: 'Surprise the body by doing what it does not expect, forcing it to grow to survive.'
+    },
+    keyInsight: 'This combination creates a physique that looks symmetrical when relaxed but "opens up like an accordion" when flexed.',
+    source: 'Golden era training principles'
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // CHISELING EXERCISES
+  // ───────────────────────────────────────────────────────────────────────────
+  chiselingExercises: {
+    title: 'Chiseling & Separation Exercises',
+    icon: '🔪',
+    principle: 'Specific isolation movements create deep grooves between muscle groups, transforming mass into a sculpted masterpiece.',
+    separationWork: [
+      {
+        area: 'Pectoral-Deltoid Separation',
+        exercises: [
+          { name: 'Front Raises with Dumbbells', purpose: 'Creates separation between pectorals and deltoids' },
+          { name: 'Upward Rowing (Heavy)', purpose: 'Separates deltoid from trapezius' },
+          { name: 'Dips', purpose: 'Creates separation between pectorals and abdominals' }
+        ]
+      },
+      {
+        area: 'Targeted Bicep Development',
+        exercises: [
+          { name: 'Wrist Rotation Curls', purpose: 'Turning wrist at top reaches area near elbow standard curls miss' },
+          { name: 'Unbalanced Dumbbells', purpose: 'Making one side heavier intensifies bicep contraction' }
+        ]
+      },
+      {
+        area: 'Quality Finish Muscles',
+        exercises: [
+          { name: 'Serratus Work', purpose: 'Provides look of finish between pectorals and lats' },
+          { name: 'Intercostal Focus', purpose: 'Quality appearance between major muscle groups' }
+        ]
+      }
+    ],
+    weakPointStrategy: {
+      name: 'Calf Blasting',
+      description: 'Train weak calves first in routine when energy is highest.',
+      technique: 'Use maximum resistance—have heaviest person in gym sit on the machine to provide enough resistance to blast the muscle.'
+    },
+    superIsometrics: {
+      description: 'After every workout, perform intense tensing and flexing of muscles.',
+      purpose: 'Burns remaining fat and "burns in" the cuts and definition.'
+    },
+    sculptureAnalogy: {
+      phase1: { name: 'Roughing Out (Mass Phase)', description: 'Building sheer mass through basic movements' },
+      phase2: { name: 'Polishing (Definition Phase)', description: 'Higher reps and specialized isolation to cut and define' }
+    },
+    source: 'Golden era training principles'
+  }
+};
+
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
@@ -1311,6 +1627,7 @@ if (typeof module !== 'undefined' && module.exports) {
     MEAL_TIMING_TEMPLATES,
     TRAINING_REFERENCES,
     EDUCATION_KNOWLEDGE,
+    GOLDEN_ERA_METHODOLOGY,
     OneRepMaxCalculator,
     CardioZoneCalculator,
     EducationalTips
