@@ -679,44 +679,6 @@ main {
   transform: translateY(-2px);
 }
 
-.scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-sm);
-  color: var(--chalk-faint);
-  animation: bounce 2s infinite;
-  margin-top: var(--space-lg);
-}
-
-.scroll-indicator span {
-  font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.scroll-indicator svg {
-  width: 28px;
-  height: 28px;
-  color: var(--blood);
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(10px); }
-  60% { transform: translateY(5px); }
-}
-
-@media (max-width: 768px) {
-  .intro {
-    min-height: auto;
-    padding: var(--space-xl) 0 var(--space-2xl);
-  }
-  .intro-title {
-    font-size: clamp(2.5rem, 12vw, 4rem);
-  }
-}
 
 .section {
   padding: var(--space-2xl) 0;
@@ -3159,15 +3121,10 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary">
-          <button class="nav-link" data-view="home">Home</button>
-          <button class="nav-link active" data-view="calculator">Planner</button>
-          <button class="nav-link" data-view="meals">Meals</button>
+          <button class="nav-link active" data-view="calculator">Plan</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
-          <button class="nav-link" data-view="gyms">Gyms</button>
-          <button class="nav-link" data-view="learn">Learn</button>
-          <button class="nav-link" data-view="prep">Prep</button>
-          <button class="nav-link" data-view="science">Science</button>
+          <button class="nav-link" data-view="knowledge">Knowledge</button>
         </nav>
 
         <button class="theme-switch" onclick="toggleTheme()">
@@ -3180,73 +3137,23 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile">
-    <button class="nav-link" data-view="home">Home</button>
     <button class="nav-link active" data-view="calculator">Plan</button>
-    <button class="nav-link" data-view="meals">Meals</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
-    <button class="nav-link" data-view="gyms">Gyms</button>
-    <button class="nav-link" data-view="learn">Learn</button>
-    <button class="nav-link" data-view="prep">Prep</button>
-    <button class="nav-link" data-view="science">Sci</button>
+    <button class="nav-link" data-view="knowledge">Knowledge</button>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════════════════════
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
   <main>
-    <!-- INTRO SECTION (Home) -->
-    <section id="introSection" class="intro" style="display: none;">
-      <div class="container">
-        <div class="intro-content">
-          <div class="intro-tagline">Evidence-Based Bodybuilding</div>
-          <h2 class="intro-title">Precision Nutrition.<span class="highlight">Science-Backed Training.</span></h2>
-          <p class="intro-text">Macro calculations grounded in peer-reviewed research. Training programs built on proven science. No guesswork. Just results.</p>
-
-          <div class="intro-features">
-            <div class="intro-feature">
-              <div class="intro-feature-icon">⚡</div>
-              <div class="intro-feature-content">
-                <h3>Plan</h3>
-                <p>Macros, calories, and training programs calculated from your exact metrics.</p>
-              </div>
-            </div>
-            <div class="intro-feature">
-              <div class="intro-feature-icon">🍽</div>
-              <div class="intro-feature-content">
-                <h3>Eat</h3>
-                <p>Structured meal plans with flexible substitutions. Hit your numbers daily.</p>
-              </div>
-            </div>
-            <div class="intro-feature">
-              <div class="intro-feature-icon">🎓</div>
-              <div class="intro-feature-content">
-                <h3>Learn</h3>
-                <p>Understand the science: muscle fibers, recovery, 1RM, and training zones.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="intro-cta">
-            <a href="#calculator" class="btn btn-primary" onclick="switchView('calculator')">Start Planning</a>
-            <div class="scroll-indicator">
-              <span>Begin</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CALCULATOR VIEW -->
     <div id="calculator" class="view active">
       <section class="section">
         <div class="container">
           <div class="section-header">
-            <h1 class="section-title">Plan Your Nutrition & Training</h1>
-            <p class="section-subtitle">Science-backed targets optimized for your body and goals</p>
+            <h1 class="section-title">Your Personal Plan</h1>
+            <p class="section-subtitle">Evidence-based nutrition and training calculated from peer-reviewed research</p>
           </div>
 
           <form id="calcForm">
@@ -3634,13 +3541,13 @@ select.field-input option {
       </section>
     </div>
 
-    <!-- LEARN VIEW -->
-    <div id="learn" class="view">
+    <!-- KNOWLEDGE VIEW (Combined Learn + Science) -->
+    <div id="knowledge" class="view">
       <section class="section">
         <div class="container">
           <div class="section-header">
-            <h1 class="section-title">Learn the Science</h1>
-            <p class="section-subtitle">Understanding the "why" makes you a better athlete</p>
+            <h1 class="section-title">Knowledge Base</h1>
+            <p class="section-subtitle">Peer-reviewed science backing every calculation</p>
           </div>
 
           <!-- 1RM Calculator -->
@@ -4067,6 +3974,17 @@ select.field-input option {
               </div>
             </div>
           </div>
+
+          <!-- Scientific References -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-lg);">Scientific References</h2>
+          <div class="alert alert-success mb-lg">
+            <span class="alert-icon">◆</span>
+            <div class="alert-content">
+              <div class="alert-title">Evidence-Based</div>
+              <div class="alert-text">Every calculation uses formulas from ISSN, ACSM, and peer-reviewed sports science journals.</div>
+            </div>
+          </div>
+          <div id="refsGrid" class="refs-grid"></div>
 
         </div>
       </section>
@@ -5623,6 +5541,21 @@ select.field-input option {
                 </div>
               </div>
             </div>
+
+            <!-- Gym Mapper Link -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Gym Finder</h2>
+                  <p class="card-subtitle">Find gyms and fitness centers near any location</p>
+                </div>
+                <span class="tool-badge">Maps</span>
+              </div>
+              <div class="card-body">
+                <p style="color: var(--chalk-secondary); margin-bottom: var(--space-lg);">Search for gyms, fitness centers, CrossFit boxes, and weight rooms using OpenStreetMap data. Results sorted by distance.</p>
+                <button class="btn btn-primary" onclick="document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('gyms').classList.add('active'); loadGyms(); window.scrollTo(0,0);">Open Gym Mapper</button>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -5633,6 +5566,7 @@ select.field-input option {
     <div id="gyms" class="view">
       <section class="section">
         <div class="container">
+          <button class="btn" style="margin-bottom: var(--space-lg);" onclick="document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('tools').classList.add('active'); document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active')); document.querySelectorAll('[data-view=tools]').forEach(b => b.classList.add('active')); window.scrollTo(0,0);">← Back to Tools</button>
           <div class="section-header">
             <h1 class="section-title">Gym Mapper</h1>
             <p class="section-subtitle">Find gyms and fitness centers near you</p>
@@ -5852,26 +5786,16 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.nav-link').forEach(btn => {
   btn.addEventListener('click', () => {
     const view = btn.dataset.view;
-    const introSection = document.getElementById('introSection');
 
     document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
     document.querySelectorAll(`[data-view="${view}"]`).forEach(b => b.classList.add('active'));
 
-    // Handle home view (show intro, hide all views)
-    if (view === 'home') {
-      introSection.style.display = 'block';
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    } else {
-      // Hide intro for all other views
-      introSection.style.display = 'none';
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById(view).classList.add('active');
-    }
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(view).classList.add('active');
 
     if (view === 'foods') loadFoods();
-    if (view === 'science') loadScience();
+    if (view === 'knowledge') loadKnowledge();
     if (view === 'tools') loadTools();
-    if (view === 'gyms') loadGyms();
 
     window.scrollTo(0, 0);
   });
@@ -6458,9 +6382,9 @@ function filterFoods() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SCIENCE
+// KNOWLEDGE (References)
 // ═══════════════════════════════════════════════════════════════════════════
-function loadScience() {
+function loadKnowledge() {
   const refs = [
     // Nutrition References
     { cat: 'Protein', title: 'ISSN Position Stand: Protein and Exercise', authors: 'Jäger R et al.', journal: 'J Int Soc Sports Nutr, 2017', tags: ['Protein timing', 'MPS', 'Daily needs'] },
@@ -7142,6 +7066,7 @@ async function searchGymsAtLocation(lat, lng) {
   document.getElementById('gymList').innerHTML = `
     <div class="gym-loading">
       <div class="gym-loading-spinner"></div>
+      <p style="margin-top: var(--space-md); color: var(--chalk-secondary);">Querying OpenStreetMap database...</p>
     </div>
   `;
 
@@ -7164,43 +7089,68 @@ async function searchGymsAtLocation(lat, lng) {
   // Center map on location
   gymMap.setView([lat, lng], 13);
 
+  // AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+
   try {
-    // Query Overpass API for gyms
+    // Query Overpass API for gyms - simplified query for faster response
     const overpassQuery = `
-      [out:json][timeout:30];
+      [out:json][timeout:25];
       (
-        node["leisure"="fitness_centre"](around:${radiusMeters},${lat},${lng});
-        way["leisure"="fitness_centre"](around:${radiusMeters},${lat},${lng});
-        node["leisure"="sports_centre"](around:${radiusMeters},${lat},${lng});
-        way["leisure"="sports_centre"](around:${radiusMeters},${lat},${lng});
-        node["sport"="fitness"](around:${radiusMeters},${lat},${lng});
-        way["sport"="fitness"](around:${radiusMeters},${lat},${lng});
-        node["amenity"="gym"](around:${radiusMeters},${lat},${lng});
-        way["amenity"="gym"](around:${radiusMeters},${lat},${lng});
-        node["name"~"gym|fitness|crossfit|iron|muscle|strength|weight",i](around:${radiusMeters},${lat},${lng});
+        nwr["leisure"="fitness_centre"](around:${radiusMeters},${lat},${lng});
+        nwr["amenity"="gym"](around:${radiusMeters},${lat},${lng});
+        nwr["sport"="fitness"](around:${radiusMeters},${lat},${lng});
       );
       out center body;
     `;
 
-    const overpassUrl = 'https://overpass-api.de/api/interpreter';
-    const response = await fetch(overpassUrl, {
-      method: 'POST',
-      body: `data=${encodeURIComponent(overpassQuery)}`
-    });
+    // Try multiple Overpass endpoints
+    const endpoints = [
+      'https://overpass-api.de/api/interpreter',
+      'https://overpass.kumi.systems/api/interpreter'
+    ];
 
-    if (!response.ok) throw new Error('Overpass API error');
+    let response = null;
+    let lastError = null;
+
+    for (const endpoint of endpoints) {
+      try {
+        response = await fetch(endpoint, {
+          method: 'POST',
+          body: `data=${encodeURIComponent(overpassQuery)}`,
+          signal: controller.signal
+        });
+        if (response.ok) break;
+      } catch (e) {
+        lastError = e;
+        continue;
+      }
+    }
+
+    clearTimeout(timeoutId);
+
+    if (!response || !response.ok) {
+      throw lastError || new Error('All API endpoints failed');
+    }
 
     const data = await response.json();
-    const gyms = processGymData(data.elements, lat, lng);
+    const gyms = processGymData(data.elements || [], lat, lng);
 
     displayGyms(gyms, lat, lng);
   } catch (error) {
+    clearTimeout(timeoutId);
     console.error('Gym search error:', error);
-    document.getElementById('gymCount').textContent = 'Error loading gyms';
+
+    const isTimeout = error.name === 'AbortError';
+    document.getElementById('gymCount').textContent = isTimeout ? 'Search timed out' : 'Search failed';
     document.getElementById('gymList').innerHTML = `
       <div class="gym-empty">
-        <div class="gym-empty-icon">⚠️</div>
-        <p>Error loading gym data. Please try again.</p>
+        <div class="gym-empty-icon">${isTimeout ? '⏱️' : '⚠️'}</div>
+        <p>${isTimeout
+          ? 'Search took too long. Try a smaller radius or different location.'
+          : 'Could not connect to gym database. Check your internet connection and try again.'}</p>
+        <button class="btn btn-primary" style="margin-top: var(--space-md);" onclick="searchGymsAtLocation(${lat}, ${lng})">Retry Search</button>
       </div>
     `;
   }
