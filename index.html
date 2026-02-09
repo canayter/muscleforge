@@ -2172,6 +2172,45 @@ select.field-input option {
   min-width: 200px;
 }
 
+.gym-search-controls .field-input {
+  border: 2px solid var(--line-hover);
+  background: var(--iron-surface);
+  position: relative;
+  z-index: 1;
+}
+
+.gym-search-controls .field-input:hover {
+  border-color: var(--training);
+  cursor: text;
+}
+
+.gym-search-controls .field-input:focus {
+  border-color: var(--training);
+  box-shadow: 0 0 0 3px var(--training-dim);
+}
+
+.gym-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.gym-search-input-wrapper .field-input {
+  padding-left: 44px;
+}
+
+.gym-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--training);
+  pointer-events: none;
+  z-index: 2;
+}
+
 .gym-location-btn {
   display: flex;
   align-items: center;
@@ -3120,6 +3159,7 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary">
+          <button class="nav-link" data-view="home">Home</button>
           <button class="nav-link active" data-view="calculator">Planner</button>
           <button class="nav-link" data-view="meals">Meals</button>
           <button class="nav-link" data-view="foods">Foods</button>
@@ -3140,6 +3180,7 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile">
+    <button class="nav-link" data-view="home">Home</button>
     <button class="nav-link active" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="meals">Meals</button>
     <button class="nav-link" data-view="foods">Foods</button>
@@ -3154,8 +3195,8 @@ select.field-input option {
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
   <main>
-    <!-- INTRO SECTION -->
-    <section class="intro">
+    <!-- INTRO SECTION (Home) -->
+    <section id="introSection" class="intro" style="display: none;">
       <div class="container">
         <div class="intro-content">
           <div class="intro-tagline">Evidence-Based Bodybuilding</div>
@@ -5602,8 +5643,14 @@ select.field-input option {
             <div class="card-body">
               <div class="gym-search-controls">
                 <div class="field">
-                  <label class="field-label">Location</label>
-                  <input type="text" id="gymLocationInput" class="field-input" placeholder="Enter city, address, or zip code">
+                  <label class="field-label">Search Location</label>
+                  <div class="gym-search-input-wrapper">
+                    <svg class="gym-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="gymLocationInput" class="field-input" placeholder="Enter city, address, or zip code">
+                  </div>
                 </div>
                 <div class="field" style="flex: 0 0 150px;">
                   <label class="field-label">Radius</label>
@@ -5805,12 +5852,21 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.nav-link').forEach(btn => {
   btn.addEventListener('click', () => {
     const view = btn.dataset.view;
+    const introSection = document.getElementById('introSection');
 
     document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
     document.querySelectorAll(`[data-view="${view}"]`).forEach(b => b.classList.add('active'));
 
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById(view).classList.add('active');
+    // Handle home view (show intro, hide all views)
+    if (view === 'home') {
+      introSection.style.display = 'block';
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    } else {
+      // Hide intro for all other views
+      introSection.style.display = 'none';
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(view).classList.add('active');
+    }
 
     if (view === 'foods') loadFoods();
     if (view === 'science') loadScience();
