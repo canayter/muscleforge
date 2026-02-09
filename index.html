@@ -891,6 +891,191 @@ main {
   border-left: 2px solid var(--training);
 }
 
+/* Lift Fuel - Metal playlist plug */
+.lift-fuel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 1px solid #333;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.lift-fuel:hover {
+  border-color: #1DB954;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.15);
+}
+
+.lift-fuel-icon {
+  font-size: 1rem;
+  filter: grayscale(0.5);
+}
+
+.lift-fuel-text {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.lift-fuel-link {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: #888;
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.lift-fuel-link:hover {
+  color: #1DB954;
+}
+
+.lift-fuel-spotify {
+  width: 16px;
+  height: 16px;
+  opacity: 0.4;
+  transition: opacity var(--duration-fast);
+}
+
+.lift-fuel:hover .lift-fuel-spotify {
+  opacity: 1;
+}
+
+/* Support/Tip section */
+.footer-support {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--iron-surface);
+}
+
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: 'Teko', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--iron-surface);
+  border: 1px solid transparent;
+  transition: all var(--duration-fast);
+}
+
+.support-link:hover {
+  color: #FFDD00;
+  border-color: #FFDD00;
+  background: rgba(255, 221, 0, 0.1);
+}
+
+.support-icon {
+  font-size: 1rem;
+}
+
+/* Unit Converter */
+.unit-converter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.converter-category {
+  padding: var(--space-md);
+  background: var(--iron-surface);
+  border-left: 3px solid var(--training);
+}
+
+.converter-category-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--training);
+  margin-bottom: var(--space-md);
+}
+
+.converter-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.converter-row:last-child {
+  margin-bottom: 0;
+}
+
+.converter-input {
+  flex: 1;
+  padding: 8px 10px;
+  background: var(--iron-dark);
+  border: 1px solid var(--iron-hover);
+  color: var(--chalk);
+  font-size: 0.875rem;
+  font-family: 'Teko', monospace;
+  text-align: right;
+  transition: border-color var(--duration-fast);
+}
+
+.converter-input:focus {
+  outline: none;
+  border-color: var(--training);
+}
+
+.converter-unit {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+  min-width: 45px;
+}
+
+.converter-arrow {
+  color: var(--chalk-faint);
+  font-size: 0.75rem;
+}
+
+.converter-quick-ref {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--iron-dark);
+  border: 1px solid var(--iron-surface);
+}
+
+.converter-quick-ref h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.converter-quick-ref ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-xs);
+}
+
+.converter-quick-ref li {
+  font-size: 0.8rem;
+  color: var(--chalk-tertiary);
+  font-family: 'Teko', monospace;
+}
+
 .home-science p {
   font-size: 0.75rem;
   color: var(--chalk-tertiary);
@@ -3490,6 +3675,7 @@ select.field-input option {
               <h3>Also Available</h3>
               <div class="home-extras-list">
                 <span onclick="switchToView('tools', 'utilities'); setTimeout(() => document.querySelector('[onclick*=gyms]')?.click(), 100)">Gym Finder</span>
+                <span onclick="switchToView('tools', 'utilities')">Unit Converter</span>
                 <span onclick="switchToView('tools', 'competition')">Contest Prep</span>
                 <span onclick="switchToView('tools', 'recovery')">Recovery Assessment</span>
                 <span onclick="switchToView('tools', 'utilities')">PR Tracker</span>
@@ -3500,6 +3686,14 @@ select.field-input option {
           <!-- Science Note -->
           <div class="home-science">
             <p>All calculations reference: <a href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">ISSN Position Stands</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener">Mifflin-St Jeor (1990)</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener">Schoenfeld et al.</a></p>
+          </div>
+
+          <!-- Lift Fuel - Curated metal playlist -->
+          <div class="lift-fuel">
+            <span class="lift-fuel-icon">🎸</span>
+            <span class="lift-fuel-text">Lift Fuel:</span>
+            <a href="https://open.spotify.com/playlist/57To8sotnyt8aXXms5Yjzo" target="_blank" rel="noopener" class="lift-fuel-link">SHEER MUSCLE</a>
+            <svg class="lift-fuel-spotify" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
           </div>
         </div>
       </section>
@@ -5981,6 +6175,123 @@ select.field-input option {
               </div>
             </div>
 
+            <!-- Unit Converter -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Unit Converter</h2>
+                  <p class="card-subtitle">Convert between imperial and metric units</p>
+                </div>
+                <span class="tool-badge">Utility</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Why Unit Conversion Matters</div>
+                  <p>Research uses metric. Gyms in the US use pounds. Food labels vary by country. Converting on the fly causes math errors that compound over time. A <strong>2.5kg plate</strong> is 5.5 lbs, not 5. These small errors add up—especially when tracking progressive overload or precise nutrition.</p>
+                </div>
+                <div class="unit-converter-grid">
+                  <!-- Weight -->
+                  <div class="converter-category">
+                    <div class="converter-category-title">Weight</div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-lbs" placeholder="0" oninput="convertUnit('lbs')">
+                      <span class="converter-unit">lbs</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-kg" placeholder="0" oninput="convertUnit('kg')">
+                      <span class="converter-unit">kg</span>
+                    </div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-oz" placeholder="0" oninput="convertUnit('oz')">
+                      <span class="converter-unit">oz</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-g" placeholder="0" oninput="convertUnit('g')">
+                      <span class="converter-unit">g</span>
+                    </div>
+                  </div>
+                  <!-- Length -->
+                  <div class="converter-category">
+                    <div class="converter-category-title">Length</div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-ft" placeholder="0" oninput="convertUnit('ft')">
+                      <span class="converter-unit">ft</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-m" placeholder="0" oninput="convertUnit('m')">
+                      <span class="converter-unit">m</span>
+                    </div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-in" placeholder="0" oninput="convertUnit('in')">
+                      <span class="converter-unit">in</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-cm" placeholder="0" oninput="convertUnit('cm')">
+                      <span class="converter-unit">cm</span>
+                    </div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-mi" placeholder="0" oninput="convertUnit('mi')">
+                      <span class="converter-unit">mi</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-km" placeholder="0" oninput="convertUnit('km')">
+                      <span class="converter-unit">km</span>
+                    </div>
+                  </div>
+                  <!-- Volume -->
+                  <div class="converter-category">
+                    <div class="converter-category-title">Volume</div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-floz" placeholder="0" oninput="convertUnit('floz')">
+                      <span class="converter-unit">fl oz</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-ml" placeholder="0" oninput="convertUnit('ml')">
+                      <span class="converter-unit">mL</span>
+                    </div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-cup" placeholder="0" oninput="convertUnit('cup')">
+                      <span class="converter-unit">cups</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-L" placeholder="0" oninput="convertUnit('L')">
+                      <span class="converter-unit">L</span>
+                    </div>
+                    <div class="converter-row">
+                      <input type="number" class="converter-input" id="conv-gal" placeholder="0" oninput="convertUnit('gal')">
+                      <span class="converter-unit">gal</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-L2" placeholder="0" oninput="convertUnit('L2')">
+                      <span class="converter-unit">L</span>
+                    </div>
+                  </div>
+                  <!-- Height -->
+                  <div class="converter-category">
+                    <div class="converter-category-title">Height</div>
+                    <div class="converter-row" style="flex-wrap: wrap;">
+                      <input type="number" class="converter-input" id="conv-hft" placeholder="0" style="flex: 0 0 60px;" oninput="convertHeight('imperial')">
+                      <span class="converter-unit">ft</span>
+                      <input type="number" class="converter-input" id="conv-hin" placeholder="0" style="flex: 0 0 60px;" oninput="convertHeight('imperial')">
+                      <span class="converter-unit">in</span>
+                      <span class="converter-arrow">↔</span>
+                      <input type="number" class="converter-input" id="conv-hcm" placeholder="0" oninput="convertHeight('metric')">
+                      <span class="converter-unit">cm</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="converter-quick-ref">
+                  <h4>Quick Reference (Common Gym Plates)</h4>
+                  <ul>
+                    <li>45 lbs = 20.4 kg</li>
+                    <li>35 lbs = 15.9 kg</li>
+                    <li>25 lbs = 11.3 kg</li>
+                    <li>10 lbs = 4.5 kg</li>
+                    <li>5 lbs = 2.3 kg</li>
+                    <li>2.5 lbs = 1.1 kg</li>
+                    <li>20 kg = 44.1 lbs</li>
+                    <li>15 kg = 33.1 lbs</li>
+                    <li>10 kg = 22.0 lbs</li>
+                    <li>5 kg = 11.0 lbs</li>
+                    <li>2.5 kg = 5.5 lbs</li>
+                    <li>1.25 kg = 2.8 lbs</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             <!-- Gym Mapper Link -->
             <div class="card tool-card" style="margin-top: var(--space-xl);">
               <div class="card-header">
@@ -6157,6 +6468,12 @@ select.field-input option {
           <p class="footer-tagline">Evidence-based nutrition and training tools for serious athletes.</p>
           <p class="footer-credit">Created with dedication by <strong>Can Ayter</strong></p>
           <a href="https://ayter.com" target="_blank" class="footer-link">ayter.com</a>
+          <div class="footer-support">
+            <a href="https://buymeacoffee.com/canayter" target="_blank" rel="noopener" class="support-link">
+              <span class="support-icon">☕</span>
+              <span>Support This Project</span>
+            </a>
+          </div>
         </div>
         <div class="footer-contact">
           <h4 class="footer-heading">Get in Touch</h4>
@@ -8204,6 +8521,67 @@ function toggleChecklistItem(name, el) {
 function resetChecklist() {
   localStorage.removeItem('muscleforge_checklist');
   loadGymBagChecklist();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// UNIT CONVERTER
+// ═══════════════════════════════════════════════════════════════════════════
+const UNIT_CONVERSIONS = {
+  // Weight
+  lbs: { to: 'kg', factor: 0.453592, pair: 'conv-kg' },
+  kg: { to: 'lbs', factor: 2.20462, pair: 'conv-lbs' },
+  oz: { to: 'g', factor: 28.3495, pair: 'conv-g' },
+  g: { to: 'oz', factor: 0.035274, pair: 'conv-oz' },
+  // Length
+  ft: { to: 'm', factor: 0.3048, pair: 'conv-m' },
+  m: { to: 'ft', factor: 3.28084, pair: 'conv-ft' },
+  in: { to: 'cm', factor: 2.54, pair: 'conv-cm' },
+  cm: { to: 'in', factor: 0.393701, pair: 'conv-in' },
+  mi: { to: 'km', factor: 1.60934, pair: 'conv-km' },
+  km: { to: 'mi', factor: 0.621371, pair: 'conv-mi' },
+  // Volume
+  floz: { to: 'ml', factor: 29.5735, pair: 'conv-ml' },
+  ml: { to: 'floz', factor: 0.033814, pair: 'conv-floz' },
+  cup: { to: 'L', factor: 0.236588, pair: 'conv-L' },
+  L: { to: 'cup', factor: 4.22675, pair: 'conv-cup' },
+  gal: { to: 'L2', factor: 3.78541, pair: 'conv-L2' },
+  L2: { to: 'gal', factor: 0.264172, pair: 'conv-gal' }
+};
+
+function convertUnit(fromUnit) {
+  const input = document.getElementById(`conv-${fromUnit}`);
+  const value = parseFloat(input.value);
+  const conversion = UNIT_CONVERSIONS[fromUnit];
+
+  if (!conversion) return;
+
+  const output = document.getElementById(conversion.pair);
+  if (isNaN(value) || value === '') {
+    output.value = '';
+  } else {
+    const result = value * conversion.factor;
+    output.value = result < 0.01 ? result.toExponential(2) :
+                   result < 10 ? result.toFixed(3) :
+                   result < 100 ? result.toFixed(2) :
+                   result.toFixed(1);
+  }
+}
+
+function convertHeight(from) {
+  if (from === 'imperial') {
+    const ft = parseFloat(document.getElementById('conv-hft').value) || 0;
+    const inches = parseFloat(document.getElementById('conv-hin').value) || 0;
+    const totalInches = (ft * 12) + inches;
+    const cm = totalInches * 2.54;
+    document.getElementById('conv-hcm').value = cm > 0 ? cm.toFixed(1) : '';
+  } else {
+    const cm = parseFloat(document.getElementById('conv-hcm').value) || 0;
+    const totalInches = cm / 2.54;
+    const ft = Math.floor(totalInches / 12);
+    const inches = totalInches % 12;
+    document.getElementById('conv-hft').value = cm > 0 ? ft : '';
+    document.getElementById('conv-hin').value = cm > 0 ? inches.toFixed(1) : '';
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
