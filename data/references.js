@@ -3480,6 +3480,14 @@ const AdvancedTrainingTechniques = {
     }
   },
 
+  getAll: function() {
+    return Object.values(this.techniques).map(t => ({
+      name: t.name,
+      description: t.description,
+      bestFor: Array.isArray(t.bestFor) ? t.bestFor.join(', ') : t.bestFor
+    }));
+  },
+
   getRecommendation: function(goal, experience) {
     const recommendations = {
       hypertrophy: {

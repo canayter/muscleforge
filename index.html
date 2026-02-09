@@ -713,6 +713,198 @@ main {
   font-family: 'Inter', sans-serif;
 }
 
+/* HOME PAGE */
+.home-section {
+  padding-top: var(--space-xl);
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.home-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: 0.04em;
+  color: var(--chalk);
+  margin-bottom: var(--space-sm);
+}
+
+.home-subtitle {
+  font-size: 1rem;
+  color: var(--chalk-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home-quickstart {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+
+.home-start-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--blood);
+  color: white;
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.home-start-btn:hover {
+  background: var(--primary-soft);
+  transform: translateX(4px);
+}
+
+.home-start-icon {
+  font-size: 1.5rem;
+}
+
+.home-index {
+  margin-bottom: var(--space-xl);
+}
+
+.home-index-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.home-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.home-index-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--iron-dark);
+  border: 1px solid var(--iron-surface);
+  border-left: 3px solid var(--blood);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.home-index-card:hover {
+  border-color: var(--blood);
+  background: var(--iron-mid);
+  transform: translateX(4px);
+}
+
+.home-index-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.home-index-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--chalk);
+  margin-bottom: var(--space-xs);
+}
+
+.home-index-content p {
+  font-size: 0.85rem;
+  color: var(--chalk-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.home-index-sublinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.home-index-sublinks span {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  background: var(--iron-surface);
+  color: var(--chalk-tertiary);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.home-index-sublinks span:hover {
+  background: var(--blood);
+  color: white;
+}
+
+.home-extras {
+  text-align: center;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--iron-surface);
+}
+
+.home-extras h3 {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--chalk-faint);
+  margin-bottom: var(--space-md);
+}
+
+.home-extras-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.home-extras-list span {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  background: var(--iron-surface);
+  color: var(--chalk-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.home-extras-list span:hover {
+  background: var(--training);
+  color: white;
+}
+
+.home-science {
+  text-align: center;
+  margin-top: var(--space-xl);
+  padding: var(--space-md);
+  background: var(--iron-dark);
+  border-left: 2px solid var(--training);
+}
+
+.home-science p {
+  font-size: 0.75rem;
+  color: var(--chalk-tertiary);
+}
+
+.home-science a {
+  color: var(--training);
+  text-decoration: none;
+}
+
+.home-science a:hover {
+  text-decoration: underline;
+}
+
 /* Tab content */
 .view {
   display: none;
@@ -934,6 +1126,15 @@ main {
   color: var(--chalk-tertiary);
   margin-top: var(--space-sm);
   font-style: italic;
+}
+
+.rationale-citation a {
+  color: var(--training);
+  text-decoration: none;
+}
+
+.rationale-citation a:hover {
+  text-decoration: underline;
 }
 
 /* Program summary stats */
@@ -3121,7 +3322,8 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary">
-          <button class="nav-link active" data-view="calculator">Plan</button>
+          <button class="nav-link active" data-view="home">Home</button>
+          <button class="nav-link" data-view="calculator">Plan</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
           <button class="nav-link" data-view="knowledge">Knowledge</button>
@@ -3137,18 +3339,105 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile">
-    <button class="nav-link active" data-view="calculator">Plan</button>
+    <button class="nav-link active" data-view="home">Home</button>
+    <button class="nav-link" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
-    <button class="nav-link" data-view="knowledge">Knowledge</button>
+    <button class="nav-link" data-view="knowledge">Know</button>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════════════════════
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
   <main>
+    <!-- HOME VIEW -->
+    <div id="home" class="view active">
+      <section class="section home-section">
+        <div class="container">
+          <!-- Hero -->
+          <div class="home-hero">
+            <h1 class="home-title">Evidence-Based Bodybuilding</h1>
+            <p class="home-subtitle">Nutrition and training tools backed by peer-reviewed research. No broscience.</p>
+          </div>
+
+          <!-- Quick Start -->
+          <div class="home-quickstart">
+            <button class="home-start-btn" onclick="switchToView('calculator')">
+              <span class="home-start-icon">→</span>
+              <span>Start Planning</span>
+            </button>
+          </div>
+
+          <!-- Index / Table of Contents -->
+          <div class="home-index">
+            <h2 class="home-index-title">What's Inside</h2>
+
+            <div class="home-index-grid">
+              <!-- Plan -->
+              <div class="home-index-card" onclick="switchToView('calculator')">
+                <div class="home-index-icon">📊</div>
+                <div class="home-index-content">
+                  <h3>Plan</h3>
+                  <p>Personalized macro and calorie targets using Mifflin-St Jeor and ISSN protein guidelines. Training programs with periodization.</p>
+                </div>
+              </div>
+
+              <!-- Foods -->
+              <div class="home-index-card" onclick="switchToView('foods')">
+                <div class="home-index-icon">🥗</div>
+                <div class="home-index-content">
+                  <h3>Foods</h3>
+                  <p>80+ foods with complete macros and micros. Searchable database for meal building.</p>
+                </div>
+              </div>
+
+              <!-- Tools -->
+              <div class="home-index-card" onclick="switchToView('tools')">
+                <div class="home-index-icon">🔧</div>
+                <div class="home-index-content">
+                  <h3>Tools</h3>
+                  <p>FFMI calculator, body fat estimation, strength scores (Wilks/DOTS), progressive overload, deload generator, supplement stacks, and more.</p>
+                  <div class="home-index-sublinks">
+                    <span onclick="event.stopPropagation(); switchToView('tools', 'body')">Body Composition</span>
+                    <span onclick="event.stopPropagation(); switchToView('tools', 'training')">Training</span>
+                    <span onclick="event.stopPropagation(); switchToView('tools', 'nutrition')">Nutrition</span>
+                    <span onclick="event.stopPropagation(); switchToView('tools', 'utilities')">Utilities</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Knowledge -->
+              <div class="home-index-card" onclick="switchToView('knowledge')">
+                <div class="home-index-icon">📚</div>
+                <div class="home-index-content">
+                  <h3>Knowledge</h3>
+                  <p>Training science fundamentals: muscle fibers, recovery, 1RM calculations, heart rate zones. Full scientific reference library.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Features -->
+            <div class="home-extras">
+              <h3>Also Available</h3>
+              <div class="home-extras-list">
+                <span onclick="switchToView('tools', 'utilities'); setTimeout(() => document.querySelector('[onclick*=gyms]')?.click(), 100)">Gym Finder</span>
+                <span onclick="switchToView('tools', 'competition')">Contest Prep</span>
+                <span onclick="switchToView('tools', 'recovery')">Recovery Assessment</span>
+                <span onclick="switchToView('tools', 'utilities')">PR Tracker</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Science Note -->
+          <div class="home-science">
+            <p>All calculations reference: <a href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">ISSN Position Stands</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener">Mifflin-St Jeor (1990)</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener">Schoenfeld et al.</a></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <!-- CALCULATOR VIEW -->
-    <div id="calculator" class="view active">
+    <div id="calculator" class="view">
       <section class="section">
         <div class="container">
           <div class="section-header">
@@ -3482,7 +3771,7 @@ select.field-input option {
                 <div class="rationale-box" style="margin-top: var(--space-lg);">
                   <div class="rationale-label">Nutrient Timing</div>
                   <p>On training days, consider increasing carbohydrate intake by 20-30% for energy and recovery. Post-workout, prioritize protein (30-40g) and fast carbs within 2 hours to maximize muscle protein synthesis.</p>
-                  <div class="rationale-citation">Reference: ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)</div>
+                  <div class="rationale-citation">Reference: <a href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0194-7" target="_blank" rel="noopener">ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)</a></div>
                 </div>
               </div>
             </div>
@@ -4097,7 +4386,7 @@ select.field-input option {
                   <h2 class="card-title">FFMI Calculator</h2>
                   <p class="card-subtitle">Fat-Free Mass Index - assess muscle mass relative to height</p>
                 </div>
-                <span class="tool-badge">Kouri et al. 1995</span>
+                <span class="tool-badge"><a href="https://pubmed.ncbi.nlm.nih.gov/7496846/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Kouri et al. 1995</a></span>
               </div>
               <div class="card-body">
                 <div class="form-grid">
@@ -5099,12 +5388,12 @@ select.field-input option {
                   <h2 class="card-title">Workout Rest Timer</h2>
                   <p class="card-subtitle">Optimal rest periods based on training goal</p>
                 </div>
-                <span class="tool-badge">Schoenfeld 2016</span>
+                <span class="tool-badge"><a href="https://pubmed.ncbi.nlm.nih.gov/26605807/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Schoenfeld 2016</a></span>
               </div>
               <div class="card-body">
                 <div class="rationale-box" style="margin-bottom: var(--space-lg);">
                   <div class="rationale-label">The Science</div>
-                  <p>Research shows rest periods significantly impact training outcomes. Schoenfeld et al. (2016) found that <strong>3+ minutes</strong> rest produces greater strength gains, while <strong>60-90 seconds</strong> optimizes metabolic stress for hypertrophy. Shorter rest increases growth hormone but reduces total volume capacity.</p>
+                  <p>Research shows rest periods significantly impact training outcomes. <a href="https://pubmed.ncbi.nlm.nih.gov/26605807/" target="_blank" rel="noopener" style="color: var(--training);">Schoenfeld et al. (2016)</a> found that <strong>3+ minutes</strong> rest produces greater strength gains, while <strong>60-90 seconds</strong> optimizes metabolic stress for hypertrophy. Shorter rest increases growth hormone but reduces total volume capacity.</p>
                 </div>
                 <div class="form-grid">
                   <div class="field">
@@ -5194,12 +5483,12 @@ select.field-input option {
                   <h2 class="card-title">Contest Prep Countdown</h2>
                   <p class="card-subtitle">Track your prep phases and milestones</p>
                 </div>
-                <span class="tool-badge">Helms et al. 2014</span>
+                <span class="tool-badge"><a href="https://jissn.biomedcentral.com/articles/10.1186/1550-2783-11-20" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Helms et al. 2014</a></span>
               </div>
               <div class="card-body">
                 <div class="rationale-box" style="margin-bottom: var(--space-lg);">
                   <div class="rationale-label">Evidence-Based Prep Timeline</div>
-                  <p>Research by Helms et al. recommends <strong>12-20 weeks</strong> of prep depending on starting body fat. Losing <strong>0.5-1% bodyweight per week</strong> maximizes fat loss while preserving muscle. Faster cuts increase muscle loss exponentially—a 16-week prep loses less muscle than an 8-week crash diet even with the same total weight loss.</p>
+                  <p>Research by <a href="https://jissn.biomedcentral.com/articles/10.1186/1550-2783-11-20" target="_blank" rel="noopener" style="color: var(--training);">Helms et al. (2014)</a> recommends <strong>12-20 weeks</strong> of prep depending on starting body fat. Losing <strong>0.5-1% bodyweight per week</strong> maximizes fat loss while preserving muscle. Faster cuts increase muscle loss exponentially—a 16-week prep loses less muscle than an 8-week crash diet even with the same total weight loss.</p>
                 </div>
                 <div class="form-grid">
                   <div class="field">
@@ -5783,21 +6072,33 @@ window.addEventListener('scroll', () => {
 // ═══════════════════════════════════════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════════════════════════════════════
+function switchToView(view, toolCategory = null) {
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll(`[data-view="${view}"]`).forEach(b => b.classList.add('active'));
+
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(view).classList.add('active');
+
+  if (view === 'foods') loadFoods();
+  if (view === 'knowledge') loadKnowledge();
+  if (view === 'tools') {
+    loadTools();
+    if (toolCategory) {
+      setTimeout(() => {
+        document.querySelectorAll('.tools-nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.tools-nav-btn[data-tool-category="${toolCategory}"]`)?.classList.add('active');
+        document.querySelectorAll('.tools-category').forEach(c => c.classList.remove('active'));
+        document.getElementById(`tools-${toolCategory}`)?.classList.add('active');
+      }, 50);
+    }
+  }
+
+  window.scrollTo(0, 0);
+}
+
 document.querySelectorAll('.nav-link').forEach(btn => {
   btn.addEventListener('click', () => {
-    const view = btn.dataset.view;
-
-    document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll(`[data-view="${view}"]`).forEach(b => b.classList.add('active'));
-
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById(view).classList.add('active');
-
-    if (view === 'foods') loadFoods();
-    if (view === 'knowledge') loadKnowledge();
-    if (view === 'tools') loadTools();
-
-    window.scrollTo(0, 0);
+    switchToView(btn.dataset.view);
   });
 });
 
