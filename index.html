@@ -1489,6 +1489,53 @@ select.field-input option {
   margin-top: 4px;
 }
 
+/* Unit System Toggle */
+.unit-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--iron-surface);
+}
+
+.unit-toggle-label {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+}
+
+.unit-toggle {
+  display: flex;
+  background: var(--iron-surface);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.unit-btn {
+  padding: 8px 16px;
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--chalk-tertiary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.unit-btn:hover {
+  color: var(--chalk);
+  background: var(--iron-hover);
+}
+
+.unit-btn.active {
+  color: white;
+  background: var(--blood);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    BUTTONS - FORGED ACTION
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -2840,14 +2887,36 @@ select.field-input option {
   border-left: 2px solid var(--training);
 }
 
+.photo-guide .guide-section h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.1rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.05em;
+}
+
 .photo-guide .guide-section ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-sm);
 }
 
 .photo-guide .guide-section li {
-  padding: var(--space-xs) 0;
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--iron-dark);
   color: var(--chalk-secondary);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.photo-guide .guide-section li strong {
+  color: var(--chalk);
+  white-space: nowrap;
+  min-width: 120px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -3484,6 +3553,15 @@ select.field-input option {
                 </div>
               </div>
               <div class="card-body">
+                <!-- Unit System Toggle -->
+                <div class="unit-toggle-row">
+                  <span class="unit-toggle-label">Units</span>
+                  <div class="unit-toggle">
+                    <button type="button" class="unit-btn active" data-unit="imperial" onclick="setUnitSystem('imperial')">Imperial (lbs/ft)</button>
+                    <button type="button" class="unit-btn" data-unit="metric" onclick="setUnitSystem('metric')">Metric (kg/cm)</button>
+                  </div>
+                </div>
+
                 <div class="form-grid">
                   <div class="field">
                     <label class="field-label">Age</label>
@@ -3500,16 +3578,23 @@ select.field-input option {
                     <label class="field-label">Weight</label>
                     <div class="field-combo">
                       <input type="number" id="weight" class="field-input" placeholder="180" step="0.1" required>
-                      <span class="field-suffix">lbs</span>
+                      <span class="field-suffix" id="weightUnit">lbs</span>
                     </div>
                   </div>
-                  <div class="field">
+                  <div class="field" id="heightFieldImperial">
                     <label class="field-label">Height</label>
                     <div class="field-combo">
-                      <input type="number" id="heightFt" class="field-input" placeholder="5" min="4" max="7" required style="border-radius: 10px 0 0 10px;">
+                      <input type="number" id="heightFt" class="field-input" placeholder="5" min="4" max="7" style="border-radius: 10px 0 0 10px;">
                       <span class="field-suffix" style="border-radius: 0;">ft</span>
-                      <input type="number" id="heightIn" class="field-input" placeholder="10" min="0" max="11" required style="border-radius: 0;">
+                      <input type="number" id="heightIn" class="field-input" placeholder="10" min="0" max="11" style="border-radius: 0;">
                       <span class="field-suffix">in</span>
+                    </div>
+                  </div>
+                  <div class="field" id="heightFieldMetric" style="display: none;">
+                    <label class="field-label">Height</label>
+                    <div class="field-combo">
+                      <input type="number" id="heightCm" class="field-input" placeholder="178" min="120" max="250" step="1">
+                      <span class="field-suffix">cm</span>
                     </div>
                   </div>
                   <div class="field">
@@ -4003,6 +4088,32 @@ select.field-input option {
                 <strong>For hardgainers:</strong> Vitamin supplementation optimizes metabolism and nutrient absorption.
               </div>
             </div>
+
+            <!-- Progressive Overload -->
+            <div class="education-card">
+              <div class="education-card-icon">📈</div>
+              <h3>Progressive Overload</h3>
+              <p>Muscles grow in response to increasing demands. Without progressive challenge, adaptation stops. This is the single most important training principle.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Add weight, reps, or sets over time. Even 2.5 lbs more or 1 extra rep counts as overload.
+              </div>
+              <div class="education-tip">
+                <strong>Track everything:</strong> You can't progress what you don't measure. Log every workout.
+              </div>
+            </div>
+
+            <!-- Time Under Tension -->
+            <div class="education-card">
+              <div class="education-card-icon">⏱️</div>
+              <h3>Time Under Tension</h3>
+              <p>Total time your muscle spends under load matters. 8 reps at 4-second tempo = 32 seconds TUT. Faster reps = less stimulus despite same weight.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Optimal TUT for hypertrophy is 40-70 seconds per set. Control the eccentric (lowering) phase.
+              </div>
+              <div class="education-tip">
+                <strong>Slow negatives:</strong> The eccentric phase causes more muscle damage and growth than the concentric.
+              </div>
+            </div>
           </div>
 
           <!-- Training Zones -->
@@ -4231,6 +4342,45 @@ select.field-input option {
               </div>
               <div class="education-tip">
                 <strong>Key insight:</strong> Muscles need raw materials. Without adequate protein, even the best training program fails.
+              </div>
+            </div>
+
+            <!-- Instinctive Training -->
+            <div class="education-card">
+              <div class="education-card-icon">🎯</div>
+              <h3>Instinctive Training</h3>
+              <p>After years of experience, your body tells you what it needs. Learn to read fatigue, energy levels, and when to push harder or back off.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> No program is perfect for everyone. Adapt exercises, volume, and frequency to YOUR body's responses.
+              </div>
+              <div class="education-tip">
+                <strong>Listen carefully:</strong> Joint pain means modify. Unusual fatigue means deload. Energy surge means push harder.
+              </div>
+            </div>
+
+            <!-- Peak Contraction -->
+            <div class="education-card">
+              <div class="education-card-icon">💎</div>
+              <h3>Peak Contraction Principle</h3>
+              <p>Hold the fully contracted position for 1-2 seconds on every rep. This maximizes muscle fiber recruitment and builds the detail that separates champions.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Most lifters rush through the squeeze. The pause at peak contraction is where the magic happens.
+              </div>
+              <div class="education-tip">
+                <strong>Apply everywhere:</strong> Top of curls, bottom of rows, lockout of extensions—squeeze and hold.
+              </div>
+            </div>
+
+            <!-- Training Partners -->
+            <div class="education-card">
+              <div class="education-card-icon">🤝</div>
+              <h3>The Training Partner</h3>
+              <p>A dedicated partner pushes you beyond what you'd achieve alone. Forced reps, spots on heavy lifts, and accountability create superior results.</p>
+              <div class="education-detail">
+                <strong>Key insight:</strong> Competition with a partner of similar strength drives both to new levels.
+              </div>
+              <div class="education-tip">
+                <strong>Choose wisely:</strong> Your partner should share your goals, schedule, and intensity level. A weak link holds both back.
               </div>
             </div>
           </div>
@@ -6127,6 +6277,59 @@ planNutritionCheckbox.addEventListener('change', () => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
+// UNIT SYSTEM
+// ═══════════════════════════════════════════════════════════════════════════
+let unitSystem = localStorage.getItem('mf-units') || 'imperial';
+
+function setUnitSystem(system) {
+  unitSystem = system;
+  localStorage.setItem('mf-units', system);
+
+  // Update button states
+  document.querySelectorAll('.unit-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.unit === system);
+  });
+
+  // Toggle height field visibility
+  const imperialField = document.getElementById('heightFieldImperial');
+  const metricField = document.getElementById('heightFieldMetric');
+  const weightUnit = document.getElementById('weightUnit');
+
+  if (system === 'metric') {
+    imperialField.style.display = 'none';
+    metricField.style.display = 'block';
+    weightUnit.textContent = 'kg';
+    document.getElementById('weight').placeholder = '82';
+  } else {
+    imperialField.style.display = 'block';
+    metricField.style.display = 'none';
+    weightUnit.textContent = 'lbs';
+    document.getElementById('weight').placeholder = '180';
+  }
+}
+
+// Initialize unit system on page load
+(function initUnits() {
+  setUnitSystem(unitSystem);
+})();
+
+function getWeightInLbs() {
+  const weight = parseFloat(document.getElementById('weight').value);
+  return unitSystem === 'metric' ? weight * 2.205 : weight;
+}
+
+function getHeightInInches() {
+  if (unitSystem === 'metric') {
+    const cm = parseFloat(document.getElementById('heightCm').value) || 0;
+    return cm / 2.54;
+  } else {
+    const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+    const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+    return ft * 12 + inches;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // CALCULATOR
 // ═══════════════════════════════════════════════════════════════════════════
 document.getElementById('calcForm').addEventListener('submit', e => {
@@ -6181,9 +6384,8 @@ function generatePlan() {
 function calculate() {
   const age = +document.getElementById('age').value;
   const sex = document.getElementById('sex').value;
-  const weightLbs = +document.getElementById('weight').value;
-  const heightFt = +document.getElementById('heightFt').value;
-  const heightIn = +document.getElementById('heightIn').value;
+  const weightLbs = getWeightInLbs();
+  const heightInches = getHeightInInches();
   const bodyFat = +document.getElementById('bodyFat').value || null;
   const activity = document.getElementById('activity').value;
   const goal = document.getElementById('goal').value;
@@ -6193,7 +6395,7 @@ function calculate() {
   const trainingTime = document.getElementById('trainingTime').value;
 
   const weightKg = weightLbs * 0.453592;
-  const heightCm = (heightFt * 12 + heightIn) * 2.54;
+  const heightCm = heightInches * 2.54;
 
   // BMR
   let bmr;
@@ -6553,16 +6755,19 @@ function renderMeals() {
               <span class="meal-time">${m.time}</span>
             </div>
             <ul class="meal-items">
-              ${m.foods.map((f, fi) => `
+              ${m.foods.map((f, fi) => {
+                const totalGrams = f.food.serving.amount * f.qty;
+                const totalCal = Math.round(f.food.calories * f.qty);
+                return `
                 <li class="meal-item">
                   <div class="meal-item-info">
                     <div class="meal-item-name">${f.food.name}</div>
-                    <div class="meal-item-portion">${f.qty}× ${f.food.serving.description}</div>
+                    <div class="meal-item-portion">${totalGrams}${f.food.serving.unit} (${f.qty}× ${f.food.serving.description}) · ${totalCal} cal</div>
                   </div>
                   <div class="meal-item-macros">${Math.round(f.food.macros.protein * f.qty)}p / ${Math.round(f.food.macros.carbs * f.qty)}c / ${Math.round(f.food.macros.fat * f.qty)}f</div>
                   <button class="meal-item-swap" onclick="openSwap(${mi}, ${fi})">⇄ Swap</button>
                 </li>
-              `).join('')}
+              `}).join('')}
             </ul>
             <div class="meal-footer">
               <span class="meal-total"><span class="meal-total-dot cal"></span>${Math.round(t.cal)} cal</span>
