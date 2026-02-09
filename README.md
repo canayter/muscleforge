@@ -1,251 +1,138 @@
 # MuscleForge
 
-**Professional Bodybuilding Nutrition & Training Planner**
+Nutrition and training toolkit for bodybuilders. All calculations backed by peer-reviewed research.
 
-A comprehensive, scientifically-backed nutrition and training toolkit designed for bodybuilders, fitness enthusiasts, and anyone serious about optimizing their diet and workouts for physique goals - including IFBB competition preparation.
+**Author:** [Can Ayter](https://ayter.com)
 
-Created by [Can Ayter](https://www.ayter.com)
+## Quick Start
+
+Open `index.html` in any modern browser. No dependencies, no build step.
 
 ## Features
 
-### Core Calculators
-- **BMR Calculator** - Uses Mifflin-St Jeor (most accurate for modern populations) or Katch-McArdle (when body fat % is known)
-- **TDEE Calculator** - Activity multipliers based on sports science research
-- **BMI Calculator** - With bodybuilder-specific notes about muscle mass
-- **Body Composition Analysis** - Lean mass vs fat mass breakdown
-- **Protein Requirements** - Based on ISSN Position Stand guidelines
-- **Water Intake Calculator** - Adjusted for activity level and climate
+### Nutrition Planner
+- **BMR/TDEE calculation** using Mifflin-St Jeor or Katch-McArdle equations
+- **Macro targets** based on ISSN protein guidelines (g/kg body weight, not arbitrary percentages)
+- **7 preset profiles**: Bodybuilding Standard, High Protein, High Carb, Low Carb, Keto, Balanced, Competition Prep
+- **Meal planning** with 80+ foods, automatic macro distribution
+- **Export**: CSV, JSON
 
-### Nutrition Planning
-- **7 Pre-built Macro Profiles**:
-  - Bodybuilding Standard (40/40/20)
-  - High Protein (45/35/20)
-  - High Carb (30/55/15)
-  - Low Carb (40/20/40)
-  - Ketogenic (25/5/70)
-  - Balanced (30/40/30)
-  - Competition Prep (50/30/20)
-- **Custom Macro Configuration**
-- **Multiple Diet Types**: Regular, Vegetarian, Vegan, Paleo, Mediterranean, Gluten-Free
-- **Meal Timing Optimization** based on training schedule
+### Training Programs
+- **4 templates**: PPL (6-day), Upper/Lower (4-day), Full Body (3-day), Bro Split (5-day)
+- **52+ exercises** with primary/secondary muscles, equipment, difficulty ratings
+- **Volume tracking**: Sets per muscle group with MEV/MAV/MRV context
+- **Exercise swap**: Find alternatives by movement pattern and muscle group
 
-### Training Program Generator
-- **Evidence-Based Programming** - All recommendations backed by peer-reviewed research
-- **4 Program Templates**:
-  - Push/Pull/Legs (6 days, 2x frequency)
-  - Upper/Lower (4 days, 2x frequency)
-  - Full Body (3 days, 3x frequency)
-  - Body Part Split (5 days, 1x frequency)
-- **52+ Exercise Database** with full metadata:
-  - Movement patterns (push, pull, squat, hinge, carry, rotation)
-  - Muscle groups (primary and secondary)
-  - Equipment requirements
-  - Difficulty levels
-  - Rep range and set recommendations
-  - Research citations for effectiveness
-- **Automatic Program Selection** based on:
-  - Experience level (beginner/intermediate/advanced)
-  - Available training days
-  - Primary goal (hypertrophy/strength/endurance)
-  - Available equipment
-- **Exercise Swap Feature** - Replace any exercise with similar alternatives
-- **Volume Tracking** - Weekly sets per muscle group with optimal/adequate/low indicators
-- **Scientific Rationale** - Research citations and pro bodybuilder notes for each program
-- **Nutrition Integration** - Training day vs rest day calorie recommendations
+### Advanced Tools (Tools Tab)
 
-### Food Database
-- **80+ foods** with detailed nutritional data
-- **Full Micronutrient Profiles**:
-  - Macros: Protein, Carbs, Fat, Fiber, Sugar
-  - Minerals: Sodium, Potassium, Calcium, Iron, Magnesium, Zinc, Phosphorus
-  - Vitamins: A, C, D, E, K, B6, B12, Folate
-  - Fats: Saturated, Trans, Omega-3, Omega-6
-  - Glycemic Index
-- **Allergen Tracking**: Dairy, Eggs, Fish, Shellfish, Tree Nuts, Peanuts, Wheat, Soy, Gluten
-- **Search & Filter** by category, diet type, and keywords
+**Body Composition**
+- FFMI Calculator (Kouri et al. 1995) - natural limit assessment
+- Navy Body Fat (circumference method)
+- Genetic Potential (Casey Butt formula)
+- Ideal Measurements (Steve Reeves proportions)
 
-### IFBB Competition Prep
-- **Prep Timeline Calculator**
-- **Weekly Weight Loss Projections**
-- **Sustainability Assessment**
-- **Phase Planning**: Base Building, Fat Loss, Sharpening, Peak Week
-- **Daily Deficit Calculations**
+**Training**
+- Volume Landmarks (Renaissance Periodization method)
+- Strength Scores (Wilks, DOTS, IPF GL)
+- Progressive Overload Calculator
+- Deload Week Generator
+- Periodization Model Selector
+- Rep Max Percentage Table
+- Workout Rest Timer
 
-### Supplement Recommendations
-Evidence-based supplement guidance with ratings:
-- **Essential**: Creatine, Whey Protein, Vitamin D3, Omega-3
-- **Performance**: Caffeine, Beta-Alanine, Citrulline Malate
-- **Recovery**: Casein, Magnesium, Zinc
+**Nutrition**
+- Carb Cycling Protocol Builder
+- Reverse Dieting Calculator
+- Body Recomposition Strategy
+- Peak Week Water/Carb Manipulation
+- Combat Sports Weight Cut (ISSN 2025)
+- HMB Guide (ISSN 2025)
+- Macro Meal Builder
+- Meal Prep Cost Calculator
+- Supplement Stack Builder (evidence-rated)
 
-### Scientific References
-All recommendations backed by peer-reviewed research:
-- ISSN Position Stands on Protein, Creatine, Caffeine, Beta-Alanine
-- Mifflin-St Jeor BMR equation (Am J Clin Nutr, 1990)
-- Evidence-based bodybuilding prep guidelines (JISSN, 2014)
-- **Training Science**:
-  - Schoenfeld et al. on training volume, frequency, and rest periods
-  - Contreras et al. on glute activation and hip thrust
-  - Helms et al. on natural bodybuilding programming
-  - EMG studies on exercise selection and muscle activation
-- And more...
+**Recovery**
+- Sleep Optimization Assessment
+- Recovery Readiness Scoring
+- Stress/Cortisol Management
+- Injury Prevention Protocols
 
-### Export Options
-- **PDF Export** - Professional formatted nutrition plan
-- **JSON Export** - For data portability and integrations
-- **Print** - Clean print-optimized layout
+**Competition**
+- Contest Prep Countdown with phase tracking
+- Water Loading Protocol
+- IFBB Mandatory Poses Guide
 
-## Installation
+**Utilities**
+- PR Tracker (local storage)
+- Gym Bag Checklist
+- Progress Photo Guide
 
-### Option 1: Direct Use
-Simply open `index.html` in a modern web browser. No server required.
+### Gym Mapper
+- Find gyms near any location using OpenStreetMap data
+- Geolocation support
+- Distance-sorted results
+- Direct Google Maps links
 
-### Option 2: Local Server
-```bash
-# Using Python
-python -m http.server 8000
+## Scientific Basis
 
-# Using Node.js
-npx serve .
-
-# Using PHP
-php -S localhost:8000
-```
-
-Then navigate to `http://localhost:8000`
-
-### Option 3: Deploy to Web
-Upload all files to any static hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- Any web hosting
+Calculations reference:
+- **Protein**: ISSN Position Stand (Jäger et al., 2017) - 1.6-2.4 g/kg for muscle building, 2.3-3.1 g/kg LBM during cuts
+- **BMR**: Mifflin-St Jeor (Am J Clin Nutr, 1990) - most accurate for modern populations
+- **Volume**: Schoenfeld et al. on dose-response relationship (J Sports Sci, 2017)
+- **Rest Periods**: Schoenfeld et al. (J Strength Cond Res, 2016) - 3+ min for strength
+- **FFMI**: Kouri et al. (Clin J Sport Med, 1995) - no natural exceeded 25
+- **Contest Prep**: Helms et al. (JISSN, 2014) - 0.5-1% BW/week loss rate
 
 ## Project Structure
 
 ```
 muscleforge/
-├── index.html          # Main application
-├── README.md           # This file
+├── index.html           # Single-file application
 ├── data/
-│   ├── foods.js        # Comprehensive food database (250+ foods)
-│   ├── exercises.js    # Exercise database (52+ exercises)
-│   ├── programs.js     # Training program templates & science
-│   └── references.js   # Scientific references & supplements
+│   ├── foods.js         # Food database with macros/micros
+│   ├── exercises.js     # Exercise metadata
+│   ├── programs.js      # Training templates
+│   └── references.js    # Scientific references + calculators
 └── js/
-    └── calculators.js  # Calculation functions
+    └── calculators.js   # Core calculation functions
 ```
 
-## Usage
+## Tech Stack
 
-1. **Enter Your Information**
-   - Age, sex, weight, height
-   - Activity level (sedentary to athlete)
-   - Body fat % (optional, for more accurate calculations)
+- Vanilla JavaScript (no frameworks)
+- Leaflet.js for maps
+- html2pdf.js for PDF export
+- All client-side, no backend required
 
-2. **Select Your Goal**
-   - Aggressive Cut (-750 cal)
-   - Cut (-500 cal)
-   - Maintain
-   - Lean Bulk (+300 cal)
-   - Bulk (+500 cal)
+## Deployment
 
-3. **Choose Macro Profile**
-   - Select from presets or customize your own
-
-4. **Configure Preferences**
-   - Diet type (vegetarian, vegan, etc.)
-   - Meals per day (3-6)
-   - Training time
-
-5. **Generate Plan**
-   - View daily calorie and macro targets
-   - Get protein recommendations per meal
-   - See hydration targets
-   - Toggle detailed view for micronutrients
-
-6. **Export**
-   - Download as PDF or JSON
-   - Print directly
-
-### Generate Training Program
-
-1. **Navigate to Training Tab**
-
-2. **Configure Your Program**
-   - Experience level
-   - Days available per week
-   - Primary goal
-   - Available equipment
-
-3. **Generate Program**
-   - View weekly schedule with exercises
-   - See sets, reps, and rest periods
-   - Review scientific rationale
-
-4. **Customize**
-   - Swap exercises with alternatives
-   - Check volume summary per muscle
-   - View nutrition recommendations
-
-## Scientific Basis
-
-### BMR Calculations
-- **Mifflin-St Jeor** (default): Most accurate for general population
-- **Katch-McArdle**: Uses lean body mass, most accurate when BF% is known
-- **Harris-Benedict**: Legacy option, included for reference
-
-### Protein Recommendations
-Based on ISSN Position Stand (Jäger et al., 2017):
-- Maintenance: 1.4-2.2 g/kg/day
-- Cutting: 2.3-3.1 g/kg lean body mass
-- Bulking: 1.6-2.4 g/kg/day
-- Per meal: 0.4-0.55 g/kg for optimal muscle protein synthesis
-
-### Competition Prep
-Based on Helms et al. (2014) evidence-based recommendations:
-- Rate of loss: 0.5-1% body weight per week
-- Protein increased during deficit
-- Phased approach to minimize muscle loss
-
-## Technologies
-
-- **HTML5/CSS3** - Modern, responsive design
-- **Vanilla JavaScript** - No frameworks, fast loading
-- **html2pdf.js** - PDF generation
-- **Inter Font** - Clean, professional typography
+Works on any static host:
+- GitHub Pages
+- Netlify
+- Vercel
+- S3/CloudFront
+- Any web server
 
 ## Browser Support
 
-- Chrome 80+
-- Firefox 75+
-- Safari 13+
-- Edge 80+
+Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-### Areas for Contribution
-- Additional foods in the database
-- More scientific references
-- Localization/translations
-- Additional calculators
-- UI/UX improvements
+Issues and PRs welcome. Priority areas:
+- Additional foods with verified nutritional data
+- More peer-reviewed citations
+- Accessibility improvements
+- Mobile UX enhancements
 
 ## License
 
-MIT License - feel free to use, modify, and distribute.
+MIT
 
 ## Disclaimer
 
-MuscleForge provides general nutritional information for educational purposes. This tool is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider, registered dietitian, or certified sports nutritionist before making significant changes to your diet or exercise program. Individual results may vary based on genetics, adherence, and other factors.
-
-## Acknowledgments
-
-- USDA FoodData Central for nutritional data
-- International Society of Sports Nutrition for evidence-based guidelines
-- The bodybuilding and sports science community
+Educational tool only. Not medical advice. Consult qualified professionals before making significant diet or exercise changes.
 
 ---
 
-**Built with science. Designed for results.**
+Built by [Can Ayter](https://ayter.com)

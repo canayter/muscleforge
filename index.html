@@ -2282,6 +2282,373 @@ select.field-input option {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   ADDITIONAL TOOLS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.rep-max-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-sm);
+}
+
+.rep-max-item {
+  background: var(--iron-surface);
+  padding: var(--space-md);
+  text-align: center;
+  border-left: 2px solid var(--training);
+}
+
+.rep-max-item .percent {
+  font-size: 0.75rem;
+  color: var(--chalk-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.rep-max-item .weight {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--chalk);
+}
+
+.rep-max-item .reps {
+  font-size: 0.8125rem;
+  color: var(--training);
+}
+
+.posing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.pose-card {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--rust);
+}
+
+.pose-card h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-sm);
+}
+
+.pose-card .pose-muscles {
+  font-size: 0.8125rem;
+  color: var(--training);
+  margin-bottom: var(--space-md);
+}
+
+.pose-card .pose-tips {
+  font-size: 0.875rem;
+  color: var(--chalk-secondary);
+  line-height: 1.6;
+}
+
+.pose-card .pose-tips li {
+  margin-bottom: var(--space-xs);
+}
+
+.contest-countdown {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--blood);
+}
+
+.contest-countdown .countdown-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: var(--blood);
+  text-align: center;
+}
+
+.contest-countdown .countdown-label {
+  font-size: 1rem;
+  color: var(--chalk-secondary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.contest-phases {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.phase-item {
+  padding: var(--space-md);
+  background: var(--iron-dark);
+  border-left: 2px solid var(--chalk-faint);
+}
+
+.phase-item.active {
+  border-left-color: var(--training);
+  background: var(--training-dim);
+}
+
+.phase-item.completed {
+  border-left-color: var(--success);
+  opacity: 0.7;
+}
+
+.water-protocol {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.water-day {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--iron-surface);
+  align-items: center;
+}
+
+.water-day .day-label {
+  font-weight: 500;
+  color: var(--chalk);
+}
+
+.water-day .water-amount,
+.water-day .sodium-amount,
+.water-day .carb-amount {
+  font-size: 0.9375rem;
+  color: var(--chalk-secondary);
+}
+
+.pr-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.pr-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--iron-surface);
+  margin-bottom: var(--space-sm);
+  border-left: 2px solid var(--training);
+}
+
+.pr-item .pr-exercise {
+  font-weight: 500;
+  color: var(--chalk);
+}
+
+.pr-item .pr-details {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  color: var(--training);
+}
+
+.pr-item .pr-date {
+  font-size: 0.8125rem;
+  color: var(--chalk-tertiary);
+}
+
+.pr-item .pr-delete {
+  background: none;
+  border: none;
+  color: var(--chalk-faint);
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.pr-item .pr-delete:hover {
+  color: var(--danger);
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--iron-surface);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.checklist-item:hover {
+  background: var(--iron-hover);
+}
+
+.checklist-item.checked {
+  opacity: 0.6;
+}
+
+.checklist-item.checked .checklist-box {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.checklist-item.checked .checklist-box::after {
+  content: "✓";
+  color: white;
+  font-size: 0.75rem;
+}
+
+.checklist-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--chalk-faint);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.checklist-label {
+  font-size: 0.9375rem;
+  color: var(--chalk-secondary);
+}
+
+.supplement-stack {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.supplement-item {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--training);
+}
+
+.supplement-item h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.125rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-xs);
+}
+
+.supplement-item .supplement-dose {
+  font-size: 0.875rem;
+  color: var(--training);
+  margin-bottom: var(--space-sm);
+}
+
+.supplement-item .supplement-timing {
+  font-size: 0.8125rem;
+  color: var(--chalk-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.supplement-item .supplement-evidence {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  background: var(--success);
+  color: white;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+.supplement-item .supplement-evidence.moderate {
+  background: var(--warning);
+  color: var(--iron-black);
+}
+
+.built-meal {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+}
+
+.built-meal h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-md);
+}
+
+.meal-food-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.meal-food-item:last-child {
+  border-bottom: none;
+}
+
+.meal-totals {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 2px solid var(--training);
+  display: flex;
+  justify-content: space-around;
+}
+
+.meal-total-item {
+  text-align: center;
+}
+
+.meal-total-item .value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--chalk);
+}
+
+.meal-total-item .label {
+  font-size: 0.75rem;
+  color: var(--chalk-tertiary);
+  text-transform: uppercase;
+}
+
+.cost-breakdown {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+}
+
+.cost-breakdown h4 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  color: var(--chalk);
+  margin-bottom: var(--space-md);
+}
+
+.cost-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cost-total {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 2px solid var(--training);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--training);
+}
+
+.photo-guide .guide-section {
+  background: var(--iron-surface);
+  padding: var(--space-lg);
+  border-left: 2px solid var(--training);
+}
+
+.photo-guide .guide-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.photo-guide .guide-section li {
+  padding: var(--space-xs) 0;
+  color: var(--chalk-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ALERTS
    ═══════════════════════════════════════════════════════════════════════════ */
 .alert {
@@ -2999,23 +3366,12 @@ select.field-input option {
                   <span class="toggle-text">Show micronutrients</span>
                 </div>
 
-                <!-- Optional: Email Results -->
-                <div class="email-results-section mt-lg">
-                  <div class="toggle-row" onclick="toggleEmailSection()">
+                <!-- Optional: Email Results (Coming Soon) -->
+                <div class="email-results-section mt-lg" style="opacity: 0.5; pointer-events: none;">
+                  <div class="toggle-row">
                     <div class="toggle" id="emailToggle"></div>
-                    <span class="toggle-text">Email me my results (optional)</span>
-                  </div>
-                  <div id="emailFields" class="email-fields hidden">
-                    <div class="form-grid" style="margin-top: var(--space-md);">
-                      <div class="field">
-                        <label class="field-label">Name (optional)</label>
-                        <input type="text" id="userName" class="field-input" placeholder="Your name">
-                      </div>
-                      <div class="field">
-                        <label class="field-label">Email</label>
-                        <input type="email" id="userEmail" class="field-input" placeholder="your@email.com">
-                      </div>
-                    </div>
+                    <span class="toggle-text">Email me my results</span>
+                    <span style="margin-left: var(--space-sm); font-size: 0.75rem; padding: 2px 8px; background: var(--iron-surface); color: var(--chalk-tertiary); border-radius: var(--radius-sm);">Coming Soon</span>
                   </div>
                 </div>
               </div>
@@ -3089,6 +3445,7 @@ select.field-input option {
                 </div>
                 <div class="btn-group" style="margin: 0;">
                   <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;" title="Coming soon">PDF ⚠</button>
+                  <button class="btn btn-ghost btn-sm" onclick="exportCSV()">CSV</button>
                   <button class="btn btn-ghost btn-sm" onclick="exportJSON()">JSON</button>
                 </div>
               </div>
@@ -3764,11 +4121,12 @@ select.field-input option {
 
           <!-- Tool Categories -->
           <div class="tools-nav">
-            <button class="tools-nav-btn active" data-tool-category="body">Body Composition</button>
+            <button class="tools-nav-btn active" data-tool-category="body">Body</button>
             <button class="tools-nav-btn" data-tool-category="training">Training</button>
             <button class="tools-nav-btn" data-tool-category="nutrition">Nutrition</button>
             <button class="tools-nav-btn" data-tool-category="recovery">Recovery</button>
-            <button class="tools-nav-btn" data-tool-category="advanced">Advanced</button>
+            <button class="tools-nav-btn" data-tool-category="competition">Competition</button>
+            <button class="tools-nav-btn" data-tool-category="utilities">Utilities</button>
           </div>
 
           <!-- Body Composition Tools -->
@@ -4768,6 +5126,459 @@ select.field-input option {
                       <li><strong>Injury Prevention</strong> - Prehab and mobility protocols</li>
                     </ul>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Competition Tools -->
+          <div id="tools-competition" class="tools-category">
+            <!-- Workout Timer -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Workout Rest Timer</h2>
+                  <p class="card-subtitle">Optimal rest periods based on training goal</p>
+                </div>
+                <span class="tool-badge">Schoenfeld 2016</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">The Science</div>
+                  <p>Research shows rest periods significantly impact training outcomes. Schoenfeld et al. (2016) found that <strong>3+ minutes</strong> rest produces greater strength gains, while <strong>60-90 seconds</strong> optimizes metabolic stress for hypertrophy. Shorter rest increases growth hormone but reduces total volume capacity.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Training Goal</label>
+                    <select id="timerGoal" class="field-input" onchange="updateTimerPreset()">
+                      <option value="strength">Strength (3-5 min)</option>
+                      <option value="hypertrophy" selected>Hypertrophy (90-120 sec)</option>
+                      <option value="endurance">Endurance (30-60 sec)</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Rest Duration</label>
+                    <div class="field-combo">
+                      <input type="number" id="timerSeconds" class="field-input" value="90" min="10" max="600">
+                      <span class="field-suffix">sec</span>
+                    </div>
+                  </div>
+                </div>
+                <div id="timerDisplay" style="text-align: center; margin-top: var(--space-xl);">
+                  <div style="font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--chalk);" id="timerClock">1:30</div>
+                  <div class="btn-group" style="margin-top: var(--space-lg); justify-content: center;">
+                    <button type="button" class="btn btn-primary" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+                    <button type="button" class="btn btn-ghost" onclick="resetTimer()">Reset</button>
+                  </div>
+                </div>
+                <div class="education-tip" style="margin-top: var(--space-lg);">
+                  <strong>Pro Tip:</strong> For compound lifts (squat, bench, deadlift), err on longer rest. For isolation work, shorter rest maintains the pump and metabolic stress that drives sarcoplasmic hypertrophy.
+                </div>
+              </div>
+            </div>
+
+            <!-- Rep Max Table -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Rep Max Percentage Table</h2>
+                  <p class="card-subtitle">Calculate working weights from your 1RM</p>
+                </div>
+                <span class="tool-badge">Brzycki Formula</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">How It Works</div>
+                  <p>The relationship between max weight and reps follows a predictable curve. At <strong>100%</strong> you can do 1 rep, at <strong>85%</strong> approximately 5 reps, at <strong>75%</strong> about 10 reps. This table uses the Brzycki formula: <code>1RM = weight × (36 / (37 - reps))</code>, which is accurate within ±5% for 1-10 rep ranges.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Your 1RM</label>
+                    <div class="field-combo">
+                      <input type="number" id="repMaxWeight" class="field-input" placeholder="225" step="5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateRepMaxTable()">Generate Table</button>
+                </div>
+                <div id="repMaxResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="repMaxTable" class="rep-max-table"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Posing Guide -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">IFBB Mandatory Poses Guide</h2>
+                  <p class="card-subtitle">Master the 8 mandatory poses for competition</p>
+                </div>
+                <span class="tool-badge">Competition Prep</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Why Posing Matters</div>
+                  <p>Posing can make or break your placing. A well-conditioned physique presented poorly will lose to a lesser physique presented masterfully. Arnold famously said he spent <strong>2+ hours daily</strong> practicing poses in his final weeks. Posing is also an isometric workout—practice builds mind-muscle connection and burns calories.</p>
+                </div>
+                <div id="posingGuide" class="posing-grid"></div>
+              </div>
+            </div>
+
+            <!-- Contest Prep Countdown -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Contest Prep Countdown</h2>
+                  <p class="card-subtitle">Track your prep phases and milestones</p>
+                </div>
+                <span class="tool-badge">Helms et al. 2014</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Evidence-Based Prep Timeline</div>
+                  <p>Research by Helms et al. recommends <strong>12-20 weeks</strong> of prep depending on starting body fat. Losing <strong>0.5-1% bodyweight per week</strong> maximizes fat loss while preserving muscle. Faster cuts increase muscle loss exponentially—a 16-week prep loses less muscle than an 8-week crash diet even with the same total weight loss.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Show Date</label>
+                    <input type="date" id="contestDate" class="field-input">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Current Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="contestCurrentWeight" class="field-input" placeholder="200">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Stage Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="contestTargetWeight" class="field-input" placeholder="175">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateContestCountdown()">Calculate Prep</button>
+                </div>
+                <div id="contestResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="contestCountdown" class="contest-countdown"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Water Loading Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Water Loading Protocol</h2>
+                  <p class="card-subtitle">Peak week water manipulation for competition</p>
+                </div>
+                <span class="tool-badge">Peak Week</span>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-warning" style="margin-bottom: var(--space-lg);">
+                  <span class="alert-icon">⚠</span>
+                  <div class="alert-content">
+                    <div class="alert-title">Caution Required</div>
+                    <div class="alert-text">Water manipulation can be dangerous. This is an advanced technique that should only be used by experienced competitors under guidance. Test protocols during prep, never experiment during peak week.</div>
+                  </div>
+                </div>
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">The Science of Water Loading</div>
+                  <p>Water loading works by downregulating aldosterone (the hormone that retains water). When you drink <strong>2+ gallons daily</strong>, your body increases urination. When you suddenly cut water, the body continues excreting at a high rate for 12-24 hours, creating a temporarily "dry" look. The effect is short-lived—timing is critical.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Body Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="waterWeight" class="field-input" placeholder="180">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Show Date</label>
+                    <input type="date" id="waterShowDate" class="field-input">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Protocol Intensity</label>
+                    <select id="waterIntensity" class="field-input">
+                      <option value="conservative" selected>Conservative (Recommended)</option>
+                      <option value="moderate">Moderate</option>
+                      <option value="aggressive">Aggressive (Experienced Only)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateWaterLoading()">Generate Protocol</button>
+                </div>
+                <div id="waterResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="waterProtocol" class="water-protocol"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utilities -->
+          <div id="tools-utilities" class="tools-category">
+            <!-- PR Tracker -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">PR Tracker</h2>
+                  <p class="card-subtitle">Log and track your personal records over time</p>
+                </div>
+                <span class="tool-badge">Progress</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Why Track PRs?</div>
+                  <p>Progressive overload is the fundamental driver of muscle growth. Research shows that <strong>tracking progress increases adherence by 30%</strong> and helps identify plateaus early. A PR doesn't have to be a 1RM—track rep PRs too. Adding 1 rep at the same weight IS progressive overload.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Exercise</label>
+                    <select id="prExercise" class="field-input">
+                      <option value="squat">Squat</option>
+                      <option value="bench">Bench Press</option>
+                      <option value="deadlift">Deadlift</option>
+                      <option value="ohp">Overhead Press</option>
+                      <option value="row">Barbell Row</option>
+                      <option value="custom">Custom...</option>
+                    </select>
+                  </div>
+                  <div class="field" id="customExerciseField" style="display: none;">
+                    <label class="field-label">Custom Exercise Name</label>
+                    <input type="text" id="prCustomExercise" class="field-input" placeholder="e.g., Incline Press">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Weight</label>
+                    <div class="field-combo">
+                      <input type="number" id="prWeight" class="field-input" placeholder="225" step="2.5">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Reps</label>
+                    <input type="number" id="prReps" class="field-input" placeholder="1" min="1" max="50">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Date</label>
+                    <input type="date" id="prDate" class="field-input">
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="logPR()">Log PR</button>
+                  <button type="button" class="btn btn-ghost" onclick="clearPRHistory()">Clear History</button>
+                </div>
+                <div id="prHistory" style="margin-top: var(--space-xl);">
+                  <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">PR History</h4>
+                  <div id="prList" class="pr-list"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gym Bag Checklist -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Gym Bag Checklist</h2>
+                  <p class="card-subtitle">Never forget your gear again</p>
+                </div>
+                <span class="tool-badge">Preparation</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Preparation = Performance</div>
+                  <p>Forgetting your belt on squat day or your straps on deadlift day can derail a workout. Studies on habit formation show that <strong>environmental cues</strong> (like a packed gym bag) are the strongest predictors of consistent behavior. A ready gym bag removes friction and excuses.</p>
+                </div>
+                <div id="gymBagChecklist" class="checklist"></div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-ghost" onclick="resetChecklist()">Reset All</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Supplement Stack Builder -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Supplement Stack Builder</h2>
+                  <p class="card-subtitle">Evidence-based stacks for your goals</p>
+                </div>
+                <span class="tool-badge">ISSN Guidelines</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Supplements That Actually Work</div>
+                  <p>Most supplements are overhyped. The ISSN rates only a handful with <strong>"Strong Evidence"</strong>: creatine monohydrate, caffeine, protein, beta-alanine, and citrulline. Everything else has limited or no evidence. Don't waste money—focus on the basics that actually have research backing.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Primary Goal</label>
+                    <select id="stackGoal" class="field-input">
+                      <option value="muscle">Build Muscle</option>
+                      <option value="strength">Increase Strength</option>
+                      <option value="fatloss">Fat Loss</option>
+                      <option value="endurance">Endurance</option>
+                      <option value="recovery">Recovery</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Budget</label>
+                    <select id="stackBudget" class="field-input">
+                      <option value="minimal">Minimal (essentials only)</option>
+                      <option value="moderate" selected>Moderate</option>
+                      <option value="comprehensive">Comprehensive</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="buildStack()">Build Stack</button>
+                </div>
+                <div id="stackResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="supplementStack" class="supplement-stack"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Macro Meal Builder -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Macro Meal Builder</h2>
+                  <p class="card-subtitle">Build meals to hit your exact macro targets</p>
+                </div>
+                <span class="tool-badge">Precision</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Flexible Dieting Explained</div>
+                  <p>Research shows that <strong>total daily macros matter more than food choices</strong> for body composition (Aragon & Schoenfeld, 2018). "If It Fits Your Macros" (IIFYM) works because the body processes macronutrients the same regardless of source. 30g protein from chicken = 30g protein from beef = 30g protein from whey for muscle protein synthesis purposes.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Target Protein</label>
+                    <div class="field-combo">
+                      <input type="number" id="mealProtein" class="field-input" placeholder="40" step="1">
+                      <span class="field-suffix">g</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Carbs</label>
+                    <div class="field-combo">
+                      <input type="number" id="mealCarbs" class="field-input" placeholder="50" step="1">
+                      <span class="field-suffix">g</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Target Fat</label>
+                    <div class="field-combo">
+                      <input type="number" id="mealFat" class="field-input" placeholder="15" step="1">
+                      <span class="field-suffix">g</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Diet Type</label>
+                    <select id="mealDietType" class="field-input">
+                      <option value="any">Any</option>
+                      <option value="vegetarian">Vegetarian</option>
+                      <option value="vegan">Vegan</option>
+                      <option value="paleo">Paleo</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="buildMacroMeal()">Build Meal</button>
+                </div>
+                <div id="mealBuilderResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="builtMeal" class="built-meal"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meal Prep Cost Calculator -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Meal Prep Cost Calculator</h2>
+                  <p class="card-subtitle">Budget your weekly meal prep</p>
+                </div>
+                <span class="tool-badge">Budgeting</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Eating Well on a Budget</div>
+                  <p>Bodybuilding doesn't have to be expensive. <strong>Cost per gram of protein</strong> is the key metric. Eggs (~$0.04/g protein), chicken thighs (~$0.05/g), and cottage cheese (~$0.06/g) beat expensive supplements. Buying in bulk, using frozen vegetables, and cooking in batches can cut food costs by 40-50%.</p>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Daily Protein Target</label>
+                    <div class="field-combo">
+                      <input type="number" id="costProtein" class="field-input" placeholder="180" step="1">
+                      <span class="field-suffix">g</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Budget Level</label>
+                    <select id="costBudget" class="field-input">
+                      <option value="tight">Tight (~$50-75/week)</option>
+                      <option value="moderate" selected>Moderate (~$75-125/week)</option>
+                      <option value="flexible">Flexible (~$125-175/week)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateMealPrepCost()">Calculate Cost</button>
+                </div>
+                <div id="costResults" class="hidden" style="margin-top: var(--space-xl);">
+                  <div id="costBreakdown" class="cost-breakdown"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Photo Tracker -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Progress Photo Guide</h2>
+                  <p class="card-subtitle">How to take consistent, comparable progress photos</p>
+                </div>
+                <span class="tool-badge">Documentation</span>
+              </div>
+              <div class="card-body">
+                <div class="rationale-box" style="margin-bottom: var(--space-lg);">
+                  <div class="rationale-label">Why Photos Beat the Scale</div>
+                  <p>The scale lies. Body recomposition (gaining muscle while losing fat) can show <strong>zero weight change</strong> while dramatically improving your physique. Photos capture what the scale can't. Studies show people who track visually have better body image and more realistic expectations than those who only weigh themselves.</p>
+                </div>
+                <div id="photoGuide" class="photo-guide">
+                  <div class="guide-section">
+                    <h4>Photo Protocol for Consistency</h4>
+                    <ul>
+                      <li><strong>Same time:</strong> Morning, fasted, after using bathroom</li>
+                      <li><strong>Same lighting:</strong> Natural light or consistent artificial light</li>
+                      <li><strong>Same location:</strong> Mark your standing spot with tape</li>
+                      <li><strong>Same poses:</strong> Front relaxed, front flex, side, back</li>
+                      <li><strong>Same distance:</strong> Use a tripod or mark camera position</li>
+                      <li><strong>Weekly frequency:</strong> Photos every 7 days, same day</li>
+                    </ul>
+                  </div>
+                  <div class="guide-section" style="margin-top: var(--space-lg);">
+                    <h4>The 4 Essential Angles</h4>
+                    <ul>
+                      <li><strong>Front Relaxed:</strong> Arms at sides, shows overall proportions</li>
+                      <li><strong>Front Double Biceps:</strong> Shows arm/shoulder development</li>
+                      <li><strong>Side (Left):</strong> Shows chest, abs, arm thickness</li>
+                      <li><strong>Back Double Biceps:</strong> Shows back width, rear delts</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="education-tip" style="margin-top: var(--space-lg);">
+                  <strong>Pro Tip:</strong> Pump affects photos significantly. For true comparisons, always take photos in the same state—either always with a pump or always without. Fasted morning photos with no pump are most consistent.
                 </div>
               </div>
             </div>
@@ -6503,6 +7314,608 @@ function focusGym(lat, lng, id) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// WORKOUT TIMER
+// ═══════════════════════════════════════════════════════════════════════════
+let timerInterval = null;
+let timerSeconds = 90;
+let timerRunning = false;
+
+function updateTimerPreset() {
+  const goal = document.getElementById('timerGoal').value;
+  const presets = { strength: 180, hypertrophy: 90, endurance: 45, custom: 90 };
+  document.getElementById('timerSeconds').value = presets[goal];
+  updateTimerDisplay(presets[goal]);
+}
+
+function updateTimerDisplay(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  document.getElementById('timerClock').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerStartBtn').textContent = 'Resume';
+  } else {
+    if (timerSeconds <= 0) {
+      timerSeconds = parseInt(document.getElementById('timerSeconds').value);
+    }
+    timerRunning = true;
+    document.getElementById('timerStartBtn').textContent = 'Pause';
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      updateTimerDisplay(timerSeconds);
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timerStartBtn').textContent = 'Start';
+        // Audio alert
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          osc.connect(ctx.destination);
+          osc.frequency.value = 800;
+          osc.start();
+          setTimeout(() => osc.stop(), 200);
+        } catch(e) {}
+        alert('Rest period complete!');
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = parseInt(document.getElementById('timerSeconds').value);
+  updateTimerDisplay(timerSeconds);
+  document.getElementById('timerStartBtn').textContent = 'Start';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// REP MAX TABLE
+// ═══════════════════════════════════════════════════════════════════════════
+function calculateRepMaxTable() {
+  const oneRM = parseFloat(document.getElementById('repMaxWeight').value);
+  if (!oneRM) return alert('Enter your 1RM');
+
+  const percentages = [
+    { pct: 100, reps: '1' }, { pct: 95, reps: '2' }, { pct: 90, reps: '3-4' },
+    { pct: 85, reps: '5-6' }, { pct: 80, reps: '7-8' }, { pct: 75, reps: '9-10' },
+    { pct: 70, reps: '11-12' }, { pct: 65, reps: '13-15' }, { pct: 60, reps: '16-20' },
+    { pct: 55, reps: '20+' }, { pct: 50, reps: '25+' }
+  ];
+
+  let html = '';
+  percentages.forEach(p => {
+    const weight = Math.round(oneRM * p.pct / 100 / 2.5) * 2.5; // Round to nearest 2.5
+    html += `
+      <div class="rep-max-item">
+        <div class="percent">${p.pct}%</div>
+        <div class="weight">${weight} lbs</div>
+        <div class="reps">${p.reps} reps</div>
+      </div>
+    `;
+  });
+
+  document.getElementById('repMaxTable').innerHTML = html;
+  document.getElementById('repMaxResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POSING GUIDE
+// ═══════════════════════════════════════════════════════════════════════════
+function loadPosingGuide() {
+  const poses = [
+    {
+      name: 'Front Double Biceps',
+      muscles: 'Biceps, Front Delts, Chest, Abs, Quads',
+      tips: ['Raise arms to shoulder height', 'Flex biceps hard while spreading lats', 'Squeeze abs and quads', 'Slight forward lean at hips']
+    },
+    {
+      name: 'Front Lat Spread',
+      muscles: 'Lats, Chest, Shoulders, Abs',
+      tips: ['Hands on hips, thumbs back', 'Push elbows forward and flare lats', 'Expand chest and vacuum abs', 'Keep shoulders down']
+    },
+    {
+      name: 'Side Chest',
+      muscles: 'Chest, Arms, Shoulders, Legs',
+      tips: ['Clasp hands in front', 'Squeeze chest between arms', 'Flex rear leg calf', 'Turn torso 45° to judges']
+    },
+    {
+      name: 'Side Triceps',
+      muscles: 'Triceps, Shoulders, Abs, Legs',
+      tips: ['Lock arm behind back', 'Press palm into glute', 'Lock front knee', 'Flex tricep hard']
+    },
+    {
+      name: 'Rear Double Biceps',
+      muscles: 'Back, Rear Delts, Biceps, Hamstrings, Calves',
+      tips: ['Same arm position as front', 'Squeeze shoulder blades', 'Pop one calf up', 'Flex hamstrings']
+    },
+    {
+      name: 'Rear Lat Spread',
+      muscles: 'Lats, Lower Back, Glutes, Hamstrings',
+      tips: ['Thumbs forward on hips', 'Spread lats as wide as possible', 'Keep waist tight', 'Flex glutes and hams']
+    },
+    {
+      name: 'Abdominals & Thighs',
+      muscles: 'Abs, Obliques, Quads, Serratus',
+      tips: ['Hands behind head', 'Crunch abs while exhaling', 'Flex one leg forward', 'Show serratus detail']
+    },
+    {
+      name: 'Most Muscular',
+      muscles: 'Traps, Chest, Arms, Forearms',
+      tips: ['Hands together or crab pose', 'Hunch shoulders up', 'Squeeze everything', 'Control facial expression']
+    }
+  ];
+
+  let html = '';
+  poses.forEach(pose => {
+    html += `
+      <div class="pose-card">
+        <h4>${pose.name}</h4>
+        <div class="pose-muscles">${pose.muscles}</div>
+        <ul class="pose-tips">
+          ${pose.tips.map(t => `<li>${t}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  });
+
+  document.getElementById('posingGuide').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONTEST COUNTDOWN
+// ═══════════════════════════════════════════════════════════════════════════
+function calculateContestCountdown() {
+  const showDate = new Date(document.getElementById('contestDate').value);
+  const currentWeight = parseFloat(document.getElementById('contestCurrentWeight').value);
+  const targetWeight = parseFloat(document.getElementById('contestTargetWeight').value);
+
+  if (!showDate || !currentWeight || !targetWeight) return alert('Fill all fields');
+
+  const today = new Date();
+  const daysOut = Math.ceil((showDate - today) / (1000 * 60 * 60 * 24));
+  const weeksOut = Math.ceil(daysOut / 7);
+  const weightToLose = currentWeight - targetWeight;
+  const weeklyLoss = weightToLose / weeksOut;
+  const pctPerWeek = (weeklyLoss / currentWeight) * 100;
+
+  let status = 'Optimal';
+  let statusClass = 'success';
+  if (pctPerWeek > 1) { status = 'Aggressive - Risk of muscle loss'; statusClass = 'warning'; }
+  if (pctPerWeek > 1.5) { status = 'Too Fast - High muscle loss risk'; statusClass = 'danger'; }
+  if (daysOut < 0) { status = 'Show has passed'; statusClass = 'danger'; }
+
+  const phases = [
+    { name: 'Base Phase', weeks: '12+ weeks out', focus: 'Build muscle, maintain calories' },
+    { name: 'Fat Loss Phase', weeks: '8-12 weeks out', focus: 'Moderate deficit, increase cardio' },
+    { name: 'Sharpening', weeks: '4-8 weeks out', focus: 'Dial in conditioning, refine posing' },
+    { name: 'Peak Week', weeks: 'Final 7 days', focus: 'Water/carb manipulation, final touches' }
+  ];
+
+  let currentPhase = 0;
+  if (weeksOut <= 12) currentPhase = 1;
+  if (weeksOut <= 8) currentPhase = 2;
+  if (weeksOut <= 1) currentPhase = 3;
+
+  let html = `
+    <div class="countdown-number">${daysOut > 0 ? daysOut : 0}</div>
+    <div class="countdown-label">days until showtime</div>
+    <div class="alert alert-${statusClass}" style="margin: var(--space-lg) 0;">
+      <span class="alert-icon">${statusClass === 'success' ? '◆' : '⚠'}</span>
+      <div class="alert-content">
+        <div class="alert-title">${status}</div>
+        <div class="alert-text">${weeklyLoss.toFixed(2)} lbs/week (${pctPerWeek.toFixed(2)}% BW)</div>
+      </div>
+    </div>
+    <div class="contest-phases">
+      <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">Prep Phases</h4>
+      ${phases.map((p, i) => `
+        <div class="phase-item ${i === currentPhase ? 'active' : ''} ${i < currentPhase ? 'completed' : ''}">
+          <strong>${p.name}</strong> (${p.weeks})<br>
+          <span style="font-size: 0.875rem; color: var(--chalk-secondary);">${p.focus}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  document.getElementById('contestCountdown').innerHTML = html;
+  document.getElementById('contestResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WATER LOADING
+// ═══════════════════════════════════════════════════════════════════════════
+function calculateWaterLoading() {
+  const weight = parseFloat(document.getElementById('waterWeight').value);
+  const showDate = new Date(document.getElementById('waterShowDate').value);
+  const intensity = document.getElementById('waterIntensity').value;
+
+  if (!weight || !showDate) return alert('Fill all fields');
+
+  const baseWater = weight * 0.5 / 33.8; // oz to L, about 0.5oz per lb baseline
+  const protocols = {
+    conservative: { peak: 2.0, cut: 0.7, final: 0.3 },
+    moderate: { peak: 2.5, cut: 0.5, final: 0.2 },
+    aggressive: { peak: 3.0, cut: 0.3, final: 0.1 }
+  };
+
+  const p = protocols[intensity];
+  const days = [
+    { day: '7 days out', water: (baseWater * p.peak).toFixed(1), sodium: 'Normal', carbs: 'Normal' },
+    { day: '6 days out', water: (baseWater * p.peak).toFixed(1), sodium: 'Normal', carbs: 'Normal' },
+    { day: '5 days out', water: (baseWater * p.peak).toFixed(1), sodium: 'Normal', carbs: 'Low' },
+    { day: '4 days out', water: (baseWater * p.peak).toFixed(1), sodium: 'Reduce 50%', carbs: 'Low' },
+    { day: '3 days out', water: (baseWater * p.cut).toFixed(1), sodium: 'Minimal', carbs: 'Carb Load' },
+    { day: '2 days out', water: (baseWater * p.cut).toFixed(1), sodium: 'Minimal', carbs: 'Carb Load' },
+    { day: '1 day out', water: (baseWater * p.final).toFixed(1), sodium: 'Minimal', carbs: 'Moderate' },
+    { day: 'Show Day', water: 'Sips only', sodium: 'None', carbs: 'As needed' }
+  ];
+
+  let html = '<h4 style="margin-bottom: var(--space-md); color: var(--chalk);">7-Day Water Protocol</h4>';
+  days.forEach(d => {
+    html += `
+      <div class="water-day">
+        <span class="day-label">${d.day}</span>
+        <span class="water-amount">Water: ${d.water}L</span>
+        <span class="sodium-amount">Sodium: ${d.sodium}</span>
+        <span class="carb-amount">Carbs: ${d.carbs}</span>
+      </div>
+    `;
+  });
+
+  document.getElementById('waterProtocol').innerHTML = html;
+  document.getElementById('waterResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PR TRACKER
+// ═══════════════════════════════════════════════════════════════════════════
+function initPRTracker() {
+  document.getElementById('prExercise').addEventListener('change', (e) => {
+    document.getElementById('customExerciseField').style.display = e.target.value === 'custom' ? 'block' : 'none';
+  });
+  document.getElementById('prDate').valueAsDate = new Date();
+  loadPRHistory();
+}
+
+function logPR() {
+  let exercise = document.getElementById('prExercise').value;
+  if (exercise === 'custom') {
+    exercise = document.getElementById('prCustomExercise').value;
+    if (!exercise) return alert('Enter exercise name');
+  }
+  const weight = parseFloat(document.getElementById('prWeight').value);
+  const reps = parseInt(document.getElementById('prReps').value);
+  const date = document.getElementById('prDate').value;
+
+  if (!weight || !reps || !date) return alert('Fill all fields');
+
+  const prs = JSON.parse(localStorage.getItem('muscleforge_prs') || '[]');
+  prs.unshift({ exercise, weight, reps, date, id: Date.now() });
+  localStorage.setItem('muscleforge_prs', JSON.stringify(prs));
+  loadPRHistory();
+
+  // Clear form
+  document.getElementById('prWeight').value = '';
+  document.getElementById('prReps').value = '';
+}
+
+function loadPRHistory() {
+  const prs = JSON.parse(localStorage.getItem('muscleforge_prs') || '[]');
+  if (prs.length === 0) {
+    document.getElementById('prList').innerHTML = '<p style="color: var(--chalk-tertiary);">No PRs logged yet. Start tracking!</p>';
+    return;
+  }
+
+  let html = '';
+  prs.slice(0, 20).forEach(pr => {
+    html += `
+      <div class="pr-item">
+        <div>
+          <span class="pr-exercise">${pr.exercise}</span>
+          <span class="pr-date">${pr.date}</span>
+        </div>
+        <div class="pr-details">${pr.weight} lbs × ${pr.reps}</div>
+        <button class="pr-delete" onclick="deletePR(${pr.id})">×</button>
+      </div>
+    `;
+  });
+
+  document.getElementById('prList').innerHTML = html;
+}
+
+function deletePR(id) {
+  let prs = JSON.parse(localStorage.getItem('muscleforge_prs') || '[]');
+  prs = prs.filter(pr => pr.id !== id);
+  localStorage.setItem('muscleforge_prs', JSON.stringify(prs));
+  loadPRHistory();
+}
+
+function clearPRHistory() {
+  if (confirm('Clear all PR history?')) {
+    localStorage.removeItem('muscleforge_prs');
+    loadPRHistory();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GYM BAG CHECKLIST
+// ═══════════════════════════════════════════════════════════════════════════
+function loadGymBagChecklist() {
+  const items = [
+    { name: 'Lifting Belt', category: 'gear' },
+    { name: 'Wrist Wraps', category: 'gear' },
+    { name: 'Knee Sleeves', category: 'gear' },
+    { name: 'Lifting Straps', category: 'gear' },
+    { name: 'Chalk', category: 'gear' },
+    { name: 'Resistance Bands', category: 'gear' },
+    { name: 'Gym Shoes', category: 'clothing' },
+    { name: 'Workout Clothes', category: 'clothing' },
+    { name: 'Towel', category: 'clothing' },
+    { name: 'Water Bottle', category: 'nutrition' },
+    { name: 'Protein Shake', category: 'nutrition' },
+    { name: 'Pre-Workout', category: 'nutrition' },
+    { name: 'Intra-Workout Carbs', category: 'nutrition' },
+    { name: 'Headphones', category: 'accessories' },
+    { name: 'Phone/Music', category: 'accessories' },
+    { name: 'Notebook/Log', category: 'accessories' }
+  ];
+
+  const saved = JSON.parse(localStorage.getItem('muscleforge_checklist') || '{}');
+
+  let html = '';
+  items.forEach((item, i) => {
+    const checked = saved[item.name] || false;
+    html += `
+      <div class="checklist-item ${checked ? 'checked' : ''}" onclick="toggleChecklistItem('${item.name}', this)">
+        <div class="checklist-box"></div>
+        <span class="checklist-label">${item.name}</span>
+      </div>
+    `;
+  });
+
+  document.getElementById('gymBagChecklist').innerHTML = html;
+}
+
+function toggleChecklistItem(name, el) {
+  el.classList.toggle('checked');
+  const saved = JSON.parse(localStorage.getItem('muscleforge_checklist') || '{}');
+  saved[name] = el.classList.contains('checked');
+  localStorage.setItem('muscleforge_checklist', JSON.stringify(saved));
+}
+
+function resetChecklist() {
+  localStorage.removeItem('muscleforge_checklist');
+  loadGymBagChecklist();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SUPPLEMENT STACK
+// ═══════════════════════════════════════════════════════════════════════════
+function buildStack() {
+  const goal = document.getElementById('stackGoal').value;
+  const budget = document.getElementById('stackBudget').value;
+
+  const supplements = {
+    muscle: [
+      { name: 'Creatine Monohydrate', dose: '5g daily', timing: 'Any time, consistency matters', evidence: 'Strong', priority: 1 },
+      { name: 'Whey Protein', dose: '20-40g post-workout', timing: 'Within 2 hours of training', evidence: 'Strong', priority: 1 },
+      { name: 'Vitamin D3', dose: '2000-5000 IU', timing: 'With fatty meal', evidence: 'Strong', priority: 2 },
+      { name: 'Omega-3 Fish Oil', dose: '2-3g EPA/DHA', timing: 'With meals', evidence: 'Strong', priority: 2 },
+      { name: 'HMB', dose: '3g daily', timing: 'Split doses', evidence: 'Moderate', priority: 3 }
+    ],
+    strength: [
+      { name: 'Creatine Monohydrate', dose: '5g daily', timing: 'Any time', evidence: 'Strong', priority: 1 },
+      { name: 'Caffeine', dose: '3-6mg/kg', timing: '30-60 min pre-workout', evidence: 'Strong', priority: 1 },
+      { name: 'Beta-Alanine', dose: '3-5g daily', timing: 'Split doses to avoid tingling', evidence: 'Strong', priority: 2 },
+      { name: 'Citrulline Malate', dose: '6-8g', timing: '30-60 min pre-workout', evidence: 'Strong', priority: 2 }
+    ],
+    fatloss: [
+      { name: 'Caffeine', dose: '100-400mg', timing: 'Morning, pre-workout', evidence: 'Strong', priority: 1 },
+      { name: 'Whey Protein', dose: '20-40g', timing: 'For satiety between meals', evidence: 'Strong', priority: 1 },
+      { name: 'Green Tea Extract', dose: '500mg EGCG', timing: 'With meals', evidence: 'Moderate', priority: 2 },
+      { name: 'Fiber Supplement', dose: '5-10g', timing: 'Before meals', evidence: 'Moderate', priority: 2 }
+    ],
+    endurance: [
+      { name: 'Caffeine', dose: '3-6mg/kg', timing: '30-60 min pre-exercise', evidence: 'Strong', priority: 1 },
+      { name: 'Beta-Alanine', dose: '3-5g daily', timing: 'Split doses', evidence: 'Strong', priority: 1 },
+      { name: 'Beetroot Juice/Nitrates', dose: '300-600mg nitrate', timing: '2-3 hours pre-exercise', evidence: 'Strong', priority: 2 },
+      { name: 'Sodium Bicarbonate', dose: '0.3g/kg', timing: '60-90 min pre-exercise', evidence: 'Moderate', priority: 3 }
+    ],
+    recovery: [
+      { name: 'Whey Protein', dose: '20-40g', timing: 'Post-workout', evidence: 'Strong', priority: 1 },
+      { name: 'Tart Cherry Juice', dose: '8-12oz', timing: 'Post-workout', evidence: 'Moderate', priority: 2 },
+      { name: 'Magnesium', dose: '200-400mg', timing: 'Before bed', evidence: 'Strong', priority: 2 },
+      { name: 'Zinc', dose: '15-30mg', timing: 'Before bed', evidence: 'Moderate', priority: 2 },
+      { name: 'Casein Protein', dose: '30-40g', timing: 'Before bed', evidence: 'Strong', priority: 2 }
+    ]
+  };
+
+  const budgetLimits = { minimal: 1, moderate: 2, comprehensive: 4 };
+  const limit = budgetLimits[budget];
+  const stack = supplements[goal].filter(s => s.priority <= limit);
+
+  let html = '';
+  stack.forEach(s => {
+    html += `
+      <div class="supplement-item">
+        <h4>${s.name}</h4>
+        <div class="supplement-dose">${s.dose}</div>
+        <div class="supplement-timing">When: ${s.timing}</div>
+        <span class="supplement-evidence ${s.evidence === 'Moderate' ? 'moderate' : ''}">${s.evidence} Evidence</span>
+      </div>
+    `;
+  });
+
+  document.getElementById('supplementStack').innerHTML = html;
+  document.getElementById('stackResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MACRO MEAL BUILDER
+// ═══════════════════════════════════════════════════════════════════════════
+function buildMacroMeal() {
+  const targetP = parseFloat(document.getElementById('mealProtein').value) || 0;
+  const targetC = parseFloat(document.getElementById('mealCarbs').value) || 0;
+  const targetF = parseFloat(document.getElementById('mealFat').value) || 0;
+  const dietType = document.getElementById('mealDietType').value;
+
+  if (!targetP && !targetC && !targetF) return alert('Enter at least one macro target');
+
+  // Simplified food database for meal building
+  const foods = [
+    { name: 'Chicken Breast', p: 31, c: 0, f: 3.6, serving: 100, diet: ['any', 'paleo'] },
+    { name: 'White Rice', p: 2.7, c: 28, f: 0.3, serving: 100, diet: ['any', 'vegetarian', 'vegan'] },
+    { name: 'Olive Oil', p: 0, c: 0, f: 14, serving: 15, diet: ['any', 'vegetarian', 'vegan', 'paleo'] },
+    { name: 'Eggs', p: 13, c: 1, f: 11, serving: 100, diet: ['any', 'vegetarian', 'paleo'] },
+    { name: 'Oatmeal', p: 5, c: 27, f: 3, serving: 40, diet: ['any', 'vegetarian', 'vegan'] },
+    { name: 'Greek Yogurt', p: 10, c: 4, f: 0, serving: 100, diet: ['any', 'vegetarian'] },
+    { name: 'Sweet Potato', p: 2, c: 20, f: 0, serving: 100, diet: ['any', 'vegetarian', 'vegan', 'paleo'] },
+    { name: 'Salmon', p: 20, c: 0, f: 13, serving: 100, diet: ['any', 'paleo'] },
+    { name: 'Tofu', p: 8, c: 2, f: 4, serving: 100, diet: ['any', 'vegetarian', 'vegan'] },
+    { name: 'Almonds', p: 6, c: 6, f: 14, serving: 28, diet: ['any', 'vegetarian', 'vegan', 'paleo'] }
+  ];
+
+  const filtered = foods.filter(f => f.diet.includes(dietType));
+
+  // Simple greedy algorithm to build meal
+  let currentP = 0, currentC = 0, currentF = 0;
+  const selectedFoods = [];
+
+  // Prioritize protein sources
+  const proteinSources = filtered.filter(f => f.p > 10);
+  const carbSources = filtered.filter(f => f.c > 15 && f.p < 10);
+  const fatSources = filtered.filter(f => f.f > 10 && f.c < 5);
+
+  // Add protein first
+  if (targetP > 0 && proteinSources.length > 0) {
+    const source = proteinSources[0];
+    const amount = Math.ceil((targetP / source.p) * source.serving);
+    selectedFoods.push({ ...source, amount: Math.round(amount / 10) * 10 });
+    currentP += source.p * (amount / source.serving);
+    currentC += source.c * (amount / source.serving);
+    currentF += source.f * (amount / source.serving);
+  }
+
+  // Add carbs
+  if (targetC > currentC && carbSources.length > 0) {
+    const source = carbSources[0];
+    const needed = targetC - currentC;
+    const amount = Math.ceil((needed / source.c) * source.serving);
+    selectedFoods.push({ ...source, amount: Math.round(amount / 10) * 10 });
+    currentP += source.p * (amount / source.serving);
+    currentC += source.c * (amount / source.serving);
+    currentF += source.f * (amount / source.serving);
+  }
+
+  // Add fats
+  if (targetF > currentF && fatSources.length > 0) {
+    const source = fatSources[0];
+    const needed = targetF - currentF;
+    const amount = Math.ceil((needed / source.f) * source.serving);
+    selectedFoods.push({ ...source, amount: Math.round(amount / 5) * 5 });
+    currentP += source.p * (amount / source.serving);
+    currentC += source.c * (amount / source.serving);
+    currentF += source.f * (amount / source.serving);
+  }
+
+  let html = '<h4>Suggested Meal</h4>';
+  selectedFoods.forEach(f => {
+    html += `
+      <div class="meal-food-item">
+        <span>${f.name}</span>
+        <span>${f.amount}g</span>
+      </div>
+    `;
+  });
+
+  const totalCals = Math.round(currentP * 4 + currentC * 4 + currentF * 9);
+  html += `
+    <div class="meal-totals">
+      <div class="meal-total-item"><div class="value">${Math.round(currentP)}g</div><div class="label">Protein</div></div>
+      <div class="meal-total-item"><div class="value">${Math.round(currentC)}g</div><div class="label">Carbs</div></div>
+      <div class="meal-total-item"><div class="value">${Math.round(currentF)}g</div><div class="label">Fat</div></div>
+      <div class="meal-total-item"><div class="value">${totalCals}</div><div class="label">Calories</div></div>
+    </div>
+  `;
+
+  document.getElementById('builtMeal').innerHTML = html;
+  document.getElementById('mealBuilderResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MEAL PREP COST
+// ═══════════════════════════════════════════════════════════════════════════
+function calculateMealPrepCost() {
+  const proteinTarget = parseFloat(document.getElementById('costProtein').value);
+  const budget = document.getElementById('costBudget').value;
+
+  if (!proteinTarget) return alert('Enter protein target');
+
+  const weeklyProtein = proteinTarget * 7;
+
+  // Cost per gram of protein (approximate US prices)
+  const sources = {
+    tight: [
+      { name: 'Eggs (dozen)', costPer: 0.04, proteinPer: 6, unit: 'egg' },
+      { name: 'Chicken Thighs', costPer: 0.05, proteinPer: 26, unit: 'lb' },
+      { name: 'Canned Tuna', costPer: 0.07, proteinPer: 20, unit: 'can' },
+      { name: 'Cottage Cheese', costPer: 0.06, proteinPer: 14, unit: 'cup' }
+    ],
+    moderate: [
+      { name: 'Chicken Breast', costPer: 0.07, proteinPer: 31, unit: 'lb' },
+      { name: 'Ground Beef 90/10', costPer: 0.08, proteinPer: 26, unit: 'lb' },
+      { name: 'Greek Yogurt', costPer: 0.08, proteinPer: 17, unit: 'cup' },
+      { name: 'Whey Protein', costPer: 0.04, proteinPer: 25, unit: 'scoop' }
+    ],
+    flexible: [
+      { name: 'Salmon', costPer: 0.12, proteinPer: 23, unit: 'fillet' },
+      { name: 'Sirloin Steak', costPer: 0.11, proteinPer: 26, unit: 'lb' },
+      { name: 'Shrimp', costPer: 0.15, proteinPer: 24, unit: 'lb' }
+    ]
+  };
+
+  const selectedSources = sources[budget];
+  const avgCostPerGram = selectedSources.reduce((sum, s) => sum + s.costPer, 0) / selectedSources.length;
+  const weeklyCost = weeklyProtein * avgCostPerGram;
+
+  let html = '<h4>Weekly Cost Estimate</h4>';
+  selectedSources.forEach(s => {
+    const weeklyAmount = Math.ceil(weeklyProtein / 3 / s.proteinPer);
+    html += `
+      <div class="cost-item">
+        <span>${s.name}</span>
+        <span>~${weeklyAmount} ${s.unit}s</span>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="cost-total">Est. $${weeklyCost.toFixed(0)}-${(weeklyCost * 1.3).toFixed(0)}/week (protein only)</div>
+    <p style="margin-top: var(--space-md); font-size: 0.875rem; color: var(--chalk-secondary);">
+      Add ~$30-50/week for carb sources (rice, oats, potatoes) and vegetables. Total: $${(weeklyCost + 40).toFixed(0)}-${(weeklyCost * 1.3 + 50).toFixed(0)}/week.
+    </p>
+  `;
+
+  document.getElementById('costBreakdown').innerHTML = html;
+  document.getElementById('costResults').classList.remove('hidden');
+}
+
+// Initialize new tools when tools tab loads
+const originalLoadTools = loadTools;
+loadTools = function() {
+  originalLoadTools();
+  loadPosingGuide();
+  loadGymBagChecklist();
+  initPRTracker();
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
 // COMP PREP
 // ═══════════════════════════════════════════════════════════════════════════
 function calcPrep() {
@@ -6644,6 +8057,50 @@ function exportJSON() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'muscleforge-plan.json';
+  a.click();
+}
+
+function exportCSV() {
+  if (!plan) return alert('Generate a plan first');
+
+  const { macros, inputs, water, protein } = plan;
+  let csv = 'MuscleForge Nutrition Plan\n';
+  csv += `Generated,${new Date().toLocaleDateString()}\n\n`;
+
+  csv += 'USER PROFILE\n';
+  csv += `Age,${inputs.age}\n`;
+  csv += `Sex,${inputs.sex}\n`;
+  csv += `Weight (lbs),${inputs.weight}\n`;
+  csv += `Height (in),${inputs.height}\n`;
+  csv += `Activity Level,${inputs.activity}\n`;
+  csv += `Body Fat %,${inputs.bf || 'Not specified'}\n`;
+  csv += `Goal,${inputs.goal}\n\n`;
+
+  csv += 'DAILY TARGETS\n';
+  csv += `Calories,${macros.cals}\n`;
+  csv += `Protein (g),${macros.protein}\n`;
+  csv += `Carbohydrates (g),${macros.carbs}\n`;
+  csv += `Fat (g),${macros.fat}\n`;
+  csv += `Water (L),${water}\n\n`;
+
+  csv += 'PROTEIN TIMING\n';
+  csv += `Per Meal (g),${protein.perMeal}\n`;
+  csv += `Number of Meals,${inputs.meals}\n\n`;
+
+  if (meals && meals.length > 0) {
+    csv += 'MEAL PLAN\n';
+    csv += 'Meal,Food,Amount,Calories,Protein,Carbs,Fat\n';
+    meals.forEach((meal, i) => {
+      meal.foods.forEach(food => {
+        csv += `${i + 1},${food.name},${food.amount}g,${food.cals},${food.p}g,${food.c}g,${food.f}g\n`;
+      });
+    });
+  }
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'muscleforge-plan.csv';
   a.click();
 }
 
