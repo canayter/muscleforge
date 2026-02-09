@@ -16,6 +16,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
   <!-- Copy Protection -->
   <script>
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -2034,6 +2038,250 @@ select.field-input option {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   GYM MAPPER
+   ═══════════════════════════════════════════════════════════════════════════ */
+.gym-mapper-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-lg);
+  height: 600px;
+}
+
+@media (max-width: 900px) {
+  .gym-mapper-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.gym-map-wrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  min-height: 400px;
+}
+
+#gymMap {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: var(--iron-mid);
+}
+
+.gym-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--iron-dark);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.gym-list-header {
+  padding: var(--space-md);
+  background: var(--iron-surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.gym-list-header h3 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--chalk);
+  margin: 0;
+}
+
+.gym-list-count {
+  font-size: 0.875rem;
+  color: var(--chalk-tertiary);
+  margin-top: var(--space-xs);
+}
+
+.gym-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.gym-item {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.gym-item:hover {
+  background: var(--iron-surface);
+}
+
+.gym-item.active {
+  background: var(--training-dim);
+  border-left: 3px solid var(--training);
+}
+
+.gym-item-name {
+  font-weight: 500;
+  color: var(--chalk);
+  margin-bottom: var(--space-xs);
+}
+
+.gym-item-address {
+  font-size: 0.875rem;
+  color: var(--chalk-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.gym-item-distance {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--training);
+}
+
+.gym-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.gym-tag {
+  font-size: 0.6875rem;
+  padding: 2px 8px;
+  background: var(--iron-hover);
+  color: var(--chalk-tertiary);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gym-tag.chain {
+  background: var(--blood-dim);
+  color: var(--blood);
+}
+
+.gym-search-controls {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.gym-search-controls .field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.gym-location-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--training-dim);
+  color: var(--training);
+  border: 1px solid var(--training);
+  cursor: pointer;
+  font-family: 'Teko', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.gym-location-btn:hover {
+  background: var(--training);
+  color: var(--iron-black);
+}
+
+.gym-location-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.gym-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--chalk-tertiary);
+}
+
+.gym-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--iron-surface);
+  border-top-color: var(--training);
+  border-radius: 50%;
+  animation: gym-spin 1s linear infinite;
+}
+
+@keyframes gym-spin {
+  to { transform: rotate(360deg); }
+}
+
+.gym-empty {
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--chalk-tertiary);
+}
+
+.gym-empty-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+/* Leaflet custom styling */
+.leaflet-popup-content-wrapper {
+  background: var(--iron-dark);
+  color: var(--chalk);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+}
+
+.leaflet-popup-tip {
+  background: var(--iron-dark);
+}
+
+.gym-popup-name {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.gym-popup-address {
+  font-size: 0.8125rem;
+  color: var(--chalk-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.gym-popup-distance {
+  font-size: 0.875rem;
+  color: var(--training);
+  font-weight: 500;
+}
+
+.gym-popup-directions {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--training);
+  color: var(--iron-black);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.gym-popup-directions:hover {
+  background: var(--chalk);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ALERTS
    ═══════════════════════════════════════════════════════════════════════════ */
 .alert {
@@ -2509,6 +2757,7 @@ select.field-input option {
           <button class="nav-link" data-view="meals">Meals</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
+          <button class="nav-link" data-view="gyms">Gyms</button>
           <button class="nav-link" data-view="learn">Learn</button>
           <button class="nav-link" data-view="prep">Prep</button>
           <button class="nav-link" data-view="science">Science</button>
@@ -2528,6 +2777,7 @@ select.field-input option {
     <button class="nav-link" data-view="meals">Meals</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
+    <button class="nav-link" data-view="gyms">Gyms</button>
     <button class="nav-link" data-view="learn">Learn</button>
     <button class="nav-link" data-view="prep">Prep</button>
     <button class="nav-link" data-view="science">Sci</button>
@@ -4527,6 +4777,129 @@ select.field-input option {
       </section>
     </div>
 
+    <!-- GYMS VIEW -->
+    <div id="gyms" class="view">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h1 class="section-title">Gym Mapper</h1>
+            <p class="section-subtitle">Find gyms and fitness centers near you</p>
+          </div>
+
+          <!-- Search Controls -->
+          <div class="card" style="margin-bottom: var(--space-xl);">
+            <div class="card-body">
+              <div class="gym-search-controls">
+                <div class="field">
+                  <label class="field-label">Location</label>
+                  <input type="text" id="gymLocationInput" class="field-input" placeholder="Enter city, address, or zip code">
+                </div>
+                <div class="field" style="flex: 0 0 150px;">
+                  <label class="field-label">Radius</label>
+                  <select id="gymRadius" class="field-input">
+                    <option value="2">2 miles</option>
+                    <option value="5" selected>5 miles</option>
+                    <option value="10">10 miles</option>
+                    <option value="25">25 miles</option>
+                  </select>
+                </div>
+                <div class="field" style="flex: 0 0 auto; align-self: flex-end;">
+                  <button type="button" class="gym-location-btn" onclick="useMyLocation()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M12 2v4m0 12v4M2 12h4m12 0h4"/>
+                    </svg>
+                    Use My Location
+                  </button>
+                </div>
+                <div class="field" style="flex: 0 0 auto; align-self: flex-end;">
+                  <button type="button" class="btn btn-primary" onclick="searchGyms()">Search Gyms</button>
+                </div>
+              </div>
+
+              <div class="alert alert-success" style="margin-top: var(--space-md);">
+                <span class="alert-icon">◆</span>
+                <div class="alert-content">
+                  <div class="alert-title">Find Your Iron Temple</div>
+                  <div class="alert-text">Search for gyms, fitness centers, CrossFit boxes, and weight rooms near any location. Results are sorted by distance.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map and List Container -->
+          <div class="gym-mapper-container">
+            <div class="gym-map-wrapper">
+              <div id="gymMap"></div>
+            </div>
+            <div class="gym-list-wrapper">
+              <div class="gym-list-header">
+                <h3>Nearby Gyms</h3>
+                <div class="gym-list-count" id="gymCount">Enter a location to search</div>
+              </div>
+              <div class="gym-list" id="gymList">
+                <div class="gym-empty">
+                  <div class="gym-empty-icon">🏋️</div>
+                  <p>Enter a location or use your current location to find nearby gyms</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gym Type Filters -->
+          <div class="card" style="margin-top: var(--space-xl);">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Popular Gym Chains</h2>
+                <p class="card-subtitle">Major fitness chains you might find</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-md);">
+                <div class="guide-section">
+                  <h4>Powerlifting / Hardcore</h4>
+                  <ul>
+                    <li>Gold's Gym</li>
+                    <li>Metroflex</li>
+                    <li>Iron Addicts</li>
+                    <li>Westside Barbell</li>
+                  </ul>
+                </div>
+                <div class="guide-section">
+                  <h4>Commercial Chains</h4>
+                  <ul>
+                    <li>Planet Fitness</li>
+                    <li>LA Fitness</li>
+                    <li>24 Hour Fitness</li>
+                    <li>Anytime Fitness</li>
+                  </ul>
+                </div>
+                <div class="guide-section">
+                  <h4>CrossFit / Functional</h4>
+                  <ul>
+                    <li>CrossFit Affiliates</li>
+                    <li>Orangetheory</li>
+                    <li>F45 Training</li>
+                    <li>Barry's Bootcamp</li>
+                  </ul>
+                </div>
+                <div class="guide-section">
+                  <h4>Premium / Luxury</h4>
+                  <ul>
+                    <li>Equinox</li>
+                    <li>Lifetime Fitness</li>
+                    <li>David Barton</li>
+                    <li>TMPL</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <!-- SWAP MODAL -->
@@ -4631,6 +5004,7 @@ document.querySelectorAll('.nav-link').forEach(btn => {
     if (view === 'foods') loadFoods();
     if (view === 'science') loadScience();
     if (view === 'tools') loadTools();
+    if (view === 'gyms') loadGyms();
 
     window.scrollTo(0, 0);
   });
@@ -5789,6 +6163,343 @@ function loadInjuryGuide() {
       </ul>
     </div>
   `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GYM MAPPER
+// ═══════════════════════════════════════════════════════════════════════════
+let gymMap = null;
+let gymMarkers = [];
+let userMarker = null;
+let userLocation = null;
+let gymsLoaded = false;
+
+function loadGyms() {
+  if (gymsLoaded) return;
+  gymsLoaded = true;
+
+  // Initialize map centered on US
+  gymMap = L.map('gymMap').setView([39.8283, -98.5795], 4);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(gymMap);
+
+  // Handle enter key on location input
+  document.getElementById('gymLocationInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') searchGyms();
+  });
+}
+
+function useMyLocation() {
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser');
+    return;
+  }
+
+  document.getElementById('gymCount').textContent = 'Getting your location...';
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      document.getElementById('gymLocationInput').value = 'Current Location';
+      searchGymsAtLocation(userLocation.lat, userLocation.lng);
+    },
+    (error) => {
+      let msg = 'Unable to get your location. ';
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          msg += 'Please allow location access or enter a location manually.';
+          break;
+        case error.POSITION_UNAVAILABLE:
+          msg += 'Location information unavailable.';
+          break;
+        case error.TIMEOUT:
+          msg += 'Location request timed out.';
+          break;
+      }
+      alert(msg);
+      document.getElementById('gymCount').textContent = 'Enter a location to search';
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+  );
+}
+
+async function searchGyms() {
+  const locationInput = document.getElementById('gymLocationInput').value.trim();
+
+  if (!locationInput) {
+    alert('Please enter a location or use your current location');
+    return;
+  }
+
+  if (locationInput === 'Current Location' && userLocation) {
+    searchGymsAtLocation(userLocation.lat, userLocation.lng);
+    return;
+  }
+
+  document.getElementById('gymCount').textContent = 'Searching...';
+
+  try {
+    // Geocode the location using Nominatim
+    const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationInput)}&limit=1`;
+    const response = await fetch(geocodeUrl, {
+      headers: { 'User-Agent': 'MuscleForge Gym Mapper' }
+    });
+    const results = await response.json();
+
+    if (results.length === 0) {
+      alert('Location not found. Please try a different address or zip code.');
+      document.getElementById('gymCount').textContent = 'Location not found';
+      return;
+    }
+
+    const { lat, lon } = results[0];
+    searchGymsAtLocation(parseFloat(lat), parseFloat(lon));
+  } catch (error) {
+    console.error('Geocoding error:', error);
+    alert('Error finding location. Please try again.');
+    document.getElementById('gymCount').textContent = 'Error searching';
+  }
+}
+
+async function searchGymsAtLocation(lat, lng) {
+  const radiusMiles = parseInt(document.getElementById('gymRadius').value);
+  const radiusMeters = radiusMiles * 1609.34;
+
+  document.getElementById('gymCount').textContent = 'Searching for gyms...';
+  document.getElementById('gymList').innerHTML = `
+    <div class="gym-loading">
+      <div class="gym-loading-spinner"></div>
+    </div>
+  `;
+
+  // Clear existing markers
+  gymMarkers.forEach(m => gymMap.removeLayer(m));
+  gymMarkers = [];
+  if (userMarker) gymMap.removeLayer(userMarker);
+
+  // Add user marker
+  userMarker = L.marker([lat, lng], {
+    icon: L.divIcon({
+      className: 'user-location-marker',
+      html: '<div style="background: var(--blood); width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"></div>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    })
+  }).addTo(gymMap);
+  userMarker.bindPopup('<strong>Your Location</strong>').openPopup();
+
+  // Center map on location
+  gymMap.setView([lat, lng], 13);
+
+  try {
+    // Query Overpass API for gyms
+    const overpassQuery = `
+      [out:json][timeout:30];
+      (
+        node["leisure"="fitness_centre"](around:${radiusMeters},${lat},${lng});
+        way["leisure"="fitness_centre"](around:${radiusMeters},${lat},${lng});
+        node["leisure"="sports_centre"](around:${radiusMeters},${lat},${lng});
+        way["leisure"="sports_centre"](around:${radiusMeters},${lat},${lng});
+        node["sport"="fitness"](around:${radiusMeters},${lat},${lng});
+        way["sport"="fitness"](around:${radiusMeters},${lat},${lng});
+        node["amenity"="gym"](around:${radiusMeters},${lat},${lng});
+        way["amenity"="gym"](around:${radiusMeters},${lat},${lng});
+        node["name"~"gym|fitness|crossfit|iron|muscle|strength|weight",i](around:${radiusMeters},${lat},${lng});
+      );
+      out center body;
+    `;
+
+    const overpassUrl = 'https://overpass-api.de/api/interpreter';
+    const response = await fetch(overpassUrl, {
+      method: 'POST',
+      body: `data=${encodeURIComponent(overpassQuery)}`
+    });
+
+    if (!response.ok) throw new Error('Overpass API error');
+
+    const data = await response.json();
+    const gyms = processGymData(data.elements, lat, lng);
+
+    displayGyms(gyms, lat, lng);
+  } catch (error) {
+    console.error('Gym search error:', error);
+    document.getElementById('gymCount').textContent = 'Error loading gyms';
+    document.getElementById('gymList').innerHTML = `
+      <div class="gym-empty">
+        <div class="gym-empty-icon">⚠️</div>
+        <p>Error loading gym data. Please try again.</p>
+      </div>
+    `;
+  }
+}
+
+function processGymData(elements, userLat, userLng) {
+  const seen = new Set();
+  const gyms = [];
+
+  elements.forEach(el => {
+    // Get coordinates
+    let elLat, elLng;
+    if (el.type === 'node') {
+      elLat = el.lat;
+      elLng = el.lon;
+    } else if (el.center) {
+      elLat = el.center.lat;
+      elLng = el.center.lon;
+    } else {
+      return;
+    }
+
+    // Get name
+    const name = el.tags?.name || 'Unnamed Gym';
+
+    // Skip duplicates (same name within 100m)
+    const key = `${name.toLowerCase()}-${Math.round(elLat * 100)}-${Math.round(elLng * 100)}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+
+    // Calculate distance
+    const distance = calculateDistance(userLat, userLng, elLat, elLng);
+
+    // Build address
+    const addr = el.tags || {};
+    const address = [
+      addr['addr:housenumber'],
+      addr['addr:street'],
+      addr['addr:city'],
+      addr['addr:postcode']
+    ].filter(Boolean).join(' ') || 'Address not available';
+
+    // Determine gym type tags
+    const tags = [];
+    if (el.tags?.brand) tags.push({ text: el.tags.brand, isChain: true });
+    if (el.tags?.sport === 'fitness' || el.tags?.leisure === 'fitness_centre') tags.push({ text: 'Fitness Center', isChain: false });
+    if (el.tags?.leisure === 'sports_centre') tags.push({ text: 'Sports Center', isChain: false });
+    if (name.toLowerCase().includes('crossfit')) tags.push({ text: 'CrossFit', isChain: false });
+    if (name.toLowerCase().includes('yoga')) tags.push({ text: 'Yoga', isChain: false });
+    if (el.tags?.['opening_hours'] === '24/7') tags.push({ text: '24/7', isChain: false });
+
+    gyms.push({
+      id: el.id,
+      name,
+      lat: elLat,
+      lng: elLng,
+      distance,
+      address,
+      tags,
+      phone: el.tags?.phone || el.tags?.['contact:phone'],
+      website: el.tags?.website || el.tags?.['contact:website'],
+      openingHours: el.tags?.['opening_hours']
+    });
+  });
+
+  // Sort by distance
+  gyms.sort((a, b) => a.distance - b.distance);
+
+  return gyms;
+}
+
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  const R = 3959; // Earth's radius in miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+function displayGyms(gyms, userLat, userLng) {
+  document.getElementById('gymCount').textContent = `${gyms.length} gym${gyms.length !== 1 ? 's' : ''} found`;
+
+  if (gyms.length === 0) {
+    document.getElementById('gymList').innerHTML = `
+      <div class="gym-empty">
+        <div class="gym-empty-icon">🏋️</div>
+        <p>No gyms found in this area. Try increasing the search radius.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Create gym markers
+  const gymIcon = L.divIcon({
+    className: 'gym-marker',
+    html: '<div style="background: var(--training); width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+    iconSize: [12, 12],
+    iconAnchor: [6, 6]
+  });
+
+  gyms.forEach((gym, index) => {
+    const marker = L.marker([gym.lat, gym.lng], { icon: gymIcon }).addTo(gymMap);
+
+    const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${gym.lat},${gym.lng}`;
+
+    marker.bindPopup(`
+      <div class="gym-popup-name">${gym.name}</div>
+      <div class="gym-popup-address">${gym.address}</div>
+      <div class="gym-popup-distance">${gym.distance.toFixed(1)} miles away</div>
+      <a href="${directionsUrl}" target="_blank" class="gym-popup-directions">Get Directions</a>
+    `);
+
+    marker.on('click', () => {
+      document.querySelectorAll('.gym-item').forEach(el => el.classList.remove('active'));
+      const item = document.querySelector(`[data-gym-id="${gym.id}"]`);
+      if (item) {
+        item.classList.add('active');
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+
+    gymMarkers.push(marker);
+  });
+
+  // Fit map to show all markers
+  const group = new L.featureGroup([userMarker, ...gymMarkers]);
+  gymMap.fitBounds(group.getBounds().pad(0.1));
+
+  // Build gym list HTML
+  let html = '';
+  gyms.forEach(gym => {
+    const tagsHtml = gym.tags.map(t =>
+      `<span class="gym-tag ${t.isChain ? 'chain' : ''}">${t.text}</span>`
+    ).join('');
+
+    html += `
+      <div class="gym-item" data-gym-id="${gym.id}" onclick="focusGym(${gym.lat}, ${gym.lng}, ${gym.id})">
+        <div class="gym-item-name">${gym.name}</div>
+        <div class="gym-item-address">${gym.address}</div>
+        <div class="gym-item-distance">${gym.distance.toFixed(1)} mi</div>
+        ${tagsHtml ? `<div class="gym-item-tags">${tagsHtml}</div>` : ''}
+      </div>
+    `;
+  });
+
+  document.getElementById('gymList').innerHTML = html;
+}
+
+function focusGym(lat, lng, id) {
+  gymMap.setView([lat, lng], 16);
+
+  // Find and open popup for this gym
+  gymMarkers.forEach(marker => {
+    const pos = marker.getLatLng();
+    if (Math.abs(pos.lat - lat) < 0.0001 && Math.abs(pos.lng - lng) < 0.0001) {
+      marker.openPopup();
+    }
+  });
+
+  // Highlight in list
+  document.querySelectorAll('.gym-item').forEach(el => el.classList.remove('active'));
+  const item = document.querySelector(`[data-gym-id="${id}"]`);
+  if (item) item.classList.add('active');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
