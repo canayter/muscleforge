@@ -3608,6 +3608,110 @@ const InjuryPreventionGuide = {
 };
 
 // ───────────────────────────────────────────────────────────────────────────
+// INJURY EXERCISE RULES
+// Maps injuries to exercises to avoid and prehab to add
+// ───────────────────────────────────────────────────────────────────────────
+const INJURY_EXERCISE_RULES = {
+  shoulder: {
+    label: 'Shoulder',
+    avoidExercises: [
+      'overheadPress', 'dumbbellShoulderPress', 'arnoldPress',
+      'uprightRow', 'dips', 'inclineBarbellPress', 'inclineDumbbellPress',
+      'skullCrusher'
+    ],
+    avoidTags: ['caution-shoulder'],
+    prehabExercises: [
+      { name: 'Face Pulls', sets: 3, reps: '15-20', note: 'Prehab: Shoulder stability' },
+      { name: 'External Rotations', sets: 2, reps: '15-20', note: 'Prehab: Rotator cuff' },
+      { name: 'Band Pull-Aparts', sets: 3, reps: '20', note: 'Prehab: Rear delt / scapular health' }
+    ],
+    note: 'Overhead and heavy pressing reduced. Prehab exercises added for shoulder stability.'
+  },
+
+  lowerBack: {
+    label: 'Lower Back',
+    avoidExercises: [
+      'barbellRow', 'tBarRow', 'romanianDeadlift', 'barbellSquat',
+      'goodMorning', 'hyperextensions'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Dead Bug', sets: 3, reps: '10 each side', note: 'Prehab: Core stability' },
+      { name: 'Bird Dog', sets: 3, reps: '10 each side', note: 'Prehab: Spinal stabilization' },
+      { name: 'Plank Hold', sets: 3, reps: '30-45 sec', note: 'Prehab: Anti-extension core' }
+    ],
+    note: 'Heavy spinal loading exercises replaced with supported alternatives. Core prehab added.'
+  },
+
+  knee: {
+    label: 'Knee',
+    avoidExercises: [
+      'barbellSquat', 'legExtension', 'walkingLunges',
+      'bulgarianSplitSquat', 'hackSquat'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Terminal Knee Extensions', sets: 3, reps: '15-20', note: 'Prehab: VMO activation' },
+      { name: 'Glute Bridge', sets: 3, reps: '15', note: 'Prehab: Hip-dominant leg strength' }
+    ],
+    note: 'High knee-stress movements replaced with hip-dominant alternatives. VMO prehab added.'
+  },
+
+  elbow: {
+    label: 'Elbow',
+    avoidExercises: [
+      'skullCrusher', 'barbellCurl', 'preacherCurl', 'closeGripBench'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Wrist Curls', sets: 2, reps: '15-20', note: 'Prehab: Forearm / elbow conditioning' },
+      { name: 'Light Hammer Curls', sets: 2, reps: '15', note: 'Prehab: Brachialis balance' }
+    ],
+    note: 'High elbow-stress exercises replaced. Neutral grip preferred. Forearm prehab added.'
+  },
+
+  wrist: {
+    label: 'Wrist',
+    avoidExercises: [
+      'barbellBenchPress', 'barbellCurl', 'overheadPress',
+      'barbellSquat', 'pushUps'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Wrist Circles', sets: 2, reps: '10 each direction', note: 'Prehab: Wrist mobility' }
+    ],
+    note: 'Barbell exercises replaced with dumbbell/machine alternatives to reduce wrist strain.'
+  },
+
+  hip: {
+    label: 'Hip',
+    avoidExercises: [
+      'barbellSquat', 'bulgarianSplitSquat', 'walkingLunges',
+      'hipThrust', 'romanianDeadlift', 'goodMorning'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Clamshells', sets: 3, reps: '15 each side', note: 'Prehab: Hip external rotators' },
+      { name: 'Hip Flexor Stretch', sets: 2, reps: '30 sec each', note: 'Prehab: Hip mobility' }
+    ],
+    note: 'Hip-loading exercises replaced with machine alternatives. Hip mobility prehab added.'
+  },
+
+  neck: {
+    label: 'Neck',
+    avoidExercises: [
+      'overheadPress', 'dumbbellShoulderPress', 'arnoldPress',
+      'uprightRow', 'barbellSquat'
+    ],
+    avoidTags: [],
+    prehabExercises: [
+      { name: 'Neck Isometrics', sets: 3, reps: '10 sec each direction', note: 'Prehab: Neck stability' }
+    ],
+    note: 'Overhead and cervical-loading exercises replaced. Neck isometric prehab added.'
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────
 // 19. HMB SUPPLEMENTATION GUIDE
 // Based on 2025 ISSN Position Stand
 // ───────────────────────────────────────────────────────────────────────────

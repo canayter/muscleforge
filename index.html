@@ -1722,6 +1722,51 @@ select.field-input option {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   CHIP SELECTOR (Multi-select pills)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.chip-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--chalk-tertiary);
+  background: var(--iron-surface);
+  border: 1px solid var(--iron-hover);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-sharp);
+  user-select: none;
+}
+
+.chip:hover {
+  color: var(--chalk);
+  border-color: var(--chalk-faint);
+  background: var(--iron-hover);
+}
+
+.chip.active {
+  color: white;
+  background: var(--blood);
+  border-color: var(--blood);
+}
+
+.field-hint {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.75rem;
+  color: var(--chalk-tertiary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    BUTTONS - FORGED ACTION
    ═══════════════════════════════════════════════════════════════════════════ */
 .btn {
@@ -3877,6 +3922,13 @@ select.field-input option {
                   </div>
                 </div>
 
+                <!-- Allergen Exclusions -->
+                <div class="field" style="margin-top: var(--space-md);">
+                  <label class="field-label">Food Allergies <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
+                  <div class="chip-selector" id="allergenChips"></div>
+                  <span class="field-hint">Selected allergens will be excluded from meal plans</span>
+                </div>
+
                 <div class="toggle-row">
                   <div class="toggle" id="detailedToggle" onclick="toggleDetailed()"></div>
                   <span class="toggle-text">Show micronutrients</span>
@@ -3936,6 +3988,13 @@ select.field-input option {
                       <option value="home">Home Gym (Dumbbells, Bodyweight)</option>
                       <option value="minimal">Minimal (Bodyweight Only)</option>
                     </select>
+                  </div>
+
+                  <!-- Injury / Condition Selection -->
+                  <div class="field" style="grid-column: 1 / -1; margin-top: var(--space-md);">
+                    <label class="field-label">Injuries or Conditions <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
+                    <div class="chip-selector" id="injuryChips"></div>
+                    <span class="field-hint">Exercises will be adapted to protect selected areas</span>
                   </div>
                 </div>
               </div>
@@ -6511,6 +6570,29 @@ let emailResults = false;
 let swapMeal = null;
 let swapFood = null;
 let swapAlt = null;
+let selectedAllergens = [];
+let selectedInjuries = [];
+
+const ALLERGEN_OPTIONS = [
+  { id: 'dairy', label: 'Dairy' },
+  { id: 'eggs', label: 'Eggs' },
+  { id: 'fish', label: 'Fish' },
+  { id: 'shellfish', label: 'Shellfish' },
+  { id: 'gluten', label: 'Gluten / Wheat', values: ['gluten', 'wheat'] },
+  { id: 'soy', label: 'Soy' },
+  { id: 'treeNuts', label: 'Tree Nuts', values: ['tree nuts'] },
+  { id: 'peanuts', label: 'Peanuts' }
+];
+
+const INJURY_OPTIONS = [
+  { id: 'shoulder', label: 'Shoulder' },
+  { id: 'lowerBack', label: 'Lower Back' },
+  { id: 'knee', label: 'Knee' },
+  { id: 'elbow', label: 'Elbow' },
+  { id: 'wrist', label: 'Wrist' },
+  { id: 'hip', label: 'Hip' },
+  { id: 'neck', label: 'Neck' }
+];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // THEME
@@ -6592,6 +6674,60 @@ planNutritionCheckbox.addEventListener('change', () => {
     planNutritionCheckbox.checked = true;
   }
 });
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CHIP SELECTORS (Allergies & Injuries)
+// ═══════════════════════════════════════════════════════════════════════════
+function renderAllergenChips() {
+  const container = document.getElementById('allergenChips');
+  if (!container) return;
+  container.innerHTML = ALLERGEN_OPTIONS.map(opt =>
+    `<div class="chip" data-allergen="${opt.id}" onclick="toggleAllergen('${opt.id}')">${opt.label}</div>`
+  ).join('');
+}
+
+function toggleAllergen(id) {
+  const idx = selectedAllergens.indexOf(id);
+  if (idx === -1) selectedAllergens.push(id);
+  else selectedAllergens.splice(idx, 1);
+  document.querySelectorAll('#allergenChips .chip').forEach(chip => {
+    chip.classList.toggle('active', selectedAllergens.includes(chip.dataset.allergen));
+  });
+}
+
+function renderInjuryChips() {
+  const container = document.getElementById('injuryChips');
+  if (!container) return;
+  container.innerHTML = INJURY_OPTIONS.map(opt =>
+    `<div class="chip" data-injury="${opt.id}" onclick="toggleInjury('${opt.id}')">${opt.label}</div>`
+  ).join('');
+}
+
+function toggleInjury(id) {
+  const idx = selectedInjuries.indexOf(id);
+  if (idx === -1) selectedInjuries.push(id);
+  else selectedInjuries.splice(idx, 1);
+  document.querySelectorAll('#injuryChips .chip').forEach(chip => {
+    chip.classList.toggle('active', selectedInjuries.includes(chip.dataset.injury));
+  });
+}
+
+function getExcludedAllergenValues() {
+  const values = [];
+  selectedAllergens.forEach(id => {
+    const opt = ALLERGEN_OPTIONS.find(o => o.id === id);
+    if (opt && opt.values) {
+      values.push(...opt.values);
+    } else if (opt) {
+      values.push(opt.id);
+    }
+  });
+  return values;
+}
+
+// Render chips on load
+renderAllergenChips();
+renderInjuryChips();
 
 // ═══════════════════════════════════════════════════════════════════════════
 // UNIT SYSTEM
@@ -6954,7 +7090,12 @@ function genMeals() {
   const { mealsPerDay, dietType, trainingTime } = inputs;
 
   const allFoods = getAllFoods();
-  const compatible = allFoods.filter(f => dietType === 'regular' || f.dietTypes.includes(dietType));
+  const excludedAllergens = getExcludedAllergenValues();
+  const compatible = allFoods.filter(f => {
+    if (dietType !== 'regular' && !f.dietTypes.includes(dietType)) return false;
+    if (excludedAllergens.length > 0 && f.allergens.some(a => excludedAllergens.includes(a))) return false;
+    return true;
+  });
 
   const times = getMealTimes(mealsPerDay, trainingTime);
   const perMeal = {
@@ -7048,7 +7189,25 @@ function renderMeals() {
     return a;
   }, { cal: 0, p: 0, c: 0, f: 0 });
 
+  let allergenAlert = '';
+  if (selectedAllergens.length > 0) {
+    const labels = selectedAllergens.map(id => {
+      const opt = ALLERGEN_OPTIONS.find(o => o.id === id);
+      return opt ? opt.label : id;
+    });
+    allergenAlert = `
+      <div class="alert alert-warning mb-lg">
+        <span class="alert-icon">⚠</span>
+        <div class="alert-content">
+          <div class="alert-title">Allergens Excluded</div>
+          <div class="alert-text">Foods containing <strong>${labels.join(', ')}</strong> have been removed from your meal plan and swap options.</div>
+        </div>
+      </div>
+    `;
+  }
+
   const mealsHTML = `
+    ${allergenAlert}
     <div class="alert alert-success mb-lg">
       <span class="alert-icon">◆</span>
       <div class="alert-content">
@@ -7138,7 +7297,14 @@ function openSwap(mi, fi) {
 
 function findAlts(curr, diet) {
   const all = getAllFoods();
-  const same = all.filter(f => f.id !== curr.id && f.category === curr.category && (diet === 'regular' || f.dietTypes.includes(diet)));
+  const excludedAllergens = getExcludedAllergenValues();
+  const same = all.filter(f => {
+    if (f.id === curr.id) return false;
+    if (f.category !== curr.category) return false;
+    if (diet !== 'regular' && !f.dietTypes.includes(diet)) return false;
+    if (excludedAllergens.length > 0 && f.allergens.some(a => excludedAllergens.includes(a))) return false;
+    return true;
+  });
 
   return same.map(f => {
     const pD = Math.abs(f.macros.protein - curr.macros.protein);
@@ -9015,6 +9181,10 @@ function resetForm() {
   document.getElementById('results').classList.add('hidden');
   plan = null;
   meals = [];
+  selectedAllergens = [];
+  selectedInjuries = [];
+  renderAllergenChips();
+  renderInjuryChips();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9139,27 +9309,32 @@ function generateTrainingProgram() {
 
   const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
 
+  // Collect injury rules
+  const injuryRules = selectedInjuries
+    .map(id => typeof INJURY_EXERCISE_RULES !== 'undefined' ? INJURY_EXERCISE_RULES[id] : null)
+    .filter(Boolean);
+
   // Select optimal program template
   const template = selectOptimalProgram(experienceLevel, daysAvailable, goal);
 
   // Generate workouts for each day
-  const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment);
+  const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules);
 
   // Calculate volume summary
   const volumeSummary = calculateVolumeSummary(workouts);
 
   // Display the program
-  displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal);
+  displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal, injuryRules);
 }
 
-function generateWorkouts(template, goal, experienceLevel, availableEquipment) {
+function generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules) {
   const workouts = [];
 
   template.split.forEach(day => {
     const exercises = [];
 
     day.exerciseSlots.forEach(slot => {
-      const exercise = selectExerciseForSlot(slot, availableEquipment, exercises);
+      const exercise = selectExerciseForSlot(slot, availableEquipment, exercises, injuryRules);
       if (exercise) {
         const repRange = getRepRangeForGoal(goal);
         const sets = calculateSets(exercise, experienceLevel);
@@ -9173,6 +9348,36 @@ function generateWorkouts(template, goal, experienceLevel, availableEquipment) {
       }
     });
 
+    // Append prehab exercises on the first workout day
+    if (injuryRules && injuryRules.length > 0 && workouts.length === 0) {
+      const prehabSet = [];
+      injuryRules.forEach(rule => {
+        rule.prehabExercises.forEach(pe => {
+          if (!prehabSet.some(p => p.name === pe.name)) {
+            prehabSet.push(pe);
+          }
+        });
+      });
+      prehabSet.forEach(pe => {
+        exercises.push({
+          exercise: {
+            id: 'prehab_' + pe.name.replace(/\s+/g, '_').toLowerCase(),
+            name: pe.name,
+            muscles: { primary: [], secondary: [] },
+            equipment: { category: 'bodyweight' },
+            movement: { type: 'isolation' },
+            programming: { difficulty: 'beginner' },
+            tags: ['prehab']
+          },
+          sets: pe.sets,
+          reps: pe.reps,
+          rest: 60,
+          isPrehab: true,
+          note: pe.note
+        });
+      });
+    }
+
     workouts.push({
       day: day.day,
       name: day.name,
@@ -9184,8 +9389,18 @@ function generateWorkouts(template, goal, experienceLevel, availableEquipment) {
   return workouts;
 }
 
-function selectExerciseForSlot(slot, availableEquipment, alreadySelected) {
+function selectExerciseForSlot(slot, availableEquipment, alreadySelected, injuryRules) {
   const selectedIds = alreadySelected.map(e => e.exercise.id);
+
+  // Build combined avoid list from injury rules
+  const avoidIds = new Set();
+  const avoidTags = new Set();
+  if (injuryRules && injuryRules.length > 0) {
+    injuryRules.forEach(rule => {
+      rule.avoidExercises.forEach(id => avoidIds.add(id));
+      if (rule.avoidTags) rule.avoidTags.forEach(t => avoidTags.add(t));
+    });
+  }
 
   // Get exercises from the appropriate category
   const category = MUSCLE_TO_CATEGORY[slot.muscle] || slot.muscle;
@@ -9211,6 +9426,10 @@ function selectExerciseForSlot(slot, availableEquipment, alreadySelected) {
 
     // Must not be already selected
     if (selectedIds.includes(ex.id)) return false;
+
+    // Must not be blocked by injury rules
+    if (avoidIds.has(ex.id)) return false;
+    if (avoidTags.size > 0 && ex.tags && ex.tags.some(t => avoidTags.has(t))) return false;
 
     return true;
   });
@@ -9295,7 +9514,7 @@ function getEducationalTip(goal, experienceLevel) {
   return tips[goal]?.[experienceLevel] || tips.hypertrophy.intermediate;
 }
 
-function displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal) {
+function displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal, injuryRules) {
   // Program header
   document.getElementById('programName').textContent = template.name;
   document.getElementById('programDescription').textContent = template.description;
@@ -9327,19 +9546,60 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     '<br><br><strong style="color: var(--primary);">💡 Training Tip:</strong> ' + educationalTips;
   document.getElementById('programCitation').textContent = template.research.proBodybuilderNote;
 
+  // Injury modification alert
+  let injuryAlertContainer = document.getElementById('injuryAlertContainer');
+  if (!injuryAlertContainer) {
+    const el = document.createElement('div');
+    el.id = 'injuryAlertContainer';
+    document.getElementById('programCitation').parentElement.parentElement.after(el);
+    injuryAlertContainer = el;
+  }
+  if (injuryRules && injuryRules.length > 0) {
+    injuryAlertContainer.innerHTML = `
+      <div class="alert alert-warning mb-lg" style="margin-top: var(--space-lg);">
+        <span class="alert-icon">⚠</span>
+        <div class="alert-content">
+          <div class="alert-title">Injury-Adapted Program</div>
+          <div class="alert-text">
+            ${injuryRules.map(r => `<strong>${r.label}:</strong> ${r.note}`).join('<br>')}
+            <br><br><em>Prehab exercises have been added to Day 1. Always consult a healthcare professional for injury management.</em>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    injuryAlertContainer.innerHTML = '';
+  }
+
   // Weekly schedule
   const scheduleHtml = workouts.map(workout => {
-    const exerciseRows = workout.exercises.map(ex => `
-      <div class="exercise-row">
-        <div class="exercise-name">
-          ${ex.exercise.name}
-          <small>${ex.exercise.muscles.primary.join(', ')}</small>
+    const exerciseRows = workout.exercises.map(ex => {
+      if (ex.isPrehab) {
+        return `
+          <div class="exercise-row" style="background: var(--iron-surface); border-left: 3px solid var(--warning);">
+            <div class="exercise-name">
+              <span style="color: var(--warning); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Teko', sans-serif;">Prehab</span><br>
+              ${ex.exercise.name}
+              <small>${ex.note || ''}</small>
+            </div>
+            <div class="exercise-sets">${ex.sets} sets</div>
+            <div class="exercise-reps">${ex.reps}</div>
+            <div style="width: 50px;"></div>
+          </div>
+        `;
+      }
+      return `
+        <div class="exercise-row">
+          <div class="exercise-name">
+            ${ex.exercise.name}
+            <small>${ex.exercise.muscles.primary.join(', ')}</small>
+          </div>
+          <div class="exercise-sets">${ex.sets} sets</div>
+          <div class="exercise-reps">${ex.reps} reps</div>
+          <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
         </div>
-        <div class="exercise-sets">${ex.sets} sets</div>
-        <div class="exercise-reps">${ex.reps} reps</div>
-        <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     return `
       <div class="training-card">
@@ -9474,7 +9734,17 @@ function openExerciseSwap(exerciseId, buttonElement) {
   // Get alternatives
   const equipmentLevel = document.getElementById('trainingEquipment').value;
   const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
-  const alternatives = findExerciseAlternatives(exerciseId, { equipment: availableEquipment });
+  let alternatives = findExerciseAlternatives(exerciseId, { equipment: availableEquipment });
+
+  // Filter out injury-restricted exercises from swap suggestions
+  if (selectedInjuries.length > 0 && typeof INJURY_EXERCISE_RULES !== 'undefined') {
+    const avoidIds = new Set();
+    selectedInjuries.forEach(id => {
+      const rule = INJURY_EXERCISE_RULES[id];
+      if (rule) rule.avoidExercises.forEach(eid => avoidIds.add(eid));
+    });
+    alternatives = alternatives.filter(alt => !avoidIds.has(alt.exercise.id));
+  }
 
   // Create modal
   const modalHtml = `
