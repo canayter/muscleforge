@@ -8,8 +8,12 @@
   <meta name="robots" content="noindex, nofollow"/>
   <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
-  <!-- Favicon -->
+  <!-- Favicon & PWA -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff6b35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4157,7 +4161,10 @@ select.field-input option {
                   <h2 class="card-title" id="programName">Your Training Program</h2>
                   <p class="card-subtitle" id="programDescription">Customized for your goals</p>
                 </div>
-                <button class="btn btn-ghost btn-sm" onclick="window.print()">Print Cards</button>
+                <div style="display: flex; gap: var(--space-sm);">
+                  <button class="btn btn-ghost btn-sm" onclick="exportCalendar()">Calendar (.ics)</button>
+                  <button class="btn btn-ghost btn-sm" onclick="window.print()">Print Cards</button>
+                </div>
               </div>
               <div class="card-body">
                 <div class="program-stats" id="programStats">
@@ -6899,6 +6906,8 @@ select.field-input option {
 // ═══════════════════════════════════════════════════════════════════════════
 let plan = null;
 let meals = [];
+let currentTemplate = null;
+let currentWorkouts = [];
 let detailed = false;
 let emailResults = false;
 let swapMeal = null;
@@ -10167,6 +10176,52 @@ function exportCSV() {
   a.click();
 }
 
+function exportCalendar() {
+  if (!currentWorkouts || currentWorkouts.length === 0) return alert('Generate a training program first');
+
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const formatDate = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+
+  // Find next Monday as start
+  const start = new Date(now);
+  start.setDate(start.getDate() + ((8 - start.getDay()) % 7 || 7));
+
+  let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MuscleForge//Training//EN\r\nCALSCALE:GREGORIAN\r\n';
+
+  currentWorkouts.forEach(workout => {
+    const dayOffset = workout.day - 1; // day 1 = Monday = offset 0
+    const eventDate = new Date(start);
+    eventDate.setDate(eventDate.getDate() + dayOffset);
+
+    const exercises = workout.exercises
+      .filter(e => !e.isPrehab)
+      .map(e => `${e.exercise.name}: ${e.sets}x${e.reps}`)
+      .join('\\n');
+
+    const uid = `mf-${Date.now()}-${workout.day}@muscleforge`;
+    const dateStr = formatDate(eventDate);
+    const templateName = currentTemplate ? currentTemplate.name : 'MuscleForge';
+
+    ics += 'BEGIN:VEVENT\r\n';
+    ics += `DTSTART;VALUE=DATE:${dateStr}\r\n`;
+    ics += `DTEND;VALUE=DATE:${dateStr}\r\n`;
+    ics += `RRULE:FREQ=WEEKLY;COUNT=8\r\n`;
+    ics += `SUMMARY:${templateName} - Day ${workout.day}: ${workout.name}\r\n`;
+    ics += `DESCRIPTION:${workout.focus.join(', ')}\\n\\n${exercises}\r\n`;
+    ics += `UID:${uid}\r\n`;
+    ics += 'END:VEVENT\r\n';
+  });
+
+  ics += 'END:VCALENDAR\r\n';
+
+  const blob = new Blob([ics], { type: 'text/calendar' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'muscleforge-training.ics';
+  a.click();
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // UTILS
 // ═══════════════════════════════════════════════════════════════════════════
@@ -10313,6 +10368,21 @@ const EQUIPMENT_AVAILABILITY = {
 // ═══════════════════════════════════════════════════════════════════════════
 // WARM-UP GENERATOR
 // ═══════════════════════════════════════════════════════════════════════════
+// Spotify playlist embeds by workout focus type
+const WORKOUT_PLAYLISTS = {
+  chest: { name: 'Chest Day Pump', uri: '37i9dQZF1DX76Wlfdnj7AP' },
+  back: { name: 'Back Day Power', uri: '37i9dQZF1DX70RN3TfnE9m' },
+  shoulders: { name: 'Shoulder Press Anthems', uri: '37i9dQZF1DX0HRj9P7NxeE' },
+  quads: { name: 'Leg Day Beast Mode', uri: '37i9dQZF1DX76Wlfdnj7AP' },
+  hamstrings: { name: 'Leg Day Beast Mode', uri: '37i9dQZF1DX76Wlfdnj7AP' },
+  glutes: { name: 'Leg Day Beast Mode', uri: '37i9dQZF1DX76Wlfdnj7AP' },
+  biceps: { name: 'Arm Day Grind', uri: '37i9dQZF1DX70RN3TfnE9m' },
+  triceps: { name: 'Arm Day Grind', uri: '37i9dQZF1DX70RN3TfnE9m' },
+  core: { name: 'Core Workout', uri: '37i9dQZF1DX0HRj9P7NxeE' },
+  calves: { name: 'Leg Day Beast Mode', uri: '37i9dQZF1DX76Wlfdnj7AP' },
+  default: { name: 'Beast Mode', uri: '37i9dQZF1DX76Wlfdnj7AP' }
+};
+
 const WARMUP_MOVEMENTS = {
   chest: [
     { name: 'Arm Circles', duration: '30 sec each direction', type: 'dynamic' },
@@ -10397,6 +10467,10 @@ function generateTrainingProgram() {
 
   // Generate workouts for each day
   const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules);
+
+  // Store globally for calendar export
+  currentTemplate = template;
+  currentWorkouts = workouts;
 
   // Calculate volume summary
   const volumeSummary = calculateVolumeSummary(workouts);
@@ -10675,6 +10749,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
           <div class="exercise-sets">${ex.sets} sets</div>
           <div class="exercise-reps">${ex.reps} reps</div>
           <button class="exercise-info" onclick="openExerciseInfo('${ex.exercise.id}')" title="Why this exercise?">?</button>
+          ${EXERCISE_VIDEO_URLS[ex.exercise.id] ? `<a href="${EXERCISE_VIDEO_URLS[ex.exercise.id]}" target="_blank" rel="noopener" class="exercise-info" title="Watch demo" style="text-decoration: none; background: var(--training);">▶</a>` : ''}
           <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
         </div>
       `;
@@ -10699,6 +10774,26 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
       name: e.exercise.name, sets: e.sets, reps: parseInt(e.reps)
     }))).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
 
+    // Get playlist for this workout's primary focus
+    const primaryFocus = workout.focus[0] || 'default';
+    const playlist = WORKOUT_PLAYLISTS[primaryFocus] || WORKOUT_PLAYLISTS.default;
+    const spotifyHTML = `
+      <div style="border-top: 1px solid var(--iron-hover);">
+        <div style="padding: var(--space-sm) var(--space-md); cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+          onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span:last-child').textContent = this.nextElementSibling.classList.contains('hidden') ? '▸' : '▾'">
+          <span style="font-family: 'Teko', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #1DB954;">
+            ♫ Lift Fuel — ${playlist.name}
+          </span>
+          <span style="color: var(--chalk-tertiary);">▸</span>
+        </div>
+        <div class="hidden" style="padding: 0 var(--space-md) var(--space-md);">
+          <iframe style="border-radius: 8px;" src="https://open.spotify.com/embed/playlist/${playlist.uri}?utm_source=generator&theme=0"
+            width="100%" height="152" frameBorder="0" allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    `;
+
     return `
       <div class="training-card">
         <div class="card-header">
@@ -10712,6 +10807,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
         <div class="card-body" style="padding: 0;">
           ${warmupHTML}
           ${exerciseRows}
+          ${spotifyHTML}
         </div>
       </div>
     `;
@@ -10919,12 +11015,59 @@ function closeExerciseSwapModal() {
 // ═══════════════════════════════════════════════════════════════════════════
 // EXERCISE INFO MODAL ("Why This Exercise?")
 // ═══════════════════════════════════════════════════════════════════════════
+// Exercise demo video URLs (ExRx.net exercise directory)
+const EXERCISE_VIDEO_URLS = {
+  barbellBenchPress: 'https://exrx.net/WeightExercises/PectoralSternal/BBBenchPress',
+  inclineBarbellBench: 'https://exrx.net/WeightExercises/PectoralClavicular/BBInclineBenchPress',
+  dumbbellBenchPress: 'https://exrx.net/WeightExercises/PectoralSternal/DBBenchPress',
+  cableCrossover: 'https://exrx.net/WeightExercises/PectoralSternal/CBCrossoverStanding',
+  pecDeckFly: 'https://exrx.net/WeightExercises/PectoralSternal/LVPecDeckFly',
+  barbellRow: 'https://exrx.net/WeightExercises/BackGeneral/BBBentOverRow',
+  pullUp: 'https://exrx.net/WeightExercises/LatissimusDorsi/BWPullup',
+  latPulldown: 'https://exrx.net/WeightExercises/LatissimusDorsi/CBFrontPulldown',
+  seatedCableRow: 'https://exrx.net/WeightExercises/BackGeneral/CBSeatedRow',
+  tBarRow: 'https://exrx.net/WeightExercises/BackGeneral/LVTBarRow',
+  dumbbellRow: 'https://exrx.net/WeightExercises/BackGeneral/DBBentOverRow',
+  overheadPress: 'https://exrx.net/WeightExercises/DeltoidAnterior/BBMilitaryPress',
+  lateralRaise: 'https://exrx.net/WeightExercises/DeltoidLateral/DBLateralRaise',
+  facePull: 'https://exrx.net/WeightExercises/DeltoidPosterior/CBRearDeltRow',
+  rearDeltFly: 'https://exrx.net/WeightExercises/DeltoidPosterior/DBRearLateralRaise',
+  arnoldPress: 'https://exrx.net/WeightExercises/DeltoidAnterior/DBArnoldPress',
+  barbellCurl: 'https://exrx.net/WeightExercises/Biceps/BBCurl',
+  dumbbellCurl: 'https://exrx.net/WeightExercises/Biceps/DBCurl',
+  hammerCurl: 'https://exrx.net/WeightExercises/Brachioradialis/DBHammerCurl',
+  preacherCurl: 'https://exrx.net/WeightExercises/Biceps/DBPreacherCurl',
+  tricepPushdown: 'https://exrx.net/WeightExercises/Triceps/CBPushdown',
+  skullCrusher: 'https://exrx.net/WeightExercises/Triceps/BBLyingTriExtSC',
+  overheadTricepExt: 'https://exrx.net/WeightExercises/Triceps/CBOverheadExtRope',
+  closeGripBench: 'https://exrx.net/WeightExercises/Triceps/BBCloseGripBenchPress',
+  barbellSquat: 'https://exrx.net/WeightExercises/Quadriceps/BBSquat',
+  legPress: 'https://exrx.net/WeightExercises/Quadriceps/SL45LegPress',
+  legExtension: 'https://exrx.net/WeightExercises/Quadriceps/LVLegExtension',
+  bulgarianSplit: 'https://exrx.net/WeightExercises/Quadriceps/DBSingleLegSplitSquat',
+  romanianDeadlift: 'https://exrx.net/WeightExercises/GluteusMaximus/BBRomanianDeadlift',
+  legCurl: 'https://exrx.net/WeightExercises/Hamstrings/LVLyingLegCurl',
+  nordicCurl: 'https://exrx.net/WeightExercises/Hamstrings/BWNordicHamCurl',
+  hipThrust: 'https://exrx.net/WeightExercises/GluteusMaximus/BBHipThrust',
+  cableGluteKickback: 'https://exrx.net/WeightExercises/GluteusMaximus/CBGluteKickback',
+  calfRaise: 'https://exrx.net/WeightExercises/Gastrocnemius/SMStandingCalfRaise',
+  seatedCalfRaise: 'https://exrx.net/WeightExercises/Soleus/LVSeatedCalfRaise',
+  plank: 'https://exrx.net/WeightExercises/RectusAbdominis/BWFrontPlank',
+  cableCrunch: 'https://exrx.net/WeightExercises/RectusAbdominis/CBKneelingCrunch',
+  hangingLegRaise: 'https://exrx.net/WeightExercises/RectusAbdominis/BWHangingLegRaise',
+  conventionalDeadlift: 'https://exrx.net/WeightExercises/GluteusMaximus/BBDeadlift',
+  sumoDeadlift: 'https://exrx.net/WeightExercises/GluteusMaximus/BBSumoDeadlift',
+  frontSquat: 'https://exrx.net/WeightExercises/Quadriceps/BBFrontSquat',
+  hackSquat: 'https://exrx.net/WeightExercises/Quadriceps/SLHackSquat'
+};
+
 function openExerciseInfo(exerciseId) {
   const exercise = getExerciseById(exerciseId);
   if (!exercise) return;
 
   const t = exercise.technique || {};
   const r = exercise.research || {};
+  const videoUrl = EXERCISE_VIDEO_URLS[exerciseId];
 
   const setupHTML = (t.setup || []).map(s => `<li>${s}</li>`).join('');
   const execHTML = (t.execution || []).map(s => `<li>${s}</li>`).join('');
@@ -10977,8 +11120,9 @@ function openExerciseInfo(exerciseId) {
             </p>
           </div>
         </div>
-        <div style="padding: var(--space-lg); border-top: 1px solid var(--line);">
-          <button onclick="closeExerciseInfoModal()" class="btn" style="width: 100%;">Close</button>
+        <div style="padding: var(--space-lg); border-top: 1px solid var(--line); display: flex; gap: var(--space-sm);">
+          ${videoUrl ? `<a href="${videoUrl}" target="_blank" rel="noopener" class="btn btn-sm" style="flex: 1; text-align: center; background: var(--training); color: var(--chalk); text-decoration: none;">Watch Demo</a>` : ''}
+          <button onclick="closeExerciseInfoModal()" class="btn" style="flex: 1;">Close</button>
         </div>
       </div>
     </div>
@@ -10997,6 +11141,11 @@ document.addEventListener('keydown', function(e) {
     closeExerciseInfoModal();
   }
 });
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
   </script>
 </body>
 </html>
