@@ -5068,6 +5068,58 @@ select.field-input option {
                 </div>
               </div>
             </div>
+
+            <!-- Weekly Check-In -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Weekly Check-In</h2>
+                  <p class="card-subtitle">Track progress and get auto-adjusted recommendations</p>
+                </div>
+                <span class="tool-badge">Weekly</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Date</label>
+                    <input type="date" id="checkinDate" class="field-input">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Body Weight (lbs)</label>
+                    <input type="number" id="checkinWeight" class="field-input" placeholder="180" step="0.1">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Waist (in)</label>
+                    <input type="number" id="checkinWaist" class="field-input" placeholder="32" step="0.1">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Chest (in)</label>
+                    <input type="number" id="checkinChest" class="field-input" placeholder="42" step="0.1">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Arms (in)</label>
+                    <input type="number" id="checkinArms" class="field-input" placeholder="15" step="0.1">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Legs (in)</label>
+                    <input type="number" id="checkinLegs" class="field-input" placeholder="24" step="0.1">
+                  </div>
+                </div>
+                <div class="field" style="margin-top: var(--space-md);">
+                  <label class="field-label">Notes</label>
+                  <textarea id="checkinNotes" class="field-input" rows="2" placeholder="How's the week been?"></textarea>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="saveCheckin()">Log Check-In</button>
+                  <button type="button" class="btn btn-ghost" onclick="clearCheckinHistory()">Clear History</button>
+                </div>
+                <div id="checkinHistory" style="margin-top: var(--space-xl);">
+                  <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">Check-In History</h4>
+                  <div id="checkinList"></div>
+                </div>
+                <div id="checkinTrend" class="hidden" style="margin-top: var(--space-lg);"></div>
+              </div>
+            </div>
           </div>
 
           <!-- Training Tools -->
@@ -5791,6 +5843,75 @@ select.field-input option {
                 <div id="injuryGuideContent" class="injury-guide"></div>
               </div>
             </div>
+
+            <!-- Daily Readiness Score -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Daily Readiness Score</h2>
+                  <p class="card-subtitle">Assess your training readiness for today</p>
+                </div>
+                <span class="tool-badge">Daily</span>
+              </div>
+              <div class="card-body">
+                <div id="readinessQuestions">
+                  <div class="field" style="margin-bottom: var(--space-md);">
+                    <label class="field-label">Sleep Quality</label>
+                    <div class="chip-selector" id="readinessSleep">
+                      <div class="chip" data-val="1" onclick="setReadiness('sleep',1,this)">1 - Poor</div>
+                      <div class="chip" data-val="2" onclick="setReadiness('sleep',2,this)">2</div>
+                      <div class="chip" data-val="3" onclick="setReadiness('sleep',3,this)">3 - OK</div>
+                      <div class="chip" data-val="4" onclick="setReadiness('sleep',4,this)">4</div>
+                      <div class="chip" data-val="5" onclick="setReadiness('sleep',5,this)">5 - Great</div>
+                    </div>
+                  </div>
+                  <div class="field" style="margin-bottom: var(--space-md);">
+                    <label class="field-label">Muscle Soreness</label>
+                    <div class="chip-selector" id="readinessSoreness">
+                      <div class="chip" data-val="1" onclick="setReadiness('soreness',1,this)">1 - Severe</div>
+                      <div class="chip" data-val="2" onclick="setReadiness('soreness',2,this)">2</div>
+                      <div class="chip" data-val="3" onclick="setReadiness('soreness',3,this)">3 - Moderate</div>
+                      <div class="chip" data-val="4" onclick="setReadiness('soreness',4,this)">4</div>
+                      <div class="chip" data-val="5" onclick="setReadiness('soreness',5,this)">5 - None</div>
+                    </div>
+                  </div>
+                  <div class="field" style="margin-bottom: var(--space-md);">
+                    <label class="field-label">Stress Level</label>
+                    <div class="chip-selector" id="readinessStress">
+                      <div class="chip" data-val="1" onclick="setReadiness('stress',1,this)">1 - High</div>
+                      <div class="chip" data-val="2" onclick="setReadiness('stress',2,this)">2</div>
+                      <div class="chip" data-val="3" onclick="setReadiness('stress',3,this)">3 - Normal</div>
+                      <div class="chip" data-val="4" onclick="setReadiness('stress',4,this)">4</div>
+                      <div class="chip" data-val="5" onclick="setReadiness('stress',5,this)">5 - Low</div>
+                    </div>
+                  </div>
+                  <div class="field" style="margin-bottom: var(--space-md);">
+                    <label class="field-label">Motivation</label>
+                    <div class="chip-selector" id="readinessMotivation">
+                      <div class="chip" data-val="1" onclick="setReadiness('motivation',1,this)">1 - Low</div>
+                      <div class="chip" data-val="2" onclick="setReadiness('motivation',2,this)">2</div>
+                      <div class="chip" data-val="3" onclick="setReadiness('motivation',3,this)">3 - Neutral</div>
+                      <div class="chip" data-val="4" onclick="setReadiness('motivation',4,this)">4</div>
+                      <div class="chip" data-val="5" onclick="setReadiness('motivation',5,this)">5 - Fired Up</div>
+                    </div>
+                  </div>
+                  <div class="field" style="margin-bottom: var(--space-md);">
+                    <label class="field-label">Energy Level</label>
+                    <div class="chip-selector" id="readinessEnergy">
+                      <div class="chip" data-val="1" onclick="setReadiness('energy',1,this)">1 - Drained</div>
+                      <div class="chip" data-val="2" onclick="setReadiness('energy',2,this)">2</div>
+                      <div class="chip" data-val="3" onclick="setReadiness('energy',3,this)">3 - Normal</div>
+                      <div class="chip" data-val="4" onclick="setReadiness('energy',4,this)">4</div>
+                      <div class="chip" data-val="5" onclick="setReadiness('energy',5,this)">5 - Wired</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="calculateReadiness()">Get Readiness Score</button>
+                </div>
+                <div id="readinessResults" class="hidden" style="margin-top: var(--space-xl);"></div>
+              </div>
+            </div>
           </div>
 
           <!-- Advanced Tools (placeholder for future expansion) -->
@@ -6104,6 +6225,69 @@ select.field-input option {
                 <div id="prHistory" style="margin-top: var(--space-xl);">
                   <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">PR History</h4>
                   <div id="prList" class="pr-list"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Workout Logger -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Workout Logger</h2>
+                  <p class="card-subtitle">Log your sets, reps, and weight each session</p>
+                </div>
+                <span class="tool-badge">Tracking</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Date</label>
+                    <input type="date" id="logDate" class="field-input">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Workout Name</label>
+                    <input type="text" id="logWorkoutName" class="field-input" placeholder="e.g. Push Day A">
+                  </div>
+                </div>
+                <div id="logExerciseRows" style="margin-top: var(--space-lg);"></div>
+                <div class="btn-group" style="margin-top: var(--space-md);">
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="addLogExerciseRow()">+ Add Exercise</button>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="saveWorkoutLog()">Save Workout</button>
+                  <button type="button" class="btn btn-ghost" onclick="clearWorkoutLog()">Clear</button>
+                </div>
+                <div id="workoutLogHistory" style="margin-top: var(--space-xl);">
+                  <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">Workout History</h4>
+                  <div id="workoutLogList"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Water Intake Tracker -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Water Intake Tracker</h2>
+                  <p class="card-subtitle">Track your daily hydration</p>
+                </div>
+                <span class="tool-badge">Daily</span>
+              </div>
+              <div class="card-body">
+                <div style="text-align: center; padding: var(--space-lg) 0;">
+                  <div id="waterProgress" style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--training);">
+                    0 / 8
+                  </div>
+                  <div style="color: var(--chalk-tertiary); font-size: 0.875rem; margin-bottom: var(--space-lg);">glasses today (250ml each)</div>
+                  <div id="waterGlasses" style="display: flex; justify-content: center; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);"></div>
+                  <div style="width: 100%; height: 8px; background: var(--iron-surface); margin-top: var(--space-md);">
+                    <div id="waterBar" style="height: 100%; background: var(--training); transition: width 0.3s; width: 0%;"></div>
+                  </div>
+                </div>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-sm" onclick="logWater(1)">+ 1 Glass</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="logWater(-1)">- 1 Glass</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="resetDailyWater()">Reset</button>
                 </div>
               </div>
             </div>
@@ -7627,6 +7811,11 @@ function loadTools() {
   loadHMBGuide();
   loadStressGuide();
   loadInjuryGuide();
+
+  // Initialize Phase 2 tracking tools
+  initWorkoutLogger();
+  initWaterTracker();
+  initCheckin();
 }
 
 // FFMI Calculator
@@ -8830,6 +9019,341 @@ function clearPRHistory() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// WORKOUT LOGGER
+// ═══════════════════════════════════════════════════════════════════════════
+let logExerciseCount = 0;
+
+function initWorkoutLogger() {
+  document.getElementById('logDate').valueAsDate = new Date();
+  addLogExerciseRow();
+  loadWorkoutLogHistory();
+}
+
+function addLogExerciseRow() {
+  logExerciseCount++;
+  const idx = logExerciseCount;
+  const row = document.createElement('div');
+  row.id = `logEx${idx}`;
+  row.style.cssText = 'padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);';
+  row.innerHTML = `
+    <div style="display: flex; gap: var(--space-sm); align-items: center; flex-wrap: wrap;">
+      <input type="text" class="field-input" id="logExName${idx}" placeholder="Exercise name" style="flex: 2; min-width: 150px;">
+      <input type="number" class="field-input" id="logExSets${idx}" placeholder="Sets" style="flex: 0.5; min-width: 60px;">
+      <input type="number" class="field-input" id="logExReps${idx}" placeholder="Reps" style="flex: 0.5; min-width: 60px;">
+      <input type="number" class="field-input" id="logExWeight${idx}" placeholder="Weight" step="2.5" style="flex: 0.7; min-width: 70px;">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('logEx${idx}').remove()" style="padding: 6px 10px;">X</button>
+    </div>
+  `;
+  document.getElementById('logExerciseRows').appendChild(row);
+}
+
+function saveWorkoutLog() {
+  const date = document.getElementById('logDate').value;
+  const name = document.getElementById('logWorkoutName').value;
+  if (!date || !name) return alert('Enter date and workout name');
+
+  const exercises = [];
+  document.querySelectorAll('#logExerciseRows > div').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const exName = inputs[0]?.value;
+    const sets = parseInt(inputs[1]?.value);
+    const reps = parseInt(inputs[2]?.value);
+    const weight = parseFloat(inputs[3]?.value);
+    if (exName && sets && reps) {
+      exercises.push({ name: exName, sets, reps, weight: weight || 0 });
+    }
+  });
+
+  if (exercises.length === 0) return alert('Add at least one exercise');
+
+  const logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
+  logs.unshift({ id: Date.now(), date, name, exercises });
+  localStorage.setItem('muscleforge_workouts', JSON.stringify(logs));
+
+  clearWorkoutLog();
+  loadWorkoutLogHistory();
+}
+
+function clearWorkoutLog() {
+  document.getElementById('logWorkoutName').value = '';
+  document.getElementById('logExerciseRows').innerHTML = '';
+  logExerciseCount = 0;
+  addLogExerciseRow();
+}
+
+function loadWorkoutLogHistory() {
+  const logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
+  const container = document.getElementById('workoutLogList');
+  if (logs.length === 0) {
+    container.innerHTML = '<p style="color: var(--chalk-tertiary);">No workouts logged yet.</p>';
+    return;
+  }
+  container.innerHTML = logs.slice(0, 10).map(log => `
+    <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+        <div>
+          <strong style="color: var(--chalk);">${log.name}</strong>
+          <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${log.date}</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
+      </div>
+      ${log.exercises.map(ex => `
+        <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--chalk-secondary); padding: 2px 0;">
+          <span>${ex.name}</span>
+          <span>${ex.sets}x${ex.reps} @ ${ex.weight}lbs</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function deleteWorkoutLog(id) {
+  let logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
+  logs = logs.filter(l => l.id !== id);
+  localStorage.setItem('muscleforge_workouts', JSON.stringify(logs));
+  loadWorkoutLogHistory();
+}
+
+function startWorkoutFromPlan(workoutName, exercises) {
+  switchToView('tools', 'utilities');
+  setTimeout(() => {
+    document.getElementById('logWorkoutName').value = workoutName;
+    document.getElementById('logDate').valueAsDate = new Date();
+    document.getElementById('logExerciseRows').innerHTML = '';
+    logExerciseCount = 0;
+    exercises.forEach(ex => {
+      addLogExerciseRow();
+      document.getElementById(`logExName${logExerciseCount}`).value = ex.name;
+      document.getElementById(`logExSets${logExerciseCount}`).value = ex.sets;
+      document.getElementById(`logExReps${logExerciseCount}`).value = ex.reps;
+    });
+    document.getElementById('logWorkoutName').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 150);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WATER INTAKE TRACKER
+// ═══════════════════════════════════════════════════════════════════════════
+function getWaterKey() {
+  return 'muscleforge_water_' + new Date().toISOString().split('T')[0];
+}
+
+function getWaterCount() {
+  return parseInt(localStorage.getItem(getWaterKey()) || '0');
+}
+
+function initWaterTracker() {
+  renderWater();
+}
+
+function logWater(delta) {
+  let count = getWaterCount() + delta;
+  if (count < 0) count = 0;
+  localStorage.setItem(getWaterKey(), count.toString());
+  renderWater();
+}
+
+function resetDailyWater() {
+  localStorage.setItem(getWaterKey(), '0');
+  renderWater();
+}
+
+function renderWater() {
+  const count = getWaterCount();
+  const target = (plan && plan.water_oz) ? Math.round(plan.water_oz / 8) : 8;
+  const pct = Math.min(100, Math.round((count / target) * 100));
+
+  document.getElementById('waterProgress').textContent = `${count} / ${target}`;
+  document.getElementById('waterBar').style.width = pct + '%';
+
+  const glassesEl = document.getElementById('waterGlasses');
+  let glassHTML = '';
+  for (let i = 1; i <= target; i++) {
+    const filled = i <= count;
+    glassHTML += `<div style="width: 36px; height: 44px; border: 2px solid ${filled ? 'var(--training)' : 'var(--iron-hover)'};
+      border-radius: 0 0 6px 6px; display: flex; align-items: flex-end; justify-content: center; cursor: pointer;
+      transition: all 0.2s;" onclick="logWater(${filled ? -1 : 1})">
+      <div style="width: 100%; background: ${filled ? 'var(--training)' : 'transparent'};
+        height: ${filled ? '80%' : '0'}; border-radius: 0 0 4px 4px; transition: height 0.3s;"></div>
+    </div>`;
+  }
+  glassesEl.innerHTML = glassHTML;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DAILY READINESS SCORE
+// ═══════════════════════════════════════════════════════════════════════════
+const readinessScores = { sleep: 0, soreness: 0, stress: 0, motivation: 0, energy: 0 };
+
+function setReadiness(category, value, el) {
+  readinessScores[category] = value;
+  const parent = el.parentElement;
+  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function calculateReadiness() {
+  const { sleep, soreness, stress, motivation, energy } = readinessScores;
+  const filled = [sleep, soreness, stress, motivation, energy].filter(v => v > 0);
+  if (filled.length < 5) return alert('Please answer all 5 questions');
+
+  const score = Math.round((sleep * 1.3 + soreness * 1.2 + stress * 1.0 + motivation * 0.8 + energy * 0.7) / 5);
+  const pct = Math.round((filled.reduce((a, b) => a + b, 0) / 25) * 100);
+
+  let recommendation, color, icon;
+  if (pct >= 80) {
+    recommendation = 'Heavy Training Day'; color = 'var(--success)'; icon = '&#9650;';
+  } else if (pct >= 60) {
+    recommendation = 'Moderate Volume'; color = 'var(--training)'; icon = '&#9654;';
+  } else if (pct >= 40) {
+    recommendation = 'Light / Recovery Day'; color = 'var(--warning)'; icon = '&#9660;';
+  } else {
+    recommendation = 'Rest Day Recommended'; color = 'var(--danger)'; icon = '&#10006;';
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  localStorage.setItem('muscleforge_readiness_' + today, JSON.stringify({ ...readinessScores, score: pct, recommendation }));
+
+  const resultsEl = document.getElementById('readinessResults');
+  resultsEl.classList.remove('hidden');
+  resultsEl.innerHTML = `
+    <div style="text-align: center; padding: var(--space-lg); background: var(--iron-surface);">
+      <div style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: ${color};">${pct}%</div>
+      <div style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase;
+        letter-spacing: 0.1em; color: ${color}; margin-top: var(--space-sm);">${icon} ${recommendation}</div>
+      <div style="margin-top: var(--space-md); color: var(--chalk-tertiary); font-size: 0.8125rem;">
+        Sleep: ${sleep}/5 | Soreness: ${soreness}/5 | Stress: ${stress}/5 | Motivation: ${motivation}/5 | Energy: ${energy}/5
+      </div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WEEKLY CHECK-IN SYSTEM
+// ═══════════════════════════════════════════════════════════════════════════
+function initCheckin() {
+  document.getElementById('checkinDate').valueAsDate = new Date();
+  loadCheckinHistory();
+}
+
+function saveCheckin() {
+  const date = document.getElementById('checkinDate').value;
+  const weight = parseFloat(document.getElementById('checkinWeight').value);
+  if (!date || !weight) return alert('Enter date and weight');
+
+  const checkin = {
+    id: Date.now(),
+    date,
+    weight,
+    waist: parseFloat(document.getElementById('checkinWaist').value) || null,
+    chest: parseFloat(document.getElementById('checkinChest').value) || null,
+    arms: parseFloat(document.getElementById('checkinArms').value) || null,
+    legs: parseFloat(document.getElementById('checkinLegs').value) || null,
+    notes: document.getElementById('checkinNotes').value || ''
+  };
+
+  const checkins = JSON.parse(localStorage.getItem('muscleforge_checkins') || '[]');
+  checkins.unshift(checkin);
+  localStorage.setItem('muscleforge_checkins', JSON.stringify(checkins));
+
+  // Clear form
+  document.getElementById('checkinWeight').value = '';
+  document.getElementById('checkinWaist').value = '';
+  document.getElementById('checkinChest').value = '';
+  document.getElementById('checkinArms').value = '';
+  document.getElementById('checkinLegs').value = '';
+  document.getElementById('checkinNotes').value = '';
+
+  loadCheckinHistory();
+}
+
+function loadCheckinHistory() {
+  const checkins = JSON.parse(localStorage.getItem('muscleforge_checkins') || '[]');
+  const container = document.getElementById('checkinList');
+
+  if (checkins.length === 0) {
+    container.innerHTML = '<p style="color: var(--chalk-tertiary);">No check-ins yet. Start tracking weekly!</p>';
+    document.getElementById('checkinTrend').classList.add('hidden');
+    return;
+  }
+
+  container.innerHTML = checkins.slice(0, 12).map(c => {
+    const measurements = [
+      c.waist ? `Waist: ${c.waist}"` : '',
+      c.chest ? `Chest: ${c.chest}"` : '',
+      c.arms ? `Arms: ${c.arms}"` : '',
+      c.legs ? `Legs: ${c.legs}"` : ''
+    ].filter(Boolean).join(' | ');
+
+    return `
+      <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong style="color: var(--chalk); font-family: 'Teko', sans-serif; font-size: 1.125rem;">${c.weight} lbs</strong>
+            <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${c.date}</span>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="deleteCheckin(${c.id})" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
+        </div>
+        ${measurements ? `<div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${measurements}</div>` : ''}
+        ${c.notes ? `<div style="font-size: 0.8125rem; color: var(--chalk-secondary); margin-top: 4px; font-style: italic;">${c.notes}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  // Show trend if 2+ check-ins
+  if (checkins.length >= 2) {
+    const latest = checkins[0].weight;
+    const previous = checkins[1].weight;
+    const diff = (latest - previous).toFixed(1);
+    const trend = diff > 0 ? `+${diff}` : diff;
+    const color = diff > 0 ? 'var(--warning)' : diff < 0 ? 'var(--success)' : 'var(--chalk-tertiary)';
+    const arrow = diff > 0 ? '&#9650;' : diff < 0 ? '&#9660;' : '&#9654;';
+
+    let suggestion = '';
+    if (plan) {
+      const goal = plan.inputs.goal;
+      if ((goal === 'cut' || goal === 'aggressiveCut') && diff > 0) {
+        suggestion = 'Weight is trending up on a cut. Consider reducing daily calories by 100-200.';
+      } else if ((goal === 'bulk' || goal === 'leanBulk') && diff < 0) {
+        suggestion = 'Weight is trending down on a bulk. Consider increasing daily calories by 100-200.';
+      } else if ((goal === 'cut' || goal === 'aggressiveCut') && diff < -2) {
+        suggestion = 'Losing weight quickly. Consider slowing the deficit to preserve muscle.';
+      }
+    }
+
+    const trendEl = document.getElementById('checkinTrend');
+    trendEl.classList.remove('hidden');
+    trendEl.innerHTML = `
+      <div style="padding: var(--space-md); background: var(--iron-surface);">
+        <div style="font-family: 'Teko', sans-serif; font-size: 0.875rem; text-transform: uppercase;
+          letter-spacing: 0.1em; color: var(--chalk-tertiary); margin-bottom: var(--space-sm);">Weight Trend</div>
+        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">
+          ${arrow} ${trend} lbs since last check-in
+        </div>
+        ${suggestion ? `<div class="alert alert-warning" style="margin-top: var(--space-md);">
+          <span class="alert-icon">&#9888;</span>
+          <div class="alert-content"><div class="alert-text">${suggestion}</div></div>
+        </div>` : ''}
+      </div>
+    `;
+  }
+}
+
+function deleteCheckin(id) {
+  let checkins = JSON.parse(localStorage.getItem('muscleforge_checkins') || '[]');
+  checkins = checkins.filter(c => c.id !== id);
+  localStorage.setItem('muscleforge_checkins', JSON.stringify(checkins));
+  loadCheckinHistory();
+}
+
+function clearCheckinHistory() {
+  if (confirm('Clear all check-in history?')) {
+    localStorage.removeItem('muscleforge_checkins');
+    loadCheckinHistory();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // GYM BAG CHECKLIST
 // ═══════════════════════════════════════════════════════════════════════════
 function loadGymBagChecklist() {
@@ -9876,6 +10400,10 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
       </div>
     `;
 
+    const startWorkoutData = JSON.stringify(workout.exercises.filter(e => !e.isPrehab).map(e => ({
+      name: e.exercise.name, sets: e.sets, reps: parseInt(e.reps)
+    }))).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+
     return `
       <div class="training-card">
         <div class="card-header">
@@ -9883,6 +10411,8 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
             <div class="training-day-name">Day ${workout.day}: ${workout.name}</div>
             <div class="training-day-focus">${workout.focus.join(' • ')}</div>
           </div>
+          <button class="btn btn-sm" style="background: var(--training); color: var(--chalk); font-size: 0.75rem;"
+            onclick="startWorkoutFromPlan('${workout.name.replace(/'/g, "\\'")}', ${startWorkoutData})">Log This Workout</button>
         </div>
         <div class="card-body" style="padding: 0;">
           ${warmupHTML}
