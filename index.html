@@ -65,30 +65,32 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* IRON - Raw steel and concrete */
-  --iron-black: #0a0a0a;
-  --iron-dark: #141414;
-  --iron-mid: #1c1c1c;
-  --iron-surface: #242424;
-  --iron-elevated: #2e2e2e;
-  --iron-hover: #383838;
+  /* ── STEEL — Forged backgrounds ── */
+  --iron-black: #08090a;
+  --iron-dark: #111214;
+  --iron-mid: #1a1b1f;
+  --iron-surface: #222328;
+  --iron-elevated: #2b2c32;
+  --iron-hover: #35363d;
+  --iron-active: #3f4049;
 
-  /* BLOOD - The color of effort */
-  --blood: #b91c1c;
-  --blood-dim: rgba(185,28,28,0.15);
-  --blood-glow: rgba(185,28,28,0.4);
+  /* ── EMBER — Primary action ── */
+  --blood: #e04520;
+  --blood-dim: rgba(224,69,32,0.12);
+  --blood-glow: rgba(224,69,32,0.35);
+  --ember-text: #ff6b42;
 
-  /* RUST - Worn iron, earned marks */
-  --rust: #c2410c;
-  --rust-dim: rgba(194,65,12,0.15);
+  /* ── RUST — Secondary accent ── */
+  --rust: #d97706;
+  --rust-dim: rgba(217,119,6,0.12);
 
-  /* CHALK - Grip, focus, clarity */
-  --chalk: #fafafa;
-  --chalk-secondary: #a3a3a3;
-  --chalk-tertiary: #737373;
-  --chalk-faint: #404040;
+  /* ── CHALK — Text hierarchy (WCAG AA+) ── */
+  --chalk: #f1f1f4;
+  --chalk-secondary: #b0b3be;
+  --chalk-tertiary: #787b88;
+  --chalk-faint: #484a54;
 
-  /* ALIASES for backwards compatibility */
+  /* ── SEMANTIC ALIASES ── */
   --void: var(--iron-black);
   --void-elevated: var(--iron-dark);
   --void-surface: var(--iron-mid);
@@ -97,7 +99,7 @@
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #dc2626;
+  --primary-soft: #ef5530;
   --accent: var(--rust);
   --accent-dim: var(--rust-dim);
   --ink: var(--chalk);
@@ -105,38 +107,40 @@
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
-  --line: rgba(255,255,255,0.08);
-  --line-hover: rgba(255,255,255,0.15);
-  --line-active: rgba(185,28,28,0.5);
+  --line: rgba(255,255,255,0.07);
+  --line-hover: rgba(255,255,255,0.13);
+  --line-active: rgba(224,69,32,0.45);
 
-  /* MACROS - Clinical, distinct */
-  --protein: #ef4444;
-  --carbs: #22c55e;
-  --fat: #eab308;
+  /* ── MACROS — Nutrition colors ── */
+  --protein: #f87171;
+  --carbs: #34d399;
+  --fat: #fbbf24;
   --calories: var(--rust);
 
-  /* TRAINING */
-  --training: #3b82f6;
-  --training-dim: rgba(59,130,246,0.15);
-  --training-glow: rgba(59,130,246,0.4);
+  /* ── TRAINING ── */
+  --training: #60a5fa;
+  --training-dim: rgba(96,165,250,0.12);
+  --training-glow: rgba(96,165,250,0.35);
 
-  /* LEVELS */
-  --beginner: #22c55e;
-  --intermediate: #eab308;
-  --advanced: #ef4444;
+  /* ── LEVELS ── */
+  --beginner: #34d399;
+  --intermediate: #fbbf24;
+  --advanced: #f87171;
 
-  /* SYSTEM */
-  --success: #22c55e;
-  --warning: #eab308;
-  --danger: #ef4444;
+  /* ── SYSTEM ── */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
 
-  /* MOTION - Quick, decisive */
+  /* ── MOTION ── */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 100ms;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 120ms;
   --duration-normal: 200ms;
+  --duration-slow: 350ms;
 
-  /* SPACING - Tight grid */
+  /* ── SPACING — 4px base grid ── */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -146,20 +150,41 @@
   --space-3xl: 96px;
   --space-4xl: 128px;
 
-  /* Radius - Minimal, rugged */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  /* ── RADIUS ── */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 9999px;
+
+  /* ── ELEVATION ── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.2);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.45), 0 4px 8px rgba(0,0,0,0.2);
+  --shadow-glow: 0 0 24px var(--blood-dim);
+
+  /* ── FOCUS (accessibility) ── */
+  --focus-ring: 0 0 0 2px var(--iron-dark), 0 0 0 4px var(--blood);
+
+  /* ── FLUID TYPOGRAPHY ── */
+  --text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
+  --text-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.75rem);
 }
 
-/* Light mode - Concrete gym floor */
+/* Light mode — Concrete gym floor */
 [data-theme="light"] {
-  --iron-black: #f5f5f5;
+  --iron-black: #f4f4f6;
   --iron-dark: #ffffff;
-  --iron-mid: #e5e5e5;
-  --iron-surface: #d4d4d4;
+  --iron-mid: #e8e8ec;
+  --iron-surface: #d8d8de;
   --iron-elevated: #fafafa;
-  --iron-hover: #e0e0e0;
+  --iron-hover: #e2e2e8;
+  --iron-active: #d0d0d8;
 
   --void: var(--iron-black);
   --void-elevated: var(--iron-dark);
@@ -167,27 +192,34 @@
   --void-float: var(--iron-surface);
   --void-hover: var(--iron-hover);
 
-  --blood: #dc2626;
-  --blood-dim: rgba(220,38,38,0.1);
-  --blood-glow: rgba(220,38,38,0.2);
+  --blood: #d03a18;
+  --blood-dim: rgba(208,58,24,0.08);
+  --blood-glow: rgba(208,58,24,0.18);
+  --ember-text: #c23010;
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #ef4444;
+  --primary-soft: #e04520;
 
-  --chalk: #171717;
-  --chalk-secondary: #525252;
-  --chalk-tertiary: #737373;
-  --chalk-faint: #d4d4d4;
+  --chalk: #141418;
+  --chalk-secondary: #4a4a54;
+  --chalk-tertiary: #6e6e7a;
+  --chalk-faint: #c8c8d0;
   --ink: var(--chalk);
   --ink-primary: var(--chalk);
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
 
-  --line: rgba(0,0,0,0.1);
-  --line-hover: rgba(0,0,0,0.15);
-  --line-active: rgba(220,38,38,0.4);
+  --line: rgba(0,0,0,0.09);
+  --line-hover: rgba(0,0,0,0.14);
+  --line-active: rgba(208,58,24,0.35);
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+  --shadow-glow: 0 0 24px var(--blood-dim);
+  --focus-ring: 0 0 0 2px var(--iron-dark), 0 0 0 4px var(--blood);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -202,6 +234,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -209,17 +242,63 @@ body {
   background: var(--void);
   color: var(--ink);
   line-height: 1.6;
-  font-size: 0.9375rem;
+  font-size: var(--text-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   transition: background var(--duration-normal) var(--ease-sharp),
               color var(--duration-normal) var(--ease-sharp);
-
-  /* Copy protection */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+}
+
+::selection {
+  background: var(--blood-dim);
+  color: var(--chalk);
+}
+
+/* ── Accessibility: Focus Ring ── */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Accessibility: Screen reader only ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 10000;
+  width: auto;
+  height: auto;
+  padding: var(--space-sm) var(--space-md);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--blood);
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--text-base);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
 }
 
 input, textarea, select {
@@ -227,16 +306,33 @@ input, textarea, select {
   -webkit-user-select: text;
 }
 
+/* ── Scrollable table wrapper ── */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 calc(var(--space-md) * -1);
+  padding: 0 var(--space-md);
+}
+
+.table-scroll::-webkit-scrollbar { height: 4px; }
+.table-scroll::-webkit-scrollbar-track { background: transparent; }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--iron-hover); border-radius: var(--radius-full); }
+
 /* ═══════════════════════════════════════════════════════════════════════════
-   TYPOGRAPHY - Western, bold, rugged
+   TYPOGRAPHY — Utilitarian, bold, industrial
    ═══════════════════════════════════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6, .display {
   font-family: 'Bebas Neue', 'Teko', sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em;
-  line-height: 1;
+  line-height: 1.05;
   text-transform: uppercase;
 }
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
 
 .display-xl {
   font-size: clamp(3.5rem, 10vw, 7rem);
@@ -260,7 +356,7 @@ h1, h2, h3, h4, h5, h6, .display {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-tertiary);
+  color: var(--chalk-tertiary);
 }
 
 .mono {
@@ -269,8 +365,8 @@ h1, h2, h3, h4, h5, h6, .display {
   letter-spacing: 0.02em;
 }
 
-/* Accent text */
 .text-accent { color: var(--accent); }
+.text-ember { color: var(--ember-text, var(--blood)); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    LAYOUT
@@ -295,24 +391,25 @@ h1, h2, h3, h4, h5, h6, .display {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, var(--iron-black) 0%, rgba(10,10,10,0.95) 100%);
-  border-bottom: 1px solid var(--blood);
-  transition: all var(--duration-fast) var(--ease-sharp);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, var(--iron-black) 0%, rgba(8,9,10,0.92) 100%);
+  border-bottom: 1px solid var(--line);
+  transition: all var(--duration-normal) var(--ease-sharp);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
 }
 
 .site-header.scrolled {
-  background: rgba(10,10,10,0.98);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  background: rgba(8,9,10,0.97);
+  box-shadow: 0 1px 0 var(--line), var(--shadow-md);
+  border-bottom-color: transparent;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
-  padding: 12px 0;
+  height: 68px;
+  padding: 8px 0;
 }
 
 /* Logo - THE MARK */
@@ -370,58 +467,65 @@ h1, h2, h3, h4, h5, h6, .display {
   .logo-credit { display: none; }
 }
 
-/* Nav - COMMAND CENTER */
+/* Nav — Command strip */
 .nav-primary {
   display: flex;
   align-items: center;
   gap: 2px;
-  background: var(--iron-dark);
-  border: 2px solid var(--blood);
-  padding: 4px;
-  box-shadow: 0 4px 20px rgba(185,28,28,0.2);
+  background: var(--iron-mid);
+  border: 1px solid var(--line-hover);
+  border-radius: var(--radius-md);
+  padding: 3px;
 }
 
 .nav-link {
   position: relative;
-  padding: 12px 24px;
+  padding: 10px 22px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--chalk-secondary);
+  color: var(--chalk-tertiary);
   background: transparent;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-sharp);
+  min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
-.nav-link::before {
+.nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 50%;
   width: 0;
   height: 2px;
   background: var(--blood);
-  transition: all var(--duration-fast) var(--ease-out-expo);
+  transition: width var(--duration-normal) var(--ease-out-expo);
   transform: translateX(-50%);
+  border-radius: var(--radius-full);
 }
 
 .nav-link:hover {
   color: var(--chalk);
+  background: var(--iron-hover);
 }
 
-.nav-link:hover::before {
-  width: 60%;
+.nav-link:hover::after {
+  width: 50%;
 }
 
 .nav-link.active {
-  color: var(--chalk);
+  color: #fff;
   background: var(--blood);
+  box-shadow: 0 0 12px var(--blood-dim);
 }
 
-.nav-link.active::before {
+.nav-link.active::after {
   display: none;
 }
 
@@ -470,14 +574,14 @@ h1, h2, h3, h4, h5, h6, .display {
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ink-tertiary);
+  color: var(--chalk-tertiary);
 }
 
 @media (max-width: 900px) {
   .nav-primary { display: none; }
 }
 
-/* Mobile nav - BOTTOM COMMAND BAR */
+/* Mobile nav — Bottom command bar */
 .nav-mobile {
   display: none;
   position: fixed;
@@ -485,26 +589,33 @@ h1, h2, h3, h4, h5, h6, .display {
   left: 0;
   right: 0;
   background: var(--iron-dark);
-  border-top: 3px solid var(--blood);
-  padding: 6px;
+  border-top: 1px solid var(--line-hover);
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px));
   z-index: 1000;
-  gap: 4px;
-  box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
+  gap: 2px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
 }
 
 .nav-mobile .nav-link {
   flex: 1;
   text-align: center;
-  padding: 14px 8px;
+  padding: 10px 4px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
   border: none;
+  border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--chalk-secondary);
+  color: var(--chalk-tertiary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav-mobile .nav-link::before {
+.nav-mobile .nav-link::after {
   display: none;
 }
 
@@ -515,19 +626,19 @@ h1, h2, h3, h4, h5, h6, .display {
 
 .nav-mobile .nav-link.active {
   background: var(--blood);
-  color: var(--chalk);
+  color: #fff;
 }
 
 @media (max-width: 900px) {
   .nav-mobile { display: flex; }
-  main { padding-bottom: 72px; }
+  main { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN CONTENT
    ═══════════════════════════════════════════════════════════════════════════ */
 main {
-  padding-top: 100px;
+  padding-top: 84px;
   min-height: 100vh;
   background: var(--iron-black);
 }
@@ -1097,7 +1208,7 @@ main {
 /* Tab content */
 .view {
   display: none;
-  animation: viewIn 0.4s var(--ease-sharp);
+  animation: viewIn 0.35s var(--ease-out-expo);
 }
 
 .view.active { display: block; }
@@ -1105,7 +1216,7 @@ main {
 @keyframes viewIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -1120,18 +1231,25 @@ main {
   background: var(--iron-dark);
   border: 1px solid var(--iron-surface);
   border-left: 3px solid var(--blood);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: all var(--duration-fast) var(--ease-sharp);
+  transition: border-color var(--duration-fast) var(--ease-sharp),
+              box-shadow var(--duration-normal) var(--ease-sharp);
   margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
   border-color: var(--blood);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .card-body {
   padding: var(--space-lg);
+}
+
+@media (max-width: 480px) {
+  .card-body { padding: var(--space-md); }
 }
 
 .card-header {
@@ -1140,9 +1258,13 @@ main {
   background: var(--iron-mid);
 }
 
+@media (max-width: 480px) {
+  .card-header { padding: var(--space-md); }
+}
+
 .card-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1151,7 +1273,7 @@ main {
 }
 
 .card-subtitle {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   color: var(--chalk-tertiary);
 }
 
@@ -1159,10 +1281,13 @@ main {
 .training-card {
   background: var(--iron-dark);
   border: 1px solid var(--iron-surface);
-  border-left: 4px solid var(--training);
+  border-left: 3px solid var(--training);
+  border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
   margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-fast), box-shadow var(--duration-normal);
 }
 
 .training-card::before {
@@ -1177,7 +1302,7 @@ main {
 
 .training-card:hover {
   border-color: var(--training-glow);
-  box-shadow: 0 0 20px var(--training-dim);
+  box-shadow: var(--shadow-md), 0 0 16px var(--training-dim);
 }
 
 .training-card .card-header {
@@ -1185,11 +1310,13 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
 .training-day-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.75rem;
+  font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1197,7 +1324,7 @@ main {
 }
 
 .training-day-focus {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   color: var(--chalk-tertiary);
 }
 
@@ -1205,7 +1332,7 @@ main {
 .exercise-row {
   display: grid;
   grid-template-columns: 1fr auto auto auto;
-  gap: var(--space-md);
+  gap: var(--space-sm) var(--space-md);
   padding: var(--space-md) var(--space-lg);
   border-bottom: 1px solid var(--iron-surface);
   align-items: center;
@@ -1220,14 +1347,27 @@ main {
   background: var(--iron-mid);
 }
 
+@media (max-width: 600px) {
+  .exercise-row {
+    grid-template-columns: 1fr auto auto;
+    gap: var(--space-xs) var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+  }
+  .exercise-sets, .exercise-reps { min-width: 40px; font-size: 1.1rem; }
+  .exercise-swap { padding: 6px 10px; font-size: 0.75rem; }
+  .exercise-info { width: 28px; height: 28px; min-width: 28px; }
+}
+
 .exercise-name {
   font-weight: 500;
   color: var(--chalk);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .exercise-name small {
   display: block;
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   color: var(--chalk-tertiary);
   font-weight: 400;
 }
@@ -1237,7 +1377,7 @@ main {
   font-size: 1.25rem;
   color: var(--training);
   text-align: center;
-  min-width: 60px;
+  min-width: 55px;
 }
 
 .exercise-reps {
@@ -1245,37 +1385,43 @@ main {
 }
 
 .exercise-swap {
-  padding: 8px 16px;
-  background: var(--rust);
-  color: var(--chalk);
-  border: none;
+  padding: 8px 14px;
+  background: var(--iron-surface);
+  color: var(--chalk-secondary);
+  border: 1px solid var(--line-hover);
+  border-radius: var(--radius-sm);
   font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all var(--duration-fast);
+  min-height: 36px;
 }
 
 .exercise-swap:hover {
   background: var(--blood);
+  color: #fff;
+  border-color: var(--blood);
 }
 
 .exercise-info {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: transparent;
   color: var(--chalk-tertiary);
   border: 1px solid var(--chalk-faint);
   font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all var(--duration-fast);
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 32px;
+  text-decoration: none;
 }
 .exercise-info:hover {
   background: var(--iron-hover);
@@ -1622,15 +1768,16 @@ main {
 
 .field-input {
   width: 100%;
-  padding: 14px 16px;
-  font-size: 1rem;
+  padding: 12px 14px;
+  font-size: var(--text-base);
   font-family: 'Inter', sans-serif;
   color: var(--chalk);
   background: var(--iron-surface);
   border: 1px solid var(--iron-hover);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   outline: none;
   transition: all var(--duration-fast) var(--ease-sharp);
+  min-height: 44px;
 }
 
 .field-input:hover {
@@ -1640,7 +1787,7 @@ main {
 
 .field-input:focus {
   border-color: var(--blood);
-  box-shadow: 0 0 0 2px var(--blood-dim);
+  box-shadow: var(--focus-ring);
   background: var(--iron-surface);
 }
 
@@ -1652,7 +1799,7 @@ main {
 select.field-input {
   appearance: none;
   background-color: var(--iron-surface);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23b91c1c' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23e04520' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 40px;
@@ -1667,7 +1814,7 @@ select.field-input option {
 
 /* For light mode dropdown arrow */
 [data-theme="light"] select.field-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23dc2626' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23d03a18' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
 }
 
 /* Input with suffix */
@@ -1761,16 +1908,18 @@ select.field-input option {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.05em;
   color: var(--chalk-tertiary);
   background: var(--iron-surface);
   border: 1px solid var(--iron-hover);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-sharp);
   user-select: none;
+  min-height: 36px;
 }
 
 .chip:hover {
@@ -1783,6 +1932,7 @@ select.field-input option {
   color: white;
   background: var(--blood);
   border-color: var(--blood);
+  box-shadow: 0 0 8px var(--blood-dim);
 }
 
 .field-hint {
@@ -1800,39 +1950,48 @@ select.field-input option {
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  padding: 16px 40px;
+  padding: 14px 36px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-sharp);
   position: relative;
+  min-height: 44px;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn-primary {
   background: var(--blood);
-  color: var(--chalk);
+  color: #fff;
   border-color: var(--blood);
+  box-shadow: 0 2px 8px var(--blood-dim);
 }
 
 .btn-primary:hover {
-  background: transparent;
-  color: var(--blood);
-  transform: translateY(-2px);
+  background: var(--primary-soft);
+  box-shadow: 0 4px 16px var(--blood-glow);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 1px 4px var(--blood-dim);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--chalk);
-  border: 2px solid var(--chalk-faint);
+  border: 1px solid var(--chalk-faint);
+  border-radius: var(--radius-sm);
 }
 
 .btn-secondary:hover {
@@ -1843,21 +2002,23 @@ select.field-input option {
 .btn-ghost {
   background: transparent;
   color: var(--chalk-secondary);
-  padding: 14px 20px;
+  padding: 12px 20px;
   border: none;
 }
 
 .btn-ghost:hover {
   color: var(--blood);
+  background: var(--blood-dim);
 }
 
 .btn-sm {
-  padding: 12px 28px;
+  padding: 10px 24px;
   font-size: 1rem;
+  min-height: 36px;
 }
 
 .btn-lg {
-  padding: 20px 56px;
+  padding: 18px 52px;
   font-size: 1.375rem;
 }
 
@@ -1872,17 +2033,19 @@ select.field-input option {
    ═══════════════════════════════════════════════════════════════════════════ */
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 2px;
   background: var(--iron-black);
-  border: 2px solid var(--blood);
+  border: 1px solid var(--iron-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .stat {
   background: var(--iron-dark);
   padding: var(--space-lg) var(--space-md);
   text-align: center;
-  transition: all var(--duration-fast) var(--ease-sharp);
+  transition: background var(--duration-fast) var(--ease-sharp);
 }
 
 .stat:hover {
@@ -1891,7 +2054,7 @@ select.field-input option {
 
 .stat-value {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--chalk);
@@ -1901,7 +2064,7 @@ select.field-input option {
 
 .stat-label {
   font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1949,14 +2112,16 @@ select.field-input option {
 }
 
 .macro-bar-track {
-  height: 4px;
+  height: 5px;
   background: var(--iron-hover);
   overflow: hidden;
+  border-radius: var(--radius-full);
 }
 
 .macro-bar-fill {
   height: 100%;
-  transition: width 0.6s var(--ease-sharp);
+  transition: width 0.8s var(--ease-out-expo);
+  border-radius: var(--radius-full);
 }
 
 .macro-bar-fill.protein { background: var(--protein); }
@@ -2078,10 +2243,12 @@ select.field-input option {
 
 .meal-footer {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-sm) var(--space-lg);
+  flex-wrap: wrap;
   padding: var(--space-sm) var(--space-lg);
   background: var(--iron-mid);
-  font-size: 0.8125rem;
+  font-size: var(--text-sm);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 .meal-total {
@@ -2281,8 +2448,10 @@ select.field-input option {
   background: var(--iron-surface);
   color: var(--chalk-secondary);
   border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-sharp);
+  min-height: 40px;
 }
 
 .tools-nav-btn:hover {
@@ -2301,23 +2470,27 @@ select.field-input option {
 }
 
 .tools-category.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .tool-card {
   border-left: 3px solid var(--training);
+  margin-top: 0 !important;
 }
 
 .tool-badge {
   font-family: 'Teko', sans-serif;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 4px 12px;
+  padding: 4px 14px;
   background: var(--training-dim);
   color: var(--training);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .measurements-grid,
@@ -3185,6 +3358,7 @@ select.field-input option {
   margin-bottom: var(--space-md);
   border-left: 3px solid;
   background: var(--iron-mid);
+  border-radius: var(--radius-sm);
 }
 
 .alert-icon {
@@ -3227,7 +3401,9 @@ select.field-input option {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: none;
   align-items: center;
   justify-content: center;
@@ -3239,17 +3415,29 @@ select.field-input option {
 
 .modal {
   background: var(--iron-dark);
-  border: 1px solid var(--blood);
+  border: 1px solid var(--iron-surface);
+  border-radius: var(--radius-lg);
   width: 100%;
   max-width: 480px;
   max-height: 85vh;
   overflow: hidden;
-  animation: modalIn 0.25s var(--ease-sharp);
+  animation: modalIn 0.3s var(--ease-out-expo);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    align-self: flex-end;
+  }
+  .modal-backdrop { align-items: flex-end; padding: 0; }
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .modal-header {
@@ -3263,7 +3451,7 @@ select.field-input option {
 
 .modal-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -3271,22 +3459,25 @@ select.field-input option {
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   color: var(--chalk-tertiary);
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-sharp);
+  min-width: 36px;
 }
 
 .modal-close:hover {
   color: var(--blood);
   border-color: var(--blood);
+  background: var(--blood-dim);
 }
 
 .modal-body {
@@ -3302,6 +3493,70 @@ select.field-input option {
   padding: var(--space-md) var(--space-lg);
   border-top: 1px solid var(--iron-surface);
   background: var(--iron-mid);
+}
+
+/* ── Water glass (responsive) ── */
+.water-glass {
+  width: 36px;
+  height: 44px;
+  border: 2px solid var(--iron-hover);
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+.water-glass-fill {
+  width: 100%;
+  background: transparent;
+  border-radius: 0 0 4px 4px;
+  transition: height 0.3s ease;
+}
+
+.water-glass.filled {
+  border-color: var(--training);
+}
+
+.water-glass.filled .water-glass-fill {
+  background: var(--training);
+}
+
+.water-glass:hover {
+  border-color: var(--training);
+  box-shadow: 0 0 8px var(--training-dim);
+}
+
+.water-glass:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 480px) {
+  .water-glass { width: 28px; height: 36px; }
+}
+
+/* ── Milestone grid (responsive) ── */
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  .milestone-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Volume summary grid (responsive) ── */
+.volume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-sm);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -3355,7 +3610,7 @@ select.field-input option {
 /* Email Results Section */
 .email-results-section {
   padding: var(--space-lg);
-  background: var(--void-surface);
+  background: var(--iron-surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
 }
@@ -3559,7 +3814,7 @@ select.field-input option {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-secondary);
+  color: var(--chalk-secondary);
   margin-bottom: var(--space-md);
 }
 
@@ -3586,7 +3841,7 @@ select.field-input option {
 
 .contact-note {
   font-size: 0.875rem;
-  color: var(--ink-faint);
+  color: var(--chalk-faint);
   margin-top: var(--space-sm);
 }
 
@@ -3598,7 +3853,7 @@ select.field-input option {
 
 .footer-bottom p {
   font-size: 0.875rem;
-  color: var(--ink-faint);
+  color: var(--chalk-faint);
 }
 
 .footer-bottom a {
@@ -3625,6 +3880,83 @@ select.field-input option {
 
 @media (max-width: 900px) {
   .watermark { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MICRO-INTERACTIONS & POLISH
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Skeleton loading pulse */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.skeleton {
+  background: var(--iron-surface);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth scroll for all scrollable containers */
+.table-scroll,
+.modal { scroll-behavior: smooth; }
+
+/* Interactive card hover lift */
+.tool-card { transition: transform var(--duration-norm) var(--ease-out-expo), box-shadow var(--duration-norm) var(--ease-out-expo); }
+.tool-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* Myth buster focus style */
+[role="button"]:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+
+/* Nav link transition refinement */
+.nav-link { transition: color var(--duration-fast), background var(--duration-fast); }
+
+/* Stats row entry animation */
+@keyframes statFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stat-item { animation: statFadeIn 0.4s var(--ease-out-expo) both; }
+.stat-item:nth-child(2) { animation-delay: 60ms; }
+.stat-item:nth-child(3) { animation-delay: 120ms; }
+.stat-item:nth-child(4) { animation-delay: 180ms; }
+
+/* Training card stagger on load */
+.training-card { animation: viewIn 0.35s var(--ease-out-expo) both; }
+.training-card:nth-child(2) { animation-delay: 80ms; }
+.training-card:nth-child(3) { animation-delay: 160ms; }
+.training-card:nth-child(4) { animation-delay: 240ms; }
+.training-card:nth-child(5) { animation-delay: 320ms; }
+.training-card:nth-child(6) { animation-delay: 400ms; }
+
+/* Education card stagger */
+.education-card { animation: viewIn 0.35s var(--ease-out-expo) both; }
+.education-card:nth-child(2) { animation-delay: 60ms; }
+.education-card:nth-child(3) { animation-delay: 120ms; }
+.education-card:nth-child(4) { animation-delay: 180ms; }
+.education-card:nth-child(5) { animation-delay: 240ms; }
+
+/* Scroll indicator gradient for overflowing containers */
+.table-scroll { position: relative; }
+.table-scroll::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  background: linear-gradient(90deg, transparent, var(--iron-dark));
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -3670,6 +4002,7 @@ select.field-input option {
 </head>
 
 <body data-theme="dark">
+  <a href="#main-content" class="sr-only">Skip to main content</a>
   <div class="watermark">© MuscleForge</div>
 
   <!-- ═══════════════════════════════════════════════════════════════════════════
@@ -3682,20 +4015,20 @@ select.field-input option {
           <div class="logo-type">
             <span class="logo-name">MUSCLEFORGE</span>
             <span class="logo-tag">Precision Nutrition & Training</span>
-            <span class="logo-credit">by <a href="https://ayter.com" target="_blank">Can Ayter</a></span>
+            <span class="logo-credit">by <a href="https://ayter.com" target="_blank" rel="noopener">Can Ayter</a></span>
           </div>
         </div>
 
-        <nav class="nav-primary">
-          <button class="nav-link active" data-view="home">Home</button>
+        <nav class="nav-primary" aria-label="Primary navigation">
+          <button class="nav-link active" data-view="home" aria-current="page">Home</button>
           <button class="nav-link" data-view="calculator">Plan</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
           <button class="nav-link" data-view="knowledge">Knowledge</button>
         </nav>
 
-        <button class="theme-switch" onclick="toggleTheme()">
-          <div class="theme-switch-track"></div>
+        <button class="theme-switch" onclick="toggleTheme()" aria-label="Toggle dark and light theme">
+          <div class="theme-switch-track" aria-hidden="true"></div>
           <span class="theme-switch-label" id="themeLabel">Dark</span>
         </button>
       </div>
@@ -3703,8 +4036,8 @@ select.field-input option {
   </header>
 
   <!-- Mobile nav -->
-  <nav class="nav-mobile">
-    <button class="nav-link active" data-view="home">Home</button>
+  <nav class="nav-mobile" aria-label="Mobile navigation">
+    <button class="nav-link active" data-view="home" aria-current="page">Home</button>
     <button class="nav-link" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
@@ -3714,7 +4047,7 @@ select.field-input option {
   <!-- ═══════════════════════════════════════════════════════════════════════════
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
-  <main>
+  <main id="main-content">
     <!-- HOME VIEW -->
     <div id="home" class="view active">
       <section class="section home-section">
@@ -3869,25 +4202,25 @@ select.field-input option {
 
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Age</label>
+                    <label class="field-label" for="age">Age</label>
                     <input type="number" id="age" class="field-input" placeholder="25" min="16" max="99" required>
                   </div>
                   <div class="field">
-                    <label class="field-label">Sex</label>
+                    <label class="field-label" for="sex">Sex</label>
                     <select id="sex" class="field-input" required>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Weight</label>
+                    <label class="field-label" for="weight">Weight</label>
                     <div class="field-combo">
                       <input type="number" id="weight" class="field-input" placeholder="180" step="0.1" required>
                       <span class="field-suffix" id="weightUnit">lbs</span>
                     </div>
                   </div>
                   <div class="field" id="heightFieldImperial">
-                    <label class="field-label">Height</label>
+                    <label class="field-label" for="heightFt">Height</label>
                     <div class="field-combo">
                       <input type="number" id="heightFt" class="field-input" placeholder="5" min="4" max="7" style="border-radius: 10px 0 0 10px;">
                       <span class="field-suffix" style="border-radius: 0;">ft</span>
@@ -3896,14 +4229,14 @@ select.field-input option {
                     </div>
                   </div>
                   <div class="field" id="heightFieldMetric" style="display: none;">
-                    <label class="field-label">Height</label>
+                    <label class="field-label" for="heightCm">Height</label>
                     <div class="field-combo">
                       <input type="number" id="heightCm" class="field-input" placeholder="178" min="120" max="250" step="1">
                       <span class="field-suffix">cm</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Body Fat % <span class="text-muted">(optional)</span></label>
+                    <label class="field-label" for="bodyFat">Body Fat % <span class="text-muted">(optional)</span></label>
                     <div class="field-combo">
                       <input type="number" id="bodyFat" class="field-input" placeholder="15" step="0.1" min="3" max="50">
                       <span class="field-suffix">%</span>
@@ -3911,7 +4244,7 @@ select.field-input option {
                     <span class="field-hint">For more accurate calculations</span>
                   </div>
                   <div class="field">
-                    <label class="field-label">Activity Level</label>
+                    <label class="field-label" for="activity">Activity Level</label>
                     <select id="activity" class="field-input" required>
                       <option value="sedentary">Sedentary</option>
                       <option value="light">Light (1-2x/week)</option>
@@ -3957,7 +4290,7 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Goal</label>
+                    <label class="field-label" for="goal">Goal</label>
                     <select id="goal" class="field-input" required>
                       <option value="aggressiveCut">Aggressive Cut (-750)</option>
                       <option value="cut">Cut (-500)</option>
@@ -3967,7 +4300,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Macro Split</label>
+                    <label class="field-label" for="macroProfile">Macro Split</label>
                     <select id="macroProfile" class="field-input" required>
                       <option value="bodybuilding" selected>Bodybuilding 40/40/20</option>
                       <option value="highProtein">High Protein 45/35/20</option>
@@ -3979,7 +4312,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Diet Type</label>
+                    <label class="field-label" for="dietType">Diet Type</label>
                     <select id="dietType" class="field-input">
                       <option value="regular" selected>Regular</option>
                       <option value="vegetarian">Vegetarian</option>
@@ -3991,7 +4324,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Meals Per Day</label>
+                    <label class="field-label" for="mealsPerDay">Meals Per Day</label>
                     <select id="mealsPerDay" class="field-input">
                       <option value="3">3 Meals</option>
                       <option value="4">4 Meals</option>
@@ -4000,7 +4333,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Training Time</label>
+                    <label class="field-label" for="trainingTime">Training Time</label>
                     <select id="trainingTime" class="field-input">
                       <option value="morning">Morning</option>
                       <option value="midday">Midday</option>
@@ -4043,7 +4376,7 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Experience Level</label>
+                    <label class="field-label" for="experienceLevel">Experience Level</label>
                     <select id="experienceLevel" class="field-input">
                       <option value="beginner">Beginner (0-1 year)</option>
                       <option value="intermediate" selected>Intermediate (1-3 years)</option>
@@ -4051,7 +4384,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Days Available</label>
+                    <label class="field-label" for="trainingDays">Days Available</label>
                     <select id="trainingDays" class="field-input">
                       <option value="3">3 days/week</option>
                       <option value="4" selected>4 days/week</option>
@@ -4060,7 +4393,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Primary Goal</label>
+                    <label class="field-label" for="trainingGoal">Primary Goal</label>
                     <select id="trainingGoal" class="field-input">
                       <option value="hypertrophy" selected>Hypertrophy (Muscle Growth)</option>
                       <option value="strength">Strength</option>
@@ -4068,7 +4401,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Available Equipment</label>
+                    <label class="field-label" for="trainingEquipment">Available Equipment</label>
                     <select id="trainingEquipment" class="field-input">
                       <option value="full" selected>Full Gym (All Equipment)</option>
                       <option value="basic">Basic Gym (Barbell, Dumbbells, Cables)</option>
@@ -4077,7 +4410,7 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Sport-Specific Program</label>
+                    <label class="field-label" for="trainingSport">Sport-Specific Program</label>
                     <select id="trainingSport" class="field-input">
                       <option value="" selected>None (General Bodybuilding)</option>
                       <option value="basketball">Basketball</option>
@@ -4303,14 +4636,14 @@ select.field-input option {
             <div class="card-body">
               <div class="form-grid">
                 <div class="field">
-                  <label class="field-label">Weight Lifted</label>
+                  <label class="field-label" for="ormWeight">Weight Lifted</label>
                   <div class="field-combo">
                     <input type="number" id="ormWeight" class="field-input" placeholder="100" step="2.5">
                     <span class="field-suffix">lbs</span>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field-label">Reps Completed</label>
+                  <label class="field-label" for="ormReps">Reps Completed</label>
                   <input type="number" id="ormReps" class="field-input" placeholder="5" min="1" max="15">
                 </div>
               </div>
@@ -4346,7 +4679,7 @@ select.field-input option {
             <div class="card-body">
               <div class="form-grid">
                 <div class="field">
-                  <label class="field-label">Your Age</label>
+                  <label class="field-label" for="hrAge">Your Age</label>
                   <input type="number" id="hrAge" class="field-input" placeholder="30" min="16" max="99">
                 </div>
               </div>
@@ -4489,6 +4822,7 @@ select.field-input option {
 
           <div class="card">
             <div class="card-body">
+              <div class="table-scroll">
               <table class="education-table">
                 <thead>
                   <tr>
@@ -4519,6 +4853,7 @@ select.field-input option {
                   </tr>
                 </tbody>
               </table>
+              </div>
               <div class="education-tip" style="margin-top: var(--space-lg);">
                 <strong>For bodybuilding:</strong> Spend 70% of training in hypertrophy zone, with occasional strength and endurance work for complete development.
               </div>
@@ -4530,6 +4865,7 @@ select.field-input option {
 
           <div class="card">
             <div class="card-body">
+              <div class="table-scroll">
               <table class="education-table">
                 <thead>
                   <tr>
@@ -4548,6 +4884,7 @@ select.field-input option {
                   <tr><td>10</td><td>100%</td><td>Maximum</td><td>True 1RM attempts only</td></tr>
                 </tbody>
               </table>
+              </div>
               <div class="education-tip" style="margin-top: var(--space-lg);">
                 <strong>Auto-regulation:</strong> Most training should be RPE 7-8. Some days you're stronger than others. RPE helps you adjust intensity based on daily readiness.
               </div>
@@ -4565,6 +4902,7 @@ select.field-input option {
               </div>
             </div>
             <div class="card-body">
+              <div class="table-scroll">
               <table class="education-table">
                 <thead>
                   <tr>
@@ -4579,6 +4917,7 @@ select.field-input option {
                   </tr>
                 </tbody>
               </table>
+              </div>
               <div class="rationale-box" style="margin-top: var(--space-lg);">
                 <div class="rationale-label">Example: Bench Press with 120kg 1RM</div>
                 <p>
@@ -4826,28 +5165,28 @@ select.field-input option {
             <div class="card-body">
               <div class="form-grid">
                 <div class="field">
-                  <label class="field-label">Current Weight</label>
+                  <label class="field-label" for="prepCurrent">Current Weight</label>
                   <div class="field-combo">
                     <input type="number" id="prepCurrent" class="field-input" placeholder="200">
                     <span class="field-suffix">lbs</span>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field-label">Target Stage Weight</label>
+                  <label class="field-label" for="prepTarget">Target Stage Weight</label>
                   <div class="field-combo">
                     <input type="number" id="prepTarget" class="field-input" placeholder="175">
                     <span class="field-suffix">lbs</span>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field-label">Current Body Fat</label>
+                  <label class="field-label" for="prepBF">Current Body Fat</label>
                   <div class="field-combo">
                     <input type="number" id="prepBF" class="field-input" placeholder="15">
                     <span class="field-suffix">%</span>
                   </div>
                 </div>
                 <div class="field">
-                  <label class="field-label">Weeks Out</label>
+                  <label class="field-label" for="prepWeeks">Weeks Out</label>
                   <div class="field-combo">
                     <input type="number" id="prepWeeks" class="field-input" placeholder="16">
                     <span class="field-suffix">wks</span>
@@ -4919,21 +5258,21 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Weight</label>
+                    <label class="field-label" for="ffmiWeight">Weight</label>
                     <div class="field-combo">
                       <input type="number" id="ffmiWeight" class="field-input" placeholder="180" step="0.1">
                       <span class="field-suffix">lbs</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Height</label>
+                    <label class="field-label" for="ffmiHeight">Height</label>
                     <div class="field-combo">
                       <input type="number" id="ffmiHeight" class="field-input" placeholder="70" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Body Fat %</label>
+                    <label class="field-label" for="ffmiBf">Body Fat %</label>
                     <div class="field-combo">
                       <input type="number" id="ffmiBf" class="field-input" placeholder="15" step="0.1" min="3" max="50">
                       <span class="field-suffix">%</span>
@@ -4975,35 +5314,35 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Sex</label>
+                    <label class="field-label" for="navySex">Sex</label>
                     <select id="navySex" class="field-input">
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
                   </div>
                   <div class="field">
-                    <label class="field-label">Height</label>
+                    <label class="field-label" for="navyHeight">Height</label>
                     <div class="field-combo">
                       <input type="number" id="navyHeight" class="field-input" placeholder="70" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Neck Circumference</label>
+                    <label class="field-label" for="navyNeck">Neck Circumference</label>
                     <div class="field-combo">
                       <input type="number" id="navyNeck" class="field-input" placeholder="15" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Waist (at navel)</label>
+                    <label class="field-label" for="navyWaist">Waist (at navel)</label>
                     <div class="field-combo">
                       <input type="number" id="navyWaist" class="field-input" placeholder="32" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field" id="navyHipField" style="display: none;">
-                    <label class="field-label">Hip (widest point)</label>
+                    <label class="field-label" for="navyHip">Hip (widest point)</label>
                     <div class="field-combo">
                       <input type="number" id="navyHip" class="field-input" placeholder="38" step="0.1">
                       <span class="field-suffix">in</span>
@@ -5041,28 +5380,28 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Height</label>
+                    <label class="field-label" for="geneticHeight">Height</label>
                     <div class="field-combo">
                       <input type="number" id="geneticHeight" class="field-input" placeholder="70" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Wrist Circumference</label>
+                    <label class="field-label" for="geneticWrist">Wrist Circumference</label>
                     <div class="field-combo">
                       <input type="number" id="geneticWrist" class="field-input" placeholder="7" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Ankle Circumference</label>
+                    <label class="field-label" for="geneticAnkle">Ankle Circumference</label>
                     <div class="field-combo">
                       <input type="number" id="geneticAnkle" class="field-input" placeholder="8.5" step="0.1">
                       <span class="field-suffix">in</span>
                     </div>
                   </div>
                   <div class="field">
-                    <label class="field-label">Target Body Fat %</label>
+                    <label class="field-label" for="geneticBf">Target Body Fat %</label>
                     <div class="field-combo">
                       <input type="number" id="geneticBf" class="field-input" placeholder="10" step="1" min="4" max="20">
                       <span class="field-suffix">%</span>
@@ -5100,7 +5439,7 @@ select.field-input option {
               <div class="card-body">
                 <div class="form-grid">
                   <div class="field">
-                    <label class="field-label">Wrist Circumference</label>
+                    <label class="field-label" for="idealWrist">Wrist Circumference</label>
                     <div class="field-combo">
                       <input type="number" id="idealWrist" class="field-input" placeholder="7" step="0.1">
                       <span class="field-suffix">in</span>
@@ -5959,52 +6298,52 @@ select.field-input option {
                 <div id="readinessQuestions">
                   <div class="field" style="margin-bottom: var(--space-md);">
                     <label class="field-label">Sleep Quality</label>
-                    <div class="chip-selector" id="readinessSleep">
-                      <div class="chip" data-val="1" onclick="setReadiness('sleep',1,this)">1 - Poor</div>
-                      <div class="chip" data-val="2" onclick="setReadiness('sleep',2,this)">2</div>
-                      <div class="chip" data-val="3" onclick="setReadiness('sleep',3,this)">3 - OK</div>
-                      <div class="chip" data-val="4" onclick="setReadiness('sleep',4,this)">4</div>
-                      <div class="chip" data-val="5" onclick="setReadiness('sleep',5,this)">5 - Great</div>
+                    <div class="chip-selector" id="readinessSleep" role="radiogroup" aria-label="Sleep quality rating">
+                      <div class="chip" data-val="1" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('sleep',1,this)">1 - Poor</div>
+                      <div class="chip" data-val="2" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('sleep',2,this)">2</div>
+                      <div class="chip" data-val="3" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('sleep',3,this)">3 - OK</div>
+                      <div class="chip" data-val="4" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('sleep',4,this)">4</div>
+                      <div class="chip" data-val="5" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('sleep',5,this)">5 - Great</div>
                     </div>
                   </div>
                   <div class="field" style="margin-bottom: var(--space-md);">
                     <label class="field-label">Muscle Soreness</label>
-                    <div class="chip-selector" id="readinessSoreness">
-                      <div class="chip" data-val="1" onclick="setReadiness('soreness',1,this)">1 - Severe</div>
-                      <div class="chip" data-val="2" onclick="setReadiness('soreness',2,this)">2</div>
-                      <div class="chip" data-val="3" onclick="setReadiness('soreness',3,this)">3 - Moderate</div>
-                      <div class="chip" data-val="4" onclick="setReadiness('soreness',4,this)">4</div>
-                      <div class="chip" data-val="5" onclick="setReadiness('soreness',5,this)">5 - None</div>
+                    <div class="chip-selector" id="readinessSoreness" role="radiogroup" aria-label="Muscle soreness rating">
+                      <div class="chip" data-val="1" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('soreness',1,this)">1 - Severe</div>
+                      <div class="chip" data-val="2" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('soreness',2,this)">2</div>
+                      <div class="chip" data-val="3" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('soreness',3,this)">3 - Moderate</div>
+                      <div class="chip" data-val="4" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('soreness',4,this)">4</div>
+                      <div class="chip" data-val="5" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('soreness',5,this)">5 - None</div>
                     </div>
                   </div>
                   <div class="field" style="margin-bottom: var(--space-md);">
                     <label class="field-label">Stress Level</label>
-                    <div class="chip-selector" id="readinessStress">
-                      <div class="chip" data-val="1" onclick="setReadiness('stress',1,this)">1 - High</div>
-                      <div class="chip" data-val="2" onclick="setReadiness('stress',2,this)">2</div>
-                      <div class="chip" data-val="3" onclick="setReadiness('stress',3,this)">3 - Normal</div>
-                      <div class="chip" data-val="4" onclick="setReadiness('stress',4,this)">4</div>
-                      <div class="chip" data-val="5" onclick="setReadiness('stress',5,this)">5 - Low</div>
+                    <div class="chip-selector" id="readinessStress" role="radiogroup" aria-label="Stress level rating">
+                      <div class="chip" data-val="1" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('stress',1,this)">1 - High</div>
+                      <div class="chip" data-val="2" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('stress',2,this)">2</div>
+                      <div class="chip" data-val="3" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('stress',3,this)">3 - Normal</div>
+                      <div class="chip" data-val="4" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('stress',4,this)">4</div>
+                      <div class="chip" data-val="5" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('stress',5,this)">5 - Low</div>
                     </div>
                   </div>
                   <div class="field" style="margin-bottom: var(--space-md);">
                     <label class="field-label">Motivation</label>
-                    <div class="chip-selector" id="readinessMotivation">
-                      <div class="chip" data-val="1" onclick="setReadiness('motivation',1,this)">1 - Low</div>
-                      <div class="chip" data-val="2" onclick="setReadiness('motivation',2,this)">2</div>
-                      <div class="chip" data-val="3" onclick="setReadiness('motivation',3,this)">3 - Neutral</div>
-                      <div class="chip" data-val="4" onclick="setReadiness('motivation',4,this)">4</div>
-                      <div class="chip" data-val="5" onclick="setReadiness('motivation',5,this)">5 - Fired Up</div>
+                    <div class="chip-selector" id="readinessMotivation" role="radiogroup" aria-label="Motivation rating">
+                      <div class="chip" data-val="1" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('motivation',1,this)">1 - Low</div>
+                      <div class="chip" data-val="2" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('motivation',2,this)">2</div>
+                      <div class="chip" data-val="3" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('motivation',3,this)">3 - Neutral</div>
+                      <div class="chip" data-val="4" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('motivation',4,this)">4</div>
+                      <div class="chip" data-val="5" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('motivation',5,this)">5 - Fired Up</div>
                     </div>
                   </div>
                   <div class="field" style="margin-bottom: var(--space-md);">
                     <label class="field-label">Energy Level</label>
-                    <div class="chip-selector" id="readinessEnergy">
-                      <div class="chip" data-val="1" onclick="setReadiness('energy',1,this)">1 - Drained</div>
-                      <div class="chip" data-val="2" onclick="setReadiness('energy',2,this)">2</div>
-                      <div class="chip" data-val="3" onclick="setReadiness('energy',3,this)">3 - Normal</div>
-                      <div class="chip" data-val="4" onclick="setReadiness('energy',4,this)">4</div>
-                      <div class="chip" data-val="5" onclick="setReadiness('energy',5,this)">5 - Wired</div>
+                    <div class="chip-selector" id="readinessEnergy" role="radiogroup" aria-label="Energy level rating">
+                      <div class="chip" data-val="1" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('energy',1,this)">1 - Drained</div>
+                      <div class="chip" data-val="2" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('energy',2,this)">2</div>
+                      <div class="chip" data-val="3" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('energy',3,this)">3 - Normal</div>
+                      <div class="chip" data-val="4" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('energy',4,this)">4</div>
+                      <div class="chip" data-val="5" role="radio" tabindex="0" aria-checked="false" onclick="setReadiness('energy',5,this)">5 - Wired</div>
                     </div>
                   </div>
                 </div>
@@ -7097,8 +7436,10 @@ planNutritionCheckbox.addEventListener('change', () => {
 function renderAllergenChips() {
   const container = document.getElementById('allergenChips');
   if (!container) return;
+  container.setAttribute('role', 'group');
+  container.setAttribute('aria-label', 'Allergen selections');
   container.innerHTML = ALLERGEN_OPTIONS.map(opt =>
-    `<div class="chip" data-allergen="${opt.id}" onclick="toggleAllergen('${opt.id}')">${opt.label}</div>`
+    `<div class="chip" data-allergen="${opt.id}" role="checkbox" tabindex="0" aria-checked="${selectedAllergens.includes(opt.id)}" onclick="toggleAllergen('${opt.id}')">${opt.label}</div>`
   ).join('');
 }
 
@@ -7107,15 +7448,19 @@ function toggleAllergen(id) {
   if (idx === -1) selectedAllergens.push(id);
   else selectedAllergens.splice(idx, 1);
   document.querySelectorAll('#allergenChips .chip').forEach(chip => {
-    chip.classList.toggle('active', selectedAllergens.includes(chip.dataset.allergen));
+    const isActive = selectedAllergens.includes(chip.dataset.allergen);
+    chip.classList.toggle('active', isActive);
+    chip.setAttribute('aria-checked', String(isActive));
   });
 }
 
 function renderInjuryChips() {
   const container = document.getElementById('injuryChips');
   if (!container) return;
+  container.setAttribute('role', 'group');
+  container.setAttribute('aria-label', 'Injury selections');
   container.innerHTML = INJURY_OPTIONS.map(opt =>
-    `<div class="chip" data-injury="${opt.id}" onclick="toggleInjury('${opt.id}')">${opt.label}</div>`
+    `<div class="chip" data-injury="${opt.id}" role="checkbox" tabindex="0" aria-checked="${selectedInjuries.includes(opt.id)}" onclick="toggleInjury('${opt.id}')">${opt.label}</div>`
   ).join('');
 }
 
@@ -7124,15 +7469,19 @@ function toggleInjury(id) {
   if (idx === -1) selectedInjuries.push(id);
   else selectedInjuries.splice(idx, 1);
   document.querySelectorAll('#injuryChips .chip').forEach(chip => {
-    chip.classList.toggle('active', selectedInjuries.includes(chip.dataset.injury));
+    const isActive = selectedInjuries.includes(chip.dataset.injury);
+    chip.classList.toggle('active', isActive);
+    chip.setAttribute('aria-checked', String(isActive));
   });
 }
 
 function renderCuisineChips() {
   const container = document.getElementById('cuisineChips');
   if (!container) return;
+  container.setAttribute('role', 'group');
+  container.setAttribute('aria-label', 'Cuisine preferences');
   container.innerHTML = CUISINE_OPTIONS.map(opt =>
-    `<div class="chip" data-cuisine="${opt.id}" onclick="toggleCuisine('${opt.id}')">${opt.label}</div>`
+    `<div class="chip" data-cuisine="${opt.id}" role="checkbox" tabindex="0" aria-checked="${selectedCuisines.includes(opt.id)}" onclick="toggleCuisine('${opt.id}')">${opt.label}</div>`
   ).join('');
 }
 
@@ -7141,7 +7490,9 @@ function toggleCuisine(id) {
   if (idx === -1) selectedCuisines.push(id);
   else selectedCuisines.splice(idx, 1);
   document.querySelectorAll('#cuisineChips .chip').forEach(chip => {
-    chip.classList.toggle('active', selectedCuisines.includes(chip.dataset.cuisine));
+    const isActive = selectedCuisines.includes(chip.dataset.cuisine);
+    chip.classList.toggle('active', isActive);
+    chip.setAttribute('aria-checked', String(isActive));
   });
 }
 
@@ -7573,20 +7924,20 @@ function renderGoalTimeline() {
       <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${Math.abs(deficit)} cal/day ${isCutting ? 'deficit' : 'surplus'}</div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-bottom: var(--space-lg);">
-      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface);">
+    <div class="milestone-grid" style="margin-bottom: var(--space-lg);">
+      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
         <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 5 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target5} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo5} weeks</div>
         <div style="font-size: 0.7rem; color: var(--chalk-tertiary);">${addWeeks(weeksTo5)}</div>
       </div>
-      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface);">
+      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
         <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 10 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target10} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo10} weeks</div>
         <div style="font-size: 0.7rem; color: var(--chalk-tertiary);">${addWeeks(weeksTo10)}</div>
       </div>
-      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface);">
+      <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
         <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 20 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target20} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo20} weeks</div>
@@ -7961,19 +8312,14 @@ function generateGroceryList() {
   }
 
   const modalHtml = `
-    <div id="groceryModal" style="
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85); z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: var(--space-lg);
+    <div id="groceryModal" role="dialog" aria-modal="true" aria-labelledby="groceryModalTitle" style="
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; padding: var(--space-lg);
     " onclick="if(event.target===this) this.remove()">
-      <div style="
-        background: var(--void-elevated); border: 1px solid var(--line);
-        max-width: 500px; width: 100%; max-height: 85vh; overflow-y: auto;
-      ">
+      <div class="modal" style="max-width: 500px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">Weekly Grocery List</h3>
-          <p style="color: var(--ink-secondary); font-size: 0.875rem;">Based on your meal plan x 7 days</p>
+          <h3 id="groceryModalTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">Weekly Grocery List</h3>
+          <p style="color: var(--chalk-secondary); font-size: 0.875rem;">Based on your meal plan x 7 days</p>
         </div>
         <div style="padding: var(--space-lg);">
           ${listHTML}
@@ -8200,8 +8546,10 @@ function loadMythBusters() {
   if (!container) return;
 
   container.innerHTML = MYTH_BUSTERS.map((m, i) => `
-    <div style="background: var(--void-elevated); border: 1px solid var(--line); margin-bottom: var(--space-sm); cursor: pointer;"
-      onclick="this.querySelector('.myth-truth').classList.toggle('hidden')">
+    <div style="background: var(--iron-elevated); border: 1px solid var(--line); margin-bottom: var(--space-sm); cursor: pointer; border-radius: var(--radius-sm);"
+      role="button" tabindex="0" aria-expanded="false"
+      onclick="const truth = this.querySelector('.myth-truth'); truth.classList.toggle('hidden'); this.setAttribute('aria-expanded', !truth.classList.contains('hidden'));"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <div style="padding: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center; gap: var(--space-md);">
           <span style="font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--danger); min-width: 24px;">X</span>
@@ -9554,7 +9902,7 @@ function loadPRHistory() {
           <span class="pr-date">${pr.date}</span>
         </div>
         <div class="pr-details">${pr.weight} lbs × ${pr.reps}</div>
-        <button class="pr-delete" onclick="deletePR(${pr.id})">×</button>
+        <button class="pr-delete" onclick="deletePR(${pr.id})" aria-label="Delete ${pr.exercise} PR">×</button>
       </div>
     `;
   });
@@ -9692,7 +10040,7 @@ function parseTrainingImport() {
           <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${entry.date}</span>
         </div>
         <div style="color: var(--training); font-weight: 600;">${entry.weight} lbs x ${entry.reps}</div>
-        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})">x</button>
+        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove ${entry.exercise} entry">x</button>
       </div>`;
   });
 
@@ -9717,7 +10065,7 @@ function removeImportEntry(index) {
           <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${entry.date}</span>
         </div>
         <div style="color: var(--training); font-weight: 600;">${entry.weight} lbs x ${entry.reps}</div>
-        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})">x</button>
+        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove ${entry.exercise} entry">x</button>
       </div>`;
   });
   list.innerHTML = html;
@@ -9831,7 +10179,7 @@ function loadWorkoutLogHistory() {
           <strong style="color: var(--chalk);">${log.name}</strong>
           <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${log.date}</span>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
+        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" aria-label="Delete ${log.name} workout log" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
       </div>
       ${log.exercises.map(ex => `
         <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--chalk-secondary); padding: 2px 0;">
@@ -9903,15 +10251,15 @@ function renderWater() {
   document.getElementById('waterBar').style.width = pct + '%';
 
   const glassesEl = document.getElementById('waterGlasses');
+  glassesEl.style.display = 'flex';
+  glassesEl.style.flexWrap = 'wrap';
+  glassesEl.style.gap = '6px';
   let glassHTML = '';
   for (let i = 1; i <= target; i++) {
     const filled = i <= count;
-    glassHTML += `<div style="width: 36px; height: 44px; border: 2px solid ${filled ? 'var(--training)' : 'var(--iron-hover)'};
-      border-radius: 0 0 6px 6px; display: flex; align-items: flex-end; justify-content: center; cursor: pointer;
-      transition: all 0.2s;" onclick="logWater(${filled ? -1 : 1})">
-      <div style="width: 100%; background: ${filled ? 'var(--training)' : 'transparent'};
-        height: ${filled ? '80%' : '0'}; border-radius: 0 0 4px 4px; transition: height 0.3s;"></div>
-    </div>`;
+    glassHTML += `<button class="water-glass${filled ? ' filled' : ''}" aria-label="Glass ${i} of ${target}" aria-pressed="${filled}" onclick="logWater(${filled ? -1 : 1})">
+      <div class="water-glass-fill" style="height: ${filled ? '80%' : '0'};"></div>
+    </button>`;
   }
   glassesEl.innerHTML = glassHTML;
 }
@@ -9924,8 +10272,12 @@ const readinessScores = { sleep: 0, soreness: 0, stress: 0, motivation: 0, energ
 function setReadiness(category, value, el) {
   readinessScores[category] = value;
   const parent = el.parentElement;
-  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  parent.querySelectorAll('.chip').forEach(c => {
+    c.classList.remove('active');
+    c.setAttribute('aria-checked', 'false');
+  });
   el.classList.add('active');
+  el.setAttribute('aria-checked', 'true');
 }
 
 function calculateReadiness() {
@@ -11183,9 +11535,9 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
           </div>
           <div class="exercise-sets">${ex.sets} sets</div>
           <div class="exercise-reps">${ex.reps} reps</div>
-          <button class="exercise-info" onclick="openExerciseInfo('${ex.exercise.id}')" title="Why this exercise?">?</button>
-          ${EXERCISE_VIDEO_URLS[ex.exercise.id] ? `<a href="${EXERCISE_VIDEO_URLS[ex.exercise.id]}" target="_blank" rel="noopener" class="exercise-info" title="Watch demo" style="text-decoration: none; background: var(--training);">▶</a>` : ''}
-          <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
+          <button class="exercise-info" onclick="openExerciseInfo('${ex.exercise.id}')" aria-label="Info about ${ex.exercise.name}">?</button>
+          ${EXERCISE_VIDEO_URLS[ex.exercise.id] ? `<a href="${EXERCISE_VIDEO_URLS[ex.exercise.id]}" target="_blank" rel="noopener" class="exercise-info" aria-label="Watch ${ex.exercise.name} demo" style="text-decoration: none; background: var(--training);">▶</a>` : ''}
+          <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)" aria-label="Swap ${ex.exercise.name}">Swap</button>
         </div>
       `;
     }).join('');
@@ -11214,13 +11566,13 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     const playlist = WORKOUT_PLAYLISTS[primaryFocus] || WORKOUT_PLAYLISTS.default;
     const spotifyHTML = `
       <div style="border-top: 1px solid var(--iron-hover);">
-        <div style="padding: var(--space-sm) var(--space-md); cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
-          onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span:last-child').textContent = this.nextElementSibling.classList.contains('hidden') ? '▸' : '▾'">
+        <button type="button" aria-expanded="false" aria-label="Toggle ${playlist.name} playlist" style="width: 100%; padding: var(--space-sm) var(--space-md); cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: none; border: none; color: inherit; font: inherit;"
+          onclick="const panel = this.nextElementSibling; panel.classList.toggle('hidden'); const expanded = !panel.classList.contains('hidden'); this.setAttribute('aria-expanded', expanded); this.querySelector('span:last-child').textContent = expanded ? '▾' : '▸';">
           <span style="font-family: 'Teko', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #1DB954;">
             ♫ Lift Fuel — ${playlist.name}
           </span>
           <span style="color: var(--chalk-tertiary);">▸</span>
-        </div>
+        </button>
         <div class="hidden" style="padding: 0 var(--space-md) var(--space-md);">
           <iframe style="border-radius: 8px;" src="https://open.spotify.com/embed/playlist/${playlist.uri}?utm_source=generator&theme=0"
             width="100%" height="152" frameBorder="0" allowfullscreen
@@ -11259,7 +11611,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
                         sets >= muscleInfo.weeklyVolume.min ? 'var(--warning)' : 'var(--danger)';
 
     return `
-      <div style="padding: var(--space-sm); background: var(--void-surface); border: 1px solid var(--line);">
+      <div style="padding: var(--space-sm); background: var(--iron-surface); border: 1px solid var(--line); border-radius: var(--radius-sm);">
         <div style="font-weight: 500; text-transform: capitalize;">${muscle}</div>
         <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--training);">${sets} sets</div>
         <div style="font-size: 0.75rem; color: ${statusColor};">${status}</div>
@@ -11267,7 +11619,9 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     `;
   }).join('');
 
-  document.getElementById('volumeSummary').innerHTML = volumeHtml;
+  const volEl = document.getElementById('volumeSummary');
+  volEl.className = 'volume-grid';
+  volEl.innerHTML = volumeHtml;
 
   // Nutrition recommendations
   displayNutritionRecommendations(template, goal);
@@ -11320,17 +11674,17 @@ function displayNutritionRecommendations(template, goal) {
     const restDayCals = currentTDEE + restDayAdj;
 
     html += `
-      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--void-surface); border: 1px solid var(--line);">
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--iron-surface); border: 1px solid var(--line);">
         <div style="font-family: 'Teko', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--training); margin-bottom: var(--space-sm);">
           Based on Your TDEE of ${currentTDEE} cal
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
           <div>
-            <div style="font-size: 0.875rem; color: var(--ink-tertiary);">Training Days</div>
+            <div style="font-size: 0.875rem; color: var(--chalk-tertiary);">Training Days</div>
             <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${trainingDayMin}-${trainingDayMax} cal</div>
           </div>
           <div>
-            <div style="font-size: 0.875rem; color: var(--ink-tertiary);">Rest Days</div>
+            <div style="font-size: 0.875rem; color: var(--chalk-tertiary);">Rest Days</div>
             <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${restDayCals} cal</div>
           </div>
         </div>
@@ -11338,8 +11692,8 @@ function displayNutritionRecommendations(template, goal) {
     `;
   } else {
     html += `
-      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--void-surface); border: 1px solid var(--line); text-align: center;">
-        <p style="color: var(--ink-secondary);">Calculate your nutrition in the Calculator tab to see personalized calorie recommendations.</p>
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--iron-surface); border: 1px solid var(--line); text-align: center;">
+        <p style="color: var(--chalk-secondary);">Calculate your nutrition in the Calculator tab to see personalized calorie recommendations.</p>
         <button class="btn btn-primary" style="margin-top: var(--space-md);" onclick="document.querySelector('[data-view=calculator]').click();">
           Go to Calculator
         </button>
@@ -11347,7 +11701,7 @@ function displayNutritionRecommendations(template, goal) {
     `;
   }
 
-  html += `<p style="margin-top: var(--space-md); font-size: 0.875rem; color: var(--ink-secondary);">${adj.note}</p>`;
+  html += `<p style="margin-top: var(--space-md); font-size: 0.875rem; color: var(--chalk-secondary);">${adj.note}</p>`;
 
   document.getElementById('nutritionRecommendations').innerHTML = html;
 }
@@ -11380,23 +11734,16 @@ function openExerciseSwap(exerciseId, buttonElement) {
 
   // Create modal
   const modalHtml = `
-    <div id="exerciseSwapModal" style="
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8); z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: var(--space-lg);
-    ">
-      <div style="
-        background: var(--void-elevated);
-        border: 1px solid var(--line);
-        max-width: 500px; width: 100%;
-        max-height: 80vh; overflow-y: auto;
-      ">
+    <div id="exerciseSwapModal" role="dialog" aria-modal="true" aria-labelledby="swapModalTitle" style="
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; padding: var(--space-lg);
+    " onclick="if(event.target===this) closeExerciseSwapModal()">
+      <div class="modal" style="max-width: 500px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em;">
+          <h3 id="swapModalTitle" style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em;">
             Swap ${exercise.name}
           </h3>
-          <p style="color: var(--ink-secondary); font-size: 0.875rem;">Select an alternative exercise</p>
+          <p style="color: var(--chalk-secondary); font-size: 0.875rem;">Select an alternative exercise</p>
         </div>
         <div style="padding: var(--space-md);">
           ${alternatives.slice(0, 5).map(alt => `
@@ -11405,15 +11752,15 @@ function openExerciseSwap(exerciseId, buttonElement) {
               border-bottom: 1px solid var(--line);
               cursor: pointer;
               transition: background 0.2s;
-            " onmouseover="this.style.background='var(--void-surface)'" onmouseout="this.style.background='transparent'"
+            " onmouseover="this.style.background='var(--iron-surface)'" onmouseout="this.style.background='transparent'"
                onclick="performExerciseSwap('${alt.exercise.id}')">
               <div style="font-weight: 500;">${alt.exercise.name}</div>
-              <div style="font-size: 0.75rem; color: var(--ink-tertiary);">
+              <div style="font-size: 0.75rem; color: var(--chalk-tertiary);">
                 ${alt.exercise.equipment.category} • ${alt.exercise.programming.difficulty} • ${alt.similarity}% match
               </div>
             </div>
           `).join('')}
-          ${alternatives.length === 0 ? '<p style="color: var(--ink-tertiary); padding: var(--space-md);">No alternatives available with your equipment.</p>' : ''}
+          ${alternatives.length === 0 ? '<p style="color: var(--chalk-tertiary); padding: var(--space-md);">No alternatives available with your equipment.</p>' : ''}
         </div>
         <div style="padding: var(--space-lg); border-top: 1px solid var(--line);">
           <button onclick="closeExerciseSwapModal()" class="btn" style="width: 100%;">Cancel</button>
@@ -11510,21 +11857,16 @@ function openExerciseInfo(exerciseId) {
   const findingsHTML = (r.keyFindings || []).map(s => `<li>${s}</li>`).join('');
 
   const modalHtml = `
-    <div id="exerciseInfoModal" style="
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85); z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: var(--space-lg);
+    <div id="exerciseInfoModal" role="dialog" aria-modal="true" aria-labelledby="exerciseInfoTitle" style="
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; padding: var(--space-lg);
     " onclick="if(event.target===this) closeExerciseInfoModal()">
-      <div style="
-        background: var(--void-elevated); border: 1px solid var(--line);
-        max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto;
-      ">
+      <div class="modal" style="max-width: 600px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em;">
+          <h3 id="exerciseInfoTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em;">
             ${exercise.name}
           </h3>
-          <p style="color: var(--ink-secondary); font-size: 0.875rem;">
+          <p style="color: var(--chalk-secondary); font-size: 0.875rem;">
             ${exercise.muscles.primary.join(', ')}${exercise.muscles.secondary.length ? ' + ' + exercise.muscles.secondary.join(', ') : ''} | ${exercise.equipment.category} | ${exercise.programming.difficulty}
           </p>
           ${r.effectiveness ? `<span class="tool-badge" style="margin-top: var(--space-sm); display: inline-block;">Effectiveness: ${r.effectiveness}</span>` : ''}
@@ -11574,6 +11916,12 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeExerciseSwapModal();
     closeExerciseInfoModal();
+    document.getElementById('groceryModal')?.remove();
+  }
+  // Keyboard support for chips with role="radio" or role="checkbox"
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('chip') && e.target.hasAttribute('role')) {
+    e.preventDefault();
+    e.target.click();
   }
 });
 
@@ -11608,11 +11956,14 @@ function startOnboarding() {
 
     const overlay = document.createElement('div');
     overlay.id = 'onboardOverlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Getting started guide');
     overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;';
     overlay.innerHTML = `
       <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);" onclick="skipOnboarding()"></div>
       <div style="position:fixed;top:${rect.bottom + 12}px;left:${Math.max(16, Math.min(rect.left, window.innerWidth - 320))}px;
-        width:300px;background:var(--void-elevated);border:2px solid var(--training);padding:var(--space-lg);z-index:10000;">
+        width:300px;background:var(--iron-elevated);border:2px solid var(--training);padding:var(--space-lg);z-index:10000;border-radius:var(--radius-md);">
         <div style="font-family:'Teko',sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--training);margin-bottom:4px;">
           Step ${step + 1} of ${ONBOARD_STEPS.length}
         </div>

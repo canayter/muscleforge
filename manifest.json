@@ -4,17 +4,17 @@
   "description": "Evidence-based fitness plan generator — nutrition, training, and tracking tools",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#ff6b35",
+  "background_color": "#08090a",
+  "theme_color": "#e04520",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230a0a0a' width='192' height='192' rx='24'/><text x='96' y='130' font-size='120' text-anchor='middle' fill='%23ff6b35'>🔥</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230a0a0a' width='192' height='192' rx='24'/><text x='96' y='130' font-size='120' text-anchor='middle' fill='%23e04520'>🔥</text></svg>",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230a0a0a' width='512' height='512' rx='64'/><text x='256' y='350' font-size='320' text-anchor='middle' fill='%23ff6b35'>🔥</text></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230a0a0a' width='512' height='512' rx='64'/><text x='256' y='350' font-size='320' text-anchor='middle' fill='%23e04520'>🔥</text></svg>",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }
