@@ -4006,6 +4006,12 @@ select.field-input option {
                   </div>
                 </div>
 
+                <div class="field mt-lg">
+                  <label class="field-label">Cuisine Preferences</label>
+                  <span class="field-hint">Select preferred cuisines to influence meal suggestions and recipes</span>
+                  <div id="cuisineChips" class="chip-selector"></div>
+                </div>
+
                 <div class="toggle-row">
                   <div class="toggle" id="detailedToggle" onclick="toggleDetailed()"></div>
                   <span class="toggle-text">Show micronutrients</span>
@@ -4066,6 +4072,18 @@ select.field-input option {
                       <option value="minimal">Minimal (Bodyweight Only)</option>
                     </select>
                   </div>
+                  <div class="field">
+                    <label class="field-label">Sport-Specific Program</label>
+                    <select id="trainingSport" class="field-input">
+                      <option value="" selected>None (General Bodybuilding)</option>
+                      <option value="basketball">Basketball</option>
+                      <option value="soccer">Soccer</option>
+                      <option value="mma">MMA / Combat Sports</option>
+                      <option value="swimming">Swimming</option>
+                      <option value="running">Running / Distance</option>
+                    </select>
+                    <span class="field-hint">Selects a sport-optimized training template</span>
+                  </div>
 
                 </div>
               </div>
@@ -4117,7 +4135,11 @@ select.field-input option {
                   <h2 class="card-title">Your Meal Plan</h2>
                   <p class="card-subtitle">Customized meals hitting your macro targets</p>
                 </div>
-                <div style="display: flex; gap: var(--space-sm);">
+                <div style="display: flex; gap: var(--space-sm); align-items: center;">
+                  <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--chalk-secondary); cursor: pointer;">
+                    <input type="checkbox" id="recipeMode" onchange="renderMeals()" style="accent-color: var(--training);">
+                    Recipes
+                  </label>
                   <button class="btn btn-ghost btn-sm" onclick="generateGroceryList()">Grocery List</button>
                   <button class="btn btn-ghost btn-sm" onclick="genMeals()">Regenerate</button>
                 </div>
@@ -5405,6 +5427,58 @@ select.field-input option {
               </div>
               <div class="card-body">
                 <div id="advancedTechniquesList" class="techniques-grid"></div>
+              </div>
+            </div>
+
+            <!-- Periodization Planner -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Periodization Planner</h2>
+                  <p class="card-subtitle">Plan intensity and volume cycles with auto-scheduled deloads</p>
+                </div>
+                <span class="tool-badge">Programming</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label">Periodization Model</label>
+                    <select id="periodModel" class="field-input">
+                      <option value="linear" selected>Linear (Ramp Up)</option>
+                      <option value="undulating">Daily Undulating (DUP)</option>
+                      <option value="block">Block Periodization</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Cycle Length</label>
+                    <select id="periodLength" class="field-input">
+                      <option value="4">4 Weeks</option>
+                      <option value="6" selected>6 Weeks</option>
+                      <option value="8">8 Weeks</option>
+                      <option value="12">12 Weeks</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Squat 1RM (lbs)</label>
+                    <input type="number" id="period1rmSquat" class="field-input" placeholder="e.g. 315">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Bench 1RM (lbs)</label>
+                    <input type="number" id="period1rmBench" class="field-input" placeholder="e.g. 225">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Deadlift 1RM (lbs)</label>
+                    <input type="number" id="period1rmDeadlift" class="field-input" placeholder="e.g. 405">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">OHP 1RM (lbs)</label>
+                    <input type="number" id="period1rmOHP" class="field-input" placeholder="e.g. 135">
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top: var(--space-lg);">
+                  <button type="button" class="btn btn-primary" onclick="generatePeriodization()">Generate Cycle</button>
+                </div>
+                <div id="periodResults" class="hidden" style="margin-top: var(--space-xl);"></div>
               </div>
             </div>
           </div>
@@ -6816,6 +6890,7 @@ select.field-input option {
   <script src="data/references.js"></script>
   <script src="data/exercises.js"></script>
   <script src="data/programs.js"></script>
+  <script src="data/recipes.js"></script>
   <script src="js/calculators.js"></script>
 
   <script>
@@ -6831,6 +6906,7 @@ let swapFood = null;
 let swapAlt = null;
 let selectedAllergens = [];
 let selectedInjuries = [];
+let selectedCuisines = [];
 
 const ALLERGEN_OPTIONS = [
   { id: 'dairy', label: 'Dairy' },
@@ -6851,6 +6927,15 @@ const INJURY_OPTIONS = [
   { id: 'wrist', label: 'Wrist' },
   { id: 'hip', label: 'Hip' },
   { id: 'neck', label: 'Neck' }
+];
+
+const CUISINE_OPTIONS = [
+  { id: 'american', label: 'American' },
+  { id: 'mediterranean', label: 'Mediterranean' },
+  { id: 'asian', label: 'Asian' },
+  { id: 'mexican', label: 'Mexican' },
+  { id: 'italian', label: 'Italian' },
+  { id: 'indian', label: 'Indian' }
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -6971,6 +7056,23 @@ function toggleInjury(id) {
   });
 }
 
+function renderCuisineChips() {
+  const container = document.getElementById('cuisineChips');
+  if (!container) return;
+  container.innerHTML = CUISINE_OPTIONS.map(opt =>
+    `<div class="chip" data-cuisine="${opt.id}" onclick="toggleCuisine('${opt.id}')">${opt.label}</div>`
+  ).join('');
+}
+
+function toggleCuisine(id) {
+  const idx = selectedCuisines.indexOf(id);
+  if (idx === -1) selectedCuisines.push(id);
+  else selectedCuisines.splice(idx, 1);
+  document.querySelectorAll('#cuisineChips .chip').forEach(chip => {
+    chip.classList.toggle('active', selectedCuisines.includes(chip.dataset.cuisine));
+  });
+}
+
 function getExcludedAllergenValues() {
   const values = [];
   selectedAllergens.forEach(id => {
@@ -6987,6 +7089,7 @@ function getExcludedAllergenValues() {
 // Render chips on load
 renderAllergenChips();
 renderInjuryChips();
+renderCuisineChips();
 
 // ═══════════════════════════════════════════════════════════════════════════
 // UNIT SYSTEM
@@ -7411,6 +7514,46 @@ const COMMON_FOODS = {
   fats: ['oliveOil', 'almonds', 'peanutButter', 'avocado', 'walnuts', 'coconutOil']
 };
 
+// Cuisine-preferred food IDs (foods that pair well with each cuisine style)
+const CUISINE_FOOD_MAP = {
+  mediterranean: {
+    proteins: ['salmon', 'chickenBreast', 'lambChop', 'shrimp', 'chickpeas', 'lentils'],
+    carbs: ['quinoa', 'wholeWheatBread', 'pitaBread', 'farro', 'couscous', 'brownRice'],
+    vegetables: ['spinach', 'tomatoes', 'cucumber', 'bellPepperRed', 'artichoke', 'zucchini'],
+    fats: ['oliveOil', 'almonds', 'avocado', 'tahini', 'walnuts']
+  },
+  asian: {
+    proteins: ['chickenBreast', 'salmon', 'tofu', 'shrimp', 'beefSirloin', 'tuna', 'edamame'],
+    carbs: ['whiteRice', 'brownRice', 'jasminRice', 'basmatiRice', 'buckwheat'],
+    vegetables: ['broccoli', 'bokChoy', 'mushrooms', 'bellPepperRed', 'spinach', 'snowPeas', 'bambooShoots'],
+    fats: ['sesameSeeds', 'peanutButter', 'coconutOil', 'cashews']
+  },
+  mexican: {
+    proteins: ['chickenBreast', 'groundBeef95', 'blackBeans', 'shrimp', 'porkShoulder', 'pintoBeans'],
+    carbs: ['brownRice', 'whiteRice', 'cornTortilla', 'sweetPotato', 'quinoa'],
+    vegetables: ['bellPepperRed', 'tomatoes', 'onion', 'jalapeno', 'zucchini'],
+    fats: ['avocado', 'sourCream', 'oliveOil']
+  },
+  italian: {
+    proteins: ['chickenBreast', 'beefSirloin', 'salmon', 'shrimp', 'wholeEggs'],
+    carbs: ['wholeWheatPasta', 'ciabatta', 'focaccia', 'whiteRice', 'polenta'],
+    vegetables: ['spinach', 'tomatoes', 'zucchini', 'bellPepperRed', 'mushrooms', 'asparagus', 'artichoke'],
+    fats: ['oliveOil', 'parmesan', 'pineNuts', 'mozzarella']
+  },
+  indian: {
+    proteins: ['chickenThigh', 'lentils', 'chickpeas', 'tofu', 'lambChop', 'paneerIfAvail'],
+    carbs: ['basmatiRice', 'naan', 'brownRice', 'whiteRice', 'quinoa'],
+    vegetables: ['spinach', 'cauliflower', 'tomatoes', 'onion', 'bellPepperRed', 'okra'],
+    fats: ['ghee', 'coconutOil', 'cashews', 'almonds']
+  },
+  american: {
+    proteins: ['chickenBreast', 'groundBeef95', 'turkeyBreast', 'wholeEggs', 'bacon', 'porkChop'],
+    carbs: ['sweetPotato', 'whitePotato', 'whiteRice', 'oatsRolled', 'wholeWheatBread', 'brownRice'],
+    vegetables: ['broccoli', 'greenBeans', 'asparagus', 'carrots', 'spinach', 'bellPepperRed'],
+    fats: ['peanutButter', 'butter', 'avocado', 'almonds', 'oliveOil']
+  }
+};
+
 function pickFoods(foods, targets, isPost) {
   const picked = [];
   const pMult = Math.max(0.5, Math.min(2, targets.p / 25));
@@ -7422,17 +7565,34 @@ function pickFoods(foods, targets, isPost) {
   const veggies = foods.filter(f => f.category === 'vegetables');
   const fats = foods.filter(f => f.category === 'fats');
 
-  // Prefer common foods first, fallback to random
-  const pickFrom = (arr, commonList) => {
+  // Build cuisine-preferred IDs from all selected cuisines
+  const cuisinePreferred = { proteins: [], carbs: [], vegetables: [], fats: [] };
+  if (selectedCuisines.length > 0) {
+    selectedCuisines.forEach(c => {
+      const map = CUISINE_FOOD_MAP[c];
+      if (map) {
+        Object.keys(cuisinePreferred).forEach(cat => {
+          if (map[cat]) cuisinePreferred[cat].push(...map[cat]);
+        });
+      }
+    });
+  }
+
+  // Prefer cuisine foods, then common foods, then random
+  const pickFrom = (arr, commonList, cuisineList) => {
+    if (cuisineList && cuisineList.length > 0) {
+      const cuiMatch = arr.filter(f => cuisineList.includes(f.id));
+      if (cuiMatch.length > 0) return cuiMatch[Math.floor(Math.random() * cuiMatch.length)];
+    }
     const common = arr.filter(f => commonList.includes(f.id));
     if (common.length > 0) return common[Math.floor(Math.random() * common.length)];
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  if (proteins.length) picked.push({ food: pickFrom(proteins, COMMON_FOODS.proteins), qty: Math.round(pMult * 10) / 10 });
-  if (carbs.length) picked.push({ food: pickFrom(carbs, COMMON_FOODS.carbs), qty: Math.round(cMult * 10) / 10 });
-  if (veggies.length) picked.push({ food: pickFrom(veggies, COMMON_FOODS.vegetables), qty: 1 });
-  if (!isPost && fats.length) picked.push({ food: pickFrom(fats, COMMON_FOODS.fats), qty: Math.round(fMult * 10) / 10 });
+  if (proteins.length) picked.push({ food: pickFrom(proteins, COMMON_FOODS.proteins, cuisinePreferred.proteins), qty: Math.round(pMult * 10) / 10 });
+  if (carbs.length) picked.push({ food: pickFrom(carbs, COMMON_FOODS.carbs, cuisinePreferred.carbs), qty: Math.round(cMult * 10) / 10 });
+  if (veggies.length) picked.push({ food: pickFrom(veggies, COMMON_FOODS.vegetables, cuisinePreferred.vegetables), qty: 1 });
+  if (!isPost && fats.length) picked.push({ food: pickFrom(fats, COMMON_FOODS.fats, cuisinePreferred.fats), qty: Math.round(fMult * 10) / 10 });
 
   return picked;
 }
@@ -7483,12 +7643,25 @@ function renderMeals() {
           f: a.f + f.food.macros.fat * f.qty
         }), { cal: 0, p: 0, c: 0, f: 0 });
 
+        const recipeOn = document.getElementById('recipeMode')?.checked;
+        const recipe = recipeOn && typeof findMatchingRecipe === 'function'
+          ? findMatchingRecipe(m.foods, selectedCuisines || []) : null;
+
         return `
           <div class="meal">
             <div class="meal-header">
               <span class="meal-title">${m.name}</span>
               <span class="meal-time">${m.time}</span>
             </div>
+            ${recipe ? `
+            <div style="padding: var(--space-md); background: linear-gradient(135deg, var(--iron-surface) 0%, rgba(255,107,53,0.08) 100%); margin-bottom: var(--space-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                <strong style="color: var(--training); font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.05em;">${recipe.name}</strong>
+                <span style="font-size: 0.7rem; color: var(--chalk-tertiary);">${recipe.prepTime}</span>
+              </div>
+              <p style="font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.5; margin: 0;">${recipe.instructions}</p>
+            </div>
+            ` : ''}
             <ul class="meal-items">
               ${m.foods.map((f, fi) => {
                 const totalGrams = f.food.serving.amount * f.qty;
@@ -8234,6 +8407,125 @@ function assessRecovery() {
     <p style="margin-top: var(--space-md);"><strong>Training Adjustment:</strong> ${result.adjustment}</p>
   `;
   document.getElementById('recoveryResults').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PERIODIZATION PLANNER
+// ═══════════════════════════════════════════════════════════════════════════
+function generatePeriodization() {
+  const model = document.getElementById('periodModel').value;
+  const weeks = parseInt(document.getElementById('periodLength').value);
+  const lifts = {
+    Squat: parseFloat(document.getElementById('period1rmSquat').value) || 0,
+    Bench: parseFloat(document.getElementById('period1rmBench').value) || 0,
+    Deadlift: parseFloat(document.getElementById('period1rmDeadlift').value) || 0,
+    OHP: parseFloat(document.getElementById('period1rmOHP').value) || 0
+  };
+
+  const hasLifts = Object.values(lifts).some(v => v > 0);
+  if (!hasLifts) return alert('Enter at least one 1RM');
+
+  const schedule = [];
+
+  if (model === 'linear') {
+    // Linear: intensity ramps from 65% to 90%, volume decreases, deload every 4th week
+    for (let w = 1; w <= weeks; w++) {
+      const isDeload = w % 4 === 0;
+      if (isDeload) {
+        schedule.push({ week: w, intensity: 50, sets: 2, reps: '8-10', rpe: 5, note: 'DELOAD' });
+      } else {
+        const progress = (w - 1 - Math.floor((w - 1) / 4)) / (weeks - Math.floor(weeks / 4) - 1);
+        const intensity = Math.round(65 + progress * 25);
+        const sets = Math.max(3, 5 - Math.floor(progress * 2));
+        const reps = intensity >= 85 ? '2-4' : intensity >= 75 ? '4-6' : '6-8';
+        const rpe = Math.min(9.5, 7 + progress * 2.5);
+        schedule.push({ week: w, intensity, sets, reps, rpe: Math.round(rpe * 10) / 10, note: '' });
+      }
+    }
+  } else if (model === 'undulating') {
+    // DUP: alternating heavy/moderate/light within each week
+    const patterns = [
+      { label: 'Heavy', intensity: 85, sets: 5, reps: '3-5', rpe: 8.5 },
+      { label: 'Moderate', intensity: 75, sets: 4, reps: '6-8', rpe: 7.5 },
+      { label: 'Light', intensity: 65, sets: 3, reps: '10-12', rpe: 6.5 }
+    ];
+    for (let w = 1; w <= weeks; w++) {
+      const isDeload = w % 4 === 0;
+      if (isDeload) {
+        schedule.push({ week: w, intensity: 50, sets: 2, reps: '8-10', rpe: 5, note: 'DELOAD', pattern: 'Recovery' });
+      } else {
+        const pat = patterns[(w - 1) % 3];
+        schedule.push({ week: w, intensity: pat.intensity, sets: pat.sets, reps: pat.reps, rpe: pat.rpe, note: pat.label, pattern: pat.label });
+      }
+    }
+  } else {
+    // Block: accumulation → intensification → peaking → deload
+    const blockSize = Math.max(2, Math.floor(weeks / 4));
+    for (let w = 1; w <= weeks; w++) {
+      const block = Math.floor((w - 1) / blockSize);
+      if (block === 0) {
+        schedule.push({ week: w, intensity: 65 + ((w - 1) % blockSize) * 3, sets: 5, reps: '8-12', rpe: 7, note: 'Accumulation' });
+      } else if (block === 1) {
+        schedule.push({ week: w, intensity: 75 + ((w - 1 - blockSize) % blockSize) * 3, sets: 4, reps: '4-6', rpe: 8, note: 'Intensification' });
+      } else if (block === 2) {
+        schedule.push({ week: w, intensity: 85 + ((w - 1 - blockSize * 2) % blockSize) * 3, sets: 3, reps: '1-3', rpe: 9, note: 'Peaking' });
+      } else {
+        schedule.push({ week: w, intensity: 50, sets: 2, reps: '8-10', rpe: 5, note: 'DELOAD' });
+      }
+    }
+  }
+
+  // Render
+  const activeLifts = Object.entries(lifts).filter(([, v]) => v > 0);
+  const modelNames = { linear: 'Linear Periodization', undulating: 'Daily Undulating (DUP)', block: 'Block Periodization' };
+
+  let html = `
+    <div style="font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--training); margin-bottom: var(--space-lg);">${modelNames[model]} — ${weeks} Weeks</div>
+    <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--iron-hover);">
+          <th style="padding: 8px; text-align: left; color: var(--chalk-secondary);">Week</th>
+          <th style="padding: 8px; text-align: center; color: var(--chalk-secondary);">Intensity</th>
+          <th style="padding: 8px; text-align: center; color: var(--chalk-secondary);">Sets</th>
+          <th style="padding: 8px; text-align: center; color: var(--chalk-secondary);">Reps</th>
+          <th style="padding: 8px; text-align: center; color: var(--chalk-secondary);">RPE</th>
+          ${activeLifts.map(([name]) => `<th style="padding: 8px; text-align: center; color: var(--chalk-secondary);">${name}</th>`).join('')}
+          <th style="padding: 8px; text-align: left; color: var(--chalk-secondary);">Phase</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${schedule.map(s => {
+          const isDeload = s.note === 'DELOAD';
+          const rowStyle = isDeload ? 'background: rgba(255,193,7,0.08);' : '';
+          return `
+            <tr style="border-bottom: 1px solid var(--iron-hover); ${rowStyle}">
+              <td style="padding: 8px; color: var(--chalk); font-weight: 600;">W${s.week}</td>
+              <td style="padding: 8px; text-align: center; color: ${isDeload ? 'var(--warning)' : 'var(--training)'}; font-weight: 600;">${s.intensity}%</td>
+              <td style="padding: 8px; text-align: center; color: var(--chalk-secondary);">${s.sets}</td>
+              <td style="padding: 8px; text-align: center; color: var(--chalk-secondary);">${s.reps}</td>
+              <td style="padding: 8px; text-align: center; color: var(--chalk-secondary);">${s.rpe}</td>
+              ${activeLifts.map(([, max]) => `<td style="padding: 8px; text-align: center; color: var(--chalk);">${Math.round(max * s.intensity / 100)}</td>`).join('')}
+              <td style="padding: 8px; color: ${isDeload ? 'var(--warning)' : 'var(--chalk-tertiary)'}; font-style: italic;">${s.note}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+    </div>
+    <div class="rationale-box" style="margin-top: var(--space-lg);">
+      <div class="rationale-label">Programming Notes</div>
+      <p style="margin-top: var(--space-sm); font-size: 0.8125rem; color: var(--chalk-secondary);">
+        ${model === 'linear' ? 'Linear periodization progressively increases intensity while decreasing volume. Best for beginners and intermediate lifters building baseline strength. Deload every 4th week allows supercompensation.' :
+          model === 'undulating' ? 'Daily Undulating Periodization (DUP) rotates between heavy, moderate, and light weeks. Research shows DUP produces comparable or superior strength gains vs linear models (Rhea et al., 2002). Ideal for intermediate lifters.' :
+          'Block periodization divides training into distinct phases: high-volume accumulation, moderate-volume intensification, and low-volume peaking. Used by advanced athletes preparing for competition (Issurin, 2010).'}
+      </p>
+    </div>
+  `;
+
+  document.getElementById('periodResults').innerHTML = html;
+  document.getElementById('periodResults').classList.remove('hidden');
 }
 
 // Load Advanced Techniques
@@ -9898,8 +10190,10 @@ function resetForm() {
   meals = [];
   selectedAllergens = [];
   selectedInjuries = [];
+  selectedCuisines = [];
   renderAllergenChips();
   renderInjuryChips();
+  renderCuisineChips();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -10089,6 +10383,7 @@ function generateTrainingProgram() {
   const daysAvailable = parseInt(document.getElementById('trainingDays').value);
   const goal = document.getElementById('trainingGoal').value;
   const equipmentLevel = document.getElementById('trainingEquipment').value;
+  const sport = document.getElementById('trainingSport')?.value || '';
 
   const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
 
@@ -10097,8 +10392,8 @@ function generateTrainingProgram() {
     .map(id => typeof INJURY_EXERCISE_RULES !== 'undefined' ? INJURY_EXERCISE_RULES[id] : null)
     .filter(Boolean);
 
-  // Select optimal program template
-  const template = selectOptimalProgram(experienceLevel, daysAvailable, goal);
+  // Select optimal program template (pass sport if selected)
+  const template = selectOptimalProgram(experienceLevel, daysAvailable, goal, sport || undefined);
 
   // Generate workouts for each day
   const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules);

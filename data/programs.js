@@ -506,6 +506,345 @@ const PROGRAM_TEMPLATES = {
       rationale: 'Despite lower frequency, the bro split can work for advanced lifters who can handle very high volume per session. The 1x/week frequency is suboptimal for most, but allows maximum focus and volume for each muscle group.',
       proBodybuilderNote: 'Many IFBB pros use variations of this split due to enhanced recovery capacity. Phil Heath, Jay Cutler, and Ronnie Coleman all used body part splits during their careers. Best reserved for advanced lifters with excellent recovery.'
     }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SPORT-SPECIFIC TEMPLATES
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  basketball: {
+    id: 'basketball',
+    name: 'Basketball Performance',
+    shortName: 'BBall',
+    sport: 'basketball',
+    description: 'Explosive power and lateral agility training designed for basketball athletes.',
+    daysPerWeek: 4,
+    frequency: 2,
+    restDays: [3, 6, 7],
+    suitableFor: ['beginner', 'intermediate', 'advanced'],
+    goals: ['strength', 'hypertrophy'],
+    split: [
+      {
+        day: 1,
+        name: 'Upper Power',
+        focus: ['chest', 'back', 'shoulders'],
+        emphasis: 'power',
+        exerciseSlots: [
+          { muscle: 'chest', type: 'compound', priority: 1 },
+          { muscle: 'back', type: 'compound', priority: 2 },
+          { muscle: 'shoulders', type: 'compound', priority: 3 },
+          { muscle: 'back', type: 'compound', priority: 4 },
+          { muscle: 'triceps', type: 'isolation', priority: 5 },
+          { muscle: 'biceps', type: 'isolation', priority: 6 }
+        ]
+      },
+      {
+        day: 2,
+        name: 'Lower Power + Plyometrics',
+        focus: ['quads', 'hamstrings', 'glutes', 'calves'],
+        emphasis: 'explosive',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'glutes', type: 'compound', priority: 2 },
+          { muscle: 'hamstrings', type: 'compound', priority: 3 },
+          { muscle: 'quads', type: 'compound', priority: 4 },
+          { muscle: 'calves', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 4,
+        name: 'Upper Hypertrophy',
+        focus: ['chest', 'back', 'shoulders', 'biceps', 'triceps'],
+        emphasis: 'chest',
+        exerciseSlots: [
+          { muscle: 'chest', type: 'compound', priority: 1 },
+          { muscle: 'back', type: 'compound', priority: 2 },
+          { muscle: 'shoulders', type: 'compound', priority: 3 },
+          { muscle: 'chest', type: 'isolation', priority: 4 },
+          { muscle: 'biceps', type: 'isolation', priority: 5 },
+          { muscle: 'triceps', type: 'isolation', priority: 6 }
+        ]
+      },
+      {
+        day: 5,
+        name: 'Lower Agility + Core',
+        focus: ['quads', 'glutes', 'hamstrings', 'core', 'calves'],
+        emphasis: 'agility',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'glutes', type: 'compound', priority: 2 },
+          { muscle: 'hamstrings', type: 'isolation', priority: 3 },
+          { muscle: 'quads', type: 'isolation', priority: 4 },
+          { muscle: 'calves', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      }
+    ],
+    research: {
+      citations: ['suchomel-2016-power', 'ziv-2010-basketball'],
+      rationale: 'Basketball demands explosive vertical power, lateral quickness, and upper body strength for contact. This program emphasizes compound power movements with lower-body plyometric capacity. Training 4x/week allows sport practice on off-days.',
+      proBodybuilderNote: 'LeBron James, Russell Westbrook, and other elite NBA athletes use periodized resistance programs combining power development with hypertrophy. Vertical jump improvement correlates strongly with squat and clean strength (Ziv & Lidor, 2010).'
+    }
+  },
+
+  soccer: {
+    id: 'soccer',
+    name: 'Soccer Athleticism',
+    shortName: 'Soccer',
+    sport: 'soccer',
+    description: 'Sprint speed, injury prevention, and endurance-focused training for soccer players.',
+    daysPerWeek: 3,
+    frequency: 2,
+    restDays: [2, 4, 6, 7],
+    suitableFor: ['beginner', 'intermediate', 'advanced'],
+    goals: ['strength', 'endurance'],
+    split: [
+      {
+        day: 1,
+        name: 'Lower Strength',
+        focus: ['quads', 'hamstrings', 'glutes', 'calves'],
+        emphasis: 'injury-prevention',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'hamstrings', type: 'compound', priority: 2 },
+          { muscle: 'glutes', type: 'compound', priority: 3 },
+          { muscle: 'hamstrings', type: 'isolation', priority: 4 },
+          { muscle: 'calves', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 3,
+        name: 'Upper + Core',
+        focus: ['chest', 'back', 'shoulders', 'core'],
+        emphasis: 'functional',
+        exerciseSlots: [
+          { muscle: 'chest', type: 'compound', priority: 1 },
+          { muscle: 'back', type: 'compound', priority: 2 },
+          { muscle: 'shoulders', type: 'compound', priority: 3 },
+          { muscle: 'back', type: 'compound', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 }
+        ]
+      },
+      {
+        day: 5,
+        name: 'Full Body Power',
+        focus: ['quads', 'glutes', 'hamstrings', 'back', 'core'],
+        emphasis: 'explosive',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'glutes', type: 'compound', priority: 2 },
+          { muscle: 'back', type: 'compound', priority: 3 },
+          { muscle: 'hamstrings', type: 'compound', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 },
+          { muscle: 'calves', type: 'isolation', priority: 6 }
+        ]
+      }
+    ],
+    research: {
+      citations: ['bahr-2005-acl', 'silva-2015-soccer-strength'],
+      rationale: 'Soccer requires repeated sprints, rapid direction changes, and 90+ minutes of endurance. This program prioritizes hamstring and hip strength for ACL/hamstring injury prevention, the #1 concern for soccer athletes. Lower volume (3 days) preserves energy for on-field training.',
+      proBodybuilderNote: 'Cristiano Ronaldo and elite soccer athletes integrate strength training 2-3x/week during season. Nordic hamstring curls reduce hamstring injuries by up to 51% (Bahr et al., 2015). Single-leg work improves bilateral asymmetry common in kicking athletes.'
+    }
+  },
+
+  mma: {
+    id: 'mma',
+    name: 'MMA Combat Strength',
+    shortName: 'MMA',
+    sport: 'mma',
+    description: 'Grappling power, striking force, and combat endurance training for mixed martial artists.',
+    daysPerWeek: 4,
+    frequency: 2,
+    restDays: [3, 6, 7],
+    suitableFor: ['intermediate', 'advanced'],
+    goals: ['strength', 'endurance'],
+    split: [
+      {
+        day: 1,
+        name: 'Upper Striking Power',
+        focus: ['chest', 'shoulders', 'back', 'triceps'],
+        emphasis: 'striking',
+        exerciseSlots: [
+          { muscle: 'chest', type: 'compound', priority: 1 },
+          { muscle: 'shoulders', type: 'compound', priority: 2 },
+          { muscle: 'back', type: 'compound', priority: 3 },
+          { muscle: 'triceps', type: 'isolation', priority: 4 },
+          { muscle: 'shoulders', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 2,
+        name: 'Lower Takedown Strength',
+        focus: ['quads', 'hamstrings', 'glutes', 'core'],
+        emphasis: 'grappling',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'hamstrings', type: 'compound', priority: 2 },
+          { muscle: 'glutes', type: 'compound', priority: 3 },
+          { muscle: 'quads', type: 'compound', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 },
+          { muscle: 'calves', type: 'isolation', priority: 6 }
+        ]
+      },
+      {
+        day: 4,
+        name: 'Upper Grappling',
+        focus: ['back', 'biceps', 'shoulders', 'core'],
+        emphasis: 'grip',
+        exerciseSlots: [
+          { muscle: 'back', type: 'compound', priority: 1 },
+          { muscle: 'back', type: 'compound', priority: 2 },
+          { muscle: 'shoulders', type: 'compound', priority: 3 },
+          { muscle: 'biceps', type: 'isolation', priority: 4 },
+          { muscle: 'biceps', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 5,
+        name: 'Lower Explosive + Core',
+        focus: ['quads', 'glutes', 'hamstrings', 'calves', 'core'],
+        emphasis: 'explosive',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'glutes', type: 'compound', priority: 2 },
+          { muscle: 'hamstrings', type: 'isolation', priority: 3 },
+          { muscle: 'quads', type: 'isolation', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 },
+          { muscle: 'calves', type: 'isolation', priority: 6 }
+        ]
+      }
+    ],
+    research: {
+      citations: ['james-2016-mma', 'kirk-2020-combat'],
+      rationale: 'MMA demands striking power (chest/shoulders), grappling control (back/grip), takedown explosiveness (legs), and rotational core stability. Two upper and two lower days balance push/pull for striking and grappling. High core volume supports anti-rotation needed in clinch and ground work.',
+      proBodybuilderNote: 'Georges St-Pierre and other elite MMA fighters use conjugate-style training mixing maximal strength with explosive power. Grip endurance and posterior chain development are critical for grappling dominance (James et al., 2016).'
+    }
+  },
+
+  swimming: {
+    id: 'swimming',
+    name: 'Swim Performance',
+    shortName: 'Swim',
+    sport: 'swimming',
+    description: 'Lat development, shoulder stability, and kick power training for competitive swimmers.',
+    daysPerWeek: 3,
+    frequency: 2,
+    restDays: [2, 4, 6, 7],
+    suitableFor: ['beginner', 'intermediate', 'advanced'],
+    goals: ['strength', 'endurance'],
+    split: [
+      {
+        day: 1,
+        name: 'Pull Dominant',
+        focus: ['back', 'shoulders', 'biceps', 'core'],
+        emphasis: 'pull',
+        exerciseSlots: [
+          { muscle: 'back', type: 'compound', priority: 1 },
+          { muscle: 'back', type: 'compound', priority: 2 },
+          { muscle: 'shoulders', type: 'compound', priority: 3 },
+          { muscle: 'biceps', type: 'isolation', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 }
+        ]
+      },
+      {
+        day: 3,
+        name: 'Push + Core',
+        focus: ['chest', 'shoulders', 'triceps', 'core'],
+        emphasis: 'push',
+        exerciseSlots: [
+          { muscle: 'chest', type: 'compound', priority: 1 },
+          { muscle: 'shoulders', type: 'compound', priority: 2 },
+          { muscle: 'chest', type: 'compound', priority: 3 },
+          { muscle: 'triceps', type: 'isolation', priority: 4 },
+          { muscle: 'shoulders', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 5,
+        name: 'Full Body + Kick Power',
+        focus: ['quads', 'hamstrings', 'glutes', 'back', 'core'],
+        emphasis: 'kick',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'hamstrings', type: 'compound', priority: 2 },
+          { muscle: 'glutes', type: 'compound', priority: 3 },
+          { muscle: 'back', type: 'compound', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 },
+          { muscle: 'calves', type: 'isolation', priority: 6 }
+        ]
+      }
+    ],
+    research: {
+      citations: ['aspenes-2009-swimming', 'crowley-2017-dryland'],
+      rationale: 'Swimming propulsion comes primarily from the lats and shoulders (70%+ of force). This program builds pull strength and shoulder stability while developing kick power through leg training. Only 3 days/week to complement high-volume pool sessions.',
+      proBodybuilderNote: 'Michael Phelps and Katie Ledecky integrate dryland strength training focusing on lat pulldowns, rows, and core anti-rotation. Increased maximal strength improves stroke rate and distance per stroke (Aspenes & Karlsen, 2012).'
+    }
+  },
+
+  running: {
+    id: 'running',
+    name: "Runner's Strength",
+    shortName: 'Run',
+    sport: 'running',
+    description: 'Injury prevention, running economy, and hip/glute strengthening for distance runners.',
+    daysPerWeek: 3,
+    frequency: 2,
+    restDays: [2, 4, 6, 7],
+    suitableFor: ['beginner', 'intermediate', 'advanced'],
+    goals: ['strength', 'endurance'],
+    split: [
+      {
+        day: 1,
+        name: 'Lower Strength',
+        focus: ['quads', 'hamstrings', 'glutes', 'calves'],
+        emphasis: 'strength',
+        exerciseSlots: [
+          { muscle: 'quads', type: 'compound', priority: 1 },
+          { muscle: 'hamstrings', type: 'compound', priority: 2 },
+          { muscle: 'glutes', type: 'compound', priority: 3 },
+          { muscle: 'calves', type: 'isolation', priority: 4 },
+          { muscle: 'hamstrings', type: 'isolation', priority: 5 },
+          { muscle: 'core', type: 'compound', priority: 6 }
+        ]
+      },
+      {
+        day: 3,
+        name: 'Upper + Core Stability',
+        focus: ['back', 'shoulders', 'chest', 'core'],
+        emphasis: 'posture',
+        exerciseSlots: [
+          { muscle: 'back', type: 'compound', priority: 1 },
+          { muscle: 'shoulders', type: 'compound', priority: 2 },
+          { muscle: 'chest', type: 'compound', priority: 3 },
+          { muscle: 'core', type: 'compound', priority: 4 },
+          { muscle: 'back', type: 'compound', priority: 5 }
+        ]
+      },
+      {
+        day: 5,
+        name: 'Lower Power + Mobility',
+        focus: ['glutes', 'hamstrings', 'quads', 'calves', 'core'],
+        emphasis: 'power',
+        exerciseSlots: [
+          { muscle: 'glutes', type: 'compound', priority: 1 },
+          { muscle: 'hamstrings', type: 'compound', priority: 2 },
+          { muscle: 'quads', type: 'compound', priority: 3 },
+          { muscle: 'calves', type: 'isolation', priority: 4 },
+          { muscle: 'core', type: 'compound', priority: 5 },
+          { muscle: 'glutes', type: 'isolation', priority: 6 }
+        ]
+      }
+    ],
+    research: {
+      citations: ['beattie-2017-running', 'lauersen-2014-injury'],
+      rationale: 'Strength training improves running economy by 2-8% and reduces injury risk by up to 50%. This program emphasizes hip/glute strength (the primary driver of running propulsion), hamstring resilience, and calf endurance. 3 days/week preserves recovery for run training.',
+      proBodybuilderNote: 'Eliud Kipchoge and elite distance runners incorporate gym work 2-3x/week. Heavy resistance training does NOT cause bulk in runners -- it improves tendon stiffness and neuromuscular efficiency (Beattie et al., 2017).'
+    }
   }
 };
 
@@ -516,11 +855,20 @@ const PROGRAM_TEMPLATES = {
 /**
  * Select optimal program template based on user profile
  */
-function selectOptimalProgram(experienceLevel, daysAvailable, goal) {
+function selectOptimalProgram(experienceLevel, daysAvailable, goal, sport) {
   const templates = Object.values(PROGRAM_TEMPLATES);
 
-  // Filter by days available
-  const eligible = templates.filter(t => t.daysPerWeek <= daysAvailable);
+  // If sport is specified, prefer sport-specific template
+  if (sport) {
+    const sportTemplates = templates.filter(t => t.sport === sport && t.daysPerWeek <= daysAvailable);
+    if (sportTemplates.length > 0) {
+      const suitable = sportTemplates.filter(t => t.suitableFor.includes(experienceLevel));
+      return suitable[0] || sportTemplates[0];
+    }
+  }
+
+  // Filter by days available (exclude sport-specific templates from general selection)
+  const eligible = templates.filter(t => !t.sport && t.daysPerWeek <= daysAvailable);
 
   // Filter by experience level
   const suitable = eligible.filter(t => t.suitableFor.includes(experienceLevel));
