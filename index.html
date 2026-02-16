@@ -1257,6 +1257,28 @@ main {
   background: var(--blood);
 }
 
+.exercise-info {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--chalk-tertiary);
+  border: 1px solid var(--chalk-faint);
+  font-family: 'Teko', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.exercise-info:hover {
+  background: var(--iron-hover);
+  color: var(--chalk);
+  border-color: var(--chalk-tertiary);
+}
+
 /* Difficulty badges */
 .badge-difficulty {
   display: inline-block;
@@ -3600,6 +3622,46 @@ select.field-input option {
 @media (max-width: 900px) {
   .watermark { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  .site-header, .nav-mobile, .nav-primary, .theme-switch,
+  .btn-group, .exercise-swap, .exercise-info,
+  .alert, .footer, .lift-fuel, .watermark,
+  #home, #foods, #tools, #knowledge, #prep, #science,
+  .plan-type-selector, .email-results-section { display: none !important; }
+
+  body { background: white !important; color: black !important; font-size: 11pt; }
+  main { padding: 0 !important; }
+
+  .view { display: none !important; }
+  #calculator { display: block !important; }
+  #trainingResultsSection { display: block !important; }
+
+  .card, .training-card {
+    border: 1px solid #ccc !important;
+    background: white !important;
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+  .card-header { border-bottom: 1px solid #ccc !important; background: #f5f5f5 !important; }
+  .card-title, .training-day-name { color: black !important; }
+  .training-day-focus, .exercise-name small { color: #666 !important; }
+
+  .exercise-row { border-bottom: 1px solid #eee !important; padding: 6px 12px !important; }
+  .exercise-name { color: black !important; }
+  .exercise-sets, .exercise-reps { color: #333 !important; }
+
+  .training-card { border-left: 3px solid #333 !important; margin-bottom: 16px !important; }
+  .training-card::before { display: none !important; }
+
+  .section-title { color: black !important; }
+  .stat-value { color: black !important; }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
   </style>
 </head>
 
@@ -3859,6 +3921,28 @@ select.field-input option {
               </div>
             </div>
 
+            <!-- Health & Dietary (allergies + injuries in one place) -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Health & Dietary</h2>
+                  <p class="card-subtitle">Allergies, injuries, and conditions</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="field">
+                  <label class="field-label">Food Allergies <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
+                  <div class="chip-selector" id="allergenChips"></div>
+                  <span class="field-hint">Selected allergens will be excluded from meal plans</span>
+                </div>
+                <div class="field" style="margin-top: var(--space-lg);">
+                  <label class="field-label">Injuries or Conditions <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
+                  <div class="chip-selector" id="injuryChips"></div>
+                  <span class="field-hint">Exercises will be adapted to protect selected areas</span>
+                </div>
+              </div>
+            </div>
+
             <div class="card">
               <div class="card-header">
                 <div>
@@ -3922,13 +4006,6 @@ select.field-input option {
                   </div>
                 </div>
 
-                <!-- Allergen Exclusions -->
-                <div class="field" style="margin-top: var(--space-md);">
-                  <label class="field-label">Food Allergies <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
-                  <div class="chip-selector" id="allergenChips"></div>
-                  <span class="field-hint">Selected allergens will be excluded from meal plans</span>
-                </div>
-
                 <div class="toggle-row">
                   <div class="toggle" id="detailedToggle" onclick="toggleDetailed()"></div>
                   <span class="toggle-text">Show micronutrients</span>
@@ -3990,12 +4067,6 @@ select.field-input option {
                     </select>
                   </div>
 
-                  <!-- Injury / Condition Selection -->
-                  <div class="field" style="grid-column: 1 / -1; margin-top: var(--space-md);">
-                    <label class="field-label">Injuries or Conditions <span style="color: var(--chalk-tertiary); font-weight: normal;">(optional)</span></label>
-                    <div class="chip-selector" id="injuryChips"></div>
-                    <span class="field-hint">Exercises will be adapted to protect selected areas</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -4046,7 +4117,10 @@ select.field-input option {
                   <h2 class="card-title">Your Meal Plan</h2>
                   <p class="card-subtitle">Customized meals hitting your macro targets</p>
                 </div>
-                <button class="btn btn-ghost btn-sm" onclick="genMeals()">Regenerate</button>
+                <div style="display: flex; gap: var(--space-sm);">
+                  <button class="btn btn-ghost btn-sm" onclick="generateGroceryList()">Grocery List</button>
+                  <button class="btn btn-ghost btn-sm" onclick="genMeals()">Regenerate</button>
+                </div>
               </div>
               <div class="card-body" id="calculatorMeals"></div>
             </div>
@@ -4061,6 +4135,7 @@ select.field-input option {
                   <h2 class="card-title" id="programName">Your Training Program</h2>
                   <p class="card-subtitle" id="programDescription">Customized for your goals</p>
                 </div>
+                <button class="btn btn-ghost btn-sm" onclick="window.print()">Print Cards</button>
               </div>
               <div class="card-body">
                 <div class="program-stats" id="programStats">
@@ -7295,6 +7370,122 @@ function openSwap(mi, fi) {
   document.getElementById('swapModal').classList.add('active');
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// GROCERY LIST GENERATOR
+// ═══════════════════════════════════════════════════════════════════════════
+function generateGroceryList() {
+  if (!meals || meals.length === 0) return alert('Generate a meal plan first');
+
+  const groceryMap = {};
+  meals.forEach(meal => {
+    meal.foods.forEach(f => {
+      const id = f.food.id;
+      const totalGrams = Math.round(f.food.serving.amount * f.qty);
+      if (groceryMap[id]) {
+        groceryMap[id].totalGrams += totalGrams;
+      } else {
+        groceryMap[id] = {
+          name: f.food.name,
+          category: f.food.category,
+          totalGrams: totalGrams
+        };
+      }
+    });
+  });
+
+  const categories = {};
+  Object.values(groceryMap).forEach(item => {
+    item.weeklyGrams = item.totalGrams * 7;
+    const cat = item.category.charAt(0).toUpperCase() + item.category.slice(1);
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(item);
+  });
+
+  let listHTML = '';
+  for (const [cat, items] of Object.entries(categories)) {
+    listHTML += `<div style="margin-bottom: var(--space-lg);">
+      <div style="font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase;
+        letter-spacing: 0.1em; color: var(--rust); border-bottom: 1px solid var(--line);
+        padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">${cat}</div>`;
+    items.forEach(item => {
+      const amt = item.weeklyGrams >= 1000
+        ? (item.weeklyGrams / 1000).toFixed(1) + ' kg'
+        : item.weeklyGrams + 'g';
+      listHTML += `<div style="display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-sm) 0; border-bottom: 1px solid var(--line);">
+        <span style="color: var(--chalk);">${item.name}</span>
+        <span style="color: var(--chalk-secondary); font-family: 'Teko', sans-serif; font-size: 1rem;">${amt}</span>
+      </div>`;
+    });
+    listHTML += '</div>';
+  }
+
+  const modalHtml = `
+    <div id="groceryModal" style="
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-lg);
+    " onclick="if(event.target===this) this.remove()">
+      <div style="
+        background: var(--void-elevated); border: 1px solid var(--line);
+        max-width: 500px; width: 100%; max-height: 85vh; overflow-y: auto;
+      ">
+        <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
+          <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">Weekly Grocery List</h3>
+          <p style="color: var(--ink-secondary); font-size: 0.875rem;">Based on your meal plan x 7 days</p>
+        </div>
+        <div style="padding: var(--space-lg);">
+          ${listHTML}
+        </div>
+        <div style="padding: var(--space-lg); border-top: 1px solid var(--line); display: flex; gap: var(--space-md);">
+          <button onclick="exportGroceryList()" class="btn btn-primary" style="flex: 1;">Download</button>
+          <button onclick="document.getElementById('groceryModal').remove()" class="btn" style="flex: 1;">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function exportGroceryList() {
+  if (!meals || meals.length === 0) return;
+  const groceryMap = {};
+  meals.forEach(meal => {
+    meal.foods.forEach(f => {
+      const id = f.food.id;
+      const totalGrams = Math.round(f.food.serving.amount * f.qty);
+      if (groceryMap[id]) { groceryMap[id].totalGrams += totalGrams; }
+      else { groceryMap[id] = { name: f.food.name, category: f.food.category, totalGrams }; }
+    });
+  });
+  let text = 'MUSCLEFORGE WEEKLY GROCERY LIST\n';
+  text += '================================\n\n';
+  const categories = {};
+  Object.values(groceryMap).forEach(item => {
+    item.weeklyGrams = item.totalGrams * 7;
+    const cat = item.category.toUpperCase();
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(item);
+  });
+  for (const [cat, items] of Object.entries(categories)) {
+    text += `${cat}\n`;
+    items.forEach(item => {
+      const amt = item.weeklyGrams >= 1000
+        ? (item.weeklyGrams / 1000).toFixed(1) + ' kg'
+        : item.weeklyGrams + 'g';
+      text += `  [ ] ${item.name} - ${amt}\n`;
+    });
+    text += '\n';
+  }
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'muscleforge-grocery-list.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
 function findAlts(curr, diet) {
   const all = getAllFoods();
   const excludedAllergens = getExcludedAllergenValues();
@@ -9301,6 +9492,74 @@ const EQUIPMENT_AVAILABILITY = {
   minimal: ['bodyweight', 'bands']
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// WARM-UP GENERATOR
+// ═══════════════════════════════════════════════════════════════════════════
+const WARMUP_MOVEMENTS = {
+  chest: [
+    { name: 'Arm Circles', duration: '30 sec each direction', type: 'dynamic' },
+    { name: 'Band Pull-Aparts', duration: '15 reps', type: 'activation' },
+    { name: 'Push-Up to Downward Dog', duration: '8 reps', type: 'dynamic' }
+  ],
+  back: [
+    { name: 'Cat-Cow Stretch', duration: '10 reps', type: 'dynamic' },
+    { name: 'Band Rows', duration: '15 reps', type: 'activation' },
+    { name: 'Scapular Push-Ups', duration: '10 reps', type: 'activation' }
+  ],
+  shoulders: [
+    { name: 'Arm Circles', duration: '30 sec each direction', type: 'dynamic' },
+    { name: 'Band External Rotations', duration: '12 each side', type: 'activation' },
+    { name: 'Wall Slides', duration: '10 reps', type: 'dynamic' }
+  ],
+  quads: [
+    { name: 'Bodyweight Squats', duration: '15 reps', type: 'dynamic' },
+    { name: 'Leg Swings (front-back)', duration: '12 each leg', type: 'dynamic' },
+    { name: 'Walking Lunges', duration: '10 each leg', type: 'activation' }
+  ],
+  hamstrings: [
+    { name: 'Inchworms', duration: '8 reps', type: 'dynamic' },
+    { name: 'Leg Swings (front-back)', duration: '12 each leg', type: 'dynamic' },
+    { name: 'Good Mornings (bodyweight)', duration: '12 reps', type: 'activation' }
+  ],
+  glutes: [
+    { name: 'Glute Bridges', duration: '15 reps', type: 'activation' },
+    { name: 'Clamshells', duration: '12 each side', type: 'activation' },
+    { name: 'Lateral Band Walks', duration: '10 each direction', type: 'activation' }
+  ],
+  biceps: [
+    { name: 'Arm Circles', duration: '20 sec each direction', type: 'dynamic' },
+    { name: 'Light Curls', duration: '15 reps', type: 'activation' }
+  ],
+  triceps: [
+    { name: 'Arm Circles', duration: '20 sec each direction', type: 'dynamic' },
+    { name: 'Light Pushdowns', duration: '15 reps', type: 'activation' }
+  ],
+  calves: [
+    { name: 'Ankle Circles', duration: '10 each direction', type: 'dynamic' },
+    { name: 'Calf Raises (bodyweight)', duration: '15 reps', type: 'activation' }
+  ],
+  core: [
+    { name: 'Dead Bugs', duration: '10 each side', type: 'activation' },
+    { name: 'Cat-Cow Stretch', duration: '10 reps', type: 'dynamic' }
+  ]
+};
+
+function generateWarmup(focusMuscles) {
+  const seen = new Set();
+  const warmupList = [];
+  warmupList.push({ name: 'Light cardio (rowing, walking, or cycling)', duration: '5 minutes', type: 'general' });
+  focusMuscles.forEach(muscle => {
+    const moves = WARMUP_MOVEMENTS[muscle] || [];
+    moves.forEach(m => {
+      if (!seen.has(m.name)) {
+        seen.add(m.name);
+        warmupList.push(m);
+      }
+    });
+  });
+  return warmupList;
+}
+
 function generateTrainingProgram() {
   const experienceLevel = document.getElementById('experienceLevel').value;
   const daysAvailable = parseInt(document.getElementById('trainingDays').value);
@@ -9596,10 +9855,26 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
           </div>
           <div class="exercise-sets">${ex.sets} sets</div>
           <div class="exercise-reps">${ex.reps} reps</div>
+          <button class="exercise-info" onclick="openExerciseInfo('${ex.exercise.id}')" title="Why this exercise?">?</button>
           <button class="exercise-swap" onclick="openExerciseSwap('${ex.exercise.id}', this)">Swap</button>
         </div>
       `;
     }).join('');
+
+    const warmup = generateWarmup(workout.focus);
+    const warmupHTML = `
+      <div style="padding: var(--space-md); background: var(--iron-surface); border-left: 3px solid var(--rust);">
+        <div style="font-family: 'Teko', sans-serif; font-size: 0.875rem; text-transform: uppercase;
+          letter-spacing: 0.1em; color: var(--rust); margin-bottom: var(--space-sm);">Warm-Up (${warmup.length} movements)</div>
+        ${warmup.map(w => `
+          <div style="display: flex; justify-content: space-between; padding: 3px 0;
+            font-size: 0.8125rem; color: var(--chalk-secondary);">
+            <span>${w.name}</span>
+            <span style="color: var(--chalk-tertiary);">${w.duration}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
 
     return `
       <div class="training-card">
@@ -9610,6 +9885,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
           </div>
         </div>
         <div class="card-body" style="padding: 0;">
+          ${warmupHTML}
           ${exerciseRows}
         </div>
       </div>
@@ -9815,8 +10091,86 @@ function closeExerciseSwapModal() {
 }
 
 // Close modal on escape key
+// ═══════════════════════════════════════════════════════════════════════════
+// EXERCISE INFO MODAL ("Why This Exercise?")
+// ═══════════════════════════════════════════════════════════════════════════
+function openExerciseInfo(exerciseId) {
+  const exercise = getExerciseById(exerciseId);
+  if (!exercise) return;
+
+  const t = exercise.technique || {};
+  const r = exercise.research || {};
+
+  const setupHTML = (t.setup || []).map(s => `<li>${s}</li>`).join('');
+  const execHTML = (t.execution || []).map(s => `<li>${s}</li>`).join('');
+  const mistakesHTML = (t.commonMistakes || []).map(s => `<li>${s}</li>`).join('');
+  const findingsHTML = (r.keyFindings || []).map(s => `<li>${s}</li>`).join('');
+
+  const modalHtml = `
+    <div id="exerciseInfoModal" style="
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-lg);
+    " onclick="if(event.target===this) closeExerciseInfoModal()">
+      <div style="
+        background: var(--void-elevated); border: 1px solid var(--line);
+        max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto;
+      ">
+        <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
+          <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em;">
+            ${exercise.name}
+          </h3>
+          <p style="color: var(--ink-secondary); font-size: 0.875rem;">
+            ${exercise.muscles.primary.join(', ')}${exercise.muscles.secondary.length ? ' + ' + exercise.muscles.secondary.join(', ') : ''} | ${exercise.equipment.category} | ${exercise.programming.difficulty}
+          </p>
+          ${r.effectiveness ? `<span class="tool-badge" style="margin-top: var(--space-sm); display: inline-block;">Effectiveness: ${r.effectiveness}</span>` : ''}
+        </div>
+        <div style="padding: var(--space-lg);">
+          ${setupHTML ? `<div class="rationale-box" style="margin-bottom: var(--space-md);">
+            <div class="rationale-label">Setup</div>
+            <ul style="padding-left: var(--space-lg); color: var(--chalk-secondary); font-size: 0.875rem;">${setupHTML}</ul>
+          </div>` : ''}
+          ${execHTML ? `<div class="rationale-box" style="margin-bottom: var(--space-md);">
+            <div class="rationale-label">Execution</div>
+            <ul style="padding-left: var(--space-lg); color: var(--chalk-secondary); font-size: 0.875rem;">${execHTML}</ul>
+          </div>` : ''}
+          ${mistakesHTML ? `<div class="rationale-box" style="margin-bottom: var(--space-md); border-left-color: var(--danger);">
+            <div class="rationale-label" style="color: var(--danger);">Common Mistakes</div>
+            <ul style="padding-left: var(--space-lg); color: var(--chalk-secondary); font-size: 0.875rem;">${mistakesHTML}</ul>
+          </div>` : ''}
+          ${findingsHTML ? `<div class="rationale-box" style="margin-bottom: var(--space-md); border-left-color: var(--success);">
+            <div class="rationale-label" style="color: var(--success);">Research Says</div>
+            <ul style="padding-left: var(--space-lg); color: var(--chalk-secondary); font-size: 0.875rem;">${findingsHTML}</ul>
+          </div>` : ''}
+          <div style="margin-top: var(--space-md); padding: var(--space-md); background: var(--iron-surface);">
+            <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Teko', sans-serif;">Programming</div>
+            <p style="color: var(--chalk-secondary); font-size: 0.875rem; margin-top: var(--space-xs);">
+              Fatigue: ${exercise.programming.fatigueRating}/10 |
+              Sets/session: ${exercise.programming.setsPerSession.min}-${exercise.programming.setsPerSession.max} |
+              Hypertrophy: ${exercise.programming.repRanges.hypertrophy.min}-${exercise.programming.repRanges.hypertrophy.max} reps
+            </p>
+          </div>
+        </div>
+        <div style="padding: var(--space-lg); border-top: 1px solid var(--line);">
+          <button onclick="closeExerciseInfoModal()" class="btn" style="width: 100%;">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function closeExerciseInfoModal() {
+  const modal = document.getElementById('exerciseInfoModal');
+  if (modal) modal.remove();
+}
+
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeExerciseSwapModal();
+  if (e.key === 'Escape') {
+    closeExerciseSwapModal();
+    closeExerciseInfoModal();
+  }
 });
   </script>
 </body>
