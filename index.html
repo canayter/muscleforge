@@ -7304,6 +7304,27 @@ Squat	225	5	2025-03-15"></textarea>
 
   <script>
 // ═══════════════════════════════════════════════════════════════════════════
+// SECURITY & FORMATTING HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+function fmt(n) {
+  if (n == null || n === '' || isNaN(Number(n))) return '—';
+  const num = parseFloat(n);
+  if (!isFinite(num)) return '—';
+  if (num % 1 === 0) return num.toString();
+  return parseFloat(num.toFixed(3)).toString();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════════════════════════
 let plan = null;
@@ -7958,7 +7979,7 @@ function renderGoalTimeline() {
         ${milestones.map(m => `
           <tr style="border-bottom: 1px solid var(--iron-hover);">
             <td style="padding: 6px 8px; color: var(--chalk);">Week ${m.week}</td>
-            <td style="padding: 6px 8px; text-align: center; color: var(--chalk);">${m.weight} lbs</td>
+            <td style="padding: 6px 8px; text-align: center; color: var(--chalk);">${fmt(m.weight)} lbs</td>
             <td style="padding: 6px 8px; text-align: center; color: ${color};">${icon} ${Math.abs(Math.round((m.weight - currentWeight) * 10) / 10)} lbs</td>
           </tr>
         `).join('')}
@@ -8198,13 +8219,13 @@ function renderMeals() {
             ` : ''}
             <ul class="meal-items">
               ${m.foods.map((f, fi) => {
-                const totalGrams = f.food.serving.amount * f.qty;
+                const totalGrams = fmt(f.food.serving.amount * f.qty);
                 const totalCal = Math.round(f.food.calories * f.qty);
                 return `
                 <li class="meal-item">
                   <div class="meal-item-info">
-                    <div class="meal-item-name">${f.food.name}</div>
-                    <div class="meal-item-portion">${totalGrams}${f.food.serving.unit} (${f.qty}× ${f.food.serving.description}) · ${totalCal} cal</div>
+                    <div class="meal-item-name">${escapeHtml(f.food.name)}</div>
+                    <div class="meal-item-portion">${totalGrams}${escapeHtml(f.food.serving.unit)} (${fmt(f.qty)}× ${escapeHtml(f.food.serving.description)}) · ${totalCal} cal</div>
                   </div>
                   <div class="meal-item-macros">${Math.round(f.food.macros.protein * f.qty)}p / ${Math.round(f.food.macros.carbs * f.qty)}c / ${Math.round(f.food.macros.fat * f.qty)}f</div>
                   <button class="meal-item-swap" onclick="openSwap(${mi}, ${fi})">⇄ Swap</button>
@@ -8241,16 +8262,16 @@ function openSwap(mi, fi) {
   const alts = findAlts(curr, diet);
 
   document.getElementById('swapBody').innerHTML = `
-    <p class="text-muted mb-lg">Replace <strong>${curr.name}</strong>:</p>
+    <p class="text-muted mb-lg">Replace <strong>${escapeHtml(curr.name)}</strong>:</p>
     <div class="foods-grid" style="grid-template-columns: 1fr;">
       ${alts.map((a, i) => `
         <div class="food-card" style="cursor:pointer;${swapAlt === i ? 'border-color:var(--signal);' : ''}" onclick="selectAlt(${i})">
-          <div class="food-name">${a.food.name}</div>
-          <div class="food-serving">${a.food.serving.description}</div>
+          <div class="food-name">${escapeHtml(a.food.name)}</div>
+          <div class="food-serving">${escapeHtml(a.food.serving.description)}</div>
           <div class="food-macros">
-            <span class="food-macro p">${a.food.macros.protein}P</span>
-            <span class="food-macro c">${a.food.macros.carbs}C</span>
-            <span class="food-macro f">${a.food.macros.fat}F</span>
+            <span class="food-macro p">${fmt(a.food.macros.protein)}P</span>
+            <span class="food-macro c">${fmt(a.food.macros.carbs)}C</span>
+            <span class="food-macro f">${fmt(a.food.macros.fat)}F</span>
           </div>
           <div class="text-muted mt-sm" style="font-size:0.6875rem;">${a.score}% match</div>
         </div>
@@ -8423,13 +8444,13 @@ function loadFoods() {
 function renderFoods(list) {
   document.getElementById('foodsGrid').innerHTML = list.slice(0, 60).map(f => `
     <div class="food-card">
-      <div class="food-name">${f.name}</div>
-      <div class="food-serving">${f.serving.description}</div>
+      <div class="food-name">${escapeHtml(f.name)}</div>
+      <div class="food-serving">${escapeHtml(f.serving.description)}</div>
       <div class="food-macros">
-        <span class="food-macro cal">${f.calories} cal</span>
-        <span class="food-macro p">${f.macros.protein}P</span>
-        <span class="food-macro c">${f.macros.carbs}C</span>
-        <span class="food-macro f">${f.macros.fat}F</span>
+        <span class="food-macro cal">${fmt(f.calories)} cal</span>
+        <span class="food-macro p">${fmt(f.macros.protein)}P</span>
+        <span class="food-macro c">${fmt(f.macros.carbs)}C</span>
+        <span class="food-macro f">${fmt(f.macros.fat)}F</span>
       </div>
     </div>
   `).join('');
@@ -9535,8 +9556,8 @@ function displayGyms(gyms, userLat, userLng) {
     const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${gym.lat},${gym.lng}`;
 
     marker.bindPopup(`
-      <div class="gym-popup-name">${gym.name}</div>
-      <div class="gym-popup-address">${gym.address}</div>
+      <div class="gym-popup-name">${escapeHtml(gym.name)}</div>
+      <div class="gym-popup-address">${escapeHtml(gym.address)}</div>
       <div class="gym-popup-distance">${gym.distance.toFixed(1)} miles away</div>
       <a href="${directionsUrl}" target="_blank" class="gym-popup-directions">Get Directions</a>
     `);
@@ -9561,13 +9582,13 @@ function displayGyms(gyms, userLat, userLng) {
   let html = '';
   gyms.forEach(gym => {
     const tagsHtml = gym.tags.map(t =>
-      `<span class="gym-tag ${t.isChain ? 'chain' : ''}">${t.text}</span>`
+      `<span class="gym-tag ${t.isChain ? 'chain' : ''}">${escapeHtml(t.text)}</span>`
     ).join('');
 
     html += `
       <div class="gym-item" data-gym-id="${gym.id}" onclick="focusGym(${gym.lat}, ${gym.lng}, ${gym.id})">
-        <div class="gym-item-name">${gym.name}</div>
-        <div class="gym-item-address">${gym.address}</div>
+        <div class="gym-item-name">${escapeHtml(gym.name)}</div>
+        <div class="gym-item-address">${escapeHtml(gym.address)}</div>
         <div class="gym-item-distance">${gym.distance.toFixed(1)} mi</div>
         ${tagsHtml ? `<div class="gym-item-tags">${tagsHtml}</div>` : ''}
       </div>
@@ -9895,14 +9916,15 @@ function loadPRHistory() {
 
   let html = '';
   prs.slice(0, 20).forEach(pr => {
+    const safeName = escapeHtml(pr.exercise);
     html += `
       <div class="pr-item">
         <div>
-          <span class="pr-exercise">${pr.exercise}</span>
-          <span class="pr-date">${pr.date}</span>
+          <span class="pr-exercise">${safeName}</span>
+          <span class="pr-date">${escapeHtml(pr.date)}</span>
         </div>
-        <div class="pr-details">${pr.weight} lbs × ${pr.reps}</div>
-        <button class="pr-delete" onclick="deletePR(${pr.id})" aria-label="Delete ${pr.exercise} PR">×</button>
+        <div class="pr-details">${fmt(pr.weight)} lbs × ${escapeHtml(String(pr.reps))}</div>
+        <button class="pr-delete" onclick="deletePR(${pr.id})" aria-label="Delete PR">×</button>
       </div>
     `;
   });
@@ -10036,11 +10058,11 @@ function parseTrainingImport() {
     html += `
       <div class="pr-item" style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-sm) var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-xs);">
         <div>
-          <span style="color: var(--chalk); font-weight: 600;">${entry.exercise}</span>
-          <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${entry.date}</span>
+          <span style="color: var(--chalk); font-weight: 600;">${escapeHtml(entry.exercise)}</span>
+          <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${escapeHtml(entry.date)}</span>
         </div>
-        <div style="color: var(--training); font-weight: 600;">${entry.weight} lbs x ${entry.reps}</div>
-        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove ${entry.exercise} entry">x</button>
+        <div style="color: var(--training); font-weight: 600;">${fmt(entry.weight)} lbs x ${escapeHtml(String(entry.reps))}</div>
+        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove entry">x</button>
       </div>`;
   });
 
@@ -10061,11 +10083,11 @@ function removeImportEntry(index) {
     html += `
       <div class="pr-item" style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-sm) var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-xs);">
         <div>
-          <span style="color: var(--chalk); font-weight: 600;">${entry.exercise}</span>
-          <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${entry.date}</span>
+          <span style="color: var(--chalk); font-weight: 600;">${escapeHtml(entry.exercise)}</span>
+          <span style="color: var(--chalk-tertiary); margin-left: var(--space-sm);">${escapeHtml(entry.date)}</span>
         </div>
-        <div style="color: var(--training); font-weight: 600;">${entry.weight} lbs x ${entry.reps}</div>
-        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove ${entry.exercise} entry">x</button>
+        <div style="color: var(--training); font-weight: 600;">${fmt(entry.weight)} lbs x ${escapeHtml(String(entry.reps))}</div>
+        <button style="background: none; border: none; color: var(--blood); cursor: pointer; font-size: 1.1rem;" onclick="removeImportEntry(${i})" aria-label="Remove entry">x</button>
       </div>`;
   });
   list.innerHTML = html;
@@ -10176,15 +10198,15 @@ function loadWorkoutLogHistory() {
     <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
         <div>
-          <strong style="color: var(--chalk);">${log.name}</strong>
-          <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${log.date}</span>
+          <strong style="color: var(--chalk);">${escapeHtml(log.name)}</strong>
+          <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${escapeHtml(log.date)}</span>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" aria-label="Delete ${log.name} workout log" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
+        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" aria-label="Delete workout log" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
       </div>
       ${log.exercises.map(ex => `
         <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--chalk-secondary); padding: 2px 0;">
-          <span>${ex.name}</span>
-          <span>${ex.sets}x${ex.reps} @ ${ex.weight}lbs</span>
+          <span>${escapeHtml(ex.name)}</span>
+          <span>${escapeHtml(String(ex.sets))}x${escapeHtml(String(ex.reps))} @ ${fmt(ex.weight)}lbs</span>
         </div>
       `).join('')}
     </div>
@@ -10367,23 +10389,23 @@ function loadCheckinHistory() {
 
   container.innerHTML = checkins.slice(0, 12).map(c => {
     const measurements = [
-      c.waist ? `Waist: ${c.waist}"` : '',
-      c.chest ? `Chest: ${c.chest}"` : '',
-      c.arms ? `Arms: ${c.arms}"` : '',
-      c.legs ? `Legs: ${c.legs}"` : ''
+      c.waist ? `Waist: ${fmt(c.waist)}"` : '',
+      c.chest ? `Chest: ${fmt(c.chest)}"` : '',
+      c.arms ? `Arms: ${fmt(c.arms)}"` : '',
+      c.legs ? `Legs: ${fmt(c.legs)}"` : ''
     ].filter(Boolean).join(' | ');
 
     return `
       <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <strong style="color: var(--chalk); font-family: 'Teko', sans-serif; font-size: 1.125rem;">${c.weight} lbs</strong>
-            <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${c.date}</span>
+            <strong style="color: var(--chalk); font-family: 'Teko', sans-serif; font-size: 1.125rem;">${fmt(c.weight)} lbs</strong>
+            <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${escapeHtml(c.date)}</span>
           </div>
           <button class="btn btn-ghost btn-sm" onclick="deleteCheckin(${c.id})" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
         </div>
         ${measurements ? `<div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${measurements}</div>` : ''}
-        ${c.notes ? `<div style="font-size: 0.8125rem; color: var(--chalk-secondary); margin-top: 4px; font-style: italic;">${c.notes}</div>` : ''}
+        ${c.notes ? `<div style="font-size: 0.8125rem; color: var(--chalk-secondary); margin-top: 4px; font-style: italic;">${escapeHtml(c.notes)}</div>` : ''}
       </div>
     `;
   }).join('');
@@ -11220,18 +11242,21 @@ const WARMUP_MOVEMENTS = {
 };
 
 function generateWarmup(focusMuscles) {
+  const MAX_SPECIFIC = 4;
   const seen = new Set();
   const warmupList = [];
   warmupList.push({ name: 'Light cardio (rowing, walking, or cycling)', duration: '5 minutes', type: 'general' });
-  focusMuscles.forEach(muscle => {
+  for (const muscle of focusMuscles) {
     const moves = WARMUP_MOVEMENTS[muscle] || [];
-    moves.forEach(m => {
+    for (const m of moves) {
+      if (warmupList.length - 1 >= MAX_SPECIFIC) break;
       if (!seen.has(m.name)) {
         seen.add(m.name);
         warmupList.push(m);
       }
-    });
-  });
+    }
+    if (warmupList.length - 1 >= MAX_SPECIFIC) break;
+  }
   return warmupList;
 }
 
@@ -11780,7 +11805,7 @@ function performExerciseSwap(newExerciseId) {
   const row = currentSwapButton.closest('.exercise-row');
   const nameEl = row.querySelector('.exercise-name');
 
-  nameEl.innerHTML = `${newExercise.name}<small>${newExercise.muscles.primary.join(', ')}</small>`;
+  nameEl.innerHTML = `${escapeHtml(newExercise.name)}<small>${escapeHtml(newExercise.muscles.primary.join(', '))}</small>`;
   currentSwapButton.setAttribute('onclick', `openExerciseSwap('${newExerciseId}', this)`);
 
   closeExerciseSwapModal();
