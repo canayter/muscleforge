@@ -1665,13 +1665,7 @@ main {
   margin-bottom: var(--space-md);
 }
 
-.education-tip {
-  background: var(--iron-surface);
-  border: 1px solid var(--iron-hover);
-  padding: var(--space-sm) var(--space-md);
-  font-size: 0.85rem;
-  color: var(--chalk-secondary);
-}
+.education-tip { display: none !important; }
 
 .education-tip strong {
   color: var(--blood);
@@ -11521,9 +11515,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
   document.getElementById('programStats').innerHTML = statsHtml;
 
   // Rationale with educational tips
-  const educationalTips = getEducationalTip(goal, experienceLevel);
-  document.getElementById('programRationaleText').innerHTML = template.research.rationale +
-    '<br><br><strong style="color: var(--primary);">💡 Training Tip:</strong> ' + educationalTips;
+  document.getElementById('programRationaleText').innerHTML = template.research.rationale;
   document.getElementById('programCitation').textContent = template.research.proBodybuilderNote;
 
   // Injury modification alert
