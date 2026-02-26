@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'self' https://script.google.com https://api.emailjs.com https://nominatim.openstreetmap.org https://overpass-api.de https://overpass.kumi.systems; frame-src https://open.spotify.com https://script.google.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="MuscleForge - Professional bodybuilding nutrition and training planner with scientifically-backed diet plans, macro calculators, evidence-based training programs, and IFBB competition prep tools."/>
   <meta name="author" content="Can Ayter"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -20,9 +22,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Leaflet Map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Leaflet Map — pinned to CDNJS with SHA-512 SRI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Copy Protection -->
   <script>
@@ -35,8 +37,8 @@
     document.addEventListener('dragstart', e => e.preventDefault());
   </script>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- EmailJS SDK — crossorigin required for SRI -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     // ═══════════════════════════════════════════════════════════════════════════
     // CONFIGURATION - Replace with your own keys
@@ -5475,28 +5477,28 @@ select.field-input option {
                   </div>
                   <div class="field">
                     <label class="field-label">Body Weight (lbs)</label>
-                    <input type="number" id="checkinWeight" class="field-input" placeholder="180" step="0.1">
+                    <input type="number" id="checkinWeight" class="field-input" placeholder="180" step="0.1" min="50" max="999">
                   </div>
                   <div class="field">
                     <label class="field-label">Waist (in)</label>
-                    <input type="number" id="checkinWaist" class="field-input" placeholder="32" step="0.1">
+                    <input type="number" id="checkinWaist" class="field-input" placeholder="32" step="0.1" min="10" max="99">
                   </div>
                   <div class="field">
                     <label class="field-label">Chest (in)</label>
-                    <input type="number" id="checkinChest" class="field-input" placeholder="42" step="0.1">
+                    <input type="number" id="checkinChest" class="field-input" placeholder="42" step="0.1" min="10" max="99">
                   </div>
                   <div class="field">
                     <label class="field-label">Arms (in)</label>
-                    <input type="number" id="checkinArms" class="field-input" placeholder="15" step="0.1">
+                    <input type="number" id="checkinArms" class="field-input" placeholder="15" step="0.1" min="5" max="50">
                   </div>
                   <div class="field">
                     <label class="field-label">Legs (in)</label>
-                    <input type="number" id="checkinLegs" class="field-input" placeholder="24" step="0.1">
+                    <input type="number" id="checkinLegs" class="field-input" placeholder="24" step="0.1" min="10" max="99">
                   </div>
                 </div>
                 <div class="field" style="margin-top: var(--space-md);">
                   <label class="field-label">Notes</label>
-                  <textarea id="checkinNotes" class="field-input" rows="2" placeholder="How's the week been?"></textarea>
+                  <textarea id="checkinNotes" class="field-input" rows="2" placeholder="How's the week been?" maxlength="500"></textarea>
                 </div>
                 <div class="btn-group" style="margin-top: var(--space-lg);">
                   <button type="button" class="btn btn-primary" onclick="saveCheckin()">Log Check-In</button>
@@ -6641,12 +6643,12 @@ select.field-input option {
                   </div>
                   <div class="field" id="customExerciseField" style="display: none;">
                     <label class="field-label">Custom Exercise Name</label>
-                    <input type="text" id="prCustomExercise" class="field-input" placeholder="e.g., Incline Press">
+                    <input type="text" id="prCustomExercise" class="field-input" placeholder="e.g., Incline Press" maxlength="100">
                   </div>
                   <div class="field">
                     <label class="field-label">Weight</label>
                     <div class="field-combo">
-                      <input type="number" id="prWeight" class="field-input" placeholder="225" step="2.5">
+                      <input type="number" id="prWeight" class="field-input" placeholder="225" step="2.5" min="0" max="2000">
                       <span class="field-suffix">lbs</span>
                     </div>
                   </div>
@@ -6687,7 +6689,7 @@ select.field-input option {
                   </div>
                   <div class="field">
                     <label class="field-label">Workout Name</label>
-                    <input type="text" id="logWorkoutName" class="field-input" placeholder="e.g. Push Day A">
+                    <input type="text" id="logWorkoutName" class="field-input" placeholder="e.g. Push Day A" maxlength="100">
                   </div>
                 </div>
                 <div id="logExerciseRows" style="margin-top: var(--space-lg);"></div>
@@ -7294,7 +7296,7 @@ Squat	225	5	2025-03-15"></textarea>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="data/foods.js"></script>
   <script src="data/references.js"></script>
   <script src="data/exercises.js"></script>
@@ -7322,6 +7324,20 @@ function fmt(n) {
   if (!isFinite(num)) return '—';
   if (num % 1 === 0) return num.toString();
   return parseFloat(num.toFixed(3)).toString();
+}
+
+// Sanitize a text input: trim, enforce max length, strip control characters
+function sanitizeText(s, maxLen = 200) {
+  if (s == null) return '';
+  return String(s).trim().slice(0, maxLen).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+}
+
+// Sanitize a numeric input: parse float, enforce min/max bounds
+function sanitizeNumber(val, min = -Infinity, max = Infinity) {
+  const n = parseFloat(val);
+  if (!isFinite(n) || isNaN(n)) return null;
+  if (n < min || n > max) return null;
+  return n;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9888,14 +9904,14 @@ function initPRTracker() {
 function logPR() {
   let exercise = document.getElementById('prExercise').value;
   if (exercise === 'custom') {
-    exercise = document.getElementById('prCustomExercise').value;
+    exercise = sanitizeText(document.getElementById('prCustomExercise').value, 100);
     if (!exercise) return alert('Enter exercise name');
   }
-  const weight = parseFloat(document.getElementById('prWeight').value);
-  const reps = parseInt(document.getElementById('prReps').value);
+  const weight = sanitizeNumber(document.getElementById('prWeight').value, 0, 2000);
+  const reps = sanitizeNumber(document.getElementById('prReps').value, 1, 999);
   const date = document.getElementById('prDate').value;
 
-  if (!weight || !reps || !date) return alert('Fill all fields');
+  if (!weight || !reps || !date) return alert('Fill all fields with valid values');
 
   const prs = JSON.parse(localStorage.getItem('muscleforge_prs') || '[]');
   prs.unshift({ exercise, weight, reps, date, id: Date.now() });
@@ -10143,10 +10159,10 @@ function addLogExerciseRow() {
   row.style.cssText = 'padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);';
   row.innerHTML = `
     <div style="display: flex; gap: var(--space-sm); align-items: center; flex-wrap: wrap;">
-      <input type="text" class="field-input" id="logExName${idx}" placeholder="Exercise name" style="flex: 2; min-width: 150px;">
-      <input type="number" class="field-input" id="logExSets${idx}" placeholder="Sets" style="flex: 0.5; min-width: 60px;">
-      <input type="number" class="field-input" id="logExReps${idx}" placeholder="Reps" style="flex: 0.5; min-width: 60px;">
-      <input type="number" class="field-input" id="logExWeight${idx}" placeholder="Weight" step="2.5" style="flex: 0.7; min-width: 70px;">
+      <input type="text" class="field-input" id="logExName${idx}" placeholder="Exercise name" maxlength="100" style="flex: 2; min-width: 150px;">
+      <input type="number" class="field-input" id="logExSets${idx}" placeholder="Sets" min="1" max="99" style="flex: 0.5; min-width: 60px;">
+      <input type="number" class="field-input" id="logExReps${idx}" placeholder="Reps" min="1" max="999" style="flex: 0.5; min-width: 60px;">
+      <input type="number" class="field-input" id="logExWeight${idx}" placeholder="Weight" step="2.5" min="0" max="2000" style="flex: 0.7; min-width: 70px;">
       <button class="btn btn-ghost btn-sm" onclick="document.getElementById('logEx${idx}').remove()" style="padding: 6px 10px;">X</button>
     </div>
   `;
@@ -10155,18 +10171,18 @@ function addLogExerciseRow() {
 
 function saveWorkoutLog() {
   const date = document.getElementById('logDate').value;
-  const name = document.getElementById('logWorkoutName').value;
+  const name = sanitizeText(document.getElementById('logWorkoutName').value, 100);
   if (!date || !name) return alert('Enter date and workout name');
 
   const exercises = [];
   document.querySelectorAll('#logExerciseRows > div').forEach(row => {
     const inputs = row.querySelectorAll('input');
-    const exName = inputs[0]?.value;
-    const sets = parseInt(inputs[1]?.value);
-    const reps = parseInt(inputs[2]?.value);
-    const weight = parseFloat(inputs[3]?.value);
+    const exName = sanitizeText(inputs[0]?.value, 100);
+    const sets = sanitizeNumber(inputs[1]?.value, 1, 99);
+    const reps = sanitizeNumber(inputs[2]?.value, 1, 999);
+    const weight = sanitizeNumber(inputs[3]?.value, 0, 2000);
     if (exName && sets && reps) {
-      exercises.push({ name: exName, sets, reps, weight: weight || 0 });
+      exercises.push({ name: exName, sets, reps, weight: weight ?? 0 });
     }
   });
 
@@ -10348,18 +10364,18 @@ function initCheckin() {
 
 function saveCheckin() {
   const date = document.getElementById('checkinDate').value;
-  const weight = parseFloat(document.getElementById('checkinWeight').value);
-  if (!date || !weight) return alert('Enter date and weight');
+  const weight = sanitizeNumber(document.getElementById('checkinWeight').value, 50, 999);
+  if (!date || !weight) return alert('Enter a valid date and weight (50–999 lbs)');
 
   const checkin = {
     id: Date.now(),
     date,
     weight,
-    waist: parseFloat(document.getElementById('checkinWaist').value) || null,
-    chest: parseFloat(document.getElementById('checkinChest').value) || null,
-    arms: parseFloat(document.getElementById('checkinArms').value) || null,
-    legs: parseFloat(document.getElementById('checkinLegs').value) || null,
-    notes: document.getElementById('checkinNotes').value || ''
+    waist: sanitizeNumber(document.getElementById('checkinWaist').value, 10, 99),
+    chest: sanitizeNumber(document.getElementById('checkinChest').value, 10, 99),
+    arms: sanitizeNumber(document.getElementById('checkinArms').value, 5, 50),
+    legs: sanitizeNumber(document.getElementById('checkinLegs').value, 10, 99),
+    notes: sanitizeText(document.getElementById('checkinNotes').value, 500)
   };
 
   const checkins = JSON.parse(localStorage.getItem('muscleforge_checkins') || '[]');
