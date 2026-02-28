@@ -11,16 +11,16 @@
   <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
   <!-- Favicon & PWA -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><rect x='2' y='12' width='5' height='8' rx='1.5' fill='%2300d4ff'/><rect x='25' y='12' width='5' height='8' rx='1.5' fill='%2300d4ff'/><rect x='6.5' y='14.5' width='19' height='3' rx='1' fill='%2300d4ff'/></svg>">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ff6b35">
+  <meta name="theme-color" content="#00d4ff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Leaflet Map — pinned to CDNJS with SHA-512 SRI -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -67,30 +67,30 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── STEEL — Forged backgrounds ── */
-  --iron-black: #08090a;
-  --iron-dark: #111214;
-  --iron-mid: #1a1b1f;
-  --iron-surface: #222328;
-  --iron-elevated: #2b2c32;
-  --iron-hover: #35363d;
-  --iron-active: #3f4049;
+  /* ── BACKGROUNDS ── */
+  --iron-black: #06060e;
+  --iron-dark: #0d0d18;
+  --iron-mid: #12121f;
+  --iron-surface: #181828;
+  --iron-elevated: #1e1e30;
+  --iron-hover: #252538;
+  --iron-active: #2c2c42;
 
-  /* ── EMBER — Primary action ── */
-  --blood: #e04520;
-  --blood-dim: rgba(224,69,32,0.12);
-  --blood-glow: rgba(224,69,32,0.35);
-  --ember-text: #ff6b42;
+  /* ── CYAN — Primary action ── */
+  --blood: #00d4ff;
+  --blood-dim: rgba(0,212,255,0.10);
+  --blood-glow: rgba(0,212,255,0.28);
+  --ember-text: #00d4ff;
 
-  /* ── RUST — Secondary accent ── */
-  --rust: #d97706;
-  --rust-dim: rgba(217,119,6,0.12);
+  /* ── VIOLET — Secondary accent ── */
+  --rust: #8b5cf6;
+  --rust-dim: rgba(139,92,246,0.12);
 
-  /* ── CHALK — Text hierarchy (WCAG AA+) ── */
-  --chalk: #f1f1f4;
-  --chalk-secondary: #b0b3be;
-  --chalk-tertiary: #787b88;
-  --chalk-faint: #484a54;
+  /* ── TEXT hierarchy (WCAG AA+) ── */
+  --chalk: #eeeef5;
+  --chalk-secondary: #9898b0;
+  --chalk-tertiary: #5a5a72;
+  --chalk-faint: #2e2e44;
 
   /* ── SEMANTIC ALIASES ── */
   --void: var(--iron-black);
@@ -101,7 +101,7 @@
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #ef5530;
+  --primary-soft: #00b8e0;
   --accent: var(--rust);
   --accent-dim: var(--rust-dim);
   --ink: var(--chalk);
@@ -110,8 +110,8 @@
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
   --line: rgba(255,255,255,0.07);
-  --line-hover: rgba(255,255,255,0.13);
-  --line-active: rgba(224,69,32,0.45);
+  --line-hover: rgba(255,255,255,0.14);
+  --line-active: rgba(0,212,255,0.28);
 
   /* ── MACROS — Nutrition colors ── */
   --protein: #f87171;
@@ -154,9 +154,9 @@
 
   /* ── RADIUS ── */
   --radius-sm: 3px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
-  --radius-xl: 14px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
   /* ── ELEVATION ── */
@@ -178,15 +178,15 @@
   --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.75rem);
 }
 
-/* Light mode — Concrete gym floor */
+/* Light mode */
 [data-theme="light"] {
-  --iron-black: #f4f4f6;
+  --iron-black: #f0f0f5;
   --iron-dark: #ffffff;
-  --iron-mid: #e8e8ec;
-  --iron-surface: #d8d8de;
-  --iron-elevated: #fafafa;
-  --iron-hover: #e2e2e8;
-  --iron-active: #d0d0d8;
+  --iron-mid: #e8e8f0;
+  --iron-surface: #ffffff;
+  --iron-elevated: #ffffff;
+  --iron-hover: #dddde8;
+  --iron-active: #d0d0df;
 
   --void: var(--iron-black);
   --void-elevated: var(--iron-dark);
@@ -194,28 +194,28 @@
   --void-float: var(--iron-surface);
   --void-hover: var(--iron-hover);
 
-  --blood: #d03a18;
-  --blood-dim: rgba(208,58,24,0.08);
-  --blood-glow: rgba(208,58,24,0.18);
-  --ember-text: #c23010;
+  --blood: #0099bb;
+  --blood-dim: rgba(0,153,187,0.10);
+  --blood-glow: rgba(0,153,187,0.22);
+  --ember-text: #0099bb;
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #e04520;
+  --primary-soft: #00b8e0;
 
-  --chalk: #141418;
-  --chalk-secondary: #4a4a54;
-  --chalk-tertiary: #6e6e7a;
-  --chalk-faint: #c8c8d0;
+  --chalk: #111120;
+  --chalk-secondary: #4a4a60;
+  --chalk-tertiary: #7070a0;
+  --chalk-faint: #d0d0e0;
   --ink: var(--chalk);
   --ink-primary: var(--chalk);
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
 
-  --line: rgba(0,0,0,0.09);
-  --line-hover: rgba(0,0,0,0.14);
-  --line-active: rgba(208,58,24,0.35);
+  --line: rgba(0,0,0,0.08);
+  --line-hover: rgba(0,0,0,0.15);
+  --line-active: rgba(0,153,187,0.30);
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
@@ -240,7 +240,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--void);
   color: var(--ink);
   line-height: 1.6;
@@ -324,7 +324,7 @@ input, textarea, select {
    TYPOGRAPHY — Utilitarian, bold, industrial
    ═══════════════════════════════════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6, .display {
-  font-family: 'Bebas Neue', 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.05;
@@ -353,7 +353,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -362,7 +362,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .mono {
-  font-family: 'Teko', monospace;
+  font-family: 'Space Grotesk', monospace;
   font-feature-settings: 'tnum';
   letter-spacing: 0.02em;
 }
@@ -428,7 +428,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .logo-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -439,7 +439,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .logo-tag {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.15em;
@@ -483,7 +483,7 @@ h4 { font-size: var(--text-lg); }
 .nav-link {
   position: relative;
   padding: 10px 22px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.15rem;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -571,7 +571,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .theme-switch-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -604,7 +604,7 @@ h4 { font-size: var(--text-lg); }
   flex: 1;
   text-align: center;
   padding: 10px 4px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   border: none;
@@ -680,7 +680,7 @@ main {
 }
 
 .intro-tagline {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -689,7 +689,7 @@ main {
 }
 
 .intro-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(3rem, 8vw, 6rem);
   letter-spacing: 0.04em;
   margin-bottom: var(--space-lg);
@@ -760,7 +760,7 @@ main {
 }
 
 .intro-feature-content h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -813,7 +813,7 @@ main {
 }
 
 .section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   margin-bottom: 0;
   text-transform: uppercase;
@@ -841,7 +841,7 @@ main {
 }
 
 .home-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2rem, 6vw, 3.5rem);
   letter-spacing: 0.04em;
   color: var(--chalk);
@@ -868,7 +868,7 @@ main {
   padding: var(--space-md) var(--space-xl);
   background: var(--blood);
   color: white;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   letter-spacing: 0.1em;
   border: none;
@@ -890,7 +890,7 @@ main {
 }
 
 .home-index-title {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -928,7 +928,7 @@ main {
 }
 
 .home-index-content h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   letter-spacing: 0.05em;
   color: var(--chalk);
@@ -971,7 +971,7 @@ main {
 }
 
 .home-extras h3 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1035,7 +1035,7 @@ main {
 }
 
 .lift-fuel-text {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1043,7 +1043,7 @@ main {
 }
 
 .lift-fuel-link {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   color: #888;
@@ -1077,7 +1077,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1113,7 +1113,7 @@ main {
 }
 
 .converter-category-title {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -1140,7 +1140,7 @@ main {
   border: 1px solid var(--iron-hover);
   color: var(--chalk);
   font-size: 0.875rem;
-  font-family: 'Teko', monospace;
+  font-family: 'Space Grotesk', monospace;
   text-align: right;
   transition: border-color var(--duration-fast);
 }
@@ -1151,7 +1151,7 @@ main {
 }
 
 .converter-unit {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1172,7 +1172,7 @@ main {
 }
 
 .converter-quick-ref h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1190,7 +1190,7 @@ main {
 .converter-quick-ref li {
   font-size: 0.8rem;
   color: var(--chalk-tertiary);
-  font-family: 'Teko', monospace;
+  font-family: 'Space Grotesk', monospace;
 }
 
 .home-science p {
@@ -1265,7 +1265,7 @@ main {
 }
 
 .card-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -1317,7 +1317,7 @@ main {
 }
 
 .training-day-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -1375,7 +1375,7 @@ main {
 }
 
 .exercise-sets, .exercise-reps {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--training);
   text-align: center;
@@ -1392,7 +1392,7 @@ main {
   color: var(--chalk-secondary);
   border: 1px solid var(--line-hover);
   border-radius: var(--radius-sm);
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-sm);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1414,7 +1414,7 @@ main {
   background: transparent;
   color: var(--chalk-tertiary);
   border: 1px solid var(--chalk-faint);
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-sm);
   font-weight: 600;
   cursor: pointer;
@@ -1435,7 +1435,7 @@ main {
 .badge-difficulty {
   display: inline-block;
   padding: 2px 8px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1467,7 +1467,7 @@ main {
 }
 
 .rationale-box .rationale-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9375rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1513,13 +1513,13 @@ main {
 }
 
 .program-stat .stat-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2.5rem;
   color: var(--training);
 }
 
 .program-stat .stat-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1601,7 +1601,7 @@ main {
 }
 
 .plan-type-label {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.75rem;
   letter-spacing: 0.06em;
   margin-bottom: 2px;
@@ -1642,7 +1642,7 @@ main {
 }
 
 .education-card h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.04em;
   margin-bottom: var(--space-sm);
@@ -1686,7 +1686,7 @@ main {
 }
 
 .education-table th {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1721,14 +1721,14 @@ main {
 }
 
 .orm-item .reps {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   color: var(--chalk-tertiary);
   letter-spacing: 0.12em;
 }
 
 .orm-item .weight {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.75rem;
   color: var(--blood);
 }
@@ -1754,7 +1754,7 @@ main {
 }
 
 .field-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -1827,7 +1827,7 @@ select.field-input option {
   display: flex;
   align-items: center;
   padding: 0 14px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1854,7 +1854,7 @@ select.field-input option {
 }
 
 .unit-toggle-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1870,7 +1870,7 @@ select.field-input option {
 
 .unit-btn {
   padding: 8px 16px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   letter-spacing: 0.05em;
   color: var(--chalk-tertiary);
@@ -1905,7 +1905,7 @@ select.field-input option {
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-sm);
   letter-spacing: 0.05em;
   color: var(--chalk-tertiary);
@@ -1947,7 +1947,7 @@ select.field-input option {
   justify-content: center;
   gap: var(--space-sm);
   padding: 14px 36px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -2049,7 +2049,7 @@ select.field-input option {
 }
 
 .stat-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -2059,7 +2059,7 @@ select.field-input option {
 }
 
 .stat-label {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -2093,7 +2093,7 @@ select.field-input option {
 }
 
 .macro-bar-name {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -2102,7 +2102,7 @@ select.field-input option {
 }
 
 .macro-bar-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--chalk);
 }
@@ -2155,7 +2155,7 @@ select.field-input option {
 }
 
 .meal-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -2164,7 +2164,7 @@ select.field-input option {
 }
 
 .meal-time {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -2209,7 +2209,7 @@ select.field-input option {
 }
 
 .meal-item-macros {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   color: var(--chalk-tertiary);
@@ -2219,7 +2219,7 @@ select.field-input option {
 
 .meal-item-swap {
   padding: 8px 14px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -2336,7 +2336,7 @@ select.field-input option {
 }
 
 .food-macro {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -2371,7 +2371,7 @@ select.field-input option {
 }
 
 .ref-category {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -2413,7 +2413,7 @@ select.field-input option {
 }
 
 .ref-tag {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -2435,7 +2435,7 @@ select.field-input option {
 }
 
 .tools-nav-btn {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -2477,7 +2477,7 @@ select.field-input option {
 }
 
 .tool-badge {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -2526,7 +2526,7 @@ select.field-input option {
 
 .measurement-item .value,
 .volume-item .value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   color: var(--chalk);
 }
@@ -2544,7 +2544,7 @@ select.field-input option {
 }
 
 .technique-card h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   color: var(--chalk);
@@ -2580,7 +2580,7 @@ select.field-input option {
 .recomp-strategy h4,
 .combat-protocol h4,
 .period-recommendation h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--chalk);
   margin-bottom: var(--space-md);
@@ -2613,7 +2613,7 @@ select.field-input option {
 }
 
 .guide-section h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.125rem;
   color: var(--chalk);
   margin-bottom: var(--space-md);
@@ -2644,7 +2644,7 @@ select.field-input option {
 }
 
 .tools-overview-section h3 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--training);
   margin-bottom: var(--space-md);
@@ -2720,7 +2720,7 @@ select.field-input option {
 }
 
 .gym-list-header h3 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--chalk);
@@ -2768,7 +2768,7 @@ select.field-input option {
 }
 
 .gym-item-distance {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   color: var(--training);
 }
@@ -2855,7 +2855,7 @@ select.field-input option {
   color: var(--training);
   border: 1px solid var(--training);
   cursor: pointer;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   letter-spacing: 0.05em;
   transition: all var(--duration-fast) var(--ease-sharp);
@@ -2921,7 +2921,7 @@ select.field-input option {
 }
 
 .gym-popup-name {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: var(--space-xs);
@@ -2979,7 +2979,7 @@ select.field-input option {
 }
 
 .rep-max-item .weight {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   color: var(--chalk);
 }
@@ -3002,7 +3002,7 @@ select.field-input option {
 }
 
 .pose-card h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--chalk);
   margin-bottom: var(--space-sm);
@@ -3031,7 +3031,7 @@ select.field-input option {
 }
 
 .contest-countdown .countdown-number {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 4rem;
   color: var(--blood);
   text-align: center;
@@ -3113,7 +3113,7 @@ select.field-input option {
 }
 
 .pr-item .pr-details {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--training);
 }
@@ -3198,7 +3198,7 @@ select.field-input option {
 }
 
 .supplement-item h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.125rem;
   color: var(--chalk);
   margin-bottom: var(--space-xs);
@@ -3236,7 +3236,7 @@ select.field-input option {
 }
 
 .built-meal h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--chalk);
   margin-bottom: var(--space-md);
@@ -3266,7 +3266,7 @@ select.field-input option {
 }
 
 .meal-total-item .value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   color: var(--chalk);
 }
@@ -3283,7 +3283,7 @@ select.field-input option {
 }
 
 .cost-breakdown h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--chalk);
   margin-bottom: var(--space-md);
@@ -3300,7 +3300,7 @@ select.field-input option {
   margin-top: var(--space-md);
   padding-top: var(--space-md);
   border-top: 2px solid var(--training);
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   text-align: center;
   color: var(--training);
@@ -3313,7 +3313,7 @@ select.field-input option {
 }
 
 .photo-guide .guide-section h4 {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.1rem;
   color: var(--chalk);
   margin-bottom: var(--space-md);
@@ -3364,7 +3364,7 @@ select.field-input option {
 
 .alert-content { flex: 1; }
 .alert-title {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -3446,7 +3446,7 @@ select.field-input option {
 }
 
 .modal-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--text-2xl);
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -3758,7 +3758,7 @@ select.field-input option {
 .footer-brand { }
 
 .footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2rem;
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -3785,7 +3785,7 @@ select.field-input option {
 
 .footer-link {
   display: inline-block;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -3805,7 +3805,7 @@ select.field-input option {
 .footer-contact { }
 
 .footer-heading {
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.0625rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -3866,7 +3866,7 @@ select.field-input option {
   position: fixed;
   bottom: 16px;
   right: 16px;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--chalk-faint);
@@ -6450,7 +6450,7 @@ select.field-input option {
                   </div>
                 </div>
                 <div id="timerDisplay" style="text-align: center; margin-top: var(--space-xl);">
-                  <div style="font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: var(--chalk);" id="timerClock">1:30</div>
+                  <div style="font-family: 'Space Grotesk', sans-serif; font-size: 5rem; color: var(--chalk);" id="timerClock">1:30</div>
                   <div class="btn-group" style="margin-top: var(--space-lg); justify-content: center;">
                     <button type="button" class="btn btn-primary" id="timerStartBtn" onclick="toggleTimer()">Start</button>
                     <button type="button" class="btn btn-ghost" onclick="resetTimer()">Reset</button>
@@ -6712,7 +6712,7 @@ select.field-input option {
               </div>
               <div class="card-body">
                 <div style="text-align: center; padding: var(--space-lg) 0;">
-                  <div id="waterProgress" style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--training);">
+                  <div id="waterProgress" style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; color: var(--training);">
                     0 / 8
                   </div>
                   <div style="color: var(--chalk-tertiary); font-size: 0.875rem; margin-bottom: var(--space-lg);">glasses today (250ml each)</div>
@@ -7850,7 +7850,7 @@ function showNotification(message, type = 'info') {
   notification.style.cssText = `
     position: fixed; bottom: 20px; right: 20px; padding: 16px 24px;
     background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--accent)' : 'var(--primary)'};
-    color: white; border-radius: 8px; font-family: 'Teko', sans-serif;
+    color: white; border-radius: 8px; font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem; letter-spacing: 0.05em; z-index: 9999;
     animation: slideIn 0.3s ease;
   `;
@@ -7948,8 +7948,8 @@ function renderGoalTimeline() {
 
   content.innerHTML = `
     <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-lg);">
-      <div style="font-family: 'Teko', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--chalk-tertiary);">Weekly Rate</div>
-      <div style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: ${color};">
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--chalk-tertiary);">Weekly Rate</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; color: ${color};">
         ${icon} ${weeklyChange.toFixed(1)} lbs/week
       </div>
       <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${Math.abs(deficit)} cal/day ${isCutting ? 'deficit' : 'surplus'}</div>
@@ -7957,19 +7957,19 @@ function renderGoalTimeline() {
 
     <div class="milestone-grid" style="margin-bottom: var(--space-lg);">
       <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 5 lbs</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 5 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target5} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo5} weeks</div>
         <div style="font-size: 0.7rem; color: var(--chalk-tertiary);">${addWeeks(weeksTo5)}</div>
       </div>
       <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 10 lbs</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 10 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target10} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo10} weeks</div>
         <div style="font-size: 0.7rem; color: var(--chalk-tertiary);">${addWeeks(weeksTo10)}</div>
       </div>
       <div style="text-align: center; padding: var(--space-md); background: var(--iron-surface); border-radius: var(--radius-sm);">
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 20 lbs</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: ${color};">${direction} 20 lbs</div>
         <div style="font-size: 0.8125rem; color: var(--chalk-secondary);">${target20} lbs</div>
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); margin-top: 4px;">${weeksTo20} weeks</div>
         <div style="font-size: 0.7rem; color: var(--chalk-tertiary);">${addWeeks(weeksTo20)}</div>
@@ -8221,7 +8221,7 @@ function renderMeals() {
             ${recipe ? `
             <div style="padding: var(--space-md); background: linear-gradient(135deg, var(--iron-surface) 0%, rgba(255,107,53,0.08) 100%); margin-bottom: var(--space-sm);">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
-                <strong style="color: var(--training); font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.05em;">${recipe.name}</strong>
+                <strong style="color: var(--training); font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.05em;">${recipe.name}</strong>
                 <span style="font-size: 0.7rem; color: var(--chalk-tertiary);">${recipe.prepTime}</span>
               </div>
               <p style="font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.5; margin: 0;">${recipe.instructions}</p>
@@ -8326,7 +8326,7 @@ function generateGroceryList() {
   let listHTML = '';
   for (const [cat, items] of Object.entries(categories)) {
     listHTML += `<div style="margin-bottom: var(--space-lg);">
-      <div style="font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase;
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; text-transform: uppercase;
         letter-spacing: 0.1em; color: var(--rust); border-bottom: 1px solid var(--line);
         padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">${cat}</div>`;
     items.forEach(item => {
@@ -8336,7 +8336,7 @@ function generateGroceryList() {
       listHTML += `<div style="display: flex; justify-content: space-between; align-items: center;
         padding: var(--space-sm) 0; border-bottom: 1px solid var(--line);">
         <span style="color: var(--chalk);">${item.name}</span>
-        <span style="color: var(--chalk-secondary); font-family: 'Teko', sans-serif; font-size: 1rem;">${amt}</span>
+        <span style="color: var(--chalk-secondary); font-family: 'Space Grotesk', sans-serif; font-size: 1rem;">${amt}</span>
       </div>`;
     });
     listHTML += '</div>';
@@ -8349,7 +8349,7 @@ function generateGroceryList() {
     " onclick="if(event.target===this) this.remove()">
       <div class="modal" style="max-width: 500px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 id="groceryModalTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">Weekly Grocery List</h3>
+          <h3 id="groceryModalTitle" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;">Weekly Grocery List</h3>
           <p style="color: var(--chalk-secondary); font-size: 0.875rem;">Based on your meal plan x 7 days</p>
         </div>
         <div style="padding: var(--space-lg);">
@@ -8583,14 +8583,14 @@ function loadMythBusters() {
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <div style="padding: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center; gap: var(--space-md);">
-          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--danger); min-width: 24px;">X</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--danger); min-width: 24px;">X</span>
           <span style="font-size: 0.9375rem; color: var(--chalk);">${m.myth}</span>
         </div>
         <span style="color: var(--chalk-tertiary); font-size: 0.75rem;">tap to reveal</span>
       </div>
       <div class="myth-truth hidden" style="padding: 0 var(--space-md) var(--space-md) calc(var(--space-md) + 24px + var(--space-md)); border-top: 1px solid var(--line);">
         <div style="padding-top: var(--space-md);">
-          <div style="font-family: 'Teko', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--success); margin-bottom: 4px;">The Truth</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--success); margin-bottom: 4px;">The Truth</div>
           <p style="font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.6; margin: 0 0 var(--space-sm);">${m.truth}</p>
           <p style="font-size: 0.7rem; color: var(--chalk-tertiary); font-style: italic; margin: 0;">${m.citation}</p>
         </div>
@@ -8797,7 +8797,7 @@ function calculateOverload() {
       <div style="padding: var(--space-md); background: var(--iron-surface); margin-top: var(--space-md); border-left: 2px solid var(--training);">
         <h4 style="color: var(--chalk); margin-bottom: var(--space-sm);">${opt.method}</h4>
         <p style="color: var(--chalk-secondary);">${opt.description}</p>
-        <p style="margin-top: var(--space-sm); font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--training);">${opt.target}</p>
+        <p style="margin-top: var(--space-sm); font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; color: var(--training);">${opt.target}</p>
       </div>
     `;
   });
@@ -8946,11 +8946,11 @@ function calculateRecomp() {
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-md);">
       <div style="padding: var(--space-md); background: var(--iron-surface);">
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase;">Training Days</div>
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.trainingDay} cal</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.trainingDay} cal</div>
       </div>
       <div style="padding: var(--space-md); background: var(--iron-surface);">
         <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase;">Rest Days</div>
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.restDay} cal</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;">${result.calorieStrategy.restDay} cal</div>
       </div>
     </div>
     <div style="margin-top: var(--space-lg);">
@@ -9125,7 +9125,7 @@ function generatePeriodization() {
   const modelNames = { linear: 'Linear Periodization', undulating: 'Daily Undulating (DUP)', block: 'Block Periodization' };
 
   let html = `
-    <div style="font-family: 'Teko', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.1em;
+    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.1em;
       color: var(--training); margin-bottom: var(--space-lg);">${modelNames[model]} — ${weeks} Weeks</div>
     <div style="overflow-x: auto;">
     <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
@@ -10338,8 +10338,8 @@ function calculateReadiness() {
   resultsEl.classList.remove('hidden');
   resultsEl.innerHTML = `
     <div style="text-align: center; padding: var(--space-lg); background: var(--iron-surface);">
-      <div style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: ${color};">${pct}%</div>
-      <div style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase;
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; color: ${color};">${pct}%</div>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; text-transform: uppercase;
         letter-spacing: 0.1em; color: ${color}; margin-top: var(--space-sm);">${icon} ${recommendation}</div>
       <div style="margin-top: var(--space-md); color: var(--chalk-tertiary); font-size: 0.8125rem;">
         Sleep: ${sleep}/5 | Soreness: ${soreness}/5 | Stress: ${stress}/5 | Motivation: ${motivation}/5 | Energy: ${energy}/5
@@ -10409,7 +10409,7 @@ function loadCheckinHistory() {
       <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <strong style="color: var(--chalk); font-family: 'Teko', sans-serif; font-size: 1.125rem;">${fmt(c.weight)} lbs</strong>
+            <strong style="color: var(--chalk); font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem;">${fmt(c.weight)} lbs</strong>
             <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${escapeHtml(c.date)}</span>
           </div>
           <button class="btn btn-ghost btn-sm" onclick="deleteCheckin(${c.id})" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
@@ -10445,9 +10445,9 @@ function loadCheckinHistory() {
     trendEl.classList.remove('hidden');
     trendEl.innerHTML = `
       <div style="padding: var(--space-md); background: var(--iron-surface);">
-        <div style="font-family: 'Teko', sans-serif; font-size: 0.875rem; text-transform: uppercase;
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; text-transform: uppercase;
           letter-spacing: 0.1em; color: var(--chalk-tertiary); margin-bottom: var(--space-sm);">Weight Trend</div>
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: ${color};">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: ${color};">
           ${arrow} ${trend} lbs since last check-in
         </div>
         ${suggestion ? `<div class="alert alert-warning" style="margin-top: var(--space-md);">
@@ -11550,7 +11550,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
         return `
           <div class="exercise-row" style="background: var(--iron-surface); border-left: 3px solid var(--warning);">
             <div class="exercise-name">
-              <span style="color: var(--warning); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Teko', sans-serif;">Prehab</span><br>
+              <span style="color: var(--warning); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif;">Prehab</span><br>
               ${ex.exercise.name}
               <small>${ex.note || ''}</small>
             </div>
@@ -11578,7 +11578,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     const warmup = generateWarmup(workout.focus);
     const warmupHTML = `
       <div style="padding: var(--space-md); background: var(--iron-surface); border-left: 3px solid var(--rust);">
-        <div style="font-family: 'Teko', sans-serif; font-size: 0.875rem; text-transform: uppercase;
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; text-transform: uppercase;
           letter-spacing: 0.1em; color: var(--rust); margin-bottom: var(--space-sm);">Warm-Up (${warmup.length} movements)</div>
         ${warmup.map(w => `
           <div style="display: flex; justify-content: space-between; padding: 3px 0;
@@ -11601,7 +11601,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
       <div style="border-top: 1px solid var(--iron-hover);">
         <button type="button" aria-expanded="false" aria-label="Toggle ${playlist.name} playlist" style="width: 100%; padding: var(--space-sm) var(--space-md); cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: none; border: none; color: inherit; font: inherit;"
           onclick="const panel = this.nextElementSibling; panel.classList.toggle('hidden'); const expanded = !panel.classList.contains('hidden'); this.setAttribute('aria-expanded', expanded); this.querySelector('span:last-child').textContent = expanded ? '▾' : '▸';">
-          <span style="font-family: 'Teko', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #1DB954;">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #1DB954;">
             ♫ Lift Fuel — ${playlist.name}
           </span>
           <span style="color: var(--chalk-tertiary);">▸</span>
@@ -11646,7 +11646,7 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     return `
       <div style="padding: var(--space-sm); background: var(--iron-surface); border: 1px solid var(--line); border-radius: var(--radius-sm);">
         <div style="font-weight: 500; text-transform: capitalize;">${muscle}</div>
-        <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--training);">${sets} sets</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--training);">${sets} sets</div>
         <div style="font-size: 0.75rem; color: ${statusColor};">${status}</div>
       </div>
     `;
@@ -11708,17 +11708,17 @@ function displayNutritionRecommendations(template, goal) {
 
     html += `
       <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--iron-surface); border: 1px solid var(--line);">
-        <div style="font-family: 'Teko', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--training); margin-bottom: var(--space-sm);">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--training); margin-bottom: var(--space-sm);">
           Based on Your TDEE of ${currentTDEE} cal
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
           <div>
             <div style="font-size: 0.875rem; color: var(--chalk-tertiary);">Training Days</div>
-            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${trainingDayMin}-${trainingDayMax} cal</div>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;">${trainingDayMin}-${trainingDayMax} cal</div>
           </div>
           <div>
             <div style="font-size: 0.875rem; color: var(--chalk-tertiary);">Rest Days</div>
-            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;">${restDayCals} cal</div>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;">${restDayCals} cal</div>
           </div>
         </div>
       </div>
@@ -11773,7 +11773,7 @@ function openExerciseSwap(exerciseId, buttonElement) {
     " onclick="if(event.target===this) closeExerciseSwapModal()">
       <div class="modal" style="max-width: 500px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 id="swapModalTitle" style="font-family: 'Teko', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em;">
+          <h3 id="swapModalTitle" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em;">
             Swap ${exercise.name}
           </h3>
           <p style="color: var(--chalk-secondary); font-size: 0.875rem;">Select an alternative exercise</p>
@@ -11896,7 +11896,7 @@ function openExerciseInfo(exerciseId) {
     " onclick="if(event.target===this) closeExerciseInfoModal()">
       <div class="modal" style="max-width: 600px; overflow-y: auto;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--line);">
-          <h3 id="exerciseInfoTitle" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em;">
+          <h3 id="exerciseInfoTitle" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em;">
             ${exercise.name}
           </h3>
           <p style="color: var(--chalk-secondary); font-size: 0.875rem;">
@@ -11922,7 +11922,7 @@ function openExerciseInfo(exerciseId) {
             <ul style="padding-left: var(--space-lg); color: var(--chalk-secondary); font-size: 0.875rem;">${findingsHTML}</ul>
           </div>` : ''}
           <div style="margin-top: var(--space-md); padding: var(--space-md); background: var(--iron-surface);">
-            <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Teko', sans-serif;">Programming</div>
+            <div style="font-size: 0.75rem; color: var(--chalk-tertiary); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif;">Programming</div>
             <p style="color: var(--chalk-secondary); font-size: 0.875rem; margin-top: var(--space-xs);">
               Fatigue: ${exercise.programming.fatigueRating}/10 |
               Sets/session: ${exercise.programming.setsPerSession.min}-${exercise.programming.setsPerSession.max} |
