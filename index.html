@@ -11,16 +11,16 @@
   <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
   <!-- Favicon & PWA -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><rect x='2' y='12' width='5' height='8' rx='1.5' fill='%2300d4ff'/><rect x='25' y='12' width='5' height='8' rx='1.5' fill='%2300d4ff'/><rect x='6.5' y='14.5' width='19' height='3' rx='1' fill='%2300d4ff'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><rect x='2' y='12' width='5' height='8' rx='1.5' fill='%23e04520'/><rect x='25' y='12' width='5' height='8' rx='1.5' fill='%23e04520'/><rect x='6.5' y='14.5' width='19' height='3' rx='1' fill='%23e04520'/></svg>">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00d4ff">
+  <meta name="theme-color" content="#e04520">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Leaflet Map — pinned to CDNJS with SHA-512 SRI -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -76,15 +76,15 @@
   --iron-hover: #252538;
   --iron-active: #2c2c42;
 
-  /* ── CYAN — Primary action ── */
-  --blood: #00d4ff;
-  --blood-dim: rgba(0,212,255,0.10);
-  --blood-glow: rgba(0,212,255,0.28);
-  --ember-text: #00d4ff;
+  /* ── BLOOD — Primary action ── */
+  --blood: #e04520;
+  --blood-dim: rgba(224,69,32,0.10);
+  --blood-glow: rgba(224,69,32,0.28);
+  --ember-text: #ff6b35;
 
-  /* ── VIOLET — Secondary accent ── */
-  --rust: #8b5cf6;
-  --rust-dim: rgba(139,92,246,0.12);
+  /* ── RUST — Secondary accent ── */
+  --rust: #d97706;
+  --rust-dim: rgba(217,119,6,0.12);
 
   /* ── TEXT hierarchy (WCAG AA+) ── */
   --chalk: #eeeef5;
@@ -101,7 +101,7 @@
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #00b8e0;
+  --primary-soft: #d04010;
   --accent: var(--rust);
   --accent-dim: var(--rust-dim);
   --ink: var(--chalk);
@@ -111,7 +111,7 @@
   --ink-faint: var(--chalk-faint);
   --line: rgba(255,255,255,0.07);
   --line-hover: rgba(255,255,255,0.14);
-  --line-active: rgba(0,212,255,0.28);
+  --line-active: rgba(224,69,32,0.28);
 
   /* ── MACROS — Nutrition colors ── */
   --protein: #f87171;
@@ -194,14 +194,14 @@
   --void-float: var(--iron-surface);
   --void-hover: var(--iron-hover);
 
-  --blood: #0099bb;
-  --blood-dim: rgba(0,153,187,0.10);
-  --blood-glow: rgba(0,153,187,0.22);
-  --ember-text: #0099bb;
+  --blood: #c43a20;
+  --blood-dim: rgba(196,58,32,0.10);
+  --blood-glow: rgba(196,58,32,0.22);
+  --ember-text: #c43a20;
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #00b8e0;
+  --primary-soft: #a03018;
 
   --chalk: #111120;
   --chalk-secondary: #4a4a60;
@@ -215,7 +215,7 @@
 
   --line: rgba(0,0,0,0.08);
   --line-hover: rgba(0,0,0,0.15);
-  --line-active: rgba(0,153,187,0.30);
+  --line-active: rgba(196,58,32,0.28);
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
@@ -324,11 +324,16 @@ input, textarea, select {
    TYPOGRAPHY — Utilitarian, bold, industrial
    ═══════════════════════════════════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6, .display {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.05;
   text-transform: uppercase;
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
+  font-weight: 500;
 }
 
 h1 { font-size: var(--text-3xl); }
@@ -353,7 +358,7 @@ h4 { font-size: var(--text-lg); }
 }
 
 .label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -841,11 +846,12 @@ main {
 }
 
 .home-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  letter-spacing: 0.04em;
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  letter-spacing: 0.06em;
   color: var(--chalk);
   margin-bottom: var(--space-sm);
+  line-height: 0.95;
 }
 
 .home-subtitle {
@@ -890,9 +896,9 @@ main {
 }
 
 .home-index-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.2em;
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--chalk-tertiary);
   margin-bottom: var(--space-lg);
@@ -928,9 +934,9 @@ main {
 }
 
 .home-index-content h3 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.25rem;
-  letter-spacing: 0.05em;
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
   color: var(--chalk);
   margin-bottom: var(--space-xs);
 }
@@ -3994,6 +4000,429 @@ select.field-input option {
 
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME — TOOL DIRECTORY & RESOURCES
+   ═══════════════════════════════════════════════════════════════════════════ */
+.home-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.home-stat { text-align: center; }
+.home-stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--blood);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.home-stat-label {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+}
+.home-dir { margin: var(--space-2xl) 0; }
+.home-dir-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md);
+}
+.home-dir-heading {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: var(--text-2xl);
+  letter-spacing: 0.06em;
+  color: var(--chalk);
+}
+.home-dir-count {
+  font-family: 'Teko', sans-serif;
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-tertiary);
+}
+.home-dir-cat {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 600px) { .home-dir-cat { grid-template-columns: 1fr; } }
+.home-dir-cat-head {
+  padding-top: 4px;
+}
+.home-dir-cat-name {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: var(--text-lg);
+  letter-spacing: 0.06em;
+  color: var(--ember-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.home-dir-cat-name:hover { color: var(--blood); }
+.home-dir-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 2px;
+}
+.home-dir-chip {
+  padding: 5px 12px;
+  background: var(--iron-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--chalk-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.home-dir-chip:hover {
+  background: var(--blood-dim);
+  border-color: var(--blood);
+  color: var(--chalk);
+}
+.home-dir-chip.new {
+  border-color: var(--blood-dim);
+  color: var(--ember-text);
+}
+/* Resources */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.resource-card {
+  background: var(--iron-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: border-color var(--duration-fast);
+}
+.resource-card:hover { border-color: var(--line-hover); }
+.resource-card-type {
+  font-family: 'Teko', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 4px;
+}
+.resource-card-title {
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--chalk);
+  margin-bottom: 2px;
+}
+.resource-card-author {
+  font-size: var(--text-xs);
+  color: var(--chalk-tertiary);
+  margin-bottom: var(--space-sm);
+}
+.resource-card-desc {
+  font-size: var(--text-sm);
+  color: var(--chalk-secondary);
+  line-height: 1.55;
+  margin-bottom: var(--space-sm);
+}
+.resource-card-link {
+  font-size: var(--text-sm);
+  color: var(--blood);
+  text-decoration: none;
+  font-family: 'Teko', sans-serif;
+  letter-spacing: 0.05em;
+}
+.resource-card-link:hover { color: var(--ember-text); }
+.news-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: var(--space-md);
+}
+.news-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--iron-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+.news-link:hover { border-color: var(--blood-dim); background: var(--iron-surface); }
+.news-link-name { font-size: var(--text-sm); color: var(--chalk); font-weight: 500; }
+.news-link-desc { font-size: var(--text-xs); color: var(--chalk-tertiary); }
+.news-link-arrow { color: var(--blood); font-size: var(--text-sm); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MUSCLE MAP
+   ═══════════════════════════════════════════════════════════════════════════ */
+.mm-toggle { display: flex; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+.muscle-map-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .muscle-map-layout { grid-template-columns: 1fr; }
+  .mm-figure-wrap { display: flex; justify-content: center; }
+  .mm-svg { width: 180px; }
+}
+.mm-svg { width: 200px; height: auto; display: block; }
+.muscle-region {
+  fill: var(--iron-surface);
+  stroke: var(--line-hover);
+  stroke-width: 0.7;
+  cursor: pointer;
+  transition: fill var(--duration-fast), stroke var(--duration-fast);
+}
+.muscle-region:hover { fill: var(--blood-dim); stroke: var(--blood); }
+.muscle-region.mm-active { fill: var(--blood); stroke: var(--ember-text); stroke-width: 1; }
+.mm-body-fill { fill: var(--iron-elevated); stroke: var(--line); stroke-width: 0.6; pointer-events: none; }
+.mm-label {
+  fill: var(--chalk-tertiary);
+  font-size: 6px;
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  text-anchor: middle;
+  user-select: none;
+  dominant-baseline: middle;
+}
+.mm-detail-panel {
+  background: var(--iron-mid);
+  border: 1px solid var(--line-hover);
+  border-left: 3px solid var(--blood);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  min-height: 200px;
+}
+.mm-prompt {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: var(--space-2xl) 0;
+  color: var(--chalk-tertiary); text-align: center; gap: var(--space-sm);
+}
+.mm-prompt-icon { font-size: 2rem; opacity: 0.25; }
+.mm-content { display: none; }
+.mm-content.visible { display: block; }
+.mm-name {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: var(--text-2xl); color: var(--ember-text);
+  letter-spacing: 0.04em; margin-bottom: 4px;
+}
+.mm-func {
+  color: var(--chalk-secondary); font-size: var(--text-sm); line-height: 1.6;
+  padding-bottom: var(--space-md); border-bottom: 1px solid var(--line); margin-bottom: var(--space-md);
+}
+.mm-section-head {
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--chalk-tertiary);
+  margin: var(--space-md) 0 6px;
+}
+.mm-ex-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
+.mm-ex-list li {
+  font-size: var(--text-sm); color: var(--chalk); padding: 4px 10px;
+  background: var(--iron-elevated); border-radius: var(--radius-sm); border-left: 2px solid var(--blood-dim);
+}
+.mm-vol-bar {
+  background: var(--iron-elevated); border-radius: var(--radius-full);
+  height: 8px; overflow: hidden; margin-top: 4px;
+}
+.mm-vol-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood-dim), var(--blood));
+  border-radius: var(--radius-full); transition: width 400ms var(--ease-out-expo);
+}
+.mm-vol-nums {
+  display: flex; justify-content: space-between; font-size: 0.63rem;
+  color: var(--chalk-secondary); font-family: 'Teko', 'Space Grotesk', sans-serif;
+  margin-top: 3px; letter-spacing: 0.06em;
+}
+.mm-recovery { font-size: var(--text-sm); color: var(--chalk-secondary); margin-top: var(--space-sm); }
+.mm-recovery strong { color: var(--rust); }
+.mm-note {
+  font-size: var(--text-sm); color: var(--chalk-secondary); background: var(--iron-elevated);
+  border-left: 2px solid var(--rust); padding: var(--space-sm) var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: var(--space-md); line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SUPPLEMENT DATABASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+.supp-filters { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); align-items: center; }
+.supp-search {
+  flex: 1 1 180px; padding: 8px 12px; background: var(--iron-elevated);
+  border: 1px solid var(--line-hover); border-radius: var(--radius-md);
+  color: var(--chalk); font-family: 'Space Grotesk', sans-serif; font-size: var(--text-sm);
+}
+.supp-search:focus { outline: none; border-color: var(--blood); box-shadow: var(--focus-ring); }
+.tier-chip {
+  padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--line-hover);
+  background: var(--iron-elevated); color: var(--chalk-secondary);
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-weight: 500; font-size: 0.8rem;
+  letter-spacing: 0.06em; cursor: pointer; transition: all var(--duration-fast);
+}
+.tier-chip:hover { border-color: var(--line-active); color: var(--chalk); }
+.tier-chip.active { color: var(--chalk); }
+.tier-chip[data-tier="all"].active { background: var(--blood-dim); border-color: var(--blood); }
+.tier-chip[data-tier="A"].active { background: rgba(52,211,153,0.14); border-color: #34d399; color: #34d399; }
+.tier-chip[data-tier="B"].active { background: var(--blood-dim); border-color: var(--blood); color: var(--ember-text); }
+.tier-chip[data-tier="C"].active { background: rgba(251,191,36,0.12); border-color: #fbbf24; color: #fbbf24; }
+.tier-chip[data-tier="D"].active { background: rgba(148,163,184,0.08); border-color: #64748b; color: #94a3b8; }
+.supp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(276px, 1fr)); gap: var(--space-md); }
+.supp-card {
+  background: var(--iron-elevated); border: 1px solid var(--line);
+  border-radius: var(--radius-md); padding: var(--space-md);
+  transition: border-color var(--duration-fast);
+}
+.supp-card:hover { border-color: var(--line-hover); }
+.supp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; gap: 8px; }
+.supp-name {
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-size: var(--text-lg);
+  font-weight: 600; color: var(--chalk); letter-spacing: 0.02em;
+}
+.tier-badge {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif; font-size: 0.95rem;
+  letter-spacing: 0.08em; padding: 2px 10px; border-radius: var(--radius-full); flex-shrink: 0;
+}
+.tier-A { background: rgba(52,211,153,0.14); color: #34d399; border: 1px solid rgba(52,211,153,0.28); }
+.tier-B { background: var(--blood-dim); color: var(--ember-text); border: 1px solid var(--blood-glow); }
+.tier-C { background: rgba(251,191,36,0.10); color: #fbbf24; border: 1px solid rgba(251,191,36,0.22); }
+.tier-D { background: rgba(148,163,184,0.07); color: #94a3b8; border: 1px solid rgba(148,163,184,0.18); }
+.supp-cat {
+  display: inline-block; font-size: 0.62rem;
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-full);
+  background: var(--iron-surface); color: var(--chalk-tertiary); margin-bottom: var(--space-sm);
+}
+.supp-mech { font-size: var(--text-sm); color: var(--chalk-secondary); line-height: 1.55; margin-bottom: var(--space-sm); }
+.supp-row {
+  font-size: var(--text-sm); color: var(--chalk); background: var(--iron-surface);
+  border-radius: var(--radius-sm); padding: 4px 10px; margin-bottom: 3px;
+}
+.supp-row strong { color: var(--rust); font-family: 'Teko', sans-serif; font-weight: 500; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 4px; }
+.supp-toggle {
+  background: none; border: none; color: var(--blood); font-size: var(--text-sm);
+  font-family: 'Space Grotesk', sans-serif; cursor: pointer; padding: 4px 0;
+  text-decoration: underline; display: block; margin-top: 6px;
+}
+.supp-notes {
+  font-size: var(--text-sm); color: var(--chalk-secondary); background: var(--iron-mid);
+  border-left: 2px solid var(--rust); padding: var(--space-sm) var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: var(--space-sm);
+  line-height: 1.5; display: none;
+}
+.supp-notes.open { display: block; }
+.supp-none { color: var(--chalk-tertiary); text-align: center; padding: var(--space-2xl) 0; font-size: var(--text-lg); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROGRAM LIBRARY
+   ═══════════════════════════════════════════════════════════════════════════ */
+.prog-filters { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); align-items: center; }
+.prog-filter-label {
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--chalk-tertiary); margin-right: 2px;
+}
+.prog-chip {
+  padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--line-hover);
+  background: var(--iron-elevated); color: var(--chalk-secondary);
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-weight: 500; font-size: 0.78rem;
+  letter-spacing: 0.05em; cursor: pointer; transition: all var(--duration-fast);
+}
+.prog-chip:hover, .prog-chip.active { background: var(--blood-dim); border-color: var(--blood); color: var(--chalk); }
+.prog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-md); }
+.prog-card {
+  background: var(--iron-elevated); border: 1px solid var(--line);
+  border-radius: var(--radius-md); overflow: hidden;
+  transition: border-color var(--duration-fast), transform var(--duration-fast);
+}
+.prog-card:hover { border-color: var(--blood-dim); transform: translateY(-1px); }
+.prog-top { padding: var(--space-md) var(--space-md) var(--space-sm); }
+.prog-name {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif; font-size: var(--text-2xl);
+  color: var(--chalk); letter-spacing: 0.04em; line-height: 1; margin-bottom: 2px;
+}
+.prog-author { font-size: var(--text-xs); color: var(--chalk-tertiary); font-family: 'Teko', 'Space Grotesk', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-sm); }
+.prog-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--space-sm); }
+.prog-level, .prog-goal {
+  font-size: 0.6rem; font-family: 'Teko', 'Space Grotesk', sans-serif; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-full);
+}
+.prog-level.beginner { background: rgba(52,211,153,0.12); color: #34d399; }
+.prog-level.intermediate { background: rgba(251,191,36,0.12); color: #fbbf24; }
+.prog-level.advanced { background: rgba(248,113,113,0.12); color: #f87171; }
+.prog-goal { background: var(--blood-dim); color: var(--ember-text); }
+.prog-meta { display: flex; gap: var(--space-lg); padding: var(--space-sm) var(--space-md); background: var(--iron-surface); }
+.prog-meta-item { font-size: var(--text-xs); color: var(--chalk-secondary); }
+.prog-meta-item strong { display: block; font-family: 'Bebas Neue', 'Space Grotesk', sans-serif; font-size: var(--text-xl); color: var(--chalk); letter-spacing: 0.03em; line-height: 1.1; }
+.prog-desc { font-size: var(--text-sm); color: var(--chalk-secondary); line-height: 1.55; padding: var(--space-sm) var(--space-md); }
+.prog-expand {
+  display: block; width: 100%; background: var(--iron-surface);
+  border: none; border-top: 1px solid var(--line); color: var(--blood);
+  font-size: var(--text-sm); font-family: 'Teko', 'Space Grotesk', sans-serif; font-weight: 500;
+  letter-spacing: 0.05em; padding: var(--space-sm); cursor: pointer;
+  transition: background var(--duration-fast);
+}
+.prog-expand:hover { background: var(--iron-elevated); }
+.prog-details {
+  overflow: hidden; max-height: 0;
+  transition: max-height 350ms var(--ease-out-expo);
+}
+.prog-details.open { max-height: 500px; }
+.prog-details-inner { padding: var(--space-md); }
+.prog-week { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin-bottom: var(--space-md); }
+.prog-week td { padding: 5px 8px; border-bottom: 1px solid var(--line); }
+.prog-week td:first-child { color: var(--chalk-tertiary); font-family: 'Teko', sans-serif; font-weight: 500; letter-spacing: 0.06em; width: 55px; }
+.prog-science {
+  font-size: var(--text-sm); color: var(--chalk-secondary); background: var(--iron-surface);
+  border-left: 2px solid var(--rust); padding: var(--space-sm) var(--space-md);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STRENGTH STANDARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ss-result { margin-top: var(--space-xl); }
+.ss-category {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif; font-size: var(--text-3xl);
+  letter-spacing: 0.05em; text-align: center; margin-bottom: var(--space-md);
+}
+.ss-bar-wrap { background: var(--iron-elevated); border-radius: var(--radius-full); height: 14px; position: relative; overflow: visible; margin-bottom: 6px; }
+.ss-bar-fill { height: 100%; border-radius: var(--radius-full); transition: width 500ms var(--ease-out-expo); }
+.ss-marker {
+  position: absolute; top: -5px; transform: translateX(-50%);
+  width: 4px; height: 24px; background: var(--chalk); border-radius: 2px;
+  transition: left 500ms var(--ease-out-expo);
+}
+.ss-ticks {
+  display: flex; justify-content: space-between; font-size: 0.58rem;
+  font-family: 'Teko', 'Space Grotesk', sans-serif; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--chalk-tertiary); margin-top: 4px;
+}
+.ss-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); margin-top: var(--space-lg); }
+.ss-stat {
+  background: var(--iron-elevated); border-radius: var(--radius-sm);
+  padding: var(--space-sm); text-align: center;
+}
+.ss-stat-label { font-size: 0.62rem; font-family: 'Teko', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--chalk-tertiary); }
+.ss-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: var(--text-xl); color: var(--chalk); }
+.ss-note { font-size: var(--text-sm); color: var(--chalk-secondary); line-height: 1.5; margin-top: var(--space-md); }
   </style>
 </head>
 
@@ -4054,71 +4483,128 @@ select.field-input option {
             <p class="home-subtitle">Nutrition and training tools backed by peer-reviewed research.</p>
           </div>
 
-          <!-- Quick Start -->
+          <!-- Quick Start + Stats -->
           <div class="home-quickstart">
             <button class="home-start-btn" onclick="switchToView('calculator')">
               <span class="home-start-icon">→</span>
-              <span>Start Planning</span>
+              <span>Build My Plan</span>
             </button>
           </div>
 
-          <!-- Index / Table of Contents -->
-          <div class="home-index">
-            <h2 class="home-index-title">What's Inside</h2>
+          <div class="home-stats">
+            <div class="home-stat"><div class="home-stat-val">30+</div><div class="home-stat-label">Calculators</div></div>
+            <div class="home-stat"><div class="home-stat-val">80+</div><div class="home-stat-label">Foods</div></div>
+            <div class="home-stat"><div class="home-stat-val">8</div><div class="home-stat-label">Programs</div></div>
+            <div class="home-stat"><div class="home-stat-val">17</div><div class="home-stat-label">Muscle Groups</div></div>
+          </div>
 
-            <div class="home-index-grid">
-              <!-- Plan -->
-              <div class="home-index-card" onclick="switchToView('calculator')">
-                <div class="home-index-icon">📊</div>
-                <div class="home-index-content">
-                  <h3>Plan</h3>
-                  <p>Personalized macro and calorie targets using Mifflin-St Jeor and ISSN protein guidelines. Training programs with periodization.</p>
-                </div>
+          <!-- Full Tool Directory -->
+          <div class="home-dir">
+            <div class="home-dir-header">
+              <div class="home-dir-heading">Everything Inside</div>
+              <div class="home-dir-count">Click any tool to jump straight to it</div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','body')">Body Composition →</div>
               </div>
-
-              <!-- Foods -->
-              <div class="home-index-card" onclick="switchToView('foods')">
-                <div class="home-index-icon">🥗</div>
-                <div class="home-index-content">
-                  <h3>Foods</h3>
-                  <p>80+ foods with complete macros and micros. Searchable database for meal building.</p>
-                </div>
-              </div>
-
-              <!-- Tools -->
-              <div class="home-index-card" onclick="switchToView('tools')">
-                <div class="home-index-icon">🔧</div>
-                <div class="home-index-content">
-                  <h3>Tools</h3>
-                  <p>FFMI calculator, body fat estimation, strength scores (Wilks/DOTS), progressive overload, deload generator, supplement stacks, and more.</p>
-                  <div class="home-index-sublinks">
-                    <span onclick="event.stopPropagation(); switchToView('tools', 'body')">Body Composition</span>
-                    <span onclick="event.stopPropagation(); switchToView('tools', 'training')">Training</span>
-                    <span onclick="event.stopPropagation(); switchToView('tools', 'nutrition')">Nutrition</span>
-                    <span onclick="event.stopPropagation(); switchToView('tools', 'utilities')">Utilities</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Knowledge -->
-              <div class="home-index-card" onclick="switchToView('knowledge')">
-                <div class="home-index-icon">📚</div>
-                <div class="home-index-content">
-                  <h3>Knowledge</h3>
-                  <p>Training science fundamentals: muscle fibers, recovery, 1RM calculations, heart rate zones. Full scientific reference library.</p>
-                </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','body')">Muscle Map ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">FFMI Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Navy Body Fat</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Genetic Potential</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Ideal Measurements</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Weekly Check-In</span>
               </div>
             </div>
 
-            <!-- Additional Features -->
-            <div class="home-extras">
-              <h3>Also Available</h3>
-              <div class="home-extras-list">
-                <span onclick="switchToView('tools', 'utilities'); setTimeout(() => document.querySelector('[onclick*=gyms]')?.click(), 100)">Gym Finder</span>
-                <span onclick="switchToView('tools', 'utilities')">Unit Converter</span>
-                <span onclick="switchToView('tools', 'competition')">Contest Prep</span>
-                <span onclick="switchToView('tools', 'recovery')">Recovery Assessment</span>
-                <span onclick="switchToView('tools', 'utilities')">PR Tracker</span>
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','training')">Training →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Program Library ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Strength Standards ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Volume Landmarks (MEV/MRV)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">1RM Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Strength Score (Wilks/DOTS)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Progressive Overload</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Deload Generator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Periodization Planner</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Heart Rate Zones</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rep Max Table</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rest Timer</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','nutrition')">Nutrition →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','nutrition')">Supplement Database ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Carb Cycling Protocol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Reverse Dieting</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Body Recomposition</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Macro Meal Builder</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Meal Prep Cost</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','recovery')">Recovery →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Daily Readiness Score</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Sleep Assessment</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Recovery Readiness</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Stress & Cortisol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Injury Prevention Guide</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','competition')">Competition →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Peak Week Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Weight Cut (Combat Sports)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Contest Countdown</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">IFBB Mandatory Poses</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Water Loading Protocol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">HMB Guide</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','utilities')">Utilities →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">PR Tracker</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Workout Logger</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Water Intake Tracker</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Supplement Stack Builder</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Unit Converter</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Bag Checklist</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Finder</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('knowledge')">Knowledge →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Training Science</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Golden Era Wisdom</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Scientific References</span>
+                <span class="home-dir-chip new" onclick="switchToView('knowledge')">Books & Podcasts ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('calculator')">Personalized Plan</span>
+                <span class="home-dir-chip" onclick="switchToView('foods')">Food Database</span>
               </div>
             </div>
           </div>
@@ -5138,6 +5624,246 @@ select.field-input option {
           </div>
           <div id="mythBustersGrid"></div>
 
+          <!-- ═══════ RESOURCES: BOOKS, PODCASTS, JOURNALS & NEWS ═══════ -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-sm);">Essential Reading</h2>
+          <p style="color: var(--chalk-secondary); margin-bottom: var(--space-lg);">The most important books in strength science and bodybuilding — curated, not comprehensive.</p>
+
+          <div class="resources-grid">
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — TRAINING SCIENCE</div>
+              <div class="resource-card-title">The Science and Practice of Strength Training</div>
+              <div class="resource-card-author">Vladimir Zatsiorsky & William Kraemer · 3rd ed. 2020</div>
+              <div class="resource-card-desc">The definitive academic text on resistance training methodology. Covers periodization, intensity zones, and neural adaptations with rigorous scientific backing. Required reading for serious coaches.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Science-Practice-Strength-Training/dp/149257015X" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — HYPERTROPHY</div>
+              <div class="resource-card-title">Science and Development of Muscle Hypertrophy</div>
+              <div class="resource-card-author">Brad Schoenfeld · 2nd ed. 2020</div>
+              <div class="resource-card-desc">The most comprehensive evidence-based treatment of muscle growth mechanisms. Schoenfeld's meta-analyses are cited throughout this site. Covers mechanical tension, metabolic stress, and muscle damage.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Science-Development-Muscle-Hypertrophy/dp/1492597678" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — PROGRAMMING</div>
+              <div class="resource-card-title">Starting Strength: Basic Barbell Training</div>
+              <div class="resource-card-author">Mark Rippetoe · 3rd ed. 2011</div>
+              <div class="resource-card-desc">The gold standard introduction to barbell training. Technically dense, practically actionable. Rippetoe's linear progression model remains the most effective protocol for raw beginners gaining strength.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Starting-Strength-Basic-Barbell-Training/dp/0982522738" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — POWERLIFTING</div>
+              <div class="resource-card-title">Beyond Bodybuilding</div>
+              <div class="resource-card-author">Pavel Tsatsouline · 2005</div>
+              <div class="resource-card-desc">Dense collection of advanced strength and hypertrophy techniques from Soviet sports science tradition. Covers tension methods, grease-the-groove, and unconventional programming strategies with real carryover.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Beyond-Bodybuilding-Pavel-Tsatsouline/dp/0938045253" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — NUTRITION</div>
+              <div class="resource-card-title">The Renaissance Diet 2.0</div>
+              <div class="resource-card-author">Mike Israetel, Melissa Davis & James Hoffmann · 2019</div>
+              <div class="resource-card-desc">Evidence-based nutrition for physique athletes from the RP Strength team. Covers macros, meal timing, cutting, bulking, and contest prep. One of the few bodybuilding nutrition books grounded in actual research.</div>
+              <a class="resource-card-link" href="https://renaissanceperiodization.com/rp-diet-2-0" target="_blank" rel="noopener">VIEW ON RP STRENGTH ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — PERIODIZATION</div>
+              <div class="resource-card-title">Periodization: Theory and Methodology of Training</div>
+              <div class="resource-card-author">Tudor Bompa & Carlo Buzzichelli · 6th ed. 2019</div>
+              <div class="resource-card-desc">The foundational text on training periodization from the originator of the concept. Essential for understanding macrocycle, mesocycle, and microcycle design for long-term athletic development.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Periodization-Theory-Methodology-Training-Bompa/dp/1492592765" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — BIOMECHANICS</div>
+              <div class="resource-card-title">Strength Training Anatomy</div>
+              <div class="resource-card-author">Frédéric Delavier · 3rd ed. 2010</div>
+              <div class="resource-card-desc">Detailed anatomical illustrations of muscles worked in every major exercise. Invaluable for understanding which fibers a lift targets and how grip/stance changes recruitment. Best visual reference in the field.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/Strength-Training-Anatomy-Frederic-Delavier/dp/0736092269" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">BOOK — BODYBUILDING HISTORY</div>
+              <div class="resource-card-title">The New Encyclopedia of Modern Bodybuilding</div>
+              <div class="resource-card-author">Arnold Schwarzenegger with Bill Dobbins · Revised 1998</div>
+              <div class="resource-card-desc">Arnold's comprehensive 800-page manual covering training, nutrition, psychology, and competition. Parts are outdated, but the training philosophy and historical context remain influential and insightful.</div>
+              <a class="resource-card-link" href="https://www.amazon.com/New-Encyclopedia-Modern-Bodybuilding/dp/0684857219" target="_blank" rel="noopener">VIEW ON AMAZON ↗</a>
+            </div>
+
+          </div>
+
+          <!-- PODCASTS -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-sm);">Top Podcasts</h2>
+          <p style="color: var(--chalk-secondary); margin-bottom: var(--space-lg);">Evidence-based shows by researchers and elite coaches — no supplement shilling, no broscience.</p>
+
+          <div class="resources-grid">
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — TRAINING &amp; NUTRITION</div>
+              <div class="resource-card-title">RP Strength Podcast</div>
+              <div class="resource-card-author">Mike Israetel, Jared Feather &amp; guests</div>
+              <div class="resource-card-desc">Dr. Mike Israetel (PhD Exercise Physiology) discusses hypertrophy, nutrition, and programming with a research-first lens. Candid, technical, and frequently updated with new sports science findings.</div>
+              <a class="resource-card-link" href="https://open.spotify.com/show/6i4GljEePLYtggM2gCRSXW" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — SCIENCE DEEP DIVES</div>
+              <div class="resource-card-title">Huberman Lab</div>
+              <div class="resource-card-author">Andrew Huberman, PhD (Stanford Neuroscience)</div>
+              <div class="resource-card-desc">Long-form science episodes covering sleep, hormones, training, and recovery. Episodes on testosterone optimization, hypertrophy, and cold exposure are particularly relevant to strength athletes.</div>
+              <a class="resource-card-link" href="https://open.spotify.com/show/79CkJF3UJTHFV8Dse3Oy0P" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — STRENGTH &amp; POWERLIFTING</div>
+              <div class="resource-card-title">Barbell Medicine Podcast</div>
+              <div class="resource-card-author">Jordan Feigenbaum MD &amp; Austin Baraki MD</div>
+              <div class="resource-card-desc">Two physician-powerlifters applying evidence-based medicine to strength training. Excellent for understanding pain management, injury prevention, periodization, and critically evaluating common gym myths.</div>
+              <a class="resource-card-link" href="https://www.barbellmedicine.com/podcasts/" target="_blank" rel="noopener">LISTEN ON BARBELL MEDICINE ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — APPLIED SCIENCE</div>
+              <div class="resource-card-title">The Mike Israetel Show</div>
+              <div class="resource-card-author">Mike Israetel, PhD · Renaissance Periodization</div>
+              <div class="resource-card-desc">Shorter, more focused episodes applying sports science to everyday training questions. Covers volume landmarks, exercise selection, deloads, and nutrition periodization for physique athletes.</div>
+              <a class="resource-card-link" href="https://open.spotify.com/show/5DRFiMmA2bXMnGHBP6GQIL" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — STRENGTH COACHING</div>
+              <div class="resource-card-title">Starting Strength Radio</div>
+              <div class="resource-card-author">Mark Rippetoe &amp; guests</div>
+              <div class="resource-card-desc">Technical discussions on barbell training, programming, and coaching from Rippetoe and various experts. Best for beginners learning the lifts and intermediate lifters troubleshooting linear progression.</div>
+              <a class="resource-card-link" href="https://open.spotify.com/show/1iyMVAIPh1nqBqAeKVGa0J" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a>
+            </div>
+
+            <div class="resource-card">
+              <div class="resource-card-type">PODCAST — NUTRITION SCIENCE</div>
+              <div class="resource-card-title">Sigma Nutrition Radio</div>
+              <div class="resource-card-author">Danny Lennon, MSc Nutritional Science</div>
+              <div class="resource-card-desc">Rigorous nutrition science interviews with leading researchers. Episodes on protein metabolism, energy balance, micronutrients, and supplement research are among the most research-accurate content available.</div>
+              <a class="resource-card-link" href="https://sigmanutrition.com/podcast/" target="_blank" rel="noopener">LISTEN ON SIGMA ↗</a>
+            </div>
+
+          </div>
+
+          <!-- JOURNALS -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-sm);">Research Journals</h2>
+          <p style="color: var(--chalk-secondary); margin-bottom: var(--space-lg);">The primary literature sources this site draws from. Use PubMed or Google Scholar to search them.</p>
+
+          <div class="news-links">
+            <a class="news-link" href="https://link.springer.com/journal/40279" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Sports Medicine</div>
+                <div class="news-link-desc">Springer · Reviews and meta-analyses in exercise science and sports medicine — highest impact journal in the field</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://journals.lww.com/nsca-jscr" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Journal of Strength and Conditioning Research</div>
+                <div class="news-link-desc">NSCA · Applied strength training, periodization, and athletic performance research</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://jissn.biomedcentral.com" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Journal of the International Society of Sports Nutrition</div>
+                <div class="news-link-desc">ISSN · Open-access nutrition research; source of the Position Stands cited throughout this site</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://physiologyonline.physiology.org" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Physiology (APS)</div>
+                <div class="news-link-desc">American Physiological Society · Muscle physiology, metabolism, and exercise adaptation mechanisms</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://www.tandfonline.com/journals/ijnb20" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">International Journal of Sport Nutrition and Exercise Metabolism</div>
+                <div class="news-link-desc">Human Kinetics · Macronutrient metabolism, body composition, and supplement research</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">PubMed / MEDLINE</div>
+                <div class="news-link-desc">NIH · Search the entire biomedical literature — start any evidence-based research here</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- NEWS & WEBSITES -->
+          <h2 style="margin-top: var(--space-xxl); margin-bottom: var(--space-sm);">Trusted Websites &amp; News</h2>
+          <p style="color: var(--chalk-secondary); margin-bottom: var(--space-lg);">Quality signal over noise — sites that cite sources and update their content.</p>
+
+          <div class="news-links" style="margin-bottom: var(--space-xxl);">
+            <a class="news-link" href="https://www.strongerbyscience.com" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Stronger By Science</div>
+                <div class="news-link-desc">Greg Nuckols · Long-form evidence-based training and nutrition analysis. Best free content on the internet for serious strength athletes</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://renaissanceperiodization.com/articles" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">RP Strength Articles</div>
+                <div class="news-link-desc">Renaissance Periodization · Volume landmark research, hypertrophy protocols, and nutrition guides from Dr. Mike Israetel's team</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://www.barbellmedicine.com/blog/" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Barbell Medicine Blog</div>
+                <div class="news-link-desc">Jordan Feigenbaum MD · Evidence-based programming, injury management, and strength medicine articles</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://www.exrx.net" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">ExRx.net</div>
+                <div class="news-link-desc">Exercise prescription database with strength standards, exercise guides, and body composition norms referenced by fitness professionals</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://www.t-nation.com" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">T-Nation</div>
+                <div class="news-link-desc">Practical programming and technique articles from coaches like Christian Thibaudeau, Paul Carter, and Dan John — always check for citations</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://mennohenselmans.com/articles/" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Menno Henselmans Blog</div>
+                <div class="news-link-desc">Bayesian Bodybuilding · Research reviews on hypertrophy, body recomposition, and optimal training frequency with full citations</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://sigmanutrition.com/articles/" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">Sigma Nutrition Articles</div>
+                <div class="news-link-desc">Danny Lennon · Rigorous nutrition science breakdowns for athletes — one of the most citation-dense nutrition education sites available</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+            <a class="news-link" href="https://www.reddit.com/r/weightroom/" target="_blank" rel="noopener">
+              <div>
+                <div class="news-link-name">r/weightroom</div>
+                <div class="news-link-desc">Reddit's highest signal strength community — intermediate and advanced lifters sharing training logs, technique reviews, and program discussions</div>
+              </div>
+              <span class="news-link-arrow">↗</span>
+            </a>
+          </div>
+
         </div>
       </section>
     </div>
@@ -5242,6 +5968,135 @@ select.field-input option {
 
           <!-- Body Composition Tools -->
           <div id="tools-body" class="tools-category active">
+
+            <!-- Interactive Muscle Map -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Interactive Muscle Map</h2>
+                  <p class="card-subtitle">Click any muscle group for exercises, weekly volume targets, and recovery data</p>
+                </div>
+                <span class="tool-badge">Schoenfeld 2017</span>
+              </div>
+              <div class="card-body">
+                <div class="mm-toggle">
+                  <button class="btn btn-primary" id="mm-btn-front" onclick="toggleMuscleView('front')">Front View</button>
+                  <button class="btn btn-secondary" id="mm-btn-back" onclick="toggleMuscleView('back')">Back View</button>
+                </div>
+                <div class="muscle-map-layout">
+                  <div class="mm-figure-wrap">
+                    <!-- FRONT SVG -->
+                    <svg id="mm-svg-front" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" aria-label="Front body muscle map">
+                      <!-- Body silhouette -->
+                      <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
+                      <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
+                      <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
+                      <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
+                      <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
+                      <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
+                      <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
+                      <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
+                      <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
+                      <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
+                      <!-- MUSCLE REGIONS — FRONT -->
+                      <ellipse class="muscle-region" data-muscle="front-delt" cx="52" cy="76" rx="17" ry="17"/>
+                      <ellipse class="muscle-region" data-muscle="front-delt" cx="168" cy="76" rx="17" ry="17"/>
+                      <path class="muscle-region" data-muscle="chest" d="M62,68 L108,68 L108,138 L80,144 L66,118 Z"/>
+                      <path class="muscle-region" data-muscle="chest" d="M112,68 L158,68 L154,118 L140,144 L112,138 Z"/>
+                      <rect class="muscle-region" data-muscle="abs" x="87" y="147" width="46" height="68" rx="5"/>
+                      <ellipse class="muscle-region" data-muscle="hip-flexors" cx="110" cy="232" rx="36" ry="13"/>
+                      <ellipse class="muscle-region" data-muscle="biceps" cx="34" cy="142" rx="13" ry="32"/>
+                      <ellipse class="muscle-region" data-muscle="biceps" cx="186" cy="142" rx="13" ry="32"/>
+                      <ellipse class="muscle-region" data-muscle="forearms" cx="28" cy="196" rx="11" ry="26"/>
+                      <ellipse class="muscle-region" data-muscle="forearms" cx="192" cy="196" rx="11" ry="26"/>
+                      <path class="muscle-region" data-muscle="quads" d="M62,254 L104,254 L102,368 L60,368 Z"/>
+                      <path class="muscle-region" data-muscle="quads" d="M116,254 L158,254 L160,368 L118,368 Z"/>
+                      <rect class="muscle-region" data-muscle="tibialis" x="60" y="378" width="43" height="100" rx="4"/>
+                      <rect class="muscle-region" data-muscle="tibialis" x="117" y="378" width="43" height="100" rx="4"/>
+                      <!-- Labels -->
+                      <text class="mm-label" x="52" y="76">DELT</text>
+                      <text class="mm-label" x="168" y="76">DELT</text>
+                      <text class="mm-label" x="85" y="106">CHEST</text>
+                      <text class="mm-label" x="135" y="106">CHEST</text>
+                      <text class="mm-label" x="110" y="181">ABS</text>
+                      <text class="mm-label" x="34" y="142">BI</text>
+                      <text class="mm-label" x="186" y="142">BI</text>
+                      <text class="mm-label" x="83" y="298">QUAD</text>
+                      <text class="mm-label" x="137" y="298">QUAD</text>
+                      <text class="mm-label" x="81" y="428">TIB</text>
+                      <text class="mm-label" x="138" y="428">TIB</text>
+                    </svg>
+                    <!-- BACK SVG -->
+                    <svg id="mm-svg-back" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-label="Back body muscle map">
+                      <!-- Body silhouette (same as front) -->
+                      <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
+                      <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
+                      <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
+                      <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
+                      <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
+                      <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
+                      <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
+                      <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
+                      <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
+                      <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
+                      <!-- MUSCLE REGIONS — BACK -->
+                      <path class="muscle-region" data-muscle="traps" d="M80,56 L140,56 L150,100 L110,110 L70,100 Z"/>
+                      <ellipse class="muscle-region" data-muscle="rear-delt" cx="50" cy="78" rx="17" ry="16"/>
+                      <ellipse class="muscle-region" data-muscle="rear-delt" cx="170" cy="78" rx="17" ry="16"/>
+                      <path class="muscle-region" data-muscle="lats" d="M60,108 L94,108 L90,196 L56,208 Z"/>
+                      <path class="muscle-region" data-muscle="lats" d="M126,108 L160,108 L164,208 L130,196 Z"/>
+                      <rect class="muscle-region" data-muscle="rhomboids" x="90" y="110" width="40" height="48" rx="4"/>
+                      <rect class="muscle-region" data-muscle="lower-back" x="86" y="174" width="48" height="44" rx="4"/>
+                      <ellipse class="muscle-region" data-muscle="triceps" cx="32" cy="148" rx="13" ry="34"/>
+                      <ellipse class="muscle-region" data-muscle="triceps" cx="188" cy="148" rx="13" ry="34"/>
+                      <path class="muscle-region" data-muscle="glutes" d="M62,252 L108,252 L106,288 L60,288 Z"/>
+                      <path class="muscle-region" data-muscle="glutes" d="M112,252 L158,252 L160,288 L114,288 Z"/>
+                      <path class="muscle-region" data-muscle="hamstrings" d="M62,292 L105,292 L103,368 L60,368 Z"/>
+                      <path class="muscle-region" data-muscle="hamstrings" d="M115,292 L158,292 L160,368 L117,368 Z"/>
+                      <rect class="muscle-region" data-muscle="calves" x="60" y="378" width="43" height="100" rx="4"/>
+                      <rect class="muscle-region" data-muscle="calves" x="117" y="378" width="43" height="100" rx="4"/>
+                      <!-- Labels -->
+                      <text class="mm-label" x="110" y="86">TRAPS</text>
+                      <text class="mm-label" x="50" y="78">DELT</text>
+                      <text class="mm-label" x="170" y="78">DELT</text>
+                      <text class="mm-label" x="74" y="155">LAT</text>
+                      <text class="mm-label" x="146" y="155">LAT</text>
+                      <text class="mm-label" x="110" y="134">RHOM</text>
+                      <text class="mm-label" x="110" y="196">LO BACK</text>
+                      <text class="mm-label" x="32" y="148">TRI</text>
+                      <text class="mm-label" x="188" y="148">TRI</text>
+                      <text class="mm-label" x="84" y="270">GLUTE</text>
+                      <text class="mm-label" x="136" y="270">GLUTE</text>
+                      <text class="mm-label" x="83" y="330">HAM</text>
+                      <text class="mm-label" x="137" y="330">HAM</text>
+                      <text class="mm-label" x="81" y="428">CALF</text>
+                      <text class="mm-label" x="138" y="428">CALF</text>
+                    </svg>
+                  </div>
+                  <!-- Detail Panel -->
+                  <div class="mm-detail-panel">
+                    <div class="mm-prompt" id="mm-prompt">
+                      <div class="mm-prompt-icon">◉</div>
+                      <div>Select a muscle group</div>
+                    </div>
+                    <div class="mm-content" id="mm-content">
+                      <div class="mm-name" id="mm-name"></div>
+                      <div class="mm-func" id="mm-func"></div>
+                      <div class="mm-section-head">Top Exercises</div>
+                      <ul class="mm-ex-list" id="mm-exercises"></ul>
+                      <div class="mm-section-head">Weekly Volume — sets/wk (Schoenfeld et al. 2017)</div>
+                      <div>
+                        <div class="mm-vol-bar"><div class="mm-vol-fill" id="mm-vol-fill" style="width:0%"></div></div>
+                        <div class="mm-vol-nums" id="mm-vol-nums"></div>
+                      </div>
+                      <div class="mm-recovery" id="mm-recovery"></div>
+                      <div class="mm-note" id="mm-note"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- FFMI Calculator -->
             <div class="card tool-card">
               <div class="card-header">
@@ -5509,6 +6364,94 @@ select.field-input option {
 
           <!-- Training Tools -->
           <div id="tools-training" class="tools-category">
+
+            <!-- Program Library -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Training Program Library</h2>
+                  <p class="card-subtitle">Evidence-based programs ranked by level and goal — find the right program for where you are</p>
+                </div>
+                <span class="tool-badge">Evidence-Based</span>
+              </div>
+              <div class="card-body">
+                <div class="prog-filters">
+                  <span class="prog-filter-label">Level:</span>
+                  <button class="prog-chip active" data-prog-level="all" onclick="filterPrograms()">All</button>
+                  <button class="prog-chip" data-prog-level="beginner" onclick="filterPrograms()">Beginner</button>
+                  <button class="prog-chip" data-prog-level="intermediate" onclick="filterPrograms()">Intermediate</button>
+                  <button class="prog-chip" data-prog-level="advanced" onclick="filterPrograms()">Advanced</button>
+                  <span class="prog-filter-label" style="margin-left:8px">Goal:</span>
+                  <button class="prog-chip active" data-prog-goal="all" onclick="filterPrograms()">All</button>
+                  <button class="prog-chip" data-prog-goal="strength" onclick="filterPrograms()">Strength</button>
+                  <button class="prog-chip" data-prog-goal="hypertrophy" onclick="filterPrograms()">Hypertrophy</button>
+                  <button class="prog-chip" data-prog-goal="powerbuilding" onclick="filterPrograms()">Powerbuilding</button>
+                </div>
+                <div class="prog-grid" id="prog-grid"></div>
+              </div>
+            </div>
+
+            <!-- Strength Standards -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Strength Standards</h2>
+                  <p class="card-subtitle">See how your lifts compare against population norms — from untrained to elite</p>
+                </div>
+                <span class="tool-badge">ExRx / Kilgore</span>
+              </div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field-label" for="ss-lift">Lift</label>
+                    <select id="ss-lift" class="field-input">
+                      <option value="squat">Back Squat</option>
+                      <option value="bench">Bench Press</option>
+                      <option value="deadlift">Deadlift</option>
+                      <option value="ohp">Overhead Press</option>
+                      <option value="row">Barbell Row</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label" for="ss-gender">Gender</label>
+                    <select id="ss-gender" class="field-input">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field-label" for="ss-bw">Bodyweight</label>
+                    <div class="field-combo">
+                      <input type="number" id="ss-bw" class="field-input" placeholder="175" min="80" max="400">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label" for="ss-lifted">Weight Lifted (1RM)</label>
+                    <div class="field-combo">
+                      <input type="number" id="ss-lifted" class="field-input" placeholder="225" min="1" max="1500">
+                      <span class="field-suffix">lbs</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-top:var(--space-lg)">
+                  <button type="button" class="btn btn-primary" onclick="calculateStrengthStandard()">Compare My Lift</button>
+                </div>
+                <div id="ss-result" class="ss-result hidden">
+                  <div class="ss-category" id="ss-category"></div>
+                  <div class="ss-bar-wrap">
+                    <div class="ss-bar-fill" id="ss-bar-fill"></div>
+                    <div class="ss-marker" id="ss-marker"></div>
+                  </div>
+                  <div class="ss-ticks">
+                    <span>Untrained</span><span>Beginner</span><span>Novice</span><span>Intermediate</span><span>Advanced</span><span>Elite</span>
+                  </div>
+                  <div class="ss-stats" id="ss-stats"></div>
+                  <div class="ss-note" id="ss-note"></div>
+                </div>
+              </div>
+            </div>
+
             <!-- Volume Landmarks Calculator -->
             <div class="card tool-card">
               <div class="card-header">
@@ -5848,6 +6791,29 @@ select.field-input option {
 
           <!-- Nutrition Tools -->
           <div id="tools-nutrition" class="tools-category">
+
+            <!-- Supplement Evidence Database -->
+            <div class="card tool-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Supplement Evidence Database</h2>
+                  <p class="card-subtitle">Every supplement graded by the actual strength of scientific evidence — no marketing, no hype</p>
+                </div>
+                <span class="tool-badge">PubMed / ISSN</span>
+              </div>
+              <div class="card-body">
+                <div class="supp-filters">
+                  <input type="text" id="supp-search" class="supp-search" placeholder="Search supplements..." oninput="filterSupplements()">
+                  <button class="tier-chip active" data-tier="all" onclick="filterSupplementsByTier(this)">All</button>
+                  <button class="tier-chip" data-tier="A" onclick="filterSupplementsByTier(this)">Tier A — Strong</button>
+                  <button class="tier-chip" data-tier="B" onclick="filterSupplementsByTier(this)">Tier B — Moderate</button>
+                  <button class="tier-chip" data-tier="C" onclick="filterSupplementsByTier(this)">Tier C — Limited</button>
+                  <button class="tier-chip" data-tier="D" onclick="filterSupplementsByTier(this)">Tier D — Weak</button>
+                </div>
+                <div class="supp-grid" id="supp-grid"></div>
+              </div>
+            </div>
+
             <!-- Carb Cycling Protocol -->
             <div class="card tool-card">
               <div class="card-header">
@@ -12033,6 +12999,617 @@ if (!localStorage.getItem('mf-onboarded')) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MUSCLE MAP
+// Volume data aligned with MUSCLE_GROUPS in exercises.js (Schoenfeld 2017)
+// Recovery times: Schoenfeld 2010; Zatsiorsky & Kraemer "Science and Practice of Strength Training"
+// ═══════════════════════════════════════════════════════════════════════════
+const MUSCLE_DATA = {
+  chest: {
+    name: 'Chest — Pectoralis Major',
+    func: 'Horizontal shoulder adduction and internal rotation. The prime mover in all horizontal pressing movements.',
+    exercises: ['Barbell Bench Press', 'Incline Dumbbell Press', 'Cable Crossover', 'Weighted Dips', 'Pec Deck Machine'],
+    volMin: 10, volOpt: 16, volMax: 22,
+    recovery: '48–72 hours',
+    note: 'The upper chest (clavicular head) responds best to 30–45° incline angles. Control the eccentric — studies show it produces more hypertrophy stimulus than the concentric (Schoenfeld 2012).'
+  },
+  'front-delt': {
+    name: 'Front Deltoid — Anterior',
+    func: 'Shoulder flexion and internal rotation. Heavily stimulated by all horizontal and vertical pressing.',
+    exercises: ['Overhead Press', 'Landmine Press', 'Arnold Press', 'Cable Front Raise', 'Incline Bench Press'],
+    volMin: 0, volOpt: 8, volMax: 14,
+    recovery: '48 hours',
+    note: 'Front delts receive substantial indirect volume from every pressing movement. Isolated front raises are rarely necessary and often contribute to shoulder imbalances. Prioritize overhead pressing instead.'
+  },
+  biceps: {
+    name: 'Biceps Brachii',
+    func: 'Elbow flexion and forearm supination. The short and long heads are both maximally loaded in different parts of the ROM.',
+    exercises: ['Barbell Curl', 'Incline Dumbbell Curl', 'Spider Curl', 'Cable Curl', 'Chin-Up'],
+    volMin: 6, volOpt: 10, volMax: 16,
+    recovery: '48 hours',
+    note: 'Full stretch at the bottom of every rep is critical for hypertrophy (Pedrosa et al. 2022). Incline and spider curls force the long head into a lengthened position and maximize the stretch-mediated growth stimulus.'
+  },
+  forearms: {
+    name: 'Forearms — Wrist Flexors & Extensors',
+    func: 'Wrist flexion, extension, and grip strength. Essential stabilizers in all pulling, rowing, and carrying movements.',
+    exercises: ['Wrist Curls', 'Reverse Curls', 'Hammer Curls', 'Farmer Carries', 'Dead Hangs'],
+    volMin: 4, volOpt: 8, volMax: 12,
+    recovery: '24 hours',
+    note: 'Forearms recover rapidly and tolerate high frequency. Heavy pulling work (rows, deadlifts, pull-ups) provides significant indirect volume — assess direct training need based on grip strength demands.'
+  },
+  abs: {
+    name: 'Abs & Core — Rectus Abdominis',
+    func: 'Spinal flexion, rotation, and core stabilization. Creates intra-abdominal pressure (IAP) during heavy compound lifts.',
+    exercises: ['Cable Crunch', 'Hanging Leg Raise', 'Ab Wheel Rollout', 'Decline Crunch', 'Dragon Flag'],
+    volMin: 6, volOpt: 10, volMax: 16,
+    recovery: '24–48 hours',
+    note: 'Visible abs are primarily a function of body fat percentage, not training volume. Train the core for functional strength, spinal stability, and IAP — not purely aesthetics. Heavy squats and deadlifts provide substantial core stimulus.'
+  },
+  'hip-flexors': {
+    name: 'Hip Flexors — Iliopsoas',
+    func: 'Hip flexion and lumbar spine stabilization. Critical for squat depth, sprint mechanics, and all athletic movement.',
+    exercises: ['Hanging Knee Raise', 'Cable Hip Flexion', 'Deficit Reverse Lunge', 'Dragon Flag', 'L-Sit Hold'],
+    volMin: 0, volOpt: 6, volMax: 12,
+    recovery: '24 hours',
+    note: 'Hip flexors are often tight from prolonged sitting and weak from underuse. Strengthening + stretching is the correct protocol — not one or the other. Tight hip flexors limit glute activation and anterior pelvic tilt.'
+  },
+  quads: {
+    name: 'Quadriceps',
+    func: 'Knee extension and hip flexion (rectus femoris). The primary driver of squatting, lunging, and all knee-dominant movements.',
+    exercises: ['Back Squat', 'Front Squat', 'Leg Press', 'Hack Squat', 'Bulgarian Split Squat', 'Leg Extension'],
+    volMin: 10, volOpt: 16, volMax: 22,
+    recovery: '48–72 hours',
+    note: 'Front squats and heel elevation shift mechanical load onto the quads more effectively than low-bar squatting (Wretenberg 1996). The quads recover slowly from high-volume, heavy training — manage frequency carefully.'
+  },
+  tibialis: {
+    name: 'Tibialis Anterior',
+    func: 'Ankle dorsiflexion. A critical but routinely neglected muscle for knee health, shin splint prevention, and squat depth.',
+    exercises: ['Tibialis Raise', 'Toe Taps Against Resistance', 'Resistance Band Dorsiflexion', 'Walking on Heels'],
+    volMin: 0, volOpt: 6, volMax: 12,
+    recovery: '24 hours',
+    note: 'Strengthening the tibialis anterior dramatically reduces anterior compartment syndrome and shin splints. It also directly improves ankle dorsiflexion range of motion, increasing squat depth without heel elevation.'
+  },
+  traps: {
+    name: 'Trapezius — Upper, Mid & Lower',
+    func: 'Scapular elevation (upper), retraction (mid), and depression (lower). Coordinates all shoulder blade movement.',
+    exercises: ['Barbell Shrug', 'Rack Pull', 'Face Pull', 'Farmer Carries', 'Y-T-W Raises'],
+    volMin: 0, volOpt: 12, volMax: 20,
+    recovery: '48 hours',
+    note: 'Upper traps are easily overtrained by shrugs while lower traps are severely neglected in most programs. Weak lower traps = elevated scapulae, impingement, and poor posture. Prioritize lower and mid-trap work for shoulder health.'
+  },
+  'rear-delt': {
+    name: 'Rear Deltoid — Posterior',
+    func: 'Shoulder horizontal abduction and external rotation. Balances the anterior deltoid and stabilizes the rotator cuff.',
+    exercises: ['Face Pull', 'Rear Delt Fly', 'Band Pull-Apart', 'Reverse Pec Deck', 'Cable Rear Row'],
+    volMin: 0, volOpt: 14, volMax: 22,
+    recovery: '24–48 hours',
+    note: 'Chronic rear delt weakness is near-universal in people who press regularly. Weak rear delts lead to shoulder internal rotation, impingement, and stalled bench. 2:1 pulling-to-pressing ratio is a common recommendation.'
+  },
+  lats: {
+    name: 'Latissimus Dorsi',
+    func: 'Shoulder extension and adduction. The broadest muscle in the body — the primary muscle responsible for the V-taper.',
+    exercises: ['Weighted Pull-Up', 'Lat Pulldown', 'Seated Cable Row', 'Single-Arm DB Row', 'Straight-Arm Pulldown'],
+    volMin: 10, volOpt: 16, volMax: 22,
+    recovery: '48–72 hours',
+    note: 'Full stretch overhead (lengthened position) drives the majority of hypertrophy stimulus. Avoid cutting ROM short at the top of pull-ups or pulldowns. Stretching through the full range is critical (Pedrosa et al. 2022).'
+  },
+  rhomboids: {
+    name: 'Rhomboids — Major & Minor',
+    func: 'Scapular retraction and downward rotation. Essential for posture, shoulder health, and setting the shoulder blades before pressing.',
+    exercises: ['Barbell Row', 'Chest-Supported Row', 'Seated Cable Row (flared elbows)', 'Band Pull-Apart', 'Face Pull'],
+    volMin: 0, volOpt: 12, volMax: 20,
+    recovery: '48 hours',
+    note: 'Active scapular retraction at the end of every rowing movement approximately doubles rhomboid EMG compared to passive retraction. Consciously pinch the shoulder blades on every rep.'
+  },
+  'lower-back': {
+    name: 'Lower Back — Spinal Erectors',
+    func: 'Spinal extension and stabilization. Works isometrically during deadlifts, squats, rows, and almost every loaded compound movement.',
+    exercises: ['Deadlift', 'Romanian Deadlift', 'Back Extension', 'Good Morning', 'Reverse Hyper'],
+    volMin: 0, volOpt: 8, volMax: 14,
+    recovery: '72+ hours',
+    note: 'The erectors recover very slowly. They are a systemic fatigue limiter, not just a local one. Never train them when sore before heavy deadlifts or squats — this is how lower back injuries occur. Prioritize recovery over volume.'
+  },
+  triceps: {
+    name: 'Triceps Brachii — All Three Heads',
+    func: 'Elbow extension. Comprises approximately two-thirds of upper arm total mass. The long head also assists shoulder extension.',
+    exercises: ['Close-Grip Bench Press', 'Overhead Tricep Extension', 'Cable Pushdown', 'Skull Crusher', 'Weighted Dips'],
+    volMin: 6, volOpt: 10, volMax: 16,
+    recovery: '48 hours',
+    note: 'The long head (the largest, most visible head) is only fully stretched when the arm is raised overhead. Overhead tricep extensions are therefore superior to pushdowns for long-head hypertrophy. Do not neglect them.'
+  },
+  glutes: {
+    name: 'Gluteus Maximus',
+    func: 'Hip extension and external rotation. The most powerful muscle in the human body. Critical for sprinting, jumping, and athletic output.',
+    exercises: ['Hip Thrust', 'Romanian Deadlift', 'Bulgarian Split Squat', 'Cable Pull-Through', 'Step-Up'],
+    volMin: 8, volOpt: 12, volMax: 18,
+    recovery: '48–72 hours',
+    note: 'Hip thrusts produce 3–4× higher glute EMG activation than squats (Contreras et al. 2015). Full hip extension at the top of each rep is non-negotiable. Squats are primarily quad exercises — do not rely on them alone for glute development.'
+  },
+  hamstrings: {
+    name: 'Hamstrings — Biceps Femoris & Semimembranosus',
+    func: 'Knee flexion AND hip extension. A two-joint muscle that must be trained in both functions for complete development and injury prevention.',
+    exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Hamstring Curl', 'Good Morning', 'Glute-Ham Raise'],
+    volMin: 8, volOpt: 12, volMax: 18,
+    recovery: '48–72 hours',
+    note: 'Hip-hinge movements (RDLs, good mornings) target the proximal hamstring attachment. Leg curls target the distal attachment. Both are required for complete development. The Nordic curl produces the greatest eccentric overload and is highly effective for injury prevention.'
+  },
+  calves: {
+    name: 'Calves — Gastrocnemius & Soleus',
+    func: 'Plantarflexion. Gastrocnemius (two-joint, runs over knee) peaks with straight knee; soleus (single-joint) peaks with bent knee.',
+    exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise', 'Jump Rope'],
+    volMin: 8, volOpt: 12, volMax: 18,
+    recovery: '24–48 hours',
+    note: 'Calves are highly fatigue-resistant (Type I fiber dominant) and require high volume, full ROM, and controlled tempo. Complete stretch at the bottom and peak contraction at the top on every rep. Both standing and seated raises are needed to target both muscles.'
+  }
+};
+
+let mmCurrentView = 'front';
+
+function toggleMuscleView(side) {
+  mmCurrentView = side;
+  document.getElementById('mm-svg-front').style.display = side === 'front' ? 'block' : 'none';
+  document.getElementById('mm-svg-back').style.display = side === 'back' ? 'block' : 'none';
+  document.getElementById('mm-btn-front').className = 'btn ' + (side === 'front' ? 'btn-primary' : 'btn-secondary');
+  document.getElementById('mm-btn-back').className = 'btn ' + (side === 'back' ? 'btn-primary' : 'btn-secondary');
+  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
+  document.getElementById('mm-content').classList.remove('visible');
+  document.getElementById('mm-prompt').style.display = 'flex';
+}
+
+function selectMuscle(muscleId) {
+  const d = MUSCLE_DATA[muscleId];
+  if (!d) return;
+  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
+  document.querySelectorAll(`.muscle-region[data-muscle="${muscleId}"]`).forEach(el => el.classList.add('mm-active'));
+  document.getElementById('mm-name').textContent = d.name;
+  document.getElementById('mm-func').textContent = d.func;
+  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e => `<li>${escapeHtml(e)}</li>`).join('');
+  const maxVol = 28;
+  document.getElementById('mm-vol-fill').style.width = (d.volMax / maxVol * 100) + '%';
+  document.getElementById('mm-vol-nums').innerHTML =
+    `<span>MEV ${d.volMin} sets</span><span>Optimal ${d.volOpt} sets</span><span>MRV ${d.volMax} sets</span>`;
+  document.getElementById('mm-recovery').innerHTML = `<strong>Recovery:</strong> ${d.recovery}`;
+  document.getElementById('mm-note').textContent = d.note;
+  document.getElementById('mm-prompt').style.display = 'none';
+  document.getElementById('mm-content').classList.add('visible');
+}
+
+document.querySelectorAll('.muscle-region').forEach(el => {
+  el.addEventListener('click', () => selectMuscle(el.dataset.muscle));
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SUPPLEMENT EVIDENCE DATABASE
+// Sources: ISSN Position Stands, PubMed meta-analyses, Examine.com reviews
+// Tier A = strong RCT evidence (multiple independent trials, large effects)
+// Tier B = moderate evidence (consistent positive trials, some caveats)
+// Tier C = limited/mixed (few trials, small samples, inconsistent results)
+// Tier D = weak/no reliable evidence in healthy trainees
+// ═══════════════════════════════════════════════════════════════════════════
+const SUPPLEMENT_DATA = [
+  {
+    name: 'Creatine Monohydrate', tier: 'A', cat: 'Performance',
+    mech: 'Replenishes phosphocreatine stores for rapid ATP regeneration. Increases intramuscular PCr by ~20%, improving output in repeated high-intensity efforts.',
+    dose: '3–5g/day', timing: 'Any time — consistency matters more than timing (Candow et al. 2014)',
+    notes: 'The most researched performance supplement in existence. Lanhers et al. 2017 meta-analysis (22 RCTs) confirmed significant improvements in upper- and lower-body strength. Safe for healthy adults at recommended doses. Monohydrate is equal to or better than all other forms (Kre-Alkalyn, ethyl ester) at a fraction of the cost. Mild water retention in muscle tissue is normal and beneficial.'
+  },
+  {
+    name: 'Caffeine', tier: 'A', cat: 'Performance',
+    mech: 'Adenosine receptor antagonist that reduces perceived exertion, increases alertness and motor unit recruitment. Also enhances fat oxidation.',
+    dose: '3–6mg/kg bodyweight', timing: '45–60 min before training',
+    notes: 'ISSN Position Stand (Goldstein et al. 2010): strong evidence for endurance, strength, and anaerobic performance. Tolerance develops quickly — cycle off for 7–10 days periodically to restore sensitivity. Anhydrous caffeine is more reliable than coffee due to variable caffeine content. Avoid within 6–8 hours of sleep to protect sleep quality.'
+  },
+  {
+    name: 'Protein Powder (Whey/Casein/Plant)', tier: 'A', cat: 'Recovery',
+    mech: 'Provides essential amino acids (EAAs), particularly leucine, to trigger muscle protein synthesis (MPS). Not a drug — a convenient food source.',
+    dose: 'Supplement to reach 1.6–2.2g/kg/day total protein', timing: 'Post-workout and/or before bed (casein)',
+    notes: 'Morton et al. 2018 meta-analysis (49 RCTs, 1,800+ subjects): protein supplementation significantly increases lean mass and strength gains when training. Daily total protein target matters far more than timing. Whey is rapidly absorbed (ideal post-workout). Casein is slow-digesting (ideal before bed). High-quality plant proteins (soy, pea+rice blend) are equivalent at matched leucine doses.'
+  },
+  {
+    name: 'Beta-Alanine', tier: 'B', cat: 'Performance',
+    mech: 'Precursor to carnosine, a dipeptide that buffers intramuscular hydrogen ion accumulation during high-intensity exercise, delaying acidosis and fatigue.',
+    dose: '3.2–6.4g/day', timing: 'Divided into smaller doses to reduce paresthesia (tingling)',
+    notes: 'Hobson et al. 2012 meta-analysis (15 RCTs): consistent improvement in exercises lasting 60–240 seconds. Less effective for very short (<60 sec) or very long (>4 min) efforts. The harmless tingling (paresthesia) can be reduced by splitting doses. Full carnosine elevation takes 4–6 weeks of consistent use.'
+  },
+  {
+    name: 'Citrulline Malate', tier: 'B', cat: 'Performance',
+    mech: 'Converts to arginine in the kidney, increasing nitric oxide production. Improves blood flow, reduces ammonia accumulation, and may directly enhance ATP production.',
+    dose: '6–8g citrulline malate (2:1 ratio)', timing: '60 min before training',
+    notes: 'Pérez-Guisado & Jakeman 2010: 40% reduction in muscle soreness, 52.9% increase in bench press reps vs. placebo. Bailey et al. 2015 confirmed reduced oxygen cost of exercise. More effective than arginine supplementation for raising plasma arginine. Primarily beneficial for high-rep, high-volume training.'
+  },
+  {
+    name: 'Beetroot / Dietary Nitrates', tier: 'B', cat: 'Performance',
+    mech: 'Dietary nitrate reduces the oxygen cost of submaximal exercise by improving mitochondrial efficiency and vasodilation via the nitrate-nitrite-NO pathway.',
+    dose: '6–8 mmol nitrate (~500ml beetroot juice)', timing: '2–3 hours before training',
+    notes: 'Larsen et al. 2010 (PNAS): dietary nitrate significantly reduced oxygen consumption during exercise. Bailey et al. 2009: improved exercise tolerance. Most effective in less-trained individuals and endurance contexts. Effect is attenuated in highly trained athletes. Do not use antibacterial mouthwash — it destroys the oral bacteria needed to convert nitrate to nitrite.'
+  },
+  {
+    name: 'Vitamin D3', tier: 'B', cat: 'Health',
+    mech: 'A steroid hormone precursor. Acts on muscle tissue directly via vitamin D receptors. Also critical for calcium absorption, immune function, and testosterone synthesis.',
+    dose: '2,000–5,000 IU/day', timing: 'With a fat-containing meal for absorption',
+    notes: 'Widespread deficiency among athletes, especially in northern latitudes or with indoor training. Pilz et al. 2011: vitamin D supplementation increased testosterone by 25% in deficient men. Wehr et al. 2010 confirmed correlation between vitamin D status and testosterone. Test serum 25(OH)D levels — optimal range is 40–80 ng/mL. Supplementation is most effective when correcting deficiency.'
+  },
+  {
+    name: 'Magnesium (Glycinate/Malate)', tier: 'B', cat: 'Recovery',
+    mech: 'Cofactor in >300 enzymatic reactions including ATP production, protein synthesis, and DNA repair. Also regulates neuromuscular transmission and sleep quality.',
+    dose: '300–400mg elemental magnesium/day', timing: 'Before bed — improves sleep quality',
+    notes: 'Deficiency is common in athletes due to losses in sweat and urine during training. Magnesium glycinate and malate have superior bioavailability vs. magnesium oxide (commonly found in cheap supplements). Correcting deficiency improves sleep, reduces muscle cramps, and may modestly improve testosterone. Avoid combining with high-dose zinc or calcium (competitive absorption).'
+  },
+  {
+    name: 'Zinc', tier: 'B', cat: 'Health',
+    mech: 'Essential trace mineral required for testosterone synthesis, immune function, and protein metabolism. Deficiency directly impairs testosterone production and recovery.',
+    dose: '25–45mg elemental zinc/day', timing: 'With food; away from iron and calcium',
+    notes: 'Only effective if actually deficient — supplementation does not raise testosterone above normal in replete individuals. Athletes lose zinc in sweat, making deficiency common. Do not exceed upper tolerable limit (~40mg/day for adults) long-term — can interfere with copper absorption. Get serum zinc tested if training hard and fatigued frequently.'
+  },
+  {
+    name: 'Fish Oil (EPA + DHA)', tier: 'B', cat: 'Health',
+    mech: 'Omega-3 fatty acids reduce systemic inflammation (NF-κB pathway), may improve muscle protein synthesis signaling, and support cardiovascular health.',
+    dose: '2–4g EPA+DHA per day', timing: 'With a meal — improves absorption',
+    notes: 'Smith et al. 2011 (AJCN): fish oil supplementation increased mTOR signaling and MPS in older adults. Tartibian et al. 2009: reduced DOMS after eccentric exercise. Strongest evidence is for inflammation reduction and cardiovascular health. For direct hypertrophy effect in young trained lifters, evidence is modest. Still one of the most widely supported general health supplements for athletes.'
+  },
+  {
+    name: 'Ashwagandha (KSM-66)', tier: 'C', cat: 'Recovery',
+    mech: 'Adaptogenic herb that modulates the HPA axis, reducing serum cortisol. May also increase LH and testosterone through poorly understood mechanisms.',
+    dose: '300–600mg KSM-66 or Sensoril extract/day', timing: 'With food; can be split into two doses',
+    notes: 'Wankhede et al. 2015 RCT: subjects gained significantly more muscle mass and strength vs. placebo over 8 weeks. Raut et al. 2012 also showed improvements. However, trials are generally small and industry-sponsored. Cortisol reduction appears most reliable. May be most beneficial in high-stress individuals where cortisol chronically impairs recovery. Seek standardized extracts (withanolide content) over raw root.'
+  },
+  {
+    name: 'L-Carnitine', tier: 'C', cat: 'Recovery',
+    mech: 'Transports long-chain fatty acids into the mitochondria for beta-oxidation. Also plays roles in reducing exercise-induced oxidative stress and muscle damage.',
+    dose: '2g/day with 80–100g carbohydrates', timing: 'With a high-carbohydrate meal',
+    notes: 'Volek et al. 2002: L-carnitine supplementation reduced markers of muscle damage and DOMS. However, oral carnitine uptake is very poor without insulin — carbohydrate co-ingestion is required to drive it into muscle (Stephens et al. 2006). Without carbs, studies are largely negative. Fat loss claims are not supported by evidence in healthy individuals with adequate dietary carnitine intake.'
+  },
+  {
+    name: 'HMB (Beta-Hydroxy-Beta-Methylbutyrate)', tier: 'C', cat: 'Performance',
+    mech: 'A leucine metabolite. Proposed to reduce muscle protein breakdown by inhibiting the ubiquitin-proteasome pathway and possibly stimulating MPS directly.',
+    dose: '3g/day', timing: '1–2g before training',
+    notes: 'Nissen et al. 1996 showed impressive results, but most subsequent RCTs in trained individuals show minimal effects. Wilson et al. 2014 mega-study showed remarkable results but has been broadly criticized for methodological issues. The ISSN position stand (2014) acknowledges modest benefits primarily in untrained individuals and during caloric restriction. Expensive relative to its effect size in trained lifters.'
+  },
+  {
+    name: 'EAAs (Essential Amino Acids)', tier: 'C', cat: 'Recovery',
+    mech: 'Provide all nine essential amino acids, including leucine (2–3g threshold required to initiate MPS). More complete than BCAAs alone for stimulating muscle protein synthesis.',
+    dose: '10–15g EAAs containing ≥2.5g leucine', timing: 'Peri-workout if unable to consume whole protein',
+    notes: 'Whole food protein (or protein powder) provides complete EAA profiles at lower cost. Wolfe 2017 (J Int Soc Sports Nutr): BCAAs alone are inferior to complete EAA sources. EAAs are superior to BCAAs but still largely redundant when protein intake is adequate (1.6g+ per kg daily). Most useful for fasted training or when total protein targets are consistently difficult to reach.'
+  },
+  {
+    name: 'Melatonin', tier: 'C', cat: 'Recovery',
+    mech: 'The primary sleep-regulating hormone. Not an anabolic supplement — improves sleep architecture which indirectly improves recovery, GH secretion, and cortisol regulation.',
+    dose: '0.5–2mg', timing: '30 min before target sleep time',
+    notes: 'Do not start with high doses (5–10mg) — they are unnecessary and can cause grogginess. Melatonin is most effective for resetting circadian rhythm (shift work, jet lag) and for falling asleep, not necessarily staying asleep. Sleep quality itself is the most powerful performance-enhancing "supplement" — prioritize sleep hygiene before supplementing.'
+  },
+  {
+    name: 'Pre-Workout Blends', tier: 'D', cat: 'Performance',
+    mech: 'Typically contain caffeine (the active ingredient), with additional ingredients at sub-effective or undisclosed doses in "proprietary blends."',
+    dose: 'Varies by product', timing: 'Per label',
+    notes: 'The caffeine they contain is effective (Tier A). Everything else in most commercial pre-workouts is either present at a sub-effective dose, not well-evidenced, or both. You can replicate 95% of the effect with caffeine + citrulline + beta-alanine purchased separately, at a fraction of the cost and with transparent dosing. Proprietary blends are a marketing strategy, not a science strategy.'
+  },
+  {
+    name: 'Testosterone Boosters', tier: 'D', cat: 'Performance',
+    mech: 'Claimed to raise endogenous testosterone via plant-based compounds (tribulus terrestris, longjack/tongkat ali, fenugreek, D-aspartic acid, etc.)',
+    dose: 'Per label', timing: 'Per label',
+    notes: 'No commercially available supplement reliably raises testosterone to a meaningful degree in healthy young men with normal T levels. Rogerson et al. 2007: Tribulus had no effect on testosterone or body composition. Wilborn et al. 2010: Same result. D-aspartic acid: initial small study positive, but Willoughby & Leutholtz 2013 showed no effect. If testosterone is clinically low, see a physician — not a supplement store.'
+  },
+  {
+    name: 'Glutamine', tier: 'D', cat: 'Recovery',
+    mech: 'The most abundant amino acid in muscle tissue. Proposed to reduce catabolism and support gut health and immune function during heavy training.',
+    dose: '5–10g/day', timing: 'Post-workout',
+    notes: 'Antonio & Street 1999: glutamine supplementation had no effect on muscle mass, strength, or body composition in resistance-trained subjects. Gleeson 2008 review: no evidence for reducing illness or improving recovery in healthy athletes consuming adequate protein. Glutamine is conditionally essential only in extreme medical catabolic states (severe burns, surgery, critical illness). Adequate dietary protein provides sufficient glutamine for healthy trainees.'
+  },
+  {
+    name: 'CLA (Conjugated Linoleic Acid)', tier: 'D', cat: 'Performance',
+    mech: 'A naturally occurring fatty acid proposed to increase fat oxidation, reduce fat mass, and potentially increase lean mass through PPARγ modulation.',
+    dose: '3–4g/day', timing: 'With meals',
+    notes: 'Larsen et al. 2010 systematic review: CLA produces average of only 0.1kg additional fat loss vs. placebo in humans — not clinically meaningful. Animal models showed stronger results, but these do not translate to humans at equivalent doses. Some RCTs suggest CLA may impair insulin sensitivity and increase inflammatory markers at doses used in supplements. Not recommended.'
+  }
+];
+
+let suppActiveTier = 'all';
+
+function filterSupplementsByTier(btn) {
+  document.querySelectorAll('.tier-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  suppActiveTier = btn.dataset.tier;
+  filterSupplements();
+}
+
+function filterSupplements() {
+  const query = (document.getElementById('supp-search')?.value || '').toLowerCase();
+  const list = SUPPLEMENT_DATA.filter(s => {
+    const tierOk = suppActiveTier === 'all' || s.tier === suppActiveTier;
+    const textOk = !query || s.name.toLowerCase().includes(query) || s.mech.toLowerCase().includes(query);
+    return tierOk && textOk;
+  });
+  renderSupplements(list);
+}
+
+function renderSupplements(list) {
+  const grid = document.getElementById('supp-grid');
+  if (!grid) return;
+  if (list.length === 0) { grid.innerHTML = '<div class="supp-none">No supplements match your filters.</div>'; return; }
+  grid.innerHTML = list.map((s, i) => `
+    <div class="supp-card">
+      <div class="supp-header">
+        <div class="supp-name">${escapeHtml(s.name)}</div>
+        <div class="tier-badge tier-${s.tier}">Tier ${s.tier}</div>
+      </div>
+      <div class="supp-cat">${escapeHtml(s.cat)}</div>
+      <div class="supp-mech">${escapeHtml(s.mech)}</div>
+      <div class="supp-row"><strong>Dose</strong>${escapeHtml(s.dose)}</div>
+      <div class="supp-row"><strong>Timing</strong>${escapeHtml(s.timing)}</div>
+      <button class="supp-toggle" onclick="toggleSuppNotes(${i})">+ Evidence notes</button>
+      <div class="supp-notes" id="supp-notes-${i}">${escapeHtml(s.notes)}</div>
+    </div>
+  `).join('');
+}
+
+function toggleSuppNotes(i) {
+  const el = document.getElementById(`supp-notes-${i}`);
+  if (!el) return;
+  el.classList.toggle('open');
+  const btn = el.previousElementSibling;
+  btn.textContent = el.classList.contains('open') ? '− Evidence notes' : '+ Evidence notes';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PROGRAM LIBRARY
+// Sources: Published program texts; peer-reviewed programming research
+// ═══════════════════════════════════════════════════════════════════════════
+const NAMED_PROGRAMS = [
+  {
+    name: 'Starting Strength', author: 'Mark Rippetoe', level: 'beginner', goals: ['strength'],
+    freq: '3×/wk', duration: '3–6 months', style: 'Linear Progression',
+    desc: 'The definitive novice strength program. Three full-body sessions per week on alternating A/B workouts. Every session adds weight to the bar. Built on 5 fundamental movement patterns. The most effective way to build a strength base from scratch.',
+    week: [
+      ['Mon', 'Workout A — Squat 3×5, Bench 3×5, Deadlift 1×5'],
+      ['Wed', 'Workout B — Squat 3×5, Press 3×5, Deadlift 1×5'],
+      ['Fri', 'Workout A — Squat 3×5, Bench 3×5, Deadlift 1×5']
+    ],
+    science: 'Linear progression is the fastest way to gain strength while neurological adaptations are available (Kraemer & Ratamess 2004). Beginners can recover and adapt within 48 hours, making daily strength gains possible.'
+  },
+  {
+    name: 'StrongLifts 5×5', author: 'Mehdi Hadim', level: 'beginner', goals: ['strength'],
+    freq: '3×/wk', duration: '3–6 months', style: 'Linear Progression',
+    desc: 'Similar structure to Starting Strength but uses 5×5 instead of 3×5 for the main lifts. More total volume per session. The app and tracking features make it accessible. Slightly more hypertrophy stimulus than SS due to higher volume at the cost of slightly slower strength gains.',
+    week: [
+      ['Mon', 'Workout A — Squat 5×5, Bench 5×5, Barbell Row 5×5'],
+      ['Wed', 'Workout B — Squat 5×5, OHP 5×5, Deadlift 1×5'],
+      ['Fri', 'Workout A — Squat 5×5, Bench 5×5, Barbell Row 5×5']
+    ],
+    science: '5×5 provides more volume than 3×5, which may provide a small hypertrophy advantage (Schoenfeld et al. 2017). However, the extra fatigue can slow progression slightly. Both are excellent for novices.'
+  },
+  {
+    name: 'GZCLP', author: 'Cody LeFever (GZCL)', level: 'beginner', goals: ['strength', 'hypertrophy'],
+    freq: '3–4×/wk', duration: '4–6 months', style: 'Tiered Linear Progression',
+    desc: 'Uses a tiered system: T1 (heavy compound, 2×5+ AMRAP), T2 (moderate compound, 3×10+), T3 (isolation accessories). More balanced development than pure strength programs. Highly customizable and scales well into intermediate training.',
+    week: [
+      ['Day 1', 'Squat T1, OHP T2, Lat Pulldown T3'],
+      ['Day 2', 'Bench T1, Deadlift T2, Row T3'],
+      ['Day 3', 'OHP T1, Squat T2, Tricep/Curl T3'],
+      ['Day 4', 'Deadlift T1, Bench T2, Row T3']
+    ],
+    science: 'The tiered approach allows frequency and intensity to be managed simultaneously, reducing interference while maintaining progressive overload across multiple rep ranges (Kraemer & Ratamess 2004).'
+  },
+  {
+    name: 'Reddit PPL (Metallicadpa)', author: 'u/Metallicadpa', level: 'intermediate', goals: ['hypertrophy'],
+    freq: '6×/wk', duration: 'Ongoing', style: 'Push/Pull/Legs × 2',
+    desc: 'The most popular free bodybuilding program online. 6 days/week PPL with A/B variation. Balances volume and frequency well for muscle hypertrophy. Runs each muscle group twice per week with 48+ hours recovery between sessions. Better for aesthetics than pure strength.',
+    week: [
+      ['Mon', 'Push A — Bench, OHP, Incline DB, Lateral Raise, Triceps'],
+      ['Tue', 'Pull A — Deadlift, Rows, Pulldown, Curl variations'],
+      ['Wed', 'Legs A — Squat, Leg Press, Leg Curl, Calf Raise'],
+      ['Thu', 'Push B — OHP, Bench, Incline, Cable Fly, Triceps'],
+      ['Fri', 'Pull B — Rows, Pullups, Face Pull, Curls'],
+      ['Sat', 'Legs B — Squat variation, RDL, Leg Curl, Calves']
+    ],
+    science: 'Training each muscle 2×/week superior to 1×/week when volume equated (Schoenfeld et al. 2016). 6-day frequency allows high volume per week without exceeding per-session MRV for most muscles.'
+  },
+  {
+    name: '5/3/1 (Original)', author: 'Jim Wendler', level: 'intermediate', goals: ['strength', 'powerbuilding'],
+    freq: '4×/wk', duration: 'Ongoing', style: 'Percentage-Based Wave Loading',
+    desc: 'Four-day program built around the four main lifts (squat, bench, deadlift, OHP) using percentage-based loading waves over 4-week cycles. Emphasis on long-term strength progression. Includes AMRAP "plus sets" and optional assistance work. One of the most proven intermediate programs ever written.',
+    week: [
+      ['Day 1', 'OHP — 5/3/1 sets + assistance (pull-ups, dips, curls)'],
+      ['Day 2', 'Deadlift — 5/3/1 sets + assistance (leg press, leg curl)'],
+      ['Day 3', 'Bench — 5/3/1 sets + assistance (DB rows, triceps)'],
+      ['Day 4', 'Squat — 5/3/1 sets + assistance (leg press, Nordic curls)']
+    ],
+    science: 'Undulating intensity within cycles manages fatigue while ensuring progressive overload. The AMRAP sets allow auto-regulation based on daily readiness (Zourdos et al. 2016 on RPE-based training).'
+  },
+  {
+    name: 'PHUL', author: 'Brian Minor', level: 'intermediate', goals: ['powerbuilding'],
+    freq: '4×/wk', duration: 'Ongoing', style: 'Power-Hypertrophy Upper-Lower',
+    desc: 'Four days split into two power days (3–5 reps) and two hypertrophy days (8–12 reps). Trains both strength and muscle simultaneously. Balances the neurological adaptations of heavy lifting with the metabolic stress of volume training. Good bridge between pure strength and pure bodybuilding.',
+    week: [
+      ['Mon', 'Upper Power — Bench 3–4×3–5, Row 3–4×3–5, OHP 2–3×5, Pull-up 2–3×6'],
+      ['Tue', 'Lower Power — Squat 3–4×3–5, Deadlift 3–4×3–5, Leg Press 3×10–12'],
+      ['Thu', 'Upper Hypertrophy — Bench, Incline, Row, Pulldown, Flye, Curl, Tricep'],
+      ['Fri', 'Lower Hypertrophy — Squat, RDL, Leg Press, Leg Curl, Calf Raise']
+    ],
+    science: 'Concurrent training of strength and hypertrophy is effective when sessions are separated (Wilson et al. 2012). Dual rep ranges optimize both neural and hypertrophic adaptations (Schoenfeld 2010).'
+  },
+  {
+    name: 'PHAT', author: 'Dr. Layne Norton', level: 'intermediate', goals: ['powerbuilding', 'hypertrophy'],
+    freq: '5×/wk', duration: 'Ongoing', style: 'Power-Hypertrophy Adaptive Training',
+    desc: 'Five-day program: 2 power days (lower reps, compound focus) followed by 3 hypertrophy days (each targeting specific muscle groups with higher volume). Designed to maximize both strength and size simultaneously. Demanding program best suited for dedicated intermediate-to-advanced lifters.',
+    week: [
+      ['Mon', 'Upper Power — Low-rep bench, row, OHP, pull-up'],
+      ['Tue', 'Lower Power — Low-rep squat, deadlift, hack squat'],
+      ['Wed', 'Rest'],
+      ['Thu', 'Back/Shoulders Hypertrophy'],
+      ['Fri', 'Legs Hypertrophy'],
+      ['Sat', 'Chest/Arms Hypertrophy']
+    ],
+    science: 'The "potentiation" effect: heavy training sessions activate high-threshold motor units which are then trained with higher volume in subsequent hypertrophy sessions (Sale 1992; Robbins et al. 2010).'
+  },
+  {
+    name: 'Texas Method', author: 'Rippetoe & Kilgore', level: 'intermediate', goals: ['strength'],
+    freq: '3×/wk', duration: '3–6 months', style: 'Weekly Volume-Recovery-Intensity',
+    desc: 'Three-day structure: Monday is high-volume (5×5 on main lifts), Wednesday is light recovery (low intensity), Friday is high-intensity PR day (work up to a 5-rep or 1-rep max). Weekly progress instead of session-to-session. The classic intermediate program for when linear progression stalls.',
+    week: [
+      ['Mon', 'Volume — Squat 5×5, Bench/Press 5×5, Deadlift 1×4'],
+      ['Wed', 'Recovery — Squat 2×5 (80% vol), Press/Bench 3×5 (light), Pull-up 3×8'],
+      ['Fri', 'Intensity — Squat 1×5 PR, Bench/Press 1×5 PR, Power Clean 5×3']
+    ],
+    science: 'Weekly undulation is appropriate when 48-hour recovery is insufficient for progress. The volume-recovery-intensity structure manages cumulative fatigue while still driving weekly adaptation (Fry & Kraemer 1997).'
+  }
+];
+
+let progActiveLvl = 'all', progActiveGoal = 'all';
+
+function filterPrograms() {
+  document.querySelectorAll('[data-prog-level]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.progLevel === progActiveLvl);
+  });
+  document.querySelectorAll('[data-prog-goal]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.progGoal === progActiveGoal);
+  });
+  const list = NAMED_PROGRAMS.filter(p => {
+    const lvlOk = progActiveLvl === 'all' || p.level === progActiveLvl;
+    const goalOk = progActiveGoal === 'all' || p.goals.includes(progActiveGoal);
+    return lvlOk && goalOk;
+  });
+  renderPrograms(list);
+}
+
+// Wire up filter chips
+document.querySelectorAll('[data-prog-level]').forEach(btn => {
+  btn.addEventListener('click', () => { progActiveLvl = btn.dataset.progLevel; filterPrograms(); });
+});
+document.querySelectorAll('[data-prog-goal]').forEach(btn => {
+  btn.addEventListener('click', () => { progActiveGoal = btn.dataset.progGoal; filterPrograms(); });
+});
+
+function renderPrograms(list) {
+  const grid = document.getElementById('prog-grid');
+  if (!grid) return;
+  if (list.length === 0) { grid.innerHTML = '<p style="color:var(--chalk-tertiary)">No programs match your filters.</p>'; return; }
+  grid.innerHTML = list.map((p, i) => {
+    const goalChips = p.goals.map(g => `<span class="prog-goal">${g.charAt(0).toUpperCase()+g.slice(1)}</span>`).join('');
+    const weekRows = p.week.map(([day, content]) =>
+      `<tr><td>${escapeHtml(day)}</td><td>${escapeHtml(content)}</td></tr>`).join('');
+    return `
+      <div class="prog-card">
+        <div class="prog-top">
+          <div class="prog-name">${escapeHtml(p.name)}</div>
+          <div class="prog-author">${escapeHtml(p.author)}</div>
+          <div class="prog-chips">
+            <span class="prog-level ${p.level}">${p.level.charAt(0).toUpperCase()+p.level.slice(1)}</span>
+            ${goalChips}
+          </div>
+        </div>
+        <div class="prog-meta">
+          <div class="prog-meta-item"><strong>${escapeHtml(p.freq)}</strong>Frequency</div>
+          <div class="prog-meta-item"><strong>${escapeHtml(p.duration)}</strong>Duration</div>
+          <div class="prog-meta-item"><strong>${escapeHtml(p.style)}</strong>Style</div>
+        </div>
+        <div class="prog-desc">${escapeHtml(p.desc)}</div>
+        <button class="prog-expand" onclick="toggleProg(${i})">+ See sample week & research</button>
+        <div class="prog-details" id="prog-details-${i}">
+          <div class="prog-details-inner">
+            <table class="prog-week">${weekRows}</table>
+            <div class="prog-science">${escapeHtml(p.science)}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleProg(i) {
+  const el = document.getElementById(`prog-details-${i}`);
+  if (!el) return;
+  const isOpen = el.classList.toggle('open');
+  el.previousElementSibling.textContent = isOpen ? '− Hide sample week & research' : '+ See sample week & research';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// STRENGTH STANDARDS
+// Source: ExRx.net strength standards (Kilgore, Rippetoe & Pendlay norms)
+// Using bodyweight ratio multipliers — accurate for natural, drug-free lifters
+// Categories align with ExRx.net population data
+// ═══════════════════════════════════════════════════════════════════════════
+const SS_RATIOS = {
+  squat: {
+    male:   { untrained: 0.68, beginner: 0.90, novice: 1.33, intermediate: 1.76, advanced: 2.25, elite: 2.72 },
+    female: { untrained: 0.40, beginner: 0.55, novice: 0.82, intermediate: 1.08, advanced: 1.38, elite: 1.78 }
+  },
+  bench: {
+    male:   { untrained: 0.55, beginner: 0.75, novice: 1.05, intermediate: 1.40, advanced: 1.80, elite: 2.30 },
+    female: { untrained: 0.24, beginner: 0.36, novice: 0.55, intermediate: 0.74, advanced: 0.95, elite: 1.28 }
+  },
+  deadlift: {
+    male:   { untrained: 0.70, beginner: 1.00, novice: 1.38, intermediate: 1.88, advanced: 2.40, elite: 2.96 },
+    female: { untrained: 0.48, beginner: 0.64, novice: 0.94, intermediate: 1.22, advanced: 1.58, elite: 2.02 }
+  },
+  ohp: {
+    male:   { untrained: 0.33, beginner: 0.45, novice: 0.68, intermediate: 0.90, advanced: 1.16, elite: 1.52 },
+    female: { untrained: 0.17, beginner: 0.27, novice: 0.40, intermediate: 0.55, advanced: 0.72, elite: 0.96 }
+  },
+  row: {
+    male:   { untrained: 0.40, beginner: 0.55, novice: 0.85, intermediate: 1.12, advanced: 1.45, elite: 1.84 },
+    female: { untrained: 0.22, beginner: 0.33, novice: 0.50, intermediate: 0.66, advanced: 0.86, elite: 1.10 }
+  }
+};
+
+const SS_CATS = ['untrained', 'beginner', 'novice', 'intermediate', 'advanced', 'elite'];
+const SS_COLORS = ['#64748b', '#34d399', '#60a5fa', '#fbbf24', '#e04520', '#d97706'];
+
+function calculateStrengthStandard() {
+  const lift = document.getElementById('ss-lift').value;
+  const gender = document.getElementById('ss-gender').value;
+  const bw = parseFloat(document.getElementById('ss-bw').value);
+  const lifted = parseFloat(document.getElementById('ss-lifted').value);
+
+  if (!bw || !lifted || bw < 80 || bw > 500 || lifted < 1) {
+    showNotification('Please enter valid bodyweight and lifted weight.', 'warning');
+    return;
+  }
+
+  const ratios = SS_RATIOS[lift]?.[gender];
+  if (!ratios) return;
+  const ratio = lifted / bw;
+
+  // Determine category
+  let catIdx = 0;
+  if (ratio >= ratios.elite)        catIdx = 5;
+  else if (ratio >= ratios.advanced)     catIdx = 4;
+  else if (ratio >= ratios.intermediate) catIdx = 3;
+  else if (ratio >= ratios.novice)       catIdx = 2;
+  else if (ratio >= ratios.beginner)     catIdx = 1;
+
+  const cat = SS_CATS[catIdx];
+  const pct = Math.min(100, Math.round((ratio / ratios.elite) * 100));
+
+  document.getElementById('ss-result').classList.remove('hidden');
+  const catEl = document.getElementById('ss-category');
+  catEl.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+  catEl.style.color = SS_COLORS[catIdx];
+
+  document.getElementById('ss-bar-fill').style.width = pct + '%';
+  document.getElementById('ss-bar-fill').style.background =
+    `linear-gradient(90deg, #34d399, ${SS_COLORS[catIdx]})`;
+  document.getElementById('ss-marker').style.left = pct + '%';
+
+  // Stats: your ratio, next level, elite
+  const nextIdx = Math.min(5, catIdx + 1);
+  const nextLabel = SS_CATS[nextIdx].charAt(0).toUpperCase() + SS_CATS[nextIdx].slice(1);
+  const nextWeight = (ratios[SS_CATS[nextIdx]] * bw).toFixed(0);
+  const eliteWeight = (ratios.elite * bw).toFixed(0);
+  document.getElementById('ss-stats').innerHTML = `
+    <div class="ss-stat"><div class="ss-stat-label">Your Ratio</div><div class="ss-stat-val">${ratio.toFixed(2)}×</div></div>
+    <div class="ss-stat"><div class="ss-stat-label">Next Level (${nextLabel})</div><div class="ss-stat-val">${nextWeight} lbs</div></div>
+    <div class="ss-stat"><div class="ss-stat-label">Elite Target</div><div class="ss-stat-val">${eliteWeight} lbs</div></div>
+  `;
+  document.getElementById('ss-note').textContent =
+    `Standards from ExRx.net (Kilgore & Rippetoe norms). Based on a ${bw} lb ${gender} performing a 1-rep max ${document.getElementById('ss-lift').options[document.getElementById('ss-lift').selectedIndex].text}. If this is estimated from reps-not-to-failure, use the 1RM calculator first for accuracy.`;
+}
+
+// Init new tools on first load
+(function initNewTools() {
+  renderSupplements(SUPPLEMENT_DATA);
+  filterPrograms();
+})();
   </script>
 </body>
 </html>
