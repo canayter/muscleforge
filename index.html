@@ -415,62 +415,97 @@ h4 { font-size: var(--text-lg); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
-  padding: 8px 0;
+  height: 80px;
+  padding: 6px 0;
 }
 
-/* Logo - THE MARK */
+/* ════════════════════════ LOGO — THE FORGE MARK ════════════════════════════ */
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: 14px;
+  flex-shrink: 0;
+  text-decoration: none;
+  cursor: default;
 }
 
+/* — SVG hex-dumbbell icon — */
+.logo-svg {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 9px rgba(224,69,32,0.38));
+  transition: filter var(--duration-fast);
+}
+.logo:hover .logo-svg {
+  filter: drop-shadow(0 0 18px rgba(224,69,32,0.70));
+}
+.logo-plate  { fill: var(--blood); }
+.logo-collar { fill: var(--blood); opacity: 0.88; }
+.logo-bar    { fill: var(--blood); opacity: 0.52; }
+.logo-ember  { fill: rgba(255,145,45,1); opacity: 0.18; }
+
+@keyframes forge-ember {
+  0%, 100% { opacity: 0.16; }
+  50%       { opacity: 0.44; }
+}
+.logo-ember { animation: forge-ember 3.2s ease-in-out infinite; }
+.logo-ember:nth-child(6) { animation-delay: 1.6s; }
+
+/* — Type lockup — */
 .logo-type {
   display: flex;
   flex-direction: column;
   gap: 0;
-}
-
-.logo-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--chalk);
   line-height: 1;
-  text-shadow: 0 0 30px var(--blood-glow);
+}
+.logo-name {
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  font-size: 2.35rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+}
+.logo-muscle { color: var(--chalk); }
+.logo-forge  {
+  color: var(--blood);
+  text-shadow: 0 0 22px var(--blood-glow), 0 0 5px rgba(255,100,30,0.22);
+  transition: text-shadow var(--duration-fast);
+}
+.logo:hover .logo-forge {
+  text-shadow: 0 0 34px var(--blood-glow), 0 0 10px rgba(255,100,30,0.42);
 }
 
 .logo-tag {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.875rem;
+  font-family: 'Teko', 'Space Grotesk', sans-serif;
+  font-size: 0.66rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--blood);
+  color: var(--chalk-tertiary);
+  margin-top: 4px;
 }
-
 .logo-credit {
-  font-size: 0.6875rem;
+  font-size: 0.59rem;
   color: var(--chalk-faint);
   margin-top: 2px;
+  letter-spacing: 0.05em;
 }
-
 .logo-credit a {
-  color: var(--chalk-tertiary);
+  color: var(--chalk-faint);
   text-decoration: none;
   transition: color var(--duration-fast);
 }
+.logo-credit a:hover { color: var(--blood); }
 
-.logo-credit a:hover {
-  color: var(--blood);
+@media (max-width: 900px) {
+  .logo-svg  { width: 52px; height: 29px; }
+  .logo-name { font-size: 1.9rem; }
+  .logo-tag  { font-size: 0.6rem; letter-spacing: 0.2em; }
 }
-
-@media (max-width: 768px) {
-  .logo-name { font-size: 1.75rem; }
-  .logo-tag { font-size: 0.6875rem; }
+@media (max-width: 640px) {
+  .logo-svg    { display: none; }
+  .logo-name   { font-size: 1.62rem; letter-spacing: 0.04em; }
+  .logo-tag    { display: none; }
   .logo-credit { display: none; }
 }
 
@@ -3764,10 +3799,10 @@ select.field-input option {
 .footer-brand { }
 
 .footer-logo {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
   font-size: 2rem;
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   color: var(--chalk);
   margin-bottom: var(--space-xs);
 }
@@ -4437,10 +4472,29 @@ select.field-input option {
     <div class="container">
       <div class="header-inner">
         <div class="logo">
+          <!-- ═══ THE FORGE MARK: hex-plate dumbbell ═══ -->
+          <svg class="logo-svg" viewBox="0 0 68 38" width="68" height="38" aria-hidden="true">
+            <!-- Left hex weight plate -->
+            <polygon class="logo-plate" points="0,19 6,7 18,7 24,19 18,31 6,31"/>
+            <!-- Left collar -->
+            <rect class="logo-collar" x="22" y="12" width="7" height="14" rx="1"/>
+            <!-- Bar -->
+            <rect class="logo-bar" x="29" y="16" width="10" height="6" rx="1"/>
+            <!-- Right collar -->
+            <rect class="logo-collar" x="39" y="12" width="7" height="14" rx="1"/>
+            <!-- Right hex weight plate -->
+            <polygon class="logo-plate" points="44,19 50,7 62,7 68,19 62,31 50,31"/>
+            <!-- Forge ember inner glow (animated) -->
+            <circle class="logo-ember" cx="12" cy="19" r="6"/>
+            <circle class="logo-ember" cx="56" cy="19" r="6"/>
+          </svg>
+
           <div class="logo-type">
-            <span class="logo-name">MUSCLEFORGE</span>
-            <span class="logo-tag">Precision Nutrition & Training</span>
-            <span class="logo-credit">by <a href="https://ayter.com" target="_blank" rel="noopener">Can Ayter</a></span>
+            <div class="logo-name">
+              <span class="logo-muscle">MUSCLE</span><span class="logo-forge">FORGE</span>
+            </div>
+            <div class="logo-tag">PRECISION &middot; TRAINING &middot; NUTRITION</div>
+            <div class="logo-credit">by <a href="https://ayter.com" target="_blank" rel="noopener">Can Ayter</a></div>
           </div>
         </div>
 
@@ -8227,7 +8281,7 @@ Squat	225	5	2025-03-15"></textarea>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">MUSCLEFORGE</div>
+          <div class="footer-logo"><span style="color:var(--chalk)">MUSCLE</span><span style="color:var(--blood);text-shadow:0 0 18px var(--blood-glow)">FORGE</span></div>
           <p class="footer-tagline">Evidence-based nutrition and training tools for serious athletes.</p>
           <p class="footer-credit">Created with dedication by <strong>Can Ayter</strong></p>
           <a href="https://ayter.com" target="_blank" class="footer-link">ayter.com</a>
