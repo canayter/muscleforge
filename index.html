@@ -4937,6 +4937,17 @@ select.field-input option {
                     </select>
                   </div>
                   <div class="field">
+                    <label class="field-label" for="workoutDuration">Session Duration</label>
+                    <select id="workoutDuration" class="field-input">
+                      <option value="0">No limit</option>
+                      <option value="45">45 minutes</option>
+                      <option value="60" selected>60 minutes</option>
+                      <option value="75">75 minutes</option>
+                      <option value="90">90 minutes</option>
+                      <option value="120">2 hours</option>
+                    </select>
+                  </div>
+                  <div class="field">
                     <label class="field-label" for="trainingEquipment">Available Equipment</label>
                     <select id="trainingEquipment" class="field-input">
                       <option value="full" selected>Full Gym (All Equipment)</option>
@@ -8454,6 +8465,22 @@ function switchToView(view, toolCategory = null) {
 document.querySelectorAll('.nav-link').forEach(btn => {
   btn.addEventListener('click', () => {
     switchToView(btn.dataset.view);
+  });
+});
+
+// ── Tool directory chips: scroll to specific tool after switching view ────────
+document.querySelectorAll('.home-dir-chip').forEach(chip => {
+  chip.addEventListener('click', function () {
+    const toolName = this.textContent.replace(/\s*✦\s*/g, '').trim();
+    setTimeout(() => {
+      const titles = document.querySelectorAll('.tools-category.active .card-title');
+      for (const h of titles) {
+        if (h.textContent.trim().startsWith(toolName)) {
+          h.closest('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          break;
+        }
+      }
+    }, 150);
   });
 });
 
@@ -12296,6 +12323,7 @@ function generateTrainingProgram() {
   const goal = document.getElementById('trainingGoal').value;
   const equipmentLevel = document.getElementById('trainingEquipment').value;
   const sport = document.getElementById('trainingSport')?.value || '';
+  const sessionMinutes = parseInt(document.getElementById('workoutDuration')?.value || '0');
 
   const availableEquipment = EQUIPMENT_AVAILABILITY[equipmentLevel];
 
@@ -12308,7 +12336,7 @@ function generateTrainingProgram() {
   const template = selectOptimalProgram(experienceLevel, daysAvailable, goal, sport || undefined);
 
   // Generate workouts for each day
-  const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules);
+  const workouts = generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules, sessionMinutes);
 
   // Store globally for calendar export
   currentTemplate = template;
@@ -12321,7 +12349,16 @@ function generateTrainingProgram() {
   displayTrainingProgram(template, workouts, volumeSummary, experienceLevel, goal, injuryRules);
 }
 
-function generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules) {
+function estimateWorkoutMinutes(exercises) {
+  const WARMUP_MIN = 5, COOLDOWN_MIN = 3, SET_DURATION_SEC = 45;
+  let totalSec = (WARMUP_MIN + COOLDOWN_MIN) * 60;
+  for (const ex of exercises) {
+    totalSec += ex.sets * (SET_DURATION_SEC + ex.rest);
+  }
+  return totalSec / 60;
+}
+
+function generateWorkouts(template, goal, experienceLevel, availableEquipment, injuryRules, sessionMinutes = 0) {
   const workouts = [];
 
   template.split.forEach(day => {
@@ -12341,6 +12378,21 @@ function generateWorkouts(template, goal, experienceLevel, availableEquipment, i
         });
       }
     });
+
+    // Trim exercises to fit session duration: remove last non-prehab exercise until it fits
+    if (sessionMinutes > 0) {
+      while (exercises.length > 1 && estimateWorkoutMinutes(exercises) > sessionMinutes) {
+        const lastNonPrehab = [...exercises].reverse().findIndex(e => !e.isPrehab);
+        if (lastNonPrehab === -1) break;
+        exercises.splice(exercises.length - 1 - lastNonPrehab, 1);
+      }
+      // If a single exercise still has too many sets, reduce them
+      for (const ex of exercises) {
+        while (ex.sets > 1 && estimateWorkoutMinutes(exercises) > sessionMinutes) {
+          ex.sets--;
+        }
+      }
+    }
 
     // Append prehab exercises on the first workout day
     if (injuryRules && injuryRules.length > 0 && workouts.length === 0) {
@@ -12514,6 +12566,9 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
   document.getElementById('programDescription').textContent = template.description;
 
   // Stats with educational context
+  const avgMins = Math.round(
+    workouts.reduce((sum, w) => sum + estimateWorkoutMinutes(w.exercises), 0) / (workouts.length || 1)
+  );
   const statsHtml = `
     <div class="program-stat">
       <div class="stat-value">${template.daysPerWeek}</div>
@@ -12522,6 +12577,10 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     <div class="program-stat">
       <div class="stat-value">${template.frequency}x</div>
       <div class="stat-label">Frequency</div>
+    </div>
+    <div class="program-stat">
+      <div class="stat-value">~${avgMins}m</div>
+      <div class="stat-label">Per Session</div>
     </div>
     <div class="program-stat">
       <div class="stat-value">${experienceLevel.charAt(0).toUpperCase() + experienceLevel.slice(1)}</div>
