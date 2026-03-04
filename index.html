@@ -11,7 +11,7 @@
   <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
   <!-- Favicon & PWA -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><rect x='2' y='12' width='5' height='8' rx='1.5' fill='%23e04520'/><rect x='25' y='12' width='5' height='8' rx='1.5' fill='%23e04520'/><rect x='6.5' y='14.5' width='19' height='3' rx='1' fill='%23e04520'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><polygon points='1,16 5,8 12,8 16,16 12,24 5,24' fill='%23e04520'/><polygon points='31,16 27,8 20,8 16,16 20,24 27,24' fill='%23e04520'/><rect x='13.5' y='13.5' width='5' height='5' rx='1.5' fill='%23e04520' opacity='.65'/></svg>">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#e04520">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -3784,6 +3784,13 @@ select.field-input option {
   border-top: 3px solid var(--blood);
   background: var(--iron-black);
 }
+.forge-network{border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;margin-top:18px;display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+.forge-net-home{font-size:.9rem;font-weight:700;color:rgba(255,255,255,0.80);text-decoration:none;letter-spacing:.02em;transition:color .12s;font-family:'Space Grotesk',sans-serif}
+.forge-net-home:hover{color:#fff}
+.forge-net-sep{width:1px;height:15px;background:rgba(255,255,255,0.14);flex-shrink:0}
+.forge-net-links{display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.forge-net-link{padding:3px 9px;border-radius:99px;font-size:.72rem;letter-spacing:.05em;color:rgba(255,255,255,0.28);text-decoration:none;transition:color .12s,background .12s;font-family:'Space Grotesk',sans-serif}
+.forge-net-link:hover{color:rgba(255,255,255,0.60);background:rgba(255,255,255,0.06)}
 
 .footer-grid {
   display: grid;
@@ -8316,6 +8323,16 @@ Squat	225	5	2025-03-15"></textarea>
       </div>
       <div class="footer-bottom">
         <p>© 2024-2025 MuscleForge · Built by <a href="https://ayter.com" target="_blank">Can Ayter</a> · All calculations are estimates. Consult a professional.</p>
+      </div>
+      <div class="forge-network">
+        <a href="https://ayter.com" class="forge-net-home">ayter.com</a>
+        <div class="forge-net-sep"></div>
+        <div class="forge-net-links">
+          <a href="/signforge" class="forge-net-link">🤟 SignForge</a>
+          <a href="/glossaforge" class="forge-net-link">🌍 GlossaForge</a>
+          <a href="/scrobbleforge/" class="forge-net-link">🎵 ScrobbleForge</a>
+          <a href="/audioforge" class="forge-net-link">🎙️ AudioForge</a>
+        </div>
       </div>
     </div>
   </footer>
