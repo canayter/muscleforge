@@ -4010,8 +4010,8 @@ select.field-input option {
   .site-header, .nav-mobile, .nav-primary, .theme-switch,
   .btn-group, .exercise-swap, .exercise-info,
   .alert, .footer, .lift-fuel, .watermark,
-  #home, #foods, #tools, #knowledge, #prep, #science,
-  .plan-type-selector, .email-results-section { display: none !important; }
+  #home, #foods, #tools, #knowledge,
+  .plan-type-selector { display: none !important; }
 
   body { background: white !important; color: black !important; font-size: 11pt; }
   main { padding: 0 !important; }
@@ -4465,6 +4465,170 @@ select.field-input option {
 .ss-stat-label { font-size: 0.62rem; font-family: 'Teko', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--chalk-tertiary); }
 .ss-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: var(--text-xl); color: var(--chalk); }
 .ss-note { font-size: var(--text-sm); color: var(--chalk-secondary); line-height: 1.5; margin-top: var(--space-md); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TRAIN VIEW — Full-screen anatomy applet (GlossaForge-inspired layout)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.train-hero {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px - 56px); /* header + mobile nav */
+  background: var(--iron-black);
+  overflow: hidden;
+}
+@media (min-width: 769px) {
+  .train-hero { height: calc(100vh - 60px); }
+}
+
+/* Controls strip */
+.train-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--iron-elevated);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.train-search {
+  flex: 1;
+  min-width: 140px;
+  max-width: 280px;
+  background: var(--iron-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 5px 12px;
+  color: var(--chalk);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8125rem;
+  outline: none;
+  transition: border-color var(--duration-fast);
+}
+.train-search:focus { border-color: var(--blood); }
+.train-search::placeholder { color: var(--chalk-tertiary); }
+.train-ctrl-actions { display: flex; gap: 6px; align-items: center; margin-left: auto; }
+
+/* Map body */
+.train-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+.train-svg-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--iron-black);
+  cursor: crosshair;
+}
+.train-svg-wrap .mm-svg {
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  transition: filter 0.2s;
+}
+.train-svg-wrap .mm-svg .muscle-region {
+  transition: fill 0.15s, opacity 0.15s;
+}
+
+/* Slide-in detail panel */
+.train-panel {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.32s var(--ease-out-expo);
+  background: var(--iron-elevated);
+  border-left: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+  position: relative;
+}
+.train-panel.open { width: 340px; }
+@media (max-width: 640px) {
+  .train-panel.open {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 100% !important;
+    z-index: 100;
+  }
+}
+.train-panel-inner {
+  width: 340px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 18px 24px;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) {
+  .train-panel-inner { width: 100%; }
+}
+.train-panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--iron-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-full);
+  color: var(--chalk-secondary);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background var(--duration-fast), color var(--duration-fast);
+  z-index: 5;
+}
+.train-panel-close:hover { background: var(--blood-dim); color: var(--blood); }
+
+/* Override mm-content display inside train panel */
+.train-panel-inner .mm-content { display: none; position: relative; }
+.train-panel-inner .mm-content.visible { display: block; }
+.train-panel-inner .mm-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 10px;
+  color: var(--chalk-tertiary);
+  font-family: 'Teko', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.mm-vol-cite {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--chalk-tertiary);
+  margin-top: 2px;
+}
+
+/* Workout bar */
+.train-workout-bar {
+  height: 46px;
+  background: var(--iron-mid);
+  border-top: 1px solid rgba(224,69,32,0.18);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Scroll indicator after map section */
+.home-section { margin-top: 0; padding-top: var(--space-xl); }
+
+/* Make mm-svg fill available height in train context */
+#home .mm-svg { display: block; height: 100%; width: auto; }
+
   </style>
 </head>
 
@@ -4506,7 +4670,7 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary" aria-label="Primary navigation">
-          <button class="nav-link active" data-view="home" aria-current="page">Home</button>
+          <button class="nav-link active" data-view="home" aria-current="page">Train</button>
           <button class="nav-link" data-view="calculator">Plan</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
@@ -4523,7 +4687,7 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile" aria-label="Mobile navigation">
-    <button class="nav-link active" data-view="home" aria-current="page">Home</button>
+    <button class="nav-link active" data-view="home" aria-current="page">Train</button>
     <button class="nav-link" data-view="calculator">Plan</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
@@ -4534,28 +4698,161 @@ select.field-input option {
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
   <main id="main-content">
-    <!-- HOME VIEW -->
+    <!-- TRAIN / HOME VIEW — Anatomy-first hero layout -->
     <div id="home" class="view active">
+
+      <!-- ═══ ANATOMY APPLET — full-height hero ═══ -->
+      <div class="train-hero">
+
+        <!-- Controls strip -->
+        <div class="train-controls">
+          <div class="btn-group" style="margin:0;gap:4px;flex-shrink:0;">
+            <button class="btn btn-primary btn-sm" id="mm-btn-front" onclick="toggleMuscleView('front')">Front</button>
+            <button class="btn btn-secondary btn-sm" id="mm-btn-back" onclick="toggleMuscleView('back')">Back</button>
+          </div>
+          <input class="train-search" id="muscleSearch" type="search" placeholder="Search muscles…" autocomplete="off" oninput="filterMuscleSvg(this.value)">
+          <div class="train-ctrl-actions">
+            <button class="btn btn-ghost btn-sm" onclick="switchToView('calculator')">📋 Build Plan</button>
+            <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','training')" style="display:none;" class="train-ctrl-hide-sm">Programs</button>
+          </div>
+        </div>
+
+        <!-- Map + slide-in detail panel -->
+        <div class="train-body">
+          <div class="train-svg-wrap">
+            <!-- FRONT SVG -->
+            <svg id="mm-svg-front" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" aria-label="Front body muscle map">
+              <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
+              <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
+              <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
+              <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
+              <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
+              <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
+              <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
+              <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
+              <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
+              <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
+              <!-- MUSCLE REGIONS — FRONT -->
+              <ellipse class="muscle-region" data-muscle="front-delt" cx="52" cy="76" rx="17" ry="17"/>
+              <ellipse class="muscle-region" data-muscle="front-delt" cx="168" cy="76" rx="17" ry="17"/>
+              <path class="muscle-region" data-muscle="chest" d="M62,68 L108,68 L108,138 L80,144 L66,118 Z"/>
+              <path class="muscle-region" data-muscle="chest" d="M112,68 L158,68 L154,118 L140,144 L112,138 Z"/>
+              <rect class="muscle-region" data-muscle="abs" x="87" y="147" width="46" height="68" rx="5"/>
+              <ellipse class="muscle-region" data-muscle="hip-flexors" cx="110" cy="232" rx="36" ry="13"/>
+              <ellipse class="muscle-region" data-muscle="biceps" cx="34" cy="142" rx="13" ry="32"/>
+              <ellipse class="muscle-region" data-muscle="biceps" cx="186" cy="142" rx="13" ry="32"/>
+              <ellipse class="muscle-region" data-muscle="forearms" cx="28" cy="196" rx="11" ry="26"/>
+              <ellipse class="muscle-region" data-muscle="forearms" cx="192" cy="196" rx="11" ry="26"/>
+              <path class="muscle-region" data-muscle="quads" d="M62,254 L104,254 L102,368 L60,368 Z"/>
+              <path class="muscle-region" data-muscle="quads" d="M116,254 L158,254 L160,368 L118,368 Z"/>
+              <rect class="muscle-region" data-muscle="tibialis" x="60" y="378" width="43" height="100" rx="4"/>
+              <rect class="muscle-region" data-muscle="tibialis" x="117" y="378" width="43" height="100" rx="4"/>
+              <!-- Labels -->
+              <text class="mm-label" x="52" y="76">DELT</text>
+              <text class="mm-label" x="168" y="76">DELT</text>
+              <text class="mm-label" x="85" y="106">CHEST</text>
+              <text class="mm-label" x="135" y="106">CHEST</text>
+              <text class="mm-label" x="110" y="181">ABS</text>
+              <text class="mm-label" x="34" y="142">BI</text>
+              <text class="mm-label" x="186" y="142">BI</text>
+              <text class="mm-label" x="83" y="298">QUAD</text>
+              <text class="mm-label" x="137" y="298">QUAD</text>
+              <text class="mm-label" x="81" y="428">TIB</text>
+              <text class="mm-label" x="138" y="428">TIB</text>
+            </svg>
+            <!-- BACK SVG -->
+            <svg id="mm-svg-back" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-label="Back body muscle map">
+              <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
+              <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
+              <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
+              <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
+              <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
+              <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
+              <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
+              <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
+              <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
+              <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
+              <!-- MUSCLE REGIONS — BACK -->
+              <path class="muscle-region" data-muscle="traps" d="M80,56 L140,56 L150,100 L110,110 L70,100 Z"/>
+              <ellipse class="muscle-region" data-muscle="rear-delt" cx="50" cy="78" rx="17" ry="16"/>
+              <ellipse class="muscle-region" data-muscle="rear-delt" cx="170" cy="78" rx="17" ry="16"/>
+              <path class="muscle-region" data-muscle="lats" d="M60,108 L94,108 L90,196 L56,208 Z"/>
+              <path class="muscle-region" data-muscle="lats" d="M126,108 L160,108 L164,208 L130,196 Z"/>
+              <rect class="muscle-region" data-muscle="rhomboids" x="90" y="110" width="40" height="48" rx="4"/>
+              <rect class="muscle-region" data-muscle="lower-back" x="86" y="174" width="48" height="44" rx="4"/>
+              <ellipse class="muscle-region" data-muscle="triceps" cx="32" cy="148" rx="13" ry="34"/>
+              <ellipse class="muscle-region" data-muscle="triceps" cx="188" cy="148" rx="13" ry="34"/>
+              <path class="muscle-region" data-muscle="glutes" d="M62,252 L108,252 L106,288 L60,288 Z"/>
+              <path class="muscle-region" data-muscle="glutes" d="M112,252 L158,252 L160,288 L114,288 Z"/>
+              <path class="muscle-region" data-muscle="hamstrings" d="M62,292 L105,292 L103,368 L60,368 Z"/>
+              <path class="muscle-region" data-muscle="hamstrings" d="M115,292 L158,292 L160,368 L117,368 Z"/>
+              <rect class="muscle-region" data-muscle="calves" x="60" y="378" width="43" height="100" rx="4"/>
+              <rect class="muscle-region" data-muscle="calves" x="117" y="378" width="43" height="100" rx="4"/>
+              <!-- Labels -->
+              <text class="mm-label" x="110" y="86">TRAPS</text>
+              <text class="mm-label" x="50" y="78">DELT</text>
+              <text class="mm-label" x="170" y="78">DELT</text>
+              <text class="mm-label" x="74" y="155">LAT</text>
+              <text class="mm-label" x="146" y="155">LAT</text>
+              <text class="mm-label" x="110" y="134">RHOM</text>
+              <text class="mm-label" x="110" y="196">LO BACK</text>
+              <text class="mm-label" x="32" y="148">TRI</text>
+              <text class="mm-label" x="188" y="148">TRI</text>
+              <text class="mm-label" x="84" y="270">GLUTE</text>
+              <text class="mm-label" x="136" y="270">GLUTE</text>
+              <text class="mm-label" x="83" y="330">HAM</text>
+              <text class="mm-label" x="137" y="330">HAM</text>
+              <text class="mm-label" x="81" y="428">CALF</text>
+              <text class="mm-label" x="138" y="428">CALF</text>
+            </svg>
+          </div>
+
+          <!-- Slide-in muscle detail panel -->
+          <aside class="train-panel" id="trainPanel">
+            <div class="train-panel-inner">
+              <div class="mm-prompt" id="mm-prompt">
+                <div class="mm-prompt-icon">◉</div>
+                <div>Select a muscle</div>
+              </div>
+              <div class="mm-content" id="mm-content">
+                <button class="train-panel-close" onclick="closeTrainPanel()" aria-label="Close">✕</button>
+                <div class="mm-name" id="mm-name"></div>
+                <div class="mm-func" id="mm-func"></div>
+                <div class="mm-section-head">Top Exercises</div>
+                <ul class="mm-ex-list" id="mm-exercises"></ul>
+                <div class="mm-section-head">Weekly Volume — sets/wk
+                  <span class="mm-vol-cite">Israetel / RP Strength; Schoenfeld et al. 2017</span>
+                </div>
+                <div>
+                  <div class="mm-vol-bar"><div class="mm-vol-fill" id="mm-vol-fill" style="width:0%"></div></div>
+                  <div class="mm-vol-nums" id="mm-vol-nums"></div>
+                </div>
+                <div class="mm-recovery" id="mm-recovery"></div>
+                <div class="mm-note" id="mm-note"></div>
+                <div style="margin-top: var(--space-lg); display:flex; gap:8px; flex-wrap:wrap;">
+                  <button class="btn btn-primary btn-sm" onclick="switchToView('tools','training')">View Programs →</button>
+                  <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','utilities')">Log Workout →</button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Workout bar -->
+        <div class="train-workout-bar">
+          <span style="font-size:0.95rem;opacity:.7;">🏋️</span>
+          <span id="trainWorkoutLabel" style="flex:1;font-size:0.8125rem;color:var(--chalk-secondary);">Click any muscle to explore exercises, volume targets, and recovery data</span>
+          <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','utilities')" style="flex-shrink:0;font-size:0.75rem;">Workout Logger →</button>
+        </div>
+      </div>
+
+      <!-- ═══ SCROLLABLE CONTENT ═══ -->
       <section class="section home-section">
         <div class="container">
-          <!-- Hero -->
-          <div class="home-hero">
-            <h1 class="home-title">Evidence-Based Bodybuilding</h1>
-            <p class="home-subtitle">Nutrition and training tools backed by peer-reviewed research.</p>
-          </div>
-
-          <!-- Quick Start + Stats -->
-          <div class="home-quickstart">
-            <button class="home-start-btn" onclick="switchToView('calculator')">
-              <span class="home-start-icon">→</span>
-              <span>Build My Plan</span>
-            </button>
-          </div>
-
           <div class="home-stats">
-            <div class="home-stat"><div class="home-stat-val">30+</div><div class="home-stat-label">Calculators</div></div>
-            <div class="home-stat"><div class="home-stat-val">80+</div><div class="home-stat-label">Foods</div></div>
-            <div class="home-stat"><div class="home-stat-val">8</div><div class="home-stat-label">Programs</div></div>
+            <div class="home-stat"><div class="home-stat-val">40+</div><div class="home-stat-label">Calculators</div></div>
+            <div class="home-stat"><div class="home-stat-val">200+</div><div class="home-stat-label">Foods</div></div>
+            <div class="home-stat"><div class="home-stat-val">12</div><div class="home-stat-label">Programs</div></div>
             <div class="home-stat"><div class="home-stat-val">17</div><div class="home-stat-label">Muscle Groups</div></div>
           </div>
 
@@ -4897,14 +5194,6 @@ select.field-input option {
                   <span class="toggle-text">Show micronutrients</span>
                 </div>
 
-                <!-- Optional: Email Results (Coming Soon) -->
-                <div class="email-results-section mt-lg" style="opacity: 0.5; pointer-events: none;">
-                  <div class="toggle-row">
-                    <div class="toggle" id="emailToggle"></div>
-                    <span class="toggle-text">Email me my results</span>
-                    <span style="margin-left: var(--space-sm); font-size: 0.75rem; padding: 2px 8px; background: var(--iron-surface); color: var(--chalk-tertiary); border-radius: var(--radius-sm);">Coming Soon</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -4999,7 +5288,6 @@ select.field-input option {
                   <p class="card-subtitle">Optimized for your goals</p>
                 </div>
                 <div class="btn-group" style="margin: 0;">
-                  <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;" title="Coming soon">PDF ⚠</button>
                   <button class="btn btn-ghost btn-sm" onclick="exportCSV()">CSV</button>
                   <button class="btn btn-ghost btn-sm" onclick="exportJSON()">JSON</button>
                 </div>
@@ -5248,7 +5536,7 @@ select.field-input option {
                   </div>
                   <div class="stat-item">
                     <div class="stat-value" id="hrFatBurn">--</div>
-                    <div class="stat-label">Fat Burn Zone</div>
+                    <div class="stat-label">Aerobic Zone (60–70%)</div>
                   </div>
                   <div class="stat-item">
                     <div class="stat-value" id="hrCardio">--</div>
@@ -5256,7 +5544,7 @@ select.field-input option {
                   </div>
                 </div>
                 <div class="education-tip" style="margin-top: var(--space-lg);">
-                  <strong>Why it matters:</strong> All cardio machines burn the same calories at equal heart rate and duration. The difference is joint stress, not calorie burn. Stay in the fat burn zone (60-70% max HR) for 30-45 min for optimal fat oxidation.
+                  <strong>Accuracy note:</strong> 220 − age is a population average with a standard deviation of ±10–12 bpm (Tanaka et al., 2001). Your true max HR may differ significantly — a graded exercise test is more accurate. The "fat burn zone" (60–70%) maximizes the <em>proportion</em> of energy from fat, but higher intensities burn more total calories and fat in aggregate. For body composition, total caloric expenditure matters more than fuel source.
                 </div>
               </div>
             </div>
@@ -5940,84 +6228,6 @@ select.field-input option {
       </section>
     </div>
 
-    <!-- PREP VIEW -->
-    <div id="prep" class="view">
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <h1 class="section-title">Competition Prep</h1>
-            <p class="section-subtitle">Plan your contest timeline with science</p>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <h2 class="card-title">Prep Calculator</h2>
-                <p class="card-subtitle">Based on JISSN evidence-based guidelines</p>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="form-grid">
-                <div class="field">
-                  <label class="field-label" for="prepCurrent">Current Weight</label>
-                  <div class="field-combo">
-                    <input type="number" id="prepCurrent" class="field-input" placeholder="200">
-                    <span class="field-suffix">lbs</span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="field-label" for="prepTarget">Target Stage Weight</label>
-                  <div class="field-combo">
-                    <input type="number" id="prepTarget" class="field-input" placeholder="175">
-                    <span class="field-suffix">lbs</span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="field-label" for="prepBF">Current Body Fat</label>
-                  <div class="field-combo">
-                    <input type="number" id="prepBF" class="field-input" placeholder="15">
-                    <span class="field-suffix">%</span>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="field-label" for="prepWeeks">Weeks Out</label>
-                  <div class="field-combo">
-                    <input type="number" id="prepWeeks" class="field-input" placeholder="16">
-                    <span class="field-suffix">wks</span>
-                  </div>
-                </div>
-              </div>
-              <div class="btn-group mt-lg">
-                <button type="button" class="btn btn-primary" onclick="calcPrep()">Calculate Prep</button>
-              </div>
-              <div id="prepResults" class="hidden mt-xl"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- SCIENCE VIEW -->
-    <div id="science" class="view">
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <h1 class="section-title">The Science</h1>
-            <p class="section-subtitle">Every calculation backed by peer-reviewed research</p>
-          </div>
-
-          <div class="alert alert-success mb-lg">
-            <span class="alert-icon">◆</span>
-            <div class="alert-content">
-              <div class="alert-title">Evidence-Based</div>
-              <div class="alert-text">MuscleForge uses formulas and guidelines from ISSN, ACSM, and leading sports nutrition and exercise science journals including Schoenfeld, Helms, and Contreras research.</div>
-            </div>
-          </div>
-
-          <div id="refsGrid" class="refs-grid"></div>
-        </div>
-      </section>
-    </div>
 
     <!-- TOOLS VIEW -->
     <div id="tools" class="view">
@@ -6041,131 +6251,22 @@ select.field-input option {
           <!-- Body Composition Tools -->
           <div id="tools-body" class="tools-category active">
 
-            <!-- Interactive Muscle Map -->
-            <div class="card tool-card">
+            <!-- Anatomy Map — redirect to Train view -->
+            <div class="card tool-card" style="cursor:pointer;" onclick="switchToView('home')">
               <div class="card-header">
                 <div>
-                  <h2 class="card-title">Interactive Muscle Map</h2>
-                  <p class="card-subtitle">Click any muscle group for exercises, weekly volume targets, and recovery data</p>
+                  <h2 class="card-title">Interactive Anatomy Map</h2>
+                  <p class="card-subtitle">Click any muscle for exercises, volume targets, and recovery data</p>
                 </div>
-                <span class="tool-badge">Schoenfeld 2017</span>
+                <span class="tool-badge">Israetel · Schoenfeld 2017</span>
               </div>
-              <div class="card-body">
-                <div class="mm-toggle">
-                  <button class="btn btn-primary" id="mm-btn-front" onclick="toggleMuscleView('front')">Front View</button>
-                  <button class="btn btn-secondary" id="mm-btn-back" onclick="toggleMuscleView('back')">Back View</button>
+              <div class="card-body" style="display:flex;align-items:center;justify-content:center;gap:16px;padding:32px;background:var(--iron-mid);border-radius:var(--radius-md);flex-direction:column;">
+                <div style="font-size:3rem;opacity:.6;">🏋️</div>
+                <div style="text-align:center;">
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--chalk);letter-spacing:.04em;">Open in Train View</div>
+                  <div style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:4px;">The anatomy map is MuscleForge's home — select muscles, explore exercises, and understand your body</div>
                 </div>
-                <div class="muscle-map-layout">
-                  <div class="mm-figure-wrap">
-                    <!-- FRONT SVG -->
-                    <svg id="mm-svg-front" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" aria-label="Front body muscle map">
-                      <!-- Body silhouette -->
-                      <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
-                      <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
-                      <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
-                      <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
-                      <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
-                      <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
-                      <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
-                      <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
-                      <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
-                      <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
-                      <!-- MUSCLE REGIONS — FRONT -->
-                      <ellipse class="muscle-region" data-muscle="front-delt" cx="52" cy="76" rx="17" ry="17"/>
-                      <ellipse class="muscle-region" data-muscle="front-delt" cx="168" cy="76" rx="17" ry="17"/>
-                      <path class="muscle-region" data-muscle="chest" d="M62,68 L108,68 L108,138 L80,144 L66,118 Z"/>
-                      <path class="muscle-region" data-muscle="chest" d="M112,68 L158,68 L154,118 L140,144 L112,138 Z"/>
-                      <rect class="muscle-region" data-muscle="abs" x="87" y="147" width="46" height="68" rx="5"/>
-                      <ellipse class="muscle-region" data-muscle="hip-flexors" cx="110" cy="232" rx="36" ry="13"/>
-                      <ellipse class="muscle-region" data-muscle="biceps" cx="34" cy="142" rx="13" ry="32"/>
-                      <ellipse class="muscle-region" data-muscle="biceps" cx="186" cy="142" rx="13" ry="32"/>
-                      <ellipse class="muscle-region" data-muscle="forearms" cx="28" cy="196" rx="11" ry="26"/>
-                      <ellipse class="muscle-region" data-muscle="forearms" cx="192" cy="196" rx="11" ry="26"/>
-                      <path class="muscle-region" data-muscle="quads" d="M62,254 L104,254 L102,368 L60,368 Z"/>
-                      <path class="muscle-region" data-muscle="quads" d="M116,254 L158,254 L160,368 L118,368 Z"/>
-                      <rect class="muscle-region" data-muscle="tibialis" x="60" y="378" width="43" height="100" rx="4"/>
-                      <rect class="muscle-region" data-muscle="tibialis" x="117" y="378" width="43" height="100" rx="4"/>
-                      <!-- Labels -->
-                      <text class="mm-label" x="52" y="76">DELT</text>
-                      <text class="mm-label" x="168" y="76">DELT</text>
-                      <text class="mm-label" x="85" y="106">CHEST</text>
-                      <text class="mm-label" x="135" y="106">CHEST</text>
-                      <text class="mm-label" x="110" y="181">ABS</text>
-                      <text class="mm-label" x="34" y="142">BI</text>
-                      <text class="mm-label" x="186" y="142">BI</text>
-                      <text class="mm-label" x="83" y="298">QUAD</text>
-                      <text class="mm-label" x="137" y="298">QUAD</text>
-                      <text class="mm-label" x="81" y="428">TIB</text>
-                      <text class="mm-label" x="138" y="428">TIB</text>
-                    </svg>
-                    <!-- BACK SVG -->
-                    <svg id="mm-svg-back" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-label="Back body muscle map">
-                      <!-- Body silhouette (same as front) -->
-                      <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
-                      <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
-                      <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
-                      <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
-                      <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
-                      <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
-                      <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
-                      <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
-                      <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
-                      <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
-                      <!-- MUSCLE REGIONS — BACK -->
-                      <path class="muscle-region" data-muscle="traps" d="M80,56 L140,56 L150,100 L110,110 L70,100 Z"/>
-                      <ellipse class="muscle-region" data-muscle="rear-delt" cx="50" cy="78" rx="17" ry="16"/>
-                      <ellipse class="muscle-region" data-muscle="rear-delt" cx="170" cy="78" rx="17" ry="16"/>
-                      <path class="muscle-region" data-muscle="lats" d="M60,108 L94,108 L90,196 L56,208 Z"/>
-                      <path class="muscle-region" data-muscle="lats" d="M126,108 L160,108 L164,208 L130,196 Z"/>
-                      <rect class="muscle-region" data-muscle="rhomboids" x="90" y="110" width="40" height="48" rx="4"/>
-                      <rect class="muscle-region" data-muscle="lower-back" x="86" y="174" width="48" height="44" rx="4"/>
-                      <ellipse class="muscle-region" data-muscle="triceps" cx="32" cy="148" rx="13" ry="34"/>
-                      <ellipse class="muscle-region" data-muscle="triceps" cx="188" cy="148" rx="13" ry="34"/>
-                      <path class="muscle-region" data-muscle="glutes" d="M62,252 L108,252 L106,288 L60,288 Z"/>
-                      <path class="muscle-region" data-muscle="glutes" d="M112,252 L158,252 L160,288 L114,288 Z"/>
-                      <path class="muscle-region" data-muscle="hamstrings" d="M62,292 L105,292 L103,368 L60,368 Z"/>
-                      <path class="muscle-region" data-muscle="hamstrings" d="M115,292 L158,292 L160,368 L117,368 Z"/>
-                      <rect class="muscle-region" data-muscle="calves" x="60" y="378" width="43" height="100" rx="4"/>
-                      <rect class="muscle-region" data-muscle="calves" x="117" y="378" width="43" height="100" rx="4"/>
-                      <!-- Labels -->
-                      <text class="mm-label" x="110" y="86">TRAPS</text>
-                      <text class="mm-label" x="50" y="78">DELT</text>
-                      <text class="mm-label" x="170" y="78">DELT</text>
-                      <text class="mm-label" x="74" y="155">LAT</text>
-                      <text class="mm-label" x="146" y="155">LAT</text>
-                      <text class="mm-label" x="110" y="134">RHOM</text>
-                      <text class="mm-label" x="110" y="196">LO BACK</text>
-                      <text class="mm-label" x="32" y="148">TRI</text>
-                      <text class="mm-label" x="188" y="148">TRI</text>
-                      <text class="mm-label" x="84" y="270">GLUTE</text>
-                      <text class="mm-label" x="136" y="270">GLUTE</text>
-                      <text class="mm-label" x="83" y="330">HAM</text>
-                      <text class="mm-label" x="137" y="330">HAM</text>
-                      <text class="mm-label" x="81" y="428">CALF</text>
-                      <text class="mm-label" x="138" y="428">CALF</text>
-                    </svg>
-                  </div>
-                  <!-- Detail Panel -->
-                  <div class="mm-detail-panel">
-                    <div class="mm-prompt" id="mm-prompt">
-                      <div class="mm-prompt-icon">◉</div>
-                      <div>Select a muscle group</div>
-                    </div>
-                    <div class="mm-content" id="mm-content">
-                      <div class="mm-name" id="mm-name"></div>
-                      <div class="mm-func" id="mm-func"></div>
-                      <div class="mm-section-head">Top Exercises</div>
-                      <ul class="mm-ex-list" id="mm-exercises"></ul>
-                      <div class="mm-section-head">Weekly Volume — sets/wk (Schoenfeld et al. 2017)</div>
-                      <div>
-                        <div class="mm-vol-bar"><div class="mm-vol-fill" id="mm-vol-fill" style="width:0%"></div></div>
-                        <div class="mm-vol-nums" id="mm-vol-nums"></div>
-                      </div>
-                      <div class="mm-recovery" id="mm-recovery"></div>
-                      <div class="mm-note" id="mm-note"></div>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();switchToView('home')">Open Anatomy Map →</button>
               </div>
             </div>
 
@@ -9769,7 +9870,7 @@ function calculateGeneticPotential() {
     <div class="rationale-label">Your Natural Potential</div>
     <p>At ${targetBf}% body fat, your maximum natural weight is approximately <strong>${Math.round(result.maxWeightAtBf)} lbs</strong>.</p>
     <p style="margin-top: var(--space-sm);">Maximum lean body mass: <strong>${Math.round(result.maxLeanMassLbs)} lbs</strong></p>
-    <p style="margin-top: var(--space-sm); font-size: 0.875rem; color: var(--chalk-tertiary);">Based on Casey Butt's formula using bone structure measurements. These are theoretical maximums achievable over years of optimal training and nutrition.</p>
+    <p style="margin-top: var(--space-sm); font-size: 0.875rem; color: var(--chalk-tertiary);">Based on Casey Butt's empirical model derived from analysis of elite natural competitive bodybuilders. This is not a peer-reviewed published formula — treat as an informed heuristic, not a hard ceiling. Individual variation in muscle bellies, insertions, and hormonal profile means actual potential can vary ±10–15% from these estimates.</p>
   `;
   document.getElementById('geneticResults').classList.remove('hidden');
 }
@@ -13054,76 +13155,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ═══════════════════════════════════════════════════════════════════════════
-// BEGINNER ONBOARDING FLOW
-// ═══════════════════════════════════════════════════════════════════════════
-const ONBOARD_STEPS = [
-  { target: '[data-view="plan"]', title: 'Plan Your Nutrition', text: 'Start here. Enter your stats and goals to generate a personalized meal plan with macro targets.', position: 'bottom' },
-  { target: '#bodyMetrics', title: 'Body Metrics', text: 'Fill in your age, weight, height, and activity level. These drive your calorie and macro calculations.', position: 'bottom' },
-  { target: '#healthDietary', title: 'Health & Dietary', text: 'Select any injuries or food allergies. Your workout and meal plans will automatically adapt.', position: 'bottom' },
-  { target: '[data-view="tools"]', title: 'Powerful Tools', text: 'Track workouts, water intake, body measurements, and more. All data saves locally.', position: 'bottom' },
-  { target: '[data-view="knowledge"]', title: 'Knowledge Base', text: 'Every recommendation is backed by peer-reviewed research. Explore the science here.', position: 'bottom' }
-];
-
-function startOnboarding() {
-  let step = 0;
-
-  function showStep() {
-    // Remove previous
-    document.getElementById('onboardOverlay')?.remove();
-
-    if (step >= ONBOARD_STEPS.length) {
-      localStorage.setItem('mf-onboarded', 'true');
-      return;
-    }
-
-    const s = ONBOARD_STEPS[step];
-    const el = document.querySelector(s.target);
-    if (!el) { step++; showStep(); return; }
-
-    const rect = el.getBoundingClientRect();
-
-    const overlay = document.createElement('div');
-    overlay.id = 'onboardOverlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Getting started guide');
-    overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;';
-    overlay.innerHTML = `
-      <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);" onclick="skipOnboarding()"></div>
-      <div style="position:fixed;top:${rect.bottom + 12}px;left:${Math.max(16, Math.min(rect.left, window.innerWidth - 320))}px;
-        width:300px;background:var(--iron-elevated);border:2px solid var(--training);padding:var(--space-lg);z-index:10000;border-radius:var(--radius-md);">
-        <div style="font-family:'Teko',sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--training);margin-bottom:4px;">
-          Step ${step + 1} of ${ONBOARD_STEPS.length}
-        </div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--chalk);margin-bottom:var(--space-sm);">${s.title}</div>
-        <p style="font-size:0.8125rem;color:var(--chalk-secondary);line-height:1.5;margin:0 0 var(--space-md);">${s.text}</p>
-        <div style="display:flex;gap:var(--space-sm);">
-          <button onclick="advanceOnboarding()" class="btn btn-sm" style="flex:1;background:var(--training);color:var(--chalk);">
-            ${step < ONBOARD_STEPS.length - 1 ? 'Next' : 'Get Started'}
-          </button>
-          <button onclick="skipOnboarding()" class="btn btn-ghost btn-sm" style="flex:0;">Skip</button>
-        </div>
-      </div>
-      <div style="position:fixed;top:${rect.top - 4}px;left:${rect.left - 4}px;width:${rect.width + 8}px;height:${rect.height + 8}px;
-        border:2px solid var(--training);border-radius:4px;z-index:10000;pointer-events:none;box-shadow:0 0 0 9999px rgba(0,0,0,0.01);"></div>
-    `;
-    document.body.appendChild(overlay);
-  }
-
-  window.advanceOnboarding = () => { step++; showStep(); };
-  window.skipOnboarding = () => {
-    document.getElementById('onboardOverlay')?.remove();
-    localStorage.setItem('mf-onboarded', 'true');
-  };
-
-  showStep();
-}
-
-// Auto-start onboarding for first-time visitors
-if (!localStorage.getItem('mf-onboarded')) {
-  setTimeout(startOnboarding, 800);
-}
 
 // Register Service Worker for PWA
 if ('serviceWorker' in navigator) {
@@ -13132,8 +13163,10 @@ if ('serviceWorker' in navigator) {
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MUSCLE MAP
-// Volume data aligned with MUSCLE_GROUPS in exercises.js (Schoenfeld 2017)
-// Recovery times: Schoenfeld 2010; Zatsiorsky & Kraemer "Science and Practice of Strength Training"
+// Volume landmarks (MEV/MAV/MRV) from Dr. Mike Israetel / Renaissance Periodization.
+// Supported by: Schoenfeld BJ et al. "Evidence-based guidelines for resistance training volume." Strength Cond J, 2017.
+// Schoenfeld et al. "Dose-response: weekly volume and muscle hypertrophy." J Sports Sci, 2017 (PMID 27433992).
+// Recovery times: Zatsiorsky & Kraemer "Science and Practice of Strength Training"; Schoenfeld 2010.
 // ═══════════════════════════════════════════════════════════════════════════
 const MUSCLE_DATA = {
   chest: {
@@ -13280,8 +13313,8 @@ function toggleMuscleView(side) {
   mmCurrentView = side;
   document.getElementById('mm-svg-front').style.display = side === 'front' ? 'block' : 'none';
   document.getElementById('mm-svg-back').style.display = side === 'back' ? 'block' : 'none';
-  document.getElementById('mm-btn-front').className = 'btn ' + (side === 'front' ? 'btn-primary' : 'btn-secondary');
-  document.getElementById('mm-btn-back').className = 'btn ' + (side === 'back' ? 'btn-primary' : 'btn-secondary');
+  document.getElementById('mm-btn-front').className = 'btn btn-sm ' + (side === 'front' ? 'btn-primary' : 'btn-secondary');
+  document.getElementById('mm-btn-back').className = 'btn btn-sm ' + (side === 'back' ? 'btn-primary' : 'btn-secondary');
   document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
   document.getElementById('mm-content').classList.remove('visible');
   document.getElementById('mm-prompt').style.display = 'flex';
@@ -13294,7 +13327,10 @@ function selectMuscle(muscleId) {
   document.querySelectorAll(`.muscle-region[data-muscle="${muscleId}"]`).forEach(el => el.classList.add('mm-active'));
   document.getElementById('mm-name').textContent = d.name;
   document.getElementById('mm-func').textContent = d.func;
-  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e => `<li>${escapeHtml(e)}</li>`).join('');
+  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e =>
+    `<li style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <span>${escapeHtml(e)}</span>
+    </li>`).join('');
   const maxVol = 28;
   document.getElementById('mm-vol-fill').style.width = (d.volMax / maxVol * 100) + '%';
   document.getElementById('mm-vol-nums').innerHTML =
@@ -13303,6 +13339,39 @@ function selectMuscle(muscleId) {
   document.getElementById('mm-note').textContent = d.note;
   document.getElementById('mm-prompt').style.display = 'none';
   document.getElementById('mm-content').classList.add('visible');
+  // Open the slide-in panel (train view)
+  const panel = document.getElementById('trainPanel');
+  if (panel) panel.classList.add('open');
+  // Update workout bar label
+  const lbl = document.getElementById('trainWorkoutLabel');
+  if (lbl) lbl.textContent = `Viewing: ${d.name}`;
+}
+
+function closeTrainPanel() {
+  const panel = document.getElementById('trainPanel');
+  if (panel) panel.classList.remove('open');
+  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
+  document.getElementById('mm-content').classList.remove('visible');
+  document.getElementById('mm-prompt').style.display = 'flex';
+  const lbl = document.getElementById('trainWorkoutLabel');
+  if (lbl) lbl.textContent = 'Click any muscle to explore exercises, volume targets, and recovery data';
+}
+
+function filterMuscleSvg(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    document.querySelectorAll('.muscle-region').forEach(el => { el.style.opacity = ''; });
+    return;
+  }
+  document.querySelectorAll('.muscle-region').forEach(el => {
+    const id = (el.dataset.muscle || '').replace(/-/g, ' ');
+    const d = MUSCLE_DATA[el.dataset.muscle];
+    const name = d ? d.name.toLowerCase() : '';
+    const match = id.includes(q) || name.includes(q);
+    el.style.opacity = match ? '1' : '0.15';
+    if (match) { el.style.fill = 'var(--blood)'; }
+    else { el.style.fill = ''; }
+  });
 }
 
 document.querySelectorAll('.muscle-region').forEach(el => {
