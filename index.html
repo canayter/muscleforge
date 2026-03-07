@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'self' https://script.google.com https://api.emailjs.com https://nominatim.openstreetmap.org https://overpass-api.de https://overpass.kumi.systems; frame-src https://open.spotify.com https://script.google.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://cdn.jsdelivr.net/npm/chart.js@4.4.0/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'self' https://script.google.com https://api.emailjs.com https://nominatim.openstreetmap.org https://overpass-api.de https://overpass.kumi.systems; frame-src https://open.spotify.com https://script.google.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="MuscleForge - Professional bodybuilding nutrition and training planner with scientifically-backed diet plans, macro calculators, evidence-based training programs, and IFBB competition prep tools."/>
   <meta name="author" content="Can Ayter"/>
@@ -4766,6 +4766,32 @@ select.field-input option {
 .mm-ex-add-btn.added { background: var(--success); border-color: var(--success); color: var(--chalk); transform: scale(0.9); }
 .mm-ex-add-btn.added::after { content: '✓'; font-size: 0.75rem; }
 
+/* ── Workout Logger Tabs ── */
+.wl-tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--iron-border); margin-bottom: var(--space-md); }
+.wl-tab {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  padding: 8px 16px; margin-bottom: -1px;
+  font-family: 'Teko', 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--chalk-secondary); cursor: pointer;
+  transition: color .15s, border-color .15s;
+}
+.wl-tab:hover { color: var(--chalk); }
+.wl-tab.active { color: var(--blood); border-bottom-color: var(--blood); }
+
+/* ── WL History entries ── */
+.wl-history-entry {
+  background: var(--iron-surface); border: 1px solid var(--iron-border);
+  border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-sm);
+}
+.wl-history-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.wl-history-name { font-family: 'Teko', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: .05em; color: var(--chalk); margin-right: var(--space-sm); }
+.wl-history-date { font-size: 0.75rem; color: var(--chalk-tertiary); }
+.wl-history-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--chalk-secondary); padding: 3px 0; border-top: 1px solid var(--iron-border); }
+.wl-history-row:first-child { border-top: none; }
+.wl-history-ex { flex: 1; }
+.wl-history-stats { color: var(--blood); font-variant-numeric: tabular-nums; }
+
   </style>
 </head>
 
@@ -8005,38 +8031,78 @@ select.field-input option {
               </div>
             </div>
 
-            <!-- Workout Logger -->
+            <!-- Workout Logger & Progress Tracker -->
             <div class="card tool-card" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
-                  <h2 class="card-title">Workout Logger</h2>
-                  <p class="card-subtitle">Log your sets, reps, and weight each session</p>
+                  <h2 class="card-title">Workout Logger & Strength Progress</h2>
+                  <p class="card-subtitle">Log sessions, view history, track strength over time</p>
                 </div>
-                <span class="tool-badge">Tracking</span>
+                <span class="tool-badge">Progress</span>
               </div>
               <div class="card-body">
-                <div class="form-grid">
-                  <div class="field">
-                    <label class="field-label">Date</label>
-                    <input type="date" id="logDate" class="field-input">
+
+                <!-- Tabs -->
+                <div class="wl-tabs">
+                  <button class="wl-tab active" onclick="switchWLTab('wl-log',this)">Log</button>
+                  <button class="wl-tab" onclick="switchWLTab('wl-history',this)">History</button>
+                  <button class="wl-tab" onclick="switchWLTab('wl-progress',this);populateProgressDropdown()">Progress Chart</button>
+                </div>
+
+                <!-- LOG PANEL -->
+                <div class="wl-panel" id="wl-log">
+                  <div class="form-grid" style="margin-top: var(--space-md);">
+                    <div class="field">
+                      <label class="field-label">Date</label>
+                      <input type="date" id="logDate" class="field-input">
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Workout Name</label>
+                      <input type="text" id="logWorkoutName" class="field-input" placeholder="e.g. Push Day A" maxlength="100">
+                    </div>
                   </div>
-                  <div class="field">
-                    <label class="field-label">Workout Name</label>
-                    <input type="text" id="logWorkoutName" class="field-input" placeholder="e.g. Push Day A" maxlength="100">
+                  <div id="logExerciseRows" style="margin-top: var(--space-lg);"></div>
+                  <div class="btn-group" style="margin-top: var(--space-md);">
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="addLogExerciseRow()">+ Add Exercise</button>
+                  </div>
+                  <div class="btn-group" style="margin-top: var(--space-lg);">
+                    <button type="button" class="btn btn-primary" onclick="saveWorkoutLog()">Save Workout</button>
+                    <button type="button" class="btn btn-ghost" onclick="clearWorkoutLog()">Clear</button>
+                  </div>
+                  <div class="alert alert-info" style="margin-top:var(--space-lg);font-size:0.8rem;">
+                    <span class="alert-icon">💡</span>
+                    <div class="alert-content">
+                      <div class="alert-text">Workouts built in the <strong>Train view</strong> and saved there also appear here automatically.</div>
+                    </div>
                   </div>
                 </div>
-                <div id="logExerciseRows" style="margin-top: var(--space-lg);"></div>
-                <div class="btn-group" style="margin-top: var(--space-md);">
-                  <button type="button" class="btn btn-ghost btn-sm" onclick="addLogExerciseRow()">+ Add Exercise</button>
+
+                <!-- HISTORY PANEL -->
+                <div class="wl-panel" id="wl-history" style="display:none">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin:var(--space-md) 0 var(--space-sm);">
+                    <span style="font-family:'Teko',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:0.85rem;color:var(--chalk-secondary);">Recent Sessions</span>
+                    <button class="btn btn-ghost btn-sm" onclick="if(confirm('Delete all workout history?')){localStorage.removeItem('mf-workout-log');renderWLHistory();}">Clear All</button>
+                  </div>
+                  <div id="wlHistoryList"></div>
                 </div>
-                <div class="btn-group" style="margin-top: var(--space-lg);">
-                  <button type="button" class="btn btn-primary" onclick="saveWorkoutLog()">Save Workout</button>
-                  <button type="button" class="btn btn-ghost" onclick="clearWorkoutLog()">Clear</button>
+
+                <!-- PROGRESS CHART PANEL -->
+                <div class="wl-panel" id="wl-progress" style="display:none">
+                  <div class="field" style="margin-top:var(--space-md);">
+                    <label class="field-label">Select Exercise</label>
+                    <select id="progressExerciseSelect" class="field-input" onchange="renderProgressChart()">
+                      <option value="">— choose an exercise —</option>
+                    </select>
+                  </div>
+                  <div style="position:relative;margin-top:var(--space-lg);">
+                    <canvas id="progressChart" style="display:none;max-height:280px;"></canvas>
+                    <div id="progressChartEmpty" style="text-align:center;padding:40px 0;color:var(--chalk-tertiary);font-size:0.8125rem;">
+                      Select an exercise above to see your strength over time
+                    </div>
+                  </div>
+                  <div id="progressStats" style="display:none;margin-top:var(--space-lg);"></div>
                 </div>
-                <div id="workoutLogHistory" style="margin-top: var(--space-xl);">
-                  <h4 style="margin-bottom: var(--space-md); color: var(--chalk);">Workout History</h4>
-                  <div id="workoutLogList"></div>
-                </div>
+
               </div>
             </div>
 
@@ -8639,6 +8705,7 @@ Squat	225	5	2025-03-15"></textarea>
   </footer>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="data/foods.js"></script>
   <script src="data/references.js"></script>
@@ -11547,12 +11614,13 @@ function saveWorkoutLog() {
 
   if (exercises.length === 0) return alert('Add at least one exercise');
 
-  const logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
+  const logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
   logs.unshift({ id: Date.now(), date, name, exercises });
-  localStorage.setItem('muscleforge_workouts', JSON.stringify(logs));
+  if (logs.length > 60) logs.splice(60);
+  localStorage.setItem('mf-workout-log', JSON.stringify(logs));
 
   clearWorkoutLog();
-  loadWorkoutLogHistory();
+  showWorkoutToast('Workout saved ✓');
 }
 
 function clearWorkoutLog() {
@@ -11563,36 +11631,198 @@ function clearWorkoutLog() {
 }
 
 function loadWorkoutLogHistory() {
-  const logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
-  const container = document.getElementById('workoutLogList');
-  if (logs.length === 0) {
-    container.innerHTML = '<p style="color: var(--chalk-tertiary);">No workouts logged yet.</p>';
-    return;
-  }
-  container.innerHTML = logs.slice(0, 10).map(log => `
-    <div style="padding: var(--space-md); background: var(--iron-surface); margin-bottom: var(--space-sm);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
-        <div>
-          <strong style="color: var(--chalk);">${escapeHtml(log.name)}</strong>
-          <span style="color: var(--chalk-tertiary); font-size: 0.8rem; margin-left: var(--space-sm);">${escapeHtml(log.date)}</span>
-        </div>
-        <button class="btn btn-ghost btn-sm" onclick="deleteWorkoutLog(${log.id})" aria-label="Delete workout log" style="padding: 4px 8px; font-size: 0.75rem;">X</button>
-      </div>
-      ${log.exercises.map(ex => `
-        <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--chalk-secondary); padding: 2px 0;">
-          <span>${escapeHtml(ex.name)}</span>
-          <span>${escapeHtml(String(ex.sets))}x${escapeHtml(String(ex.reps))} @ ${fmt(ex.weight)}lbs</span>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+  // Now handled by tabbed UI — delegate to renderWLHistory
+  renderWLHistory();
 }
 
-function deleteWorkoutLog(id) {
-  let logs = JSON.parse(localStorage.getItem('muscleforge_workouts') || '[]');
+function deleteWorkoutLog(id) { deleteWLEntry(id); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WORKOUT LOGGER — TABS / HISTORY / PROGRESS CHART
+// ═══════════════════════════════════════════════════════════════════════════
+
+function switchWLTab(panelId, btn) {
+  document.querySelectorAll('.wl-panel').forEach(p => { p.style.display = 'none'; });
+  document.querySelectorAll('.wl-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(panelId);
+  if (panel) panel.style.display = 'block';
+  btn.classList.add('active');
+  if (panelId === 'wl-history') renderWLHistory();
+}
+
+function renderWLHistory() {
+  const logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
+  const container = document.getElementById('wlHistoryList');
+  if (!container) return;
+  if (logs.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:32px 0;color:var(--chalk-tertiary);font-size:0.85rem;">No workouts logged yet.<br>Save a session in the Log tab or from the Train view.</div>';
+    return;
+  }
+  container.innerHTML = logs.slice(0, 30).map(log => {
+    const dateStr = log.date
+      ? (log.date.includes('T') ? log.date.split('T')[0] : log.date)
+      : '—';
+    const name = log.name || 'Workout Session';
+    const exList = (log.exercises || []).map(ex => {
+      const parts = [];
+      if (ex.sets && ex.reps) parts.push(`${ex.sets}\u00d7${ex.reps}`);
+      if (ex.weight) parts.push(`@ ${fmt(ex.weight)} lbs`);
+      const stats = parts.join(' ');
+      return `<div class="wl-history-row">
+        <span class="wl-history-ex">${escapeHtml(ex.name)}</span>
+        <span class="wl-history-stats">${escapeHtml(stats)}</span>
+      </div>`;
+    }).join('');
+    const deleteBtn = log.id
+      ? `<button class="btn btn-ghost btn-sm" onclick="deleteWLEntry(${log.id})" style="padding:3px 8px;font-size:.7rem;" aria-label="Delete">&#x2715;</button>`
+      : '';
+    return `<div class="wl-history-entry">
+      <div class="wl-history-header">
+        <div>
+          <span class="wl-history-name">${escapeHtml(name)}</span>
+          <span class="wl-history-date">${escapeHtml(dateStr)}</span>
+        </div>
+        ${deleteBtn}
+      </div>
+      <div>${exList || '<em style="color:var(--chalk-tertiary);font-size:.8rem;">No exercises recorded</em>'}</div>
+    </div>`;
+  }).join('');
+}
+
+function deleteWLEntry(id) {
+  let logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
   logs = logs.filter(l => l.id !== id);
-  localStorage.setItem('muscleforge_workouts', JSON.stringify(logs));
-  loadWorkoutLogHistory();
+  localStorage.setItem('mf-workout-log', JSON.stringify(logs));
+  renderWLHistory();
+}
+
+function populateProgressDropdown() {
+  const logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
+  const exSet = new Set();
+  logs.forEach(log => (log.exercises || []).forEach(ex => { if (ex.name) exSet.add(ex.name); }));
+  const sel = document.getElementById('progressExerciseSelect');
+  if (!sel) return;
+  const prev = sel.value;
+  const sorted = [...exSet].sort();
+  sel.innerHTML = '<option value="">— choose an exercise —</option>'
+    + sorted.map(n => `<option value="${escapeHtml(n)}"${n === prev ? ' selected' : ''}>${escapeHtml(n)}</option>`).join('');
+  if (sel.value) renderProgressChart();
+  else {
+    const canvas = document.getElementById('progressChart');
+    const empty = document.getElementById('progressChartEmpty');
+    const stats = document.getElementById('progressStats');
+    if (canvas) canvas.style.display = 'none';
+    if (empty) { empty.textContent = 'Select an exercise above to see your strength over time'; empty.style.display = 'block'; }
+    if (stats) stats.style.display = 'none';
+  }
+}
+
+let _progressChart = null;
+
+function renderProgressChart() {
+  const sel = document.getElementById('progressExerciseSelect');
+  const canvas = document.getElementById('progressChart');
+  const empty = document.getElementById('progressChartEmpty');
+  const statsEl = document.getElementById('progressStats');
+  if (!sel || !canvas) return;
+  const exercise = sel.value;
+  if (!exercise) {
+    canvas.style.display = 'none';
+    if (empty) { empty.textContent = 'Select an exercise above to see your strength over time'; empty.style.display = 'block'; }
+    if (statsEl) statsEl.style.display = 'none';
+    return;
+  }
+
+  const logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
+  const points = [];
+  logs.forEach(log => {
+    const dateStr = log.date ? (log.date.includes('T') ? log.date.split('T')[0] : log.date) : null;
+    if (!dateStr) return;
+    (log.exercises || []).forEach(ex => {
+      if (ex.name === exercise && ex.weight > 0) {
+        const reps = Math.max(1, ex.reps || 1);
+        const w = ex.weight;
+        const e1rm = reps === 1 ? w : Math.round(w * (1 + reps / 30));
+        points.push({ date: dateStr, weight: w, reps, e1rm });
+      }
+    });
+  });
+
+  if (points.length === 0) {
+    canvas.style.display = 'none';
+    if (empty) { empty.textContent = 'No weight data found for this exercise. Log some sessions with weight to track progress!'; empty.style.display = 'block'; }
+    if (statsEl) statsEl.style.display = 'none';
+    return;
+  }
+
+  points.sort((a, b) => a.date.localeCompare(b.date));
+  const labels = points.map(p => p.date);
+  const weights = points.map(p => p.weight);
+  const e1rms = points.map(p => p.e1rm);
+
+  canvas.style.display = 'block';
+  if (empty) empty.style.display = 'none';
+
+  if (_progressChart) { _progressChart.destroy(); _progressChart = null; }
+  const ctx = canvas.getContext('2d');
+  _progressChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Weight (lbs)',
+          data: weights,
+          borderColor: 'rgba(224,69,32,0.9)',
+          backgroundColor: 'rgba(224,69,32,0.08)',
+          fill: true, tension: 0.35,
+          pointRadius: 4, pointHoverRadius: 6,
+          pointBackgroundColor: '#e04520',
+        },
+        {
+          label: 'Est. 1RM (Epley)',
+          data: e1rms,
+          borderColor: 'rgba(217,119,6,0.8)',
+          backgroundColor: 'rgba(217,119,6,0.04)',
+          fill: false, tension: 0.35,
+          pointRadius: 3, pointHoverRadius: 5,
+          pointBackgroundColor: '#d97706',
+          borderDash: [5, 3],
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#a0a0b0', font: { family: "'Space Grotesk', sans-serif", size: 11 } } },
+        tooltip: {
+          backgroundColor: '#13131f', titleColor: '#e04520',
+          bodyColor: '#d0d0e0', borderColor: '#2a2a3c', borderWidth: 1,
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#7070a0', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { ticks: { color: '#7070a0', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: false }
+      }
+    }
+  });
+
+  if (statsEl && weights.length > 0) {
+    const max = Math.max(...weights);
+    const last = weights[weights.length - 1];
+    const first = weights[0];
+    const gain = last - first;
+    statsEl.style.cssText = 'display:flex;gap:var(--space-lg);flex-wrap:wrap;margin-top:var(--space-md);justify-content:center;';
+    statsEl.innerHTML = [
+      { label: 'Current', val: `${fmt(last)} lbs` },
+      { label: 'Peak', val: `${fmt(max)} lbs` },
+      { label: 'Progress', val: `${gain >= 0 ? '+' : ''}${fmt(gain)} lbs` },
+      { label: 'Sessions', val: points.length },
+    ].map(s => `<div style="text-align:center;">
+      <div style="font-family:'Teko',sans-serif;font-size:1.4rem;color:var(--blood);">${s.val}</div>
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--chalk-tertiary);">${s.label}</div>
+    </div>`).join('');
+  }
 }
 
 function startWorkoutFromPlan(workoutName, exercises) {
@@ -13733,6 +13963,8 @@ function saveWorkoutToLog() {
   if (WORKOUT.length === 0) { alert('Add at least one exercise first.'); return; }
   const log = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
   const entry = {
+    id: Date.now(),
+    name: 'Train View Session',
     date: new Date().toISOString(),
     exercises: WORKOUT.map(w => ({
       name: w.exercise,
