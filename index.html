@@ -4792,6 +4792,39 @@ select.field-input option {
 .wl-history-ex { flex: 1; }
 .wl-history-stats { color: var(--blood); font-variant-numeric: tabular-nums; }
 
+/* ── Achievements ── */
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+.ach-badge {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: var(--space-md) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--iron-border);
+  background: var(--iron-surface);
+  transition: var(--transition-base);
+  position: relative;
+  cursor: default;
+}
+.ach-badge.unlocked { border-color: var(--blood); background: var(--blood-dim); }
+.ach-badge.locked { opacity: 0.4; filter: grayscale(0.6); }
+.ach-badge-icon { font-size: 1.75rem; line-height: 1; }
+.ach-badge-title {
+  font-family: 'Teko', sans-serif; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--chalk-secondary); margin-top: 4px; line-height: 1.15;
+}
+.ach-badge.unlocked .ach-badge-title { color: var(--chalk); }
+.ach-badge-lock { position: absolute; top: 4px; right: 5px; font-size: 0.6rem; opacity: 0.45; }
+.ach-badge.unlocked .ach-badge-lock { display: none; }
+
+/* ── iOS safe-area support ── */
+.workout-sheet { padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px)); }
+.mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
   </style>
 </head>
 
@@ -8508,6 +8541,22 @@ Squat	225	5	2025-03-15"></textarea>
                 <button class="btn btn-primary" onclick="document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('gyms').classList.add('active'); loadGyms(); window.scrollTo(0,0);">Open Gym Mapper</button>
               </div>
             </div>
+
+            <!-- Achievements -->
+            <div class="card tool-card" style="margin-top: var(--space-xl);" id="achievementsCard">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Achievements</h2>
+                  <p class="card-subtitle">Milestones earned through your training</p>
+                </div>
+                <span class="tool-badge" id="achievementsStats">— / 8</span>
+              </div>
+              <div class="card-body">
+                <div class="ach-grid" id="achievementsGrid"></div>
+                <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-lg);" onclick="checkAchievements();renderAchievements();">Refresh</button>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -10066,6 +10115,11 @@ function loadTools() {
   initWorkoutLogger();
   initWaterTracker();
   initCheckin();
+
+  // Phase 4 — achievements + mobile swipe
+  renderAchievements();
+  checkAchievements();
+  initTrainPanelSwipe();
 }
 
 // FFMI Calculator
@@ -11621,6 +11675,7 @@ function saveWorkoutLog() {
 
   clearWorkoutLog();
   showWorkoutToast('Workout saved ✓');
+  checkAchievements();
 }
 
 function clearWorkoutLog() {
@@ -13982,6 +14037,7 @@ function saveWorkoutToLog() {
   clearWorkout();
   // Brief toast feedback
   showWorkoutToast('Workout saved to your log ✓');
+  checkAchievements();
 }
 
 function showWorkoutToast(msg) {
@@ -14431,6 +14487,85 @@ function calculateStrengthStandard() {
   renderSupplements(SUPPLEMENT_DATA);
   filterPrograms();
 })();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PHASE 4 — ACHIEVEMENTS + MOBILE POLISH
+// ═══════════════════════════════════════════════════════════════════════════
+
+const ACHIEVEMENTS = [
+  { id: 'iron_start',  icon: '🔥', title: 'Iron Start',   desc: 'Log your first workout' },
+  { id: 'momentum',   icon: '⚡', title: 'Momentum',      desc: 'Log 10 workouts' },
+  { id: 'the_grind',  icon: '💪', title: 'The Grind',     desc: 'Log 30 workouts' },
+  { id: 'centurion',  icon: '🏆', title: 'Centurion',     desc: '100 workouts logged' },
+  { id: 'pr_breaker', icon: '🎯', title: 'PR Breaker',    desc: 'Log your first personal record' },
+  { id: 'pr_hunter',  icon: '🔱', title: 'PR Hunter',     desc: 'Log 3+ personal records' },
+  { id: 'body_audit', icon: '📊', title: 'Body Audit',    desc: 'Complete 5 body check-ins' },
+  { id: 'hydrated',   icon: '💧', title: 'Stay Hydrated', desc: 'Log 8+ glasses in one day' },
+];
+
+function getAchievementStatus() {
+  const logs = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
+  const prs = JSON.parse(localStorage.getItem('muscleforge_prs') || '[]');
+  const checkins = JSON.parse(localStorage.getItem('muscleforge_checkins') || '[]');
+  const hasWater8 = Object.keys(localStorage)
+    .some(k => k.startsWith('muscleforge_water_') && parseInt(localStorage.getItem(k) || '0') >= 8);
+  return {
+    iron_start:  logs.length >= 1,
+    momentum:    logs.length >= 10,
+    the_grind:   logs.length >= 30,
+    centurion:   logs.length >= 100,
+    pr_breaker:  prs.length >= 1,
+    pr_hunter:   prs.length >= 3,
+    body_audit:  checkins.length >= 5,
+    hydrated:    hasWater8,
+  };
+}
+
+function checkAchievements() {
+  const status = getAchievementStatus();
+  const unlocked = JSON.parse(localStorage.getItem('mf-achievements') || '[]');
+  const newlyUnlocked = [];
+  for (const ach of ACHIEVEMENTS) {
+    if (status[ach.id] && !unlocked.includes(ach.id)) {
+      unlocked.push(ach.id);
+      newlyUnlocked.push(ach);
+    }
+  }
+  if (newlyUnlocked.length > 0) {
+    localStorage.setItem('mf-achievements', JSON.stringify(unlocked));
+    newlyUnlocked.forEach((ach, i) => {
+      setTimeout(() => showWorkoutToast(`${ach.icon} Achievement unlocked: ${ach.title}!`), i * 1800);
+    });
+    renderAchievements();
+  }
+}
+
+function renderAchievements() {
+  const container = document.getElementById('achievementsGrid');
+  const statsEl = document.getElementById('achievementsStats');
+  if (!container) return;
+  const unlocked = JSON.parse(localStorage.getItem('mf-achievements') || '[]');
+  container.innerHTML = ACHIEVEMENTS.map(ach => {
+    const isUnlocked = unlocked.includes(ach.id);
+    return `<div class="ach-badge ${isUnlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(ach.desc)}">
+      <div class="ach-badge-icon">${ach.icon}</div>
+      <div class="ach-badge-title">${escapeHtml(ach.title)}</div>
+      <div class="ach-badge-lock">&#x1F512;</div>
+    </div>`;
+  }).join('');
+  if (statsEl) statsEl.textContent = `${unlocked.length} / ${ACHIEVEMENTS.length}`;
+}
+
+function initTrainPanelSwipe() {
+  const panel = document.getElementById('trainPanel');
+  if (!panel) return;
+  let touchStartX = 0;
+  panel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  panel.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (dx > 55) closeTrainPanel(); // swipe right → close
+  }, { passive: true });
+}
   </script>
 </body>
 </html>
