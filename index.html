@@ -4629,6 +4629,143 @@ select.field-input option {
 /* Make mm-svg fill available height in train context */
 #home .mm-svg { display: block; height: 100%; width: auto; }
 
+/* ── Workout builder bottom sheet ── */
+.workout-sheet {
+  flex-shrink: 0;
+  background: var(--iron-elevated);
+  border-top: 2px solid rgba(224,69,32,0.22);
+  max-height: 48px;
+  overflow: hidden;
+  transition: max-height 0.38s var(--ease-out-expo);
+}
+.workout-sheet.open { max-height: 340px; }
+.workout-sheet-handle {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+.workout-sheet-handle:hover { background: var(--iron-mid); }
+.workout-count-badge {
+  background: var(--blood);
+  color: var(--chalk);
+  font-family: 'Teko', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  min-width: 20px;
+  text-align: center;
+  transition: background 0.15s;
+}
+.workout-count-badge.empty { background: var(--iron-surface); color: var(--chalk-tertiary); }
+.workout-sheet-caret {
+  font-size: 0.7rem;
+  color: var(--chalk-tertiary);
+  transition: transform 0.3s;
+}
+.workout-sheet.open .workout-sheet-caret { transform: rotate(180deg); }
+.workout-sheet-body {
+  max-height: 292px;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+}
+.workout-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 10px;
+}
+.workout-empty {
+  text-align: center;
+  padding: 24px 0 16px;
+}
+.workout-ex-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.8125rem;
+}
+.workout-ex-name {
+  font-weight: 500;
+  color: var(--chalk);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.workout-ex-input {
+  width: 54px;
+  background: var(--iron-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  color: var(--chalk);
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  text-align: center;
+  font-family: 'Space Grotesk', monospace;
+}
+.workout-ex-input:focus { outline: none; border-color: var(--blood); }
+.workout-ex-label {
+  font-size: 0.65rem;
+  color: var(--chalk-tertiary);
+  text-align: center;
+  line-height: 1;
+}
+.workout-ex-col { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.workout-ex-remove {
+  background: none;
+  border: none;
+  color: var(--chalk-tertiary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast), background var(--duration-fast);
+}
+.workout-ex-remove:hover { color: var(--danger); background: rgba(248,113,113,0.08); }
+
+/* ── Exercise add button in muscle panel ── */
+.mm-ex-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 8px;
+}
+.mm-ex-item:last-child { border-bottom: none; }
+.mm-ex-item-name { flex: 1; font-size: 0.8125rem; color: var(--chalk); }
+.mm-ex-add-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--blood-dim);
+  border: 1px solid rgba(224,69,32,0.3);
+  color: var(--blood);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--duration-fast), color var(--duration-fast), transform 0.12s;
+}
+.mm-ex-add-btn:hover { background: var(--blood); color: var(--chalk); }
+.mm-ex-add-btn.added { background: var(--success); border-color: var(--success); color: var(--chalk); transform: scale(0.9); }
+.mm-ex-add-btn.added::after { content: '✓'; font-size: 0.75rem; }
+
   </style>
 </head>
 
@@ -4733,30 +4870,58 @@ select.field-input option {
               <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
               <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
               <!-- MUSCLE REGIONS — FRONT -->
+              <!-- Neck / SCM -->
+              <ellipse class="muscle-region" data-muscle="neck" cx="97" cy="57" rx="8" ry="7"/>
+              <ellipse class="muscle-region" data-muscle="neck" cx="123" cy="57" rx="8" ry="7"/>
+              <!-- Front Delts -->
               <ellipse class="muscle-region" data-muscle="front-delt" cx="52" cy="76" rx="17" ry="17"/>
               <ellipse class="muscle-region" data-muscle="front-delt" cx="168" cy="76" rx="17" ry="17"/>
+              <!-- Chest -->
               <path class="muscle-region" data-muscle="chest" d="M62,68 L108,68 L108,138 L80,144 L66,118 Z"/>
               <path class="muscle-region" data-muscle="chest" d="M112,68 L158,68 L154,118 L140,144 L112,138 Z"/>
+              <!-- Serratus Anterior -->
+              <ellipse class="muscle-region" data-muscle="serratus" cx="62" cy="150" rx="7" ry="22"/>
+              <ellipse class="muscle-region" data-muscle="serratus" cx="158" cy="150" rx="7" ry="22"/>
+              <!-- Abs -->
               <rect class="muscle-region" data-muscle="abs" x="87" y="147" width="46" height="68" rx="5"/>
+              <!-- Obliques -->
+              <path class="muscle-region" data-muscle="obliques" d="M58,162 L80,155 L77,220 L60,218 Z"/>
+              <path class="muscle-region" data-muscle="obliques" d="M162,162 L140,155 L143,220 L160,218 Z"/>
+              <!-- Hip Flexors -->
               <ellipse class="muscle-region" data-muscle="hip-flexors" cx="110" cy="232" rx="36" ry="13"/>
+              <!-- Biceps -->
               <ellipse class="muscle-region" data-muscle="biceps" cx="34" cy="142" rx="13" ry="32"/>
               <ellipse class="muscle-region" data-muscle="biceps" cx="186" cy="142" rx="13" ry="32"/>
+              <!-- Forearms -->
               <ellipse class="muscle-region" data-muscle="forearms" cx="28" cy="196" rx="11" ry="26"/>
               <ellipse class="muscle-region" data-muscle="forearms" cx="192" cy="196" rx="11" ry="26"/>
+              <!-- Quads -->
               <path class="muscle-region" data-muscle="quads" d="M62,254 L104,254 L102,368 L60,368 Z"/>
               <path class="muscle-region" data-muscle="quads" d="M116,254 L158,254 L160,368 L118,368 Z"/>
+              <!-- Adductors (inner thigh) -->
+              <ellipse class="muscle-region" data-muscle="adductors" cx="89" cy="306" rx="13" ry="42"/>
+              <ellipse class="muscle-region" data-muscle="adductors" cx="131" cy="306" rx="13" ry="42"/>
+              <!-- Tibialis -->
               <rect class="muscle-region" data-muscle="tibialis" x="60" y="378" width="43" height="100" rx="4"/>
               <rect class="muscle-region" data-muscle="tibialis" x="117" y="378" width="43" height="100" rx="4"/>
               <!-- Labels -->
+              <text class="mm-label" x="97" y="57">SCM</text>
+              <text class="mm-label" x="123" y="57">SCM</text>
               <text class="mm-label" x="52" y="76">DELT</text>
               <text class="mm-label" x="168" y="76">DELT</text>
               <text class="mm-label" x="85" y="106">CHEST</text>
               <text class="mm-label" x="135" y="106">CHEST</text>
+              <text class="mm-label" x="62" y="152">SER</text>
+              <text class="mm-label" x="158" y="152">SER</text>
               <text class="mm-label" x="110" y="181">ABS</text>
+              <text class="mm-label" x="69" y="190">OBL</text>
+              <text class="mm-label" x="151" y="190">OBL</text>
               <text class="mm-label" x="34" y="142">BI</text>
               <text class="mm-label" x="186" y="142">BI</text>
               <text class="mm-label" x="83" y="298">QUAD</text>
               <text class="mm-label" x="137" y="298">QUAD</text>
+              <text class="mm-label" x="89" y="306">ADD</text>
+              <text class="mm-label" x="131" y="306">ADD</text>
               <text class="mm-label" x="81" y="428">TIB</text>
               <text class="mm-label" x="138" y="428">TIB</text>
             </svg>
@@ -4773,25 +4938,39 @@ select.field-input option {
               <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
               <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
               <!-- MUSCLE REGIONS — BACK -->
+              <!-- Traps -->
               <path class="muscle-region" data-muscle="traps" d="M80,56 L140,56 L150,100 L110,110 L70,100 Z"/>
+              <!-- Rear Delts -->
               <ellipse class="muscle-region" data-muscle="rear-delt" cx="50" cy="78" rx="17" ry="16"/>
               <ellipse class="muscle-region" data-muscle="rear-delt" cx="170" cy="78" rx="17" ry="16"/>
+              <!-- Teres Major / Rotator Cuff -->
+              <ellipse class="muscle-region" data-muscle="teres" cx="68" cy="116" rx="11" ry="13"/>
+              <ellipse class="muscle-region" data-muscle="teres" cx="152" cy="116" rx="11" ry="13"/>
+              <!-- Lats -->
               <path class="muscle-region" data-muscle="lats" d="M60,108 L94,108 L90,196 L56,208 Z"/>
               <path class="muscle-region" data-muscle="lats" d="M126,108 L160,108 L164,208 L130,196 Z"/>
+              <!-- Rhomboids -->
               <rect class="muscle-region" data-muscle="rhomboids" x="90" y="110" width="40" height="48" rx="4"/>
+              <!-- Lower Back / Erectors -->
               <rect class="muscle-region" data-muscle="lower-back" x="86" y="174" width="48" height="44" rx="4"/>
+              <!-- Triceps -->
               <ellipse class="muscle-region" data-muscle="triceps" cx="32" cy="148" rx="13" ry="34"/>
               <ellipse class="muscle-region" data-muscle="triceps" cx="188" cy="148" rx="13" ry="34"/>
+              <!-- Glutes -->
               <path class="muscle-region" data-muscle="glutes" d="M62,252 L108,252 L106,288 L60,288 Z"/>
               <path class="muscle-region" data-muscle="glutes" d="M112,252 L158,252 L160,288 L114,288 Z"/>
+              <!-- Hamstrings -->
               <path class="muscle-region" data-muscle="hamstrings" d="M62,292 L105,292 L103,368 L60,368 Z"/>
               <path class="muscle-region" data-muscle="hamstrings" d="M115,292 L158,292 L160,368 L117,368 Z"/>
+              <!-- Calves -->
               <rect class="muscle-region" data-muscle="calves" x="60" y="378" width="43" height="100" rx="4"/>
               <rect class="muscle-region" data-muscle="calves" x="117" y="378" width="43" height="100" rx="4"/>
               <!-- Labels -->
               <text class="mm-label" x="110" y="86">TRAPS</text>
               <text class="mm-label" x="50" y="78">DELT</text>
               <text class="mm-label" x="170" y="78">DELT</text>
+              <text class="mm-label" x="68" y="116">TER</text>
+              <text class="mm-label" x="152" y="116">TER</text>
               <text class="mm-label" x="74" y="155">LAT</text>
               <text class="mm-label" x="146" y="155">LAT</text>
               <text class="mm-label" x="110" y="134">RHOM</text>
@@ -4838,11 +5017,32 @@ select.field-input option {
           </aside>
         </div>
 
-        <!-- Workout bar -->
-        <div class="train-workout-bar">
-          <span style="font-size:0.95rem;opacity:.7;">🏋️</span>
-          <span id="trainWorkoutLabel" style="flex:1;font-size:0.8125rem;color:var(--chalk-secondary);">Click any muscle to explore exercises, volume targets, and recovery data</span>
-          <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','utilities')" style="flex-shrink:0;font-size:0.75rem;">Workout Logger →</button>
+        <!-- Workout Builder — collapsible bottom sheet -->
+        <div class="workout-sheet" id="workoutSheet">
+          <div class="workout-sheet-handle" onclick="toggleWorkoutSheet()" role="button" aria-expanded="false" id="workoutSheetHandle">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:0.9rem;opacity:.65;">🏋️</span>
+              <span id="trainWorkoutLabel" style="font-size:0.8125rem;color:var(--chalk-secondary);">Click a muscle to start building your workout</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+              <span class="workout-count-badge" id="workoutCountBadge">0</span>
+              <span class="workout-sheet-caret" id="workoutSheetCaret">▲</span>
+            </div>
+          </div>
+          <div class="workout-sheet-body" id="workoutSheetBody">
+            <div class="workout-sheet-header">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.04em;color:var(--chalk);">Today's Workout</span>
+              <div style="display:flex;gap:6px;">
+                <button class="btn btn-sm btn-primary" onclick="saveWorkoutToLog()">Save Log</button>
+                <button class="btn btn-sm btn-ghost" onclick="clearWorkout()">Clear</button>
+              </div>
+            </div>
+            <div class="workout-empty" id="workoutEmpty">
+              <div style="font-size:1.5rem;opacity:.35;margin-bottom:8px;">◉</div>
+              <div style="font-size:0.8125rem;color:var(--chalk-tertiary);">Click a muscle, then tap <strong style="color:var(--blood);">+</strong> on any exercise to add it here</div>
+            </div>
+            <div id="workoutExerciseList"></div>
+          </div>
         </div>
       </div>
 
@@ -13304,6 +13504,46 @@ const MUSCLE_DATA = {
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '24–48 hours',
     note: 'Calves are highly fatigue-resistant (Type I fiber dominant) and require high volume, full ROM, and controlled tempo. Complete stretch at the bottom and peak contraction at the top on every rep. Both standing and seated raises are needed to target both muscles.'
+  },
+  neck: {
+    name: 'Neck — Sternocleidomastoid & Upper Traps',
+    func: 'Head flexion, rotation, and lateral flexion. Often undertrained. Critical for appearance in athletes and for injury prevention in contact sports.',
+    exercises: ['Neck Curl (Harness)', 'Neck Extension (Harness)', 'Lateral Neck Flexion', 'Shrug', "Farmer's Carry"],
+    volMin: 6, volOpt: 9, volMax: 14,
+    recovery: '48 hours',
+    note: 'Begin with bodyweight isometrics — lying neck curl/extension — before adding resistance. The SCM is the most visible neck muscle and responds well to direct work. Highly relevant for combat sports, rugby, and football athletes. Most gym-goers neglect this entirely.'
+  },
+  serratus: {
+    name: 'Serratus Anterior',
+    func: 'Scapular protraction, upward rotation, and stabilization against the ribcage. Critical for shoulder health and overhead pressing mechanics.',
+    exercises: ['Ab Wheel Rollout', 'Serratus Punch', 'Push-Up Plus', 'Cable Serratus Crunch', 'Overhead Press'],
+    volMin: 8, volOpt: 12, volMax: 16,
+    recovery: '48 hours',
+    note: 'Serratus weakness causes scapular winging, leading to impingement, rotator cuff tears, and shoulder dysfunction. Ab wheel rollouts load it heavily under stretch. Visible in lean athletes as the "fingers" along the ribs — a signature of elite conditioning. (Kibler et al., 2013)'
+  },
+  obliques: {
+    name: 'Obliques — External & Internal',
+    func: 'Trunk rotation, lateral flexion, and anti-rotation stability. Transmit force between upper and lower body in all compound movements.',
+    exercises: ['Pallof Press', 'Cable Woodchop', 'Side Plank', 'Hanging Oblique Raise', 'Landmine Rotation'],
+    volMin: 8, volOpt: 12, volMax: 18,
+    recovery: '48 hours',
+    note: 'Obliques function primarily as anti-rotation muscles — they resist movement rather than create it. Pallof press and side plank train this function directly. Avoid heavy weighted side bends: they can widen the waist by adding mass to the obliques, which is unfavorable for most physique goals.'
+  },
+  adductors: {
+    name: 'Hip Adductors — Groin Complex',
+    func: 'Hip adduction (pulling the leg inward) and hip flexion assistance. Critical for squat depth, athletic performance, and groin injury prevention.',
+    exercises: ['Copenhagen Plank', 'Sumo Squat', 'Cable Hip Adduction', 'Wide-Stance Leg Press', 'Groin Machine'],
+    volMin: 6, volOpt: 10, volMax: 14,
+    recovery: '48 hours',
+    note: 'The Copenhagen plank is the gold standard for adductor strengthening and injury prevention — clinically proven to reduce groin strains in soccer players (Harøy et al., 2019). Adductors contribute significantly to squat strength, especially at the bottom position. Most lifters neglect direct adductor work.'
+  },
+  teres: {
+    name: 'Teres Major & Rotator Cuff (SITS)',
+    func: 'Internal rotation and adduction (teres major). Rotator cuff stabilizes the glenohumeral joint — the single most injury-prone joint in lifting.',
+    exercises: ['Face Pull', 'Band External Rotation', 'Cable External Rotation', 'Prone Dumbbell Row', 'Chest-Supported Row'],
+    volMin: 6, volOpt: 10, volMax: 14,
+    recovery: '48 hours',
+    note: 'Face pulls should be in every serious lifter\'s program — forever. The rotator cuff (supraspinatus, infraspinatus, teres minor, subscapularis) stabilizes the shoulder during all pressing movements. Neglecting it causes the majority of chronic shoulder injuries. Low load, high frequency works best. (Reinold et al., 2009)'
   }
 };
 
@@ -13327,10 +13567,33 @@ function selectMuscle(muscleId) {
   document.querySelectorAll(`.muscle-region[data-muscle="${muscleId}"]`).forEach(el => el.classList.add('mm-active'));
   document.getElementById('mm-name').textContent = d.name;
   document.getElementById('mm-func').textContent = d.func;
-  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e =>
-    `<li style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-      <span>${escapeHtml(e)}</span>
-    </li>`).join('');
+
+  // Build exercise list with Add-to-Workout buttons
+  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e => {
+    const inWorkout = WORKOUT.some(w => w.exercise === e);
+    return `<li class="mm-ex-item" data-exercise="${encodeURIComponent(e)}" data-muscle="${muscleId}">
+      <span class="mm-ex-item-name">${escapeHtml(e)}</span>
+      <button class="mm-ex-add-btn${inWorkout ? ' added' : ''}"
+        title="${inWorkout ? 'Added' : 'Add to workout'}"
+        aria-label="${inWorkout ? 'Added' : 'Add to workout'}">
+        ${inWorkout ? '' : '+'}
+      </button>
+    </li>`;
+  }).join('');
+
+  // Event delegation for add buttons
+  document.getElementById('mm-exercises').onclick = function(e) {
+    const btn = e.target.closest('.mm-ex-add-btn');
+    if (!btn || btn.classList.contains('added')) return;
+    const li = btn.closest('.mm-ex-item');
+    const exercise = decodeURIComponent(li.dataset.exercise);
+    const mid = li.dataset.muscle;
+    addExerciseToWorkout(exercise, mid);
+    btn.classList.add('added');
+    btn.title = 'Added';
+    btn.textContent = '';
+  };
+
   const maxVol = 28;
   document.getElementById('mm-vol-fill').style.width = (d.volMax / maxVol * 100) + '%';
   document.getElementById('mm-vol-nums').innerHTML =
@@ -13339,12 +13602,16 @@ function selectMuscle(muscleId) {
   document.getElementById('mm-note').textContent = d.note;
   document.getElementById('mm-prompt').style.display = 'none';
   document.getElementById('mm-content').classList.add('visible');
-  // Open the slide-in panel (train view)
+
+  // Open the slide-in panel
   const panel = document.getElementById('trainPanel');
   if (panel) panel.classList.add('open');
-  // Update workout bar label
+
+  // Update workout sheet label
   const lbl = document.getElementById('trainWorkoutLabel');
-  if (lbl) lbl.textContent = `Viewing: ${d.name}`;
+  if (lbl) lbl.textContent = WORKOUT.length
+    ? `${WORKOUT.length} exercise${WORKOUT.length > 1 ? 's' : ''} — tap ▲ to edit`
+    : `Viewing: ${d.name.split('—')[0].trim()}`;
 }
 
 function closeTrainPanel() {
@@ -13360,7 +13627,7 @@ function closeTrainPanel() {
 function filterMuscleSvg(query) {
   const q = query.trim().toLowerCase();
   if (!q) {
-    document.querySelectorAll('.muscle-region').forEach(el => { el.style.opacity = ''; });
+    document.querySelectorAll('.muscle-region').forEach(el => { el.style.opacity = ''; el.style.fill = ''; });
     return;
   }
   document.querySelectorAll('.muscle-region').forEach(el => {
@@ -13368,10 +13635,133 @@ function filterMuscleSvg(query) {
     const d = MUSCLE_DATA[el.dataset.muscle];
     const name = d ? d.name.toLowerCase() : '';
     const match = id.includes(q) || name.includes(q);
-    el.style.opacity = match ? '1' : '0.15';
-    if (match) { el.style.fill = 'var(--blood)'; }
-    else { el.style.fill = ''; }
+    el.style.opacity = match ? '1' : '0.12';
+    el.style.fill = match ? 'var(--blood)' : '';
   });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WORKOUT BUILDER
+// Sets/reps/weight per exercise, persisted to localStorage as a workout log
+// ═══════════════════════════════════════════════════════════════════════════
+let WORKOUT = []; // [{exercise, muscleId, sets, reps, weight}]
+
+function addExerciseToWorkout(exercise, muscleId) {
+  if (WORKOUT.some(w => w.exercise === exercise)) return;
+  WORKOUT.push({ exercise, muscleId, sets: 3, reps: 8, weight: '' });
+  renderWorkoutSheet();
+  updateWorkoutBar();
+}
+
+function removeExerciseFromWorkout(idx) {
+  WORKOUT.splice(idx, 1);
+  renderWorkoutSheet();
+  updateWorkoutBar();
+}
+
+function updateWorkoutField(idx, field, value) {
+  if (WORKOUT[idx]) WORKOUT[idx][field] = value;
+}
+
+function updateWorkoutBar() {
+  const lbl = document.getElementById('trainWorkoutLabel');
+  const badge = document.getElementById('workoutCountBadge');
+  const count = WORKOUT.length;
+  if (lbl) lbl.textContent = count
+    ? `${count} exercise${count > 1 ? 's' : ''} in workout — tap ▲ to edit`
+    : 'Click a muscle to start building your workout';
+  if (badge) {
+    badge.textContent = count;
+    badge.className = 'workout-count-badge' + (count === 0 ? ' empty' : '');
+  }
+}
+
+function renderWorkoutSheet() {
+  const list = document.getElementById('workoutExerciseList');
+  const empty = document.getElementById('workoutEmpty');
+  if (!list) return;
+  if (WORKOUT.length === 0) {
+    list.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  list.innerHTML = WORKOUT.map((w, i) => `
+    <div class="workout-ex-row">
+      <div class="workout-ex-name" title="${escapeHtml(w.exercise)}">${escapeHtml(w.exercise)}</div>
+      <div class="workout-ex-col">
+        <input class="workout-ex-input" type="number" value="${w.sets}" min="1" max="20"
+          onchange="updateWorkoutField(${i},'sets',+this.value)" aria-label="Sets">
+        <span class="workout-ex-label">sets</span>
+      </div>
+      <div class="workout-ex-col">
+        <input class="workout-ex-input" type="number" value="${w.reps}" min="1" max="100"
+          onchange="updateWorkoutField(${i},'reps',+this.value)" aria-label="Reps">
+        <span class="workout-ex-label">reps</span>
+      </div>
+      <div class="workout-ex-col">
+        <input class="workout-ex-input" type="number" value="${w.weight}" min="0"
+          placeholder="kg" onchange="updateWorkoutField(${i},'weight',this.value)" aria-label="Weight">
+        <span class="workout-ex-label">kg</span>
+      </div>
+      <button class="workout-ex-remove" onclick="removeExerciseFromWorkout(${i})" aria-label="Remove">✕</button>
+    </div>
+  `).join('');
+}
+
+function toggleWorkoutSheet() {
+  const sheet = document.getElementById('workoutSheet');
+  const handle = document.getElementById('workoutSheetHandle');
+  if (!sheet) return;
+  const isOpen = sheet.classList.toggle('open');
+  if (handle) handle.setAttribute('aria-expanded', isOpen);
+}
+
+function clearWorkout() {
+  WORKOUT = [];
+  renderWorkoutSheet();
+  updateWorkoutBar();
+  // Re-render exercise panel if open to reset + buttons
+  document.querySelectorAll('.mm-ex-add-btn.added').forEach(btn => {
+    btn.classList.remove('added');
+    btn.textContent = '+';
+    btn.title = 'Add to workout';
+  });
+}
+
+function saveWorkoutToLog() {
+  if (WORKOUT.length === 0) { alert('Add at least one exercise first.'); return; }
+  const log = JSON.parse(localStorage.getItem('mf-workout-log') || '[]');
+  const entry = {
+    date: new Date().toISOString(),
+    exercises: WORKOUT.map(w => ({
+      name: w.exercise,
+      muscleId: w.muscleId,
+      sets: w.sets,
+      reps: w.reps,
+      weight: w.weight || null
+    }))
+  };
+  log.unshift(entry); // most recent first
+  if (log.length > 60) log.splice(60); // keep 60 workouts
+  localStorage.setItem('mf-workout-log', JSON.stringify(log));
+  // Close sheet and clear
+  document.getElementById('workoutSheet')?.classList.remove('open');
+  clearWorkout();
+  // Brief toast feedback
+  showWorkoutToast('Workout saved to your log ✓');
+}
+
+function showWorkoutToast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `position:fixed;bottom:70px;left:50%;transform:translateX(-50%);
+    background:var(--iron-elevated);border:1px solid var(--blood);
+    color:var(--chalk);padding:10px 20px;border-radius:var(--radius-full);
+    font-size:0.8125rem;font-family:'Space Grotesk',sans-serif;z-index:9999;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);pointer-events:none;`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
 }
 
 document.querySelectorAll('.muscle-region').forEach(el => {
