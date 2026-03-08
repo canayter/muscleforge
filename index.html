@@ -13270,7 +13270,7 @@ if ('serviceWorker' in navigator) {
 // 3-COLUMN EXERCISE BROWSER
 // ═══════════════════════════════════════════════════════════════════════════
 
-const MUSCLE_GROUPS = [
+const MB_GROUPS = [
   { id: 'chest',     label: 'Chest',         muscles: ['chest', 'serratus'] },
   { id: 'back',      label: 'Back',           muscles: ['lats', 'traps', 'rhomboids', 'rear-delt', 'lower-back', 'teres'] },
   { id: 'shoulders', label: 'Shoulders',      muscles: ['front-delt', 'rear-delt'] },
@@ -13290,7 +13290,7 @@ function renderMBGroups() {
   const header = col.querySelector('.mb-col-header');
   col.innerHTML = '';
   if (header) col.appendChild(header);
-  MUSCLE_GROUPS.forEach(g => {
+  MB_GROUPS.forEach(g => {
     const el = document.createElement('div');
     el.className = 'mb-item' + (MB_STATE.group === g.id ? ' active' : '');
     el.textContent = g.label;
@@ -13322,7 +13322,7 @@ function selectMBGroup(groupId) {
 }
 
 function renderMBMuscles(groupId) {
-  const group = MUSCLE_GROUPS.find(g => g.id === groupId);
+  const group = MB_GROUPS.find(g => g.id === groupId);
   const col = document.getElementById('mbColMuscles');
   if (!col || !group) return;
   const header = col.querySelector('.mb-col-header');
@@ -13442,7 +13442,7 @@ function scrollToMuscleBrowser() {
   document.getElementById('muscleBrowser')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Render group column on page load (MUSCLE_GROUPS is initialized above)
+// Render group column on page load (MB_GROUPS is initialized above)
 renderMBGroups();
 
 // ═══════════════════════════════════════════════════════════════════════════
