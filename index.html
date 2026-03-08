@@ -8521,9 +8521,6 @@ document.querySelectorAll('.nav-link').forEach(btn => {
   });
 });
 
-// Initialize exercise browser (home view is active on load)
-renderMBGroups();
-
 // ── Tool directory chips: scroll to specific tool after switching view ────────
 document.querySelectorAll('.home-dir-chip').forEach(chip => {
   chip.addEventListener('click', function () {
@@ -13444,6 +13441,9 @@ function renderMBExercises(muscleId) {
 function scrollToMuscleBrowser() {
   document.getElementById('muscleBrowser')?.scrollIntoView({ behavior: 'smooth' });
 }
+
+// Render group column on page load (MUSCLE_GROUPS is initialized above)
+renderMBGroups();
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Volume landmarks (MEV/MAV/MRV) from Dr. Mike Israetel / Renaissance Periodization.
