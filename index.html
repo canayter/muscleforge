@@ -11,7 +11,7 @@
   <title>MuscleForge | Professional Bodybuilding Nutrition & Training Planner</title>
 
   <!-- Favicon & PWA -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d0d18'/><polygon points='1,16 5,8 12,8 16,16 12,24 5,24' fill='%23e04520'/><polygon points='31,16 27,8 20,8 16,16 20,24 27,24' fill='%23e04520'/><rect x='13.5' y='13.5' width='5' height='5' rx='1.5' fill='%23e04520' opacity='.65'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#e04520">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -429,85 +429,7 @@ h4 { font-size: var(--text-lg); }
   cursor: default;
 }
 
-/* — SVG hex-dumbbell icon — */
-.logo-svg {
-  flex-shrink: 0;
-  filter: drop-shadow(0 0 9px rgba(224,69,32,0.38));
-  transition: filter var(--duration-fast);
-}
-.logo:hover .logo-svg {
-  filter: drop-shadow(0 0 18px rgba(224,69,32,0.70));
-}
-.logo-plate  { fill: var(--blood); }
-.logo-collar { fill: var(--blood); opacity: 0.88; }
-.logo-bar    { fill: var(--blood); opacity: 0.52; }
-.logo-ember  { fill: rgba(255,145,45,1); opacity: 0.18; }
-
-@keyframes forge-ember {
-  0%, 100% { opacity: 0.16; }
-  50%       { opacity: 0.44; }
-}
-.logo-ember { animation: forge-ember 3.2s ease-in-out infinite; }
-.logo-ember:nth-child(6) { animation-delay: 1.6s; }
-
-/* — Type lockup — */
-.logo-type {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  line-height: 1;
-}
-.logo-name {
-  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
-  font-size: 2.35rem;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  display: flex;
-  align-items: baseline;
-}
-.logo-muscle { color: var(--chalk); }
-.logo-forge  {
-  color: var(--blood);
-  text-shadow: 0 0 22px var(--blood-glow), 0 0 5px rgba(255,100,30,0.22);
-  transition: text-shadow var(--duration-fast);
-}
-.logo:hover .logo-forge {
-  text-shadow: 0 0 34px var(--blood-glow), 0 0 10px rgba(255,100,30,0.42);
-}
-
-.logo-tag {
-  font-family: 'Teko', 'Space Grotesk', sans-serif;
-  font-size: 0.66rem;
-  font-weight: 400;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--chalk-tertiary);
-  margin-top: 4px;
-}
-.logo-credit {
-  font-size: 0.59rem;
-  color: var(--chalk-faint);
-  margin-top: 2px;
-  letter-spacing: 0.05em;
-}
-.logo-credit a {
-  color: var(--chalk-faint);
-  text-decoration: none;
-  transition: color var(--duration-fast);
-}
-.logo-credit a:hover { color: var(--blood); }
-
-@media (max-width: 900px) {
-  .logo-svg  { width: 52px; height: 29px; }
-  .logo-name { font-size: 1.9rem; }
-  .logo-tag  { font-size: 0.6rem; letter-spacing: 0.2em; }
-}
-@media (max-width: 640px) {
-  .logo-svg    { display: none; }
-  .logo-name   { font-size: 1.62rem; letter-spacing: 0.04em; }
-  .logo-tag    { display: none; }
-  .logo-credit { display: none; }
-}
+/* Logo emoji styles — see bottom of CSS block */
 
 /* Nav — Command strip */
 .nav-primary {
@@ -4210,99 +4132,7 @@ select.field-input option {
 .news-link-desc { font-size: var(--text-xs); color: var(--chalk-tertiary); }
 .news-link-arrow { color: var(--blood); font-size: var(--text-sm); }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   MUSCLE MAP
-   ═══════════════════════════════════════════════════════════════════════════ */
-.mm-toggle { display: flex; gap: var(--space-sm); margin-bottom: var(--space-lg); }
-.muscle-map-layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: var(--space-xl);
-  align-items: start;
-}
-@media (max-width: 640px) {
-  .muscle-map-layout { grid-template-columns: 1fr; }
-  .mm-figure-wrap { display: flex; justify-content: center; }
-  .mm-svg { width: 180px; }
-}
-.mm-svg { width: 200px; height: auto; display: block; }
-.muscle-region {
-  fill: var(--iron-surface);
-  stroke: var(--line-hover);
-  stroke-width: 0.7;
-  cursor: pointer;
-  transition: fill var(--duration-fast), stroke var(--duration-fast);
-}
-.muscle-region:hover { fill: var(--blood-dim); stroke: var(--blood); }
-.muscle-region.mm-active { fill: var(--blood); stroke: var(--ember-text); stroke-width: 1; }
-.mm-body-fill { fill: var(--iron-elevated); stroke: var(--line); stroke-width: 0.6; pointer-events: none; }
-.mm-label {
-  fill: var(--chalk-tertiary);
-  font-size: 6px;
-  font-family: 'Teko', 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  pointer-events: none;
-  text-anchor: middle;
-  user-select: none;
-  dominant-baseline: middle;
-}
-.mm-detail-panel {
-  background: var(--iron-mid);
-  border: 1px solid var(--line-hover);
-  border-left: 3px solid var(--blood);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  min-height: 200px;
-}
-.mm-prompt {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: var(--space-2xl) 0;
-  color: var(--chalk-tertiary); text-align: center; gap: var(--space-sm);
-}
-.mm-prompt-icon { font-size: 2rem; opacity: 0.25; }
-.mm-content { display: none; }
-.mm-content.visible { display: block; }
-.mm-name {
-  font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
-  font-size: var(--text-2xl); color: var(--ember-text);
-  letter-spacing: 0.04em; margin-bottom: 4px;
-}
-.mm-func {
-  color: var(--chalk-secondary); font-size: var(--text-sm); line-height: 1.6;
-  padding-bottom: var(--space-md); border-bottom: 1px solid var(--line); margin-bottom: var(--space-md);
-}
-.mm-section-head {
-  font-family: 'Teko', 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 600;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--chalk-tertiary);
-  margin: var(--space-md) 0 6px;
-}
-.mm-ex-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
-.mm-ex-list li {
-  font-size: var(--text-sm); color: var(--chalk); padding: 4px 10px;
-  background: var(--iron-elevated); border-radius: var(--radius-sm); border-left: 2px solid var(--blood-dim);
-}
-.mm-vol-bar {
-  background: var(--iron-elevated); border-radius: var(--radius-full);
-  height: 8px; overflow: hidden; margin-top: 4px;
-}
-.mm-vol-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--blood-dim), var(--blood));
-  border-radius: var(--radius-full); transition: width 400ms var(--ease-out-expo);
-}
-.mm-vol-nums {
-  display: flex; justify-content: space-between; font-size: 0.63rem;
-  color: var(--chalk-secondary); font-family: 'Teko', 'Space Grotesk', sans-serif;
-  margin-top: 3px; letter-spacing: 0.06em;
-}
-.mm-recovery { font-size: var(--text-sm); color: var(--chalk-secondary); margin-top: var(--space-sm); }
-.mm-recovery strong { color: var(--rust); }
-.mm-note {
-  font-size: var(--text-sm); color: var(--chalk-secondary); background: var(--iron-elevated);
-  border-left: 2px solid var(--rust); padding: var(--space-sm) var(--space-md);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-top: var(--space-md); line-height: 1.55;
-}
+/* MUSCLE MAP CSS removed — replaced by 3-column browser */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    SUPPLEMENT DATABASE
@@ -4466,168 +4296,8 @@ select.field-input option {
 .ss-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: var(--text-xl); color: var(--chalk); }
 .ss-note { font-size: var(--text-sm); color: var(--chalk-secondary); line-height: 1.5; margin-top: var(--space-md); }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TRAIN VIEW — Full-screen anatomy applet (GlossaForge-inspired layout)
-   ═══════════════════════════════════════════════════════════════════════════ */
-.train-hero {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px - 56px); /* header + mobile nav */
-  background: var(--iron-black);
-  overflow: hidden;
-}
-@media (min-width: 769px) {
-  .train-hero { height: calc(100vh - 60px); }
-}
-
-/* Controls strip */
-.train-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-  background: var(--iron-elevated);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  flex-shrink: 0;
-  flex-wrap: wrap;
-}
-.train-search {
-  flex: 1;
-  min-width: 140px;
-  max-width: 280px;
-  background: var(--iron-surface);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-md);
-  padding: 5px 12px;
-  color: var(--chalk);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8125rem;
-  outline: none;
-  transition: border-color var(--duration-fast);
-}
-.train-search:focus { border-color: var(--blood); }
-.train-search::placeholder { color: var(--chalk-tertiary); }
-.train-ctrl-actions { display: flex; gap: 6px; align-items: center; margin-left: auto; }
-
-/* Map body */
-.train-body {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-}
-.train-svg-wrap {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--iron-black);
-  cursor: crosshair;
-}
-.train-svg-wrap .mm-svg {
-  max-height: 100%;
-  width: auto;
-  max-width: 100%;
-  transition: filter 0.2s;
-}
-.train-svg-wrap .mm-svg .muscle-region {
-  transition: fill 0.15s, opacity 0.15s;
-}
-
-/* Slide-in detail panel */
-.train-panel {
-  width: 0;
-  overflow: hidden;
-  transition: width 0.32s var(--ease-out-expo);
-  background: var(--iron-elevated);
-  border-left: 1px solid rgba(255,255,255,0.07);
-  flex-shrink: 0;
-  position: relative;
-}
-.train-panel.open { width: 340px; }
-@media (max-width: 640px) {
-  .train-panel.open {
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 100% !important;
-    z-index: 100;
-  }
-}
-.train-panel-inner {
-  width: 340px;
-  height: 100%;
-  overflow-y: auto;
-  padding: 20px 18px 24px;
-  box-sizing: border-box;
-}
-@media (max-width: 640px) {
-  .train-panel-inner { width: 100%; }
-}
-.train-panel-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--iron-surface);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-full);
-  color: var(--chalk-secondary);
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: background var(--duration-fast), color var(--duration-fast);
-  z-index: 5;
-}
-.train-panel-close:hover { background: var(--blood-dim); color: var(--blood); }
-
-/* Override mm-content display inside train panel */
-.train-panel-inner .mm-content { display: none; position: relative; }
-.train-panel-inner .mm-content.visible { display: block; }
-.train-panel-inner .mm-prompt {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  gap: 10px;
-  color: var(--chalk-tertiary);
-  font-family: 'Teko', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.mm-vol-cite {
-  display: block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--chalk-tertiary);
-  margin-top: 2px;
-}
-
-/* Workout bar */
-.train-workout-bar {
-  height: 46px;
-  background: var(--iron-mid);
-  border-top: 1px solid rgba(224,69,32,0.18);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-/* Scroll indicator after map section */
+/* TRAIN VIEW CSS removed — replaced by editorial hero + 3-column browser */
 .home-section { margin-top: 0; padding-top: var(--space-xl); }
-
-/* Make mm-svg fill available height in train context */
-#home .mm-svg { display: block; height: 100%; width: auto; }
 
 /* ── Workout builder bottom sheet ── */
 .workout-sheet {
@@ -4825,6 +4495,113 @@ select.field-input option {
 .workout-sheet { padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px)); }
 .mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
 
+/* ── Logo Emoji ── */
+.logo-emoji { font-size: 1.75rem; line-height: 1; }
+.logo-textblock { display: flex; flex-direction: column; }
+.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .08em; color: var(--chalk); line-height: 1; }
+.logo-tagline { font-family: 'Teko', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--blood); }
+
+/* ── Hero ── */
+.mf-hero {
+  display: flex; align-items: center;
+  min-height: calc(100vh - 60px - 56px);
+  padding: var(--space-3xl) 0;
+  border-bottom: 1px solid var(--iron-border);
+}
+.mf-hero-eyebrow {
+  font-family: 'Teko', sans-serif; text-transform: uppercase;
+  letter-spacing: .15em; color: var(--blood);
+  font-size: 0.85rem; margin-bottom: var(--space-md);
+}
+.mf-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  letter-spacing: .01em; line-height: .9;
+  color: var(--chalk); margin-bottom: var(--space-xl);
+}
+.mf-hero-body {
+  max-width: 560px; color: var(--chalk-secondary);
+  font-size: 1rem; line-height: 1.65;
+  margin-bottom: var(--space-xl);
+}
+.mf-hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+.btn-lg { padding: 14px 28px; font-size: 0.95rem; }
+
+/* ── Muscle Browser ── */
+.muscle-browser { padding: var(--space-3xl) 0; border-bottom: 1px solid var(--iron-border); }
+.mb-header { margin-bottom: var(--space-xl); }
+.mb-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .04em; color: var(--chalk); }
+.mb-header p { color: var(--chalk-secondary); font-size: 0.875rem; margin-top: 4px; }
+.mb-columns {
+  display: grid; grid-template-columns: 180px 220px 1fr;
+  border: 1px solid var(--iron-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden; min-height: 460px;
+}
+.mb-col {
+  border-right: 1px solid var(--iron-border);
+  display: flex; flex-direction: column;
+  overflow-y: auto; min-height: 0;
+}
+.mb-col:last-child { border-right: none; }
+.mb-col-header {
+  padding: 10px 16px;
+  font-family: 'Teko', sans-serif; text-transform: uppercase;
+  letter-spacing: .1em; font-size: 0.7rem; color: var(--chalk-tertiary);
+  border-bottom: 1px solid var(--iron-border);
+  background: var(--iron-surface); flex-shrink: 0;
+}
+.mb-item {
+  padding: 11px 16px; cursor: pointer;
+  font-size: 0.875rem; color: var(--chalk-secondary);
+  border-bottom: 1px solid var(--iron-border);
+  transition: background .1s, color .1s; flex-shrink: 0;
+}
+.mb-item:last-child { border-bottom: none; }
+.mb-item:hover { background: var(--iron-hover); color: var(--chalk); }
+.mb-item.active { background: var(--blood-dim); color: var(--blood); font-weight: 600; border-left: 2px solid var(--blood); padding-left: 14px; }
+.mb-exercises-wrap { padding: var(--space-lg); flex: 1; overflow-y: auto; }
+.mb-muscle-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--chalk); margin-bottom: 2px; }
+.mb-muscle-func { font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.5; margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); }
+.mb-section-label { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.7rem; color: var(--chalk-tertiary); margin-bottom: var(--space-sm); margin-top: var(--space-lg); }
+.mb-ex-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--iron-border); }
+.mb-ex-row:last-child { border-bottom: none; }
+.mb-ex-name { font-size: 0.875rem; color: var(--chalk); }
+.mb-vol-row {
+  display: flex; gap: var(--space-xl);
+  margin: var(--space-lg) 0; padding: var(--space-md);
+  background: var(--iron-surface); border-radius: var(--radius-md);
+}
+.mb-vol-stat { text-align: center; }
+.mb-vol-val { font-family: 'Teko', sans-serif; font-size: 1.4rem; color: var(--blood); display: block; }
+.mb-vol-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--chalk-tertiary); }
+.mb-empty {
+  display: flex; align-items: center; justify-content: center;
+  flex: 1; color: var(--chalk-tertiary);
+  font-size: 0.8125rem; text-align: center; padding: var(--space-xl);
+}
+.mb-plan-cta {
+  display: block; margin-top: var(--space-lg); padding: 10px 0;
+  text-align: center; border: 1px solid var(--iron-border);
+  border-radius: var(--radius-md);
+  font-family: 'Teko', sans-serif; text-transform: uppercase;
+  letter-spacing: .08em; font-size: 0.85rem; color: var(--chalk-secondary);
+  cursor: pointer; transition: border-color .15s, color .15s;
+  background: none; width: 100%;
+}
+.mb-plan-cta:hover { border-color: var(--blood); color: var(--blood); }
+.mb-note { font-size: 0.7rem; color: var(--chalk-tertiary); margin-top: var(--space-lg); line-height: 1.5; }
+@media (max-width: 640px) {
+  .mb-columns { grid-template-columns: 1fr; min-height: auto; }
+  .mb-col { max-height: 240px; border-right: none; border-bottom: 1px solid var(--iron-border); }
+  .mb-col:last-child { max-height: none; border-bottom: none; }
+  .mf-hero { min-height: auto; padding: var(--space-2xl) 0; }
+  .mf-hero-title { font-size: clamp(3rem, 18vw, 5rem); }
+}
+@media (max-width: 768px) {
+  .mb-columns { grid-template-columns: 160px 200px 1fr; }
+}
+
   </style>
 </head>
 
@@ -4838,30 +4615,11 @@ select.field-input option {
   <header class="site-header" id="header">
     <div class="container">
       <div class="header-inner">
-        <div class="logo">
-          <!-- ═══ THE FORGE MARK: hex-plate dumbbell ═══ -->
-          <svg class="logo-svg" viewBox="0 0 68 38" width="68" height="38" aria-hidden="true">
-            <!-- Left hex weight plate -->
-            <polygon class="logo-plate" points="0,19 6,7 18,7 24,19 18,31 6,31"/>
-            <!-- Left collar -->
-            <rect class="logo-collar" x="22" y="12" width="7" height="14" rx="1"/>
-            <!-- Bar -->
-            <rect class="logo-bar" x="29" y="16" width="10" height="6" rx="1"/>
-            <!-- Right collar -->
-            <rect class="logo-collar" x="39" y="12" width="7" height="14" rx="1"/>
-            <!-- Right hex weight plate -->
-            <polygon class="logo-plate" points="44,19 50,7 62,7 68,19 62,31 50,31"/>
-            <!-- Forge ember inner glow (animated) -->
-            <circle class="logo-ember" cx="12" cy="19" r="6"/>
-            <circle class="logo-ember" cx="56" cy="19" r="6"/>
-          </svg>
-
-          <div class="logo-type">
-            <div class="logo-name">
-              <span class="logo-muscle">MUSCLE</span><span class="logo-forge">FORGE</span>
-            </div>
-            <div class="logo-tag">PRECISION &middot; TRAINING &middot; NUTRITION</div>
-            <div class="logo-credit">by <a href="https://ayter.com" target="_blank" rel="noopener">Can Ayter</a></div>
+        <div class="logo" onclick="switchToView('home')" style="cursor:pointer;display:flex;gap:10px;align-items:center;">
+          <span class="logo-emoji" aria-hidden="true">💪</span>
+          <div class="logo-textblock">
+            <span class="logo-text">MUSCLEFORGE</span>
+            <span class="logo-tagline">Train Smarter.</span>
           </div>
         </div>
 
@@ -4894,187 +4652,47 @@ select.field-input option {
        MAIN
        ═══════════════════════════════════════════════════════════════════════════ -->
   <main id="main-content">
-    <!-- TRAIN / HOME VIEW — Anatomy-first hero layout -->
+    <!-- HOME VIEW — Editorial hero + 3-column exercise browser -->
     <div id="home" class="view active">
 
-      <!-- ═══ ANATOMY APPLET — full-height hero ═══ -->
-      <div class="train-hero">
-
-        <!-- Controls strip -->
-        <div class="train-controls">
-          <div class="btn-group" style="margin:0;gap:4px;flex-shrink:0;">
-            <button class="btn btn-primary btn-sm" id="mm-btn-front" onclick="toggleMuscleView('front')">Front</button>
-            <button class="btn btn-secondary btn-sm" id="mm-btn-back" onclick="toggleMuscleView('back')">Back</button>
-          </div>
-          <input class="train-search" id="muscleSearch" type="search" placeholder="Search muscles…" autocomplete="off" oninput="filterMuscleSvg(this.value)">
-          <div class="train-ctrl-actions">
-            <button class="btn btn-ghost btn-sm" onclick="switchToView('calculator')">📋 Build Plan</button>
-            <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','training')" style="display:none;" class="train-ctrl-hide-sm">Programs</button>
+      <!-- ═══ HERO ═══ -->
+      <section class="mf-hero">
+        <div class="container">
+          <div class="mf-hero-eyebrow">Evidence-Based &middot; Strength &amp; Hypertrophy</div>
+          <h1 class="mf-hero-title">MUSCLEFORGE</h1>
+          <p class="mf-hero-body">A structured reference for athletes and coaches. Browse the complete exercise library organized by muscle group, or enter your biometrics to generate a personalized training and nutrition protocol.</p>
+          <div class="mf-hero-actions">
+            <button class="btn btn-primary btn-lg" onclick="scrollToMuscleBrowser()">Browse Exercises &#x2192;</button>
+            <button class="btn btn-ghost btn-lg" onclick="switchToView('calculator')">Generate My Program &#x2192;</button>
           </div>
         </div>
+      </section>
 
-        <!-- Map + slide-in detail panel -->
-        <div class="train-body">
-          <div class="train-svg-wrap">
-            <!-- FRONT SVG -->
-            <svg id="mm-svg-front" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" aria-label="Front body muscle map">
-              <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
-              <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
-              <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
-              <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
-              <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
-              <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
-              <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
-              <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
-              <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
-              <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
-              <!-- MUSCLE REGIONS — FRONT -->
-              <!-- Neck / SCM -->
-              <ellipse class="muscle-region" data-muscle="neck" cx="97" cy="57" rx="8" ry="7"/>
-              <ellipse class="muscle-region" data-muscle="neck" cx="123" cy="57" rx="8" ry="7"/>
-              <!-- Front Delts -->
-              <ellipse class="muscle-region" data-muscle="front-delt" cx="52" cy="76" rx="17" ry="17"/>
-              <ellipse class="muscle-region" data-muscle="front-delt" cx="168" cy="76" rx="17" ry="17"/>
-              <!-- Chest -->
-              <path class="muscle-region" data-muscle="chest" d="M62,68 L108,68 L108,138 L80,144 L66,118 Z"/>
-              <path class="muscle-region" data-muscle="chest" d="M112,68 L158,68 L154,118 L140,144 L112,138 Z"/>
-              <!-- Serratus Anterior -->
-              <ellipse class="muscle-region" data-muscle="serratus" cx="62" cy="150" rx="7" ry="22"/>
-              <ellipse class="muscle-region" data-muscle="serratus" cx="158" cy="150" rx="7" ry="22"/>
-              <!-- Abs -->
-              <rect class="muscle-region" data-muscle="abs" x="87" y="147" width="46" height="68" rx="5"/>
-              <!-- Obliques -->
-              <path class="muscle-region" data-muscle="obliques" d="M58,162 L80,155 L77,220 L60,218 Z"/>
-              <path class="muscle-region" data-muscle="obliques" d="M162,162 L140,155 L143,220 L160,218 Z"/>
-              <!-- Hip Flexors -->
-              <ellipse class="muscle-region" data-muscle="hip-flexors" cx="110" cy="232" rx="36" ry="13"/>
-              <!-- Biceps -->
-              <ellipse class="muscle-region" data-muscle="biceps" cx="34" cy="142" rx="13" ry="32"/>
-              <ellipse class="muscle-region" data-muscle="biceps" cx="186" cy="142" rx="13" ry="32"/>
-              <!-- Forearms -->
-              <ellipse class="muscle-region" data-muscle="forearms" cx="28" cy="196" rx="11" ry="26"/>
-              <ellipse class="muscle-region" data-muscle="forearms" cx="192" cy="196" rx="11" ry="26"/>
-              <!-- Quads -->
-              <path class="muscle-region" data-muscle="quads" d="M62,254 L104,254 L102,368 L60,368 Z"/>
-              <path class="muscle-region" data-muscle="quads" d="M116,254 L158,254 L160,368 L118,368 Z"/>
-              <!-- Adductors (inner thigh) -->
-              <ellipse class="muscle-region" data-muscle="adductors" cx="89" cy="306" rx="13" ry="42"/>
-              <ellipse class="muscle-region" data-muscle="adductors" cx="131" cy="306" rx="13" ry="42"/>
-              <!-- Tibialis -->
-              <rect class="muscle-region" data-muscle="tibialis" x="60" y="378" width="43" height="100" rx="4"/>
-              <rect class="muscle-region" data-muscle="tibialis" x="117" y="378" width="43" height="100" rx="4"/>
-              <!-- Labels -->
-              <text class="mm-label" x="97" y="57">SCM</text>
-              <text class="mm-label" x="123" y="57">SCM</text>
-              <text class="mm-label" x="52" y="76">DELT</text>
-              <text class="mm-label" x="168" y="76">DELT</text>
-              <text class="mm-label" x="85" y="106">CHEST</text>
-              <text class="mm-label" x="135" y="106">CHEST</text>
-              <text class="mm-label" x="62" y="152">SER</text>
-              <text class="mm-label" x="158" y="152">SER</text>
-              <text class="mm-label" x="110" y="181">ABS</text>
-              <text class="mm-label" x="69" y="190">OBL</text>
-              <text class="mm-label" x="151" y="190">OBL</text>
-              <text class="mm-label" x="34" y="142">BI</text>
-              <text class="mm-label" x="186" y="142">BI</text>
-              <text class="mm-label" x="83" y="298">QUAD</text>
-              <text class="mm-label" x="137" y="298">QUAD</text>
-              <text class="mm-label" x="89" y="306">ADD</text>
-              <text class="mm-label" x="131" y="306">ADD</text>
-              <text class="mm-label" x="81" y="428">TIB</text>
-              <text class="mm-label" x="138" y="428">TIB</text>
-            </svg>
-            <!-- BACK SVG -->
-            <svg id="mm-svg-back" class="mm-svg" viewBox="0 0 220 490" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-label="Back body muscle map">
-              <circle class="mm-body-fill" cx="110" cy="28" r="22"/>
-              <rect class="mm-body-fill" x="101" y="50" width="18" height="14" rx="3"/>
-              <path class="mm-body-fill" d="M52,64 L168,64 L162,222 L58,222 Z"/>
-              <path class="mm-body-fill" d="M36,66 L54,66 L52,188 L22,198 Z"/>
-              <path class="mm-body-fill" d="M166,66 L184,66 L198,198 L168,188 Z"/>
-              <rect class="mm-body-fill" x="60" y="222" width="100" height="28" rx="6"/>
-              <path class="mm-body-fill" d="M60,250 L107,250 L105,372 L58,372 Z"/>
-              <path class="mm-body-fill" d="M113,250 L160,250 L162,372 L115,372 Z"/>
-              <rect class="mm-body-fill" x="58" y="375" width="47" height="106" rx="5"/>
-              <rect class="mm-body-fill" x="115" y="375" width="47" height="106" rx="5"/>
-              <!-- MUSCLE REGIONS — BACK -->
-              <!-- Traps -->
-              <path class="muscle-region" data-muscle="traps" d="M80,56 L140,56 L150,100 L110,110 L70,100 Z"/>
-              <!-- Rear Delts -->
-              <ellipse class="muscle-region" data-muscle="rear-delt" cx="50" cy="78" rx="17" ry="16"/>
-              <ellipse class="muscle-region" data-muscle="rear-delt" cx="170" cy="78" rx="17" ry="16"/>
-              <!-- Teres Major / Rotator Cuff -->
-              <ellipse class="muscle-region" data-muscle="teres" cx="68" cy="116" rx="11" ry="13"/>
-              <ellipse class="muscle-region" data-muscle="teres" cx="152" cy="116" rx="11" ry="13"/>
-              <!-- Lats -->
-              <path class="muscle-region" data-muscle="lats" d="M60,108 L94,108 L90,196 L56,208 Z"/>
-              <path class="muscle-region" data-muscle="lats" d="M126,108 L160,108 L164,208 L130,196 Z"/>
-              <!-- Rhomboids -->
-              <rect class="muscle-region" data-muscle="rhomboids" x="90" y="110" width="40" height="48" rx="4"/>
-              <!-- Lower Back / Erectors -->
-              <rect class="muscle-region" data-muscle="lower-back" x="86" y="174" width="48" height="44" rx="4"/>
-              <!-- Triceps -->
-              <ellipse class="muscle-region" data-muscle="triceps" cx="32" cy="148" rx="13" ry="34"/>
-              <ellipse class="muscle-region" data-muscle="triceps" cx="188" cy="148" rx="13" ry="34"/>
-              <!-- Glutes -->
-              <path class="muscle-region" data-muscle="glutes" d="M62,252 L108,252 L106,288 L60,288 Z"/>
-              <path class="muscle-region" data-muscle="glutes" d="M112,252 L158,252 L160,288 L114,288 Z"/>
-              <!-- Hamstrings -->
-              <path class="muscle-region" data-muscle="hamstrings" d="M62,292 L105,292 L103,368 L60,368 Z"/>
-              <path class="muscle-region" data-muscle="hamstrings" d="M115,292 L158,292 L160,368 L117,368 Z"/>
-              <!-- Calves -->
-              <rect class="muscle-region" data-muscle="calves" x="60" y="378" width="43" height="100" rx="4"/>
-              <rect class="muscle-region" data-muscle="calves" x="117" y="378" width="43" height="100" rx="4"/>
-              <!-- Labels -->
-              <text class="mm-label" x="110" y="86">TRAPS</text>
-              <text class="mm-label" x="50" y="78">DELT</text>
-              <text class="mm-label" x="170" y="78">DELT</text>
-              <text class="mm-label" x="68" y="116">TER</text>
-              <text class="mm-label" x="152" y="116">TER</text>
-              <text class="mm-label" x="74" y="155">LAT</text>
-              <text class="mm-label" x="146" y="155">LAT</text>
-              <text class="mm-label" x="110" y="134">RHOM</text>
-              <text class="mm-label" x="110" y="196">LO BACK</text>
-              <text class="mm-label" x="32" y="148">TRI</text>
-              <text class="mm-label" x="188" y="148">TRI</text>
-              <text class="mm-label" x="84" y="270">GLUTE</text>
-              <text class="mm-label" x="136" y="270">GLUTE</text>
-              <text class="mm-label" x="83" y="330">HAM</text>
-              <text class="mm-label" x="137" y="330">HAM</text>
-              <text class="mm-label" x="81" y="428">CALF</text>
-              <text class="mm-label" x="138" y="428">CALF</text>
-            </svg>
+      <!-- ═══ 3-COLUMN EXERCISE BROWSER ═══ -->
+      <section class="muscle-browser" id="muscleBrowser">
+        <div class="container">
+          <div class="mb-header">
+            <h2>Exercise Library by Muscle Group</h2>
+            <p>Select a group, then a muscle to browse exercises. Use <strong style="color:var(--blood);">+</strong> to add to your workout session below.</p>
           </div>
-
-          <!-- Slide-in muscle detail panel -->
-          <aside class="train-panel" id="trainPanel">
-            <div class="train-panel-inner">
-              <div class="mm-prompt" id="mm-prompt">
-                <div class="mm-prompt-icon">◉</div>
-                <div>Select a muscle</div>
-              </div>
-              <div class="mm-content" id="mm-content">
-                <button class="train-panel-close" onclick="closeTrainPanel()" aria-label="Close">✕</button>
-                <div class="mm-name" id="mm-name"></div>
-                <div class="mm-func" id="mm-func"></div>
-                <div class="mm-section-head">Top Exercises</div>
-                <ul class="mm-ex-list" id="mm-exercises"></ul>
-                <div class="mm-section-head">Weekly Volume — sets/wk
-                  <span class="mm-vol-cite">Israetel / RP Strength; Schoenfeld et al. 2017</span>
-                </div>
-                <div>
-                  <div class="mm-vol-bar"><div class="mm-vol-fill" id="mm-vol-fill" style="width:0%"></div></div>
-                  <div class="mm-vol-nums" id="mm-vol-nums"></div>
-                </div>
-                <div class="mm-recovery" id="mm-recovery"></div>
-                <div class="mm-note" id="mm-note"></div>
-                <div style="margin-top: var(--space-lg); display:flex; gap:8px; flex-wrap:wrap;">
-                  <button class="btn btn-primary btn-sm" onclick="switchToView('tools','training')">View Programs →</button>
-                  <button class="btn btn-ghost btn-sm" onclick="switchToView('tools','utilities')">Log Workout →</button>
-                </div>
-              </div>
+          <div class="mb-columns">
+            <div class="mb-col" id="mbColGroups">
+              <div class="mb-col-header">Group</div>
             </div>
-          </aside>
+            <div class="mb-col" id="mbColMuscles">
+              <div class="mb-col-header">Muscle</div>
+              <div class="mb-empty">&#8592; Select a group</div>
+            </div>
+            <div class="mb-col" id="mbColExercises">
+              <div class="mb-col-header">Exercises &amp; Detail</div>
+              <div class="mb-empty">&#8592; Select a muscle</div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- ═══ FAKE TRAIN-HERO WRAPPER (for workout sheet) ═══ -->
+      <div class="train-hero" style="height:auto;border:none;flex-shrink:0;">
 
         <!-- Workout Builder — collapsible bottom sheet -->
         <div class="workout-sheet" id="workoutSheet">
@@ -5127,7 +4745,7 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','body')">Body Composition →</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip new" onclick="switchToView('tools','body')">Muscle Map ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('home'); setTimeout(() => scrollToMuscleBrowser(), 100)">Exercise Browser ✦</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">FFMI Calculator</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">Navy Body Fat</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">Genetic Potential</span>
@@ -6510,22 +6128,22 @@ select.field-input option {
           <!-- Body Composition Tools -->
           <div id="tools-body" class="tools-category active">
 
-            <!-- Anatomy Map — redirect to Train view -->
-            <div class="card tool-card" style="cursor:pointer;" onclick="switchToView('home')">
+            <!-- Exercise Browser — redirect to Home -->
+            <div class="card tool-card" style="cursor:pointer;" onclick="switchToView('home'); setTimeout(() => scrollToMuscleBrowser(), 100)">
               <div class="card-header">
                 <div>
-                  <h2 class="card-title">Interactive Anatomy Map</h2>
-                  <p class="card-subtitle">Click any muscle for exercises, volume targets, and recovery data</p>
+                  <h2 class="card-title">Exercise Browser</h2>
+                  <p class="card-subtitle">Browse 185+ exercises organized by muscle group with volume targets and recovery data</p>
                 </div>
                 <span class="tool-badge">Israetel · Schoenfeld 2017</span>
               </div>
               <div class="card-body" style="display:flex;align-items:center;justify-content:center;gap:16px;padding:32px;background:var(--iron-mid);border-radius:var(--radius-md);flex-direction:column;">
-                <div style="font-size:3rem;opacity:.6;">🏋️</div>
+                <div style="font-size:3rem;opacity:.6;">💪</div>
                 <div style="text-align:center;">
-                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--chalk);letter-spacing:.04em;">Open in Train View</div>
-                  <div style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:4px;">The anatomy map is MuscleForge's home — select muscles, explore exercises, and understand your body</div>
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--chalk);letter-spacing:.04em;">Open Exercise Browser</div>
+                  <div style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:4px;">3-column drill-down: Group → Muscle → Exercises. Add to your workout session directly from the browser.</div>
                 </div>
-                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();switchToView('home')">Open Anatomy Map →</button>
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();switchToView('home');setTimeout(()=>scrollToMuscleBrowser(),100)">Browse Exercises →</button>
               </div>
             </div>
 
@@ -10116,10 +9734,12 @@ function loadTools() {
   initWaterTracker();
   initCheckin();
 
-  // Phase 4 — achievements + mobile swipe
+  // Exercise browser
+  renderMBGroups();
+
+  // Phase 4 — achievements
   renderAchievements();
   checkAchievements();
-  initTrainPanelSwipe();
 }
 
 // FFMI Calculator
@@ -13648,6 +13268,183 @@ if ('serviceWorker' in navigator) {
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MUSCLE MAP
+// ═══════════════════════════════════════════════════════════════════════════
+// 3-COLUMN EXERCISE BROWSER
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MUSCLE_GROUPS = [
+  { id: 'chest',     label: 'Chest',         muscles: ['chest', 'serratus'] },
+  { id: 'back',      label: 'Back',           muscles: ['lats', 'traps', 'rhomboids', 'rear-delt', 'lower-back', 'teres'] },
+  { id: 'shoulders', label: 'Shoulders',      muscles: ['front-delt', 'rear-delt'] },
+  { id: 'arms',      label: 'Arms',           muscles: ['biceps', 'triceps', 'forearms'] },
+  { id: 'core',      label: 'Core',           muscles: ['abs', 'obliques'] },
+  { id: 'legs',      label: 'Legs',           muscles: ['quads', 'hamstrings', 'calves', 'tibialis', 'adductors', 'hip-flexors'] },
+  { id: 'glutes',    label: 'Glutes & Hips',  muscles: ['glutes', 'hip-flexors', 'adductors'] },
+  { id: 'neck',      label: 'Neck',           muscles: ['neck'] },
+];
+
+let MB_STATE = { group: null, muscle: null };
+
+function renderMBGroups() {
+  const col = document.getElementById('mbColGroups');
+  if (!col) return;
+  // Keep header, replace rest
+  const header = col.querySelector('.mb-col-header');
+  col.innerHTML = '';
+  if (header) col.appendChild(header);
+  MUSCLE_GROUPS.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'mb-item' + (MB_STATE.group === g.id ? ' active' : '');
+    el.textContent = g.label;
+    el.onclick = () => selectMBGroup(g.id);
+    col.appendChild(el);
+  });
+}
+
+function selectMBGroup(groupId) {
+  MB_STATE.group = groupId;
+  MB_STATE.muscle = null;
+  renderMBGroups();
+  renderMBMuscles(groupId);
+  // Clear exercises column
+  const col = document.getElementById('mbColExercises');
+  if (col) {
+    const header = col.querySelector('.mb-col-header');
+    col.innerHTML = '';
+    if (header) col.appendChild(header);
+    const empty = document.createElement('div');
+    empty.className = 'mb-empty';
+    empty.textContent = '\u2190 Select a muscle';
+    col.appendChild(empty);
+  }
+  // Mobile: scroll to muscles column
+  if (window.innerWidth <= 640) {
+    document.getElementById('mbColMuscles')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function renderMBMuscles(groupId) {
+  const group = MUSCLE_GROUPS.find(g => g.id === groupId);
+  const col = document.getElementById('mbColMuscles');
+  if (!col || !group) return;
+  const header = col.querySelector('.mb-col-header');
+  col.innerHTML = '';
+  if (header) col.appendChild(header);
+  group.muscles.forEach(muscleId => {
+    const d = MUSCLE_DATA[muscleId];
+    if (!d) return;
+    const el = document.createElement('div');
+    el.className = 'mb-item' + (MB_STATE.muscle === muscleId ? ' active' : '');
+    el.textContent = d.name.split('\u2014')[0].split('(')[0].trim();
+    el.onclick = () => selectMBMuscle(muscleId);
+    col.appendChild(el);
+  });
+}
+
+function selectMBMuscle(muscleId) {
+  MB_STATE.muscle = muscleId;
+  renderMBMuscles(MB_STATE.group);
+  renderMBExercises(muscleId);
+  // Mobile: scroll to exercises column
+  if (window.innerWidth <= 640) {
+    document.getElementById('mbColExercises')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function renderMBExercises(muscleId) {
+  const d = MUSCLE_DATA[muscleId];
+  const col = document.getElementById('mbColExercises');
+  if (!col || !d) return;
+  const header = col.querySelector('.mb-col-header');
+  col.innerHTML = '';
+  if (header) col.appendChild(header);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'mb-exercises-wrap';
+
+  // Muscle name + function
+  const nameEl = document.createElement('div');
+  nameEl.className = 'mb-muscle-name';
+  nameEl.textContent = d.name.split('\u2014')[0].trim();
+  wrap.appendChild(nameEl);
+
+  const funcEl = document.createElement('div');
+  funcEl.className = 'mb-muscle-func';
+  funcEl.textContent = d.func;
+  wrap.appendChild(funcEl);
+
+  // Exercises
+  const exLabel = document.createElement('div');
+  exLabel.className = 'mb-section-label';
+  exLabel.textContent = 'Exercises';
+  wrap.appendChild(exLabel);
+
+  const exList = document.createElement('div');
+  d.exercises.forEach(ex => {
+    const row = document.createElement('div');
+    row.className = 'mb-ex-row';
+    const inWorkout = WORKOUT.some(w => w.exercise === ex);
+    row.innerHTML = `<span class="mb-ex-name">${escapeHtml(ex)}</span>
+      <button class="mm-ex-add-btn${inWorkout ? ' added' : ''}"
+        title="${inWorkout ? 'Added' : 'Add to workout'}"
+        aria-label="${inWorkout ? 'Added' : 'Add to workout'}"
+        data-exercise="${encodeURIComponent(ex)}" data-muscle="${muscleId}">
+        ${inWorkout ? '' : '+'}
+      </button>`;
+    exList.appendChild(row);
+  });
+  exList.addEventListener('click', function(e) {
+    const btn = e.target.closest('.mm-ex-add-btn');
+    if (!btn || btn.classList.contains('added')) return;
+    const exercise = decodeURIComponent(btn.dataset.exercise);
+    const mid = btn.dataset.muscle;
+    addExerciseToWorkout(exercise, mid);
+    btn.classList.add('added');
+    btn.title = 'Added';
+    btn.textContent = '';
+  });
+  wrap.appendChild(exList);
+
+  // Volume block
+  const volLabel = document.createElement('div');
+  volLabel.className = 'mb-section-label';
+  volLabel.style.marginTop = 'var(--space-xl)';
+  volLabel.textContent = 'Weekly Volume (sets/wk)';
+  wrap.appendChild(volLabel);
+
+  const volRow = document.createElement('div');
+  volRow.className = 'mb-vol-row';
+  volRow.innerHTML = [
+    { label: 'MEV', val: d.volMin },
+    { label: 'Optimal', val: d.volOpt },
+    { label: 'MRV', val: d.volMax },
+  ].map(v => `<div class="mb-vol-stat">
+    <span class="mb-vol-val">${v.val}</span>
+    <span class="mb-vol-label">${v.label}</span>
+  </div>`).join('');
+  wrap.appendChild(volRow);
+
+  // Recovery + note
+  const recLabel = document.createElement('div');
+  recLabel.className = 'mb-note';
+  recLabel.innerHTML = `<strong>Recovery:</strong> ${escapeHtml(d.recovery)}<br><em>${escapeHtml(d.note)}</em>`;
+  wrap.appendChild(recLabel);
+
+  // Plan CTA
+  const planBtn = document.createElement('button');
+  planBtn.className = 'mb-plan-cta';
+  planBtn.textContent = `Build a Program \u2192`;
+  planBtn.onclick = () => switchToView('calculator');
+  wrap.appendChild(planBtn);
+
+  col.appendChild(wrap);
+}
+
+function scrollToMuscleBrowser() {
+  document.getElementById('muscleBrowser')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // Volume landmarks (MEV/MAV/MRV) from Dr. Mike Israetel / Renaissance Periodization.
 // Supported by: Schoenfeld BJ et al. "Evidence-based guidelines for resistance training volume." Strength Cond J, 2017.
 // Schoenfeld et al. "Dose-response: weekly volume and muscle hypertrophy." J Sports Sci, 2017 (PMID 27433992).
@@ -13657,7 +13454,7 @@ const MUSCLE_DATA = {
   chest: {
     name: 'Chest — Pectoralis Major',
     func: 'Horizontal shoulder adduction and internal rotation. The prime mover in all horizontal pressing movements.',
-    exercises: ['Barbell Bench Press', 'Incline Dumbbell Press', 'Cable Crossover', 'Weighted Dips', 'Pec Deck Machine'],
+    exercises: ['Barbell Bench Press', 'Incline Barbell Press', 'Incline Dumbbell Press', 'Flat Dumbbell Press', 'Cable Fly (mid)', 'Low-to-High Cable Fly', 'High-to-Low Cable Fly', 'Weighted Dips', 'Pec Deck Machine', 'Machine Chest Press', 'DB Squeeze Press', 'Push-Up Variations'],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
     note: 'The upper chest (clavicular head) responds best to 30–45° incline angles. Control the eccentric — studies show it produces more hypertrophy stimulus than the concentric (Schoenfeld 2012).'
@@ -13665,7 +13462,7 @@ const MUSCLE_DATA = {
   'front-delt': {
     name: 'Front Deltoid — Anterior',
     func: 'Shoulder flexion and internal rotation. Heavily stimulated by all horizontal and vertical pressing.',
-    exercises: ['Overhead Press', 'Landmine Press', 'Arnold Press', 'Cable Front Raise', 'Incline Bench Press'],
+    exercises: ['Barbell Overhead Press', 'Dumbbell Overhead Press', 'Arnold Press', 'Seated DB Press', 'Landmine Press', 'Cable Front Raise', 'Plate Front Raise', 'Smith Machine OHP'],
     volMin: 0, volOpt: 8, volMax: 14,
     recovery: '48 hours',
     note: 'Front delts receive substantial indirect volume from every pressing movement. Isolated front raises are rarely necessary and often contribute to shoulder imbalances. Prioritize overhead pressing instead.'
@@ -13673,7 +13470,7 @@ const MUSCLE_DATA = {
   biceps: {
     name: 'Biceps Brachii',
     func: 'Elbow flexion and forearm supination. The short and long heads are both maximally loaded in different parts of the ROM.',
-    exercises: ['Barbell Curl', 'Incline Dumbbell Curl', 'Spider Curl', 'Cable Curl', 'Chin-Up'],
+    exercises: ['Barbell Curl', 'Incline Dumbbell Curl', 'Spider Curl', 'Cable Curl', 'Chin-Up', 'Preacher Curl', 'Concentration Curl', 'Hammer Curl'],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
     note: 'Full stretch at the bottom of every rep is critical for hypertrophy (Pedrosa et al. 2022). Incline and spider curls force the long head into a lengthened position and maximize the stretch-mediated growth stimulus.'
@@ -13681,7 +13478,7 @@ const MUSCLE_DATA = {
   forearms: {
     name: 'Forearms — Wrist Flexors & Extensors',
     func: 'Wrist flexion, extension, and grip strength. Essential stabilizers in all pulling, rowing, and carrying movements.',
-    exercises: ['Wrist Curls', 'Reverse Curls', 'Hammer Curls', 'Farmer Carries', 'Dead Hangs'],
+    exercises: ['Wrist Curls', 'Reverse Curls', 'Hammer Curls', 'Farmer Carries', 'Dead Hangs', 'Zottman Curl', 'Plate Pinch', 'Towel Pull-Up'],
     volMin: 4, volOpt: 8, volMax: 12,
     recovery: '24 hours',
     note: 'Forearms recover rapidly and tolerate high frequency. Heavy pulling work (rows, deadlifts, pull-ups) provides significant indirect volume — assess direct training need based on grip strength demands.'
@@ -13689,7 +13486,7 @@ const MUSCLE_DATA = {
   abs: {
     name: 'Abs & Core — Rectus Abdominis',
     func: 'Spinal flexion, rotation, and core stabilization. Creates intra-abdominal pressure (IAP) during heavy compound lifts.',
-    exercises: ['Cable Crunch', 'Hanging Leg Raise', 'Ab Wheel Rollout', 'Decline Crunch', 'Dragon Flag'],
+    exercises: ['Cable Crunch', 'Hanging Leg Raise', 'Ab Wheel Rollout', 'Decline Crunch', 'Dragon Flag', 'Rope Crunch', 'Weighted Crunch', 'Plank Variations'],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '24–48 hours',
     note: 'Visible abs are primarily a function of body fat percentage, not training volume. Train the core for functional strength, spinal stability, and IAP — not purely aesthetics. Heavy squats and deadlifts provide substantial core stimulus.'
@@ -13697,7 +13494,7 @@ const MUSCLE_DATA = {
   'hip-flexors': {
     name: 'Hip Flexors — Iliopsoas',
     func: 'Hip flexion and lumbar spine stabilization. Critical for squat depth, sprint mechanics, and all athletic movement.',
-    exercises: ['Hanging Knee Raise', 'Cable Hip Flexion', 'Deficit Reverse Lunge', 'Dragon Flag', 'L-Sit Hold'],
+    exercises: ['Hanging Knee Raise', 'Cable Hip Flexion', 'Deficit Reverse Lunge', 'Dragon Flag', 'L-Sit Hold', 'Mountain Climbers', 'Hanging Straight Leg Raise'],
     volMin: 0, volOpt: 6, volMax: 12,
     recovery: '24 hours',
     note: 'Hip flexors are often tight from prolonged sitting and weak from underuse. Strengthening + stretching is the correct protocol — not one or the other. Tight hip flexors limit glute activation and anterior pelvic tilt.'
@@ -13705,7 +13502,7 @@ const MUSCLE_DATA = {
   quads: {
     name: 'Quadriceps',
     func: 'Knee extension and hip flexion (rectus femoris). The primary driver of squatting, lunging, and all knee-dominant movements.',
-    exercises: ['Back Squat', 'Front Squat', 'Leg Press', 'Hack Squat', 'Bulgarian Split Squat', 'Leg Extension'],
+    exercises: ['Back Squat', 'Front Squat', 'Leg Press', 'Hack Squat', 'Bulgarian Split Squat', 'Leg Extension', 'Goblet Squat', 'Sissy Squat', 'Step-Up', 'Walking Lunge'],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
     note: 'Front squats and heel elevation shift mechanical load onto the quads more effectively than low-bar squatting (Wretenberg 1996). The quads recover slowly from high-volume, heavy training — manage frequency carefully.'
@@ -13713,7 +13510,7 @@ const MUSCLE_DATA = {
   tibialis: {
     name: 'Tibialis Anterior',
     func: 'Ankle dorsiflexion. A critical but routinely neglected muscle for knee health, shin splint prevention, and squat depth.',
-    exercises: ['Tibialis Raise', 'Toe Taps Against Resistance', 'Resistance Band Dorsiflexion', 'Walking on Heels'],
+    exercises: ['Tibialis Raise', 'Toe Taps Against Resistance', 'Resistance Band Dorsiflexion', 'Walking on Heels', 'Banded Dorsiflexion Hold', 'Ankle Circle Drill'],
     volMin: 0, volOpt: 6, volMax: 12,
     recovery: '24 hours',
     note: 'Strengthening the tibialis anterior dramatically reduces anterior compartment syndrome and shin splints. It also directly improves ankle dorsiflexion range of motion, increasing squat depth without heel elevation.'
@@ -13721,7 +13518,7 @@ const MUSCLE_DATA = {
   traps: {
     name: 'Trapezius — Upper, Mid & Lower',
     func: 'Scapular elevation (upper), retraction (mid), and depression (lower). Coordinates all shoulder blade movement.',
-    exercises: ['Barbell Shrug', 'Rack Pull', 'Face Pull', 'Farmer Carries', 'Y-T-W Raises'],
+    exercises: ['Barbell Shrug', 'Rack Pull', 'Face Pull', 'Farmer Carries', 'Y-T-W Raises', 'Cable Shrug', 'Dumbbell Shrug', 'Overhead Carry'],
     volMin: 0, volOpt: 12, volMax: 20,
     recovery: '48 hours',
     note: 'Upper traps are easily overtrained by shrugs while lower traps are severely neglected in most programs. Weak lower traps = elevated scapulae, impingement, and poor posture. Prioritize lower and mid-trap work for shoulder health.'
@@ -13729,7 +13526,7 @@ const MUSCLE_DATA = {
   'rear-delt': {
     name: 'Rear Deltoid — Posterior',
     func: 'Shoulder horizontal abduction and external rotation. Balances the anterior deltoid and stabilizes the rotator cuff.',
-    exercises: ['Face Pull', 'Rear Delt Fly', 'Band Pull-Apart', 'Reverse Pec Deck', 'Cable Rear Row'],
+    exercises: ['Face Pull', 'Rear Delt Fly', 'Band Pull-Apart', 'Reverse Pec Deck', 'Cable Rear Row', 'Bent-Over Rear Delt Fly', 'Prone Y-Raise', 'Cable Face Pull'],
     volMin: 0, volOpt: 14, volMax: 22,
     recovery: '24–48 hours',
     note: 'Chronic rear delt weakness is near-universal in people who press regularly. Weak rear delts lead to shoulder internal rotation, impingement, and stalled bench. 2:1 pulling-to-pressing ratio is a common recommendation.'
@@ -13737,7 +13534,7 @@ const MUSCLE_DATA = {
   lats: {
     name: 'Latissimus Dorsi',
     func: 'Shoulder extension and adduction. The broadest muscle in the body — the primary muscle responsible for the V-taper.',
-    exercises: ['Weighted Pull-Up', 'Lat Pulldown', 'Seated Cable Row', 'Single-Arm DB Row', 'Straight-Arm Pulldown'],
+    exercises: ['Weighted Pull-Up', 'Lat Pulldown', 'Seated Cable Row', 'Single-Arm DB Row', 'Straight-Arm Pulldown', 'Meadows Row', 'Chest-Supported DB Row', 'T-Bar Row', 'Cable Pullover', 'Underhand Barbell Row'],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
     note: 'Full stretch overhead (lengthened position) drives the majority of hypertrophy stimulus. Avoid cutting ROM short at the top of pull-ups or pulldowns. Stretching through the full range is critical (Pedrosa et al. 2022).'
@@ -13745,7 +13542,7 @@ const MUSCLE_DATA = {
   rhomboids: {
     name: 'Rhomboids — Major & Minor',
     func: 'Scapular retraction and downward rotation. Essential for posture, shoulder health, and setting the shoulder blades before pressing.',
-    exercises: ['Barbell Row', 'Chest-Supported Row', 'Seated Cable Row (flared elbows)', 'Band Pull-Apart', 'Face Pull'],
+    exercises: ['Barbell Row', 'Chest-Supported Row', 'Seated Cable Row (flared elbows)', 'Band Pull-Apart', 'Face Pull', 'Dumbbell Row (elbows out)', 'Resistance Band Row', 'Prone Y-T-W'],
     volMin: 0, volOpt: 12, volMax: 20,
     recovery: '48 hours',
     note: 'Active scapular retraction at the end of every rowing movement approximately doubles rhomboid EMG compared to passive retraction. Consciously pinch the shoulder blades on every rep.'
@@ -13753,7 +13550,7 @@ const MUSCLE_DATA = {
   'lower-back': {
     name: 'Lower Back — Spinal Erectors',
     func: 'Spinal extension and stabilization. Works isometrically during deadlifts, squats, rows, and almost every loaded compound movement.',
-    exercises: ['Deadlift', 'Romanian Deadlift', 'Back Extension', 'Good Morning', 'Reverse Hyper'],
+    exercises: ['Deadlift', 'Romanian Deadlift', 'Back Extension', 'Good Morning', 'Reverse Hyper', 'Hyperextension', 'Kettlebell Swing'],
     volMin: 0, volOpt: 8, volMax: 14,
     recovery: '72+ hours',
     note: 'The erectors recover very slowly. They are a systemic fatigue limiter, not just a local one. Never train them when sore before heavy deadlifts or squats — this is how lower back injuries occur. Prioritize recovery over volume.'
@@ -13761,7 +13558,7 @@ const MUSCLE_DATA = {
   triceps: {
     name: 'Triceps Brachii — All Three Heads',
     func: 'Elbow extension. Comprises approximately two-thirds of upper arm total mass. The long head also assists shoulder extension.',
-    exercises: ['Close-Grip Bench Press', 'Overhead Tricep Extension', 'Cable Pushdown', 'Skull Crusher', 'Weighted Dips'],
+    exercises: ['Close-Grip Bench Press', 'Overhead Tricep Extension', 'Cable Pushdown', 'Skull Crusher', 'Weighted Dips', 'JM Press', 'Incline Overhead Extension', 'Diamond Push-Up'],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
     note: 'The long head (the largest, most visible head) is only fully stretched when the arm is raised overhead. Overhead tricep extensions are therefore superior to pushdowns for long-head hypertrophy. Do not neglect them.'
@@ -13769,7 +13566,7 @@ const MUSCLE_DATA = {
   glutes: {
     name: 'Gluteus Maximus',
     func: 'Hip extension and external rotation. The most powerful muscle in the human body. Critical for sprinting, jumping, and athletic output.',
-    exercises: ['Hip Thrust', 'Romanian Deadlift', 'Bulgarian Split Squat', 'Cable Pull-Through', 'Step-Up'],
+    exercises: ['Barbell Hip Thrust', 'Romanian Deadlift', 'Bulgarian Split Squat', 'Cable Pull-Through', 'Step-Up', 'Single-Leg Hip Thrust', 'Sumo Deadlift', 'Glute Bridge', 'Abductor Machine', 'Cable Kickback'],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48–72 hours',
     note: 'Hip thrusts produce 3–4× higher glute EMG activation than squats (Contreras et al. 2015). Full hip extension at the top of each rep is non-negotiable. Squats are primarily quad exercises — do not rely on them alone for glute development.'
@@ -13777,7 +13574,7 @@ const MUSCLE_DATA = {
   hamstrings: {
     name: 'Hamstrings — Biceps Femoris & Semimembranosus',
     func: 'Knee flexion AND hip extension. A two-joint muscle that must be trained in both functions for complete development and injury prevention.',
-    exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Hamstring Curl', 'Good Morning', 'Glute-Ham Raise'],
+    exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Hamstring Curl', 'Good Morning', 'Glute-Ham Raise', 'Stiff-Leg Deadlift', 'Lying Leg Curl', 'Seated Leg Curl', 'Single-Leg RDL', 'Swiss Ball Leg Curl'],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48–72 hours',
     note: 'Hip-hinge movements (RDLs, good mornings) target the proximal hamstring attachment. Leg curls target the distal attachment. Both are required for complete development. The Nordic curl produces the greatest eccentric overload and is highly effective for injury prevention.'
@@ -13785,7 +13582,7 @@ const MUSCLE_DATA = {
   calves: {
     name: 'Calves — Gastrocnemius & Soleus',
     func: 'Plantarflexion. Gastrocnemius (two-joint, runs over knee) peaks with straight knee; soleus (single-joint) peaks with bent knee.',
-    exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise', 'Jump Rope'],
+    exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise', 'Jump Rope', 'Leg Press Calf Raise', 'Smith Machine Calf Raise', 'Calf Press on Leg Press'],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '24–48 hours',
     note: 'Calves are highly fatigue-resistant (Type I fiber dominant) and require high volume, full ROM, and controlled tempo. Complete stretch at the bottom and peak contraction at the top on every rep. Both standing and seated raises are needed to target both muscles.'
@@ -13793,7 +13590,7 @@ const MUSCLE_DATA = {
   neck: {
     name: 'Neck — Sternocleidomastoid & Upper Traps',
     func: 'Head flexion, rotation, and lateral flexion. Often undertrained. Critical for appearance in athletes and for injury prevention in contact sports.',
-    exercises: ['Neck Curl (Harness)', 'Neck Extension (Harness)', 'Lateral Neck Flexion', 'Shrug', "Farmer's Carry"],
+    exercises: ['Neck Curl (Harness)', 'Neck Extension (Harness)', 'Lateral Neck Flexion', 'Shrug', "Farmer's Carry", 'Chin Tuck', 'Manual Resistance Neck Flex'],
     volMin: 6, volOpt: 9, volMax: 14,
     recovery: '48 hours',
     note: 'Begin with bodyweight isometrics — lying neck curl/extension — before adding resistance. The SCM is the most visible neck muscle and responds well to direct work. Highly relevant for combat sports, rugby, and football athletes. Most gym-goers neglect this entirely.'
@@ -13801,7 +13598,7 @@ const MUSCLE_DATA = {
   serratus: {
     name: 'Serratus Anterior',
     func: 'Scapular protraction, upward rotation, and stabilization against the ribcage. Critical for shoulder health and overhead pressing mechanics.',
-    exercises: ['Ab Wheel Rollout', 'Serratus Punch', 'Push-Up Plus', 'Cable Serratus Crunch', 'Overhead Press'],
+    exercises: ['Ab Wheel Rollout', 'Serratus Punch', 'Push-Up Plus', 'Cable Serratus Crunch', 'Overhead Press', 'Bear Crawl', 'Wall Slide'],
     volMin: 8, volOpt: 12, volMax: 16,
     recovery: '48 hours',
     note: 'Serratus weakness causes scapular winging, leading to impingement, rotator cuff tears, and shoulder dysfunction. Ab wheel rollouts load it heavily under stretch. Visible in lean athletes as the "fingers" along the ribs — a signature of elite conditioning. (Kibler et al., 2013)'
@@ -13809,7 +13606,7 @@ const MUSCLE_DATA = {
   obliques: {
     name: 'Obliques — External & Internal',
     func: 'Trunk rotation, lateral flexion, and anti-rotation stability. Transmit force between upper and lower body in all compound movements.',
-    exercises: ['Pallof Press', 'Cable Woodchop', 'Side Plank', 'Hanging Oblique Raise', 'Landmine Rotation'],
+    exercises: ['Pallof Press', 'Cable Woodchop', 'Side Plank', 'Hanging Oblique Raise', 'Landmine Rotation', 'Russian Twist', 'Windmill'],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48 hours',
     note: 'Obliques function primarily as anti-rotation muscles — they resist movement rather than create it. Pallof press and side plank train this function directly. Avoid heavy weighted side bends: they can widen the waist by adding mass to the obliques, which is unfavorable for most physique goals.'
@@ -13817,7 +13614,7 @@ const MUSCLE_DATA = {
   adductors: {
     name: 'Hip Adductors — Groin Complex',
     func: 'Hip adduction (pulling the leg inward) and hip flexion assistance. Critical for squat depth, athletic performance, and groin injury prevention.',
-    exercises: ['Copenhagen Plank', 'Sumo Squat', 'Cable Hip Adduction', 'Wide-Stance Leg Press', 'Groin Machine'],
+    exercises: ['Copenhagen Plank', 'Sumo Squat', 'Cable Hip Adduction', 'Wide-Stance Leg Press', 'Groin Machine', 'Side-Lying Leg Raise', 'Lateral Lunge'],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
     note: 'The Copenhagen plank is the gold standard for adductor strengthening and injury prevention — clinically proven to reduce groin strains in soccer players (Harøy et al., 2019). Adductors contribute significantly to squat strength, especially at the bottom position. Most lifters neglect direct adductor work.'
@@ -13825,105 +13622,15 @@ const MUSCLE_DATA = {
   teres: {
     name: 'Teres Major & Rotator Cuff (SITS)',
     func: 'Internal rotation and adduction (teres major). Rotator cuff stabilizes the glenohumeral joint — the single most injury-prone joint in lifting.',
-    exercises: ['Face Pull', 'Band External Rotation', 'Cable External Rotation', 'Prone Dumbbell Row', 'Chest-Supported Row'],
+    exercises: ['Face Pull', 'Band External Rotation', 'Cable External Rotation', 'Prone Dumbbell Row', 'Chest-Supported Row', 'Band Internal Rotation', 'Dumbbell External Rotation'],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
     note: 'Face pulls should be in every serious lifter\'s program — forever. The rotator cuff (supraspinatus, infraspinatus, teres minor, subscapularis) stabilizes the shoulder during all pressing movements. Neglecting it causes the majority of chronic shoulder injuries. Low load, high frequency works best. (Reinold et al., 2009)'
   }
 };
 
-let mmCurrentView = 'front';
-
-function toggleMuscleView(side) {
-  mmCurrentView = side;
-  document.getElementById('mm-svg-front').style.display = side === 'front' ? 'block' : 'none';
-  document.getElementById('mm-svg-back').style.display = side === 'back' ? 'block' : 'none';
-  document.getElementById('mm-btn-front').className = 'btn btn-sm ' + (side === 'front' ? 'btn-primary' : 'btn-secondary');
-  document.getElementById('mm-btn-back').className = 'btn btn-sm ' + (side === 'back' ? 'btn-primary' : 'btn-secondary');
-  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
-  document.getElementById('mm-content').classList.remove('visible');
-  document.getElementById('mm-prompt').style.display = 'flex';
-}
-
-function selectMuscle(muscleId) {
-  const d = MUSCLE_DATA[muscleId];
-  if (!d) return;
-  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
-  document.querySelectorAll(`.muscle-region[data-muscle="${muscleId}"]`).forEach(el => el.classList.add('mm-active'));
-  document.getElementById('mm-name').textContent = d.name;
-  document.getElementById('mm-func').textContent = d.func;
-
-  // Build exercise list with Add-to-Workout buttons
-  document.getElementById('mm-exercises').innerHTML = d.exercises.map(e => {
-    const inWorkout = WORKOUT.some(w => w.exercise === e);
-    return `<li class="mm-ex-item" data-exercise="${encodeURIComponent(e)}" data-muscle="${muscleId}">
-      <span class="mm-ex-item-name">${escapeHtml(e)}</span>
-      <button class="mm-ex-add-btn${inWorkout ? ' added' : ''}"
-        title="${inWorkout ? 'Added' : 'Add to workout'}"
-        aria-label="${inWorkout ? 'Added' : 'Add to workout'}">
-        ${inWorkout ? '' : '+'}
-      </button>
-    </li>`;
-  }).join('');
-
-  // Event delegation for add buttons
-  document.getElementById('mm-exercises').onclick = function(e) {
-    const btn = e.target.closest('.mm-ex-add-btn');
-    if (!btn || btn.classList.contains('added')) return;
-    const li = btn.closest('.mm-ex-item');
-    const exercise = decodeURIComponent(li.dataset.exercise);
-    const mid = li.dataset.muscle;
-    addExerciseToWorkout(exercise, mid);
-    btn.classList.add('added');
-    btn.title = 'Added';
-    btn.textContent = '';
-  };
-
-  const maxVol = 28;
-  document.getElementById('mm-vol-fill').style.width = (d.volMax / maxVol * 100) + '%';
-  document.getElementById('mm-vol-nums').innerHTML =
-    `<span>MEV ${d.volMin} sets</span><span>Optimal ${d.volOpt} sets</span><span>MRV ${d.volMax} sets</span>`;
-  document.getElementById('mm-recovery').innerHTML = `<strong>Recovery:</strong> ${d.recovery}`;
-  document.getElementById('mm-note').textContent = d.note;
-  document.getElementById('mm-prompt').style.display = 'none';
-  document.getElementById('mm-content').classList.add('visible');
-
-  // Open the slide-in panel
-  const panel = document.getElementById('trainPanel');
-  if (panel) panel.classList.add('open');
-
-  // Update workout sheet label
-  const lbl = document.getElementById('trainWorkoutLabel');
-  if (lbl) lbl.textContent = WORKOUT.length
-    ? `${WORKOUT.length} exercise${WORKOUT.length > 1 ? 's' : ''} — tap ▲ to edit`
-    : `Viewing: ${d.name.split('—')[0].trim()}`;
-}
-
-function closeTrainPanel() {
-  const panel = document.getElementById('trainPanel');
-  if (panel) panel.classList.remove('open');
-  document.querySelectorAll('.muscle-region.mm-active').forEach(el => el.classList.remove('mm-active'));
-  document.getElementById('mm-content').classList.remove('visible');
-  document.getElementById('mm-prompt').style.display = 'flex';
-  const lbl = document.getElementById('trainWorkoutLabel');
-  if (lbl) lbl.textContent = 'Click any muscle to explore exercises, volume targets, and recovery data';
-}
-
-function filterMuscleSvg(query) {
-  const q = query.trim().toLowerCase();
-  if (!q) {
-    document.querySelectorAll('.muscle-region').forEach(el => { el.style.opacity = ''; el.style.fill = ''; });
-    return;
-  }
-  document.querySelectorAll('.muscle-region').forEach(el => {
-    const id = (el.dataset.muscle || '').replace(/-/g, ' ');
-    const d = MUSCLE_DATA[el.dataset.muscle];
-    const name = d ? d.name.toLowerCase() : '';
-    const match = id.includes(q) || name.includes(q);
-    el.style.opacity = match ? '1' : '0.12';
-    el.style.fill = match ? 'var(--blood)' : '';
-  });
-}
+// selectMuscle() alias for backward compat — delegates to browser
+function selectMuscle(muscleId) { selectMBMuscle(muscleId); }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // WORKOUT BUILDER
@@ -14556,16 +14263,6 @@ function renderAchievements() {
   if (statsEl) statsEl.textContent = `${unlocked.length} / ${ACHIEVEMENTS.length}`;
 }
 
-function initTrainPanelSwipe() {
-  const panel = document.getElementById('trainPanel');
-  if (!panel) return;
-  let touchStartX = 0;
-  panel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  panel.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (dx > 55) closeTrainPanel(); // swipe right → close
-  }, { passive: true });
-}
   </script>
 </body>
 </html>
