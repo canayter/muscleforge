@@ -4498,8 +4498,8 @@ select.field-input option {
 /* ── Logo Emoji ── */
 .logo-emoji { font-size: 1.75rem; line-height: 1; }
 .logo-textblock { display: flex; flex-direction: column; }
-.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .08em; color: var(--chalk); line-height: 1; }
-.logo-tagline { font-family: 'Teko', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--blood); }
+.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: var(--chalk); line-height: 1; }
+.logo-tagline { font-family: 'Teko', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .12em; color: var(--blood); }
 
 /* ── Hero ── */
 .mf-hero {
@@ -8497,6 +8497,7 @@ function switchToView(view, toolCategory = null) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(view).classList.add('active');
 
+  if (view === 'home') renderMBGroups();
   if (view === 'foods') loadFoods();
   if (view === 'knowledge') loadKnowledge();
   if (view === 'tools') {
@@ -8519,6 +8520,9 @@ document.querySelectorAll('.nav-link').forEach(btn => {
     switchToView(btn.dataset.view);
   });
 });
+
+// Initialize exercise browser (home view is active on load)
+renderMBGroups();
 
 // ── Tool directory chips: scroll to specific tool after switching view ────────
 document.querySelectorAll('.home-dir-chip').forEach(chip => {
@@ -9733,9 +9737,6 @@ function loadTools() {
   initWorkoutLogger();
   initWaterTracker();
   initCheckin();
-
-  // Exercise browser
-  renderMBGroups();
 
   // Phase 4 — achievements
   renderAchievements();
