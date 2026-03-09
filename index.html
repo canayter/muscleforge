@@ -4796,6 +4796,25 @@ select.field-input option {
   .mb-columns { grid-template-columns: 160px 200px 1fr; }
 }
 
+/* ── Exercise Atlas ── */
+.ex-filter-row { display:flex; gap:var(--space-md); margin:var(--space-lg) 0 var(--space-md); flex-wrap:wrap; }
+.ex-group-chips { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:var(--space-md); }
+.ex-count { font-size:0.75rem; color:var(--chalk-tertiary); text-transform:uppercase; letter-spacing:.1em; margin-bottom:var(--space-md); font-family:'Teko',sans-serif; }
+.exercises-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1px; background:var(--iron-border); border:1px solid var(--iron-border); border-radius:var(--radius-md); overflow:hidden; margin-bottom:var(--space-3xl); }
+.ex-card { background:var(--iron-surface); padding:var(--space-md) var(--space-lg); cursor:pointer; position:relative; transition:background var(--duration-fast); display:flex; flex-direction:column; gap:4px; }
+.ex-card:hover { background:var(--iron-hover); }
+.ex-card-group { font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.1em; font-size:0.65rem; color:var(--blood); margin-bottom:2px; }
+.ex-card-name { font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:600; color:var(--chalk); line-height:1.2; padding-right:28px; }
+.ex-card-muscle { font-size:0.75rem; color:var(--chalk-secondary); }
+.ex-card-secondary { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
+.ex-sec-tag { font-size:0.65rem; padding:1px 5px; border-radius:3px; font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.06em; }
+.ex-sec-tag.ex-sec-h { background:rgba(212,160,23,0.15); color:var(--blood); }
+.ex-sec-tag.ex-sec-m { background:rgba(255,255,255,0.07); color:var(--chalk-secondary); }
+.ex-sec-tag.ex-sec-l { background:rgba(255,255,255,0.04); color:var(--chalk-tertiary); }
+.ex-card-add { position:absolute; top:var(--space-md); right:var(--space-md); width:22px; height:22px; border-radius:50%; border:1px solid var(--iron-border); background:none; color:var(--chalk-tertiary); font-size:0.9rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all var(--duration-fast); }
+.ex-card-add:hover { border-color:var(--blood); color:var(--blood); background:var(--blood-dim); }
+.ex-empty { grid-column:1/-1; padding:var(--space-3xl); text-align:center; color:var(--chalk-tertiary); font-size:0.875rem; }
+
   </style>
 </head>
 
@@ -4818,8 +4837,9 @@ select.field-input option {
         </div>
 
         <nav class="nav-primary" aria-label="Primary navigation">
-          <button class="nav-link active" data-view="home" aria-current="page">Train</button>
-          <button class="nav-link" data-view="calculator">Plan</button>
+          <button class="nav-link active" data-view="home" aria-current="page">Home</button>
+          <button class="nav-link" data-view="calculator">Plans</button>
+          <button class="nav-link" data-view="exercises">Exercises</button>
           <button class="nav-link" data-view="foods">Foods</button>
           <button class="nav-link" data-view="tools">Tools</button>
           <button class="nav-link" data-view="knowledge">Knowledge</button>
@@ -4835,8 +4855,9 @@ select.field-input option {
 
   <!-- Mobile nav -->
   <nav class="nav-mobile" aria-label="Mobile navigation">
-    <button class="nav-link active" data-view="home" aria-current="page">Train</button>
-    <button class="nav-link" data-view="calculator">Plan</button>
+    <button class="nav-link active" data-view="home" aria-current="page">Home</button>
+    <button class="nav-link" data-view="calculator">Plans</button>
+    <button class="nav-link" data-view="exercises">Exrcs</button>
     <button class="nav-link" data-view="foods">Foods</button>
     <button class="nav-link" data-view="tools">Tools</button>
     <button class="nav-link" data-view="knowledge">Know</button>
@@ -4940,7 +4961,7 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','body')">Body Composition →</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip new" onclick="switchToView('home'); setTimeout(() => scrollToMuscleBrowser(), 100)">Exercise Browser ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('exercises')">Exercise Atlas ✦</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">FFMI Calculator</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">Navy Body Fat</span>
                 <span class="home-dir-chip" onclick="switchToView('tools','body')">Genetic Potential</span>
@@ -5493,6 +5514,31 @@ select.field-input option {
 
         </div>
       </section>
+    </div>
+
+    <!-- EXERCISES ATLAS VIEW -->
+    <div id="exercises" class="view">
+      <div class="container">
+        <div class="section-header" style="padding-top:var(--space-2xl)">
+          <div class="section-eyebrow">Reference Library</div>
+          <h2 class="section-title">Exercise Atlas</h2>
+          <p class="section-sub">Complete exercise encyclopedia organized by muscle group. Search, filter, and add to your workout.</p>
+        </div>
+        <div class="ex-filter-row">
+          <input id="exSearch" class="field-input" type="search" placeholder="Search exercises…" oninput="filterExercises()">
+          <select id="exSort" class="field-input" style="width:auto;min-width:160px" onchange="filterExercises()">
+            <option value="">Sort: Default</option>
+            <option value="name">Name A → Z</option>
+            <option value="muscle">By Muscle</option>
+            <option value="group">By Group</option>
+          </select>
+        </div>
+        <div id="exGroupFilter" class="ex-group-chips">
+          <button class="chip active" data-group="" onclick="selectExGroup(this)">All</button>
+        </div>
+        <div id="exCount" class="ex-count"></div>
+        <div id="exercisesGrid" class="exercises-grid"></div>
+      </div>
     </div>
 
     <!-- MEALS VIEW -->
@@ -6484,22 +6530,22 @@ select.field-input option {
           <!-- Body Composition Tools -->
           <div id="tools-body" class="tools-category active">
 
-            <!-- Exercise Browser — redirect to Home -->
-            <div class="card tool-card" style="cursor:pointer;" onclick="switchToView('home'); setTimeout(() => scrollToMuscleBrowser(), 100)">
+            <!-- Exercise Atlas — redirect to Exercises view -->
+            <div class="card tool-card" style="cursor:pointer;" onclick="switchToView('exercises')">
               <div class="card-header">
                 <div>
-                  <h2 class="card-title">Exercise Browser</h2>
-                  <p class="card-subtitle">Browse 185+ exercises organized by muscle group with volume targets and recovery data</p>
+                  <h2 class="card-title">Exercise Atlas</h2>
+                  <p class="card-subtitle">Complete encyclopedia of 185+ exercises organized by muscle group with activation data, anatomy, and volume targets</p>
                 </div>
                 <span class="tool-badge">Israetel · Schoenfeld 2017</span>
               </div>
               <div class="card-body" style="display:flex;align-items:center;justify-content:center;gap:16px;padding:32px;background:var(--iron-mid);border-radius:var(--radius-md);flex-direction:column;">
                 <div style="font-size:3rem;opacity:.6;">💪</div>
                 <div style="text-align:center;">
-                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--chalk);letter-spacing:.04em;">Open Exercise Browser</div>
-                  <div style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:4px;">3-column drill-down: Group → Muscle → Exercises. Add to your workout session directly from the browser.</div>
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--chalk);letter-spacing:.04em;">Open Exercise Atlas</div>
+                  <div style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:4px;">Search, filter by muscle group, and add exercises to your workout. Full anatomy and activation data for every exercise.</div>
                 </div>
-                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();switchToView('home');setTimeout(()=>scrollToMuscleBrowser(),100)">Browse Exercises →</button>
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();switchToView('exercises')">Browse Exercises →</button>
               </div>
             </div>
 
@@ -8694,6 +8740,21 @@ Squat	225	5	2025-03-15"></textarea>
   </main>
 
   <!-- FOOD DETAIL MODAL -->
+  <!-- Exercise Atlas Modal -->
+  <div id="exAtlasModal" class="modal-backdrop" style="display:none" onclick="if(event.target===this)closeExAtlasModal()">
+    <div class="modal" style="max-width:600px;width:calc(100% - 32px);overflow-y:auto;max-height:90vh">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="exAtlasTitle" style="font-size:1rem;text-transform:none;letter-spacing:0;font-family:'Space Grotesk',sans-serif"></h3>
+          <p id="exAtlasSub" style="color:var(--chalk-secondary);font-size:0.875rem;margin-top:2px"></p>
+        </div>
+        <button class="modal-close" onclick="closeExAtlasModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="exAtlasBody"></div>
+      <div id="exAtlasFooter" style="padding:var(--space-md) var(--space-lg);border-top:1px solid var(--iron-border);display:flex;gap:var(--space-sm)"></div>
+    </div>
+  </div>
+
   <div id="foodDetailModal" class="modal-backdrop" onclick="if(event.target===this)closeFoodModal()">
     <div class="modal" style="max-width:560px;width:calc(100% - 32px)">
       <div class="modal-header">
@@ -8892,6 +8953,7 @@ function switchToView(view, toolCategory = null) {
   document.getElementById(view).classList.add('active');
 
   if (view === 'home') renderMBGroups();
+  if (view === 'exercises') loadExercises();
   if (view === 'foods') loadFoods();
   if (view === 'knowledge') loadKnowledge();
   if (view === 'tools') {
@@ -9961,6 +10023,108 @@ function closeSwap() {
 // ═══════════════════════════════════════════════════════════════════════════
 // FOODS
 // ═══════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
+// EXERCISE ATLAS
+// ═══════════════════════════════════════════════════════════════════════════
+
+let _exIndex = null;
+function getExIndex() {
+  if (_exIndex) return _exIndex;
+  const list = [];
+  for (const [id, m] of Object.entries(MUSCLE_DATA)) {
+    const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(id)) : null;
+    (m.exercises || []).forEach(ex => {
+      list.push({ name: ex.name, secondary: ex.secondary || [], muscleId: id,
+        muscleName: m.name, groupId: group?.id || '', groupLabel: group?.label || '' });
+    });
+  }
+  _exIndex = list;
+  return list;
+}
+
+function loadExercises() {
+  const chipWrap = document.getElementById('exGroupFilter');
+  if (chipWrap && chipWrap.children.length === 1 && typeof MB_GROUPS !== 'undefined') {
+    MB_GROUPS.forEach(g => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.dataset.group = g.id;
+      btn.textContent = g.label;
+      btn.onclick = () => selectExGroup(btn);
+      chipWrap.appendChild(btn);
+    });
+  }
+  filterExercises();
+}
+
+function selectExGroup(btn) {
+  document.querySelectorAll('#exGroupFilter .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  filterExercises();
+}
+
+function filterExercises() {
+  const q = (document.getElementById('exSearch')?.value || '').toLowerCase();
+  const group = document.querySelector('#exGroupFilter .chip.active')?.dataset.group || '';
+  const sort = document.getElementById('exSort')?.value || '';
+  let list = getExIndex();
+  if (q) list = list.filter(e =>
+    e.name.toLowerCase().includes(q) ||
+    e.muscleName.toLowerCase().includes(q) ||
+    e.secondary.some(s => s.m.toLowerCase().includes(q))
+  );
+  if (group) list = list.filter(e => e.groupId === group);
+  if (sort === 'name')   list = [...list].sort((a,b) => a.name.localeCompare(b.name));
+  if (sort === 'muscle') list = [...list].sort((a,b) => a.muscleName.localeCompare(b.muscleName));
+  if (sort === 'group')  list = [...list].sort((a,b) => (a.groupLabel||'').localeCompare(b.groupLabel||''));
+  const countEl = document.getElementById('exCount');
+  if (countEl) countEl.textContent = `${list.length} exercise${list.length === 1 ? '' : 's'}`;
+  renderExercises(list);
+}
+
+function renderExercises(list) {
+  const grid = document.getElementById('exercisesGrid');
+  if (!grid) return;
+  if (!list.length) { grid.innerHTML = '<div class="ex-empty">No exercises match your filters.</div>'; return; }
+  grid.innerHTML = list.map(ex => {
+    const muscleShort = ex.muscleName.includes('—') ? ex.muscleName.split('—')[1].trim() : ex.muscleName.split(' — ')[0].trim();
+    const secTags = ex.secondary.slice(0,3).map(s => `<span class="ex-sec-tag ex-sec-${s.t}">${escapeHtml(s.m)}</span>`).join('');
+    const safeEx = ex.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    return `<div class="ex-card" onclick="openExAtlasModal('${safeEx}','${ex.muscleId}')">
+      ${ex.groupLabel ? `<div class="ex-card-group">${escapeHtml(ex.groupLabel)}</div>` : ''}
+      <div class="ex-card-name">${escapeHtml(ex.name)}</div>
+      <div class="ex-card-muscle">${escapeHtml(muscleShort)}</div>
+      ${secTags ? `<div class="ex-card-secondary">${secTags}</div>` : ''}
+      <button class="ex-card-add" onclick="event.stopPropagation();addExerciseToWorkout('${safeEx}','${ex.muscleId}')" title="Add to workout">+</button>
+    </div>`;
+  }).join('');
+}
+
+function openExAtlasModal(exName, muscleId) {
+  const muscle = MUSCLE_DATA[muscleId];
+  const muscleShort = muscle ? (muscle.name.includes('—') ? muscle.name.split('—')[1].trim() : muscle.name.split(' — ')[0].trim()) : muscleId;
+  const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(muscleId)) : null;
+  document.getElementById('exAtlasTitle').textContent = exName;
+  document.getElementById('exAtlasSub').textContent = [muscleShort, group?.label].filter(Boolean).join(' · ');
+  document.getElementById('exAtlasBody').innerHTML = buildExerciseDetail({ exercise: exName, muscleId });
+  const searchQuery = encodeURIComponent('how to ' + exName + ' proper form technique');
+  const safeEx = exName.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  document.getElementById('exAtlasFooter').innerHTML = `
+    <a href="https://www.youtube.com/results?search_query=${searchQuery}" target="_blank" rel="noopener"
+      class="btn btn-sm" style="flex:1;text-align:center;text-decoration:none">&#x25B6; Watch Demo</a>
+    <button class="btn btn-primary btn-sm" style="flex:1"
+      onclick="addExerciseToWorkout('${safeEx}','${muscleId}');closeExAtlasModal()">
+      + Add to Workout
+    </button>
+    <button class="btn btn-sm" style="flex:0 0 auto" onclick="closeExAtlasModal()">Close</button>`;
+  document.getElementById('exAtlasModal').style.display = 'flex';
+}
+
+function closeExAtlasModal() {
+  const modal = document.getElementById('exAtlasModal');
+  if (modal) modal.style.display = 'none';
+}
+
 function loadFoods() {
   renderFoods(getAllFoods());
 }
@@ -14067,6 +14231,7 @@ function closeExerciseInfoModal() {
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
+    closeExAtlasModal();
     closeExerciseSwapModal();
     closeExerciseInfoModal();
     closeFoodModal();
