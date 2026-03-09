@@ -2311,6 +2311,40 @@ select.field-input option {
 .food-macro.c { color: var(--carbs); }
 .food-macro.f { color: var(--fat); }
 
+/* ── Food card full-profile expand ── */
+.food-card { cursor: pointer; }
+.food-expand-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; margin-top: 10px; padding: 5px 0 0;
+  background: none; border: none; border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--chalk-tertiary); font-family: 'Teko', sans-serif;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: .1em;
+  cursor: pointer; transition: color .15s;
+}
+.food-expand-btn:hover { color: var(--blood); }
+.food-expand-btn .food-expand-chev { transition: transform .2s; }
+.food-expand-btn.open .food-expand-chev { transform: rotate(90deg); color: var(--blood); }
+.food-micro-panel { display: none; margin-top: 10px; }
+.food-micro-panel.open { display: block; }
+.food-micro-section { margin-bottom: 11px; }
+.food-micro-section-label {
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em;
+  font-size: 0.68rem; color: var(--chalk-tertiary); margin-bottom: 5px;
+  padding-bottom: 3px; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.food-micro-row { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+.food-micro-name { flex: 0 0 108px; font-size: 0.75rem; color: var(--chalk-secondary); }
+.food-micro-val { flex: 0 0 56px; text-align: right; font-size: 0.75rem; color: var(--chalk); font-variant-numeric: tabular-nums; }
+.food-micro-bar-wrap { flex: 1; height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.food-micro-bar { height: 100%; border-radius: 2px; background: var(--blood); }
+.food-micro-dv { flex: 0 0 34px; text-align: right; font-size: 0.68rem; color: var(--chalk-tertiary); }
+.food-micro-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.food-micro-tag {
+  font-size: 0.68rem; padding: 2px 7px; border-radius: 20px;
+  background: rgba(255,255,255,0.05); color: var(--chalk-tertiary);
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .06em;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    SCIENCE TAB
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -7106,6 +7140,11 @@ select.field-input option {
               <div class="card-body">
                 <div class="supp-filters">
                   <input type="text" id="supp-search" class="supp-search" placeholder="Search supplements..." oninput="filterSupplements()">
+                  <select id="supp-sort" class="supp-search" style="width:auto;min-width:160px;padding:8px 12px" onchange="filterSupplements()">
+                    <option value="">Sort: Tier</option>
+                    <option value="name_asc">Name A → Z</option>
+                    <option value="cat">By Goal / Category</option>
+                  </select>
                   <button class="tier-chip active" data-tier="all" onclick="filterSupplementsByTier(this)">All</button>
                   <button class="tier-chip" data-tier="A" onclick="filterSupplementsByTier(this)">Tier A — Strong</button>
                   <button class="tier-chip" data-tier="B" onclick="filterSupplementsByTier(this)">Tier B — Moderate</button>
@@ -9809,10 +9848,11 @@ function renderFoods(list) {
   const display = list.slice(0, 120); // show up to 120 when filtered/sorted
   const grid = document.getElementById('foodsGrid');
   if (!grid) return;
-  grid.innerHTML = display.map(f => {
+  grid.innerHTML = display.map((f, i) => {
     const ppg = f.serving?.amount > 0 ? ((f.macros.protein / f.serving.amount) * 100).toFixed(1) : '—';
+    const uid = `fc-${i}-${f.id || i}`;
     return `
-    <div class="food-card">
+    <div class="food-card" id="${uid}">
       <div class="food-name">${escapeHtml(f.name)}</div>
       <div class="food-serving">${escapeHtml(f.serving.description)}</div>
       <div class="food-macros">
@@ -9822,6 +9862,11 @@ function renderFoods(list) {
         <span class="food-macro f">${fmt(f.macros.fat)}F</span>
         ${showProteinPerGram ? `<span class="food-macro p" style="opacity:0.7;font-size:0.7rem">${ppg}g P/100g</span>` : ''}
       </div>
+      <button class="food-expand-btn" id="feb-${uid}" onclick="toggleFoodCard('${uid}', event)" aria-label="Full nutritional profile">
+        <span>Full Profile</span>
+        <span class="food-expand-chev">›</span>
+      </button>
+      <div class="food-micro-panel" id="fmp-${uid}"></div>
     </div>`;
   }).join('');
   if (list.length > 120) {
@@ -9855,6 +9900,96 @@ function filterFoods() {
     }
   }
   renderFoods(list);
+}
+
+function toggleFoodCard(uid, e) {
+  if (e) e.stopPropagation();
+  const panel = document.getElementById(`fmp-${uid}`);
+  const btn   = document.getElementById(`feb-${uid}`);
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  if (btn) btn.classList.toggle('open', isOpen);
+  if (isOpen && !panel.dataset.built) {
+    // find the food object from current rendered list
+    const card = document.getElementById(uid);
+    const foodName = card?.querySelector('.food-name')?.textContent;
+    const food = getAllFoods().find(f => f.name === foodName);
+    if (food) panel.innerHTML = buildFoodMicros(food);
+    panel.dataset.built = '1';
+  }
+}
+
+function buildFoodMicros(f) {
+  const m = f.macros || {};
+  const u = f.micros || {};
+  // %DV reference (FDA 2000-cal basis)
+  const DV = {
+    protein:50, fat:78, carbs:275, fiber:28,
+    sodium:2300, potassium:4700, calcium:1300, iron:18,
+    magnesium:420, zinc:11, phosphorus:1250,
+    vitA:900, vitC:90, vitD:20, vitE:15, vitK:120,
+    vitB6:1.7, vitB12:2.4, folate:400,
+    cholesterol:300, saturatedFat:20
+  };
+  const row = (name, val, unit, dvKey) => {
+    if (val == null || val === undefined) return '';
+    const dv = dvKey ? DV[dvKey] : null;
+    const pct = dv && val > 0 ? Math.round(val / dv * 100) : null;
+    const barW = pct ? Math.min(pct, 100) : 0;
+    const barColor = pct > 100 ? 'var(--rust)' : pct > 50 ? 'var(--blood)' : 'rgba(212,160,23,0.5)';
+    return `<div class="food-micro-row">
+      <div class="food-micro-name">${name}</div>
+      <div class="food-micro-val">${val}${unit}</div>
+      ${dv ? `<div class="food-micro-bar-wrap"><div class="food-micro-bar" style="width:${barW}%;background:${barColor}"></div></div><div class="food-micro-dv">${pct}%</div>` : '<div style="flex:1"></div><div class="food-micro-dv"></div>'}
+    </div>`;
+  };
+  const sec = (label, rows) => rows.filter(Boolean).length
+    ? `<div class="food-micro-section"><div class="food-micro-section-label">${label}</div>${rows.join('')}</div>` : '';
+
+  const diets = f.dietTypes?.map(d => `<span class="food-micro-tag">${d}</span>`).join('') || '';
+  const tags  = f.tags?.map(t => `<span class="food-micro-tag">${t}</span>`).join('') || '';
+  const allergens = f.allergens?.length ? f.allergens.join(', ') : '';
+
+  return [
+    sec('Macronutrients', [
+      row('Protein',        m.protein,    'g',   'protein'),
+      row('Carbohydrates',  m.carbs,      'g',   'carbs'),
+      row('Dietary Fiber',  m.fiber||0,   'g',   'fiber'),
+      row('Sugar',          m.sugar||0,   'g',   null),
+      row('Total Fat',      m.fat,        'g',   'fat'),
+    ]),
+    sec('Minerals', [
+      row('Sodium',         u.sodium,     'mg',  'sodium'),
+      row('Potassium',      u.potassium,  'mg',  'potassium'),
+      row('Calcium',        u.calcium,    'mg',  'calcium'),
+      row('Iron',           u.iron,       'mg',  'iron'),
+      row('Magnesium',      u.magnesium,  'mg',  'magnesium'),
+      row('Zinc',           u.zinc,       'mg',  'zinc'),
+      row('Phosphorus',     u.phosphorus, 'mg',  'phosphorus'),
+    ]),
+    sec('Vitamins', [
+      row('Vitamin A',   u.vitA,   'mcg', 'vitA'),
+      row('Vitamin C',   u.vitC,   'mg',  'vitC'),
+      row('Vitamin D',   u.vitD,   'mcg', 'vitD'),
+      row('Vitamin E',   u.vitE,   'mg',  'vitE'),
+      row('Vitamin K',   u.vitK,   'mcg', 'vitK'),
+      row('Vitamin B6',  u.vitB6,  'mg',  'vitB6'),
+      row('Vitamin B12', u.vitB12, 'mcg', 'vitB12'),
+      row('Folate',      u.folate, 'mcg', 'folate'),
+    ]),
+    sec('Lipid Profile', [
+      row('Cholesterol',    u.cholesterol,  'mg', 'cholesterol'),
+      row('Saturated Fat',  u.saturatedFat, 'g',  'saturatedFat'),
+      u.transFat ? row('Trans Fat', u.transFat, 'g', null) : '',
+      row('Omega-3',        u.omega3,       'g',  null),
+      row('Omega-6',        u.omega6,       'g',  null),
+      f.glycemicIndex ? row('Glycemic Index', f.glycemicIndex, '', null) : '',
+    ]),
+    diets ? `<div class="food-micro-section"><div class="food-micro-section-label">Diet Compatible</div><div class="food-micro-tags">${diets}</div></div>` : '',
+    tags  ? `<div class="food-micro-section"><div class="food-micro-section-label">Tags</div><div class="food-micro-tags">${tags}</div></div>` : '',
+    allergens ? `<div style="font-size:0.7rem;color:var(--chalk-tertiary);margin-top:4px">Allergens: ${escapeHtml(allergens)}</div>` : '',
+    `<div style="font-size:0.68rem;color:var(--chalk-tertiary);margin-top:6px">%DV based on 2,000 cal/day reference intake. Source: USDA FoodData Central.</div>`,
+  ].join('');
 }
 
 function toggleMSP(id) {
@@ -14400,11 +14535,20 @@ function toggleExerciseDetail(idx) {
 }
 
 function buildExerciseDetail(w) {
-  const muscle = MUSCLE_DATA[w.muscleId];
-  const exData = muscle?.exercises?.find(e => e.name === w.exercise);
+  let muscle = MUSCLE_DATA[w.muscleId];
+  let exData = muscle?.exercises?.find(e => e.name === w.exercise);
+  let resolvedMuscleId = w.muscleId;
+
+  // Fallback: search all MUSCLE_DATA when muscleId is missing or exercise not found
+  if ((!muscle || !exData) && MUSCLE_DATA) {
+    for (const [mid, mData] of Object.entries(MUSCLE_DATA)) {
+      const found = mData.exercises?.find(e => e.name === w.exercise);
+      if (found) { muscle = mData; exData = found; resolvedMuscleId = mid; break; }
+    }
+  }
 
   // Find group this muscle belongs to
-  const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(w.muscleId)) : null;
+  const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(resolvedMuscleId)) : null;
   const groupLabel = group?.label || '';
 
   // Video search link
@@ -14674,11 +14818,16 @@ function filterSupplementsByTier(btn) {
 
 function filterSupplements() {
   const query = (document.getElementById('supp-search')?.value || '').toLowerCase();
-  const list = SUPPLEMENT_DATA.filter(s => {
+  const sort  = document.getElementById('supp-sort')?.value || '';
+  const tierOrder = { A: 0, B: 1, C: 2, D: 3 };
+  let list = SUPPLEMENT_DATA.filter(s => {
     const tierOk = suppActiveTier === 'all' || s.tier === suppActiveTier;
-    const textOk = !query || s.name.toLowerCase().includes(query) || s.mech.toLowerCase().includes(query);
+    const textOk = !query || s.name.toLowerCase().includes(query) || s.mech.toLowerCase().includes(query) || s.cat.toLowerCase().includes(query);
     return tierOk && textOk;
   });
+  if (sort === 'name_asc') list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  else if (sort === 'cat') list = [...list].sort((a, b) => a.cat.localeCompare(b.cat) || tierOrder[a.tier] - tierOrder[b.tier]);
+  else list = [...list].sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]);
   renderSupplements(list);
 }
 
