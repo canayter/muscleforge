@@ -181,13 +181,15 @@
 
 /* Light mode */
 [data-theme="light"] {
-  --iron-black: #f0f0f5;
-  --iron-dark: #ffffff;
-  --iron-mid: #e8e8f0;
-  --iron-surface: #ffffff;
-  --iron-elevated: #ffffff;
-  --iron-hover: #dddde8;
-  --iron-active: #d0d0df;
+  /* Warm white surfaces — inverted mirror of dark mode iron palette */
+  --iron-black: #FDFAF2;
+  --iron-dark: #FFFFFF;
+  --iron-mid: #F5F0E0;
+  --iron-surface: #FAF7EE;
+  --iron-elevated: #FFFFFF;
+  --iron-hover: #EDE6CE;
+  --iron-active: #E0D8B8;
+  --iron-border: rgba(160,120,0,0.18);
 
   --void: var(--iron-black);
   --void-elevated: var(--iron-dark);
@@ -195,32 +197,36 @@
   --void-float: var(--iron-surface);
   --void-hover: var(--iron-hover);
 
-  --blood: #c43a20;
-  --blood-dim: rgba(196,58,32,0.10);
-  --blood-glow: rgba(196,58,32,0.22);
-  --ember-text: #c43a20;
+  /* Amber accent — deeper for legibility on light background */
+  --blood: #9A7800;
+  --blood-dim: rgba(154,120,0,0.12);
+  --blood-glow: rgba(154,120,0,0.28);
+  --ember-text: #B08A00;
+  --rust: #8A6E00;
+  --rust-dim: rgba(138,110,0,0.12);
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #a03018;
+  --primary-soft: #7A6000;
 
-  --chalk: #111120;
-  --chalk-secondary: #4a4a60;
-  --chalk-tertiary: #7070a0;
-  --chalk-faint: #d0d0e0;
+  /* Near-black text on warm white */
+  --chalk: #1A1810;
+  --chalk-secondary: #504830;
+  --chalk-tertiary: #807050;
+  --chalk-faint: #D8D0B0;
   --ink: var(--chalk);
   --ink-primary: var(--chalk);
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
 
-  --line: rgba(0,0,0,0.08);
-  --line-hover: rgba(0,0,0,0.15);
-  --line-active: rgba(196,58,32,0.28);
+  --line: rgba(130,100,0,0.12);
+  --line-hover: rgba(130,100,0,0.22);
+  --line-active: rgba(154,120,0,0.35);
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+  --shadow-sm: 0 1px 3px rgba(100,80,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(100,80,0,0.1), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg: 0 12px 32px rgba(100,80,0,0.12), 0 4px 8px rgba(0,0,0,0.05);
   --shadow-glow: 0 0 24px var(--blood-dim);
   --focus-ring: 0 0 0 2px var(--iron-dark), 0 0 0 4px var(--blood);
 }
@@ -1772,9 +1778,9 @@ select.field-input option {
   padding: 12px;
 }
 
-/* For light mode dropdown arrow */
+/* For light mode dropdown arrow — amber to match theme */
 [data-theme="light"] select.field-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23d03a18' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239A7800' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
 }
 
 /* Input with suffix */
@@ -4814,6 +4820,13 @@ select.field-input option {
 .ex-card-add { position:absolute; top:var(--space-md); right:var(--space-md); width:22px; height:22px; border-radius:50%; border:1px solid var(--iron-border); background:none; color:var(--chalk-tertiary); font-size:0.9rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all var(--duration-fast); }
 .ex-card-add:hover { border-color:var(--blood); color:var(--blood); background:var(--blood-dim); }
 .ex-empty { grid-column:1/-1; padding:var(--space-3xl); text-align:center; color:var(--chalk-tertiary); font-size:0.875rem; }
+.ex-sub-chips { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:var(--space-sm); padding:8px 12px; background:rgba(255,255,255,0.03); border-radius:var(--radius-md); border:1px solid var(--iron-border); }
+.ex-head-chips { border-color:rgba(212,160,23,0.25); background:rgba(212,160,23,0.04); }
+.ex-sub-label { font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.12em; font-size:0.65rem; color:var(--chalk-tertiary); flex-shrink:0; margin-right:4px; }
+.chip.ex-muscle { border-color:rgba(255,255,255,0.15); }
+.chip.ex-muscle.active { border-color:var(--chalk); color:var(--chalk); background:rgba(255,255,255,0.08); }
+.chip.ex-head { border-color:rgba(212,160,23,0.3); color:var(--blood); }
+.chip.ex-head.active { background:var(--blood-dim); border-color:var(--blood); }
 
   </style>
 </head>
@@ -5535,6 +5548,12 @@ select.field-input option {
         </div>
         <div id="exGroupFilter" class="ex-group-chips">
           <button class="chip active" data-group="" onclick="selectExGroup(this)">All</button>
+        </div>
+        <div id="exMuscleFilter" class="ex-sub-chips" style="display:none">
+          <span class="ex-sub-label">Muscle</span>
+        </div>
+        <div id="exHeadFilter" class="ex-sub-chips ex-head-chips" style="display:none">
+          <span class="ex-sub-label">Sub-muscle</span>
         </div>
         <div id="exCount" class="ex-count"></div>
         <div id="exercisesGrid" class="exercises-grid"></div>
@@ -10027,15 +10046,30 @@ function closeSwap() {
 // EXERCISE ATLAS
 // ═══════════════════════════════════════════════════════════════════════════
 
+// Sub-muscle head labels for muscles with meaningful head distinctions
+const HEAD_LABELS = {
+  chest:      { clavicular: 'Clavicular Head (Upper)', sternal: 'Sternal Head (Mid/Lower)' },
+  lats:       { upper: 'Upper Lats', lower: 'Lower Lats' },
+  biceps:     { long: 'Long Head (Peak)', short: 'Short Head (Width)' },
+  triceps:    { long: 'Long Head', lateral: 'Lateral Head (Outer)', medial: 'Medial Head (Inner)' },
+  quads:      { rf: 'Rectus Femoris', vl: 'Vastus Lateralis (Outer)', vmo: 'Vastus Medialis (VMO)' },
+  hamstrings: { hip: 'Hip-Hinge (Long Head)', curl: 'Knee Curl (Short Head)' },
+  calves:     { gastro: 'Gastrocnemius', soleus: 'Soleus' },
+  traps:      { upper: 'Upper Traps', mid: 'Middle Traps', lower: 'Lower Traps' },
+};
+
+// Filter state
+let EX_FILTER = { group: '', muscleId: '', head: '' };
 let _exIndex = null;
+
 function getExIndex() {
   if (_exIndex) return _exIndex;
   const list = [];
   for (const [id, m] of Object.entries(MUSCLE_DATA)) {
     const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(id)) : null;
     (m.exercises || []).forEach(ex => {
-      list.push({ name: ex.name, secondary: ex.secondary || [], muscleId: id,
-        muscleName: m.name, groupId: group?.id || '', groupLabel: group?.label || '' });
+      list.push({ name: ex.name, secondary: ex.secondary || [], h: ex.h || null,
+        muscleId: id, muscleName: m.name, groupId: group?.id || '', groupLabel: group?.label || '' });
     });
   }
   _exIndex = list;
@@ -10043,6 +10077,7 @@ function getExIndex() {
 }
 
 function loadExercises() {
+  // Seed group chips once
   const chipWrap = document.getElementById('exGroupFilter');
   if (chipWrap && chipWrap.children.length === 1 && typeof MB_GROUPS !== 'undefined') {
     MB_GROUPS.forEach(g => {
@@ -10058,14 +10093,104 @@ function loadExercises() {
 }
 
 function selectExGroup(btn) {
+  // Update group chips
   document.querySelectorAll('#exGroupFilter .chip').forEach(c => c.classList.remove('active'));
   btn.classList.add('active');
+  EX_FILTER.group = btn.dataset.group || '';
+  EX_FILTER.muscleId = '';
+  EX_FILTER.head = '';
+
+  // Render muscle chips for selected group (or hide if "All")
+  const muscleWrap = document.getElementById('exMuscleFilter');
+  const headWrap = document.getElementById('exHeadFilter');
+  if (!muscleWrap) { filterExercises(); return; }
+
+  // Clear downstream
+  headWrap.style.display = 'none';
+  // Reset head wrap to just the label
+  headWrap.innerHTML = '<span class="ex-sub-label">Sub-muscle</span>';
+
+  if (!EX_FILTER.group) {
+    muscleWrap.style.display = 'none';
+    muscleWrap.innerHTML = '<span class="ex-sub-label">Muscle</span>';
+    filterExercises();
+    return;
+  }
+
+  const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.id === EX_FILTER.group) : null;
+  if (!group) { muscleWrap.style.display = 'none'; filterExercises(); return; }
+
+  // Build muscle chips
+  muscleWrap.innerHTML = '<span class="ex-sub-label">Muscle</span>';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'chip ex-muscle active';
+  allBtn.dataset.muscle = '';
+  allBtn.textContent = 'All';
+  allBtn.onclick = () => selectExMuscle(allBtn);
+  muscleWrap.appendChild(allBtn);
+
+  group.muscles.forEach(mid => {
+    const m = MUSCLE_DATA[mid];
+    if (!m) return;
+    const label = m.name.includes('—') ? m.name.split('—')[0].trim() : m.name.split('(')[0].trim();
+    const btn2 = document.createElement('button');
+    btn2.className = 'chip ex-muscle';
+    btn2.dataset.muscle = mid;
+    btn2.textContent = label;
+    btn2.onclick = () => selectExMuscle(btn2);
+    muscleWrap.appendChild(btn2);
+  });
+  muscleWrap.style.display = 'flex';
+  filterExercises();
+}
+
+function selectExMuscle(btn) {
+  document.querySelectorAll('#exMuscleFilter .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  EX_FILTER.muscleId = btn.dataset.muscle || '';
+  EX_FILTER.head = '';
+
+  const headWrap = document.getElementById('exHeadFilter');
+  if (!headWrap) { filterExercises(); return; }
+
+  // Clear + hide head row
+  headWrap.style.display = 'none';
+  headWrap.innerHTML = '<span class="ex-sub-label">Sub-muscle</span>';
+
+  if (!EX_FILTER.muscleId) { filterExercises(); return; }
+
+  const headMap = HEAD_LABELS[EX_FILTER.muscleId];
+  if (!headMap || !Object.keys(headMap).length) { filterExercises(); return; }
+
+  // Build head chips
+  const allBtn = document.createElement('button');
+  allBtn.className = 'chip ex-head active';
+  allBtn.dataset.head = '';
+  allBtn.textContent = 'All';
+  allBtn.onclick = () => selectExHead(allBtn);
+  headWrap.appendChild(allBtn);
+
+  Object.entries(headMap).forEach(([key, label]) => {
+    const btn2 = document.createElement('button');
+    btn2.className = 'chip ex-head';
+    btn2.dataset.head = key;
+    btn2.textContent = label;
+    btn2.onclick = () => selectExHead(btn2);
+    headWrap.appendChild(btn2);
+  });
+  headWrap.style.display = 'flex';
+  filterExercises();
+}
+
+function selectExHead(btn) {
+  document.querySelectorAll('#exHeadFilter .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  EX_FILTER.head = btn.dataset.head || '';
   filterExercises();
 }
 
 function filterExercises() {
   const q = (document.getElementById('exSearch')?.value || '').toLowerCase();
-  const group = document.querySelector('#exGroupFilter .chip.active')?.dataset.group || '';
   const sort = document.getElementById('exSort')?.value || '';
   let list = getExIndex();
   if (q) list = list.filter(e =>
@@ -10073,10 +10198,12 @@ function filterExercises() {
     e.muscleName.toLowerCase().includes(q) ||
     e.secondary.some(s => s.m.toLowerCase().includes(q))
   );
-  if (group) list = list.filter(e => e.groupId === group);
-  if (sort === 'name')   list = [...list].sort((a,b) => a.name.localeCompare(b.name));
-  if (sort === 'muscle') list = [...list].sort((a,b) => a.muscleName.localeCompare(b.muscleName));
-  if (sort === 'group')  list = [...list].sort((a,b) => (a.groupLabel||'').localeCompare(b.groupLabel||''));
+  if (EX_FILTER.group)    list = list.filter(e => e.groupId === EX_FILTER.group);
+  if (EX_FILTER.muscleId) list = list.filter(e => e.muscleId === EX_FILTER.muscleId);
+  if (EX_FILTER.head)     list = list.filter(e => e.h?.includes(EX_FILTER.head));
+  if (sort === 'name')    list = [...list].sort((a,b) => a.name.localeCompare(b.name));
+  if (sort === 'muscle')  list = [...list].sort((a,b) => a.muscleName.localeCompare(b.muscleName));
+  if (sort === 'group')   list = [...list].sort((a,b) => (a.groupLabel||'').localeCompare(b.groupLabel||''));
   const countEl = document.getElementById('exCount');
   if (countEl) countEl.textContent = `${list.length} exercise${list.length === 1 ? '' : 's'}`;
   renderExercises(list);
@@ -14484,18 +14611,18 @@ const MUSCLE_DATA = {
       { name: 'Sternal Head (Mid/Lower)', desc: 'Originates at the sternum and costal cartilage. Primary target of flat bench press. Largest portion of the pec.' },
     ],
     exercises: [
-      { name: 'Barbell Bench Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}] },
-      { name: 'Incline Barbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}] },
-      { name: 'Incline Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'}] },
-      { name: 'Flat Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'},{m:'Serratus',t:'m'}] },
-      { name: 'Cable Fly (mid)', secondary: [{m:'Ant. Delt',t:'m'},{m:'Biceps',t:'l'}] },
-      { name: 'Low-to-High Cable Fly', secondary: [{m:'Ant. Delt',t:'m'}] },
-      { name: 'High-to-Low Cable Fly', secondary: [{m:'Ant. Delt',t:'l'},{m:'Serratus',t:'l'}] },
-      { name: 'Weighted Dips', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}] },
-      { name: 'Pec Deck Machine', secondary: [{m:'Ant. Delt',t:'l'}] },
-      { name: 'Machine Chest Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}] },
-      { name: 'DB Squeeze Press', secondary: [{m:'Triceps',t:'m'}] },
-      { name: 'Push-Up Variations', secondary: [{m:'Triceps',t:'h'},{m:'Serratus',t:'m'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'Barbell Bench Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}], h:['sternal'] },
+      { name: 'Incline Barbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}], h:['clavicular'] },
+      { name: 'Incline Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'}], h:['clavicular'] },
+      { name: 'Flat Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'},{m:'Serratus',t:'m'}], h:['sternal'] },
+      { name: 'Cable Fly (mid)', secondary: [{m:'Ant. Delt',t:'m'},{m:'Biceps',t:'l'}], h:['sternal'] },
+      { name: 'Low-to-High Cable Fly', secondary: [{m:'Ant. Delt',t:'m'}], h:['clavicular'] },
+      { name: 'High-to-Low Cable Fly', secondary: [{m:'Ant. Delt',t:'l'},{m:'Serratus',t:'l'}], h:['sternal'] },
+      { name: 'Weighted Dips', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}], h:['sternal'] },
+      { name: 'Pec Deck Machine', secondary: [{m:'Ant. Delt',t:'l'}], h:['sternal'] },
+      { name: 'Machine Chest Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}], h:['sternal'] },
+      { name: 'DB Squeeze Press', secondary: [{m:'Triceps',t:'m'}], h:['sternal'] },
+      { name: 'Push-Up Variations', secondary: [{m:'Triceps',t:'h'},{m:'Serratus',t:'m'},{m:'Ant. Delt',t:'m'}], h:['sternal'] },
     ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
@@ -14549,14 +14676,14 @@ const MUSCLE_DATA = {
       { name: 'Short Head (Inner)', desc: 'Originates at the coracoid process of the scapula. Contributes to bicep width. Best targeted with the arm in front of the body (preacher curl position).' },
     ],
     exercises: [
-      { name: 'Barbell Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'m'}] },
-      { name: 'Incline Dumbbell Curl', secondary: [{m:'Brachialis',t:'m'}] },
-      { name: 'Spider Curl', secondary: [{m:'Brachialis',t:'h'}] },
-      { name: 'Cable Curl', secondary: [{m:'Brachialis',t:'m'},{m:'Brachioradialis',t:'m'}] },
-      { name: 'Chin-Up', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'m'},{m:'Brachialis',t:'m'}] },
-      { name: 'Preacher Curl', secondary: [{m:'Brachialis',t:'h'}] },
-      { name: 'Concentration Curl', secondary: [] },
-      { name: 'Hammer Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'h'}] },
+      { name: 'Barbell Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'m'}], h:['long','short'] },
+      { name: 'Incline Dumbbell Curl', secondary: [{m:'Brachialis',t:'m'}], h:['long'] },
+      { name: 'Spider Curl', secondary: [{m:'Brachialis',t:'h'}], h:['long'] },
+      { name: 'Cable Curl', secondary: [{m:'Brachialis',t:'m'},{m:'Brachioradialis',t:'m'}], h:['long','short'] },
+      { name: 'Chin-Up', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'m'},{m:'Brachialis',t:'m'}], h:['short'] },
+      { name: 'Preacher Curl', secondary: [{m:'Brachialis',t:'h'}], h:['short'] },
+      { name: 'Concentration Curl', secondary: [], h:['short'] },
+      { name: 'Hammer Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'h'}], h:['long'] },
     ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
@@ -14635,16 +14762,16 @@ const MUSCLE_DATA = {
       { name: 'Vastus Intermedius (Deep)', desc: 'A deep muscle beneath the rectus femoris. Cannot be isolated or distinguished by appearance. Contributes force across the full ROM of knee extension.' },
     ],
     exercises: [
-      { name: 'Back Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Lower Back',t:'m'},{m:'Adductors',t:'m'}] },
-      { name: 'Front Squat', secondary: [{m:'Glutes',t:'m'},{m:'Upper Back',t:'h'},{m:'Core',t:'h'}] },
-      { name: 'Leg Press', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}] },
-      { name: 'Hack Squat', secondary: [{m:'Glutes',t:'m'}] },
-      { name: 'Bulgarian Split Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Hip Flexors',t:'l'}] },
-      { name: 'Leg Extension', secondary: [] },
-      { name: 'Goblet Squat', secondary: [{m:'Glutes',t:'m'},{m:'Core',t:'m'}] },
-      { name: 'Sissy Squat', secondary: [{m:'Hip Flexors',t:'l'}] },
-      { name: 'Step-Up', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}] },
-      { name: 'Walking Lunge', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'},{m:'Adductors',t:'l'}] },
+      { name: 'Back Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Lower Back',t:'m'},{m:'Adductors',t:'m'}], h:['vl','rf'] },
+      { name: 'Front Squat', secondary: [{m:'Glutes',t:'m'},{m:'Upper Back',t:'h'},{m:'Core',t:'h'}], h:['rf','vmo'] },
+      { name: 'Leg Press', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}], h:['vl','rf'] },
+      { name: 'Hack Squat', secondary: [{m:'Glutes',t:'m'}], h:['vl','rf'] },
+      { name: 'Bulgarian Split Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Hip Flexors',t:'l'}], h:['rf','vmo'] },
+      { name: 'Leg Extension', secondary: [], h:['rf','vmo'] },
+      { name: 'Goblet Squat', secondary: [{m:'Glutes',t:'m'},{m:'Core',t:'m'}], h:['rf','vmo'] },
+      { name: 'Sissy Squat', secondary: [{m:'Hip Flexors',t:'l'}], h:['rf'] },
+      { name: 'Step-Up', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}], h:['vmo'] },
+      { name: 'Walking Lunge', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'},{m:'Adductors',t:'l'}], h:['vmo','rf'] },
     ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
@@ -14677,14 +14804,14 @@ const MUSCLE_DATA = {
       { name: 'Lower Traps', desc: 'Depress and upwardly rotate the scapulae. Severely neglected in most programs. Weak lower traps = elevated scapulae, impingement, and poor posture.' },
     ],
     exercises: [
-      { name: 'Barbell Shrug', secondary: [] },
-      { name: 'Rack Pull', secondary: [{m:'Lower Back',t:'h'},{m:'Glutes',t:'m'}] },
-      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Ext. Rotators',t:'m'}] },
-      { name: 'Farmer Carries', secondary: [{m:'Core',t:'h'},{m:'Forearms',t:'h'}] },
-      { name: 'Y-T-W Raises', secondary: [{m:'Rear Delt',t:'h'},{m:'Rhomboids',t:'m'}] },
-      { name: 'Cable Shrug', secondary: [] },
-      { name: 'Dumbbell Shrug', secondary: [] },
-      { name: 'Overhead Carry', secondary: [{m:'Serratus',t:'m'},{m:'Core',t:'m'}] },
+      { name: 'Barbell Shrug', secondary: [], h:['upper'] },
+      { name: 'Rack Pull', secondary: [{m:'Lower Back',t:'h'},{m:'Glutes',t:'m'}], h:['upper'] },
+      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Ext. Rotators',t:'m'}], h:['mid','lower'] },
+      { name: 'Farmer Carries', secondary: [{m:'Core',t:'h'},{m:'Forearms',t:'h'}], h:['upper'] },
+      { name: 'Y-T-W Raises', secondary: [{m:'Rear Delt',t:'h'},{m:'Rhomboids',t:'m'}], h:['lower','mid'] },
+      { name: 'Cable Shrug', secondary: [], h:['upper'] },
+      { name: 'Dumbbell Shrug', secondary: [], h:['upper'] },
+      { name: 'Overhead Carry', secondary: [{m:'Serratus',t:'m'},{m:'Core',t:'m'}], h:['lower'] },
     ],
     volMin: 0, volOpt: 12, volMax: 20,
     recovery: '48 hours',
@@ -14718,16 +14845,16 @@ const MUSCLE_DATA = {
       { name: 'Lower Lats', desc: 'Fibers originating lower on the thoracolumbar fascia and iliac crest. Best targeted by straight-arm pulldowns and pullovers with full shoulder extension.' },
     ],
     exercises: [
-      { name: 'Weighted Pull-Up', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'},{m:'Rhomboids',t:'m'}] },
-      { name: 'Lat Pulldown', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'}] },
-      { name: 'Seated Cable Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'m'}] },
-      { name: 'Single-Arm DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'l'}] },
-      { name: 'Straight-Arm Pulldown', secondary: [{m:'Triceps',t:'l'}] },
-      { name: 'Meadows Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Biceps',t:'m'}] },
-      { name: 'Chest-Supported DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Rear Delt',t:'m'},{m:'Biceps',t:'m'}] },
-      { name: 'T-Bar Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Lower Back',t:'m'}] },
-      { name: 'Cable Pullover', secondary: [{m:'Triceps',t:'l'},{m:'Serratus',t:'m'}] },
-      { name: 'Underhand Barbell Row', secondary: [{m:'Biceps',t:'h'},{m:'Rhomboids',t:'h'}] },
+      { name: 'Weighted Pull-Up', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'},{m:'Rhomboids',t:'m'}], h:['upper'] },
+      { name: 'Lat Pulldown', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'}], h:['upper'] },
+      { name: 'Seated Cable Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'m'}], h:['upper','lower'] },
+      { name: 'Single-Arm DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'l'}], h:['upper','lower'] },
+      { name: 'Straight-Arm Pulldown', secondary: [{m:'Triceps',t:'l'}], h:['lower'] },
+      { name: 'Meadows Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Biceps',t:'m'}], h:['upper','lower'] },
+      { name: 'Chest-Supported DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Rear Delt',t:'m'},{m:'Biceps',t:'m'}], h:['upper','lower'] },
+      { name: 'T-Bar Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Lower Back',t:'m'}], h:['upper','lower'] },
+      { name: 'Cable Pullover', secondary: [{m:'Triceps',t:'l'},{m:'Serratus',t:'m'}], h:['lower'] },
+      { name: 'Underhand Barbell Row', secondary: [{m:'Biceps',t:'h'},{m:'Rhomboids',t:'h'}], h:['lower'] },
     ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
@@ -14784,16 +14911,16 @@ const MUSCLE_DATA = {
       { name: 'Medial Head (Inner/Deep)', desc: 'Deep, largely obscured by the other two heads. Active throughout the full ROM, especially in the final degrees of extension. Best targeted by reverse-grip pushdowns.' },
     ],
     exercises: [
-      { name: 'Close-Grip Bench Press', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}] },
-      { name: 'Overhead Tricep Extension (cable)', secondary: [] },
-      { name: 'Cable Pushdown', secondary: [] },
-      { name: 'Skull Crusher', secondary: [] },
-      { name: 'Weighted Dips', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}] },
-      { name: 'JM Press', secondary: [{m:'Chest',t:'l'}] },
-      { name: 'Incline Overhead Extension', secondary: [] },
-      { name: 'Diamond Push-Up', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'l'}] },
-      { name: 'Reverse-Grip Pushdown', secondary: [{m:'Brachioradialis',t:'m'}] },
-      { name: 'Tate Press', secondary: [] },
+      { name: 'Close-Grip Bench Press', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}], h:['lateral','medial'] },
+      { name: 'Overhead Tricep Extension (cable)', secondary: [], h:['long'] },
+      { name: 'Cable Pushdown', secondary: [], h:['lateral','medial'] },
+      { name: 'Skull Crusher', secondary: [], h:['long','lateral'] },
+      { name: 'Weighted Dips', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}], h:['lateral','medial'] },
+      { name: 'JM Press', secondary: [{m:'Chest',t:'l'}], h:['lateral','medial'] },
+      { name: 'Incline Overhead Extension', secondary: [], h:['long'] },
+      { name: 'Diamond Push-Up', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'l'}], h:['lateral'] },
+      { name: 'Reverse-Grip Pushdown', secondary: [{m:'Brachioradialis',t:'m'}], h:['medial'] },
+      { name: 'Tate Press', secondary: [], h:['medial'] },
     ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
@@ -14853,16 +14980,16 @@ const MUSCLE_DATA = {
       { name: 'Semitendinosus', desc: 'Also medial, runs superficial to the semimembranosus. Has a long tendon. Two-joint muscle. Visible as a cord behind the knee in lean individuals.' },
     ],
     exercises: [
-      { name: 'Romanian Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Lower Back',t:'m'}] },
-      { name: 'Leg Curl', secondary: [] },
-      { name: 'Nordic Hamstring Curl', secondary: [{m:'Glutes',t:'l'}] },
-      { name: 'Good Morning', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'h'}] },
-      { name: 'Glute-Ham Raise', secondary: [{m:'Glutes',t:'m'},{m:'Calves',t:'l'}] },
-      { name: 'Stiff-Leg Deadlift', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'m'}] },
-      { name: 'Lying Leg Curl', secondary: [] },
-      { name: 'Seated Leg Curl', secondary: [] },
-      { name: 'Single-Leg RDL', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}] },
-      { name: 'Swiss Ball Leg Curl', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}] },
+      { name: 'Romanian Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Lower Back',t:'m'}], h:['hip'] },
+      { name: 'Leg Curl', secondary: [], h:['hip','curl'] },
+      { name: 'Nordic Hamstring Curl', secondary: [{m:'Glutes',t:'l'}], h:['hip','curl'] },
+      { name: 'Good Morning', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'h'}], h:['hip'] },
+      { name: 'Glute-Ham Raise', secondary: [{m:'Glutes',t:'m'},{m:'Calves',t:'l'}], h:['hip','curl'] },
+      { name: 'Stiff-Leg Deadlift', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'m'}], h:['hip'] },
+      { name: 'Lying Leg Curl', secondary: [], h:['curl'] },
+      { name: 'Seated Leg Curl', secondary: [], h:['curl'] },
+      { name: 'Single-Leg RDL', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}], h:['hip'] },
+      { name: 'Swiss Ball Leg Curl', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}], h:['hip','curl'] },
     ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48–72 hours',
@@ -14877,14 +15004,14 @@ const MUSCLE_DATA = {
       { name: 'Soleus', desc: 'Deep, flat muscle running beneath the gastrocnemius. Single-joint — only crosses the ankle. Dominant plantarflexor when the knee is bent. Targeted by seated calf raises.' },
     ],
     exercises: [
-      { name: 'Standing Calf Raise', secondary: [] },
-      { name: 'Seated Calf Raise', secondary: [] },
-      { name: 'Donkey Calf Raise', secondary: [] },
-      { name: 'Single-Leg Calf Raise', secondary: [] },
-      { name: 'Jump Rope', secondary: [{m:'Hip Flexors',t:'l'},{m:'Quads',t:'l'}] },
-      { name: 'Leg Press Calf Raise', secondary: [] },
-      { name: 'Smith Machine Calf Raise', secondary: [] },
-      { name: 'Calf Press on Leg Press', secondary: [] },
+      { name: 'Standing Calf Raise', secondary: [], h:['gastro'] },
+      { name: 'Seated Calf Raise', secondary: [], h:['soleus'] },
+      { name: 'Donkey Calf Raise', secondary: [], h:['gastro'] },
+      { name: 'Single-Leg Calf Raise', secondary: [], h:['gastro'] },
+      { name: 'Jump Rope', secondary: [{m:'Hip Flexors',t:'l'},{m:'Quads',t:'l'}], h:['gastro'] },
+      { name: 'Leg Press Calf Raise', secondary: [], h:['gastro'] },
+      { name: 'Smith Machine Calf Raise', secondary: [], h:['gastro'] },
+      { name: 'Calf Press on Leg Press', secondary: [], h:['gastro','soleus'] },
     ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '24–48 hours',
