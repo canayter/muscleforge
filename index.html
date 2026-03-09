@@ -13,7 +13,7 @@
   <!-- Favicon & PWA -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#e04520">
+  <meta name="theme-color" content="#D4A017">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -67,30 +67,31 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── BACKGROUNDS ── */
-  --iron-black: #06060e;
-  --iron-dark: #0d0d18;
-  --iron-mid: #12121f;
-  --iron-surface: #181828;
-  --iron-elevated: #1e1e30;
-  --iron-hover: #252538;
-  --iron-active: #2c2c42;
+  /* ── BACKGROUNDS — pure black ── */
+  --iron-black: #060606;
+  --iron-dark: #0d0d0d;
+  --iron-mid: #121212;
+  --iron-surface: #181818;
+  --iron-elevated: #1e1e1e;
+  --iron-hover: #252525;
+  --iron-active: #2c2c2c;
+  --iron-border: rgba(212,160,23,0.18);
 
-  /* ── BLOOD — Primary action ── */
-  --blood: #e04520;
-  --blood-dim: rgba(224,69,32,0.10);
-  --blood-glow: rgba(224,69,32,0.28);
-  --ember-text: #ff6b35;
+  /* ── GOLD — Primary action ── */
+  --blood: #D4A017;
+  --blood-dim: rgba(212,160,23,0.12);
+  --blood-glow: rgba(212,160,23,0.32);
+  --ember-text: #E8B624;
 
-  /* ── RUST — Secondary accent ── */
-  --rust: #d97706;
-  --rust-dim: rgba(217,119,6,0.12);
+  /* ── AMBER — Secondary accent ── */
+  --rust: #B8860B;
+  --rust-dim: rgba(184,134,11,0.12);
 
   /* ── TEXT hierarchy (WCAG AA+) ── */
-  --chalk: #eeeef5;
-  --chalk-secondary: #9898b0;
-  --chalk-tertiary: #5a5a72;
-  --chalk-faint: #2e2e44;
+  --chalk: #eeeee8;
+  --chalk-secondary: #9a9a90;
+  --chalk-tertiary: #5a5a52;
+  --chalk-faint: #2e2e28;
 
   /* ── SEMANTIC ALIASES ── */
   --void: var(--iron-black);
@@ -101,7 +102,7 @@
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #d04010;
+  --primary-soft: #c49010;
   --accent: var(--rust);
   --accent-dim: var(--rust-dim);
   --ink: var(--chalk);
@@ -109,9 +110,9 @@
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
-  --line: rgba(255,255,255,0.07);
-  --line-hover: rgba(255,255,255,0.14);
-  --line-active: rgba(224,69,32,0.28);
+  --line: rgba(212,160,23,0.08);
+  --line-hover: rgba(212,160,23,0.16);
+  --line-active: rgba(212,160,23,0.35);
 
   /* ── MACROS — Nutrition colors ── */
   --protein: #f87171;
@@ -3609,7 +3610,7 @@ select.field-input option {
   text-align: center;
   padding-bottom: 24px;
   margin-bottom: 24px;
-  border-bottom: 2px solid #ff6b35;
+  border-bottom: 2px solid #E8B624;
 }
 
 .pdf-export .pdf-logo {
@@ -3655,7 +3656,7 @@ select.field-input option {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: #ff6b35 !important;
+  color: #E8B624 !important;
 }
 
 .pdf-export .pdf-stat-label {
@@ -3670,7 +3671,7 @@ select.field-input option {
   padding: 12px;
   background: #f9f9f9 !important;
   border-radius: 6px;
-  border-left: 3px solid #ff6b35;
+  border-left: 3px solid #E8B624;
 }
 
 .pdf-export .pdf-meal-title {
@@ -4303,7 +4304,7 @@ select.field-input option {
 .workout-sheet {
   flex-shrink: 0;
   background: var(--iron-elevated);
-  border-top: 2px solid rgba(224,69,32,0.22);
+  border-top: 2px solid rgba(212,160,23,0.22);
   max-height: 48px;
   overflow: hidden;
   transition: max-height 0.38s var(--ease-out-expo);
@@ -4421,7 +4422,7 @@ select.field-input option {
   height: 24px;
   border-radius: var(--radius-full);
   background: var(--blood-dim);
-  border: 1px solid rgba(224,69,32,0.3);
+  border: 1px solid rgba(212,160,23,0.3);
   color: var(--blood);
   font-size: 1rem;
   line-height: 1;
@@ -4591,6 +4592,25 @@ select.field-input option {
 }
 .mb-plan-cta:hover { border-color: var(--blood); color: var(--blood); }
 .mb-note { font-size: 0.7rem; color: var(--chalk-tertiary); margin-top: var(--space-lg); line-height: 1.5; }
+
+/* ── Anatomical heads ── */
+.mb-heads { margin-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); padding-bottom: var(--space-md); }
+.mb-head-item { padding: 6px 0; border-bottom: 1px solid var(--iron-border); font-size: 0.78rem; line-height: 1.5; }
+.mb-head-item:last-child { border-bottom: none; }
+.mb-head-name { color: var(--blood); font-weight: 700; font-family: 'Teko', sans-serif; font-size: 0.85rem; letter-spacing: .03em; text-transform: uppercase; }
+.mb-head-desc { color: var(--chalk-secondary); }
+
+/* ── Exercise row with secondary muscles ── */
+.mb-ex-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.mb-ex-secondary { display: flex; flex-wrap: wrap; gap: 3px; }
+.mb-ex-sec { font-size: 0.6rem; padding: 1px 5px; border-radius: var(--radius-full); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; line-height: 1.6; }
+.mb-ex-sec-h { background: rgba(212,160,23,0.16); color: var(--blood); border: 1px solid rgba(212,160,23,0.3); }
+.mb-ex-sec-m { background: rgba(255,255,255,0.05); color: var(--chalk-secondary); border: 1px solid rgba(255,255,255,0.1); }
+.mb-ex-sec-l { background: transparent; color: var(--chalk-tertiary); border: 1px solid rgba(255,255,255,0.06); }
+
+/* ── Secondary legend ── */
+.mb-sec-legend { display: flex; align-items: center; gap: 5px; margin-top: var(--space-sm); flex-wrap: wrap; }
+.mb-sec-legend-label { font-size: 0.6rem; color: var(--chalk-tertiary); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; }
 @media (max-width: 640px) {
   .mb-columns { grid-template-columns: 1fr; min-height: auto; }
   .mb-col { max-height: 240px; border-right: none; border-bottom: 1px solid var(--iron-border); }
@@ -11446,20 +11466,20 @@ function renderProgressChart() {
         {
           label: 'Weight (lbs)',
           data: weights,
-          borderColor: 'rgba(224,69,32,0.9)',
-          backgroundColor: 'rgba(224,69,32,0.08)',
+          borderColor: 'rgba(212,160,23,0.9)',
+          backgroundColor: 'rgba(212,160,23,0.08)',
           fill: true, tension: 0.35,
           pointRadius: 4, pointHoverRadius: 6,
-          pointBackgroundColor: '#e04520',
+          pointBackgroundColor: '#D4A017',
         },
         {
           label: 'Est. 1RM (Epley)',
           data: e1rms,
-          borderColor: 'rgba(217,119,6,0.8)',
-          backgroundColor: 'rgba(217,119,6,0.04)',
+          borderColor: 'rgba(184,134,11,0.8)',
+          backgroundColor: 'rgba(184,134,11,0.04)',
           fill: false, tension: 0.35,
           pointRadius: 3, pointHoverRadius: 5,
-          pointBackgroundColor: '#d97706',
+          pointBackgroundColor: '#B8860B',
           borderDash: [5, 3],
         }
       ]
@@ -11467,10 +11487,10 @@ function renderProgressChart() {
     options: {
       responsive: true,
       plugins: {
-        legend: { labels: { color: '#a0a0b0', font: { family: "'Space Grotesk', sans-serif", size: 11 } } },
+        legend: { labels: { color: '#a0a090', font: { family: "'Space Grotesk', sans-serif", size: 11 } } },
         tooltip: {
-          backgroundColor: '#13131f', titleColor: '#e04520',
-          bodyColor: '#d0d0e0', borderColor: '#2a2a3c', borderWidth: 1,
+          backgroundColor: '#131313', titleColor: '#D4A017',
+          bodyColor: '#d0d0c0', borderColor: '#2a2a22', borderWidth: 1,
         }
       },
       scales: {
@@ -12137,7 +12157,7 @@ function exportPDF() {
         <div style="font-size:12px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #ddd;text-transform:uppercase;letter-spacing:0.05em;color:#333;">Daily Targets</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <div style="text-align:center;padding:16px 20px;background:linear-gradient(135deg,#fff8e1,#fff);border:2px solid #ffd000;border-radius:8px;flex:1;min-width:70px;">
-            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#ff6b35;">${macros.cals}</div>
+            <div style="font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:700;color:#E8B624;">${macros.cals}</div>
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-top:4px;">Calories</div>
           </div>
           <div style="text-align:center;padding:16px 20px;background:#f5f5f5;border-radius:8px;flex:1;min-width:70px;">
@@ -12166,7 +12186,7 @@ function exportPDF() {
           <div style="margin-bottom:16px;padding:16px;background:#fafafa;border-radius:8px;border-left:4px solid #ffd000;">
             <div style="font-weight:600;font-size:14px;margin-bottom:10px;display:flex;justify-content:space-between;">
               <span>${m.name}</span>
-              <span style="color:#ff6b35;font-weight:500;">${m.time}</span>
+              <span style="color:#E8B624;font-weight:500;">${m.time}</span>
             </div>
             ${m.foods.map(f => `
               <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid #eee;">
@@ -13273,11 +13293,11 @@ if ('serviceWorker' in navigator) {
 const MB_GROUPS = [
   { id: 'chest',     label: 'Chest',         muscles: ['chest', 'serratus'] },
   { id: 'back',      label: 'Back',           muscles: ['lats', 'traps', 'rhomboids', 'rear-delt', 'lower-back', 'teres'] },
-  { id: 'shoulders', label: 'Shoulders',      muscles: ['front-delt', 'rear-delt'] },
+  { id: 'shoulders', label: 'Shoulders',      muscles: ['front-delt', 'lateral-delt', 'rear-delt', 'teres'] },
   { id: 'arms',      label: 'Arms',           muscles: ['biceps', 'triceps', 'forearms'] },
   { id: 'core',      label: 'Core',           muscles: ['abs', 'obliques'] },
   { id: 'legs',      label: 'Legs',           muscles: ['quads', 'hamstrings', 'calves', 'tibialis', 'adductors', 'hip-flexors'] },
-  { id: 'glutes',    label: 'Glutes & Hips',  muscles: ['glutes', 'hip-flexors', 'adductors'] },
+  { id: 'glutes',    label: 'Glutes & Hips',  muscles: ['glutes', 'glute-med', 'hip-flexors', 'adductors'] },
   { id: 'neck',      label: 'Neck',           muscles: ['neck'] },
 ];
 
@@ -13371,22 +13391,48 @@ function renderMBExercises(muscleId) {
   funcEl.textContent = d.func;
   wrap.appendChild(funcEl);
 
-  // Exercises
+  // Anatomical heads
+  if (d.heads && d.heads.length > 0) {
+    const headsLabel = document.createElement('div');
+    headsLabel.className = 'mb-section-label';
+    headsLabel.textContent = 'Anatomical Structure';
+    wrap.appendChild(headsLabel);
+    const headsEl = document.createElement('div');
+    headsEl.className = 'mb-heads';
+    d.heads.forEach(h => {
+      const item = document.createElement('div');
+      item.className = 'mb-head-item';
+      item.innerHTML = `<span class="mb-head-name">${escapeHtml(h.name)}</span><span class="mb-head-desc"> — ${escapeHtml(h.desc)}</span>`;
+      headsEl.appendChild(item);
+    });
+    wrap.appendChild(headsEl);
+  }
+
+  // Exercises with secondary muscles
   const exLabel = document.createElement('div');
   exLabel.className = 'mb-section-label';
   exLabel.textContent = 'Exercises';
   wrap.appendChild(exLabel);
 
+  const tierLabels = { h: 'High synergist', m: 'Moderate synergist', l: 'Light synergist' };
   const exList = document.createElement('div');
   d.exercises.forEach(ex => {
+    const exName = typeof ex === 'string' ? ex : ex.name;
+    const secondary = (typeof ex === 'object' && ex.secondary) ? ex.secondary : [];
     const row = document.createElement('div');
     row.className = 'mb-ex-row';
-    const inWorkout = WORKOUT.some(w => w.exercise === ex);
-    row.innerHTML = `<span class="mb-ex-name">${escapeHtml(ex)}</span>
+    const inWorkout = WORKOUT.some(w => w.exercise === exName);
+    const secHtml = secondary.map(s =>
+      `<span class="mb-ex-sec mb-ex-sec-${s.t}" title="${escapeHtml(tierLabels[s.t] || s.t)}">${escapeHtml(s.m)}</span>`
+    ).join('');
+    row.innerHTML = `<div class="mb-ex-info">
+        <span class="mb-ex-name">${escapeHtml(exName)}</span>
+        ${secHtml ? `<div class="mb-ex-secondary">${secHtml}</div>` : ''}
+      </div>
       <button class="mm-ex-add-btn${inWorkout ? ' added' : ''}"
         title="${inWorkout ? 'Added' : 'Add to workout'}"
-        aria-label="${inWorkout ? 'Added' : 'Add to workout'}"
-        data-exercise="${encodeURIComponent(ex)}" data-muscle="${muscleId}">
+        aria-label="${inWorkout ? 'Added to workout' : 'Add to workout'}"
+        data-exercise="${encodeURIComponent(exName)}" data-muscle="${muscleId}">
         ${inWorkout ? '' : '+'}
       </button>`;
     exList.appendChild(row);
@@ -13402,6 +13448,12 @@ function renderMBExercises(muscleId) {
     btn.textContent = '';
   });
   wrap.appendChild(exList);
+
+  // Secondary muscle legend
+  const legendEl = document.createElement('div');
+  legendEl.className = 'mb-sec-legend';
+  legendEl.innerHTML = `<span class="mb-ex-sec mb-ex-sec-h">High</span><span class="mb-ex-sec mb-ex-sec-m">Moderate</span><span class="mb-ex-sec mb-ex-sec-l">Light</span><span class="mb-sec-legend-label">— synergist activation</span>`;
+  wrap.appendChild(legendEl);
 
   // Volume block
   const volLabel = document.createElement('div');
@@ -13454,179 +13506,520 @@ renderMBGroups();
 const MUSCLE_DATA = {
   chest: {
     name: 'Chest — Pectoralis Major',
-    func: 'Horizontal shoulder adduction and internal rotation. The prime mover in all horizontal pressing movements.',
-    exercises: ['Barbell Bench Press', 'Incline Barbell Press', 'Incline Dumbbell Press', 'Flat Dumbbell Press', 'Cable Fly (mid)', 'Low-to-High Cable Fly', 'High-to-Low Cable Fly', 'Weighted Dips', 'Pec Deck Machine', 'Machine Chest Press', 'DB Squeeze Press', 'Push-Up Variations'],
+    func: 'Horizontal shoulder adduction and internal rotation. The prime mover in all horizontal pressing movements. Divided into clavicular (upper) and sternal (lower) heads with distinct fiber angles and peak activation zones.',
+    heads: [
+      { name: 'Clavicular Head (Upper)', desc: 'Originates at the clavicle. Best activated at 30–45° incline angles. Often underdeveloped due to reliance on flat pressing.' },
+      { name: 'Sternal Head (Mid/Lower)', desc: 'Originates at the sternum and costal cartilage. Primary target of flat bench press. Largest portion of the pec.' },
+    ],
+    exercises: [
+      { name: 'Barbell Bench Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}] },
+      { name: 'Incline Barbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'},{m:'Serratus',t:'m'}] },
+      { name: 'Incline Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'h'}] },
+      { name: 'Flat Dumbbell Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'},{m:'Serratus',t:'m'}] },
+      { name: 'Cable Fly (mid)', secondary: [{m:'Ant. Delt',t:'m'},{m:'Biceps',t:'l'}] },
+      { name: 'Low-to-High Cable Fly', secondary: [{m:'Ant. Delt',t:'m'}] },
+      { name: 'High-to-Low Cable Fly', secondary: [{m:'Ant. Delt',t:'l'},{m:'Serratus',t:'l'}] },
+      { name: 'Weighted Dips', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'Pec Deck Machine', secondary: [{m:'Ant. Delt',t:'l'}] },
+      { name: 'Machine Chest Press', secondary: [{m:'Triceps',t:'h'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'DB Squeeze Press', secondary: [{m:'Triceps',t:'m'}] },
+      { name: 'Push-Up Variations', secondary: [{m:'Triceps',t:'h'},{m:'Serratus',t:'m'},{m:'Ant. Delt',t:'m'}] },
+    ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
     note: 'The upper chest (clavicular head) responds best to 30–45° incline angles. Control the eccentric — studies show it produces more hypertrophy stimulus than the concentric (Schoenfeld 2012).'
   },
   'front-delt': {
-    name: 'Front Deltoid — Anterior',
-    func: 'Shoulder flexion and internal rotation. Heavily stimulated by all horizontal and vertical pressing.',
-    exercises: ['Barbell Overhead Press', 'Dumbbell Overhead Press', 'Arnold Press', 'Seated DB Press', 'Landmine Press', 'Cable Front Raise', 'Plate Front Raise', 'Smith Machine OHP'],
+    name: 'Front Deltoid — Anterior Head',
+    func: 'Shoulder flexion and internal rotation. The anterior head is the primary driver of all overhead and horizontal pressing movements. Directly involved in elevating the arm to the front.',
+    heads: [
+      { name: 'Anterior Head', desc: 'The front portion of the deltoid. Massively recruited in any pressing pattern — overhead, incline, or flat. Rarely needs direct training in a press-heavy program.' },
+    ],
+    exercises: [
+      { name: 'Barbell Overhead Press', secondary: [{m:'Triceps',t:'h'},{m:'Lat. Delt',t:'m'},{m:'Traps',t:'m'},{m:'Serratus',t:'m'}] },
+      { name: 'Dumbbell Overhead Press', secondary: [{m:'Triceps',t:'h'},{m:'Lat. Delt',t:'m'},{m:'Traps',t:'l'}] },
+      { name: 'Arnold Press', secondary: [{m:'Triceps',t:'h'},{m:'Lat. Delt',t:'m'},{m:'Rear Delt',t:'l'}] },
+      { name: 'Seated DB Press', secondary: [{m:'Triceps',t:'h'},{m:'Lat. Delt',t:'m'}] },
+      { name: 'Landmine Press', secondary: [{m:'Triceps',t:'m'},{m:'Chest',t:'m'}] },
+      { name: 'Cable Front Raise', secondary: [{m:'Lat. Delt',t:'l'}] },
+      { name: 'Plate Front Raise', secondary: [{m:'Lat. Delt',t:'l'}] },
+      { name: 'Smith Machine OHP', secondary: [{m:'Triceps',t:'h'},{m:'Lat. Delt',t:'m'}] },
+    ],
     volMin: 0, volOpt: 8, volMax: 14,
     recovery: '48 hours',
     note: 'Front delts receive substantial indirect volume from every pressing movement. Isolated front raises are rarely necessary and often contribute to shoulder imbalances. Prioritize overhead pressing instead.'
   },
+  'lateral-delt': {
+    name: 'Lateral Deltoid — Middle Head',
+    func: 'Shoulder abduction — lifting the arm out to the side. The lateral head is the sole driver of shoulder width. No other muscle creates the "capped" shoulder silhouette.',
+    heads: [
+      { name: 'Middle (Lateral) Head', desc: 'The only deltoid head responsible for abducting the arm in the frontal plane. Massively underactivated in pressing — requires direct lateral raises for meaningful hypertrophy.' },
+    ],
+    exercises: [
+      { name: 'Dumbbell Lateral Raise', secondary: [{m:'Ant. Delt',t:'l'},{m:'Traps',t:'l'}] },
+      { name: 'Cable Lateral Raise', secondary: [{m:'Ant. Delt',t:'l'}] },
+      { name: 'Machine Lateral Raise', secondary: [{m:'Traps',t:'l'}] },
+      { name: 'Leaning Cable Lateral Raise', secondary: [{m:'Ant. Delt',t:'l'}] },
+      { name: 'Behind-the-Back Cable Raise', secondary: [{m:'Rear Delt',t:'l'}] },
+      { name: 'Barbell Upright Row (wide)', secondary: [{m:'Traps',t:'h'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'Plate Lateral Raise', secondary: [{m:'Ant. Delt',t:'l'}] },
+      { name: 'Partial Side Lateral (cable)', secondary: [] },
+    ],
+    volMin: 8, volOpt: 16, volMax: 26,
+    recovery: '24–48 hours',
+    note: 'The lateral head receives almost no stimulus from pressing. It requires the highest direct volume of any deltoid head — often 16–26 sets per week in physique athletes. Cable laterals maintain tension in the shortened position better than dumbbells.'
+  },
   biceps: {
     name: 'Biceps Brachii',
-    func: 'Elbow flexion and forearm supination. The short and long heads are both maximally loaded in different parts of the ROM.',
-    exercises: ['Barbell Curl', 'Incline Dumbbell Curl', 'Spider Curl', 'Cable Curl', 'Chin-Up', 'Preacher Curl', 'Concentration Curl', 'Hammer Curl'],
+    func: 'Elbow flexion and forearm supination. A two-headed muscle with distinct mechanical properties — the long head contributes to peak, the short head to width.',
+    heads: [
+      { name: 'Long Head (Outer)', desc: 'Originates at the supraglenoid tubercle of the scapula. Creates the visible "peak" of the bicep. Maximally stretched when the arm is behind the body (incline curl position).' },
+      { name: 'Short Head (Inner)', desc: 'Originates at the coracoid process of the scapula. Contributes to bicep width. Best targeted with the arm in front of the body (preacher curl position).' },
+    ],
+    exercises: [
+      { name: 'Barbell Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'m'}] },
+      { name: 'Incline Dumbbell Curl', secondary: [{m:'Brachialis',t:'m'}] },
+      { name: 'Spider Curl', secondary: [{m:'Brachialis',t:'h'}] },
+      { name: 'Cable Curl', secondary: [{m:'Brachialis',t:'m'},{m:'Brachioradialis',t:'m'}] },
+      { name: 'Chin-Up', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'m'},{m:'Brachialis',t:'m'}] },
+      { name: 'Preacher Curl', secondary: [{m:'Brachialis',t:'h'}] },
+      { name: 'Concentration Curl', secondary: [] },
+      { name: 'Hammer Curl', secondary: [{m:'Brachialis',t:'h'},{m:'Brachioradialis',t:'h'}] },
+    ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
     note: 'Full stretch at the bottom of every rep is critical for hypertrophy (Pedrosa et al. 2022). Incline and spider curls force the long head into a lengthened position and maximize the stretch-mediated growth stimulus.'
   },
   forearms: {
     name: 'Forearms — Wrist Flexors & Extensors',
-    func: 'Wrist flexion, extension, and grip strength. Essential stabilizers in all pulling, rowing, and carrying movements.',
-    exercises: ['Wrist Curls', 'Reverse Curls', 'Hammer Curls', 'Farmer Carries', 'Dead Hangs', 'Zottman Curl', 'Plate Pinch', 'Towel Pull-Up'],
+    func: 'Wrist flexion, extension, and grip strength. Essential stabilizers in all pulling, rowing, and carrying movements. Often the limiting factor in deadlifts and rows before the target muscle fatigues.',
+    heads: [
+      { name: 'Flexor Group (Anterior)', desc: 'Flexor carpi radialis, flexor carpi ulnaris, palmaris longus. Drive wrist flexion and grip. Targeted by wrist curls.' },
+      { name: 'Extensor Group (Posterior)', desc: 'Extensor carpi radialis, extensor carpi ulnaris. Drive wrist extension. Targeted by reverse curls.' },
+      { name: 'Brachioradialis', desc: 'The most visible forearm muscle. Acts as an elbow flexor, especially in neutral (hammer) grip. Best targeted by hammer curls and reverse curls.' },
+    ],
+    exercises: [
+      { name: 'Wrist Curls', secondary: [] },
+      { name: 'Reverse Curls', secondary: [{m:'Brachioradialis',t:'h'},{m:'Biceps',t:'m'}] },
+      { name: 'Hammer Curls', secondary: [{m:'Biceps',t:'m'},{m:'Brachialis',t:'h'}] },
+      { name: 'Farmer Carries', secondary: [{m:'Traps',t:'h'},{m:'Core',t:'m'}] },
+      { name: 'Dead Hangs', secondary: [{m:'Lats',t:'l'}] },
+      { name: 'Zottman Curl', secondary: [{m:'Biceps',t:'m'}] },
+      { name: 'Plate Pinch', secondary: [] },
+      { name: 'Towel Pull-Up', secondary: [{m:'Lats',t:'h'},{m:'Biceps',t:'h'}] },
+    ],
     volMin: 4, volOpt: 8, volMax: 12,
     recovery: '24 hours',
     note: 'Forearms recover rapidly and tolerate high frequency. Heavy pulling work (rows, deadlifts, pull-ups) provides significant indirect volume — assess direct training need based on grip strength demands.'
   },
   abs: {
     name: 'Abs & Core — Rectus Abdominis',
-    func: 'Spinal flexion, rotation, and core stabilization. Creates intra-abdominal pressure (IAP) during heavy compound lifts.',
-    exercises: ['Cable Crunch', 'Hanging Leg Raise', 'Ab Wheel Rollout', 'Decline Crunch', 'Dragon Flag', 'Rope Crunch', 'Weighted Crunch', 'Plank Variations'],
+    func: 'Spinal flexion, trunk stabilization, and intra-abdominal pressure generation. The rectus abdominis is a single muscle separated visually into "blocks" by tendinous intersections.',
+    heads: [
+      { name: 'Upper Rectus', desc: 'Fibers closer to the sternum. Tend to become visible first during fat loss. Highly active in crunching motions with the pelvis fixed.' },
+      { name: 'Lower Rectus', desc: 'Fibers closest to the pubic symphysis. More active during hip flexion movements (hanging leg raises). Often the last region to develop visual definition.' },
+    ],
+    exercises: [
+      { name: 'Cable Crunch', secondary: [{m:'Hip Flexors',t:'l'}] },
+      { name: 'Hanging Leg Raise', secondary: [{m:'Hip Flexors',t:'h'}] },
+      { name: 'Ab Wheel Rollout', secondary: [{m:'Serratus',t:'h'},{m:'Lats',t:'m'},{m:'Hip Flexors',t:'m'}] },
+      { name: 'Decline Crunch', secondary: [{m:'Hip Flexors',t:'m'}] },
+      { name: 'Dragon Flag', secondary: [{m:'Hip Flexors',t:'h'},{m:'Lower Back',t:'m'}] },
+      { name: 'Rope Crunch', secondary: [{m:'Hip Flexors',t:'l'}] },
+      { name: 'Weighted Crunch', secondary: [] },
+      { name: 'Plank Variations', secondary: [{m:'Serratus',t:'m'},{m:'Glutes',t:'l'}] },
+    ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '24–48 hours',
     note: 'Visible abs are primarily a function of body fat percentage, not training volume. Train the core for functional strength, spinal stability, and IAP — not purely aesthetics. Heavy squats and deadlifts provide substantial core stimulus.'
   },
   'hip-flexors': {
     name: 'Hip Flexors — Iliopsoas',
-    func: 'Hip flexion and lumbar spine stabilization. Critical for squat depth, sprint mechanics, and all athletic movement.',
-    exercises: ['Hanging Knee Raise', 'Cable Hip Flexion', 'Deficit Reverse Lunge', 'Dragon Flag', 'L-Sit Hold', 'Mountain Climbers', 'Hanging Straight Leg Raise'],
+    func: 'Hip flexion and lumbar spine stabilization. Critical for squat depth, sprint mechanics, and all athletic movement. One of the most commonly tight and understrengthened muscle groups.',
+    heads: [
+      { name: 'Iliacus', desc: 'Fan-shaped muscle from the iliac fossa. Pure hip flexor. Merges with the psoas to form the iliopsoas tendon inserting at the lesser trochanter.' },
+      { name: 'Psoas Major', desc: 'Long muscle from the lumbar vertebrae (L1–L5) to the lesser trochanter. Both a hip flexor and lumbar stabilizer. Weakness or tightness directly affects spine alignment.' },
+    ],
+    exercises: [
+      { name: 'Hanging Knee Raise', secondary: [{m:'Abs',t:'m'}] },
+      { name: 'Cable Hip Flexion', secondary: [{m:'Quads',t:'l'}] },
+      { name: 'Deficit Reverse Lunge', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'h'}] },
+      { name: 'Dragon Flag', secondary: [{m:'Abs',t:'h'},{m:'Lower Back',t:'m'}] },
+      { name: 'L-Sit Hold', secondary: [{m:'Abs',t:'m'},{m:'Quads',t:'l'}] },
+      { name: 'Mountain Climbers', secondary: [{m:'Abs',t:'m'},{m:'Shoulders',t:'l'}] },
+      { name: 'Hanging Straight Leg Raise', secondary: [{m:'Abs',t:'h'}] },
+    ],
     volMin: 0, volOpt: 6, volMax: 12,
     recovery: '24 hours',
-    note: 'Hip flexors are often tight from prolonged sitting and weak from underuse. Strengthening + stretching is the correct protocol — not one or the other. Tight hip flexors limit glute activation and anterior pelvic tilt.'
+    note: 'Hip flexors are often tight from prolonged sitting and weak from underuse. Strengthening + stretching is the correct protocol — not one or the other. Tight hip flexors limit glute activation and cause anterior pelvic tilt.'
   },
   quads: {
     name: 'Quadriceps',
-    func: 'Knee extension and hip flexion (rectus femoris). The primary driver of squatting, lunging, and all knee-dominant movements.',
-    exercises: ['Back Squat', 'Front Squat', 'Leg Press', 'Hack Squat', 'Bulgarian Split Squat', 'Leg Extension', 'Goblet Squat', 'Sissy Squat', 'Step-Up', 'Walking Lunge'],
+    func: 'Knee extension (all 4 heads) and hip flexion (rectus femoris only). The primary driver of squatting, lunging, and all knee-dominant movements. The largest muscle group in the body by mass.',
+    heads: [
+      { name: 'Rectus Femoris', desc: 'The only quad head that crosses the hip joint. Limits squat depth when tight. Best targeted in hip-extended positions (leg extension, Bulgarian split squat).' },
+      { name: 'Vastus Lateralis (Outer)', desc: 'The largest quad head. Creates the outer sweep visible from the front. Highly active in squats, leg press, and hack squats.' },
+      { name: 'Vastus Medialis (VMO)', desc: 'The teardrop-shaped muscle above the inner knee. Critical for knee tracking and stability. Highly active in terminal knee extension (0–30°).' },
+      { name: 'Vastus Intermedius (Deep)', desc: 'A deep muscle beneath the rectus femoris. Cannot be isolated or distinguished by appearance. Contributes force across the full ROM of knee extension.' },
+    ],
+    exercises: [
+      { name: 'Back Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Lower Back',t:'m'},{m:'Adductors',t:'m'}] },
+      { name: 'Front Squat', secondary: [{m:'Glutes',t:'m'},{m:'Upper Back',t:'h'},{m:'Core',t:'h'}] },
+      { name: 'Leg Press', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}] },
+      { name: 'Hack Squat', secondary: [{m:'Glutes',t:'m'}] },
+      { name: 'Bulgarian Split Squat', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Hip Flexors',t:'l'}] },
+      { name: 'Leg Extension', secondary: [] },
+      { name: 'Goblet Squat', secondary: [{m:'Glutes',t:'m'},{m:'Core',t:'m'}] },
+      { name: 'Sissy Squat', secondary: [{m:'Hip Flexors',t:'l'}] },
+      { name: 'Step-Up', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'}] },
+      { name: 'Walking Lunge', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'l'},{m:'Adductors',t:'l'}] },
+    ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
     note: 'Front squats and heel elevation shift mechanical load onto the quads more effectively than low-bar squatting (Wretenberg 1996). The quads recover slowly from high-volume, heavy training — manage frequency carefully.'
   },
   tibialis: {
     name: 'Tibialis Anterior',
-    func: 'Ankle dorsiflexion. A critical but routinely neglected muscle for knee health, shin splint prevention, and squat depth.',
-    exercises: ['Tibialis Raise', 'Toe Taps Against Resistance', 'Resistance Band Dorsiflexion', 'Walking on Heels', 'Banded Dorsiflexion Hold', 'Ankle Circle Drill'],
+    func: 'Ankle dorsiflexion — pulling the foot up toward the shin. A critical but routinely neglected muscle for knee health, shin splint prevention, and squat depth without heel elevation.',
+    heads: [
+      { name: 'Tibialis Anterior', desc: 'Single-unit muscle running along the front of the shin. The prime dorsiflexor. Also assists in foot inversion. Directly limits squat depth when short and weak.' },
+    ],
+    exercises: [
+      { name: 'Tibialis Raise', secondary: [] },
+      { name: 'Toe Taps Against Resistance', secondary: [] },
+      { name: 'Resistance Band Dorsiflexion', secondary: [] },
+      { name: 'Walking on Heels', secondary: [] },
+      { name: 'Banded Dorsiflexion Hold', secondary: [] },
+      { name: 'Ankle Circle Drill', secondary: [] },
+    ],
     volMin: 0, volOpt: 6, volMax: 12,
     recovery: '24 hours',
     note: 'Strengthening the tibialis anterior dramatically reduces anterior compartment syndrome and shin splints. It also directly improves ankle dorsiflexion range of motion, increasing squat depth without heel elevation.'
   },
   traps: {
     name: 'Trapezius — Upper, Mid & Lower',
-    func: 'Scapular elevation (upper), retraction (mid), and depression (lower). Coordinates all shoulder blade movement.',
-    exercises: ['Barbell Shrug', 'Rack Pull', 'Face Pull', 'Farmer Carries', 'Y-T-W Raises', 'Cable Shrug', 'Dumbbell Shrug', 'Overhead Carry'],
+    func: 'Scapular elevation (upper), retraction (mid), and depression (lower). Coordinates all shoulder blade movement and is heavily involved in overhead pressing safety.',
+    heads: [
+      { name: 'Upper Traps', desc: 'Elevate the scapulae and support the neck. Easily overtrained via shrugs. Create the visible "bull neck" or trapezoidal upper back.' },
+      { name: 'Middle Traps', desc: 'Retract the scapulae. Work alongside the rhomboids. Best targeted by face pulls and horizontal rows with a retraction emphasis.' },
+      { name: 'Lower Traps', desc: 'Depress and upwardly rotate the scapulae. Severely neglected in most programs. Weak lower traps = elevated scapulae, impingement, and poor posture.' },
+    ],
+    exercises: [
+      { name: 'Barbell Shrug', secondary: [] },
+      { name: 'Rack Pull', secondary: [{m:'Lower Back',t:'h'},{m:'Glutes',t:'m'}] },
+      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Ext. Rotators',t:'m'}] },
+      { name: 'Farmer Carries', secondary: [{m:'Core',t:'h'},{m:'Forearms',t:'h'}] },
+      { name: 'Y-T-W Raises', secondary: [{m:'Rear Delt',t:'h'},{m:'Rhomboids',t:'m'}] },
+      { name: 'Cable Shrug', secondary: [] },
+      { name: 'Dumbbell Shrug', secondary: [] },
+      { name: 'Overhead Carry', secondary: [{m:'Serratus',t:'m'},{m:'Core',t:'m'}] },
+    ],
     volMin: 0, volOpt: 12, volMax: 20,
     recovery: '48 hours',
     note: 'Upper traps are easily overtrained by shrugs while lower traps are severely neglected in most programs. Weak lower traps = elevated scapulae, impingement, and poor posture. Prioritize lower and mid-trap work for shoulder health.'
   },
   'rear-delt': {
-    name: 'Rear Deltoid — Posterior',
-    func: 'Shoulder horizontal abduction and external rotation. Balances the anterior deltoid and stabilizes the rotator cuff.',
-    exercises: ['Face Pull', 'Rear Delt Fly', 'Band Pull-Apart', 'Reverse Pec Deck', 'Cable Rear Row', 'Bent-Over Rear Delt Fly', 'Prone Y-Raise', 'Cable Face Pull'],
+    name: 'Rear Deltoid — Posterior Head',
+    func: 'Shoulder horizontal abduction and external rotation. Balances the anterior deltoid, protects the rotator cuff, and directly determines shoulder health and posture.',
+    heads: [
+      { name: 'Posterior Head', desc: 'The back portion of the deltoid. Visible from behind as the rounded cap of the shoulder. Chronically undertrained in press-heavy athletes, leading to impingement and internal rotation.' },
+    ],
+    exercises: [
+      { name: 'Face Pull', secondary: [{m:'Ext. Rotators',t:'h'},{m:'Traps',t:'m'}] },
+      { name: 'Rear Delt Fly (DB)', secondary: [{m:'Rhomboids',t:'m'},{m:'Traps',t:'l'}] },
+      { name: 'Band Pull-Apart', secondary: [{m:'Rhomboids',t:'m'},{m:'Traps',t:'l'}] },
+      { name: 'Reverse Pec Deck', secondary: [{m:'Rhomboids',t:'m'}] },
+      { name: 'Cable Rear Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Traps',t:'m'}] },
+      { name: 'Bent-Over Rear Delt Fly', secondary: [{m:'Rhomboids',t:'m'},{m:'Lower Back',t:'l'}] },
+      { name: 'Prone Y-Raise', secondary: [{m:'Lower Traps',t:'h'},{m:'Rhomboids',t:'m'}] },
+      { name: 'Cable Face Pull (high)', secondary: [{m:'Ext. Rotators',t:'h'},{m:'Traps',t:'m'}] },
+    ],
     volMin: 0, volOpt: 14, volMax: 22,
     recovery: '24–48 hours',
     note: 'Chronic rear delt weakness is near-universal in people who press regularly. Weak rear delts lead to shoulder internal rotation, impingement, and stalled bench. 2:1 pulling-to-pressing ratio is a common recommendation.'
   },
   lats: {
     name: 'Latissimus Dorsi',
-    func: 'Shoulder extension and adduction. The broadest muscle in the body — the primary muscle responsible for the V-taper.',
-    exercises: ['Weighted Pull-Up', 'Lat Pulldown', 'Seated Cable Row', 'Single-Arm DB Row', 'Straight-Arm Pulldown', 'Meadows Row', 'Chest-Supported DB Row', 'T-Bar Row', 'Cable Pullover', 'Underhand Barbell Row'],
+    func: 'Shoulder extension, adduction, and internal rotation. The broadest muscle in the body — the primary determinant of back width and the V-taper silhouette.',
+    heads: [
+      { name: 'Upper Lats', desc: 'Fibers closest to the armpit. Widest visual contributor. Best targeted with wide-grip pull-ups and pulldowns at full overhead stretch.' },
+      { name: 'Lower Lats', desc: 'Fibers originating lower on the thoracolumbar fascia and iliac crest. Best targeted by straight-arm pulldowns and pullovers with full shoulder extension.' },
+    ],
+    exercises: [
+      { name: 'Weighted Pull-Up', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'},{m:'Rhomboids',t:'m'}] },
+      { name: 'Lat Pulldown', secondary: [{m:'Biceps',t:'h'},{m:'Rear Delt',t:'m'}] },
+      { name: 'Seated Cable Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'m'}] },
+      { name: 'Single-Arm DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Rear Delt',t:'l'}] },
+      { name: 'Straight-Arm Pulldown', secondary: [{m:'Triceps',t:'l'}] },
+      { name: 'Meadows Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Biceps',t:'m'}] },
+      { name: 'Chest-Supported DB Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Rear Delt',t:'m'},{m:'Biceps',t:'m'}] },
+      { name: 'T-Bar Row', secondary: [{m:'Rhomboids',t:'h'},{m:'Biceps',t:'m'},{m:'Lower Back',t:'m'}] },
+      { name: 'Cable Pullover', secondary: [{m:'Triceps',t:'l'},{m:'Serratus',t:'m'}] },
+      { name: 'Underhand Barbell Row', secondary: [{m:'Biceps',t:'h'},{m:'Rhomboids',t:'h'}] },
+    ],
     volMin: 10, volOpt: 16, volMax: 22,
     recovery: '48–72 hours',
-    note: 'Full stretch overhead (lengthened position) drives the majority of hypertrophy stimulus. Avoid cutting ROM short at the top of pull-ups or pulldowns. Stretching through the full range is critical (Pedrosa et al. 2022).'
+    note: 'Full stretch overhead drives the majority of hypertrophy stimulus. Avoid cutting ROM short at the top of pull-ups or pulldowns. Stretching through the full range is critical (Pedrosa et al. 2022).'
   },
   rhomboids: {
     name: 'Rhomboids — Major & Minor',
-    func: 'Scapular retraction and downward rotation. Essential for posture, shoulder health, and setting the shoulder blades before pressing.',
-    exercises: ['Barbell Row', 'Chest-Supported Row', 'Seated Cable Row (flared elbows)', 'Band Pull-Apart', 'Face Pull', 'Dumbbell Row (elbows out)', 'Resistance Band Row', 'Prone Y-T-W'],
+    func: 'Scapular retraction and downward rotation. Essential for posture, shoulder health, and setting the shoulder blades before pressing movements.',
+    heads: [
+      { name: 'Rhomboid Major', desc: 'Larger of the two. Retracts the scapula and rotates it to depress the glenoid. Sits between the thoracic spine and the medial border of the scapula.' },
+      { name: 'Rhomboid Minor', desc: 'Runs from cervical vertebrae to the superior angle of the scapula. Assists in retraction. Often inseparable in function from the major.' },
+    ],
+    exercises: [
+      { name: 'Barbell Row', secondary: [{m:'Lats',t:'h'},{m:'Biceps',t:'m'},{m:'Lower Back',t:'m'}] },
+      { name: 'Chest-Supported Row', secondary: [{m:'Lats',t:'h'},{m:'Rear Delt',t:'m'},{m:'Biceps',t:'m'}] },
+      { name: 'Seated Cable Row (flared elbows)', secondary: [{m:'Rear Delt',t:'h'},{m:'Lats',t:'m'}] },
+      { name: 'Band Pull-Apart', secondary: [{m:'Rear Delt',t:'m'}] },
+      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Traps',t:'m'}] },
+      { name: 'Dumbbell Row (elbows out)', secondary: [{m:'Rear Delt',t:'h'},{m:'Lats',t:'m'}] },
+      { name: 'Resistance Band Row', secondary: [{m:'Rear Delt',t:'m'},{m:'Biceps',t:'l'}] },
+      { name: 'Prone Y-T-W', secondary: [{m:'Lower Traps',t:'h'},{m:'Rear Delt',t:'m'}] },
+    ],
     volMin: 0, volOpt: 12, volMax: 20,
     recovery: '48 hours',
     note: 'Active scapular retraction at the end of every rowing movement approximately doubles rhomboid EMG compared to passive retraction. Consciously pinch the shoulder blades on every rep.'
   },
   'lower-back': {
     name: 'Lower Back — Spinal Erectors',
-    func: 'Spinal extension and stabilization. Works isometrically during deadlifts, squats, rows, and almost every loaded compound movement.',
-    exercises: ['Deadlift', 'Romanian Deadlift', 'Back Extension', 'Good Morning', 'Reverse Hyper', 'Hyperextension', 'Kettlebell Swing'],
+    func: 'Spinal extension and stabilization. Works isometrically during deadlifts, squats, rows, and almost every loaded compound movement. The primary CNS fatigue driver in most training programs.',
+    heads: [
+      { name: 'Iliocostalis (Outer)', desc: 'Lateral erector. Runs from the iliac crest to the ribs. Primary lateral stabilizer of the spine.' },
+      { name: 'Longissimus (Middle)', desc: 'The largest erector component. Runs from the iliac crest to the base of the skull. Primary extensor force generator.' },
+      { name: 'Spinalis (Inner)', desc: 'Closest to the vertebrae. Small but critical for inter-segmental spinal stability. Trains best with slow, controlled extension movements.' },
+    ],
+    exercises: [
+      { name: 'Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'h'},{m:'Traps',t:'m'},{m:'Quads',t:'m'}] },
+      { name: 'Romanian Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'h'}] },
+      { name: 'Back Extension', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'m'}] },
+      { name: 'Good Morning', secondary: [{m:'Hamstrings',t:'h'},{m:'Glutes',t:'m'}] },
+      { name: 'Reverse Hyper', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'m'}] },
+      { name: 'Hyperextension', secondary: [{m:'Glutes',t:'m'},{m:'Hamstrings',t:'m'}] },
+      { name: 'Kettlebell Swing', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'h'},{m:'Core',t:'m'}] },
+    ],
     volMin: 0, volOpt: 8, volMax: 14,
     recovery: '72+ hours',
     note: 'The erectors recover very slowly. They are a systemic fatigue limiter, not just a local one. Never train them when sore before heavy deadlifts or squats — this is how lower back injuries occur. Prioritize recovery over volume.'
   },
   triceps: {
-    name: 'Triceps Brachii — All Three Heads',
-    func: 'Elbow extension. Comprises approximately two-thirds of upper arm total mass. The long head also assists shoulder extension.',
-    exercises: ['Close-Grip Bench Press', 'Overhead Tricep Extension', 'Cable Pushdown', 'Skull Crusher', 'Weighted Dips', 'JM Press', 'Incline Overhead Extension', 'Diamond Push-Up'],
+    name: 'Triceps Brachii',
+    func: 'Elbow extension — the primary function. The long head also extends the shoulder joint. Comprises ~65% of upper arm mass, making it the dominant muscle for arm size.',
+    heads: [
+      { name: 'Long Head', desc: 'The only head that crosses the shoulder joint. It is fully stretched when the arm is raised overhead. Overhead extensions are irreplaceable for long-head hypertrophy — pushdowns do not replicate this.' },
+      { name: 'Lateral Head (Outer)', desc: 'Creates the horseshoe shape on the outer upper arm. Highly active in most pressing and extension movements. Well-developed by close-grip bench and pushdowns.' },
+      { name: 'Medial Head (Inner/Deep)', desc: 'Deep, largely obscured by the other two heads. Active throughout the full ROM, especially in the final degrees of extension. Best targeted by reverse-grip pushdowns.' },
+    ],
+    exercises: [
+      { name: 'Close-Grip Bench Press', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'Overhead Tricep Extension (cable)', secondary: [] },
+      { name: 'Cable Pushdown', secondary: [] },
+      { name: 'Skull Crusher', secondary: [] },
+      { name: 'Weighted Dips', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'m'}] },
+      { name: 'JM Press', secondary: [{m:'Chest',t:'l'}] },
+      { name: 'Incline Overhead Extension', secondary: [] },
+      { name: 'Diamond Push-Up', secondary: [{m:'Chest',t:'m'},{m:'Ant. Delt',t:'l'}] },
+      { name: 'Reverse-Grip Pushdown', secondary: [{m:'Brachioradialis',t:'m'}] },
+      { name: 'Tate Press', secondary: [] },
+    ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '48 hours',
-    note: 'The long head (the largest, most visible head) is only fully stretched when the arm is raised overhead. Overhead tricep extensions are therefore superior to pushdowns for long-head hypertrophy. Do not neglect them.'
+    note: 'The long head is only fully stretched when the arm is raised overhead. Overhead extensions are superior to pushdowns for long-head hypertrophy. Do not neglect them — they determine the size of the tricep more than any other exercise.'
   },
   glutes: {
     name: 'Gluteus Maximus',
-    func: 'Hip extension and external rotation. The most powerful muscle in the human body. Critical for sprinting, jumping, and athletic output.',
-    exercises: ['Barbell Hip Thrust', 'Romanian Deadlift', 'Bulgarian Split Squat', 'Cable Pull-Through', 'Step-Up', 'Single-Leg Hip Thrust', 'Sumo Deadlift', 'Glute Bridge', 'Abductor Machine', 'Cable Kickback'],
+    func: 'Hip extension and external rotation. The most powerful muscle in the human body. Critical for sprinting, jumping, and all athletic output. Also a primary stabilizer of the pelvis during single-leg stance.',
+    heads: [
+      { name: 'Upper Glute Max', desc: 'Upper fiber bundle with slightly more abduction contribution. More visible as the "upper shelf" of the glute from the side. Best activated in hip-extended, externally-rotated positions.' },
+      { name: 'Lower Glute Max', desc: 'The bulk of the gluteus maximus. Primary hip extensor. Most active in hip thrust, Romanian deadlift, and deep squat at the bottom position.' },
+    ],
+    exercises: [
+      { name: 'Barbell Hip Thrust', secondary: [{m:'Hamstrings',t:'m'},{m:'Quads',t:'l'}] },
+      { name: 'Romanian Deadlift', secondary: [{m:'Hamstrings',t:'h'},{m:'Lower Back',t:'m'}] },
+      { name: 'Bulgarian Split Squat', secondary: [{m:'Quads',t:'h'},{m:'Hamstrings',t:'m'}] },
+      { name: 'Cable Pull-Through', secondary: [{m:'Hamstrings',t:'m'},{m:'Lower Back',t:'l'}] },
+      { name: 'Step-Up', secondary: [{m:'Quads',t:'m'},{m:'Hamstrings',t:'l'}] },
+      { name: 'Single-Leg Hip Thrust', secondary: [{m:'Hamstrings',t:'m'}] },
+      { name: 'Sumo Deadlift', secondary: [{m:'Adductors',t:'h'},{m:'Hamstrings',t:'h'},{m:'Lower Back',t:'m'}] },
+      { name: 'Glute Bridge', secondary: [{m:'Hamstrings',t:'m'}] },
+      { name: 'Cable Kickback', secondary: [] },
+      { name: 'Back Squat (deep)', secondary: [{m:'Quads',t:'h'},{m:'Hamstrings',t:'m'},{m:'Adductors',t:'m'}] },
+    ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48–72 hours',
     note: 'Hip thrusts produce 3–4× higher glute EMG activation than squats (Contreras et al. 2015). Full hip extension at the top of each rep is non-negotiable. Squats are primarily quad exercises — do not rely on them alone for glute development.'
   },
+  'glute-med': {
+    name: 'Gluteus Medius & Minimus',
+    func: 'Hip abduction and pelvic stabilization during single-leg stance. The gluteus medius prevents the pelvis from dropping (Trendelenburg gait) during walking, running, and all unilateral movements.',
+    heads: [
+      { name: 'Gluteus Medius', desc: 'Fan-shaped muscle on the lateral hip. Primary hip abductor. Critical stabilizer during single-leg phases of gait and sport. Creates the outer hip curve visible from the front.' },
+      { name: 'Gluteus Minimus', desc: 'Lies deep to the gluteus medius. Assists in hip abduction and internal rotation. Often trained simultaneously with the medius.' },
+    ],
+    exercises: [
+      { name: 'Abductor Machine', secondary: [] },
+      { name: 'Clamshell (banded)', secondary: [] },
+      { name: 'Side-Lying Hip Abduction', secondary: [] },
+      { name: 'Cable Hip Abduction', secondary: [] },
+      { name: 'Banded Monster Walk', secondary: [{m:'Hip Flexors',t:'l'}] },
+      { name: 'Single-Leg Squat', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'m'},{m:'Core',t:'m'}] },
+      { name: 'Lateral Band Walk', secondary: [{m:'Adductors',t:'l'}] },
+      { name: 'Hip Hike', secondary: [] },
+    ],
+    volMin: 6, volOpt: 12, volMax: 20,
+    recovery: '24–48 hours',
+    note: 'The glute medius is the most common site of lateral hip pain and Trendelenburg gait. Weakness here causes knee valgus (caving), IT band syndrome, and lower back dysfunction. Strengthening is therapeutic and performance-critical for all athletes.'
+  },
   hamstrings: {
-    name: 'Hamstrings — Biceps Femoris & Semimembranosus',
-    func: 'Knee flexion AND hip extension. A two-joint muscle that must be trained in both functions for complete development and injury prevention.',
-    exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Hamstring Curl', 'Good Morning', 'Glute-Ham Raise', 'Stiff-Leg Deadlift', 'Lying Leg Curl', 'Seated Leg Curl', 'Single-Leg RDL', 'Swiss Ball Leg Curl'],
+    name: 'Hamstrings',
+    func: 'Knee flexion AND hip extension. A two-joint muscle group that must be trained in both functions for complete development and injury prevention. One of the most commonly injured muscle groups in athletic populations.',
+    heads: [
+      { name: 'Biceps Femoris — Long Head', desc: 'Two-joint hamstring. Performs both knee flexion and hip extension. Most commonly injured hamstring. Best trained with hip-hinge movements at full hip flexion (RDL bottom).' },
+      { name: 'Biceps Femoris — Short Head', desc: 'Single-joint. Only crosses the knee. Functions only in knee flexion. Trained by leg curls, NOT by RDLs. Often neglected.' },
+      { name: 'Semimembranosus', desc: 'Medial (inner) hamstring. Two-joint. Contributes to both knee flexion and hip extension. Provides most of the inner hamstring mass visible from behind.' },
+      { name: 'Semitendinosus', desc: 'Also medial, runs superficial to the semimembranosus. Has a long tendon. Two-joint muscle. Visible as a cord behind the knee in lean individuals.' },
+    ],
+    exercises: [
+      { name: 'Romanian Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Lower Back',t:'m'}] },
+      { name: 'Leg Curl', secondary: [] },
+      { name: 'Nordic Hamstring Curl', secondary: [{m:'Glutes',t:'l'}] },
+      { name: 'Good Morning', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'h'}] },
+      { name: 'Glute-Ham Raise', secondary: [{m:'Glutes',t:'m'},{m:'Calves',t:'l'}] },
+      { name: 'Stiff-Leg Deadlift', secondary: [{m:'Glutes',t:'m'},{m:'Lower Back',t:'m'}] },
+      { name: 'Lying Leg Curl', secondary: [] },
+      { name: 'Seated Leg Curl', secondary: [] },
+      { name: 'Single-Leg RDL', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}] },
+      { name: 'Swiss Ball Leg Curl', secondary: [{m:'Glutes',t:'h'},{m:'Core',t:'m'}] },
+    ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48–72 hours',
-    note: 'Hip-hinge movements (RDLs, good mornings) target the proximal hamstring attachment. Leg curls target the distal attachment. Both are required for complete development. The Nordic curl produces the greatest eccentric overload and is highly effective for injury prevention.'
+    note: 'Hip-hinge movements target the proximal hamstring attachment. Leg curls target the distal attachment. Both are required for complete development. The Nordic curl produces the greatest eccentric overload and is highly effective for injury prevention.'
   },
   calves: {
     name: 'Calves — Gastrocnemius & Soleus',
-    func: 'Plantarflexion. Gastrocnemius (two-joint, runs over knee) peaks with straight knee; soleus (single-joint) peaks with bent knee.',
-    exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise', 'Jump Rope', 'Leg Press Calf Raise', 'Smith Machine Calf Raise', 'Calf Press on Leg Press'],
+    func: 'Plantarflexion (pointing the foot down). Provide propulsion in running and jumping. Highly fatigue-resistant due to Type I fiber dominance.',
+    heads: [
+      { name: 'Gastrocnemius (Medial Head)', desc: 'The larger, more visible inner head. Two-joint — also flexes the knee. Maximally active with the knee straight. Targeted by straight-leg calf raises.' },
+      { name: 'Gastrocnemius (Lateral Head)', desc: 'Smaller outer head. Same two-joint function. Creates the outer visible head of the calf. Also best trained with straight knee.' },
+      { name: 'Soleus', desc: 'Deep, flat muscle running beneath the gastrocnemius. Single-joint — only crosses the ankle. Dominant plantarflexor when the knee is bent. Targeted by seated calf raises.' },
+    ],
+    exercises: [
+      { name: 'Standing Calf Raise', secondary: [] },
+      { name: 'Seated Calf Raise', secondary: [] },
+      { name: 'Donkey Calf Raise', secondary: [] },
+      { name: 'Single-Leg Calf Raise', secondary: [] },
+      { name: 'Jump Rope', secondary: [{m:'Hip Flexors',t:'l'},{m:'Quads',t:'l'}] },
+      { name: 'Leg Press Calf Raise', secondary: [] },
+      { name: 'Smith Machine Calf Raise', secondary: [] },
+      { name: 'Calf Press on Leg Press', secondary: [] },
+    ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '24–48 hours',
-    note: 'Calves are highly fatigue-resistant (Type I fiber dominant) and require high volume, full ROM, and controlled tempo. Complete stretch at the bottom and peak contraction at the top on every rep. Both standing and seated raises are needed to target both muscles.'
+    note: 'Calves are highly fatigue-resistant and require high volume, full ROM, and controlled tempo. Complete stretch at the bottom and peak contraction at the top on every rep. Both standing and seated raises are needed to target both muscles.'
   },
   neck: {
-    name: 'Neck — Sternocleidomastoid & Upper Traps',
-    func: 'Head flexion, rotation, and lateral flexion. Often undertrained. Critical for appearance in athletes and for injury prevention in contact sports.',
-    exercises: ['Neck Curl (Harness)', 'Neck Extension (Harness)', 'Lateral Neck Flexion', 'Shrug', "Farmer's Carry", 'Chin Tuck', 'Manual Resistance Neck Flex'],
+    name: 'Neck — Sternocleidomastoid & Posterior Extensors',
+    func: 'Head flexion, extension, rotation, and lateral flexion. Often undertrained despite being critical for appearance in athletes and injury prevention in contact sports, combat sports, and vehicle incidents.',
+    heads: [
+      { name: 'Sternocleidomastoid (SCM)', desc: 'The most visible neck muscle — the oblique cord visible when turning the head. Flexes and rotates the head. Developed by weighted neck curls and manual resistance.' },
+      { name: 'Splenius / Semispinalis', desc: 'Deep posterior neck extensors. Responsible for head extension and stability. Targeted by neck extension exercises.' },
+    ],
+    exercises: [
+      { name: 'Neck Curl (Harness)', secondary: [] },
+      { name: 'Neck Extension (Harness)', secondary: [] },
+      { name: 'Lateral Neck Flexion', secondary: [] },
+      { name: 'Shrug', secondary: [{m:'Upper Traps',t:'h'}] },
+      { name: "Farmer's Carry", secondary: [{m:'Traps',t:'h'},{m:'Core',t:'m'}] },
+      { name: 'Chin Tuck', secondary: [] },
+      { name: 'Manual Resistance Neck Flex', secondary: [] },
+    ],
     volMin: 6, volOpt: 9, volMax: 14,
     recovery: '48 hours',
-    note: 'Begin with bodyweight isometrics — lying neck curl/extension — before adding resistance. The SCM is the most visible neck muscle and responds well to direct work. Highly relevant for combat sports, rugby, and football athletes. Most gym-goers neglect this entirely.'
+    note: 'Begin with bodyweight isometrics before adding resistance. The SCM is the most visible neck muscle and responds well to direct work. Highly relevant for combat sports, rugby, and football athletes. Most gym-goers neglect this entirely.'
   },
   serratus: {
     name: 'Serratus Anterior',
-    func: 'Scapular protraction, upward rotation, and stabilization against the ribcage. Critical for shoulder health and overhead pressing mechanics.',
-    exercises: ['Ab Wheel Rollout', 'Serratus Punch', 'Push-Up Plus', 'Cable Serratus Crunch', 'Overhead Press', 'Bear Crawl', 'Wall Slide'],
+    func: 'Scapular protraction, upward rotation, and stabilization against the ribcage. Critical for shoulder health and overhead pressing mechanics. Without it, the scapula wings away from the thorax.',
+    heads: [
+      { name: 'Serratus Anterior', desc: 'Originates from the lateral surface of ribs 1–9. Inserts on the medial border of the scapula. Holds the scapula flat against the ribcage. Visible as the "serrated" finger-like striations on the lateral ribcage in lean athletes.' },
+    ],
+    exercises: [
+      { name: 'Ab Wheel Rollout', secondary: [{m:'Abs',t:'h'},{m:'Lats',t:'m'}] },
+      { name: 'Serratus Punch', secondary: [] },
+      { name: 'Push-Up Plus', secondary: [{m:'Chest',t:'m'},{m:'Triceps',t:'m'}] },
+      { name: 'Cable Serratus Crunch', secondary: [{m:'Abs',t:'m'}] },
+      { name: 'Overhead Press', secondary: [{m:'Ant. Delt',t:'h'},{m:'Triceps',t:'h'}] },
+      { name: 'Bear Crawl', secondary: [{m:'Core',t:'h'},{m:'Shoulders',t:'m'}] },
+      { name: 'Wall Slide', secondary: [{m:'Lower Traps',t:'h'}] },
+    ],
     volMin: 8, volOpt: 12, volMax: 16,
     recovery: '48 hours',
     note: 'Serratus weakness causes scapular winging, leading to impingement, rotator cuff tears, and shoulder dysfunction. Ab wheel rollouts load it heavily under stretch. Visible in lean athletes as the "fingers" along the ribs — a signature of elite conditioning. (Kibler et al., 2013)'
   },
   obliques: {
     name: 'Obliques — External & Internal',
-    func: 'Trunk rotation, lateral flexion, and anti-rotation stability. Transmit force between upper and lower body in all compound movements.',
-    exercises: ['Pallof Press', 'Cable Woodchop', 'Side Plank', 'Hanging Oblique Raise', 'Landmine Rotation', 'Russian Twist', 'Windmill'],
+    func: 'Trunk rotation, lateral flexion, and anti-rotation stability. The obliques transmit force between the upper and lower body in all compound movements and are critical for athletic power transfer.',
+    heads: [
+      { name: 'External Obliques', desc: 'Superficial. Run diagonally downward from ribs to pelvis. Rotate the trunk to the opposite side. Visible as diagonal lines at the side of the abdomen in lean athletes.' },
+      { name: 'Internal Obliques', desc: 'Deep to the external obliques. Run diagonally in the opposite direction. Rotate the trunk to the same side. Work synergistically with the contralateral external oblique.' },
+    ],
+    exercises: [
+      { name: 'Pallof Press', secondary: [{m:'Abs',t:'m'}] },
+      { name: 'Cable Woodchop', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}] },
+      { name: 'Side Plank', secondary: [{m:'Glute Med',t:'m'},{m:'Adductors',t:'l'}] },
+      { name: 'Hanging Oblique Raise', secondary: [{m:'Hip Flexors',t:'h'},{m:'Abs',t:'m'}] },
+      { name: 'Landmine Rotation', secondary: [{m:'Shoulders',t:'m'}] },
+      { name: 'Russian Twist', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}] },
+      { name: 'Windmill', secondary: [{m:'Hamstrings',t:'m'},{m:'Glutes',t:'l'}] },
+    ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48 hours',
-    note: 'Obliques function primarily as anti-rotation muscles — they resist movement rather than create it. Pallof press and side plank train this function directly. Avoid heavy weighted side bends: they can widen the waist by adding mass to the obliques, which is unfavorable for most physique goals.'
+    note: 'Obliques function primarily as anti-rotation muscles. Pallof press and side plank train this function directly. Avoid heavy weighted side bends: they can widen the waist by adding mass to the obliques, which is unfavorable for most physique goals.'
   },
   adductors: {
     name: 'Hip Adductors — Groin Complex',
-    func: 'Hip adduction (pulling the leg inward) and hip flexion assistance. Critical for squat depth, athletic performance, and groin injury prevention.',
-    exercises: ['Copenhagen Plank', 'Sumo Squat', 'Cable Hip Adduction', 'Wide-Stance Leg Press', 'Groin Machine', 'Side-Lying Leg Raise', 'Lateral Lunge'],
+    func: 'Hip adduction (pulling the leg inward toward the midline) and hip flexion assistance. Critical for squat depth, wide-stance stability, athletic performance, and groin injury prevention.',
+    heads: [
+      { name: 'Adductor Longus', desc: 'Most prominent and easily palpable. Strong hip flexion assistance in addition to adduction. Frequently strained in soccer and sprinting athletes.' },
+      { name: 'Adductor Magnus', desc: 'The largest adductor. Has both an adductor portion (from pubis) and a hamstring portion (from ischium). The hamstring portion contributes meaningfully to hip extension.' },
+      { name: 'Adductor Brevis', desc: 'Short, deep adductor. Less functional distinction from longus — works synergistically in all adduction tasks.' },
+      { name: 'Gracilis', desc: 'Long, thin, runs medially across the knee. Two-joint — also weakly flexes the knee. Easily neglected, rarely isolated.' },
+    ],
+    exercises: [
+      { name: 'Copenhagen Plank', secondary: [{m:'Core',t:'h'}] },
+      { name: 'Sumo Squat', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'m'}] },
+      { name: 'Cable Hip Adduction', secondary: [] },
+      { name: 'Wide-Stance Leg Press', secondary: [{m:'Glutes',t:'h'},{m:'Quads',t:'m'}] },
+      { name: 'Groin Machine', secondary: [] },
+      { name: 'Side-Lying Leg Raise (inner)', secondary: [] },
+      { name: 'Lateral Lunge', secondary: [{m:'Quads',t:'m'},{m:'Glutes',t:'m'}] },
+    ],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
-    note: 'The Copenhagen plank is the gold standard for adductor strengthening and injury prevention — clinically proven to reduce groin strains in soccer players (Harøy et al., 2019). Adductors contribute significantly to squat strength, especially at the bottom position. Most lifters neglect direct adductor work.'
+    note: 'The Copenhagen plank is the gold standard for adductor strengthening — clinically proven to reduce groin strains in soccer players (Harøy et al., 2019). Adductors contribute significantly to squat strength, especially at the bottom position. Most lifters neglect direct adductor work.'
   },
   teres: {
     name: 'Teres Major & Rotator Cuff (SITS)',
-    func: 'Internal rotation and adduction (teres major). Rotator cuff stabilizes the glenohumeral joint — the single most injury-prone joint in lifting.',
-    exercises: ['Face Pull', 'Band External Rotation', 'Cable External Rotation', 'Prone Dumbbell Row', 'Chest-Supported Row', 'Band Internal Rotation', 'Dumbbell External Rotation'],
+    func: 'Internal rotation and adduction (teres major). The rotator cuff (SITS: Supraspinatus, Infraspinatus, Teres Minor, Subscapularis) stabilizes the glenohumeral joint throughout all shoulder movement.',
+    heads: [
+      { name: 'Supraspinatus', desc: 'Initiates shoulder abduction (0–30°). The most commonly torn rotator cuff muscle. Runs through the subacromial space — impingement risk when weak.' },
+      { name: 'Infraspinatus', desc: 'Primary external rotator of the shoulder. Directly opposes the internal rotation forces of pressing. Critical for shoulder health in all pressing athletes.' },
+      { name: 'Teres Minor', desc: 'Assists external rotation. Often grouped with infraspinatus. Selectively targeted by cable external rotation with the arm at the side.' },
+      { name: 'Subscapularis', desc: 'The only internal rotator of the rotator cuff. The largest and strongest cuff muscle. Critical for pressing stability and bench press power transfer.' },
+    ],
+    exercises: [
+      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Mid Traps',t:'m'}] },
+      { name: 'Band External Rotation', secondary: [] },
+      { name: 'Cable External Rotation', secondary: [] },
+      { name: 'Prone Dumbbell Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Rear Delt',t:'m'}] },
+      { name: 'Chest-Supported Row', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'h'}] },
+      { name: 'Band Internal Rotation', secondary: [] },
+      { name: 'Dumbbell External Rotation', secondary: [] },
+    ],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
-    note: 'Face pulls should be in every serious lifter\'s program — forever. The rotator cuff (supraspinatus, infraspinatus, teres minor, subscapularis) stabilizes the shoulder during all pressing movements. Neglecting it causes the majority of chronic shoulder injuries. Low load, high frequency works best. (Reinold et al., 2009)'
+    note: 'Face pulls should be in every serious lifter\'s program — forever. The rotator cuff stabilizes the shoulder during all pressing movements. Neglecting it causes the majority of chronic shoulder injuries. Low load, high frequency works best. (Reinold et al., 2009)'
   }
 };
 
@@ -14138,7 +14531,7 @@ const SS_RATIOS = {
 };
 
 const SS_CATS = ['untrained', 'beginner', 'novice', 'intermediate', 'advanced', 'elite'];
-const SS_COLORS = ['#64748b', '#34d399', '#60a5fa', '#fbbf24', '#e04520', '#d97706'];
+const SS_COLORS = ['#64748b', '#34d399', '#60a5fa', '#fbbf24', '#D4A017', '#B8860B'];
 
 function calculateStrengthStandard() {
   const lift = document.getElementById('ss-lift').value;
