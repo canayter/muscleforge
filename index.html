@@ -170,13 +170,13 @@
   --focus-ring: 0 0 0 2px var(--iron-dark), 0 0 0 4px var(--blood);
 
   /* ── FLUID TYPOGRAPHY ── */
-  --text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
-  --text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
-  --text-base: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
-  --text-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
-  --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.75rem);
+  --text-xs: clamp(0.8rem, 0.76rem + 0.2vw, 0.875rem);
+  --text-sm: clamp(0.9375rem, 0.9rem + 0.18vw, 1rem);
+  --text-base: clamp(1rem, 0.97rem + 0.18vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.07rem + 0.28vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.25rem + 0.55vw, 1.625rem);
+  --text-2xl: clamp(1.625rem, 1.4rem + 1.1vw, 2.125rem);
+  --text-3xl: clamp(2.125rem, 1.8rem + 1.6vw, 2.875rem);
 }
 
 /* Light mode */
@@ -4363,9 +4363,9 @@ select.field-input option {
   grid-template-columns: 1fr auto auto auto auto;
   align-items: center;
   gap: 8px;
-  padding: 8px 0;
+  padding: 9px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
 }
 .workout-ex-name {
   font-weight: 500;
@@ -4376,24 +4376,32 @@ select.field-input option {
   min-width: 0;
 }
 .workout-ex-input {
-  width: 54px;
+  width: 58px;
   background: var(--iron-surface);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: var(--radius-sm);
   color: var(--chalk);
-  font-size: 0.8rem;
-  padding: 4px 6px;
+  font-size: 0.9rem;
+  padding: 5px 6px;
   text-align: center;
   font-family: 'Space Grotesk', monospace;
 }
 .workout-ex-input:focus { outline: none; border-color: var(--blood); }
 .workout-ex-label {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--chalk-tertiary);
   text-align: center;
   line-height: 1;
 }
 .workout-ex-col { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.workout-unit-toggle {
+  font-family: 'Teko', sans-serif; font-size: 0.85rem; text-transform: uppercase;
+  letter-spacing: .08em; background: var(--iron-surface);
+  border: 1px solid var(--iron-border); border-radius: var(--radius-sm);
+  color: var(--chalk-secondary); cursor: pointer; padding: 3px 9px;
+  transition: color .15s, border-color .15s;
+}
+.workout-unit-toggle:hover { border-color: var(--blood); color: var(--blood); }
 .workout-ex-remove {
   background: none;
   border: none;
@@ -4497,10 +4505,12 @@ select.field-input option {
 .mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
 
 /* ── Logo Emoji ── */
-.logo-emoji { font-size: 1.75rem; line-height: 1; }
+.logo-emoji { font-size: 2.2rem; line-height: 1; }
 .logo-textblock { display: flex; flex-direction: column; }
-.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .08em; color: var(--chalk); line-height: 1; }
-.logo-tagline { font-family: 'Teko', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .12em; color: var(--blood); }
+.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .08em; line-height: 1; }
+.logo-muscle { color: var(--chalk); }
+.logo-forge { color: var(--blood); text-shadow: 0 0 10px var(--blood-glow); }
+.logo-tagline { font-family: 'Teko', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: .12em; color: var(--blood); }
 
 /* ── Hero ── */
 .mf-hero {
@@ -4548,13 +4558,13 @@ select.field-input option {
 .mb-col-header {
   padding: 10px 16px;
   font-family: 'Teko', sans-serif; text-transform: uppercase;
-  letter-spacing: .1em; font-size: 0.7rem; color: var(--chalk-tertiary);
+  letter-spacing: .1em; font-size: 0.8rem; color: var(--chalk-tertiary);
   border-bottom: 1px solid var(--iron-border);
   background: var(--iron-surface); flex-shrink: 0;
 }
 .mb-item {
-  padding: 11px 16px; cursor: pointer;
-  font-size: 0.875rem; color: var(--chalk-secondary);
+  padding: 12px 16px; cursor: pointer;
+  font-size: 0.9375rem; color: var(--chalk-secondary);
   border-bottom: 1px solid var(--iron-border);
   transition: background .1s, color .1s; flex-shrink: 0;
 }
@@ -4562,24 +4572,24 @@ select.field-input option {
 .mb-item:hover { background: var(--iron-hover); color: var(--chalk); }
 .mb-item.active { background: var(--blood-dim); color: var(--blood); font-weight: 600; border-left: 2px solid var(--blood); padding-left: 14px; }
 .mb-exercises-wrap { padding: var(--space-lg); flex: 1; overflow-y: auto; }
-.mb-muscle-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .04em; color: var(--chalk); margin-bottom: 2px; }
-.mb-muscle-func { font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.5; margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); }
-.mb-section-label { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.7rem; color: var(--chalk-tertiary); margin-bottom: var(--space-sm); margin-top: var(--space-lg); }
+.mb-muscle-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem; letter-spacing: .04em; color: var(--chalk); margin-bottom: 2px; }
+.mb-muscle-func { font-size: 0.9rem; color: var(--chalk-secondary); line-height: 1.6; margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); }
+.mb-section-label { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.8rem; color: var(--chalk-tertiary); margin-bottom: var(--space-sm); margin-top: var(--space-lg); }
 .mb-ex-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--iron-border); }
 .mb-ex-row:last-child { border-bottom: none; }
-.mb-ex-name { font-size: 0.875rem; color: var(--chalk); }
+.mb-ex-name { font-size: 0.9375rem; color: var(--chalk); }
 .mb-vol-row {
   display: flex; gap: var(--space-xl);
   margin: var(--space-lg) 0; padding: var(--space-md);
   background: var(--iron-surface); border-radius: var(--radius-md);
 }
 .mb-vol-stat { text-align: center; }
-.mb-vol-val { font-family: 'Teko', sans-serif; font-size: 1.4rem; color: var(--blood); display: block; }
-.mb-vol-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--chalk-tertiary); }
+.mb-vol-val { font-family: 'Teko', sans-serif; font-size: 1.6rem; color: var(--blood); display: block; }
+.mb-vol-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--chalk-tertiary); }
 .mb-empty {
   display: flex; align-items: center; justify-content: center;
   flex: 1; color: var(--chalk-tertiary);
-  font-size: 0.8125rem; text-align: center; padding: var(--space-xl);
+  font-size: 0.9rem; text-align: center; padding: var(--space-xl);
 }
 .mb-plan-cta {
   display: block; margin-top: var(--space-lg); padding: 10px 0;
@@ -4595,22 +4605,22 @@ select.field-input option {
 
 /* ── Anatomical heads ── */
 .mb-heads { margin-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); padding-bottom: var(--space-md); }
-.mb-head-item { padding: 6px 0; border-bottom: 1px solid var(--iron-border); font-size: 0.78rem; line-height: 1.5; }
+.mb-head-item { padding: 7px 0; border-bottom: 1px solid var(--iron-border); font-size: 0.875rem; line-height: 1.55; }
 .mb-head-item:last-child { border-bottom: none; }
-.mb-head-name { color: var(--blood); font-weight: 700; font-family: 'Teko', sans-serif; font-size: 0.85rem; letter-spacing: .03em; text-transform: uppercase; }
+.mb-head-name { color: var(--blood); font-weight: 700; font-family: 'Teko', sans-serif; font-size: 0.95rem; letter-spacing: .03em; text-transform: uppercase; }
 .mb-head-desc { color: var(--chalk-secondary); }
 
 /* ── Exercise row with secondary muscles ── */
-.mb-ex-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
-.mb-ex-secondary { display: flex; flex-wrap: wrap; gap: 3px; }
-.mb-ex-sec { font-size: 0.6rem; padding: 1px 5px; border-radius: var(--radius-full); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; line-height: 1.6; }
+.mb-ex-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.mb-ex-secondary { display: flex; flex-wrap: wrap; gap: 4px; }
+.mb-ex-sec { font-size: 0.7rem; padding: 2px 7px; border-radius: var(--radius-full); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; line-height: 1.6; }
 .mb-ex-sec-h { background: rgba(212,160,23,0.16); color: var(--blood); border: 1px solid rgba(212,160,23,0.3); }
 .mb-ex-sec-m { background: rgba(255,255,255,0.05); color: var(--chalk-secondary); border: 1px solid rgba(255,255,255,0.1); }
 .mb-ex-sec-l { background: transparent; color: var(--chalk-tertiary); border: 1px solid rgba(255,255,255,0.06); }
 
 /* ── Secondary legend ── */
 .mb-sec-legend { display: flex; align-items: center; gap: 5px; margin-top: var(--space-sm); flex-wrap: wrap; }
-.mb-sec-legend-label { font-size: 0.6rem; color: var(--chalk-tertiary); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; }
+.mb-sec-legend-label { font-size: 0.7rem; color: var(--chalk-tertiary); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; }
 @media (max-width: 640px) {
   .mb-columns { grid-template-columns: 1fr; min-height: auto; }
   .mb-col { max-height: 240px; border-right: none; border-bottom: 1px solid var(--iron-border); }
@@ -4638,7 +4648,7 @@ select.field-input option {
         <div class="logo" onclick="switchToView('home')" style="cursor:pointer;display:flex;gap:10px;align-items:center;">
           <span class="logo-emoji" aria-hidden="true">💪</span>
           <div class="logo-textblock">
-            <span class="logo-text">MUSCLEFORGE</span>
+            <span class="logo-text"><span class="logo-muscle">MUSCLE</span><span class="logo-forge">FORGE</span></span>
             <span class="logo-tagline">Train Smarter.</span>
           </div>
         </div>
@@ -4728,8 +4738,9 @@ select.field-input option {
           </div>
           <div class="workout-sheet-body" id="workoutSheetBody">
             <div class="workout-sheet-header">
-              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.04em;color:var(--chalk);">Today's Workout</span>
-              <div style="display:flex;gap:6px;">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.04em;color:var(--chalk);">Today's Workout</span>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <button class="workout-unit-toggle" id="unitToggleBtn" onclick="toggleWorkoutUnit()" title="Switch weight unit" aria-label="Switch between kg and lbs">kg</button>
                 <button class="btn btn-sm btn-primary" onclick="saveWorkoutToLog()">Save Log</button>
                 <button class="btn btn-sm btn-ghost" onclick="clearWorkout()">Clear</button>
               </div>
@@ -13298,7 +13309,7 @@ const MB_GROUPS = [
   { id: 'core',      label: 'Core',           muscles: ['abs', 'obliques'] },
   { id: 'legs',      label: 'Legs',           muscles: ['quads', 'hamstrings', 'calves', 'tibialis', 'adductors', 'hip-flexors'] },
   { id: 'glutes',    label: 'Glutes & Hips',  muscles: ['glutes', 'glute-med', 'hip-flexors', 'adductors'] },
-  { id: 'neck',      label: 'Neck',           muscles: ['neck'] },
+  { id: 'neck',      label: 'Neck & Traps',   muscles: ['traps', 'neck'] },
 ];
 
 let MB_STATE = { group: null, muscle: null };
@@ -14031,6 +14042,25 @@ function selectMuscle(muscleId) { selectMBMuscle(muscleId); }
 // Sets/reps/weight per exercise, persisted to localStorage as a workout log
 // ═══════════════════════════════════════════════════════════════════════════
 let WORKOUT = []; // [{exercise, muscleId, sets, reps, weight}]
+let WORKOUT_UNIT = 'kg'; // 'kg' | 'lbs'
+
+function toggleWorkoutUnit() {
+  const isKg = WORKOUT_UNIT === 'kg';
+  const factor = isKg ? 2.2046 : 1 / 2.2046;
+  WORKOUT_UNIT = isKg ? 'lbs' : 'kg';
+  // Convert existing weights
+  WORKOUT.forEach(w => {
+    if (w.weight) {
+      const parsed = parseFloat(w.weight);
+      if (!isNaN(parsed) && parsed > 0) {
+        w.weight = Math.round(parsed * factor * 10) / 10;
+      }
+    }
+  });
+  const btn = document.getElementById('unitToggleBtn');
+  if (btn) btn.textContent = WORKOUT_UNIT;
+  renderWorkoutSheet();
+}
 
 function addExerciseToWorkout(exercise, muscleId) {
   if (WORKOUT.some(w => w.exercise === exercise)) return;
@@ -14087,8 +14117,8 @@ function renderWorkoutSheet() {
       </div>
       <div class="workout-ex-col">
         <input class="workout-ex-input" type="number" value="${w.weight}" min="0"
-          placeholder="kg" onchange="updateWorkoutField(${i},'weight',this.value)" aria-label="Weight">
-        <span class="workout-ex-label">kg</span>
+          placeholder="${WORKOUT_UNIT}" onchange="updateWorkoutField(${i},'weight',this.value)" aria-label="Weight in ${WORKOUT_UNIT}">
+        <span class="workout-ex-label">${WORKOUT_UNIT}</span>
       </div>
       <button class="workout-ex-remove" onclick="removeExerciseFromWorkout(${i})" aria-label="Remove">✕</button>
     </div>
@@ -14122,6 +14152,7 @@ function saveWorkoutToLog() {
     id: Date.now(),
     name: 'Train View Session',
     date: new Date().toISOString(),
+    unit: WORKOUT_UNIT,
     exercises: WORKOUT.map(w => ({
       name: w.exercise,
       muscleId: w.muscleId,
