@@ -2263,10 +2263,12 @@ select.field-input option {
 
 .foods-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2px;
-  background: var(--iron-black);
-  border: 1px solid var(--iron-surface);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--iron-border);
+  border: 1px solid var(--iron-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .food-card {
@@ -2311,39 +2313,92 @@ select.field-input option {
 .food-macro.c { color: var(--carbs); }
 .food-macro.f { color: var(--fat); }
 
-/* ── Food card full-profile expand ── */
-.food-card { cursor: pointer; }
-.food-expand-btn {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; margin-top: 10px; padding: 5px 0 0;
-  background: none; border: none; border-top: 1px solid rgba(255,255,255,0.05);
-  color: var(--chalk-tertiary); font-family: 'Teko', sans-serif;
-  font-size: 0.75rem; text-transform: uppercase; letter-spacing: .1em;
-  cursor: pointer; transition: color .15s;
+/* ── Food card click-to-open ── */
+.food-card { cursor: pointer; transition: background var(--duration-fast), border-color var(--duration-fast); }
+.food-card:hover { background: var(--iron-hover); border-color: rgba(212,160,23,0.3); }
+
+/* ── Food Detail Modal ── */
+.food-modal-macros {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: var(--space-lg); padding: var(--space-md);
+  background: var(--iron-surface); border-radius: var(--radius-md);
 }
-.food-expand-btn:hover { color: var(--blood); }
-.food-expand-btn .food-expand-chev { transition: transform .2s; }
-.food-expand-btn.open .food-expand-chev { transform: rotate(90deg); color: var(--blood); }
-.food-micro-panel { display: none; margin-top: 10px; }
-.food-micro-panel.open { display: block; }
-.food-micro-section { margin-bottom: 11px; }
-.food-micro-section-label {
-  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em;
-  font-size: 0.68rem; color: var(--chalk-tertiary); margin-bottom: 5px;
-  padding-bottom: 3px; border-bottom: 1px solid rgba(255,255,255,0.05);
+.food-modal-macro-pill {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; padding: 10px 6px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.04);
 }
-.food-micro-row { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
-.food-micro-name { flex: 0 0 108px; font-size: 0.75rem; color: var(--chalk-secondary); }
-.food-micro-val { flex: 0 0 56px; text-align: right; font-size: 0.75rem; color: var(--chalk); font-variant-numeric: tabular-nums; }
-.food-micro-bar-wrap { flex: 1; height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
-.food-micro-bar { height: 100%; border-radius: 2px; background: var(--blood); }
-.food-micro-dv { flex: 0 0 34px; text-align: right; font-size: 0.68rem; color: var(--chalk-tertiary); }
-.food-micro-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-.food-micro-tag {
-  font-size: 0.68rem; padding: 2px 7px; border-radius: 20px;
-  background: rgba(255,255,255,0.05); color: var(--chalk-tertiary);
-  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .06em;
+.food-modal-macro-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; line-height: 1; letter-spacing: .02em; }
+.food-modal-macro-label { font-family: 'Teko', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--chalk-tertiary); }
+.food-modal-section { margin-bottom: var(--space-lg); }
+.food-modal-section-title {
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .12em;
+  font-size: 0.75rem; color: var(--chalk-tertiary); padding-bottom: 6px;
+  border-bottom: 1px solid var(--iron-border); margin-bottom: 10px;
 }
+.food-modal-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.food-modal-row:last-child { border-bottom: none; }
+.food-modal-name { flex: 0 0 130px; font-size: 0.8125rem; color: var(--chalk-secondary); }
+.food-modal-val { flex: 0 0 64px; text-align: right; font-size: 0.8125rem; color: var(--chalk); font-variant-numeric: tabular-nums; font-weight: 500; }
+.food-modal-bar-wrap { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.food-modal-bar { height: 100%; border-radius: 2px; }
+.food-modal-dv { flex: 0 0 38px; text-align: right; font-size: 0.75rem; color: var(--chalk-tertiary); font-variant-numeric: tabular-nums; }
+.food-modal-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.food-modal-tag {
+  font-size: 0.72rem; padding: 3px 9px; border-radius: var(--radius-full);
+  border: 1px solid var(--iron-border); color: var(--chalk-secondary);
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .07em;
+}
+.food-modal-tag.diet { border-color: rgba(52,211,153,0.25); color: #34d399; }
+.food-modal-tag.label { border-color: rgba(212,160,23,0.25); color: var(--blood); }
+
+/* ── Rehab & PT ── */
+.rehab-injury-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-xl); }
+.rehab-injury-btn {
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 0.9rem; padding: 8px 18px; border-radius: var(--radius-sm);
+  background: var(--iron-surface); border: 1px solid var(--iron-border);
+  color: var(--chalk-secondary); cursor: pointer; transition: all var(--duration-fast);
+}
+.rehab-injury-btn:hover { background: var(--iron-hover); color: var(--chalk); }
+.rehab-injury-btn.active { background: rgba(96,165,250,0.12); border-color: #60a5fa; color: #60a5fa; }
+.rehab-red-flags {
+  background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25);
+  border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.rehab-red-flags-title { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.8rem; color: #f87171; margin-bottom: 6px; }
+.rehab-red-flags ul { margin: 0; padding-left: 18px; }
+.rehab-red-flags li { font-size: 0.8125rem; color: #f87171; line-height: 1.7; }
+.rehab-phase-tabs { display: flex; gap: 8px; margin-bottom: var(--space-lg); flex-wrap: wrap; }
+.rehab-phase-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.8125rem; font-weight: 500;
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  background: var(--iron-surface); border: 1px solid var(--iron-border);
+  color: var(--chalk-secondary); cursor: pointer; transition: all var(--duration-fast);
+}
+.rehab-phase-btn:hover { background: var(--iron-hover); color: var(--chalk); }
+.rehab-phase-btn.active { background: rgba(96,165,250,0.12); border-color: #60a5fa; color: #60a5fa; }
+.rehab-phase-panel { display: none; }
+.rehab-phase-panel.active { display: block; }
+.rehab-phase-goal { font-size: 0.875rem; color: var(--chalk-secondary); margin-bottom: var(--space-lg); padding: var(--space-md); background: var(--iron-surface); border-left: 3px solid #60a5fa; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.rehab-ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-md); }
+.rehab-ex-card {
+  background: var(--iron-elevated); border: 1px solid var(--iron-border);
+  border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.rehab-ex-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.9375rem; color: var(--chalk); }
+.rehab-ex-sets { font-family: 'Teko', sans-serif; font-size: 0.95rem; color: #60a5fa; letter-spacing: .04em; }
+.rehab-ex-cue { font-size: 0.8125rem; color: var(--chalk-secondary); line-height: 1.55; }
+.rehab-ex-focus { font-size: 0.775rem; color: var(--chalk-tertiary); font-style: italic; }
+.rehab-evidence { margin-top: var(--space-xl); padding: var(--space-md) var(--space-lg); background: var(--iron-surface); border-radius: var(--radius-md); }
+.rehab-evidence-title { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.75rem; color: var(--chalk-tertiary); margin-bottom: 8px; }
+.rehab-evidence li { font-size: 0.775rem; color: var(--chalk-tertiary); line-height: 1.7; margin-bottom: 2px; }
+.rehab-return-note { margin-top: var(--space-md); padding: var(--space-md); background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.2); border-radius: var(--radius-md); font-size: 0.8125rem; color: var(--chalk-secondary); }
+.rehab-disclaimer { margin-top: var(--space-lg); padding: var(--space-md); background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: var(--radius-md); font-size: 0.775rem; color: var(--chalk-tertiary); text-align: center; }
+.rehab-conditions { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: var(--space-lg); }
+.rehab-condition { font-size: 0.75rem; padding: 3px 10px; border-radius: var(--radius-full); background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); color: #93c5fd; font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .06em; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    SCIENCE TAB
@@ -4942,6 +4997,20 @@ select.field-input option {
 
             <div class="home-dir-cat">
               <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','rehab');initRehab()" style="color:#93c5fd">Rehab & PT →</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Lower Back Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Shoulder Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Knee Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Elbow / Tendinopathy ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Achilles Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Hip & Groin ✦</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
                 <div class="home-dir-cat-name" onclick="switchToView('tools','competition')">Competition →</div>
               </div>
               <div class="home-dir-tools">
@@ -6409,6 +6478,7 @@ select.field-input option {
             <button class="tools-nav-btn" data-tool-category="recovery">Recovery</button>
             <button class="tools-nav-btn" data-tool-category="competition">Competition</button>
             <button class="tools-nav-btn" data-tool-category="utilities">Utilities</button>
+            <button class="tools-nav-btn" data-tool-category="rehab" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Rehab & PT</button>
           </div>
 
           <!-- Body Composition Tools -->
@@ -8598,11 +8668,44 @@ Squat	225	5	2025-03-15"></textarea>
             </div>
           </div>
 
+          <!-- REHAB & PT -->
+          <div id="tools-rehab" class="tools-category">
+            <div class="card tool-card" style="border-left-color:#60a5fa">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Rehabilitation & Physical Therapy Protocols</h2>
+                  <p class="card-subtitle">Evidence-based, phase-structured rehab for common lifting injuries — peer-reviewed sources</p>
+                </div>
+                <span class="tool-badge" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">APTA · Cochrane · PubMed</span>
+              </div>
+              <div class="card-body">
+                <div class="rehab-injury-tabs" id="rehabInjuryTabs"></div>
+                <div id="rehabContent">
+                  <div style="color:var(--chalk-tertiary);font-size:0.875rem;padding:var(--space-xl) 0;text-align:center">Select an injury region above to view the rehab protocol.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>
 
   </main>
+
+  <!-- FOOD DETAIL MODAL -->
+  <div id="foodDetailModal" class="modal-backdrop" onclick="if(event.target===this)closeFoodModal()">
+    <div class="modal" style="max-width:560px;width:calc(100% - 32px)">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="foodDetailTitle" style="font-size:1rem;text-transform:none;letter-spacing:0;font-family:'Space Grotesk',sans-serif"></h3>
+          <p style="font-size:0.8125rem;color:var(--chalk-tertiary);margin-top:2px" id="foodDetailSub"></p>
+        </div>
+        <button class="modal-close" onclick="closeFoodModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="foodDetailBody"></div>
+    </div>
+  </div>
 
   <!-- SWAP MODAL -->
   <div id="swapModal" class="modal-backdrop">
@@ -9850,9 +9953,9 @@ function renderFoods(list) {
   if (!grid) return;
   grid.innerHTML = display.map((f, i) => {
     const ppg = f.serving?.amount > 0 ? ((f.macros.protein / f.serving.amount) * 100).toFixed(1) : '—';
-    const uid = `fc-${i}-${f.id || i}`;
+    const safeId = encodeURIComponent(f.id || String(i));
     return `
-    <div class="food-card" id="${uid}">
+    <div class="food-card" onclick="openFoodModal('${escapeHtml(safeId)}')" role="button" tabindex="0" aria-label="View full profile for ${escapeHtml(f.name)}" data-food-id="${escapeHtml(f.id || String(i))}">
       <div class="food-name">${escapeHtml(f.name)}</div>
       <div class="food-serving">${escapeHtml(f.serving.description)}</div>
       <div class="food-macros">
@@ -9862,11 +9965,7 @@ function renderFoods(list) {
         <span class="food-macro f">${fmt(f.macros.fat)}F</span>
         ${showProteinPerGram ? `<span class="food-macro p" style="opacity:0.7;font-size:0.7rem">${ppg}g P/100g</span>` : ''}
       </div>
-      <button class="food-expand-btn" id="feb-${uid}" onclick="toggleFoodCard('${uid}', event)" aria-label="Full nutritional profile">
-        <span>Full Profile</span>
-        <span class="food-expand-chev">›</span>
-      </button>
-      <div class="food-micro-panel" id="fmp-${uid}"></div>
+      <div style="margin-top:8px;font-family:'Teko',sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--chalk-tertiary)">Tap for full profile ›</div>
     </div>`;
   }).join('');
   if (list.length > 120) {
@@ -9902,70 +10001,96 @@ function filterFoods() {
   renderFoods(list);
 }
 
-function toggleFoodCard(uid, e) {
-  if (e) e.stopPropagation();
-  const panel = document.getElementById(`fmp-${uid}`);
-  const btn   = document.getElementById(`feb-${uid}`);
-  if (!panel) return;
-  const isOpen = panel.classList.toggle('open');
-  if (btn) btn.classList.toggle('open', isOpen);
-  if (isOpen && !panel.dataset.built) {
-    // find the food object from current rendered list
-    const card = document.getElementById(uid);
-    const foodName = card?.querySelector('.food-name')?.textContent;
-    const food = getAllFoods().find(f => f.name === foodName);
-    if (food) panel.innerHTML = buildFoodMicros(food);
-    panel.dataset.built = '1';
-  }
+function openFoodModal(safeId) {
+  const foodId = decodeURIComponent(safeId);
+  const food = getAllFoods().find(f => (f.id || '') === foodId) || getAllFoods().find(f => f.id === foodId);
+  if (!food) return;
+  const modal = document.getElementById('foodDetailModal');
+  const body  = document.getElementById('foodDetailBody');
+  const title = document.getElementById('foodDetailTitle');
+  const sub   = document.getElementById('foodDetailSub');
+  if (!modal || !body) return;
+  if (title) title.textContent = food.name;
+  if (sub) sub.textContent = food.serving.description;
+  body.innerHTML = buildFoodModalContent(food);
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeFoodModal() {
+  document.getElementById('foodDetailModal')?.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
-function buildFoodMicros(f) {
+function buildFoodModalContent(f) {
   const m = f.macros || {};
   const u = f.micros || {};
-  // %DV reference (FDA 2000-cal basis)
   const DV = {
     protein:50, fat:78, carbs:275, fiber:28,
     sodium:2300, potassium:4700, calcium:1300, iron:18,
     magnesium:420, zinc:11, phosphorus:1250,
     vitA:900, vitC:90, vitD:20, vitE:15, vitK:120,
-    vitB6:1.7, vitB12:2.4, folate:400,
-    cholesterol:300, saturatedFat:20
+    vitB6:1.7, vitB12:2.4, folate:400, cholesterol:300, saturatedFat:20
   };
   const row = (name, val, unit, dvKey) => {
-    if (val == null || val === undefined) return '';
+    if (val == null) return '';
     const dv = dvKey ? DV[dvKey] : null;
     const pct = dv && val > 0 ? Math.round(val / dv * 100) : null;
     const barW = pct ? Math.min(pct, 100) : 0;
-    const barColor = pct > 100 ? 'var(--rust)' : pct > 50 ? 'var(--blood)' : 'rgba(212,160,23,0.5)';
-    return `<div class="food-micro-row">
-      <div class="food-micro-name">${name}</div>
-      <div class="food-micro-val">${val}${unit}</div>
-      ${dv ? `<div class="food-micro-bar-wrap"><div class="food-micro-bar" style="width:${barW}%;background:${barColor}"></div></div><div class="food-micro-dv">${pct}%</div>` : '<div style="flex:1"></div><div class="food-micro-dv"></div>'}
+    const barColor = pct > 100 ? '#f87171' : pct > 50 ? 'var(--blood)' : 'rgba(212,160,23,0.45)';
+    return `<div class="food-modal-row">
+      <div class="food-modal-name">${name}</div>
+      <div class="food-modal-val">${val}${unit}</div>
+      ${dv ? `<div class="food-modal-bar-wrap"><div class="food-modal-bar" style="width:${barW}%;background:${barColor}"></div></div><div class="food-modal-dv">${pct}%</div>` : '<div style="flex:1"></div><div class="food-modal-dv" style="color:transparent">—</div>'}
     </div>`;
   };
-  const sec = (label, rows) => rows.filter(Boolean).length
-    ? `<div class="food-micro-section"><div class="food-micro-section-label">${label}</div>${rows.join('')}</div>` : '';
+  const sec = (label, rows) => {
+    const content = rows.filter(Boolean).join('');
+    return content ? `<div class="food-modal-section"><div class="food-modal-section-title">${label}</div>${content}</div>` : '';
+  };
 
-  const diets = f.dietTypes?.map(d => `<span class="food-micro-tag">${d}</span>`).join('') || '';
-  const tags  = f.tags?.map(t => `<span class="food-micro-tag">${t}</span>`).join('') || '';
-  const allergens = f.allergens?.length ? f.allergens.join(', ') : '';
+  const macroDisplay = `
+    <div class="food-modal-macros">
+      <div class="food-modal-macro-pill">
+        <div class="food-modal-macro-val" style="color:var(--chalk)">${f.calories}</div>
+        <div class="food-modal-macro-label">kcal</div>
+      </div>
+      <div class="food-modal-macro-pill">
+        <div class="food-modal-macro-val" style="color:var(--protein)">${m.protein}g</div>
+        <div class="food-modal-macro-label">Protein</div>
+      </div>
+      <div class="food-modal-macro-pill">
+        <div class="food-modal-macro-val" style="color:var(--carbs)">${m.carbs}g</div>
+        <div class="food-modal-macro-label">Carbs</div>
+      </div>
+      <div class="food-modal-macro-pill">
+        <div class="food-modal-macro-val" style="color:var(--fat)">${m.fat}g</div>
+        <div class="food-modal-macro-label">Fat</div>
+      </div>
+    </div>`;
+
+  const diets = f.dietTypes?.map(d => `<span class="food-modal-tag diet">${d}</span>`).join('') || '';
+  const tags  = f.tags?.map(t => `<span class="food-modal-tag label">${t.replace(/-/g,' ')}</span>`).join('') || '';
+  const allergens = f.allergens?.length ? `<p style="font-size:0.775rem;color:#f87171;margin-top:8px">Allergens: ${escapeHtml(f.allergens.join(', '))}</p>` : '';
+  const ppg = f.serving?.amount > 0 ? ((m.protein / f.serving.amount) * 100).toFixed(1) : null;
 
   return [
-    sec('Macronutrients', [
-      row('Protein',        m.protein,    'g',   'protein'),
-      row('Carbohydrates',  m.carbs,      'g',   'carbs'),
-      row('Dietary Fiber',  m.fiber||0,   'g',   'fiber'),
-      row('Sugar',          m.sugar||0,   'g',   null),
-      row('Total Fat',      m.fat,        'g',   'fat'),
+    macroDisplay,
+    sec('Macronutrients — % Daily Value (2,000 cal reference)', [
+      row('Protein',       m.protein,    'g',   'protein'),
+      row('Carbohydrates', m.carbs,      'g',   'carbs'),
+      row('Dietary Fiber', m.fiber||0,   'g',   'fiber'),
+      row('Sugar',         m.sugar||0,   'g',   null),
+      row('Total Fat',     m.fat,        'g',   'fat'),
+      ppg ? `<div class="food-modal-row"><div class="food-modal-name" style="color:var(--chalk-tertiary);font-size:0.75rem">Protein / 100g</div><div class="food-modal-val" style="color:var(--blood)">${ppg}g</div><div style="flex:1"></div><div class="food-modal-dv"></div></div>` : '',
     ]),
     sec('Minerals', [
-      row('Sodium',         u.sodium,     'mg',  'sodium'),
-      row('Potassium',      u.potassium,  'mg',  'potassium'),
-      row('Calcium',        u.calcium,    'mg',  'calcium'),
-      row('Iron',           u.iron,       'mg',  'iron'),
-      row('Magnesium',      u.magnesium,  'mg',  'magnesium'),
-      row('Zinc',           u.zinc,       'mg',  'zinc'),
-      row('Phosphorus',     u.phosphorus, 'mg',  'phosphorus'),
+      row('Sodium',      u.sodium,     'mg', 'sodium'),
+      row('Potassium',   u.potassium,  'mg', 'potassium'),
+      row('Calcium',     u.calcium,    'mg', 'calcium'),
+      row('Iron',        u.iron,       'mg', 'iron'),
+      row('Magnesium',   u.magnesium,  'mg', 'magnesium'),
+      row('Zinc',        u.zinc,       'mg', 'zinc'),
+      row('Phosphorus',  u.phosphorus, 'mg', 'phosphorus'),
     ]),
     sec('Vitamins', [
       row('Vitamin A',   u.vitA,   'mcg', 'vitA'),
@@ -9978,18 +10103,268 @@ function buildFoodMicros(f) {
       row('Folate',      u.folate, 'mcg', 'folate'),
     ]),
     sec('Lipid Profile', [
-      row('Cholesterol',    u.cholesterol,  'mg', 'cholesterol'),
-      row('Saturated Fat',  u.saturatedFat, 'g',  'saturatedFat'),
-      u.transFat ? row('Trans Fat', u.transFat, 'g', null) : '',
-      row('Omega-3',        u.omega3,       'g',  null),
-      row('Omega-6',        u.omega6,       'g',  null),
+      row('Cholesterol',   u.cholesterol,  'mg', 'cholesterol'),
+      row('Saturated Fat', u.saturatedFat, 'g',  'saturatedFat'),
+      u.transFat > 0 ? row('Trans Fat', u.transFat, 'g', null) : '',
+      row('Omega-3',       u.omega3,       'g',  null),
+      row('Omega-6',       u.omega6,       'g',  null),
       f.glycemicIndex ? row('Glycemic Index', f.glycemicIndex, '', null) : '',
     ]),
-    diets ? `<div class="food-micro-section"><div class="food-micro-section-label">Diet Compatible</div><div class="food-micro-tags">${diets}</div></div>` : '',
-    tags  ? `<div class="food-micro-section"><div class="food-micro-section-label">Tags</div><div class="food-micro-tags">${tags}</div></div>` : '',
-    allergens ? `<div style="font-size:0.7rem;color:var(--chalk-tertiary);margin-top:4px">Allergens: ${escapeHtml(allergens)}</div>` : '',
-    `<div style="font-size:0.68rem;color:var(--chalk-tertiary);margin-top:6px">%DV based on 2,000 cal/day reference intake. Source: USDA FoodData Central.</div>`,
+    (diets || tags) ? `<div class="food-modal-section"><div class="food-modal-section-title">Diet & Tags</div><div class="food-modal-tags">${diets}${tags}</div></div>` : '',
+    allergens,
+    `<div style="font-size:0.7rem;color:var(--chalk-tertiary);text-align:center;padding-top:var(--space-md);border-top:1px solid var(--iron-border);margin-top:var(--space-lg)">Source: USDA FoodData Central · %DV = % Daily Value based on 2,000 kcal/day</div>`,
   ].join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// REHAB & PT
+// ═══════════════════════════════════════════════════════════════════════════
+const REHAB_DATA = [
+  {
+    id:'lower-back', region:'Lower Back',
+    conditions:['Lumbar Muscle Strain','Non-Specific Low Back Pain','Disc Herniation (L4-S1)'],
+    redFlags:['Pain with bowel or bladder changes (emergency)','Saddle anaesthesia (inner thigh/groin numbness)','Bilateral sudden leg weakness','Fever combined with back pain','History of cancer + new back pain'],
+    phases:[
+      { name:'Phase 1 — Acute', weeks:'Weeks 1–2', goal:'Reduce pain and muscle guarding. Maintain movement to prevent deconditioning. Avoid bed rest beyond 1–2 days.',
+        exercises:[
+          { name:'Knee-to-Chest Stretch', sets:'3 × 30s each side', cue:'Lying on back, hug single knee to chest. Breathe deeply into the stretch. No bouncing, no pain.', focus:'Hip flexor release, lumbar decompression, paraspinal relaxation' },
+          { name:'Cat-Cow Mobilisation', sets:'3 × 10 slow reps', cue:'On hands and knees. Arch fully (cow), then round fully (cat). Move with breath. Find pain-free range.', focus:'Lumbar segmental mobility, paraspinal muscle coordination' },
+          { name:'Pelvic Tilt', sets:'3 × 15 × 3s hold', cue:'Lying, knees bent. Gently flatten lower back to floor by tilting pelvis. Hold 3s. No glute squeeze needed.', focus:'Multifidus and transversus abdominis activation — deep stabilisers' },
+          { name:'Walking (low impact)', sets:'10–20 min/day', cue:'Gentle pace, flat surface. Avoid hills initially. Focus on upright posture.', focus:'Prevent deconditioning, maintain lumbar circulation, natural spinal loading' },
+        ]},
+      { name:'Phase 2 — Subacute', weeks:'Weeks 3–6', goal:'Restore range of motion. Begin core stabilisation. Return to daily activities.',
+        exercises:[
+          { name:'Dead Bug', sets:'3 × 8 each side', cue:'Lower back pressed to floor throughout. Extend opposite arm and leg to parallel. Exhale on extension. Lumbar contact with floor is the cue.', focus:'Transversus abdominis, multifidus, anti-extension core stability' },
+          { name:'Bird Dog', sets:'3 × 10 each side × 2s hold', cue:'Opposite arm/leg extend to horizontal. Zero hip rotation. Core braced. Think "long" not "high."', focus:'Multifidus, erector spinae, glutes — lumbar stability under movement' },
+          { name:'Glute Bridge', sets:'3 × 15', cue:'Drive hips to ceiling through heels. Squeeze glutes at top. No hyperextension at lower back.', focus:'Glute max and hamstrings — reduces anterior tilt and hip flexor dominance' },
+          { name:'Side-Lying Clamshell', sets:'3 × 15 each side', cue:'Hips at 45°, feet together. Rotate top knee upward like a clamshell. No pelvic roll. Slow.', focus:'Glute medius, hip external rotators — reduces lumbar compensation' },
+        ]},
+      { name:'Phase 3 — Strengthening', weeks:'Weeks 6–12', goal:'Build load tolerance for return to compound training.',
+        exercises:[
+          { name:'Romanian Deadlift (BW → Loaded)', sets:'3–4 × 10', cue:'Hinge at hips, soft knee bend. Bar or weight tracks close to leg. Stop at hamstring tension, not pain.', focus:'Hip hinge motor pattern, posterior chain loading, disc-friendly mechanics' },
+          { name:'Pallof Press', sets:'3 × 12 each side', cue:'Cable or band perpendicular to body. Press out and resist rotation fully. Hold 2s at extension.', focus:'Anti-rotation core, obliques, transversus — functional stability' },
+          { name:'Prone Superman Hold', sets:'3 × 10 × 5s', cue:'Face down. Lift opposite arm and leg together. Squeeze glutes, keep neck neutral (eyes down).', focus:'Erector spinae, multifidus, glutes — posterior chain endurance' },
+          { name:'Hip Flexor Stretch (Half-Kneeling)', sets:'3 × 45s each side', cue:'Half-kneeling. Posterior pelvic tilt (tuck pelvis under). Gently shift forward. Feel stretch in front hip of back leg.', focus:'Iliopsoas lengthening — key to normalising lumbar curve and reducing anterior pelvic tilt' },
+        ]},
+    ],
+    evidence:['Hayden JA et al. Exercise therapy for chronic low back pain. Cochrane Database Syst Rev. 2021; CD009790.','Foster NE et al. Prevention and treatment of low back pain. Lancet. 2018; 391(10137):2368–2383.','McGill SM. Low Back Disorders: Evidence-Based Prevention and Rehabilitation. Human Kinetics, 3rd ed. 2015.'],
+    returnNote:'Return to barbell squatting and deadlifting typically at Week 10–12 if pain-free through Phase 3 exercises. Begin at 40–50% of previous working weight and progress 5% per session. Avoid Jefferson Curl and Good Morning as first movements back.',
+  },
+  {
+    id:'shoulder', region:'Shoulder',
+    conditions:['Rotator Cuff Impingement','Supraspinatus Tendinopathy','Shoulder Impingement Syndrome (SIS)'],
+    redFlags:['Sudden inability to raise arm after trauma (possible full-thickness tear)','Night pain preventing sleep despite positioning','Numbness/tingling radiating to hand (cervical nerve root)','Visible deformity or shoulder instability','Acute dislocation mechanism'],
+    phases:[
+      { name:'Phase 1 — Pain Management', weeks:'Weeks 1–3', goal:'Reduce inflammation and protect healing. Maintain scapular control. Avoid painful arc (60–120° of abduction).',
+        exercises:[
+          { name:'Pendulum Swings', sets:'3 × 20 circles each direction', cue:'Lean forward, supported by non-involved hand. Arm hangs freely. Swing in circles — gravity does the work. Zero muscular effort in shoulder.', focus:'Joint mobilisation via gravity, synovial fluid circulation, glenohumeral decompression' },
+          { name:'Scapular Retraction & Depression', sets:'3 × 15 × 5s hold', cue:'Squeeze shoulder blades down and together. Hold 5s. Keep neck long. No shrugging.', focus:'Lower trapezius, serratus anterior — corrects scapular dyskinesis underlying most impingement' },
+          { name:'Isometric External Rotation', sets:'3 × 10 × 5s', cue:'Elbow at 90°, upper arm at side. Press forearm outward into a wall or doorframe without moving. Pain-free.', focus:'Infraspinatus isometric activation below the impingement arc' },
+        ]},
+      { name:'Phase 2 — Rotator Cuff', weeks:'Weeks 3–8', goal:'Restore full pain-free ROM. Strengthen all four rotator cuff muscles. Balance ER:IR ratio.',
+        exercises:[
+          { name:'External Rotation — Band/Cable', sets:'3 × 15 slow', cue:'Elbow pinned to side, 90° bend. Rotate forearm outward slowly. 3s eccentric return. Stay pain-free throughout range.', focus:'Infraspinatus + teres minor — posterior cuff. Target ER:IR ratio 3:2 for shoulder health' },
+          { name:'Internal Rotation — Band/Cable', sets:'3 × 15 slow', cue:'Mirror of ER drill. Same tempo, same elbow position. Controlled throughout.', focus:'Subscapularis — anterior cuff, shoulder stability' },
+          { name:'Face Pull — Band', sets:'3 × 15–20', cue:'Pull to face level, elbows flared high. Finish with external rotation (hands behind ears). Squeeze between shoulder blades.', focus:'Rear delt, infraspinatus, mid/lower trap — corrects forward head + rounded shoulder posture' },
+          { name:'Side-Lying External Rotation', sets:'3 × 15', cue:'Lie on non-involved side. Small weight, elbow at 90°. Rotate upward without rolling body. Slow.', focus:'Infraspinatus isolation — pure gravity-resisted external rotation' },
+        ]},
+      { name:'Phase 3 — Load & Return', weeks:'Weeks 8–16', goal:'Progressive pressing and overhead load. Scapular upward rotation under load.',
+        exercises:[
+          { name:'Serratus Wall Slides', sets:'3 × 10', cue:'Forearms on smooth wall. Slide arms upward while pushing wall away (protraction). Ribcage stays down.', focus:'Serratus anterior — primary upward rotator, prevents scapular winging' },
+          { name:'Landmine Press', sets:'3–4 × 10', cue:'Angled press eliminates vertical impingement arc. Drive from core, not just shoulder.', focus:'Graduated return to pressing — significantly reduces glenohumeral compression vs vertical barbell press' },
+          { name:'Incline DB Press (30°)', sets:'3 × 10–12', cue:'Retract scapulae before lowering. Control eccentric 3s. Stop DB at chest level, not lower.', focus:'Upper pec + anterior delt with reduced impingement arc vs flat bench' },
+          { name:'Cable Y-Raise (Scapular Plane)', sets:'3 × 12', cue:'Cable at floor level, raise arms to Y (30° forward of frontal plane). Thumbs up. Stop at ear height initially.', focus:'Supraspinatus in scapular plane (35° forward) — less impingement risk than true lateral raise' },
+        ]},
+    ],
+    evidence:['Kuhn JE et al. Effectiveness of physical therapy in treating atraumatic full-thickness rotator cuff tears. JBJS Am. 2013; 95(1):1–8.','Holmgren T et al. Effect of specific exercise strategy on need for surgery in subacromial impingement syndrome. BMJ. 2012; 344:e787.','Hanratty CE et al. The effectiveness of physiotherapy exercises in subacromial impingement syndrome. Semin Arthritis Rheum. 2012; 42(3):297–316.'],
+    returnNote:'Return to bench press and overhead work at Week 12–16. Begin at 40% 1RM, progress 5% per week if pain-free through range. Permanently avoid behind-the-neck press and upright rows. Warm up rotator cuff before every pressing session.',
+  },
+  {
+    id:'knee', region:'Knee',
+    conditions:['Patellofemoral Pain Syndrome (PFPS)','Patellar Tendinopathy (Jumper\'s Knee)','IT Band Syndrome'],
+    redFlags:['Acute locking sensation (possible meniscus fragment)','Complete instability — knee giving way without trauma','Significant swelling within hours of minor event','Fever + joint swelling','Inability to bear any weight after impact'],
+    phases:[
+      { name:'Phase 1 — Load Management', weeks:'Weeks 1–3', goal:'Reduce compressive patellofemoral load. Maintain quad activation at low angles.',
+        exercises:[
+          { name:'Terminal Knee Extension (TKE)', sets:'3 × 15', cue:'Band behind knee, standing. Fully straighten leg against band resistance. Slow controlled movement. Pain-free.', focus:'VMO (Vastus Medialis Oblique) activation at 0–30° — where PF compression is lowest and VMO is most active' },
+          { name:'Short Arc Quads', sets:'3 × 20', cue:'Towel roll under knee (30° flexion). Straighten to full extension. Hold 2s. Lower slowly.', focus:'Quad activation in pain-free terminal range — zero full patellofemoral compression' },
+          { name:'Hip Abduction & Clamshells', sets:'3 × 15 each', cue:'Clamshells lying, hip abduction standing with band. Maintain level pelvis throughout all reps.', focus:'Glute medius strength reduces knee valgus collapse — the primary biomechanical driver of PFPS' },
+          { name:'Straight Leg Raise', sets:'3 × 15', cue:'Lying flat. Tighten quad fully before lifting. Raise to ~45°. Lower controlled.', focus:'Quad recruitment with zero patellofemoral joint compression' },
+        ]},
+      { name:'Phase 2 — Progressive Loading', weeks:'Weeks 3–8', goal:'Reload patellar tendon progressively. Build quad and hip capacity.',
+        exercises:[
+          { name:'Spanish Squat — Isometric', sets:'4–5 × 45s hold', cue:'Band around fixed object, sit into squat with vertical tibia (band prevents forward knee travel). Hold. Pain 0–5/10 is acceptable — this is therapeutic.', focus:'Isometric quad loading — Rio et al. 2015: immediate analgesia effect on tendon pain, superior to isotonic acutely' },
+          { name:'Leg Press (Partial ROM)', sets:'3 × 15', cue:'0–60° knee flexion only to start. Feet mid-platform. 3s eccentric on every rep.', focus:'Quad loading with controlled depth and reduced body-weight demand' },
+          { name:'Step-Down (Eccentric Emphasis)', sets:'3 × 12 each', cue:'Step height where pain ≤5/10. Lower on involved leg only, 4s descent. Knee tracks over 2nd toe.', focus:'Eccentric quad loading — gold standard for tendon remodelling per Alfredson principle' },
+        ]},
+      { name:'Phase 3 — Return to Training', weeks:'Weeks 8–14', goal:'Progressive bilateral squat loading and return to impact activities.',
+        exercises:[
+          { name:'Bulgarian Split Squat', sets:'3–4 × 8–10', cue:'Rear foot elevated. Front knee tracks 2nd toe. Torso upright. Bodyweight → load over weeks.', focus:'Unilateral quad and glute loading — reveals symmetry deficits between legs' },
+          { name:'Box Squat (Controlled Depth)', sets:'3 × 10', cue:'Descent to box at parallel. Brief pause. Drive up through heels. Prevents depth-loading in early return.', focus:'Graduated return to bilateral squat pattern without end-range patellofemoral compression' },
+          { name:'Sled Push', sets:'3 × 20m', cue:'Upright torso, moderate load. Continuous walking pace. Avoid forward lean.', focus:'Quad loading without deep knee flexion — very low PF compression, very high quad stimulus' },
+        ]},
+    ],
+    evidence:['Lack S et al. Proximal muscle rehabilitation is effective for patellofemoral pain. Br J Sports Med. 2015; 49(21):1365–1376.','Rio E et al. Isometric exercise induces analgesia and reduces inhibition in patellar tendinopathy. Br J Sports Med. 2015; 49(19):1277–1283.','van der Heijden RA et al. Physiotherapy for patellofemoral pain syndrome. Cochrane Database Syst Rev. 2015; 1:CD010387.'],
+    returnNote:'Return to full depth squats when: pain ≤2/10 during all Phase 3 exercises, single-leg squat shows ≤10% asymmetry in quad strength. Avoid leg extension machine during entire rehab — patellofemoral compression is highest at 0–30° on extension machine.',
+  },
+  {
+    id:'elbow', region:'Elbow',
+    conditions:['Lateral Epicondylalgia (Tennis Elbow)','Medial Epicondylalgia (Golfer\'s Elbow)','Distal Biceps Tendinopathy'],
+    redFlags:['Audible pop during heavy lifting + inability to supinate forearm (biceps rupture)','Ulnar nerve symptoms — numbness in ring/little fingers','Elbow locking or snapping with pain','Elbow dislocation mechanism','Point tenderness directly on bone'],
+    phases:[
+      { name:'Phase 1 — Isometric', weeks:'Weeks 1–3', goal:'Immediate pain reduction via isometric loading. Identify and reduce provocative loads.',
+        exercises:[
+          { name:'Wrist Extension Isometric (Lateral)', sets:'4–5 × 45s', cue:'Wrist in neutral. Press forearm/wrist into immovable resistance (wall, table). 70% effort. Pain ≤5/10 acceptable — this is analgesic.', focus:'ECRL/ECRB isometric activation — Rio et al. principle: isometric loading provides immediate tendon analgesia' },
+          { name:'Wrist Flexion Isometric (Medial)', sets:'4–5 × 45s', cue:'Same principle but push wrist downward (flexion direction). Elbow at 90°.', focus:'Pronator teres and FCR — medial epicondyle loading for golfer\'s elbow' },
+          { name:'Gentle Grip Squeeze', sets:'3 × 15 slow', cue:'Soft ball or rolled towel. Submaximal (50%) squeeze. Zero pain. Maintain forearm circulation.', focus:'Forearm intrinsic maintenance without provocative ECRL load' },
+        ]},
+      { name:'Phase 2 — Eccentric Loading', weeks:'Weeks 3–8', goal:'Progressive eccentric-concentric loading for tendon tissue remodelling.',
+        exercises:[
+          { name:'Eccentric Wrist Extension (Tyler Twist)', sets:'3 × 15', cue:'Concentric with both hands (or flex bar), eccentric with involved side only. 4s lowering. Start very light. The eccentric phase IS the treatment.', focus:'ECRL/ECRB eccentric overload — Tyler et al. 2010: 81% symptom resolution at 6 weeks' },
+          { name:'Reverse Wrist Curl', sets:'3 × 15', cue:'Forearm supported on table, palm down. Light dumbbell. Curl wrist up and lower very slowly. Start 0.5–1kg.', focus:'Eccentric + concentric wrist extensor loading' },
+          { name:'Forearm Pronation/Supination', sets:'3 × 15 each direction', cue:'Hold hammer at end (heavier lever arm). Rotate forearm slowly. Full range both directions.', focus:'Supinator, pronator teres, distal biceps — forearm rotation pattern restoration' },
+        ]},
+      { name:'Phase 3 — Strength & Return', weeks:'Weeks 8–14', goal:'Progressive return to pulling loads and grip-intensive movements.',
+        exercises:[
+          { name:'Wrist Roller', sets:'3 × 3 rotations each direction', cue:'Arms elevated or forward. Roll weight up and down with alternating wrist movements. Moderate weight.', focus:'Forearm flexor/extensor endurance across full ROM' },
+          { name:'Reverse Curl', sets:'3 × 12', cue:'Pronated (overhand) grip curl. Wrist neutral throughout. Standard curl motion.', focus:'Brachioradialis + ECRL/ECRB progressive loading in functional grip pattern' },
+          { name:'Fat Grip Rows', sets:'3 × 10', cue:'Fat grips on barbell or dumbbell row. Distributes forearm load — reduces focused stress on lateral epicondyle.', focus:'Grip + upper back integration with distributed forearm stimulus' },
+        ]},
+    ],
+    evidence:['Tyler TF et al. Addition of isolated wrist extensor eccentric exercise to standard treatment for chronic lateral epicondylosis. J Shoulder Elbow Surg. 2010; 19(6):917–922.','Bisset L et al. Physiotherapy management of lateral epicondylalgia. J Physiother. 2015; 61(4):174–181.','Coombes BK et al. Efficacy and safety of corticosteroid injections vs other treatments. Lancet. 2010; 376(9754):1751–1767.'],
+    returnNote:'Return to pulling (rows, deadlifts) at Week 8–10 — less forearm extensor involvement. Return to pressing earlier (Week 6–8). Long-term: avoid barbell wrist curls if lateral. Avoid overhand barbell rows if medial. Eccentric maintenance set 1×/week permanently.',
+  },
+  {
+    id:'achilles', region:'Achilles & Ankle',
+    conditions:['Achilles Tendinopathy (Midportion & Insertional)','Ankle Sprain Grade I–II','Plantar Fasciitis'],
+    redFlags:['Sudden "snap" + inability to push off (Achilles rupture — surgical emergency)','Severe swelling + bruising + inability to bear weight after inversion (possible fracture)','Point tenderness directly on fibula bone','Progressive weakness in calf despite conservative care'],
+    phases:[
+      { name:'Phase 1 — Load Management', weeks:'Weeks 1–4', goal:'Reduce compressive/tensile load on Achilles. Maintain calf function isometrically. On flat ground only (not step edge) for insertional tendinopathy.',
+        exercises:[
+          { name:'Isometric Calf Raise — Double Leg Hold', sets:'4 × 45s', cue:'Rise onto balls of feet and hold. No bounce. Pain ≤5/10. Flat ground (avoids Achilles compression at insertion that occurs on step edge).', focus:'Isometric Achilles loading — immediate analgesic effect. Maintains tendon stimulus without provocative tensile load' },
+          { name:'Ankle Alphabet', sets:'2 × full alphabet each foot', cue:'Seated, foot off floor. Trace alphabet with big toe slowly. Maximise range.', focus:'Full ankle ROM maintenance — dorsiflexion, plantarflexion, inversion, eversion' },
+          { name:'Seated Calf Raise', sets:'3 × 20 slow', cue:'Seated with weight on thighs. Full range up and down. Slow 3s eccentric. Primarily loads soleus.', focus:'Soleus loading with reduced Achilles tensile stress vs standing raise' },
+        ]},
+      { name:'Phase 2 — Eccentric Protocol (Alfredson)', weeks:'Weeks 4–12', goal:'The landmark evidence-based Achilles tendinopathy protocol. Twice daily is the actual protocol.',
+        exercises:[
+          { name:'Eccentric Heel Drop — Straight Knee', sets:'3 × 15 (twice daily)', cue:'Rise on both feet on step edge, lower on involved foot ONLY with knee straight. Into pain (≤5/10). This is non-negotiable — pain-free versions show inferior outcomes.', focus:'Gastrocnemius eccentric overload — Alfredson 1998: 82% success at 12 weeks; reduced need for surgery' },
+          { name:'Eccentric Heel Drop — Bent Knee', sets:'3 × 15 (twice daily)', cue:'Same drill, knee bent 30–40°. Isolates soleus component. Perform after straight-knee sets.', focus:'Soleus eccentric loading — targets both gastrocnemius and soleus-driven tendinopathy' },
+          { name:'Single-Leg Balance', sets:'3 × 45–60s each', cue:'Eyes open → closed progression. Soft surface → unstable surface over weeks. Ankle lightly loaded.', focus:'Proprioception, peroneal reaction time — primary ankle sprain prevention mechanism' },
+        ]},
+      { name:'Phase 3 — Power & Return', weeks:'Weeks 12–20', goal:'Tendon loading for high-force activities — running, jumping, change of direction.',
+        exercises:[
+          { name:'Single-Leg Calf Raise (Loaded)', sets:'3 × 15 with added load', cue:'Hold dumbbell on involved side. Full range on step edge. Slow down (3s). No "spring" through bottom.', focus:'Maximum plantarflexion force development — Achilles energy storage capacity' },
+          { name:'Skipping Rope — Double Leg', sets:'Start 3 × 1 min', cue:'Soft landing on balls of feet. Progress duration by 10% per week. Stop if pain >3/10.', focus:'Achilles spring-mass loading — tendon energy storage and return (elasticity)' },
+          { name:'Hop Tests', sets:'3 × 10m each direction', cue:'Forward/back, side/side, figure-8. Start 50% speed. Target: ≤15% asymmetry vs uninvolved side before return to running.', focus:'Return-to-sport readiness — functional symmetry benchmark' },
+        ]},
+    ],
+    evidence:['Alfredson H et al. Heavy-load eccentric calf muscle training for the treatment of chronic Achilles tendinosis. Am J Sports Med. 1998; 26(3):360–366. [Original landmark RCT]','Beyer R et al. Heavy slow resistance versus eccentric training for Achilles tendinopathy. Am J Sports Med. 2015; 43(7):1704–1711.','Rio E et al. Isometric contractions are more analgesic than isotonic contractions for patellar tendon pain. Br J Sports Med. 2017; 51(2):87–94.'],
+    returnNote:'Return to running: pain ≤2/10 during 25 single-leg calf raises. Return to court/field sport: hop test symmetry ≤15%. Full Achilles loading capacity requires 3–6 months of consistent eccentric work — do not rush. Insertional tendinopathy: avoid stretch beyond neutral (no deep heel drops off step edge).',
+  },
+  {
+    id:'hip', region:'Hip & Groin',
+    conditions:['Hip Flexor Strain (Iliopsoas)','Adductor Strain / Groin Pull','Gluteal Tendinopathy','IT Band Syndrome'],
+    redFlags:['Severe groin pain + difficulty walking in older adult (hip stress fracture)','Clicking + pain with hip flexion in young athlete (labral tear)','Pain at rest and at night (bone stress reaction)','Significant bruising tracking down thigh after impact'],
+    phases:[
+      { name:'Phase 1 — Offload & Mobility', weeks:'Weeks 1–2', goal:'Reduce hip flexor and adductor tension. Restore safe range of motion.',
+        exercises:[
+          { name:'Modified Thomas Stretch', sets:'3 × 30–45s each side', cue:'Lie at table edge. Hug one knee to chest. Let other leg hang. Tilt pelvis posteriorly (flatten back). Feel stretch in front of hanging-leg hip. Never painful.', focus:'Iliopsoas and rectus femoris lengthening — addresses anterior pelvic tilt load on hip flexors' },
+          { name:'90/90 Hip Rotation', sets:'3 × 10 each side', cue:'Seated, both knees at 90°. Rotate to front shin horizontal (internal rotation), then back shin horizontal (external rotation). Upright spine throughout.', focus:'Hip internal and external rotation mobility — often restricted in strength athletes with hip strain' },
+          { name:'Supine Hip Flexion March', sets:'3 × 15 slow', cue:'Lying on back. Slowly raise knee to 90° and lower. No speed. Pain-free range only.', focus:'Iliopsoas gentle activation — prevents atrophy during unloading phase' },
+        ]},
+      { name:'Phase 2 — Strength & Control', weeks:'Weeks 2–8', goal:'Progressive hip strengthening addressing muscle imbalances underlying the injury.',
+        exercises:[
+          { name:'Copenhagen Adductor (Assisted)', sets:'3 × 8–12', cue:'Side plank. Bottom knee on bench (easier) or bottom foot (harder). Lift body using inner thigh. Progress over weeks.', focus:'Adductor longus/brevis loading — Harøy et al. 2019 (Br J Sports Med): 41% reduction in groin injuries in footballers' },
+          { name:'Hip Flexion Marches — Band', sets:'3 × 15', cue:'Band above knees. Standing. Drive knee to 90° against resistance. Maintain neutral pelvis throughout.', focus:'Iliopsoas isotonic loading without end-range hip compression' },
+          { name:'Lateral Band Walk', sets:'3 × 15 each direction', cue:'Band above knees. Slight squat. Side-step maintaining feet parallel. No knee valgus.', focus:'Glute medius, TFL, hip abductors — corrects adductor dominance and IT band overload' },
+          { name:'Single-Leg RDL (Bodyweight)', sets:'3 × 10 each', cue:'Hinge forward on one leg, opposite leg extends behind. Keep hips level. Touch down lightly.', focus:'Glute max, hamstring, hip stabilisers — addresses glute weakness that drives IT band syndrome' },
+        ]},
+      { name:'Phase 3 — Return to Load', weeks:'Weeks 6–12', goal:'Progressive return to squatting, deadlifts, and bilateral hip-dominant movements.',
+        exercises:[
+          { name:'Sumo Deadlift (Light → Progressed)', sets:'3–4 × 8', cue:'Wide stance, toes pointed out. Maintain neutral spine. Reduces hip flexion depth vs conventional.', focus:'Gradual adductor and glute return to heavy bilateral loading' },
+          { name:'Cable Pull-Through', sets:'3 × 15', cue:'Cable between legs. Hip hinge forward and drive hips through to extension. Squeeze glutes at top.', focus:'Hip extension without lumbar loading — safe hip extensor strengthening' },
+          { name:'Lateral Sled Drag', sets:'3 × 20m each direction', cue:'Sled attached at hip. Walk sideways against lateral resistance. Upright posture.', focus:'Hip abductor and adductor graduated strengthening without axial impact' },
+        ]},
+    ],
+    evidence:['Harøy J et al. The Adductor Strengthening Programme prevents groin problems in male football players. Br J Sports Med. 2019; 53(3):150–157.','Fredericson M et al. Hip abductor weakness in distance runners with iliotibial band syndrome. Clin J Sport Med. 2000; 10(3):169–175.','Niemuth PE et al. Hip muscle weakness and overuse injuries in recreational runners. Clin J Sport Med. 2005; 15(1):14–21.'],
+    returnNote:'Return to bilateral squatting and deadlifts when: single-leg squat shows ≤15% asymmetry, Copenhagen adductor ≥8 reps without pain. Hip flexor strains: 3–8 weeks. Adductor grade I: 2–4 weeks. Grade II: 6–10 weeks. Grade III: 10–16 weeks (may require surgical consult).',
+  },
+];
+
+let rehabActiveInjury = null;
+let rehabActivePhase  = 0;
+
+function initRehab() {
+  const tabs = document.getElementById('rehabInjuryTabs');
+  if (!tabs || tabs.dataset.init) return;
+  tabs.dataset.init = '1';
+  tabs.innerHTML = REHAB_DATA.map(r =>
+    `<button class="rehab-injury-btn" onclick="selectRehabInjury('${r.id}')">${r.region}</button>`
+  ).join('');
+}
+
+function selectRehabInjury(id) {
+  rehabActiveInjury = id;
+  rehabActivePhase  = 0;
+  document.querySelectorAll('.rehab-injury-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === REHAB_DATA.find(r => r.id === id)?.region);
+  });
+  renderRehabContent(id);
+}
+
+function renderRehabContent(id) {
+  const r = REHAB_DATA.find(x => x.id === id);
+  const el = document.getElementById('rehabContent');
+  if (!r || !el) return;
+
+  const conditions = r.conditions.map(c => `<span class="rehab-condition">${c}</span>`).join('');
+  const redFlags   = r.redFlags.map(f => `<li>${f}</li>`).join('');
+  const phaseTabs  = r.phases.map((p, i) =>
+    `<button class="rehab-phase-btn${i===0?' active':''}" onclick="selectRehabPhase(${i},'${id}')">${p.name.split('—')[0].trim()}</button>`
+  ).join('');
+  const panels = r.phases.map((p, i) => `
+    <div class="rehab-phase-panel${i===0?' active':''}" id="rehab-panel-${id}-${i}">
+      <div class="rehab-phase-goal"><strong>${p.weeks}</strong> — ${p.goal}</div>
+      <div class="rehab-ex-grid">
+        ${p.exercises.map(ex => `
+          <div class="rehab-ex-card">
+            <div class="rehab-ex-name">${escapeHtml(ex.name)}</div>
+            <div class="rehab-ex-sets">${escapeHtml(ex.sets)}</div>
+            <div class="rehab-ex-cue">${escapeHtml(ex.cue)}</div>
+            <div class="rehab-ex-focus">${escapeHtml(ex.focus)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const evidence = r.evidence.map(e => `<li>${e}</li>`).join('');
+
+  el.innerHTML = `
+    <div class="rehab-conditions">${conditions}</div>
+    <div class="rehab-red-flags">
+      <div class="rehab-red-flags-title">⚠ Stop & See a Doctor If Any Red Flags Apply</div>
+      <ul>${redFlags}</ul>
+    </div>
+    <div class="rehab-phase-tabs" id="rehab-phase-tabs-${id}">${phaseTabs}</div>
+    ${panels}
+    <div class="rehab-evidence">
+      <div class="rehab-evidence-title">Evidence Base</div>
+      <ul style="padding-left:18px;margin:0">${evidence}</ul>
+    </div>
+    <div class="rehab-return-note"><strong>Return to Training:</strong> ${r.returnNote}</div>
+    <div class="rehab-disclaimer">⚕ These protocols are for educational reference only. Always consult a licensed physiotherapist or sports medicine physician before beginning any rehabilitation program. Do not train through sharp, acute, or worsening pain.</div>
+  `;
+}
+
+function selectRehabPhase(idx, injuryId) {
+  const id = injuryId || rehabActiveInjury;
+  const r = REHAB_DATA.find(x => x.id === id);
+  if (!r) return;
+  rehabActivePhase = idx;
+  document.querySelectorAll(`#rehab-phase-tabs-${id} .rehab-phase-btn`).forEach((b, i) => b.classList.toggle('active', i === idx));
+  r.phases.forEach((_, i) => {
+    const panel = document.getElementById(`rehab-panel-${id}-${i}`);
+    if (panel) panel.classList.toggle('active', i === idx);
+  });
 }
 
 function toggleMSP(id) {
@@ -10139,7 +10514,8 @@ function loadTools() {
       document.querySelectorAll('.tools-nav-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.querySelectorAll('.tools-category').forEach(c => c.classList.remove('active'));
-      document.getElementById(`tools-${cat}`).classList.add('active');
+      document.getElementById(`tools-${cat}`)?.classList.add('active');
+      if (cat === 'rehab') initRehab();
     });
   });
 
@@ -13673,7 +14049,14 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeExerciseSwapModal();
     closeExerciseInfoModal();
+    closeFoodModal();
     document.getElementById('groceryModal')?.remove();
+  }
+  // Keyboard: food cards are focusable
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('food-card')) {
+    e.preventDefault();
+    const foodId = e.target.dataset.foodId;
+    if (foodId) openFoodModal(encodeURIComponent(foodId));
   }
   // Keyboard support for chips with role="radio" or role="checkbox"
   if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('chip') && e.target.hasAttribute('role')) {
