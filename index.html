@@ -4360,7 +4360,7 @@ select.field-input option {
 }
 .workout-ex-row {
   display: grid;
-  grid-template-columns: 1fr auto auto auto auto;
+  grid-template-columns: 1fr auto auto auto auto auto;
   align-items: center;
   gap: 8px;
   padding: 9px 0;
@@ -4413,6 +4413,50 @@ select.field-input option {
   transition: color var(--duration-fast), background var(--duration-fast);
 }
 .workout-ex-remove:hover { color: var(--danger); background: rgba(248,113,113,0.08); }
+
+/* ── Exercise info toggle in workout tray ── */
+.workout-ex-wrap { display: flex; flex-direction: column; }
+.workout-ex-info-btn {
+  background: none; border: none; color: var(--chalk-tertiary); cursor: pointer;
+  font-size: 1rem; padding: 4px 6px; border-radius: var(--radius-sm);
+  transition: color var(--duration-fast), background var(--duration-fast);
+  line-height: 1; flex-shrink: 0;
+}
+.workout-ex-info-btn:hover { color: var(--blood); }
+.workout-ex-info-btn.active { color: var(--blood); background: var(--blood-dim); }
+.workout-ex-detail {
+  display: none; background: rgba(255,255,255,0.03); border: 1px solid var(--iron-border);
+  border-radius: var(--radius-md); padding: 14px 16px; margin: 0 0 8px;
+  font-size: 0.8125rem;
+}
+.workout-ex-detail.open { display: block; }
+.ex-detail-section { margin-bottom: 14px; }
+.ex-detail-section:last-child { margin-bottom: 0; }
+.ex-detail-label {
+  font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em;
+  font-size: 0.72rem; color: var(--chalk-tertiary); margin-bottom: 6px;
+}
+.ex-detail-text { color: var(--chalk-secondary); line-height: 1.55; font-size: 0.8125rem; }
+.ex-dist-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.ex-dist-label { flex: 0 0 150px; color: var(--chalk-secondary); font-size: 0.7875rem; }
+.ex-dist-bar-wrap { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.ex-dist-bar { height: 100%; border-radius: 3px; background: var(--blood); transition: width .4s ease; }
+.ex-dist-pct { flex: 0 0 38px; text-align: right; font-family: 'Teko', sans-serif; font-size: 0.95rem; color: var(--blood); }
+.ex-detail-video-link {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--blood);
+  font-size: 0.8125rem; text-decoration: none; padding: 6px 12px;
+  border: 1px solid var(--iron-border); border-radius: var(--radius-sm);
+  transition: border-color .15s, background .15s;
+}
+.ex-detail-video-link:hover { border-color: var(--blood); background: var(--blood-dim); }
+.ex-detail-breadcrumb {
+  font-family: 'Teko', sans-serif; font-size: 0.8rem; color: var(--chalk-tertiary);
+  letter-spacing: .04em; margin-bottom: 10px;
+}
+.ex-detail-breadcrumb span { color: var(--chalk-secondary); }
+.ex-head-item { margin-bottom: 7px; }
+.ex-head-name { color: var(--chalk); font-size: 0.8125rem; font-weight: 500; }
+.ex-head-desc { color: var(--chalk-tertiary); font-size: 0.75rem; margin-top: 2px; line-height: 1.45; }
 
 /* ── Exercise add button in muscle panel ── */
 .mm-ex-item {
@@ -5358,6 +5402,17 @@ select.field-input option {
               <option value="fats">Fats</option>
               <option value="vegetables">Vegetables</option>
               <option value="dairy">Dairy</option>
+            </select>
+            <select id="foodSort" class="field-input" style="width: auto; min-width: 200px;">
+              <option value="">Sort: Default</option>
+              <option value="protein_per_gram_desc">Protein/gram ↓ (highest first)</option>
+              <option value="protein_desc">Total Protein ↓</option>
+              <option value="calories_asc">Calories ↑ (lowest first)</option>
+              <option value="calories_desc">Calories ↓ (highest first)</option>
+              <option value="fat_asc">Fat ↑ (lowest first)</option>
+              <option value="carbs_asc">Carbs ↑ (lowest first)</option>
+              <option value="fiber_desc">Fiber ↓ (highest first)</option>
+              <option value="name_asc">Name A → Z</option>
             </select>
           </div>
 
@@ -9583,7 +9638,14 @@ function loadFoods() {
 }
 
 function renderFoods(list) {
-  document.getElementById('foodsGrid').innerHTML = list.slice(0, 60).map(f => `
+  const sort = document.getElementById('foodSort')?.value || '';
+  const showProteinPerGram = sort === 'protein_per_gram_desc';
+  const display = list.slice(0, 120); // show up to 120 when filtered/sorted
+  const grid = document.getElementById('foodsGrid');
+  if (!grid) return;
+  grid.innerHTML = display.map(f => {
+    const ppg = f.serving?.amount > 0 ? ((f.macros.protein / f.serving.amount) * 100).toFixed(1) : '—';
+    return `
     <div class="food-card">
       <div class="food-name">${escapeHtml(f.name)}</div>
       <div class="food-serving">${escapeHtml(f.serving.description)}</div>
@@ -9592,20 +9654,40 @@ function renderFoods(list) {
         <span class="food-macro p">${fmt(f.macros.protein)}P</span>
         <span class="food-macro c">${fmt(f.macros.carbs)}C</span>
         <span class="food-macro f">${fmt(f.macros.fat)}F</span>
+        ${showProteinPerGram ? `<span class="food-macro p" style="opacity:0.7;font-size:0.7rem">${ppg}g P/100g</span>` : ''}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+  if (list.length > 120) {
+    grid.insertAdjacentHTML('beforeend', `<div style="grid-column:1/-1;text-align:center;padding:12px;color:var(--chalk-tertiary);font-size:0.8rem">Showing 120 of ${list.length} — refine your search to narrow results.</div>`);
+  }
 }
 
 document.getElementById('foodSearch')?.addEventListener('input', filterFoods);
 document.getElementById('catFilter')?.addEventListener('change', filterFoods);
+document.getElementById('foodSort')?.addEventListener('change', filterFoods);
 
 function filterFoods() {
   const q = document.getElementById('foodSearch').value.toLowerCase();
   const cat = document.getElementById('catFilter').value;
+  const sort = document.getElementById('foodSort').value;
   let list = getAllFoods();
   if (q) list = list.filter(f => f.name.toLowerCase().includes(q) || f.tags?.some(t => t.includes(q)));
   if (cat) list = list.filter(f => f.category === cat);
+  if (sort) {
+    list = [...list]; // avoid mutating source
+    const proteinPerGram = f => f.serving?.amount > 0 ? (f.macros.protein / f.serving.amount) * 100 : 0;
+    switch (sort) {
+      case 'protein_per_gram_desc': list.sort((a, b) => proteinPerGram(b) - proteinPerGram(a)); break;
+      case 'protein_desc':          list.sort((a, b) => b.macros.protein - a.macros.protein); break;
+      case 'calories_asc':          list.sort((a, b) => a.calories - b.calories); break;
+      case 'calories_desc':         list.sort((a, b) => b.calories - a.calories); break;
+      case 'fat_asc':               list.sort((a, b) => a.macros.fat - b.macros.fat); break;
+      case 'carbs_asc':             list.sort((a, b) => a.macros.carbs - b.macros.carbs); break;
+      case 'fiber_desc':            list.sort((a, b) => (b.macros.fiber || 0) - (a.macros.fiber || 0)); break;
+      case 'name_asc':              list.sort((a, b) => a.name.localeCompare(b.name)); break;
+    }
+  }
   renderFoods(list);
 }
 
@@ -14103,26 +14185,118 @@ function renderWorkoutSheet() {
   }
   if (empty) empty.style.display = 'none';
   list.innerHTML = WORKOUT.map((w, i) => `
-    <div class="workout-ex-row">
-      <div class="workout-ex-name" title="${escapeHtml(w.exercise)}">${escapeHtml(w.exercise)}</div>
-      <div class="workout-ex-col">
-        <input class="workout-ex-input" type="number" value="${w.sets}" min="1" max="20"
-          onchange="updateWorkoutField(${i},'sets',+this.value)" aria-label="Sets">
-        <span class="workout-ex-label">sets</span>
+    <div class="workout-ex-wrap">
+      <div class="workout-ex-row">
+        <div class="workout-ex-name" title="${escapeHtml(w.exercise)}">${escapeHtml(w.exercise)}</div>
+        <div class="workout-ex-col">
+          <input class="workout-ex-input" type="number" value="${w.sets}" min="1" max="20"
+            onchange="updateWorkoutField(${i},'sets',+this.value)" aria-label="Sets">
+          <span class="workout-ex-label">sets</span>
+        </div>
+        <div class="workout-ex-col">
+          <input class="workout-ex-input" type="number" value="${w.reps}" min="1" max="100"
+            onchange="updateWorkoutField(${i},'reps',+this.value)" aria-label="Reps">
+          <span class="workout-ex-label">reps</span>
+        </div>
+        <div class="workout-ex-col">
+          <input class="workout-ex-input" type="number" value="${w.weight}" min="0"
+            placeholder="${WORKOUT_UNIT}" onchange="updateWorkoutField(${i},'weight',this.value)" aria-label="Weight in ${WORKOUT_UNIT}">
+          <span class="workout-ex-label">${WORKOUT_UNIT}</span>
+        </div>
+        <button class="workout-ex-info-btn" id="ex-info-btn-${i}" onclick="toggleExerciseDetail(${i})" aria-label="Exercise info" title="Exercise info">ℹ</button>
+        <button class="workout-ex-remove" onclick="removeExerciseFromWorkout(${i})" aria-label="Remove">✕</button>
       </div>
-      <div class="workout-ex-col">
-        <input class="workout-ex-input" type="number" value="${w.reps}" min="1" max="100"
-          onchange="updateWorkoutField(${i},'reps',+this.value)" aria-label="Reps">
-        <span class="workout-ex-label">reps</span>
-      </div>
-      <div class="workout-ex-col">
-        <input class="workout-ex-input" type="number" value="${w.weight}" min="0"
-          placeholder="${WORKOUT_UNIT}" onchange="updateWorkoutField(${i},'weight',this.value)" aria-label="Weight in ${WORKOUT_UNIT}">
-        <span class="workout-ex-label">${WORKOUT_UNIT}</span>
-      </div>
-      <button class="workout-ex-remove" onclick="removeExerciseFromWorkout(${i})" aria-label="Remove">✕</button>
+      <div class="workout-ex-detail" id="ex-detail-${i}"></div>
     </div>
   `).join('');
+}
+
+function toggleExerciseDetail(idx) {
+  const detail = document.getElementById(`ex-detail-${idx}`);
+  const btn = document.getElementById(`ex-info-btn-${idx}`);
+  if (!detail) return;
+  const isOpen = detail.classList.toggle('open');
+  if (btn) btn.classList.toggle('active', isOpen);
+  if (isOpen && !detail.dataset.loaded) {
+    detail.innerHTML = buildExerciseDetail(WORKOUT[idx]);
+    detail.dataset.loaded = '1';
+  }
+}
+
+function buildExerciseDetail(w) {
+  const muscle = MUSCLE_DATA[w.muscleId];
+  const exData = muscle?.exercises?.find(e => e.name === w.exercise);
+
+  // Find group this muscle belongs to
+  const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(w.muscleId)) : null;
+  const groupLabel = group?.label || '';
+
+  // Video search link
+  const searchQuery = encodeURIComponent(`how to ${w.exercise} proper form technique`);
+  const videoUrl = `https://www.youtube.com/results?search_query=${searchQuery}`;
+
+  // Muscle name (short form)
+  const muscleShort = muscle ? (muscle.name.includes('—') ? muscle.name.split('—')[1].trim() : muscle.name) : w.muscleId;
+
+  // Breadcrumb: Head(s) → Muscle → Group
+  const firstHead = muscle?.heads?.[0]?.name?.split('(')[0]?.trim() || '';
+  const breadcrumb = muscle ? `<div class="ex-detail-breadcrumb">
+    ${firstHead ? `<span>${firstHead}</span> › ` : ''}
+    <span>${muscleShort}</span>${groupLabel ? ` › <span>${groupLabel}</span>` : ''}
+  </div>` : '';
+
+  // Build activation distribution
+  const isCompound = (exData?.secondary?.length || 0) >= 2;
+  const primaryPct = isCompound ? 65 : 82;
+  const distributions = [];
+  if (muscle) distributions.push({ name: muscleShort, pct: primaryPct, primary: true });
+  (exData?.secondary || []).forEach(s => {
+    const pct = s.t === 'h' ? 32 : s.t === 'm' ? 18 : 8;
+    distributions.push({ name: s.m, pct, tier: s.t });
+  });
+  distributions.sort((a, b) => b.pct - a.pct);
+
+  const distHtml = distributions.map(d => `
+    <div class="ex-dist-row">
+      <div class="ex-dist-label">${d.primary ? `<strong style="color:var(--chalk)">${d.name}</strong>` : d.name}</div>
+      <div class="ex-dist-bar-wrap"><div class="ex-dist-bar" style="width:${Math.round(d.pct / (primaryPct) * 100)}%;${!d.primary ? `opacity:${d.tier === 'h' ? 0.7 : d.tier === 'm' ? 0.5 : 0.3}` : ''}"></div></div>
+      <div class="ex-dist-pct">~${d.pct}%</div>
+    </div>`).join('');
+
+  // Anatomical heads section
+  const headsHtml = muscle?.heads?.length ? muscle.heads.map(h => `
+    <div class="ex-head-item">
+      <div class="ex-head-name">${h.name}</div>
+      <div class="ex-head-desc">${h.desc}</div>
+    </div>`).join('') : '';
+
+  return `
+    <div class="ex-detail-section">
+      <div class="ex-detail-label">Watch Demo</div>
+      <a href="${videoUrl}" target="_blank" rel="noopener noreferrer" class="ex-detail-video-link">▶ ${escapeHtml(w.exercise)} — proper form</a>
+    </div>
+    ${breadcrumb}
+    ${muscle?.func ? `
+    <div class="ex-detail-section">
+      <div class="ex-detail-label">Primary Function</div>
+      <div class="ex-detail-text">${muscle.func}</div>
+    </div>` : ''}
+    <div class="ex-detail-section">
+      <div class="ex-detail-label">Muscle Activation Distribution</div>
+      ${distHtml || '<div class="ex-detail-text">No distribution data.</div>'}
+      <div style="font-size:0.7rem;color:var(--chalk-tertiary);margin-top:6px">Values are approximate; vary by load, ROM, and individual mechanics.</div>
+    </div>
+    ${headsHtml ? `
+    <div class="ex-detail-section">
+      <div class="ex-detail-label">Anatomical Breakdown</div>
+      ${headsHtml}
+    </div>` : ''}
+    ${muscle?.note ? `
+    <div class="ex-detail-section">
+      <div class="ex-detail-label">Training Note</div>
+      <div class="ex-detail-text">${muscle.note}</div>
+    </div>` : ''}
+  `;
 }
 
 function toggleWorkoutSheet() {
