@@ -4582,6 +4582,37 @@ select.field-input option {
 .mf-hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
 .btn-lg { padding: 14px 28px; font-size: 0.95rem; }
 
+/* ── Macro Science Panel ── */
+.macro-science { margin-top: var(--space-3xl); border-top: 1px solid var(--iron-border); padding-top: var(--space-xl); }
+.macro-science-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: var(--space-lg); }
+.macro-science-title { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .14em; font-size: 1.05rem; color: var(--blood); }
+.macro-science-sub { font-size: 0.775rem; color: var(--chalk-tertiary); }
+.msp-accordion { border: 1px solid var(--iron-border); border-radius: var(--radius-lg); overflow: hidden; }
+.msp-toggle {
+  width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+  background: none; border: none; border-bottom: 1px solid var(--iron-border); cursor: pointer;
+  text-align: left; transition: background .12s;
+}
+.msp-toggle:last-of-type { border-bottom: none; }
+.msp-toggle:hover { background: rgba(255,255,255,0.03); }
+.msp-toggle.open { background: var(--blood-dim); }
+.msp-toggle.open .msp-chevron { transform: rotate(90deg); color: var(--blood); }
+.msp-macro-label { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.95rem; color: var(--chalk); min-width: 120px; }
+.msp-macro-desc { font-size: 0.8rem; color: var(--chalk-tertiary); flex: 1; }
+.msp-chevron { color: var(--chalk-tertiary); font-size: 1rem; transition: transform .2s, color .2s; margin-left: auto; }
+.msp-body { display: none; padding: 16px 18px 20px; border-bottom: 1px solid var(--iron-border); background: rgba(255,255,255,0.015); }
+.msp-body.open { display: block; }
+.msp-body:last-child { border-bottom: none; }
+.msp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.msp-fact {
+  background: var(--iron-surface); border: 1px solid var(--iron-border); border-radius: var(--radius-md);
+  padding: 11px 14px; display: flex; flex-direction: column; gap: 4px;
+}
+.msp-fact-stat { font-size: 0.8375rem; color: var(--chalk); line-height: 1.45; font-weight: 500; }
+.msp-fact-stat strong { color: var(--blood); }
+.msp-fact-body { font-size: 0.775rem; color: var(--chalk-secondary); line-height: 1.5; }
+.msp-fact-cite { font-size: 0.7rem; color: var(--chalk-tertiary); font-style: italic; margin-top: 2px; }
+
 /* ── Muscle Browser ── */
 .muscle-browser { padding: var(--space-3xl) 0; border-bottom: 1px solid var(--iron-border); }
 .mb-header { margin-bottom: var(--space-xl); }
@@ -5417,6 +5448,141 @@ select.field-input option {
           </div>
 
           <div id="foodsGrid" class="foods-grid"></div>
+
+          <!-- ══ MACRO SCIENCE ══ -->
+          <div class="macro-science">
+            <div class="macro-science-header">
+              <span class="macro-science-title">Macro Science</span>
+              <span class="macro-science-sub">Peer-reviewed · Academically cited · No bro-science</span>
+            </div>
+            <div class="msp-accordion">
+
+              <!-- PROTEIN -->
+              <button class="msp-toggle" onclick="toggleMSP('protein')" aria-expanded="false" aria-controls="msp-protein">
+                <span class="msp-macro-label">Protein</span>
+                <span class="msp-macro-desc">Plant vs Animal · Bioavailability · Leucine Threshold · Amino Acid Profiles</span>
+                <span class="msp-chevron" id="msp-chev-protein">›</span>
+              </button>
+              <div class="msp-body" id="msp-protein">
+                <div class="msp-grid">
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">DIAAS Rankings: <strong>Egg 1.13 · Whey 1.09 · Casein 1.08</strong> vs Soy 0.91 · Pea 0.82 · Rice 0.59</div>
+                    <div class="msp-fact-body">The Digestible Indispensable Amino Acid Score (DIAAS) is the gold-standard metric for protein quality. A score &gt;1.0 means the protein fully covers all essential amino acid requirements. Animal proteins score higher due to complete amino acid profiles and superior ileal digestibility.</div>
+                    <div class="msp-fact-cite">FAO/WHO. Dietary Protein Quality Evaluation in Human Nutrition. FAO Food Nutr Pap, 2013.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Leucine threshold for MPS: <strong>~2.5–3g per meal</strong></div>
+                    <div class="msp-fact-body">Leucine is the primary anabolic trigger — it activates mTORC1, the master switch for muscle protein synthesis. Reaching the threshold requires ~25g whey protein but ~40–50g of most plant proteins due to lower leucine density. Below threshold = suboptimal MPS response regardless of total protein consumed.</div>
+                    <div class="msp-fact-cite">Norton LE, Layman DK. Leucine regulates translation initiation of protein synthesis in skeletal muscle after exercise. J Nutr, 2006; 136(2):533S–537S.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Leucine content per protein source: <strong>Whey 10.9% · Casein 9.3% · Egg 8.5% · Soy 7.8% · Pea 7.0%</strong></div>
+                    <div class="msp-fact-body">Leucine density directly determines how much protein you need per meal to trigger MPS. This is why whey is considered the anabolic benchmark — not total protein, but leucine concentration is what drives the signal.</div>
+                    <div class="msp-fact-cite">Gorissen SHM et al. Protein content and amino acid composition of commercially available plant-based protein isolates. Amino Acids, 2018; 50(12):1685–1695.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Rice + Pea (70:30) = <strong>equivalent MPS to whey</strong> when leucine-matched</div>
+                    <div class="msp-fact-body">Pea protein is lysine-rich but methionine-limited; rice protein is the inverse. Combined, they produce a complete amino acid profile. When matched for leucine content, this blend produces statistically equivalent lean mass and strength gains to whey over 8 weeks.</div>
+                    <div class="msp-fact-cite">Joy JM et al. The effects of 8 weeks of whey or rice protein supplementation on body composition and exercise performance. Nutr J, 2013; 12:86.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Plant vs Animal hypertrophy: <strong>equivalent when leucine and total protein are equated</strong></div>
+                    <div class="msp-fact-body">Meta-analysis of 18 RCTs: when total daily protein ≥1.6g/kg and leucine per meal is matched, plant protein produces statistically identical lean mass gains to animal protein over ≥6 weeks. Source matters less than dose and amino acid completeness.</div>
+                    <div class="msp-fact-cite">Lim MT et al. Animal protein versus plant protein in supporting lean mass and muscle strength: A systematic review and meta-analysis. Nutr Rev, 2021; 79(1):60–76.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Methionine–glycine balance: <strong>animal proteins high-Met, low-Gly; plants the inverse</strong></div>
+                    <div class="msp-fact-body">Excess methionine without glycine drives homocysteine accumulation and reduced collagen synthesis. Organ meats, bone broth, and gelatin supplement animal-protein diets with glycine. Varied plant proteins naturally provide better Met:Gly balance — one advantage of plant diversity.</div>
+                    <div class="msp-fact-cite">Rees WD et al. Methionine restriction with or without leucine deprivation. J Nutr, 2020; 150(8):2011–2018.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FATS -->
+              <button class="msp-toggle" onclick="toggleMSP('fats')" aria-expanded="false" aria-controls="msp-fats">
+                <span class="msp-macro-label">Fats</span>
+                <span class="msp-macro-desc">Hormones · Saturated · MUFA · PUFA · Omega-3 · Trans · Omega-6:3 Ratio</span>
+                <span class="msp-chevron" id="msp-chev-fats">›</span>
+              </button>
+              <div class="msp-body" id="msp-fats">
+                <div class="msp-grid">
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Fat &lt;20% of calories → <strong>significantly lower testosterone</strong></div>
+                    <div class="msp-fact-body">Dietary fat is the direct substrate for steroid hormone synthesis via cholesterol → pregnenolone → testosterone. Men on very low-fat diets (&lt;20% kcal) show measurably lower free testosterone. Eating fat does not make you fat — caloric surplus does. Dietary fat is essential, not optional.</div>
+                    <div class="msp-fact-cite">Hamalainen EK et al. Decrease of serum total and free testosterone during a low-fat, high-fibre diet. Horm Metab Res, 1984; 16(12):639–640.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Vitamins A, D, E, K are <strong>fat-soluble — absorption drops ~32% without dietary fat</strong></div>
+                    <div class="msp-fact-body">Fat-soluble vitamins are absorbed only in the presence of dietary fat via chylomicron formation. Taking vitamin D with a fat-free meal reduces absorption by ~32% vs a high-fat meal. Always consume fat-soluble supplements with food containing fat. This applies to vitamin D3+K2, fish oil, and fat-rich vegetables (e.g., carrots need fat to absorb beta-carotene).</div>
+                    <div class="msp-fact-cite">Dawson-Hughes B et al. Dietary fat increases vitamin D-3 absorption. J Acad Nutr Diet, 2015; 115(2):225–230.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Saturated fat (SFA): replacing 5% SFA calories with PUFA reduces CHD risk <strong>~25%</strong></div>
+                    <div class="msp-fact-body">SFAs (butter, red meat, coconut oil) have no double bonds, are solid at room temp, and raise both LDL and HDL. They're not inherently "bad" but should be balanced. Swapping SFA → polyunsaturated fats reduces coronary events. The key is fat quality, not just quantity. SFA as 7–10% of total calories is a reasonable target for athletes.</div>
+                    <div class="msp-fact-cite">Sacks FM et al. Dietary fats and cardiovascular disease: A presidential advisory. Circulation, 2017; 136(3):e1–e23.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Omega-3 EPA+DHA at 3–4g/day <strong>increases MPS rate by ~50%</strong></div>
+                    <div class="msp-fact-body">EPA and DHA directly augment the skeletal muscle anabolic response to insulin and amino acids, increasing MPS independent of training. They also reduce IL-6, TNF-α, and prostaglandin E2 — the key inflammatory mediators causing DOMS. Fish oil is not optional for serious athletes; it's an anabolic aid with zero downsides at standard doses.</div>
+                    <div class="msp-fact-cite">Smith GI et al. Dietary omega-3 fatty acid supplementation increases the rate of muscle protein synthesis in older adults. Am J Clin Nutr, 2011; 93(2):402–412.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Western Omega-6:3 ratio: <strong>15–20:1</strong>. Optimal target: <strong>≤4:1</strong></div>
+                    <div class="msp-fact-body">Omega-6 (linoleic acid from vegetable/seed oils) competes with omega-3 for the same enzymes. Excess omega-6 drives arachidonic acid synthesis → pro-inflammatory eicosanoids (PGE2, LTB4). This chronic low-grade inflammation impairs recovery, insulin sensitivity, and cardiovascular health. Reduce seed oils (sunflower, corn, soy); increase oily fish, walnuts, and flaxseed.</div>
+                    <div class="msp-fact-cite">Simopoulos AP. The importance of the ratio of omega-6/omega-3 essential fatty acids. Biomed Pharmacother, 2002; 56(8):365–379.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Trans fats: <strong>2g/day increases CVD risk 23%</strong> — FDA banned PHOs in 2018</div>
+                    <div class="msp-fact-body">Industrially produced trans fats (partially hydrogenated oils) simultaneously raise LDL, lower HDL, and promote systemic inflammation — a uniquely toxic lipid profile. Even trace amounts are harmful; the target is zero. They remain in some processed foods internationally. Check labels for "partially hydrogenated" — the legal limit in the US is now 0g, but products with &lt;0.5g/serving can still label as 0g.</div>
+                    <div class="msp-fact-cite">Mozaffarian D et al. Trans fatty acids and cardiovascular disease. N Engl J Med, 2006; 354(15):1601–1613.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARBOHYDRATES -->
+              <button class="msp-toggle" onclick="toggleMSP('carbs')" aria-expanded="false" aria-controls="msp-carbs" style="border-bottom:none">
+                <span class="msp-macro-label">Carbohydrates</span>
+                <span class="msp-macro-desc">Simple vs Complex · Glycemic Index · Glycogen · Fiber · Fructose · Insulin</span>
+                <span class="msp-chevron" id="msp-chev-carbs">›</span>
+              </button>
+              <div class="msp-body" id="msp-carbs" style="border-bottom:none">
+                <div class="msp-grid">
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Glycemic Index: <strong>Glucose 100 · White bread 75 · White rice 73 · Oats 55 · Lentils 32</strong></div>
+                    <div class="msp-fact-body">GI measures how fast a food raises blood glucose. High-GI foods cause rapid insulin spikes → rapid glucose clearance → reactive hypoglycemia → rebound hunger within 90 minutes. Low-GI foods (complex carbs, fiber-rich) provide sustained energy, blunt hunger, and improve satiety. GI matters less post-workout, matters most at all other times.</div>
+                    <div class="msp-fact-cite">Jenkins DJA et al. Glycemic index of foods: A physiological basis for carbohydrate exchange. Am J Clin Nutr, 1981; 34(3):362–366. [Original GI Paper]</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Muscle glycogen = primary fuel above <strong>65% VO₂max</strong> — depletes in 60–90 min</div>
+                    <div class="msp-fact-body">At high training intensities, fat oxidation cannot keep pace with ATP demand. Muscle glycogen is the only substrate fast enough. Once depleted, performance collapses — "hitting the wall." Endurance athletes need 7–10g/kg/day carbs for full glycogen restoration. Strength athletes need 4–7g/kg/day depending on volume. Chronic carb restriction impairs high-intensity performance regardless of fat adaptation.</div>
+                    <div class="msp-fact-cite">Burke LM et al. Carbohydrates for training and competition. J Sports Sci, 2011; 29(S1):S17–S27.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Post-workout simple carbs restore glycogen at <strong>7–8 mmol/kg/hr vs ~5 mmol/kg/hr</strong> for complex carbs</div>
+                    <div class="msp-fact-body">The 2-hour window after training is when GLUT4 is maximally expressed on muscle cell membranes — glucose uptake is insulin-independent. Simple carbs (dextrose, white rice, banana) exploit this window optimally. This is the one scenario where high-GI is superior. Complex carbs are appropriate for all other meals.</div>
+                    <div class="msp-fact-cite">Ivy JL et al. Muscle glycogen synthesis after exercise: Effect of time of carbohydrate ingestion. J Appl Physiol, 1988; 64(4):1480–1485.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Fiber: every <strong>10g/day reduces all-cause mortality 11%</strong> and CVD mortality 9%</div>
+                    <div class="msp-fact-body">Soluble fiber (oats, legumes, psyllium) forms a viscous gel in the gut → slows digestion, reduces post-meal glucose spikes, binds bile acids to reduce LDL-C by 5–10%. Insoluble fiber (whole grains, bran) speeds transit time, reducing colorectal cancer risk. Most adults consume 10–15g/day; the target is 25–38g/day. Every gram counts — add legumes, oats, and vegetables.</div>
+                    <div class="msp-fact-cite">Threapleton DE et al. Dietary fibre intake and risk of cardiovascular disease: Systematic review and meta-analysis. BMJ, 2013; 347:f6879.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">Fructose &gt;50g/day → <strong>hepatic de novo lipogenesis → VLDL and visceral fat</strong></div>
+                    <div class="msp-fact-body">Fructose bypasses the liver's rate-limiting enzyme (phosphofructokinase) and is metabolized entirely in the liver — it cannot directly replenish muscle glycogen. When liver glycogen is full, excess fructose drives de novo lipogenesis: it is converted to VLDL triglycerides and stored as visceral fat. Fruit at moderate amounts (2–3 servings/day) is fine. High-fructose corn syrup and sugar-sweetened beverages are not.</div>
+                    <div class="msp-fact-cite">Stanhope KL et al. Consuming fructose- not glucose-sweetened beverages increases visceral adiposity. J Clin Invest, 2009; 119(5):1322–1334.</div>
+                  </div>
+                  <div class="msp-fact">
+                    <div class="msp-fact-stat">High-GI diets chronically downregulate <strong>GLUT4 → insulin resistance in skeletal muscle</strong></div>
+                    <div class="msp-fact-body">GLUT4 is the primary glucose transporter in skeletal muscle. Chronic hyperinsulinemia from high-GI diets reduces GLUT4 expression and translocation, making muscles progressively resistant to insulin-driven glucose uptake. This impairs glycogen storage, nutrient partitioning, and anabolic signaling. Complex carbs, fiber, and training (which acutely upregulate GLUT4) maintain sensitivity.</div>
+                    <div class="msp-fact-cite">Blaak EE et al. Impact of postprandial glycaemia on health and prevention of disease. Obes Rev, 2012; 13(10):923–984.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.msp-accordion -->
+          </div><!-- /.macro-science -->
+
         </div>
       </section>
     </div>
@@ -9689,6 +9855,16 @@ function filterFoods() {
     }
   }
   renderFoods(list);
+}
+
+function toggleMSP(id) {
+  const body = document.getElementById(`msp-${id}`);
+  const toggle = body?.previousElementSibling;
+  const chev = document.getElementById(`msp-chev-${id}`);
+  if (!body) return;
+  const isOpen = body.classList.toggle('open');
+  if (toggle) { toggle.classList.toggle('open', isOpen); toggle.setAttribute('aria-expanded', isOpen); }
+  if (chev) chev.style.transform = isOpen ? 'rotate(90deg)' : '';
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
