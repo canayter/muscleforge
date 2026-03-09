@@ -9526,11 +9526,16 @@ function genMeals() {
     f: Math.round(macros.fat.g / mealsPerDay)
   };
 
-  meals = times.map(t => ({
-    ...t,
-    foods: pickFoods(compatible, perMeal, t.name.toLowerCase().includes('post')),
-    targets: perMeal
-  }));
+  meals = times.map((t, idx) => {
+    const nameLower = t.name.toLowerCase();
+    const isPost      = nameLower.includes('post');
+    const isBreakfast = idx === 0 || nameLower.includes('breakfast');
+    return {
+      ...t,
+      foods: pickFoods(compatible, perMeal, isPost, isBreakfast),
+      targets: perMeal
+    };
+  });
 
   renderMeals();
 }
@@ -9568,9 +9573,17 @@ function getMealTimes(n, time) {
 // Common US foods - prioritized for easy availability
 const COMMON_FOODS = {
   proteins: ['chickenBreast', 'eggs', 'groundBeef95', 'salmon', 'turkeyBreast', 'tuna', 'groundTurkey', 'wholeEggs', 'tilapia', 'shrimpCooked'],
-  carbs: ['whiteRice', 'brownRice', 'oatmeal', 'sweetPotato', 'potato', 'quinoa', 'wholeWheatBread', 'pasta'],
+  carbs: ['whiteRice', 'brownRice', 'oatsRolled', 'sweetPotato', 'potato', 'quinoa', 'wholeWheatBread', 'pasta'],
   vegetables: ['broccoli', 'spinach', 'greenBeans', 'mixedGreens', 'bellPepper', 'asparagus', 'zucchini'],
   fats: ['oliveOil', 'almonds', 'peanutButter', 'avocado', 'walnuts', 'coconutOil']
+};
+
+// Breakfast-preferred foods — classic morning items athletes actually eat
+const BREAKFAST_FOODS = {
+  proteins: ['wholeEggs', 'eggWhites', 'greekYogurt', 'cottageCheese', 'salmon', 'kefir'],
+  carbs: ['oatsRolled', 'wholeWheatBread', 'banana', 'blueberries', 'strawberries', 'bagel', 'creamOfWheat', 'grits', 'granola'],
+  vegetables: ['spinach', 'mushrooms', 'bellPepperRed', 'tomatoes', 'onion'],
+  fats: ['avocado', 'peanutButter', 'almonds', 'walnuts', 'butter', 'chiaSeeds']
 };
 
 // Cuisine-preferred food IDs (foods that pair well with each cuisine style)
@@ -9613,7 +9626,7 @@ const CUISINE_FOOD_MAP = {
   }
 };
 
-function pickFoods(foods, targets, isPost) {
+function pickFoods(foods, targets, isPost, isBreakfast) {
   const picked = [];
   const pMult = Math.max(0.5, Math.min(2, targets.p / 25));
   const cMult = Math.max(0.5, Math.min(2, targets.c / 35));
@@ -9637,21 +9650,28 @@ function pickFoods(foods, targets, isPost) {
     });
   }
 
-  // Prefer cuisine foods, then common foods, then random
-  const pickFrom = (arr, commonList, cuisineList) => {
+  // Priority chain: cuisine → breakfast (if applicable) → common → random
+  const pickFrom = (arr, commonList, cuisineList, breakfastList) => {
+    // Cuisine is always highest priority when selected
     if (cuisineList && cuisineList.length > 0) {
       const cuiMatch = arr.filter(f => cuisineList.includes(f.id));
       if (cuiMatch.length > 0) return cuiMatch[Math.floor(Math.random() * cuiMatch.length)];
     }
+    // Breakfast preference for first/breakfast meals
+    if (isBreakfast && breakfastList && breakfastList.length > 0) {
+      const bfMatch = arr.filter(f => breakfastList.includes(f.id));
+      if (bfMatch.length > 0) return bfMatch[Math.floor(Math.random() * bfMatch.length)];
+    }
+    // Fall back to common foods, then fully random
     const common = arr.filter(f => commonList.includes(f.id));
     if (common.length > 0) return common[Math.floor(Math.random() * common.length)];
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  if (proteins.length) picked.push({ food: pickFrom(proteins, COMMON_FOODS.proteins, cuisinePreferred.proteins), qty: Math.round(pMult * 10) / 10 });
-  if (carbs.length) picked.push({ food: pickFrom(carbs, COMMON_FOODS.carbs, cuisinePreferred.carbs), qty: Math.round(cMult * 10) / 10 });
-  if (veggies.length) picked.push({ food: pickFrom(veggies, COMMON_FOODS.vegetables, cuisinePreferred.vegetables), qty: 1 });
-  if (!isPost && fats.length) picked.push({ food: pickFrom(fats, COMMON_FOODS.fats, cuisinePreferred.fats), qty: Math.round(fMult * 10) / 10 });
+  if (proteins.length) picked.push({ food: pickFrom(proteins, COMMON_FOODS.proteins, cuisinePreferred.proteins, BREAKFAST_FOODS.proteins), qty: Math.round(pMult * 10) / 10 });
+  if (carbs.length) picked.push({ food: pickFrom(carbs, COMMON_FOODS.carbs, cuisinePreferred.carbs, BREAKFAST_FOODS.carbs), qty: Math.round(cMult * 10) / 10 });
+  if (veggies.length) picked.push({ food: pickFrom(veggies, COMMON_FOODS.vegetables, cuisinePreferred.vegetables, BREAKFAST_FOODS.vegetables), qty: 1 });
+  if (!isPost && fats.length) picked.push({ food: pickFrom(fats, COMMON_FOODS.fats, cuisinePreferred.fats, BREAKFAST_FOODS.fats), qty: Math.round(fMult * 10) / 10 });
 
   return picked;
 }
