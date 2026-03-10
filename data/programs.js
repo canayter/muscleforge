@@ -194,7 +194,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'shoulders', type: 'compound', priority: 3 },
           { muscle: 'chest', type: 'isolation', priority: 4 },
           { muscle: 'shoulders', type: 'isolation', priority: 5 },
-          { muscle: 'triceps', type: 'isolation', priority: 6 }
+          { muscle: 'triceps', type: 'isolation', priority: 6 },
+          { muscle: 'triceps', type: 'isolation', priority: 7 }
         ]
       },
       {
@@ -208,7 +209,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'back', type: 'compound', priority: 3 },
           { muscle: 'back', type: 'isolation', priority: 4 },
           { muscle: 'biceps', type: 'isolation', priority: 5 },
-          { muscle: 'biceps', type: 'isolation', priority: 6 }
+          { muscle: 'biceps', type: 'isolation', priority: 6 },
+          { muscle: 'shoulders', type: 'isolation', priority: 7 }
         ]
       },
       {
@@ -237,7 +239,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'chest', type: 'compound', priority: 3 },
           { muscle: 'shoulders', type: 'isolation', priority: 4 },
           { muscle: 'shoulders', type: 'isolation', priority: 5 },
-          { muscle: 'triceps', type: 'isolation', priority: 6 }
+          { muscle: 'triceps', type: 'isolation', priority: 6 },
+          { muscle: 'chest', type: 'isolation', priority: 7 }
         ]
       },
       {
@@ -251,7 +254,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'back', type: 'compound', priority: 3 },
           { muscle: 'back', type: 'isolation', priority: 4 },
           { muscle: 'biceps', type: 'isolation', priority: 5 },
-          { muscle: 'biceps', type: 'isolation', priority: 6 }
+          { muscle: 'biceps', type: 'isolation', priority: 6 },
+          { muscle: 'shoulders', type: 'isolation', priority: 7 }
         ]
       },
       {
@@ -300,7 +304,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'chest', type: 'compound', priority: 4 },
           { muscle: 'back', type: 'compound', priority: 5 },
           { muscle: 'biceps', type: 'isolation', priority: 6 },
-          { muscle: 'triceps', type: 'isolation', priority: 7 }
+          { muscle: 'triceps', type: 'isolation', priority: 7 },
+          { muscle: 'shoulders', type: 'isolation', priority: 8 }
         ]
       },
       {
@@ -315,7 +320,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'quads', type: 'compound', priority: 4 },
           { muscle: 'hamstrings', type: 'isolation', priority: 5 },
           { muscle: 'calves', type: 'isolation', priority: 6 },
-          { muscle: 'core', type: 'compound', priority: 7 }
+          { muscle: 'core', type: 'compound', priority: 7 },
+          { muscle: 'glutes', type: 'isolation', priority: 8 }
         ]
       },
       {
@@ -330,7 +336,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'shoulders', type: 'compound', priority: 4 },
           { muscle: 'shoulders', type: 'isolation', priority: 5 },
           { muscle: 'triceps', type: 'isolation', priority: 6 },
-          { muscle: 'biceps', type: 'isolation', priority: 7 }
+          { muscle: 'biceps', type: 'isolation', priority: 7 },
+          { muscle: 'back', type: 'isolation', priority: 8 }
         ]
       },
       {
@@ -345,7 +352,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'quads', type: 'isolation', priority: 4 },
           { muscle: 'hamstrings', type: 'isolation', priority: 5 },
           { muscle: 'calves', type: 'isolation', priority: 6 },
-          { muscle: 'core', type: 'compound', priority: 7 }
+          { muscle: 'core', type: 'compound', priority: 7 },
+          { muscle: 'glutes', type: 'isolation', priority: 8 }
         ]
       }
     ],
@@ -378,7 +386,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'back', type: 'compound', priority: 3 },
           { muscle: 'shoulders', type: 'compound', priority: 4 },
           { muscle: 'hamstrings', type: 'compound', priority: 5 },
-          { muscle: 'core', type: 'compound', priority: 6 }
+          { muscle: 'core', type: 'compound', priority: 6 },
+          { muscle: 'biceps', type: 'isolation', priority: 7 }
         ]
       },
       {
@@ -392,7 +401,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'chest', type: 'compound', priority: 3 },
           { muscle: 'quads', type: 'compound', priority: 4 },
           { muscle: 'biceps', type: 'isolation', priority: 5 },
-          { muscle: 'triceps', type: 'isolation', priority: 6 }
+          { muscle: 'triceps', type: 'isolation', priority: 6 },
+          { muscle: 'shoulders', type: 'compound', priority: 7 }
         ]
       },
       {
@@ -406,7 +416,8 @@ const PROGRAM_TEMPLATES = {
           { muscle: 'chest', type: 'compound', priority: 3 },
           { muscle: 'shoulders', type: 'compound', priority: 4 },
           { muscle: 'glutes', type: 'compound', priority: 5 },
-          { muscle: 'core', type: 'compound', priority: 6 }
+          { muscle: 'core', type: 'compound', priority: 6 },
+          { muscle: 'triceps', type: 'isolation', priority: 7 }
         ]
       }
     ],

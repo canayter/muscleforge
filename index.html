@@ -13898,15 +13898,14 @@ function selectExerciseForSlot(slot, availableEquipment, alreadySelected, injury
 
   if (candidates.length === 0) return null;
 
-  // Sort by priority (fatigue rating for compounds, or random for variation)
-  candidates.sort((a, b) => {
-    if (slot.type === 'compound') {
-      return b.programming.fatigueRating - a.programming.fatigueRating;
-    }
-    return Math.random() - 0.5;
-  });
-
-  return candidates[0];
+  // For compounds: pick randomly from top-3 by fatigue rating for plan-to-plan variety
+  // For isolation: fully random
+  if (slot.type === 'compound') {
+    candidates.sort((a, b) => b.programming.fatigueRating - a.programming.fatigueRating);
+    const pool = candidates.slice(0, Math.min(3, candidates.length));
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
 function getRepRangeForGoal(goal) {
@@ -14101,17 +14100,16 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
     }).join('');
 
     const warmup = generateWarmup(workout.focus);
+    const warmupId = 'wu-' + Math.random().toString(36).slice(2);
     const warmupHTML = `
-      <div style="padding: var(--space-md); background: var(--iron-surface); border-left: 3px solid var(--rust);">
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; text-transform: uppercase;
-          letter-spacing: 0.1em; color: var(--rust); margin-bottom: var(--space-sm);">Warm-Up (${warmup.length} movements)</div>
-        ${warmup.map(w => `
-          <div style="display: flex; justify-content: space-between; padding: 3px 0;
-            font-size: 0.8125rem; color: var(--chalk-secondary);">
-            <span>${w.name}</span>
-            <span style="color: var(--chalk-tertiary);">${w.duration}</span>
-          </div>
-        `).join('')}
+      <div style="border-left:3px solid rgba(217,119,6,0.4);background:var(--iron-surface)">
+        <button onclick="var d=document.getElementById('${warmupId}');var open=d.style.display==='block';d.style.display=open?'none':'block';this.querySelector('em').textContent=open?'▸':'▾';" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:7px var(--space-md);background:none;border:none;cursor:pointer;color:inherit;text-align:left;">
+          <span style="font-family:'Teko',sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:0.7rem;color:var(--rust)">Warm-Up · ${warmup.length} movements</span>
+          <em style="font-style:normal;color:var(--chalk-tertiary);font-size:0.65rem">▸</em>
+        </button>
+        <div id="${warmupId}" style="display:none;padding:2px var(--space-md) 10px">
+          ${warmup.map(w => `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:0.8rem;color:var(--chalk-secondary)"><span>${w.name}</span><span style="color:var(--chalk-tertiary)">${w.duration}</span></div>`).join('')}
+        </div>
       </div>
     `;
 
