@@ -179,17 +179,17 @@
   --text-3xl: clamp(2.125rem, 1.8rem + 1.6vw, 2.875rem);
 }
 
-/* Light mode */
+/* Light mode — blood orange + clean neutral grays */
 [data-theme="light"] {
-  /* Warm white surfaces — inverted mirror of dark mode iron palette */
-  --iron-black: #FDFAF2;
-  --iron-dark: #FFFFFF;
-  --iron-mid: #F5F0E0;
-  --iron-surface: #FAF7EE;
+  /* Clean neutral surfaces */
+  --iron-black: #F1F0EE;
+  --iron-dark: #F8F7F5;
+  --iron-mid: #ECEAE6;
+  --iron-surface: #F4F3F0;
   --iron-elevated: #FFFFFF;
-  --iron-hover: #EDE6CE;
-  --iron-active: #E0D8B8;
-  --iron-border: rgba(160,120,0,0.18);
+  --iron-hover: #E6E4DF;
+  --iron-active: #DDDAD4;
+  --iron-border: rgba(0,0,0,0.10);
 
   --void: var(--iron-black);
   --void-elevated: var(--iron-dark);
@@ -197,38 +197,38 @@
   --void-float: var(--iron-surface);
   --void-hover: var(--iron-hover);
 
-  /* Amber accent — deeper for legibility on light background */
-  --blood: #9A7800;
-  --blood-dim: rgba(154,120,0,0.12);
-  --blood-glow: rgba(154,120,0,0.28);
-  --ember-text: #B08A00;
-  --rust: #8A6E00;
-  --rust-dim: rgba(138,110,0,0.12);
+  /* Blood orange — same energy as dark mode */
+  --blood: #C53A1A;
+  --blood-dim: rgba(197,58,26,0.10);
+  --blood-glow: rgba(197,58,26,0.20);
+  --ember-text: #C53A1A;
+  --rust: #B34412;
+  --rust-dim: rgba(179,68,18,0.10);
   --primary: var(--blood);
   --primary-dim: var(--blood-dim);
   --primary-glow: var(--blood-glow);
-  --primary-soft: #7A6000;
+  --primary-soft: #A03318;
 
-  /* Near-black text on warm white */
-  --chalk: #1A1810;
-  --chalk-secondary: #504830;
-  --chalk-tertiary: #807050;
-  --chalk-faint: #D8D0B0;
+  /* Near-black text on light background */
+  --chalk: #16151A;
+  --chalk-secondary: #44434A;
+  --chalk-tertiary: #72717A;
+  --chalk-faint: #C4C3CA;
   --ink: var(--chalk);
   --ink-primary: var(--chalk);
   --ink-secondary: var(--chalk-secondary);
   --ink-tertiary: var(--chalk-tertiary);
   --ink-faint: var(--chalk-faint);
 
-  --line: rgba(130,100,0,0.12);
-  --line-hover: rgba(130,100,0,0.22);
-  --line-active: rgba(154,120,0,0.35);
+  --line: rgba(0,0,0,0.08);
+  --line-hover: rgba(0,0,0,0.14);
+  --line-active: rgba(197,58,26,0.30);
 
-  --shadow-sm: 0 1px 3px rgba(100,80,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 12px rgba(100,80,0,0.1), 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-lg: 0 12px 32px rgba(100,80,0,0.12), 0 4px 8px rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.09), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.11), 0 4px 8px rgba(0,0,0,0.05);
   --shadow-glow: 0 0 24px var(--blood-dim);
-  --focus-ring: 0 0 0 2px var(--iron-dark), 0 0 0 4px var(--blood);
+  --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blood);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -4978,11 +4978,11 @@ select.field-input option {
               </div>
               <div class="home-dir-tools">
                 <span class="home-dir-chip new" onclick="switchToView('exercises')">Exercise Atlas ✦</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','body')">FFMI Calculator</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','body')">Navy Body Fat</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','body')">Genetic Potential</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','body')">Ideal Measurements</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','body')">Weekly Check-In</span>
+                <span class="home-dir-chip" onclick="goTool('body','tc-ffmi')">FFMI Calculator</span>
+                <span class="home-dir-chip" onclick="goTool('body','tc-navy-bf')">Navy Body Fat</span>
+                <span class="home-dir-chip" onclick="goTool('body','tc-genetic')">Genetic Potential</span>
+                <span class="home-dir-chip" onclick="goTool('body','tc-ideal')">Ideal Measurements</span>
+                <span class="home-dir-chip" onclick="goTool('body','tc-checkin')">Weekly Check-In</span>
               </div>
             </div>
 
@@ -4991,17 +4991,17 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','training')">Training &#x2192;</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Program Library ✦</span>
-                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Strength Standards ✦</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Volume Landmarks (MEV/MRV)</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">1RM Calculator</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Strength Score (Wilks/DOTS)</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Progressive Overload</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Deload Generator</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Periodization Planner</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Heart Rate Zones</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rep Max Table</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rest Timer</span>
+                <span class="home-dir-chip new" onclick="goTool('training','tc-programs')">Program Library ✦</span>
+                <span class="home-dir-chip new" onclick="goTool('training','tc-standards')">Strength Standards ✦</span>
+                <span class="home-dir-chip" onclick="goTool('training','tc-volume')">Volume Landmarks (MEV/MRV)</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">1RM Calculator</span>
+                <span class="home-dir-chip" onclick="goTool('training','tc-strength-score')">Strength Score (Wilks/DOTS)</span>
+                <span class="home-dir-chip" onclick="goTool('training','tc-prog-overload')">Progressive Overload</span>
+                <span class="home-dir-chip" onclick="goTool('training','tc-deload')">Deload Generator</span>
+                <span class="home-dir-chip" onclick="goTool('training','tc-period-planner')">Periodization Planner</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Heart Rate Zones</span>
+                <span class="home-dir-chip" onclick="goTool('competition','tc-rep-max')">Rep Max Table</span>
+                <span class="home-dir-chip" onclick="goTool('competition','tc-rest-timer')">Rest Timer</span>
               </div>
             </div>
 
@@ -5010,12 +5010,12 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','nutrition')">Nutrition &#x2192;</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip new" onclick="switchToView('tools','nutrition')">Supplement Database ✦</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Carb Cycling Protocol</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Reverse Dieting</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Body Recomposition</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Macro Meal Builder</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Meal Prep Cost</span>
+                <span class="home-dir-chip new" onclick="goTool('nutrition','tc-supp-db')">Supplement Database ✦</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-carb-cycling')">Carb Cycling Protocol</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-reverse-diet')">Reverse Dieting</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-body-recomp')">Body Recomposition</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-macro-builder')">Macro Meal Builder</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-meal-prep')">Meal Prep Cost</span>
               </div>
             </div>
 
@@ -5024,11 +5024,11 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','recovery')">Recovery &#x2192;</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Daily Readiness Score</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Sleep Assessment</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Recovery Readiness</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Stress &amp; Cortisol</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Injury Prevention Guide</span>
+                <span class="home-dir-chip" onclick="goTool('recovery','tc-daily-readiness')">Daily Readiness Score</span>
+                <span class="home-dir-chip" onclick="goTool('recovery','tc-sleep')">Sleep Assessment</span>
+                <span class="home-dir-chip" onclick="goTool('recovery','tc-recovery-readiness')">Recovery Readiness</span>
+                <span class="home-dir-chip" onclick="goTool('recovery','tc-stress-cortisol')">Stress &amp; Cortisol</span>
+                <span class="home-dir-chip" onclick="goTool('recovery','tc-injury-prev')">Injury Prevention Guide</span>
               </div>
             </div>
 
@@ -5051,12 +5051,12 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','competition')">Competition &#x2192;</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Peak Week Calculator</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Weight Cut (Combat Sports)</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Contest Countdown</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">IFBB Mandatory Poses</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Water Loading Protocol</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','competition')">HMB Guide</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-peak-week')">Peak Week Calculator</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-weight-cut')">Weight Cut (Combat Sports)</span>
+                <span class="home-dir-chip" onclick="goTool('competition','tc-contest-countdown')">Contest Countdown</span>
+                <span class="home-dir-chip" onclick="goTool('competition','tc-ifbb-poses')">IFBB Mandatory Poses</span>
+                <span class="home-dir-chip" onclick="goTool('competition','tc-water-loading')">Water Loading Protocol</span>
+                <span class="home-dir-chip" onclick="goTool('nutrition','tc-hmb')">HMB Guide</span>
               </div>
             </div>
 
@@ -5065,13 +5065,13 @@ select.field-input option {
                 <div class="home-dir-cat-name" onclick="switchToView('tools','utilities')">Utilities &#x2192;</div>
               </div>
               <div class="home-dir-tools">
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">PR Tracker</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Workout Logger</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Water Intake Tracker</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Supplement Stack Builder</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Unit Converter</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Bag Checklist</span>
-                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Finder</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-pr-tracker')">PR Tracker</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-workout-logger')">Workout Logger</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-water-intake')">Water Intake Tracker</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-supp-stack')">Supplement Stack Builder</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-unit-converter')">Unit Converter</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-gym-bag')">Gym Bag Checklist</span>
+                <span class="home-dir-chip" onclick="goTool('utilities','tc-gym-finder')">Gym Finder</span>
               </div>
             </div>
 
@@ -6637,7 +6637,7 @@ select.field-input option {
             </div>
 
             <!-- FFMI Calculator -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-ffmi">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">FFMI Calculator</h2>
@@ -6693,7 +6693,7 @@ select.field-input option {
             </div>
 
             <!-- Navy Body Fat Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-navy-bf" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Navy Body Fat Calculator</h2>
@@ -6759,7 +6759,7 @@ select.field-input option {
             </div>
 
             <!-- Genetic Potential Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-genetic" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Genetic Potential Calculator</h2>
@@ -6818,7 +6818,7 @@ select.field-input option {
             </div>
 
             <!-- Ideal Measurements Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-ideal" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Ideal Measurements Calculator</h2>
@@ -6849,7 +6849,7 @@ select.field-input option {
             </div>
 
             <!-- Weekly Check-In -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-checkin" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Weekly Check-In</h2>
@@ -6905,7 +6905,7 @@ select.field-input option {
           <div id="tools-training" class="tools-category">
 
             <!-- Program Library -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-programs">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Training Program Library</h2>
@@ -6931,7 +6931,7 @@ select.field-input option {
             </div>
 
             <!-- Strength Standards -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-standards">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Strength Standards</h2>
@@ -6992,7 +6992,7 @@ select.field-input option {
             </div>
 
             <!-- Volume Landmarks Calculator -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-volume">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Volume Landmarks Calculator</h2>
@@ -7055,7 +7055,7 @@ select.field-input option {
             </div>
 
             <!-- Strength Score Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-strength-score" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Strength Score Calculator</h2>
@@ -7125,7 +7125,7 @@ select.field-input option {
             </div>
 
             <!-- Progressive Overload Tracker -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-prog-overload" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Progressive Overload Calculator</h2>
@@ -7169,7 +7169,7 @@ select.field-input option {
             </div>
 
             <!-- Deload Generator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-deload" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Deload Week Generator</h2>
@@ -7215,7 +7215,7 @@ select.field-input option {
             </div>
 
             <!-- Periodization Models -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-period-model" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Periodization Model Selector</h2>
@@ -7262,7 +7262,7 @@ select.field-input option {
             </div>
 
             <!-- Advanced Training Techniques -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-adv-training" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Advanced Training Techniques</h2>
@@ -7276,7 +7276,7 @@ select.field-input option {
             </div>
 
             <!-- Periodization Planner -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-period-planner">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Periodization Planner</h2>
@@ -7332,7 +7332,7 @@ select.field-input option {
           <div id="tools-nutrition" class="tools-category">
 
             <!-- Supplement Evidence Database -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-supp-db">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Supplement Evidence Database</h2>
@@ -7359,7 +7359,7 @@ select.field-input option {
             </div>
 
             <!-- Carb Cycling Protocol -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-carb-cycling">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Carb Cycling Protocol Builder</h2>
@@ -7411,7 +7411,7 @@ select.field-input option {
             </div>
 
             <!-- Reverse Dieting Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-reverse-diet" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Reverse Dieting Calculator</h2>
@@ -7462,7 +7462,7 @@ select.field-input option {
             </div>
 
             <!-- Body Recomposition Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-body-recomp" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Body Recomposition Calculator</h2>
@@ -7512,7 +7512,7 @@ select.field-input option {
             </div>
 
             <!-- Peak Week Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-peak-week" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Peak Week Calculator</h2>
@@ -7566,7 +7566,7 @@ select.field-input option {
             </div>
 
             <!-- Combat Sports Weight Cut -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-weight-cut" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Combat Sports Weight Cut Calculator</h2>
@@ -7613,7 +7613,7 @@ select.field-input option {
             </div>
 
             <!-- HMB Guide -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-hmb" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">HMB Supplementation Guide</h2>
@@ -7630,7 +7630,7 @@ select.field-input option {
           <!-- Recovery Tools -->
           <div id="tools-recovery" class="tools-category">
             <!-- Sleep Optimization -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-sleep">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Sleep Optimization Assessment</h2>
@@ -7697,7 +7697,7 @@ select.field-input option {
             </div>
 
             <!-- Recovery Readiness Assessment -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-recovery-readiness" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Recovery Readiness Assessment</h2>
@@ -7764,7 +7764,7 @@ select.field-input option {
             </div>
 
             <!-- Stress Management -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-stress-cortisol" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Stress & Cortisol Management</h2>
@@ -7778,7 +7778,7 @@ select.field-input option {
             </div>
 
             <!-- Injury Prevention Guide -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-injury-prev" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Injury Prevention & Mobility Guide</h2>
@@ -7792,7 +7792,7 @@ select.field-input option {
             </div>
 
             <!-- Daily Readiness Score -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-daily-readiness" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Daily Readiness Score</h2>
@@ -7928,7 +7928,7 @@ select.field-input option {
           <!-- Competition Tools -->
           <div id="tools-competition" class="tools-category">
             <!-- Workout Timer -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-rest-timer">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Workout Rest Timer</h2>
@@ -7973,7 +7973,7 @@ select.field-input option {
             </div>
 
             <!-- Rep Max Table -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-rep-max" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Rep Max Percentage Table</h2>
@@ -8005,7 +8005,7 @@ select.field-input option {
             </div>
 
             <!-- Posing Guide -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-ifbb-poses" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">IFBB Mandatory Poses Guide</h2>
@@ -8023,7 +8023,7 @@ select.field-input option {
             </div>
 
             <!-- Contest Prep Countdown -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-contest-countdown" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Contest Prep Countdown</h2>
@@ -8066,7 +8066,7 @@ select.field-input option {
             </div>
 
             <!-- Water Loading Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-water-loading" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Water Loading Protocol</h2>
@@ -8120,7 +8120,7 @@ select.field-input option {
           <!-- Utilities -->
           <div id="tools-utilities" class="tools-category">
             <!-- PR Tracker -->
-            <div class="card tool-card">
+            <div class="card tool-card" id="tc-pr-tracker">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">PR Tracker</h2>
@@ -8177,7 +8177,7 @@ select.field-input option {
             </div>
 
             <!-- Workout Logger & Progress Tracker -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-workout-logger" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Workout Logger & Strength Progress</h2>
@@ -8252,7 +8252,7 @@ select.field-input option {
             </div>
 
             <!-- Water Intake Tracker -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-water-intake" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Water Intake Tracker</h2>
@@ -8280,7 +8280,7 @@ select.field-input option {
             </div>
 
             <!-- Gym Bag Checklist -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-gym-bag" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Gym Bag Checklist</h2>
@@ -8301,7 +8301,7 @@ select.field-input option {
             </div>
 
             <!-- Supplement Stack Builder -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-supp-stack" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Supplement Stack Builder</h2>
@@ -8344,7 +8344,7 @@ select.field-input option {
             </div>
 
             <!-- Macro Meal Builder -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-macro-builder" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Macro Meal Builder</h2>
@@ -8399,7 +8399,7 @@ select.field-input option {
             </div>
 
             <!-- Meal Prep Cost Calculator -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-meal-prep" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Meal Prep Cost Calculator</h2>
@@ -8439,7 +8439,7 @@ select.field-input option {
             </div>
 
             <!-- Progress Photo Tracker -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-progress-photo" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Progress Photo Guide</h2>
@@ -8481,7 +8481,7 @@ select.field-input option {
             </div>
 
             <!-- Unit Converter -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-unit-converter" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Unit Converter</h2>
@@ -8598,7 +8598,7 @@ select.field-input option {
             </div>
 
             <!-- Training History Import -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-training-import" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Training History Import</h2>
@@ -8640,7 +8640,7 @@ Squat	225	5	2025-03-15"></textarea>
             </div>
 
             <!-- Gym Mapper Link -->
-            <div class="card tool-card" style="margin-top: var(--space-xl);">
+            <div class="card tool-card" id="tc-gym-finder" style="margin-top: var(--space-xl);">
               <div class="card-header">
                 <div>
                   <h2 class="card-title">Gym Finder</h2>
@@ -9063,29 +9063,19 @@ document.querySelectorAll('.nav-link').forEach(btn => {
   });
 });
 
-// ── Tool directory chips: scroll to specific tool after switching view ────────
-document.querySelectorAll('.home-dir-chip').forEach(chip => {
-  chip.addEventListener('click', function () {
-    // Strip decorators and parenthetical suffixes, then lowercase
-    const q = this.textContent
-      .replace(/\s*✦\s*/g, '')
-      .replace(/\s*\([^)]*\)/g, '')
-      .trim().toLowerCase();
-    setTimeout(() => {
-      const titles = document.querySelectorAll('.tools-category.active .card-title');
-      const words = q.split(/\s+/).filter(w => w.length > 2);
-      for (const h of titles) {
-        const t = h.textContent.trim().toLowerCase();
-        const match = t.includes(q) || q.includes(t) ||
-          (words.length > 0 && words.every(w => t.includes(w)));
-        if (match) {
-          h.closest('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          break;
-        }
-      }
-    }, 200);
-  });
-});
+// ── goTool: switch to tool category and scroll directly to card ──────────────
+function goTool(category, cardId) {
+  switchToView('tools', category);
+  // Wait for viewIn animation (350ms) to finish before scrolling
+  setTimeout(() => {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const hdr = document.getElementById('header');
+    const offset = hdr ? hdr.offsetHeight + 12 : 72;
+    const top = card.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }, 420);
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PLAN TYPE SELECTION
