@@ -4654,9 +4654,7 @@ select.field-input option {
 /* ── Hero ── */
 .mf-hero {
   display: flex; align-items: center;
-  min-height: calc(100vh - 60px - 56px);
-  padding: var(--space-3xl) 0;
-  border-bottom: 1px solid var(--iron-border);
+  padding: var(--space-xl) 0 var(--space-md);
 }
 .mf-hero-eyebrow {
   font-family: 'Teko', sans-serif; text-transform: uppercase;
@@ -4667,12 +4665,12 @@ select.field-input option {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(4rem, 12vw, 9rem);
   letter-spacing: .01em; line-height: .9;
-  color: var(--chalk); margin-bottom: var(--space-xl);
+  color: var(--chalk); margin-bottom: var(--space-md);
 }
 .mf-hero-body {
   max-width: 560px; color: var(--chalk-secondary);
   font-size: 1rem; line-height: 1.65;
-  margin-bottom: var(--space-xl);
+  margin-bottom: 0;
 }
 .mf-hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
 .btn-lg { padding: 14px 28px; font-size: 0.95rem; }
@@ -4795,7 +4793,7 @@ select.field-input option {
   .mb-columns { grid-template-columns: 1fr; min-height: auto; }
   .mb-col { max-height: 240px; border-right: none; border-bottom: 1px solid var(--iron-border); }
   .mb-col:last-child { max-height: none; border-bottom: none; }
-  .mf-hero { min-height: auto; padding: var(--space-2xl) 0; }
+  .mf-hero { padding: var(--space-lg) 0 var(--space-sm); }
   .mf-hero-title { font-size: clamp(3rem, 18vw, 5rem); }
 }
 @media (max-width: 768px) {
@@ -4829,17 +4827,18 @@ select.field-input option {
 .chip.ex-head.active { background:var(--blood-dim); border-color:var(--blood); }
 
 /* ── Home Portal Cards ── */
-.home-portals { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1px; background:var(--iron-border); border:1px solid var(--iron-border); border-radius:var(--radius-md); overflow:hidden; margin:var(--space-xl) 0 var(--space-lg); }
-.portal { background:var(--iron-surface); padding:var(--space-xl) var(--space-lg); cursor:pointer; display:flex; flex-direction:column; gap:5px; position:relative; transition:background var(--duration-fast); border-top:2px solid transparent; }
+.home-portals { display:grid; grid-template-columns:repeat(5, 1fr); gap:1px; background:var(--iron-border); border:1px solid var(--iron-border); border-radius:var(--radius-md); overflow:hidden; margin:var(--space-md) 0 var(--space-lg); }
+.portal { background:var(--iron-surface); padding:var(--space-lg) var(--space-md); cursor:pointer; display:flex; flex-direction:column; gap:5px; position:relative; transition:background var(--duration-fast); border-top:2px solid transparent; }
 .portal:hover { background:var(--iron-hover); border-top-color:var(--blood); }
 .portal.portal-primary { border-top-color:var(--blood); }
 .portal-eyebrow { font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.12em; font-size:0.65rem; color:var(--blood); }
-.portal-label { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:.04em; color:var(--chalk); line-height:1; }
-.portal-sub { font-size:0.775rem; color:var(--chalk-tertiary); line-height:1.45; margin-top:2px; }
-.portal-arrow { position:absolute; top:var(--space-lg); right:var(--space-lg); color:var(--chalk-faint); font-size:1rem; transition:color var(--duration-fast); }
+.portal-label { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.04em; color:var(--chalk); line-height:1; }
+.portal-sub { font-size:0.75rem; color:var(--chalk-tertiary); line-height:1.4; margin-top:2px; padding-right:18px; }
+.portal-arrow { position:absolute; top:var(--space-md); right:var(--space-md); color:var(--chalk-faint); font-size:1rem; transition:color var(--duration-fast); }
 .portal:hover .portal-arrow { color:var(--blood); }
-@media (max-width:640px) { .home-portals { grid-template-columns:1fr 1fr; } }
-@media (max-width:380px) { .home-portals { grid-template-columns:1fr; } }
+@media (max-width:800px)  { .home-portals { grid-template-columns:repeat(3, 1fr); } }
+@media (max-width:540px)  { .home-portals { grid-template-columns:1fr 1fr; } }
+@media (max-width:360px)  { .home-portals { grid-template-columns:1fr; } }
 
 /* ── Group Coverage Bars ── */
 .cov-row { display:flex; align-items:center; gap:var(--space-md); padding:10px 0; border-bottom:1px solid var(--iron-border); }
@@ -4924,7 +4923,7 @@ select.field-input option {
       </section>
 
       <!-- ═══ PORTAL CARDS ═══ -->
-      <section class="section" style="padding-top:var(--space-xl);padding-bottom:0">
+      <section class="section" style="padding-top:var(--space-sm);padding-bottom:0">
         <div class="container">
           <div class="home-portals">
             <div class="portal portal-primary" onclick="switchToView('calculator')">
@@ -4954,7 +4953,7 @@ select.field-input option {
             <div class="portal" onclick="switchToView('knowledge')">
               <span class="portal-arrow">&#x2192;</span>
               <div class="portal-eyebrow">Evidence</div>
-              <div class="portal-label">Training Science</div>
+              <div class="portal-label">The Compendium</div>
               <div class="portal-sub">Methods, principles &amp; peer-reviewed research</div>
             </div>
           </div>
@@ -4964,6 +4963,131 @@ select.field-input option {
             <div class="home-stat"><div class="home-stat-val">200+</div><div class="home-stat-label">Foods</div></div>
             <div class="home-stat"><div class="home-stat-val">12</div><div class="home-stat-label">Programs</div></div>
             <div class="home-stat"><div class="home-stat-val">17</div><div class="home-stat-label">Muscle Groups</div></div>
+          </div>
+
+          <!-- Full Tool Directory -->
+          <div class="home-dir">
+            <div class="home-dir-header">
+              <div class="home-dir-heading">Everything Inside</div>
+              <div class="home-dir-count">Click any tool to jump straight to it</div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','body')">Body Composition &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('exercises')">Exercise Atlas ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">FFMI Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Navy Body Fat</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Genetic Potential</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Ideal Measurements</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','body')">Weekly Check-In</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','training')">Training &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Program Library ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','training')">Strength Standards ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Volume Landmarks (MEV/MRV)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">1RM Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Strength Score (Wilks/DOTS)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Progressive Overload</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Deload Generator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Periodization Planner</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Heart Rate Zones</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rep Max Table</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','training')">Rest Timer</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','nutrition')">Nutrition &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','nutrition')">Supplement Database ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Carb Cycling Protocol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Reverse Dieting</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Body Recomposition</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Macro Meal Builder</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','nutrition')">Meal Prep Cost</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','recovery')">Recovery &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Daily Readiness Score</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Sleep Assessment</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Recovery Readiness</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Stress &amp; Cortisol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','recovery')">Injury Prevention Guide</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','rehab');initRehab()" style="color:#93c5fd">Rehab &amp; PT &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Lower Back Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Shoulder Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Knee Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Elbow / Tendinopathy ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Achilles Protocol ✦</span>
+                <span class="home-dir-chip new" onclick="switchToView('tools','rehab');initRehab()" style="border-color:rgba(96,165,250,0.3);color:#93c5fd">Hip &amp; Groin ✦</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','competition')">Competition &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Peak Week Calculator</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Weight Cut (Combat Sports)</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Contest Countdown</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">IFBB Mandatory Poses</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">Water Loading Protocol</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','competition')">HMB Guide</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('tools','utilities')">Utilities &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">PR Tracker</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Workout Logger</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Water Intake Tracker</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Supplement Stack Builder</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Unit Converter</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Bag Checklist</span>
+                <span class="home-dir-chip" onclick="switchToView('tools','utilities')">Gym Finder</span>
+              </div>
+            </div>
+
+            <div class="home-dir-cat">
+              <div class="home-dir-cat-head">
+                <div class="home-dir-cat-name" onclick="switchToView('knowledge')">The Compendium &#x2192;</div>
+              </div>
+              <div class="home-dir-tools">
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Training Science</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Golden Era Wisdom</span>
+                <span class="home-dir-chip" onclick="switchToView('knowledge')">Scientific References</span>
+                <span class="home-dir-chip new" onclick="switchToView('knowledge')">Books &amp; Podcasts ✦</span>
+                <span class="home-dir-chip" onclick="switchToView('calculator')">Personalized Plan</span>
+                <span class="home-dir-chip" onclick="switchToView('foods')">Food Database</span>
+              </div>
+            </div>
           </div>
 
           <div class="home-science">
