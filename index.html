@@ -9068,17 +9068,17 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 // ── goTool: switch to tool category and scroll directly to card ──────────────
 function goTool(category, cardId) {
   switchToView('tools', category);
-  // Double-rAF after 400ms ensures viewIn animation (350ms) is done
-  // and browser has fully laid out the newly-active category before
-  // scrollIntoView — scroll-margin-top on .tool-card handles the fixed header
+  // Wait past the viewIn animation (350ms), then use offsetTop chain —
+  // unlike getBoundingClientRect/scrollIntoView, offsetTop is unaffected
+  // by CSS transforms on ancestor elements during animation
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const card = document.getElementById(cardId);
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  }, 400);
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    let top = 0, el = card;
+    while (el) { top += el.offsetTop; el = el.offsetParent; }
+    const hdr = document.getElementById('header');
+    window.scrollTo({ top: Math.max(0, top - (hdr ? hdr.offsetHeight + 8 : 88)), behavior: 'smooth' });
+  }, 420);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -10693,16 +10693,13 @@ let rehabActivePhase  = 0;
 function initRehab() {
   const tabs = document.getElementById('rehabInjuryTabs');
   if (!tabs) return;
-  if (!tabs.dataset.init) {
-    tabs.dataset.init = '1';
-    tabs.innerHTML = REHAB_DATA.map(r =>
-      `<button class="rehab-injury-btn" onclick="selectRehabInjury('${r.id}')">${r.region}</button>`
-    ).join('');
-  }
-  // Auto-select first injury if none chosen yet
-  if (!rehabActiveInjury && REHAB_DATA.length > 0) {
-    selectRehabInjury(REHAB_DATA[0].id);
-  }
+  // Always render tabs (idempotent — safe to call multiple times)
+  const activeId = rehabActiveInjury || (REHAB_DATA[0] && REHAB_DATA[0].id);
+  tabs.innerHTML = REHAB_DATA.map(r =>
+    `<button class="rehab-injury-btn${r.id === activeId ? ' active' : ''}" onclick="selectRehabInjury('${r.id}')">${r.region}</button>`
+  ).join('');
+  // Tick delay so the DOM settles before rendering content
+  if (activeId) setTimeout(() => selectRehabInjury(activeId), 0);
 }
 
 function selectRehabInjury(id) {
