@@ -2533,6 +2533,7 @@ select.field-input option {
 .tool-card {
   border-left: 3px solid var(--training);
   margin-top: 0 !important;
+  scroll-margin-top: 92px;
 }
 
 .tool-badge {
@@ -9054,7 +9055,7 @@ function switchToView(view, toolCategory = null) {
     }
   }
 
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 document.querySelectorAll('.nav-link').forEach(btn => {
@@ -9066,15 +9067,17 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 // ── goTool: switch to tool category and scroll directly to card ──────────────
 function goTool(category, cardId) {
   switchToView('tools', category);
-  // Wait for viewIn animation (350ms) to finish before scrolling
+  // Double-rAF after 400ms ensures viewIn animation (350ms) is done
+  // and browser has fully laid out the newly-active category before
+  // scrollIntoView — scroll-margin-top on .tool-card handles the fixed header
   setTimeout(() => {
-    const card = document.getElementById(cardId);
-    if (!card) return;
-    const hdr = document.getElementById('header');
-    const offset = hdr ? hdr.offsetHeight + 12 : 72;
-    const top = card.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-  }, 420);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const card = document.getElementById(cardId);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }, 400);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
