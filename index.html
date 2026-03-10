@@ -4744,7 +4744,8 @@ select.field-input option {
 .mb-muscle-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem; letter-spacing: .04em; color: var(--chalk); margin-bottom: 2px; }
 .mb-muscle-func { font-size: 0.9rem; color: var(--chalk-secondary); line-height: 1.6; margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--iron-border); }
 .mb-section-label { font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .1em; font-size: 0.8rem; color: var(--chalk-tertiary); margin-bottom: var(--space-sm); margin-top: var(--space-lg); }
-.mb-ex-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--iron-border); }
+.mb-ex-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--iron-border); cursor: pointer; border-radius: var(--radius-sm); transition: background var(--duration-fast); }
+.mb-ex-row:hover { background: var(--iron-hover); padding-left: 6px; padding-right: 6px; }
 .mb-ex-row:last-child { border-bottom: none; }
 .mb-ex-name { font-size: 0.9375rem; color: var(--chalk); }
 .mb-vol-row {
@@ -14655,6 +14656,8 @@ function renderMBExercises(muscleId) {
     const secondary = (typeof ex === 'object' && ex.secondary) ? ex.secondary : [];
     const row = document.createElement('div');
     row.className = 'mb-ex-row';
+    row.dataset.exercise = encodeURIComponent(exName);
+    row.dataset.muscle = muscleId;
     const inWorkout = WORKOUT.some(w => w.exercise === exName);
     const secHtml = secondary.map(s =>
       `<span class="mb-ex-sec mb-ex-sec-${s.t}" title="${escapeHtml(tierLabels[s.t] || s.t)}">${escapeHtml(s.m)}</span>`
@@ -14673,13 +14676,20 @@ function renderMBExercises(muscleId) {
   });
   exList.addEventListener('click', function(e) {
     const btn = e.target.closest('.mm-ex-add-btn');
-    if (!btn || btn.classList.contains('added')) return;
-    const exercise = decodeURIComponent(btn.dataset.exercise);
-    const mid = btn.dataset.muscle;
-    addExerciseToWorkout(exercise, mid);
-    btn.classList.add('added');
-    btn.title = 'Added';
-    btn.textContent = '';
+    if (btn) {
+      if (btn.classList.contains('added')) return;
+      const exercise = decodeURIComponent(btn.dataset.exercise);
+      const mid = btn.dataset.muscle;
+      addExerciseToWorkout(exercise, mid);
+      btn.classList.add('added');
+      btn.title = 'Added';
+      btn.textContent = '';
+      return;
+    }
+    // Click anywhere else on the row → open detail modal
+    const row = e.target.closest('.mb-ex-row');
+    if (!row) return;
+    openExAtlasModal(decodeURIComponent(row.dataset.exercise), row.dataset.muscle);
   });
   wrap.appendChild(exList);
 
