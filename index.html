@@ -4828,6 +4828,24 @@ select.field-input option {
 .chip.ex-head { border-color:rgba(212,160,23,0.3); color:var(--blood); }
 .chip.ex-head.active { background:var(--blood-dim); border-color:var(--blood); }
 
+/* ── Group Coverage Bars ── */
+.cov-row { display:flex; align-items:center; gap:var(--space-md); padding:10px 0; border-bottom:1px solid var(--iron-border); }
+.cov-row:last-child { border-bottom:none; }
+.cov-label { font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:0.85rem; color:var(--chalk); min-width:130px; flex-shrink:0; }
+.cov-bar-wrap { flex:1; background:var(--iron-active); border-radius:3px; height:8px; overflow:hidden; }
+.cov-bar { height:100%; border-radius:3px; transition:width .4s ease; }
+.cov-bar.cov-full  { background:var(--success); }
+.cov-bar.cov-good  { background:var(--blood); }
+.cov-bar.cov-low   { background:var(--warning); }
+.cov-bar.cov-none  { width:0; }
+.cov-meta { font-size:0.72rem; color:var(--chalk-tertiary); min-width:90px; text-align:right; flex-shrink:0; }
+.cov-badge { font-size:0.65rem; font-family:'Teko',sans-serif; text-transform:uppercase; letter-spacing:.08em; padding:1px 6px; border-radius:3px; margin-left:6px; flex-shrink:0; }
+.cov-badge.cov-b-full { background:rgba(34,197,94,0.15); color:var(--success); }
+.cov-badge.cov-b-good { background:var(--blood-dim); color:var(--blood); }
+.cov-badge.cov-b-low  { background:rgba(234,179,8,0.15); color:var(--warning); }
+.cov-badge.cov-b-none { background:rgba(255,255,255,0.05); color:var(--chalk-tertiary); }
+.cov-alert { margin-top:var(--space-md); padding:var(--space-sm) var(--space-md); background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.25); border-radius:var(--radius-sm); font-size:0.8rem; color:var(--chalk-secondary); }
+
   </style>
 </head>
 
@@ -5501,6 +5519,19 @@ select.field-input option {
                 <div id="volumeSummary" class="form-grid">
                   <!-- Populated by JavaScript -->
                 </div>
+              </div>
+            </div>
+
+            <!-- Group Coverage Analysis -->
+            <div class="card" style="margin-top: var(--space-xl);">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Muscle Group Coverage</h2>
+                  <p class="card-subtitle">How well your program distributes training load across all groups</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="groupCoverage"><!-- Populated by JavaScript --></div>
               </div>
             </div>
 
@@ -10056,6 +10087,10 @@ const HEAD_LABELS = {
   hamstrings: { hip: 'Hip-Hinge (Long Head)', curl: 'Knee Curl (Short Head)' },
   calves:     { gastro: 'Gastrocnemius', soleus: 'Soleus' },
   traps:      { upper: 'Upper Traps', mid: 'Middle Traps', lower: 'Lower Traps' },
+  teres:      { er: 'External Rotators (Infra/Teres Minor)', ir: 'Internal Rotator (Subscap)', sup: 'Abduction (Supraspinatus)' },
+  abs:        { upper: 'Upper Abs', lower: 'Lower Abs' },
+  obliques:   { rotation: 'Rotation / Lateral', antirot: 'Anti-Rotation / Stability' },
+  'glute-med': { abduction: 'Hip Abduction', stability: 'Pelvic Stability (Unilateral)' },
 };
 
 // Filter state
@@ -10064,12 +10099,24 @@ let _exIndex = null;
 
 function getExIndex() {
   if (_exIndex) return _exIndex;
+  // Build a map of muscleId → all group IDs it belongs to (some muscles appear in multiple groups)
+  const muscleToGroupIds = {};
+  if (typeof MB_GROUPS !== 'undefined') {
+    MB_GROUPS.forEach(g => {
+      g.muscles.forEach(mid => {
+        if (!muscleToGroupIds[mid]) muscleToGroupIds[mid] = [];
+        muscleToGroupIds[mid].push(g.id);
+      });
+    });
+  }
   const list = [];
   for (const [id, m] of Object.entries(MUSCLE_DATA)) {
-    const group = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(id)) : null;
+    const groupIds = muscleToGroupIds[id] || [];
+    const primaryGroup = (typeof MB_GROUPS !== 'undefined') ? MB_GROUPS.find(g => g.muscles.includes(id)) : null;
     (m.exercises || []).forEach(ex => {
       list.push({ name: ex.name, secondary: ex.secondary || [], h: ex.h || null,
-        muscleId: id, muscleName: m.name, groupId: group?.id || '', groupLabel: group?.label || '' });
+        muscleId: id, muscleName: m.name,
+        groupIds, groupId: primaryGroup?.id || '', groupLabel: primaryGroup?.label || '' });
     });
   }
   _exIndex = list;
@@ -10198,7 +10245,7 @@ function filterExercises() {
     e.muscleName.toLowerCase().includes(q) ||
     e.secondary.some(s => s.m.toLowerCase().includes(q))
   );
-  if (EX_FILTER.group)    list = list.filter(e => e.groupId === EX_FILTER.group);
+  if (EX_FILTER.group)    list = list.filter(e => e.groupIds.includes(EX_FILTER.group));
   if (EX_FILTER.muscleId) list = list.filter(e => e.muscleId === EX_FILTER.muscleId);
   if (EX_FILTER.head)     list = list.filter(e => e.h?.includes(EX_FILTER.head));
   if (sort === 'name')    list = [...list].sort((a,b) => a.name.localeCompare(b.name));
@@ -13855,6 +13902,36 @@ function calculateRestForGoal(goal, movementType) {
   return rest;
 }
 
+function buildGroupCoverage(volumeSummary) {
+  const COVERAGE_MAP = {
+    chest: 'chest', back: 'back', shoulders: 'shoulders',
+    biceps: 'arms', triceps: 'arms', forearms: 'arms',
+    quads: 'legs', hamstrings: 'legs', calves: 'legs',
+    glutes: 'glutes', core: 'core',
+  };
+  const GROUP_THRESHOLDS = {
+    chest:     { opt: 16, label: 'Chest' },
+    back:      { opt: 16, label: 'Back' },
+    shoulders: { opt: 14, label: 'Shoulders' },
+    arms:      { opt: 18, label: 'Arms' },
+    core:      { opt: 10, label: 'Core' },
+    legs:      { opt: 28, label: 'Legs' },
+    glutes:    { opt: 12, label: 'Glutes & Hips' },
+    neck:      { opt: 9,  label: 'Neck & Traps' },
+  };
+  const groupSets = {};
+  Object.entries(volumeSummary).forEach(([muscle, sets]) => {
+    const gid = COVERAGE_MAP[muscle];
+    if (gid) groupSets[gid] = (groupSets[gid] || 0) + sets;
+  });
+  return Object.entries(GROUP_THRESHOLDS).map(([id, t]) => {
+    const sets = groupSets[id] || 0;
+    const pct  = t.opt > 0 ? Math.min(100, Math.round(sets / t.opt * 100)) : 0;
+    const tier = sets === 0 ? 'none' : pct >= 80 ? 'full' : pct >= 40 ? 'good' : 'low';
+    return { id, label: t.label, sets, pct, tier, opt: t.opt };
+  });
+}
+
 function calculateVolumeSummary(workouts) {
   const volume = {};
 
@@ -14066,6 +14143,23 @@ function displayTrainingProgram(template, workouts, volumeSummary, experienceLev
   const volEl = document.getElementById('volumeSummary');
   volEl.className = 'volume-grid';
   volEl.innerHTML = volumeHtml;
+
+  // Group coverage analysis
+  const coverage = buildGroupCoverage(volumeSummary);
+  const badgeLabel = { none: 'missing', full: 'optimal', good: 'adequate', low: 'low' };
+  const missingGroups = coverage.filter(g => g.sets === 0).map(g => g.label);
+  const covHtml = coverage.map(g => `
+    <div class="cov-row">
+      <span class="cov-label">${g.label}</span>
+      <div class="cov-bar-wrap"><div class="cov-bar cov-${g.tier}" style="width:${g.pct}%"></div></div>
+      <span class="cov-meta">${g.sets > 0 ? `${g.sets} sets · ${g.pct}%` : '0 sets'}</span>
+      <span class="cov-badge cov-b-${g.tier}">${badgeLabel[g.tier]}</span>
+    </div>`).join('');
+  const alertHtml = missingGroups.length
+    ? `<div class="cov-alert">&#9888; Not covered this week: <strong>${missingGroups.join(', ')}</strong>. Consider adding direct work for these groups.</div>`
+    : `<div class="cov-alert" style="background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.2);color:var(--success)">&#10003; All major muscle groups are covered in this program.</div>`;
+  const covEl = document.getElementById('groupCoverage');
+  if (covEl) covEl.innerHTML = covHtml + alertHtml;
 
   // Nutrition recommendations
   displayNutritionRecommendations(template, goal);
@@ -14719,14 +14813,14 @@ const MUSCLE_DATA = {
       { name: 'Lower Rectus', desc: 'Fibers closest to the pubic symphysis. More active during hip flexion movements (hanging leg raises). Often the last region to develop visual definition.' },
     ],
     exercises: [
-      { name: 'Cable Crunch', secondary: [{m:'Hip Flexors',t:'l'}] },
-      { name: 'Hanging Leg Raise', secondary: [{m:'Hip Flexors',t:'h'}] },
-      { name: 'Ab Wheel Rollout', secondary: [{m:'Serratus',t:'h'},{m:'Lats',t:'m'},{m:'Hip Flexors',t:'m'}] },
-      { name: 'Decline Crunch', secondary: [{m:'Hip Flexors',t:'m'}] },
-      { name: 'Dragon Flag', secondary: [{m:'Hip Flexors',t:'h'},{m:'Lower Back',t:'m'}] },
-      { name: 'Rope Crunch', secondary: [{m:'Hip Flexors',t:'l'}] },
-      { name: 'Weighted Crunch', secondary: [] },
-      { name: 'Plank Variations', secondary: [{m:'Serratus',t:'m'},{m:'Glutes',t:'l'}] },
+      { name: 'Cable Crunch', secondary: [{m:'Hip Flexors',t:'l'}], h:['upper'] },
+      { name: 'Hanging Leg Raise', secondary: [{m:'Hip Flexors',t:'h'}], h:['lower'] },
+      { name: 'Ab Wheel Rollout', secondary: [{m:'Serratus',t:'h'},{m:'Lats',t:'m'},{m:'Hip Flexors',t:'m'}], h:['upper','lower'] },
+      { name: 'Decline Crunch', secondary: [{m:'Hip Flexors',t:'m'}], h:['upper'] },
+      { name: 'Dragon Flag', secondary: [{m:'Hip Flexors',t:'h'},{m:'Lower Back',t:'m'}], h:['upper','lower'] },
+      { name: 'Rope Crunch', secondary: [{m:'Hip Flexors',t:'l'}], h:['upper'] },
+      { name: 'Weighted Crunch', secondary: [], h:['upper'] },
+      { name: 'Plank Variations', secondary: [{m:'Serratus',t:'m'},{m:'Glutes',t:'l'}], h:['upper','lower'] },
     ],
     volMin: 6, volOpt: 10, volMax: 16,
     recovery: '24–48 hours',
@@ -14741,12 +14835,18 @@ const MUSCLE_DATA = {
     ],
     exercises: [
       { name: 'Hanging Knee Raise', secondary: [{m:'Abs',t:'m'}] },
+      { name: 'Hanging Straight Leg Raise', secondary: [{m:'Abs',t:'h'}] },
       { name: 'Cable Hip Flexion', secondary: [{m:'Quads',t:'l'}] },
+      { name: 'Banded Hip Flexion', secondary: [{m:'Quads',t:'l'}] },
       { name: 'Deficit Reverse Lunge', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'h'}] },
       { name: 'Dragon Flag', secondary: [{m:'Abs',t:'h'},{m:'Lower Back',t:'m'}] },
       { name: 'L-Sit Hold', secondary: [{m:'Abs',t:'m'},{m:'Quads',t:'l'}] },
       { name: 'Mountain Climbers', secondary: [{m:'Abs',t:'m'},{m:'Shoulders',t:'l'}] },
-      { name: 'Hanging Straight Leg Raise', secondary: [{m:'Abs',t:'h'}] },
+      { name: 'Seated March (Weighted)', secondary: [{m:'Abs',t:'l'}] },
+      { name: 'Psoas March', secondary: [{m:'Core',t:'m'}] },
+      { name: 'Scissors (Flutter Kick)', secondary: [{m:'Abs',t:'m'}] },
+      { name: 'Kneeling Hip Flexor Activation (Band)', secondary: [] },
+      { name: 'Reverse Crunch', secondary: [{m:'Abs',t:'h'}] },
     ],
     volMin: 0, volOpt: 6, volMax: 12,
     recovery: '24 hours',
@@ -14957,14 +15057,20 @@ const MUSCLE_DATA = {
       { name: 'Gluteus Minimus', desc: 'Lies deep to the gluteus medius. Assists in hip abduction and internal rotation. Often trained simultaneously with the medius.' },
     ],
     exercises: [
-      { name: 'Abductor Machine', secondary: [] },
-      { name: 'Clamshell (banded)', secondary: [] },
-      { name: 'Side-Lying Hip Abduction', secondary: [] },
-      { name: 'Cable Hip Abduction', secondary: [] },
-      { name: 'Banded Monster Walk', secondary: [{m:'Hip Flexors',t:'l'}] },
-      { name: 'Single-Leg Squat', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'m'},{m:'Core',t:'m'}] },
-      { name: 'Lateral Band Walk', secondary: [{m:'Adductors',t:'l'}] },
-      { name: 'Hip Hike', secondary: [] },
+      { name: 'Abductor Machine', secondary: [], h:['abduction'] },
+      { name: 'Clamshell (banded)', secondary: [], h:['abduction'] },
+      { name: 'Side-Lying Hip Abduction', secondary: [], h:['abduction'] },
+      { name: 'Weighted Side-Lying Hip Abduction', secondary: [], h:['abduction'] },
+      { name: 'Cable Hip Abduction', secondary: [], h:['abduction'] },
+      { name: '45-Degree Hip Abduction', secondary: [], h:['abduction'] },
+      { name: 'Banded Monster Walk', secondary: [{m:'Hip Flexors',t:'l'}], h:['abduction','stability'] },
+      { name: 'Lateral Band Walk', secondary: [{m:'Adductors',t:'l'}], h:['abduction','stability'] },
+      { name: 'Sumo Walk (Banded)', secondary: [{m:'Glutes',t:'l'}], h:['abduction'] },
+      { name: 'Fire Hydrant', secondary: [], h:['abduction'] },
+      { name: 'Single-Leg Squat', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'m'},{m:'Core',t:'m'}], h:['stability'] },
+      { name: 'Hip Hike', secondary: [], h:['stability'] },
+      { name: 'Single-Leg Stance Hold', secondary: [{m:'Core',t:'m'}], h:['stability'] },
+      { name: 'Banded Side Step', secondary: [{m:'Quads',t:'l'}], h:['abduction','stability'] },
     ],
     volMin: 6, volOpt: 12, volMax: 20,
     recovery: '24–48 hours',
@@ -15027,11 +15133,17 @@ const MUSCLE_DATA = {
     exercises: [
       { name: 'Neck Curl (Harness)', secondary: [] },
       { name: 'Neck Extension (Harness)', secondary: [] },
+      { name: 'Plate-Loaded Neck Curl', secondary: [] },
       { name: 'Lateral Neck Flexion', secondary: [] },
       { name: 'Shrug', secondary: [{m:'Upper Traps',t:'h'}] },
       { name: "Farmer's Carry", secondary: [{m:'Traps',t:'h'},{m:'Core',t:'m'}] },
       { name: 'Chin Tuck', secondary: [] },
       { name: 'Manual Resistance Neck Flex', secondary: [] },
+      { name: 'Manual Resistance Neck Extension', secondary: [] },
+      { name: 'Isometric Neck Press (4-Way)', secondary: [] },
+      { name: 'Neck Bridge (Wrestler)', secondary: [{m:'Upper Traps',t:'m'}] },
+      { name: 'Prone Neck Extension (Band)', secondary: [] },
+      { name: 'Towel Pull Neck Flex', secondary: [] },
     ],
     volMin: 6, volOpt: 9, volMax: 14,
     recovery: '48 hours',
@@ -15064,13 +15176,13 @@ const MUSCLE_DATA = {
       { name: 'Internal Obliques', desc: 'Deep to the external obliques. Run diagonally in the opposite direction. Rotate the trunk to the same side. Work synergistically with the contralateral external oblique.' },
     ],
     exercises: [
-      { name: 'Pallof Press', secondary: [{m:'Abs',t:'m'}] },
-      { name: 'Cable Woodchop', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}] },
-      { name: 'Side Plank', secondary: [{m:'Glute Med',t:'m'},{m:'Adductors',t:'l'}] },
-      { name: 'Hanging Oblique Raise', secondary: [{m:'Hip Flexors',t:'h'},{m:'Abs',t:'m'}] },
-      { name: 'Landmine Rotation', secondary: [{m:'Shoulders',t:'m'}] },
-      { name: 'Russian Twist', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}] },
-      { name: 'Windmill', secondary: [{m:'Hamstrings',t:'m'},{m:'Glutes',t:'l'}] },
+      { name: 'Pallof Press', secondary: [{m:'Abs',t:'m'}], h:['antirot'] },
+      { name: 'Cable Woodchop', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}], h:['rotation'] },
+      { name: 'Side Plank', secondary: [{m:'Glute Med',t:'m'},{m:'Adductors',t:'l'}], h:['antirot'] },
+      { name: 'Hanging Oblique Raise', secondary: [{m:'Hip Flexors',t:'h'},{m:'Abs',t:'m'}], h:['rotation'] },
+      { name: 'Landmine Rotation', secondary: [{m:'Shoulders',t:'m'}], h:['rotation'] },
+      { name: 'Russian Twist', secondary: [{m:'Abs',t:'m'},{m:'Hip Flexors',t:'l'}], h:['rotation'] },
+      { name: 'Windmill', secondary: [{m:'Hamstrings',t:'m'},{m:'Glutes',t:'l'}], h:['rotation'] },
     ],
     volMin: 8, volOpt: 12, volMax: 18,
     recovery: '48 hours',
@@ -15087,12 +15199,17 @@ const MUSCLE_DATA = {
     ],
     exercises: [
       { name: 'Copenhagen Plank', secondary: [{m:'Core',t:'h'}] },
+      { name: 'Copenhagen Adductor Exercise', secondary: [{m:'Core',t:'m'}] },
       { name: 'Sumo Squat', secondary: [{m:'Quads',t:'h'},{m:'Glutes',t:'m'}] },
+      { name: 'Sumo Deadlift', secondary: [{m:'Glutes',t:'h'},{m:'Hamstrings',t:'m'},{m:'Quads',t:'m'}] },
       { name: 'Cable Hip Adduction', secondary: [] },
       { name: 'Wide-Stance Leg Press', secondary: [{m:'Glutes',t:'h'},{m:'Quads',t:'m'}] },
       { name: 'Groin Machine', secondary: [] },
       { name: 'Side-Lying Leg Raise (inner)', secondary: [] },
       { name: 'Lateral Lunge', secondary: [{m:'Quads',t:'m'},{m:'Glutes',t:'m'}] },
+      { name: 'Slider Lateral Lunge', secondary: [{m:'Quads',t:'m'},{m:'Glutes',t:'l'}] },
+      { name: 'Long Lever Side Plank Hip Adduction', secondary: [{m:'Core',t:'h'}] },
+      { name: 'Ball Squeeze (Isometric Adduction)', secondary: [] },
     ],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
@@ -15108,13 +15225,20 @@ const MUSCLE_DATA = {
       { name: 'Subscapularis', desc: 'The only internal rotator of the rotator cuff. The largest and strongest cuff muscle. Critical for pressing stability and bench press power transfer.' },
     ],
     exercises: [
-      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Mid Traps',t:'m'}] },
-      { name: 'Band External Rotation', secondary: [] },
-      { name: 'Cable External Rotation', secondary: [] },
-      { name: 'Prone Dumbbell Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Rear Delt',t:'m'}] },
-      { name: 'Chest-Supported Row', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'h'}] },
-      { name: 'Band Internal Rotation', secondary: [] },
-      { name: 'Dumbbell External Rotation', secondary: [] },
+      { name: 'Face Pull', secondary: [{m:'Rear Delt',t:'h'},{m:'Mid Traps',t:'m'}], h:['er'] },
+      { name: 'Band External Rotation', secondary: [], h:['er'] },
+      { name: 'Cable External Rotation', secondary: [], h:['er'] },
+      { name: 'Side-Lying Dumbbell External Rotation', secondary: [], h:['er'] },
+      { name: 'Prone Y-T-W', secondary: [{m:'Mid Traps',t:'m'},{m:'Lower Traps',t:'m'}], h:['er','sup'] },
+      { name: 'Cable Cross-Body External Rotation', secondary: [], h:['er'] },
+      { name: 'Band Internal Rotation', secondary: [], h:['ir'] },
+      { name: 'Cable Internal Rotation', secondary: [], h:['ir'] },
+      { name: 'Prone Dumbbell Row', secondary: [{m:'Rhomboids',t:'m'},{m:'Rear Delt',t:'m'}], h:['er'] },
+      { name: 'Chest-Supported Row', secondary: [{m:'Lats',t:'h'},{m:'Rhomboids',t:'h'}], h:['er'] },
+      { name: 'Dumbbell External Rotation', secondary: [], h:['er'] },
+      { name: 'Empty Can / Full Can', secondary: [], h:['sup'] },
+      { name: 'Scapular Push-Up', secondary: [{m:'Serratus',t:'h'}], h:['sup'] },
+      { name: 'Sleeper Stretch Isometric', secondary: [], h:['er','ir'] },
     ],
     volMin: 6, volOpt: 10, volMax: 14,
     recovery: '48 hours',
