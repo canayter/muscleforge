@@ -9046,13 +9046,11 @@ function switchToView(view, toolCategory = null) {
   if (view === 'tools') {
     loadTools();
     if (toolCategory) {
-      setTimeout(() => {
-        document.querySelectorAll('.tools-nav-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector(`.tools-nav-btn[data-tool-category="${toolCategory}"]`)?.classList.add('active');
-        document.querySelectorAll('.tools-category').forEach(c => c.classList.remove('active'));
-        document.getElementById(`tools-${toolCategory}`)?.classList.add('active');
-        if (toolCategory === 'rehab') initRehab();
-      }, 50);
+      document.querySelectorAll('.tools-nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.tools-nav-btn[data-tool-category="${toolCategory}"]`)?.classList.add('active');
+      document.querySelectorAll('.tools-category').forEach(c => c.classList.remove('active'));
+      document.getElementById(`tools-${toolCategory}`)?.classList.add('active');
+      if (toolCategory === 'rehab') initRehab();
     }
   }
 
@@ -10700,11 +10698,17 @@ let rehabActivePhase  = 0;
 
 function initRehab() {
   const tabs = document.getElementById('rehabInjuryTabs');
-  if (!tabs || tabs.dataset.init) return;
-  tabs.dataset.init = '1';
-  tabs.innerHTML = REHAB_DATA.map(r =>
-    `<button class="rehab-injury-btn" onclick="selectRehabInjury('${r.id}')">${r.region}</button>`
-  ).join('');
+  if (!tabs) return;
+  if (!tabs.dataset.init) {
+    tabs.dataset.init = '1';
+    tabs.innerHTML = REHAB_DATA.map(r =>
+      `<button class="rehab-injury-btn" onclick="selectRehabInjury('${r.id}')">${r.region}</button>`
+    ).join('');
+  }
+  // Auto-select first injury if none chosen yet
+  if (!rehabActiveInjury && REHAB_DATA.length > 0) {
+    selectRehabInjury(REHAB_DATA[0].id);
+  }
 }
 
 function selectRehabInjury(id) {
