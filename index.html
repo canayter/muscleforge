@@ -4791,15 +4791,15 @@ select.field-input option {
 /* ── Secondary legend ── */
 .mb-sec-legend { display: flex; align-items: center; gap: 5px; margin-top: var(--space-sm); flex-wrap: wrap; }
 .mb-sec-legend-label { font-size: 0.7rem; color: var(--chalk-tertiary); font-family: 'Teko', sans-serif; text-transform: uppercase; letter-spacing: .05em; }
+@media (max-width: 768px) {
+  .mb-columns { grid-template-columns: 150px 190px 1fr; }
+}
 @media (max-width: 640px) {
   .mb-columns { grid-template-columns: 1fr; min-height: auto; }
-  .mb-col { max-height: 240px; border-right: none; border-bottom: 1px solid var(--iron-border); }
+  .mb-col { max-height: 220px; border-right: none; border-bottom: 1px solid var(--iron-border); }
   .mb-col:last-child { max-height: none; border-bottom: none; }
   .mf-hero { padding: var(--space-lg) 0 var(--space-sm); }
   .mf-hero-title { font-size: clamp(3rem, 18vw, 5rem); }
-}
-@media (max-width: 768px) {
-  .mb-columns { grid-template-columns: 160px 200px 1fr; }
 }
 
 /* ── Exercise Atlas ── */
@@ -4859,6 +4859,130 @@ select.field-input option {
 .cov-badge.cov-b-low  { background:rgba(234,179,8,0.15); color:var(--warning); }
 .cov-badge.cov-b-none { background:rgba(255,255,255,0.05); color:var(--chalk-tertiary); }
 .cov-alert { margin-top:var(--space-md); padding:var(--space-sm) var(--space-md); background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.25); border-radius:var(--radius-sm); font-size:0.8rem; color:var(--chalk-secondary); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — comprehensive fixes for ≤768px / ≤480px
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tools nav: scroll horizontally instead of wrapping badly ── */
+@media (max-width: 700px) {
+  .tools-nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    gap: 4px;
+    /* subtle scroll indicator */
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-btn {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+/* ── Workout sheet: compact on phones ── */
+@media (max-width: 600px) {
+  .workout-ex-row {
+    grid-template-columns: 1fr auto auto auto auto auto;
+    gap: 4px;
+    font-size: 0.875rem;
+  }
+  .workout-ex-input {
+    width: 44px;
+    padding: 4px 3px;
+    font-size: 0.82rem;
+  }
+  .workout-ex-label { font-size: 0.65rem; }
+  .workout-sheet.open { max-height: 420px; }
+  .workout-sheet-body { max-height: 372px; }
+  .workout-ex-name { font-size: 0.85rem; }
+}
+
+/* ── Form grids: single column on phones ── */
+@media (max-width: 480px) {
+  .form-grid { grid-template-columns: 1fr !important; }
+  .field-combo { flex-wrap: wrap; }
+  .field-combo .field-input { min-width: 0; flex: 1; }
+}
+
+/* ── Card padding: tighter on phones ── */
+@media (max-width: 480px) {
+  .card-body { padding: var(--space-md); }
+  .card-header { padding: var(--space-md); }
+  .card { border-radius: var(--radius-md); }
+}
+
+/* ── Section padding: breathe on small screens ── */
+@media (max-width: 600px) {
+  .section-header { margin-bottom: var(--space-xl); }
+  .container { padding: 0 var(--space-sm); }
+}
+
+/* ── Exercise atlas: single column search/filters wrap cleanly ── */
+@media (max-width: 600px) {
+  .ex-filter-row { flex-direction: column; gap: var(--space-sm); }
+  .ex-filter-row select,
+  .ex-filter-row input { width: 100%; min-width: 0; }
+  .exercises-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Home directory chips: compress on small phones ── */
+@media (max-width: 400px) {
+  .home-dir-chip { font-size: 0.72rem; padding: 4px 10px; }
+}
+
+/* ── Rehab grid: single column on phones ── */
+@media (max-width: 600px) {
+  .rehab-ex-grid { grid-template-columns: 1fr; }
+  .rehab-injury-tabs { gap: 5px; }
+  .rehab-injury-btn { font-size: 0.75rem; padding: 5px 10px; }
+}
+
+/* ── Modals: full-width on phones ── */
+@media (max-width: 520px) {
+  .modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 88vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    margin-top: auto;
+  }
+  .modal-backdrop { align-items: flex-end; }
+}
+
+/* ── Strength standards / rep max tables: scroll ── */
+@media (max-width: 600px) {
+  .standards-table-wrap,
+  .rep-max-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* ── Knowledge / supplement card grids ── */
+@media (max-width: 600px) {
+  .supplement-grid,
+  .knowledge-grid,
+  .resource-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Fix: stat rows that use inline flex with fixed widths ── */
+@media (max-width: 480px) {
+  .stat-row,
+  .result-row,
+  .result-block { flex-wrap: wrap; gap: var(--space-sm); }
+  .stat-value,
+  .result-value { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+}
+
+/* ── Main padding-top: account for mobile nav height ── */
+@media (max-width: 900px) {
+  main { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}
 
   </style>
 </head>
